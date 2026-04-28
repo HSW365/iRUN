@@ -3,253 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iRun — AI Content Machine | HSW365Media</title>
+<title>iRUN — AI Content Machine</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
-  --black: #080808;
-  --dark: #0f0f0f;
-  --card: #141414;
-  --border: #222;
-  --accent: #ff3c00;
-  --gold: #ffd000;
-  --white: #f0f0f0;
-  --muted: #666;
+  --black:#080808;
+  --dark:#0f0f0f;
+  --card:#141414;
+  --border:#222;
+  --accent:#ff3c00;
+  --white:#f0f0f0;
+  --muted:#666;
 }
+
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4;}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
 
-/* TICKER */
-.ticker-wrap{background:var(--accent);overflow:hidden;height:36px;display:flex;align-items:center;}
-.ticker{display:flex;animation:tick 30s linear infinite;white-space:nowrap;}
-.ticker span{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#fff;padding:0 40px;letter-spacing:.1em;}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+nav{
+  position:sticky;top:0;
+  background:#080808;
+  border-bottom:1px solid var(--border);
+  padding:20px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,8,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--white);}
-.nav-logo span{color:var(--accent);}
-.nav-cta{background:var(--accent);color:#fff;border:none;padding:10px 24px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;border-radius:2px;}
+.logo{
+  font-family:'Bebas Neue';
+  font-size:28px;
+  letter-spacing:3px;
+}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(255,60,0,.12) 0%,transparent 70%);pointer-events:none;}
-.hero-tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--accent);margin-bottom:24px;animation:fadeUp .8s ease both;}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,14vw,180px);line-height:.9;letter-spacing:2px;margin-bottom:24px;animation:fadeUp .8s .1s ease both;}
+.logo span{color:var(--accent);}
+
+.nav-btn{
+  background:var(--accent);
+  border:none;
+  color:#fff;
+  padding:10px 20px;
+  cursor:pointer;
+}
+
+.hero{
+  text-align:center;
+  padding:120px 20px;
+}
+
+.hero h1{
+  font-family:'Bebas Neue';
+  font-size:120px;
+  line-height:0.9;
+}
+
 .hero h1 span{color:var(--accent);}
-.hero-sub{font-size:clamp(16px,2.5vw,22px);color:#aaa;max-width:600px;margin:0 auto 48px;font-weight:300;animation:fadeUp .8s .2s ease both;}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .3s ease both;}
-.btn-primary{background:var(--accent);color:#fff;border:none;padding:16px 40px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;border-radius:2px;transition:transform .2s,box-shadow .2s;}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,60,0,.4);}
-.btn-secondary{background:transparent;color:var(--white);border:1px solid #444;padding:16px 40px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;border-radius:2px;transition:border-color .2s;}
-.btn-secondary:hover{border-color:var(--accent);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-/* STATS */
-.stats{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:32px;text-align:center;}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--accent);line-height:1;}
-.stat-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);margin-top:8px;}
+.hero p{
+  color:#aaa;
+  max-width:600px;
+  margin:20px auto;
+}
 
-/* SECTION */
-section{padding:100px 40px;max-width:1200px;margin:0 auto;}
-.section-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--accent);margin-bottom:16px;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,96px);line-height:.95;margin-bottom:40px;}
-.section-title span{color:var(--accent);}
+.btn{
+  padding:15px 40px;
+  margin:10px;
+  border:none;
+  cursor:pointer;
+  font-size:12px;
+  letter-spacing:2px;
+}
 
-/* FEATURES GRID */
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
-.feat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:32px;transition:border-color .3s,transform .3s;}
-.feat-card:hover{border-color:var(--accent);transform:translateY(-4px);}
-.feat-icon{font-size:36px;margin-bottom:16px;}
-.feat-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:12px;}
-.feat-desc{color:#888;font-size:14px;line-height:1.7;}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
 
-/* WHO */
-.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
-.who-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:24px;text-align:center;}
-.who-icon{font-size:32px;margin-bottom:12px;}
-.who-label{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;}
+.btn-secondary{
+  background:none;
+  border:1px solid #444;
+  color:#fff;
+}
 
-/* PRICING */
-.pricing-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:900px;margin:0 auto;}
-.price-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:40px;text-align:center;}
-.price-card.featured{border-color:var(--accent);position:relative;}
-.price-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:4px 16px;border-radius:20px;}
-.price-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:8px;}
-.price-amount{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent);line-height:1;}
-.price-period{font-size:13px;color:var(--muted);margin-bottom:32px;}
-.price-features{list-style:none;text-align:left;margin-bottom:32px;}
-.price-features li{padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:#aaa;display:flex;align-items:center;gap:10px;}
-.price-features li::before{content:'→';color:var(--accent);}
-.price-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:14px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;border-radius:2px;}
-.price-btn.outline{background:transparent;border:1px solid #444;color:var(--white);}
+section{
+  padding:80px 20px;
+  text-align:center;
+}
 
-/* CTA SECTION */
-.cta-section{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 40px;text-align:center;}
-.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,112px);line-height:.95;margin-bottom:32px;}
-.cta-section h2 span{color:var(--accent);}
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
 
-/* FOOTER */
-footer{background:var(--black);border-top:1px solid var(--border);padding:48px 40px;text-align:center;}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;margin-bottom:16px;}
-.footer-logo span{color:var(--accent);}
-.footer-links{display:flex;gap:32px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;}
-.footer-links a{color:var(--muted);text-decoration:none;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;transition:color .2s;}
-.footer-links a:hover{color:var(--accent);}
-.footer-copy{font-size:12px;color:var(--muted);}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:30px;
+  margin:10px;
+  width:260px;
+}
 
-@media(max-width:768px){nav{padding:16px 20px;}section{padding:60px 20px;}.stats{padding:40px 20px;}.cta-section{padding:60px 20px;}.hero{padding:60px 20px;}footer{padding:40px 20px;}}
+.pricing{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.price{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:30px;
+  margin:10px;
+  width:260px;
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:40px;
+  text-align:center;
+  color:var(--muted);
+}
 </style>
 </head>
+
 <body>
 
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span>iRUN AI CONTENT MACHINE &nbsp;·&nbsp; BUILT FOR INDIE ARTISTS &nbsp;·&nbsp; BUILT FOR ENTREPRENEURS &nbsp;·&nbsp; HSW365MEDIA.COM &nbsp;·&nbsp; @HOODSTAR365 &nbsp;·&nbsp; CASH APP $HSW365 &nbsp;·&nbsp;</span>
-    <span>iRUN AI CONTENT MACHINE &nbsp;·&nbsp; BUILT FOR INDIE ARTISTS &nbsp;·&nbsp; BUILT FOR ENTREPRENEURS &nbsp;·&nbsp; HSW365MEDIA.COM &nbsp;·&nbsp; @HOODSTAR365 &nbsp;·&nbsp; CASH APP $HSW365 &nbsp;·&nbsp;</span>
-  </div>
-</div>
-
 <nav>
-  <div class="nav-logo">i<span>RUN</span></div>
-  <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">GET ACCESS</button>
+  <div class="logo">i<span>RUN</span></div>
+  <button class="nav-btn" onclick="goPricing()">GET ACCESS</button>
 </nav>
 
 <div class="hero">
-  <div class="hero-tag">HSW365MEDIA PRESENTS</div>
   <h1>i<span>RUN</span><br>AI</h1>
-  <p class="hero-sub">The AI content machine built for indie artists, entrepreneurs, and small businesses who are done playing small.</p>
-  <div class="hero-btns">
-    <button class="btn-primary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">START NOW →</button>
-    <button class="btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">SEE FEATURES</button>
-  </div>
-</div>
+  <p>The AI content machine for creators, artists, and entrepreneurs ready to scale.</p>
 
-<div class="stats">
-  <div><div class="stat-num">7</div><div class="stat-label">AI AGENTS</div></div>
-  <div><div class="stat-num">24/7</div><div class="stat-label">ALWAYS RUNNING</div></div>
-  <div><div class="stat-num">∞</div><div class="stat-label">CONTENT OUTPUT</div></div>
-  <div><div class="stat-num">$0</div><div class="stat-label">EXTRA STAFF NEEDED</div></div>
+  <button class="btn btn-primary" onclick="startApp()">START NOW</button>
+  <button class="btn btn-secondary" onclick="goFeatures()">FEATURES</button>
 </div>
 
 <section id="features">
-  <div class="section-tag">WHAT iRUN DOES</div>
-  <div class="section-title">YOUR AI<br><span>EMPIRE</span><br>NEVER SLEEPS</div>
-  <div class="features-grid">
-    <div class="feat-card">
-      <div class="feat-icon">⚡</div>
-      <div class="feat-title">Content Machine</div>
-      <div class="feat-desc">Generate TikTok scripts, IG captions, YouTube hooks, email sequences, and blog posts in seconds. Never stare at a blank page again.</div>
+  <h2>WHAT iRUN DOES</h2>
+  <div class="cards">
+    <div class="card">Content Generator</div>
+    <div class="card">Sales Copy System</div>
+    <div class="card">Artist Tools</div>
+    <div class="card">Growth Strategy</div>
+    <div class="card">Monetization Engine</div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2>PRICING</h2>
+
+  <div class="pricing">
+    <div class="price">
+      <h3>Starter</h3>
+      <p>$27 one-time</p>
+      <button class="btn btn-primary" onclick="buy()">BUY</button>
     </div>
-    <div class="feat-card">
-      <div class="feat-icon">🎯</div>
-      <div class="feat-title">Sales Closer</div>
-      <div class="feat-desc">AI-powered DM scripts, sales copy, and objection handlers that convert followers into buyers around the clock.</div>
+
+    <div class="price">
+      <h3>Pro</h3>
+      <p>$47/month</p>
+      <button class="btn btn-primary" onclick="buy()">BUY</button>
     </div>
-    <div class="feat-card">
-      <div class="feat-icon">🎵</div>
-      <div class="feat-title">Artist Tools</div>
-      <div class="feat-desc">Press releases, bio writing, pitch emails to playlists, labels, and blogs. Built specifically for the indie artist grind.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">📈</div>
-      <div class="feat-title">Growth Strategy</div>
-      <div class="feat-desc">Platform-specific growth plans, posting schedules, hashtag strategy, and audience targeting built by AI that knows your niche.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">💰</div>
-      <div class="feat-title">Monetization Engine</div>
-      <div class="feat-desc">Digital product ideas, pricing strategy, launch plans, and revenue stream blueprints tailored to your brand and audience.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🤖</div>
-      <div class="feat-title">AI Clone</div>
-      <div class="feat-desc">Train an AI on your voice, your brand, your offers. It answers DMs, closes sales, and builds relationships while you sleep.</div>
+
+    <div class="price">
+      <h3>Empire</h3>
+      <p>$97/month</p>
+      <button class="btn btn-primary" onclick="buy()">BUY</button>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="section-tag">WHO IT'S FOR</div>
-  <div class="section-title">BUILT FOR<br><span>REAL ONES</span></div>
-  <div class="who-grid">
-    <div class="who-card"><div class="who-icon">🎤</div><div class="who-label">Indie Artists</div></div>
-    <div class="who-card"><div class="who-icon">💼</div><div class="who-label">Entrepreneurs</div></div>
-    <div class="who-card"><div class="who-icon">🏪</div><div class="who-label">Small Businesses</div></div>
-    <div class="who-card"><div class="who-icon">📱</div><div class="who-label">Content Creators</div></div>
-    <div class="who-card"><div class="who-icon">👟</div><div class="who-label">Streetwear Brands</div></div>
-    <div class="who-card"><div class="who-icon">🎙</div><div class="who-label">Podcasters</div></div>
-  </div>
+  <h2>START RUNNING</h2>
+  <button class="btn btn-primary" onclick="buy()">GET ACCESS</button>
 </section>
-
-<section id="pricing" style="max-width:1200px;">
-  <div style="text-align:center;margin-bottom:60px;">
-    <div class="section-tag" style="justify-content:center;display:flex;">PRICING</div>
-    <div class="section-title">GET IN THE<br><span>GAME</span></div>
-  </div>
-  <div class="pricing-wrap">
-    <div class="price-card">
-      <div class="price-name">STARTER</div>
-      <div class="price-amount">$27</div>
-      <div class="price-period">ONE-TIME</div>
-      <ul class="price-features">
-        <li>iRun Core Access</li>
-        <li>Content Generator</li>
-        <li>5 AI Tools Unlocked</li>
-        <li>Email Support</li>
-      </ul>
-      <button class="price-btn outline" onclick="window.open('https://hsw365media.com','_blank')">GET STARTER</button>
-    </div>
-    <div class="price-card featured">
-      <div class="price-badge">MOST POPULAR</div>
-      <div class="price-name">PRO</div>
-      <div class="price-amount">$47</div>
-      <div class="price-period">/ MONTH</div>
-      <ul class="price-features">
-        <li>Everything in Starter</li>
-        <li>All 7 AI Agents</li>
-        <li>AI Sales Clone</li>
-        <li>Artist Tools Suite</li>
-        <li>Monthly Strategy Call</li>
-        <li>Priority Support</li>
-      </ul>
-      <button class="price-btn" onclick="window.open('https://cash.app/$hsw365','_blank')">GET PRO NOW</button>
-    </div>
-    <div class="price-card">
-      <div class="price-name">EMPIRE</div>
-      <div class="price-amount">$97</div>
-      <div class="price-period">/ MONTH</div>
-      <ul class="price-features">
-        <li>Everything in Pro</li>
-        <li>White-Label Rights</li>
-        <li>Resell iRun</li>
-        <li>Custom AI Training</li>
-        <li>VIP Support Line</li>
-        <li>Affiliate Program</li>
-      </ul>
-      <button class="price-btn outline" onclick="window.open('https://hsw365media.com','_blank')">GET EMPIRE</button>
-    </div>
-  </div>
-</section>
-
-<div class="cta-section">
-  <h2>STOP<br><span>WAITING.</span><br>START RUNNING.</h2>
-  <p style="color:#888;font-size:18px;max-width:500px;margin:0 auto 40px;">Every day you don't use AI is a day your competition gets further ahead. iRun closes that gap.</p>
-  <button class="btn-primary" onclick="window.open('https://cash.app/$hsw365','_blank')" style="font-size:14px;padding:20px 60px;">PAY & GET ACCESS NOW →</button>
-  <p style="margin-top:20px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">SEND PAYMENT TO CASH APP $HSW365 · DM @HSW365MEDIA FOR INSTANT ACCESS</p>
-</div>
 
 <footer>
-  <div class="footer-logo">i<span>RUN</span> AI</div>
-  <div class="footer-links">
-    <a href="https://hsw365media.com" target="_blank">HSW365MEDIA.COM</a>
-    <a href="https://hsw365.co" target="_blank">HSW365.CO</a>
-    <a href="https://cash.app/$hsw365" target="_blank">$HSW365</a>
-  </div>
-  <div class="footer-copy">© 2026 HOODSTAR ENT LLC · HSW365MEDIA · ALL RIGHTS RESERVED</div>
+  iRUN AI · HSW365MEDIA · ALL RIGHTS RESERVED
 </footer>
+
+<script>
+function goFeatures(){
+  document.getElementById('features').scrollIntoView({behavior:'smooth'});
+}
+
+function goPricing(){
+  document.getElementById('pricing').scrollIntoView({behavior:'smooth'});
+}
+
+function startApp(){
+  // CONNECT THIS TO YOUR APP PAGE LATER
+  window.location.href = "app.html";
+}
+
+function buy(){
+  alert("Connect payment here (Gumroad / Stripe / Cash App)");
+}
+</script>
 
 </body>
 </html>
