@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iRun Connect</title>
+<style>body{margin:0;background:#0a0a0f;color:#f2f2f7;font:16px Inter,system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;padding:16px}
+.c{max-width:560px;width:100%}h1{font:800 40px 'Barlow Condensed',Impact,sans-serif;letter-spacing:1px;margin:0 0 8px;color:#22d3ee}
+code{display:block;background:#15151f;border:1px solid #2a2a3a;padding:14px;border-radius:10px;word-break:break-all;color:#fbbf24;margin:12px 0}
+button{background:#a855f7;color:#fff;border:0;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer}p{color:#9a9aad}</style></head>
+<body><div class="c"><h1>iRUN CONNECT</h1><p id="m">Copy this code and paste it into the iRun setup window.</p><code id="code"></code>
+<button onclick="navigator.clipboard.writeText(document.getElementById('code').textContent)">Copy code</button></div>
+<script>const q=new URLSearchParams(location.search);const c=q.get('code');const e=q.get('error_description')||q.get('error');
+document.getElementById('code').textContent=c||('No code received'+(e?': '+e:''));if(!c)document.getElementById('m').textContent='Connection did not complete.';</script>
+</body></html>

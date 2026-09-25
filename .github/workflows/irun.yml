@@ -1,0 +1,64 @@
+name: iRun autopilot
+
+on:
+  schedule:
+    # UTC. 4 TikTok + 2 Instagram per day = 8am, 11am, 2pm, 6pm ET (EDT). Slot->platform map lives in engine/run.py
+    - cron: "7 12 * * *"
+    - cron: "7 15 * * *"
+    - cron: "7 18 * * *"
+    - cron: "7 22 * * *"
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "tiktok, instagram, or both"
+        default: "both"
+      product:
+        description: "product id from config/products.json (blank = auto rotate)"
+        default: ""
+      mode:
+        description: "draft (render + save only) or live (actually post)"
+        default: "draft"
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt
+      - name: Make and post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          # Scheduled runs use repo variable IRUN_MODE (set it to "live" once you approve drafts). Manual runs use the input.
+          IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'draft' }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.platform }}" ]; then ARGS="$ARGS --platform ${{ github.event.inputs.platform }}"; fi
+          if [ -n "${{ github.event.inputs.product }}" ]; then ARGS="$ARGS --product ${{ github.event.inputs.product }}"; fi
+          python engine/run.py $ARGS
+      - name: Keep videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: irun-${{ github.run_id }}
+          path: out/
+          retention-days: 14

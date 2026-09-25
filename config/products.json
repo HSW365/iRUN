@@ -1,0 +1,59 @@
+{
+  "_note": "Products iRun promotes for @hsw365media. keyword = what viewers comment/DM to get the link. Do not put prices here unless they are confirmed live.",
+  "products": [
+    {
+      "id": "klipit",
+      "name": "KLIPIT",
+      "keyword": "CLIP",
+      "link": "https://klipit.onrender.com",
+      "audience": "streamers and gamers (Twitch, Kick, YouTube), especially GTA6 streamers",
+      "pitch": "Paste a stream or VOD link and Klipit finds your best moments and cuts them into ready-to-post vertical and wide clips automatically.",
+      "angles": ["stop scrubbing 6-hour VODs", "one link in, clips out", "grow on TikTok off streams you already did"]
+    },
+    {
+      "id": "calltwin",
+      "name": "CALLTWIN",
+      "keyword": "CALL",
+      "link": "https://calltwin.onrender.com",
+      "audience": "small business owners, contractors, barbers, salons, service businesses",
+      "pitch": "An AI receptionist that answers and follows up on missed calls so a busy owner stops losing customers to voicemail.",
+      "angles": ["every missed call is a lost customer", "your phone rings while your hands are full", "AI picks up when you can't"]
+    },
+    {
+      "id": "queenee",
+      "name": "QUEENEE",
+      "keyword": "SITE",
+      "link": "https://hsw365.github.io/queenee/",
+      "audience": "business owners and hustlers with no website or an outdated one",
+      "pitch": "QUEENEE builds a professional website for your business, with CallTwin available as an add-on.",
+      "angles": ["no website means customers can't find you", "your Instagram is not a website", "look legit in one move"]
+    },
+    {
+      "id": "flipit",
+      "name": "FLIPIT",
+      "keyword": "FLIP",
+      "link": "https://flipit-m5ig.onrender.com",
+      "audience": "real estate investors, wholesalers, flippers",
+      "pitch": "A deal workspace for real estate flippers to run numbers and organize deals in one place.",
+      "angles": ["run the numbers before you get emotional", "stop tracking deals in your notes app"]
+    },
+    {
+      "id": "irun",
+      "name": "iRUN",
+      "keyword": "AUTO",
+      "link": "https://hsw365.github.io/irun/",
+      "audience": "creators, indie artists, entrepreneurs who don't post consistently",
+      "pitch": "iRun writes, voices, renders and posts short videos for your brand on autopilot and turns comments into DM leads.",
+      "angles": ["this video was made and posted by AI", "consistency without the burnout", "your content team is a robot"]
+    },
+    {
+      "id": "build-series",
+      "name": "HSW365 BUILD SERIES",
+      "keyword": "BUILD",
+      "link": "https://hsw365.co",
+      "audience": "people who want to start or scale a one-person business",
+      "pitch": "The HSW365 Media Build Series: ebooks and a course from a solo founder and Army veteran on shipping real products alone.",
+      "angles": ["one man, multiple businesses", "turn negative into positive", "stop planning, ship it"]
+    }
+  ]
+}

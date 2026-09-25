@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>iRun Command</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--panel:#12121a;--line:#23232f;--text:#f2f2f7;--muted:#8a8aa0;--cyan:#22d3ee;--violet:#a855f7;--red:#ef4444;--yellow:#fbbf24}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 16px 60px}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h1{font:800 34px 'Barlow Condensed',sans-serif;letter-spacing:1px;margin:0}h1 b{color:var(--cyan)}
+.mono{font:700 11px 'Space Mono',monospace;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 22px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat .n{font:800 34px 'Barlow Condensed',sans-serif}.stat .n.c{color:var(--cyan)}.stat .n.y{color:var(--yellow)}
+h2{font:800 22px 'Barlow Condensed',sans-serif;letter-spacing:1px;margin:26px 0 10px}
+.tabs{display:flex;gap:8px;margin-top:6px}.tabs button{background:var(--panel);color:var(--muted);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-weight:600;cursor:pointer}
+.tabs button.on{color:var(--text);border-color:var(--violet)}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:12px}
+.tw{overflow-x:auto}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid var(--line)}
+.ok{color:#34d399;border-color:#1f5b47}.bad{color:var(--red);border-color:#5b1f1f}.draft{color:var(--yellow);border-color:#5b4a1f}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.card video{width:100%;aspect-ratio:9/16;background:#000;display:block}.card .b{padding:10px 12px}
+.card .h{font-weight:600;margin:4px 0}.card .cap{color:var(--muted);font-size:12px;white-space:pre-wrap;max-height:90px;overflow:auto}
+.gate{max-width:420px;margin:12vh auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+input{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--text);padding:12px;border-radius:10px;margin:12px 0}
+.btn{background:var(--violet);color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+.err{color:var(--red)}
+</style>
+</head>
+<body>
+<div id="gate" class="gate" hidden>
+  <h1>iRUN <b>COMMAND</b></h1>
+  <p class="mono">Owner access</p>
+  <input id="k" type="password" placeholder="Owner key" autocomplete="off">
+  <button class="btn" onclick="login()">Open</button>
+  <p id="gerr" class="err"></p>
+</div>
+<div id="app" class="wrap" hidden>
+  <div class="top"><h1>iRUN <b>COMMAND</b></h1><span class="mono">@hsw365media autopilot</span></div>
+  <div class="stats" id="stats"></div>
+  <div class="tabs"><button class="on" data-t="leads">Leads</button><button data-t="posts">Posts</button><button data-t="conn">Connections</button></div>
+  <section id="leads"></section><section id="posts" hidden></section><section id="conn" hidden></section>
+</div>
+<script>
+const API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const when = s => s ? new Date(s).toLocaleString() : "";
+let key = (location.hash.match(/key=([a-f0-9]+)/) || [])[1] || sessionStorageGet();
+function sessionStorageGet(){ try { return sessionStorage.getItem("irun_key"); } catch { return null; } }
+function login(){ key = document.getElementById("k").value.trim(); load(); }
+async function load(){
+  if(!key){ document.getElementById("gate").hidden=false; return; }
+  const r = await fetch(`${API}?view=data&key=${encodeURIComponent(key)}`);
+  if(!r.ok){ document.getElementById("gate").hidden=false; document.getElementById("gerr").textContent="Wrong key."; return; }
+  try { sessionStorage.setItem("irun_key", key); } catch {}
+  history.replaceState(null,"",location.pathname);
+  const d = await r.json();
+  document.getElementById("gate").hidden=true; document.getElementById("app").hidden=false;
+  const day = Date.now()-864e5, week = Date.now()-7*864e5;
+  const posted = d.posts.filter(p=>p.status==="posted");
+  const leads7 = d.leads.filter(l=>l.keyword && new Date(l.created_at)>week);
+  document.getElementById("stats").innerHTML = [
+    ["Posted today", posted.filter(p=>new Date(p.posted_at)>day).length, "c"],
+    ["Drafts waiting", d.posts.filter(p=>p.status==="draft").length, "y"],
+    ["Leads (7 days)", leads7.length, "c"],
+    ["Links sent (7 days)", leads7.filter(l=>l.replied).length, ""],
+    ["Failed posts", d.posts.filter(p=>p.status==="failed").length, ""]
+  ].map(([l,n,c])=>`<div class="stat"><div class="mono">${l}</div><div class="n ${c}">${n}</div></div>`).join("");
+  const byProd = {}; d.leads.filter(l=>l.product_id).forEach(l=>byProd[l.product_id]=(byProd[l.product_id]||0)+1);
+  document.getElementById("leads").innerHTML = `<h2>Leads by app</h2><p class="mono">${Object.entries(byProd).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${esc(k)}: ${v}`).join("  |  ")||"No leads yet"}</p>
+    <h2>Inbox + comments</h2><div class="tw"><table><tr><th>When</th><th>From</th><th>Source</th><th>Keyword</th><th>Message</th><th>Link sent</th></tr>
+    ${d.leads.map(l=>`<tr><td>${when(l.created_at)}</td><td>${l.username?"@"+esc(l.username):esc(l.ig_user_id)}</td><td>${esc(l.source)}</td><td>${esc(l.keyword||"-")}</td><td>${esc(l.message)}</td>
+    <td>${l.keyword?(l.replied?'<span class="pill ok">sent</span>':`<span class="pill bad" title="${esc(l.reply_error)}">not sent</span>`):'<span class="mono">reply by hand</span>'}</td></tr>`).join("")}</table></div>`;
+  document.getElementById("posts").innerHTML = `<h2>Posts</h2><div class="grid">${d.posts.map(p=>`<div class="card">${p.video_url?`<video src="${esc(p.video_url)}" controls preload="none" playsinline></video>`:""}
+    <div class="b"><span class="pill ${p.status==="posted"?"ok":p.status==="failed"?"bad":"draft"}">${esc(p.status)}</span> <span class="mono">${esc(p.platform)} / ${esc(p.product_id)}</span>
+    <div class="h">${esc(p.hook)}</div><div class="cap">${esc(p.caption)}</div>${p.error?`<p class="err">${esc(p.error.slice(0,200))}</p>`:""}<div class="mono">${when(p.created_at)}</div></div></div>`).join("")||"<p>No posts yet.</p>"}</div>`;
+  const conn = n => d.connections.find(c=>c.name===n);
+  document.getElementById("conn").innerHTML = `<h2>Connections</h2><div class="tw"><table><tr><th>Platform</th><th>Status</th><th>Token refreshed</th></tr>
+    ${["tiktok","instagram"].map(n=>`<tr><td>${n}</td><td>${conn(n)?'<span class="pill ok">connected</span>':'<span class="pill bad">not connected</span>'}</td><td>${when(conn(n)?.updated_at)}</td></tr>`).join("")}</table></div>
+    <h2>Apps being promoted</h2><div class="tw"><table><tr><th>App</th><th>Keyword</th><th>Link</th></tr>${d.products.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.keyword)}</td><td>${esc(p.link)}</td></tr>`).join("")}</table></div>`;
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));["leads","posts","conn"].forEach(id=>document.getElementById(id).hidden=id!==b.dataset.t);});
+load();
+</script>
+</body>
+</html>
