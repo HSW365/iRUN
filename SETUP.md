@@ -18,7 +18,7 @@ Data lives on the Supabase project `klipit` (`lsxdlmrjrcivxwgfkpop`) in the `iru
 | CALL | CallTwin | calltwin.onrender.com |
 | SITE | QUEENEE | hsw365.github.io/queenee/ |
 | FLIP | FLIPIT | flipit-m5ig.onrender.com |
-| AUTO | iRun | hsw365.github.io/irun/ |
+| AUTO | iRun | hsw365.github.io/iRUN/ |
 | BUILD | Build Series | hsw365.co |
 
 To change these, edit `config/products.json`. The next run syncs them to the bot.
@@ -37,7 +37,7 @@ With just these, **Actions > iRun autopilot > Run workflow** (mode `draft`) make
 
 ## 2. TikTok
 1. Go to developers.tiktok.com, create an app, and add **Login Kit** and **Content Posting API** (turn on Direct Post). Scopes: `user.info.basic` and `video.publish`.
-2. Set the redirect URI to `https://hsw365.github.io/irun/callback.html`.
+2. Set the redirect URI to `https://hsw365.github.io/iRUN/callback.html`.
 3. Add the secrets `TIKTOK_CLIENT_KEY` and `TIKTOK_CLIENT_SECRET`.
 4. On your PC, set those two values as environment variables, then run `python engine/tiktok_auth.py`. Approve the login with @hsw365media and paste the code it shows you. Save the printed token as `TIKTOK_REFRESH_TOKEN`.
 5. **Important:** TikTok only lets an app post **publicly** after it passes TikTok's app audit, which you submit in the developer portal. Until then, TikTok forces every post to "Only me". iRun detects this and logs it.
@@ -57,7 +57,7 @@ With just these, **Actions > iRun autopilot > Run workflow** (mode `draft`) make
 After you've watched a few drafts in the dashboard, go to **Settings > Secrets and variables > Actions > Variables**, add `IRUN_MODE` = `live`, and scheduled runs will start posting. Set it back to `draft` to pause posting without stopping the drafts.
 
 ## Dashboard
-`https://hsw365.github.io/irun/dashboard.html`: enter the owner key (stored in `irun_settings.owner_key`).
+`https://hsw365.github.io/iRUN/dashboard.html`: enter the owner key (stored in `irun_settings.owner_key`).
 
 ## Run locally
 ```
