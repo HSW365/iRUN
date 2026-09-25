@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0f">
+<title>iRun Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--panel:#12121a;--panel2:#171722;--line:#25253a;--text:#f2f2f7;--muted:#8a8aa0;--cyan:#22d3ee;--violet:#a855f7;--red:#ef4444;--yellow:#fbbf24;--green:#34d399}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:16px 16px 90px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0 14px}
+.logo{font:800 30px 'Barlow Condensed',sans-serif;letter-spacing:1px}.logo b{color:var(--cyan)}
+.mono{font:700 11px 'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px}
+nav button{flex:0 0 auto;background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:9px 14px;border-radius:999px;font:600 14px Inter,sans-serif;cursor:pointer}
+nav button.on{color:var(--text);border-color:var(--violet)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+h2{font:800 24px 'Barlow Condensed',sans-serif;letter-spacing:1px;margin:0 0 10px}
+label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px;font-weight:600}
+input,select,textarea{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--text);padding:11px 12px;border-radius:10px;font:15px Inter,sans-serif}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--violet);color:#fff;border:0;padding:12px 18px;border-radius:10px;font:700 15px Inter,sans-serif;cursor:pointer;text-decoration:none}
+.btn.cy{background:var(--cyan);color:#06222a}.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}.btn.red{background:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chk{display:flex;align-items:center;gap:8px;margin-top:10px;color:var(--muted);font-size:14px}.chk input{width:auto}
+.beat{display:flex;gap:8px;margin-bottom:8px}.beat input:first-child{flex:1}.beat input:last-child{width:120px}
+.status{margin-top:10px;font-size:14px;color:var(--muted);min-height:20px}.status.err{color:var(--red)}.status.ok{color:var(--green)}
+.bar{height:6px;background:#1e1e2c;border-radius:6px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;width:0;background:var(--cyan);transition:width .2s}
+.out{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.vid{background:var(--panel2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.vid video{width:100%;aspect-ratio:9/16;display:block;background:#000}.vid .b{padding:10px 12px}
+.vid .cap{font-size:12px;color:var(--muted);white-space:pre-wrap;max-height:110px;overflow:auto;margin:6px 0}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid var(--line)}
+.pill.tt{color:var(--cyan)}.pill.ig{color:var(--violet)}.pill.ok{color:var(--green)}.pill.bad{color:var(--red)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}th{color:var(--muted);font-size:12px}
+.tw{overflow-x:auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px}.stat .n{font:800 30px 'Barlow Condensed',sans-serif;color:var(--cyan)}
+.note{font-size:13px;color:var(--muted)}.note b{color:var(--text)}
+canvas#stage{display:none}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="logo">iRUN <b>STUDIO</b></div><span class="mono">HSW365 Media</span></header>
+  <nav>
+    <button data-v="make" class="on">Make</button>
+    <button data-v="today">Today's 6</button>
+    <button data-v="leads">Leads</button>
+    <button data-v="settings">Settings</button>
+  </nav>
+
+  <!-- MAKE -->
+  <section id="v-make">
+    <div class="card">
+      <h2>New video</h2>
+      <div class="row">
+        <div><label>App to promote</label><select id="product"></select></div>
+        <div><label>Platform</label><select id="platform"><option value="tiktok">TikTok</option><option value="instagram">Instagram Reels</option></select></div>
+      </div>
+      <label>Angle (optional)</label><input id="angle" placeholder="Leave blank to auto-pick">
+      <div class="btns"><button class="btn" id="btnWrite">Write script</button></div>
+      <div class="status" id="wStatus"></div>
+    </div>
+    <div class="card" id="editor" hidden>
+      <h2>Script</h2>
+      <p class="note">Each line is one on-screen beat and gets spoken. Right box = word to highlight.</p>
+      <div id="beats"></div>
+      <label>Caption</label><textarea id="caption"></textarea>
+      <label class="chk"><input type="checkbox" id="beatBed" checked> Background beat</label>
+      <div class="btns"><button class="btn cy" id="btnRender">Render video</button><button class="btn ghost" id="btnRewrite">Rewrite</button></div>
+      <div class="bar"><i id="rBar"></i></div>
+      <div class="status" id="rStatus"></div>
+    </div>
+    <div class="out" id="makeOut"></div>
+  </section>
+
+  <!-- TODAY -->
+  <section id="v-today" hidden>
+    <div class="card">
+      <h2>Today's 6</h2>
+      <p class="note">4 TikToks + 2 Reels, rotating your apps. Keep this tab open while it renders (about 30 seconds a video). Then post each one: Share on your phone opens TikTok or Instagram with the video ready.</p>
+      <div class="btns"><button class="btn" id="btnBatch">Make today's 6</button><button class="btn ghost" id="btnStop" hidden>Stop</button></div>
+      <div class="bar"><i id="bBar"></i></div>
+      <div class="status" id="bStatus"></div>
+    </div>
+    <div class="out" id="batchOut"></div>
+  </section>
+
+  <!-- LEADS -->
+  <section id="v-leads" hidden>
+    <div class="card">
+      <h2>Leads</h2>
+      <p class="note">People who commented or DMed a keyword on Instagram. Needs your owner key in Settings.</p>
+      <div class="btns"><button class="btn ghost" id="btnLeads">Refresh</button></div>
+      <div class="status" id="lStatus"></div>
+    </div>
+    <div class="stats" id="lStats"></div>
+    <div class="card tw" id="lTable" hidden></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="v-settings" hidden>
+    <div class="card">
+      <h2>Settings</h2>
+      <p class="note">Saved only in this browser on this device. Keys are sent straight to Anthropic / ElevenLabs, nowhere else.</p>
+      <label>Anthropic API key (required)</label><input id="sAnth" type="password" placeholder="sk-ant-..." autocomplete="off">
+      <label>ElevenLabs API key (optional, adds voiceover)</label><input id="sEleven" type="password" autocomplete="off">
+      <label>ElevenLabs voice ID (optional)</label><input id="sVoice" placeholder="pNInz6obpgDQGcFmaJgB">
+      <label>Your handle</label><input id="sHandle" value="hsw365media">
+      <label>Owner key (for Leads)</label><input id="sOwner" type="password" autocomplete="off">
+      <div class="btns"><button class="btn" id="btnSave">Save</button></div>
+      <div class="status" id="sStatus"></div>
+    </div>
+    <div class="card">
+      <h2>Autopilot</h2>
+      <p class="note">This page makes videos while it's open. For posting with your phone off, the same repo also has the <b>iRun autopilot</b> GitHub Action (4 TikToks + 2 Reels a day) and the Instagram DM bot. See <a href="https://github.com/HSW365/iRUN/blob/main/SETUP.md" style="color:var(--cyan)">SETUP.md</a>.</p>
+    </div>
+  </section>
+</div>
+<canvas id="stage" width="1080" height="1920"></canvas>
+
+<script>
+const W = 1080, H = 1920, FPS = 30;
+const C = {base:"#0a0a0f", cyan:"#22d3ee", violet:"#a855f7", red:"#ef4444", yellow:"#fbbf24", white:"#f2f2f7", muted:"#78788c"};
+const LEADS_API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook";
+const MODEL = "claude-sonnet-5";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {
+  get(k, d = "") { try { return localStorage.getItem("irun_" + k) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("irun_" + k, v); } catch {} }
+};
+let PRODUCTS = [];
+let current = null; // {product, platform, beats, emphasis, caption}
+
+/* ---------- nav ---------- */
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b));
+  ["make","today","leads","settings"].forEach(v => $("v-" + v).hidden = v !== b.dataset.v);
+  if (b.dataset.v === "leads") loadLeads();
+});
+
+/* ---------- settings ---------- */
+function loadSettings() {
+  $("sAnth").value = store.get("anth"); $("sEleven").value = store.get("eleven");
+  $("sVoice").value = store.get("voice"); $("sHandle").value = store.get("handle", "hsw365media");
+  $("sOwner").value = store.get("owner");
+}
+$("btnSave").onclick = () => {
+  store.set("anth", $("sAnth").value.trim()); store.set("eleven", $("sEleven").value.trim());
+  store.set("voice", $("sVoice").value.trim()); store.set("handle", ($("sHandle").value.trim() || "hsw365media").replace(/^@/, ""));
+  store.set("owner", $("sOwner").value.trim());
+  setStatus("sStatus", "Saved on this device.", "ok");
+};
+const handle = () => store.get("handle", "hsw365media");
+function setStatus(id, msg, cls = "") { const el = $(id); el.textContent = msg; el.className = "status " + cls; }
+
+/* ---------- products ---------- */
+async function loadProducts() {
+  try {
+    const r = await fetch("config/products.json", {cache: "no-cache"});
+    PRODUCTS = (await r.json()).products;
+  } catch { PRODUCTS = []; }
+  $("product").innerHTML = PRODUCTS.map(p => `<option value="${esc(p.id)}">${esc(p.name)} (${esc(p.keyword)})</option>`).join("");
+}
+const prod = id => PRODUCTS.find(p => p.id === id);
+
+/* ---------- script writing (Claude) ---------- */
+const SYSTEM = `You write short-form vertical video scripts (TikTok / Instagram Reels) for HSW365 Media, run by Hoodstar365:
+a solo founder and U.S. Army veteran whose philosophy is "Turn Negative Into Positive".
+Voice: direct, confident, street-smart, motivational, no corporate fluff.
+Hard rules:
+- 45-75 spoken words total. First beat is a scroll-stopping hook under 9 words.
+- 5 to 7 beats. Each beat is one short on-screen line (max 9 words) that is ALSO spoken.
+- No prices, no discounts, no income claims, no guarantees, no fake testimonials, no fake statistics.
+- Only describe what the product actually does per the pitch given. Do not invent features.
+- No emojis anywhere. No hashtags inside beats.
+- The last beat is the call to action and must contain the keyword in capitals.
+Return ONLY JSON: {"beats": [..], "emphasis": [one word from each beat to highlight, same length as beats], "caption": "...", "hashtags": ["..."]}.
+Caption: 1-3 sentences, ends with the CTA line provided. 4-6 relevant hashtags without the # sign.`;
+
+function cta(platform, kw) {
+  const h = handle();
+  if (platform === "instagram") return {
+    spoken: `Comment ${kw} and I'll DM you the link`,
+    screen: [`COMMENT "${kw}"`, `OR DM "${kw}" TO @${h.toUpperCase()}`],
+    caption: `Comment ${kw} and the link lands in your DMs.`};
+  return {
+    spoken: `DM ${kw} to @${h} on Instagram for the link`,
+    screen: [`DM "${kw}"`, `TO @${h.toUpperCase()} ON INSTAGRAM`],
+    caption: `DM ${kw} to @${h} on Instagram and the link comes straight to you. Link in bio too.`};
+}
+
+async function writeScript(p, platform, angle) {
+  const key = store.get("anth");
+  if (!key) throw new Error("Add your Anthropic API key in Settings first.");
+  const kw = p.keyword.toUpperCase(), c = cta(platform, kw);
+  const ang = angle || (p.angles || [p.pitch])[Math.floor(Math.random() * (p.angles || [1]).length)];
+  const user = `Product: ${p.name}\nWhat it does: ${p.pitch}\nWho it's for: ${p.audience}\nAngle for this video: ${ang}\nPlatform: ${platform}\nKeyword: ${kw}\nCall to action to use (spoken as last beat, adapted naturally): ${c.spoken}`;
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json",
+              "anthropic-dangerous-direct-browser-access": "true"},
+    body: JSON.stringify({model: MODEL, max_tokens: 1200, system: SYSTEM, messages: [{role: "user", content: user}]})
+  });
+  const data = await r.json();
+  if (!r.ok) throw new Error(data?.error?.message || `Claude error ${r.status}`);
+  const text = data.content.filter(b => b.type === "text").map(b => b.text).join("");
+  const j = JSON.parse(text.match(/\{[\s\S]*\}/)[0]);
+  const beats = j.beats.map(b => b.replace(/[^\x00-\x7F]+/g, "").trim()).filter(Boolean);
+  const emphasis = (j.emphasis || []).concat(Array(beats.length).fill("")).slice(0, beats.length);
+  let caption = j.caption.trim();
+  if (!caption.toLowerCase().includes(c.caption.toLowerCase().slice(0, 20))) caption += "\n\n" + c.caption;
+  caption += "\n\n" + (j.hashtags || []).slice(0, 6).map(t => "#" + t.replace(/^#/, "").replace(/\s/g, "")).join(" ");
+  return {product: p, platform, beats, emphasis, caption};
+}
+
+/* ---------- voice ---------- */
+let AC = null;
+const ctx = () => (AC ||= new (window.AudioContext || window.webkitAudioContext)());
+async function voiceBuffer(text) {
+  const key = store.get("eleven");
+  if (!key) return null;
+  const voice = store.get("voice") || "pNInz6obpgDQGcFmaJgB";
+  const r = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice}`, {
+    method: "POST", headers: {"xi-api-key": key, "content-type": "application/json", accept: "audio/mpeg"},
+    body: JSON.stringify({text, model_id: "eleven_multilingual_v2", voice_settings: {stability: .45, similarity_boost: .8, style: .35}})
+  });
+  if (!r.ok) throw new Error(`ElevenLabs error ${r.status}: ${(await r.text()).slice(0, 160)}`);
+  return await ctx().decodeAudioData(await r.arrayBuffer());
+}
+
+function scheduleBeat(ac, dest, start, dur, vol) {
+  const g = ac.createGain(); g.gain.value = vol; g.connect(dest);
+  const noise = ac.createBuffer(1, ac.sampleRate * 0.05, ac.sampleRate);
+  const nd = noise.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+  const step = 60 / 92;
+  for (let t = 0; t < dur; t += step / 2) {
+    const at = start + t, beatIdx = Math.round(t / (step / 2));
+    if (beatIdx % 2 === 0) { // kick
+      const o = ac.createOscillator(), og = ac.createGain();
+      o.frequency.setValueAtTime(130, at); o.frequency.exponentialRampToValueAtTime(42, at + 0.18);
+      og.gain.setValueAtTime(1, at); og.gain.exponentialRampToValueAtTime(0.001, at + 0.3);
+      o.connect(og).connect(g); o.start(at); o.stop(at + 0.32);
+    }
+    const s = ac.createBufferSource(), hp = ac.createBiquadFilter(), hg = ac.createGain();
+    s.buffer = noise; hp.type = "highpass"; hp.frequency.value = 7000;
+    hg.gain.setValueAtTime(beatIdx % 2 ? 0.35 : 0.18, at); hg.gain.exponentialRampToValueAtTime(0.001, at + 0.05);
+    s.connect(hp).connect(hg).connect(g); s.start(at);
+  }
+}
+
+/* ---------- canvas renderer (matches engine/render.py) ---------- */
+const cv = $("stage"), g2 = cv.getContext("2d");
+function wrap(words, font, maxW) {
+  g2.font = font; const lines = []; let cur = [];
+  for (const w of words) {
+    const t = [...cur, w].join(" ");
+    if (cur.length && g2.measureText(t).width > maxW) { lines.push(cur); cur = [w]; } else cur.push(w);
+  }
+  if (cur.length) lines.push(cur);
+  return lines;
+}
+function layout(text) {
+  const words = text.toUpperCase().split(/\s+/).filter(Boolean);
+  let size = words.length <= 5 ? 150 : words.length <= 7 ? 128 : 112, lines;
+  while (true) {
+    lines = wrap(words, `800 ${size}px "Barlow Condensed"`, W - 180);
+    if (lines.length <= 5 || size <= 84) break; size -= 10;
+  }
+  return {size, lines};
+}
+function drawFrame(s, i, local, lay) {
+  const n = s.beats.length, t = i / Math.max(n - 1, 1), kw = s.product.keyword.toUpperCase(), last = i === n - 1;
+  g2.setTransform(1, 0, 0, 1, 0, 0);
+  g2.fillStyle = C.base; g2.fillRect(0, 0, W, H);
+  const zoom = 1 + 0.05 * Math.min(local, 1);
+  g2.setTransform(zoom, 0, 0, zoom, W / 2 * (1 - zoom), H / 2 * (1 - zoom));
+  const glow = (x, y, r, col) => { const gr = g2.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, col); gr.addColorStop(1, "rgba(0,0,0,0)"); g2.fillStyle = gr; g2.fillRect(0, 0, W, H); };
+  glow(W * (0.15 + 0.5 * t), H * 0.28, 760, "rgba(14,110,130,0.55)");
+  glow(W * (0.85 - 0.4 * t), H * 0.72, 820, "rgba(100,40,150,0.55)");
+  g2.strokeStyle = "#16161f"; g2.lineWidth = 1;
+  for (let x = 0; x < W; x += 90) { g2.beginPath(); g2.moveTo(x + .5, 0); g2.lineTo(x + .5, H); g2.stroke(); }
+  for (let y = 0; y < H; y += 90) { g2.beginPath(); g2.moveTo(0, y + .5); g2.lineTo(W, y + .5); g2.stroke(); }
+  g2.setTransform(1, 0, 0, 1, 0, 0);
+  g2.textBaseline = "top";
+  g2.font = `700 30px "Space Mono"`; g2.fillStyle = C.cyan; g2.fillText("HSW365 MEDIA", 70, 150);
+  const tag = `// ${s.product.name}`; g2.fillStyle = C.muted; g2.fillText(tag, W - 70 - g2.measureText(tag).width, 150);
+  g2.fillStyle = C.violet; g2.fillRect(70, 205, 120, 6);
+
+  const ease = Math.min(local * 4, 1), inE = 1 - Math.pow(1 - ease, 3);
+  g2.globalAlpha = inE;
+  const {size, lines} = lay, lh = Math.round(size * 1.02);
+  let y = Math.round(H * 0.40 - lh * lines.length / 2 + (1 - inE) * 40);
+  const emph = (s.emphasis[i] || "").toUpperCase().replace(/[.,!?]/g, "");
+  g2.font = `800 ${size}px "Barlow Condensed"`;
+  for (const line of lines) {
+    let x = 90;
+    for (const w of line) {
+      const bare = w.replace(/[.,!?'"]/g, "");
+      g2.fillStyle = (bare === kw || (last && bare.includes(kw))) ? C.yellow : (emph && bare === emph) ? C.cyan : C.white;
+      g2.fillText(w, x, y); x += g2.measureText(w + " ").width;
+    }
+    y += lh;
+  }
+  if (last) {
+    const c = cta(s.platform, kw).screen;
+    g2.font = `800 76px "Barlow Condensed"`;
+    const tw = g2.measureText(c[0]).width, bx = 90, by = y + 60;
+    g2.fillStyle = C.red; roundRect(bx, by, tw + 80, 120, 18); g2.fill();
+    g2.fillStyle = C.white; g2.fillText(c[0], bx + 40, by + 18);
+    g2.font = `700 30px "Space Mono"`; g2.fillStyle = C.muted; g2.fillText(c[1], bx, by + 150);
+  }
+  g2.globalAlpha = 1;
+  g2.fillStyle = "#1e1e2a"; g2.fillRect(70, H - 420, W - 140, 6);
+  g2.fillStyle = C.cyan; g2.fillRect(70, H - 420, (W - 140) * (i + local) / n, 6);
+}
+function roundRect(x, y, w, h, r) { g2.beginPath(); g2.moveTo(x + r, y); g2.arcTo(x + w, y, x + w, y + h, r); g2.arcTo(x + w, y + h, x, y + h, r); g2.arcTo(x, y + h, x, y, r); g2.arcTo(x, y, x + w, y, r); g2.closePath(); }
+
+function pickMime() {
+  const opts = ["video/mp4;codecs=avc1.42E01E,mp4a.40.2", "video/mp4", "video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm"];
+  return opts.find(m => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || "";
+}
+
+let STOP = false;
+async function renderVideo(s, bed, onProgress) {
+  await Promise.all(["800 100px 'Barlow Condensed'", "700 30px 'Space Mono'"].map(f => document.fonts.load(f)));
+  const ac = ctx(); await ac.resume();
+  const voice = await voiceBuffer(s.beats.join(". "));
+  const words = s.beats.join(" ").split(/\s+/).length;
+  const speech = voice ? voice.duration : Math.max(words / 2.6, 12);
+  const tail = 1.4, total = speech + tail + 0.3;
+  const weights = s.beats.map(b => Math.max(b.split(/\s+/).length, 2) + 1.2), sum = weights.reduce((a, b) => a + b, 0);
+  const durs = weights.map(w => speech * w / sum); durs[durs.length - 1] += tail;
+  const starts = durs.map((_, i) => durs.slice(0, i).reduce((a, b) => a + b, 0));
+  const lays = s.beats.map(layout);
+
+  const dest = ac.createMediaStreamDestination();
+  const t0 = ac.currentTime + 0.25;
+  if (voice) { const src = ac.createBufferSource(); src.buffer = voice; src.connect(dest); src.start(t0); }
+  if (bed) scheduleBeat(ac, dest, t0, total, voice ? 0.12 : 0.45);
+  if (!voice && !bed) { const o = ac.createConstantSource ? ac.createConstantSource() : ac.createOscillator(); const z = ac.createGain(); z.gain.value = 0; o.connect(z).connect(dest); o.start(); o.stop(t0 + total); }
+
+  drawFrame(s, 0, 0, lays[0]);
+  const stream = new MediaStream([...cv.captureStream(FPS).getVideoTracks(), ...dest.stream.getAudioTracks()]);
+  const mime = pickMime();
+  const rec = new MediaRecorder(stream, mime ? {mimeType: mime, videoBitsPerSecond: 8_000_000, audioBitsPerSecond: 160_000} : undefined);
+  const chunks = []; rec.ondataavailable = e => e.data.size && chunks.push(e.data);
+  const done = new Promise(res => rec.onstop = res);
+  while (ac.currentTime < t0 - 0.02) await new Promise(r => setTimeout(r, 10));
+  rec.start(250);
+  await new Promise(resolve => {
+    const tick = () => {
+      const el = ac.currentTime - t0;
+      if (el >= total || STOP) { resolve(); return; }
+      let i = starts.findIndex((st, k) => el >= st && el < st + durs[k]); if (i < 0) i = s.beats.length - 1;
+      drawFrame(s, i, Math.min((el - starts[i]) / durs[i], 1), lays[i]);
+      onProgress && onProgress(el / total);
+      setTimeout(tick, 1000 / FPS);
+    };
+    tick();
+  });
+  rec.stop(); await done;
+  const type = (rec.mimeType || mime || "video/webm").split(";")[0];
+  return {blob: new Blob(chunks, {type}), ext: type.includes("mp4") ? "mp4" : "webm", voiced: !!voice};
+}
+
+/* ---------- output cards ---------- */
+function outCard(s, res, target) {
+  const url = URL.createObjectURL(res.blob);
+  const name = `irun-${s.platform}-${s.product.id}-${Date.now()}.${res.ext}`;
+  const file = new File([res.blob], name, {type: res.blob.type});
+  const el = document.createElement("div"); el.className = "vid";
+  el.innerHTML = `<video src="${url}" controls playsinline></video><div class="b">
+    <span class="pill ${s.platform === "tiktok" ? "tt" : "ig"}">${s.platform === "tiktok" ? "TikTok" : "Instagram"}</span> <span class="mono">${esc(s.product.name)}${res.voiced ? " / voiced" : ""}</span>
+    <div class="cap">${esc(s.caption)}</div>
+    <div class="btns"><button class="btn cy" data-a="share">Share</button><a class="btn ghost" href="${url}" download="${name}">Download</a><button class="btn ghost" data-a="copy">Copy caption</button></div></div>`;
+  el.querySelector('[data-a="copy"]').onclick = async e => { try { await navigator.clipboard.writeText(s.caption); e.target.textContent = "Copied"; } catch { e.target.textContent = "Copy failed"; } };
+  const sh = el.querySelector('[data-a="share"]');
+  if (navigator.canShare && navigator.canShare({files: [file]})) {
+    sh.onclick = async () => { try { await navigator.clipboard.writeText(s.caption); } catch {} try { await navigator.share({files: [file], text: s.caption}); } catch {} };
+  } else sh.hidden = true;
+  target.prepend(el);
+}
+
+/* ---------- editor ---------- */
+function showEditor(s) {
+  current = s; $("editor").hidden = false;
+  $("beats").innerHTML = s.beats.map((b, i) => `<div class="beat"><input value="${esc(b)}" data-i="${i}" class="bt"><input value="${esc(s.emphasis[i])}" class="em" placeholder="highlight"></div>`).join("");
+  $("caption").value = s.caption;
+}
+function readEditor() {
+  const rows = [...document.querySelectorAll("#beats .beat")];
+  current.beats = rows.map(r => r.querySelector(".bt").value.trim()).filter(Boolean);
+  current.emphasis = rows.map(r => r.querySelector(".em").value.trim()).slice(0, current.beats.length);
+  current.caption = $("caption").value;
+}
+async function doWrite() {
+  const p = prod($("product").value); if (!p) return;
+  $("btnWrite").disabled = true; setStatus("wStatus", "Writing...");
+  try { showEditor(await writeScript(p, $("platform").value, $("angle").value.trim())); setStatus("wStatus", "Script ready. Edit anything, then render.", "ok"); }
+  catch (e) { setStatus("wStatus", e.message, "err"); }
+  $("btnWrite").disabled = false;
+}
+$("btnWrite").onclick = doWrite; $("btnRewrite").onclick = doWrite;
+$("btnRender").onclick = async () => {
+  if (!current) return; readEditor();
+  $("btnRender").disabled = true; STOP = false; setStatus("rStatus", "Rendering... keep this tab open.");
+  try {
+    const res = await renderVideo(current, $("beatBed").checked, f => $("rBar").style.width = (f * 100).toFixed(0) + "%");
+    outCard({...current}, res, $("makeOut")); $("rBar").style.width = "100%";
+    setStatus("rStatus", `Done (${res.ext.toUpperCase()}). Tap Share to post, or Download.`, "ok");
+  } catch (e) { setStatus("rStatus", e.message, "err"); }
+  $("btnRender").disabled = false;
+};
+
+/* ---------- today's 6 ---------- */
+$("btnBatch").onclick = async () => {
+  if (!store.get("anth")) { setStatus("bStatus", "Add your Anthropic API key in Settings first.", "err"); return; }
+  const plan = ["tiktok", "tiktok", "instagram", "tiktok", "tiktok", "instagram"];
+  const day = Math.floor(Date.now() / 864e5);
+  $("btnBatch").disabled = true; $("btnStop").hidden = false; STOP = false;
+  for (let k = 0; k < plan.length && !STOP; k++) {
+    const p = PRODUCTS[(day + k) % PRODUCTS.length];
+    try {
+      setStatus("bStatus", `${k + 1}/6: writing ${p.name} for ${plan[k]}...`);
+      const s = await writeScript(p, plan[k], "");
+      setStatus("bStatus", `${k + 1}/6: rendering ${p.name}...`);
+      const res = await renderVideo(s, true, f => $("bBar").style.width = (((k + f) / plan.length) * 100).toFixed(0) + "%");
+      if (!STOP) outCard(s, res, $("batchOut"));
+    } catch (e) { setStatus("bStatus", `${k + 1}/6 failed: ${e.message}`, "err"); await new Promise(r => setTimeout(r, 1500)); }
+  }
+  $("bBar").style.width = "100%"; setStatus("bStatus", STOP ? "Stopped." : "All 6 ready. Share each to TikTok / Instagram.", STOP ? "" : "ok");
+  $("btnBatch").disabled = false; $("btnStop").hidden = true;
+};
+$("btnStop").onclick = () => { STOP = true; };
+
+/* ---------- leads ---------- */
+async function loadLeads() {
+  const key = store.get("owner");
+  if (!key) { setStatus("lStatus", "Add your owner key in Settings.", "err"); return; }
+  setStatus("lStatus", "Loading...");
+  try {
+    const r = await fetch(`${LEADS_API}?view=data&key=${encodeURIComponent(key)}`);
+    if (!r.ok) throw new Error(r.status === 401 ? "Wrong owner key." : `Error ${r.status}`);
+    const d = await r.json(), week = Date.now() - 7 * 864e5;
+    const kw = d.leads.filter(l => l.keyword), wk = kw.filter(l => new Date(l.created_at) > week);
+    $("lStats").innerHTML = [["Leads 7 days", wk.length], ["Links sent 7 days", wk.filter(l => l.replied).length], ["All leads", kw.length], ["Inbox msgs", d.leads.length]]
+      .map(([l, n]) => `<div class="stat"><div class="mono">${l}</div><div class="n">${n}</div></div>`).join("");
+    $("lTable").hidden = false;
+    $("lTable").innerHTML = d.leads.length ? `<table><tr><th>When</th><th>From</th><th>Keyword</th><th>Message</th><th>Link</th></tr>${d.leads.map(l => `<tr><td>${new Date(l.created_at).toLocaleString()}</td><td>${l.username ? "@" + esc(l.username) : esc(l.ig_user_id)}</td><td>${esc(l.keyword || "-")}</td><td>${esc(l.message)}</td><td>${l.keyword ? (l.replied ? '<span class="pill ok">sent</span>' : '<span class="pill bad">not sent</span>') : '<span class="mono">reply by hand</span>'}</td></tr>`).join("")}</table>` : `<p class="note">No leads yet. They show up here once the Instagram bot is connected.</p>`;
+    setStatus("lStatus", "");
+  } catch (e) { setStatus("lStatus", e.message, "err"); }
+}
+$("btnLeads").onclick = loadLeads;
+
+/* ---------- boot ---------- */
+loadSettings(); loadProducts();
+if (!window.MediaRecorder || !cv.captureStream) setStatus("wStatus", "This browser can't record video. Use Safari (iPhone) or Chrome.", "err");
+</script>
+</body>
+</html>
