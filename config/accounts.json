@@ -7,7 +7,10 @@
       "handle": "hsw365media",
       "type": "owner",
       "enabled": true,
-      "platforms": ["tiktok", "instagram"],
+      "platforms": [
+        "tiktok",
+        "instagram"
+      ],
       "lead_bot": true,
       "voice": "HSW365 Media, run by Hoodstar365: a solo founder and U.S. Army veteran whose philosophy is \"Turn Negative Into Positive\". Direct, confident, street-smart, motivational, no corporate fluff.",
       "products": "config/products.json"
@@ -18,7 +21,10 @@
       "handle": "hoodstar365",
       "type": "owner",
       "enabled": true,
-      "platforms": ["tiktok", "instagram"],
+      "platforms": [
+        "tiktok",
+        "instagram"
+      ],
       "lead_bot": false,
       "voice": "Hoodstar365 (Elvin Torres Sr.): U.S. Army veteran, published author, recording artist, podcast host and motivational speaker. His message is \"Turn Negative Into Positive\". Real, raw, faith-driven, motivational, speaks from lived experience.",
       "products": [
@@ -29,12 +35,19 @@
           "link": "",
           "cta": {
             "spoken": "Book Hoodstar365 to speak. Email book at hoodstar365 dot com",
-            "screen": ["BOOK HOODSTAR365", "BOOK@HOODSTAR365.COM"],
+            "screen": [
+              "BOOK HOODSTAR365",
+              "BOOK@HOODSTAR365.COM"
+            ],
             "caption": "Book Hoodstar365 for your school, organization or event: book@hoodstar365.com"
           },
           "audience": "schools, colleges, veteran organizations, libraries, youth programs and event organizers",
           "pitch": "Hoodstar365 is a U.S. Army veteran and author who speaks to schools, veterans and organizations about turning negative into positive.",
-          "angles": ["your setback is the setup", "from the streets to the Army to the stage", "turn negative into positive"]
+          "angles": [
+            "your setback is the setup",
+            "from the streets to the Army to the stage",
+            "turn negative into positive"
+          ]
         },
         {
           "id": "books",
@@ -43,12 +56,19 @@
           "link": "",
           "cta": {
             "spoken": "Hoodlum Soldier, Ride Out, Better Days and God Who Am I. Link in bio",
-            "screen": ["LINK IN BIO", "HOODLUM SOLDIER / RIDE OUT / BETTER DAYS"],
+            "screen": [
+              "LINK IN BIO",
+              "HOODLUM SOLDIER / RIDE OUT / BETTER DAYS"
+            ],
             "caption": "Hoodlum Soldier, Ride Out, Better Days and God Who Am I? by Hoodstar365. Link in bio."
           },
           "audience": "readers who like real stories about struggle, the military, faith and coming up from nothing",
           "pitch": "Hoodstar365 wrote Hoodlum Soldier, Ride Out, Better Days and God Who Am I?, books drawn from his life before, during and after the Army.",
-          "angles": ["the story they don't tell you", "pain into pages", "faith when nothing makes sense"]
+          "angles": [
+            "the story they don't tell you",
+            "pain into pages",
+            "faith when nothing makes sense"
+          ]
         },
         {
           "id": "podcast",
@@ -57,12 +77,138 @@
           "link": "",
           "cta": {
             "spoken": "Search Respect Da Game and tap in",
-            "screen": ["RESPECT DA GAME", "SEARCH IT. TAP IN."],
+            "screen": [
+              "RESPECT DA GAME",
+              "SEARCH IT. TAP IN."
+            ],
             "caption": "Respect Da Game, the podcast hosted by Hoodstar365. Search it and tap in."
           },
           "audience": "people who want real conversations about hustle, life lessons and respect",
           "pitch": "Respect Da Game is the podcast hosted by Hoodstar365 with real conversations about the hustle and life.",
-          "angles": ["real talk only", "lessons that cost somebody everything", "respect the game, it respects you back"]
+          "angles": [
+            "real talk only",
+            "lessons that cost somebody everything",
+            "respect the game, it respects you back"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hsw365co",
+      "brand": "HSW365.CO",
+      "handle": "hsw365.co",
+      "type": "owner",
+      "enabled": true,
+      "platforms": [
+        "tiktok",
+        "instagram"
+      ],
+      "lead_bot": false,
+      "voice": "HSW365, the veteran-owned streetwear and tech brand from Hoodstar365, a U.S. Army veteran. Every piece carries the message \"Turn Negative Into Positive\". Bold, proud, real, survival-to-success energy, no hype words.",
+      "products": [
+        {
+          "id": "survivor",
+          "name": "SURVIVOR COLLECTION",
+          "keyword": "SURVIVOR",
+          "link": "https://hsw365.co",
+          "cta": {
+            "spoken": "Shop it at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "ONE OF ONE. SIGNED."
+            ],
+            "caption": "Shop it at hsw365.co. Link in bio."
+          },
+          "audience": "streetwear buyers and collectors who want pieces with a real story",
+          "pitch": "The Survivor Collection: eight one-of-one tees, each hand-bleached and personally signed by Hoodstar365, each telling a chapter of surviving and coming out stronger. Names include Crimson Fracture, Gold Rush, Midnight Shrapnel, Blood Orbit, Stars & Stripes, Blue Gold Fracture, Gold Starburst and Founder's Mark. When one sells, it's gone.",
+          "angles": [
+            "one of one means nobody else has it",
+            "every scar is a chapter",
+            "wear the story, not the logo"
+          ]
+        },
+        {
+          "id": "prints",
+          "name": "FOUNDER'S PRINT SERIES",
+          "keyword": "PRINT",
+          "link": "https://hsw365.co/products/survivor-collection-founders-print-series-limited-edition-of-25",
+          "cta": {
+            "spoken": "Shop it at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "LIMITED: 25 EACH"
+            ],
+            "caption": "Shop it at hsw365.co. Link in bio."
+          },
+          "audience": "collectors and fans who want Survivor Collection art on their wall",
+          "pitch": "The Founder's Print Series: museum-quality giclee prints of the one-of-one Survivor Collection designs, limited to 25 of each design.",
+          "angles": [
+            "own the art behind the one-of-ones",
+            "only 25 of each",
+            "the story, framed"
+          ]
+        },
+        {
+          "id": "faith",
+          "name": "FAITH OVER FEAR",
+          "keyword": "FAITH",
+          "link": "https://hsw365.co/products/faith-over-fear",
+          "cta": {
+            "spoken": "Shop it at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "LINK IN BIO"
+            ],
+            "caption": "Shop it at hsw365.co. Link in bio."
+          },
+          "audience": "people of faith and anyone pushing through fear",
+          "pitch": "The FAITH OVER FEAR tee, the piece where every Survivor starts: one decision, faith over fear.",
+          "angles": [
+            "one decision changes everything",
+            "faith over fear, every day",
+            "where every survivor starts"
+          ]
+        },
+        {
+          "id": "streetwear",
+          "name": "HSW365 STREETWEAR",
+          "keyword": "WEAR",
+          "link": "https://hsw365.co",
+          "cta": {
+            "spoken": "Shop it at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "LINK IN BIO"
+            ],
+            "caption": "Shop it at hsw365.co. Link in bio."
+          },
+          "audience": "streetwear fans who back veteran-owned and independent brands",
+          "pitch": "HSW365 streetwear: veteran-owned tees and HOODSTARWORLD hoodies, including THE KING IS HERE, THE G.O.A.T, THE KING DUNKS and NOLAN, all carrying the Turn Negative Into Positive message.",
+          "angles": [
+            "veteran owned, independent, real",
+            "turn negative into positive on your chest",
+            "support the brand that built itself"
+          ]
+        },
+        {
+          "id": "calltwin",
+          "name": "CALLTWIN",
+          "keyword": "CALL",
+          "link": "https://hsw365.co/products/calltwin-24-7-virtual-assitant",
+          "cta": {
+            "spoken": "Get CallTwin at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "AI RECEPTIONIST"
+            ],
+            "caption": "Get CallTwin at hsw365.co. Link in bio."
+          },
+          "audience": "small business owners who miss calls while they work",
+          "pitch": "CallTwin, an AI receptionist sold at hsw365.co, answers your business line 24/7, takes the caller's details and texts you the job.",
+          "angles": [
+            "every missed call is a lost customer",
+            "AI picks up when you can't"
+          ]
         }
       ]
     }
