@@ -10,6 +10,13 @@ iRun makes and posts short videos for @hsw365media and turns comments and DMs in
 
 Data lives on the Supabase project `klipit` (`lsxdlmrjrcivxwgfkpop`) in the `irun_*` tables and the `irun-media` bucket. The dedicated "Irun" project is paused because the free plan caps you at 2 active projects.
 
+- **Accounts** (`config/accounts.json`): every brand iRun runs: @hsw365media, @hoodstar365, and clients. See CLIENTS.md.
+- **Content queue** (`content/queue/`): scripts written ahead of time by the daily Claude writer. iRun uses these first,
+  so it runs without an Anthropic API key. Posted scripts move to `content/posted/`.
+
+Every run starts with a **preflight** block in the log that lists which keys are set and which accounts are connected.
+Read that first when something isn't posting.
+
 ## Keywords
 
 | Keyword | App | Link |
@@ -28,7 +35,7 @@ Go to repo **Settings > Secrets and variables > Actions > New repository secret*
 
 | Secret | Where to get it |
 |---|---|
-| `ANTHROPIC_API_KEY` | console.anthropic.com > API keys |
+| `ANTHROPIC_API_KEY` (optional) | console.anthropic.com > API keys. Only needed when the content queue runs dry |
 | `SUPABASE_SERVICE_KEY` | Supabase > klipit project > Settings > API > `service_role` secret |
 | `ELEVENLABS_API_KEY` (optional) | elevenlabs.io > Profile > API key. Without it, the free voice is used |
 | `ELEVENLABS_VOICE_ID` (optional) | the voice you want |

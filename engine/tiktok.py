@@ -2,17 +2,19 @@
 import os
 import time
 import requests
+import accounts
 import db
 
 API = "https://open.tiktokapis.com/v2"
 
 
-def access_token():
+def access_token(account=accounts.MAIN):
     ck, cs = os.environ["TIKTOK_CLIENT_KEY"], os.environ["TIKTOK_CLIENT_SECRET"]
-    stored = db.get_token("tiktok") if db.enabled() else None
-    refresh = (stored or {}).get("refresh_value") or os.environ.get("TIKTOK_REFRESH_TOKEN")
+    name = accounts.token_name("tiktok", account)
+    stored = db.get_token(name) if db.enabled() else None
+    refresh = (stored or {}).get("refresh_value") or (os.environ.get("TIKTOK_REFRESH_TOKEN") if account == accounts.MAIN else None)
     if not refresh:
-        raise RuntimeError("No TikTok refresh token. Run engine/tiktok_auth.py once.")
+        raise RuntimeError(f"No TikTok refresh token for @{account}. Run engine/tiktok_auth.py --account {account} once.")
     r = requests.post(
         f"{API}/oauth/token/",
         headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -23,12 +25,12 @@ def access_token():
     if "access_token" not in data:
         raise RuntimeError(f"TikTok token refresh failed: {data}")
     if db.enabled():
-        db.set_token("tiktok", data["access_token"], data.get("refresh_token", refresh))
+        db.set_token(name, data["access_token"], data.get("refresh_token", refresh))
     return data["access_token"]
 
 
-def publish(video_path, caption):
-    tok = access_token()
+def publish(video_path, caption, account=accounts.MAIN):
+    tok = access_token(account)
     h = {"Authorization": f"Bearer {tok}", "Content-Type": "application/json; charset=UTF-8"}
     info = requests.post(f"{API}/post/publish/creator_info/query/", headers=h, timeout=30).json()
     opts = info.get("data", {}).get("privacy_level_options", [])

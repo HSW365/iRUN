@@ -4,11 +4,13 @@ import os
 import re
 import requests
 
-MODEL = os.environ.get("IRUN_MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("IRUN_MODEL", "claude-sonnet-5-5")
 
-SYSTEM = """You write short-form vertical video scripts (TikTok / Instagram Reels) for HSW365 Media, run by Hoodstar365:
-a solo founder and U.S. Army veteran whose philosophy is "Turn Negative Into Positive".
-Voice: direct, confident, street-smart, motivational, no corporate fluff.
+DEFAULT_VOICE = ("HSW365 Media, run by Hoodstar365: a solo founder and U.S. Army veteran whose philosophy is "
+                 "\"Turn Negative Into Positive\". Direct, confident, street-smart, motivational, no corporate fluff.")
+
+SYSTEM = """You write short-form vertical video scripts (TikTok / Instagram Reels) for this brand:
+{voice}
 
 Hard rules:
 - 45-75 spoken words total. First beat is a scroll-stopping hook under 9 words.
@@ -22,7 +24,7 @@ Return ONLY JSON: {"beats": [..], "emphasis": [one word from each beat to highli
 Caption: 1-3 sentences, ends with the CTA line provided. 4-6 relevant hashtags without the # sign."""
 
 
-def write_script(product, angle, platform, cta, avoid_hooks=()):
+def write_script(product, angle, platform, cta, avoid_hooks=(), voice=None):
     key = os.environ["ANTHROPIC_API_KEY"]
     user = (
         f"Product: {product['name']}\nWhat it does: {product['pitch']}\nWho it's for: {product['audience']}\n"
@@ -33,7 +35,7 @@ def write_script(product, angle, platform, cta, avoid_hooks=()):
     r = requests.post(
         "https://api.anthropic.com/v1/messages",
         headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-        json={"model": MODEL, "max_tokens": 1200, "system": SYSTEM, "messages": [{"role": "user", "content": user}]},
+        json={"model": MODEL, "max_tokens": 1200, "system": SYSTEM.replace("{voice}", voice or DEFAULT_VOICE), "messages": [{"role": "user", "content": user}]},
         timeout=120,
     )
     r.raise_for_status()

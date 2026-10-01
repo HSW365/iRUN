@@ -3,16 +3,18 @@ import datetime as dt
 import os
 import time
 import requests
+import accounts
 import db
 
 GRAPH = "https://graph.instagram.com/v23.0"
 
 
-def access_token():
-    stored = db.get_token("instagram") if db.enabled() else None
-    tok = (stored or {}).get("value") or os.environ.get("IG_ACCESS_TOKEN")
+def access_token(account=accounts.MAIN):
+    name = accounts.token_name("instagram", account)
+    stored = db.get_token(name) if db.enabled() else None
+    tok = (stored or {}).get("value") or (os.environ.get("IG_ACCESS_TOKEN") if account == accounts.MAIN else None)
     if not tok:
-        raise RuntimeError("No Instagram token. Add IG_ACCESS_TOKEN (see SETUP.md).")
+        raise RuntimeError(f"No Instagram token for @{account}. See SETUP.md.")
     # Long-lived tokens last 60 days; refresh on every run (allowed once the token is >24h old).
     r = requests.get("https://graph.instagram.com/refresh_access_token",
                      params={"grant_type": "ig_refresh_token", "access_token": tok}, timeout=30)
@@ -20,22 +22,22 @@ def access_token():
         tok = r.json()["access_token"]
         exp = (dt.datetime.utcnow() + dt.timedelta(seconds=r.json().get("expires_in", 0))).isoformat() + "Z"
         if db.enabled():
-            db.set_token("instagram", tok, expires_at=exp)
+            db.set_token(name, tok, expires_at=exp)
     elif db.enabled() and not stored:
-        db.set_token("instagram", tok)
+        db.set_token(name, tok)
     return tok
 
 
-def user_id(tok):
-    uid = os.environ.get("IG_USER_ID")
+def user_id(tok, account=accounts.MAIN):
+    uid = os.environ.get("IG_USER_ID") if account == accounts.MAIN else None
     if uid:
         return uid
     return requests.get(f"{GRAPH}/me", params={"fields": "user_id,username", "access_token": tok}, timeout=30).json()["user_id"]
 
 
-def publish(video_url, caption):
-    tok = access_token()
-    uid = user_id(tok)
+def publish(video_url, caption, account=accounts.MAIN):
+    tok = access_token(account)
+    uid = user_id(tok, account)
     c = requests.post(f"{GRAPH}/{uid}/media", timeout=60, data={
         "media_type": "REELS", "video_url": video_url, "caption": caption[:2200],
         "share_to_feed": "true", "access_token": tok}).json()

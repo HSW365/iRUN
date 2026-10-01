@@ -1,0 +1,70 @@
+{
+  "_note": "Every brand iRun runs content for. Owner accounts are HSW365's own; add clients the same way (see CLIENTS.md). 'products' is a file path or an inline list in the same shape as config/products.json. An account only posts to a platform once its login is connected; until then iRun renders drafts for it.",
+  "accounts": [
+    {
+      "id": "hsw365media",
+      "brand": "HSW365 Media",
+      "handle": "hsw365media",
+      "type": "owner",
+      "enabled": true,
+      "platforms": ["tiktok", "instagram"],
+      "lead_bot": true,
+      "voice": "HSW365 Media, run by Hoodstar365: a solo founder and U.S. Army veteran whose philosophy is \"Turn Negative Into Positive\". Direct, confident, street-smart, motivational, no corporate fluff.",
+      "products": "config/products.json"
+    },
+    {
+      "id": "hoodstar365",
+      "brand": "Hoodstar365",
+      "handle": "hoodstar365",
+      "type": "owner",
+      "enabled": true,
+      "platforms": ["tiktok", "instagram"],
+      "lead_bot": false,
+      "voice": "Hoodstar365 (Elvin Torres Sr.): U.S. Army veteran, published author, recording artist, podcast host and motivational speaker. His message is \"Turn Negative Into Positive\". Real, raw, faith-driven, motivational, speaks from lived experience.",
+      "products": [
+        {
+          "id": "speaking",
+          "name": "BOOK HOODSTAR365",
+          "keyword": "SPEAK",
+          "link": "",
+          "cta": {
+            "spoken": "Book Hoodstar365 to speak. Email book at hoodstar365 dot com",
+            "screen": ["BOOK HOODSTAR365", "BOOK@HOODSTAR365.COM"],
+            "caption": "Book Hoodstar365 for your school, organization or event: book@hoodstar365.com"
+          },
+          "audience": "schools, colleges, veteran organizations, libraries, youth programs and event organizers",
+          "pitch": "Hoodstar365 is a U.S. Army veteran and author who speaks to schools, veterans and organizations about turning negative into positive.",
+          "angles": ["your setback is the setup", "from the streets to the Army to the stage", "turn negative into positive"]
+        },
+        {
+          "id": "books",
+          "name": "THE BOOKS",
+          "keyword": "READ",
+          "link": "",
+          "cta": {
+            "spoken": "Hoodlum Soldier, Ride Out, Better Days and God Who Am I. Link in bio",
+            "screen": ["LINK IN BIO", "HOODLUM SOLDIER / RIDE OUT / BETTER DAYS"],
+            "caption": "Hoodlum Soldier, Ride Out, Better Days and God Who Am I? by Hoodstar365. Link in bio."
+          },
+          "audience": "readers who like real stories about struggle, the military, faith and coming up from nothing",
+          "pitch": "Hoodstar365 wrote Hoodlum Soldier, Ride Out, Better Days and God Who Am I?, books drawn from his life before, during and after the Army.",
+          "angles": ["the story they don't tell you", "pain into pages", "faith when nothing makes sense"]
+        },
+        {
+          "id": "podcast",
+          "name": "RESPECT DA GAME",
+          "keyword": "GAME",
+          "link": "",
+          "cta": {
+            "spoken": "Search Respect Da Game and tap in",
+            "screen": ["RESPECT DA GAME", "SEARCH IT. TAP IN."],
+            "caption": "Respect Da Game, the podcast hosted by Hoodstar365. Search it and tap in."
+          },
+          "audience": "people who want real conversations about hustle, life lessons and respect",
+          "pitch": "Respect Da Game is the podcast hosted by Hoodstar365 with real conversations about the hustle and life.",
+          "angles": ["real talk only", "lessons that cost somebody everything", "respect the game, it respects you back"]
+        }
+      ]
+    }
+  ]
+}

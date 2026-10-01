@@ -12,12 +12,18 @@ on:
       platform:
         description: "tiktok, instagram, or both"
         default: "both"
+      account:
+        description: "account id from config/accounts.json (blank = all enabled accounts)"
+        default: ""
       product:
-        description: "product id from config/products.json (blank = auto rotate)"
+        description: "product id within that account (blank = queue / auto rotate)"
         default: ""
       mode:
         description: "draft (render + save only) or live (actually post)"
         default: "draft"
+
+permissions:
+  contents: write
 
 concurrency:
   group: irun
@@ -53,8 +59,18 @@ jobs:
         run: |
           ARGS=""
           if [ -n "${{ github.event.inputs.platform }}" ]; then ARGS="$ARGS --platform ${{ github.event.inputs.platform }}"; fi
+          if [ -n "${{ github.event.inputs.account }}" ]; then ARGS="$ARGS --account ${{ github.event.inputs.account }}"; fi
           if [ -n "${{ github.event.inputs.product }}" ]; then ARGS="$ARGS --product ${{ github.event.inputs.product }}"; fi
           python engine/run.py $ARGS
+      - name: Save queue progress
+        if: always()
+        run: |
+          git config user.name "iRun"
+          git config user.email "hsw365media@gmail.com"
+          git add content || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "iRun: queue progress [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
       - name: Keep videos
         if: always()
         uses: actions/upload-artifact@v4

@@ -51,11 +51,11 @@ def _wrap(words, font, draw, max_w):
     return lines
 
 
-def frame(text, emphasis, i, n, product_name, keyword, out, cta=None):
+def frame(text, emphasis, i, n, product_name, keyword, out, cta=None, brand="HSW365 MEDIA", handle="HSW365MEDIA"):
     img = _background(i, n)
     d = ImageDraw.Draw(img)
     mono = _font("SpaceMono-Bold.ttf", 30)
-    d.text((70, 150), "HSW365 MEDIA", font=mono, fill=CYAN)
+    d.text((70, 150), brand.upper(), font=mono, fill=CYAN)
     tag = f"// {product_name}"
     d.text((W - 70 - d.textlength(tag, font=mono), 150), tag, font=mono, fill=MUTED)
     d.rectangle([70, 205, 190, 211], fill=VIOLET)
@@ -66,7 +66,8 @@ def frame(text, emphasis, i, n, product_name, keyword, out, cta=None):
     while True:
         font = _font("BarlowCondensed-ExtraBold.ttf", size)
         lines = _wrap(words, font, d, W - 180)
-        if len(lines) <= 5 or size <= 84:
+        widest = max(d.textlength(w, font=font) for w in words)
+        if (len(lines) <= 5 and widest <= W - 180) or size <= 60:
             break
         size -= 10
     lh = int(size * 1.02)
@@ -89,7 +90,7 @@ def frame(text, emphasis, i, n, product_name, keyword, out, cta=None):
 
     if last:
         pill = _font("BarlowCondensed-ExtraBold.ttf", 76)
-        label, sub = cta or (f"COMMENT \"{kw}\"", "OR DM IT TO @HSW365MEDIA")
+        label, sub = cta or (f"COMMENT \"{kw}\"", f"OR DM IT TO @{handle.upper()}")
         tw = d.textlength(label, font=pill)
         bx, by = 90, y + 60
         d.rounded_rectangle([bx, by, bx + tw + 80, by + 120], radius=18, fill=RED)
@@ -102,7 +103,7 @@ def frame(text, emphasis, i, n, product_name, keyword, out, cta=None):
     img.save(out, "PNG")
 
 
-def render(beats, emphasis, audio_path, audio_len, product, workdir, out_path, cta=None):
+def render(beats, emphasis, audio_path, audio_len, product, workdir, out_path, cta=None, brand="HSW365 MEDIA", handle="HSW365MEDIA"):
     n = len(beats)
     weights = [max(len(b.split()), 2) + 1.2 for b in beats]
     total = sum(weights)
@@ -112,7 +113,7 @@ def render(beats, emphasis, audio_path, audio_len, product, workdir, out_path, c
     segs = []
     for i, (b, e, dur) in enumerate(zip(beats, emphasis, durs)):
         png = os.path.join(workdir, f"f{i}.png")
-        frame(b, e, i, n, product["name"], product["keyword"], png, cta)
+        frame(b, e, i, n, product["name"], product["keyword"], png, cta, brand, handle)
         seg = os.path.join(workdir, f"s{i}.mp4")
         frames = max(int(dur * 30), 15)
         zoom = f"zoompan=z='min(1+0.0009*on,1.12)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={W}x{H}:fps=30"
