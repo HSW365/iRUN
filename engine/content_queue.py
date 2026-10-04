@@ -9,7 +9,10 @@ Queue item shape:
   "beats": ["hook", "...", "CTA beat with KEYWORD"],
   "emphasis": ["word", ...],           # one word per beat to highlight (optional)
   "caption": "1-3 sentences",
-  "hashtags": ["tag", ...]             # without '#'
+  "hashtags": ["tag", ...],            # without '#'
+  "format": "video",                   # optional: "carousel" posts the beats as swipeable Instagram slides
+  "angle": "the angle this script takes",          # optional: lets iRun learn which angles perform
+  "experiment": "hsw365media-20261005", "variant": "A"   # optional: an A/B pair shares one experiment id
 }
 """
 import datetime as dt

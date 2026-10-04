@@ -63,6 +63,33 @@ With just these, **Actions > iRun autopilot > Run workflow** (mode `draft`) make
 ## 4. Go live
 After you've watched a few drafts in the dashboard, go to **Settings > Secrets and variables > Actions > Variables**, add `IRUN_MODE` = `live`, and scheduled runs will start posting. Set it back to `draft` to pause posting without stopping the drafts.
 
+## 5. Growth engine
+
+Runs every morning at 6:37am ET before the first post (**Actions > iRun growth engine**), and on demand.
+
+| What | How it works | What it needs |
+|---|---|---|
+| **Store scan** | Run the workflow with job `scan` and a Shopify store URL. iRun reads the public catalog and writes the brand voice, audience, catalog facts and content subjects. The account is added **paused** so you can read it first. | Nothing. `ANTHROPIC_API_KEY` makes the voice and angles sharper. |
+| **30-day plan** | Every slot for 30 days gets a subject, an angle, a weekly goal and a format. Rebuilt each morning from today forward. | Nothing. |
+| **Carousels** | Every 3rd Instagram slot posts as a swipeable carousel instead of a Reel. | Same Instagram login as Reels. |
+| **A/B hook tests** | Every other day the first two TikToks share a subject and angle with different hooks. Settled 48 hours after both are live. | Post numbers (below). |
+| **Results** | Views, likes, comments, shares and saves per post. Subjects and angles that score higher get more of the plan. | Instagram: add the `instagram_business_manage_insights` permission for full numbers (likes and comments work without it). TikTok: add the `video.list` scope to the app, then log in again with `TIKTOK_SCOPES=user.info.basic,video.publish,video.list`. |
+| **Competitors** | Add `"competitors": ["https://their-store.com"]` to an account. iRun tracks their catalog, prices and changes daily and benchmarks them against the account's own `"store"`. | Competitor must be on Shopify. |
+| **Ad budgets** | Moves Meta ad budget from weak ad sets to strong ones inside campaigns you list. Never raises total spend, never moves an ad set more than 20% a day, never creates campaigns. | Secret `META_ADS_TOKEN` (system user token with `ads_management`) and an `"ads"` block on the account: `{"ad_account_id": "act_...", "campaign_ids": ["..."]}`. It only proposes changes until you set repo variable `IRUN_ADS_MODE` = `live`. |
+| **Order alerts** | Each new Shopify order is logged and shown in the dashboard as it happens. | Steps below. |
+
+With `ANTHROPIC_API_KEY` set, job `fill` writes the next 3 days of the plan into `content/queue/` as ready scripts.
+
+### Order alerts
+1. Shopify admin > **Settings > Notifications > Webhooks > Create webhook**. Event: **Order creation**. Format: JSON.
+   URL: `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-growth?shop=ACCOUNT_ID` (for hsw365.co the id is `hsw365co`).
+2. Copy the signing secret Shopify shows on that page into Supabase table `irun_settings` as key
+   `shopify_webhook_secret:ACCOUNT_ID`. Orders are rejected until this is set.
+3. Optional phone alert: put a URL that accepts a plain-text POST (for example an ntfy.sh topic) in `irun_settings`
+   as `notify_url`.
+
+Only the order number, total, items and where the visit came from are stored. No customer names, emails or addresses.
+
 ## Dashboard
 `https://hsw365.github.io/iRUN/dashboard.html`: enter the owner key (stored in `irun_settings.owner_key`).
 

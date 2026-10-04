@@ -78,3 +78,16 @@ def publish(video_path, caption, account=accounts.MAIN):
         if status == "FAILED":
             raise RuntimeError(f"TikTok publish failed: {st}")
     return {"publish_id": publish_id, "post_id": None, "privacy": privacy, "note": "still processing"}
+
+
+def metrics(video_ids, tok):
+    """{video_id: {views, likes, comments, shares}} for up to 20 videos. Needs the video.list scope on the login."""
+    r = requests.post(
+        f"{API}/video/query/", params={"fields": "id,view_count,like_count,comment_count,share_count"},
+        headers={"Authorization": f"Bearer {tok}", "Content-Type": "application/json"},
+        json={"filters": {"video_ids": list(video_ids)[:20]}}, timeout=30).json()
+    if r.get("error", {}).get("code") not in (None, "ok"):
+        raise RuntimeError(f"TikTok metrics failed: {r['error']} (the login needs the video.list scope)")
+    return {str(v["id"]): {"views": int(v.get("view_count") or 0), "likes": int(v.get("like_count") or 0),
+                           "comments": int(v.get("comment_count") or 0), "shares": int(v.get("share_count") or 0), "saves": 0}
+            for v in r.get("data", {}).get("videos", [])}
