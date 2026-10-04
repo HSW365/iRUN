@@ -32,6 +32,33 @@ th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vert
 input{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--text);padding:12px;border-radius:10px;margin:12px 0}
 .btn{background:var(--violet);color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
 .err{color:var(--red)}
+.tabs{flex-wrap:wrap}
+select{background:var(--panel);color:var(--text);border:1px solid var(--line);padding:9px 12px;border-radius:10px;font:600 13px Inter,sans-serif}
+.pick{margin-left:auto;display:flex;align-items:center;gap:8px}
+.note{color:var(--muted);max-width:760px;margin:6px 0 14px}
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted)}
+.empty b{color:var(--text)}
+.cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 10px;min-height:118px}
+.day.today{border-color:var(--cyan)}.day.past{opacity:.5}
+.day .d{font:700 11px 'Space Mono',monospace;letter-spacing:1px;color:var(--muted);display:flex;justify-content:space-between}
+.sl{display:flex;gap:6px;align-items:baseline;font-size:12px;margin-top:5px;line-height:1.25}
+.sl span{flex:1;min-width:0;overflow-wrap:anywhere}.sl em{flex:none}
+.sl i{font:700 9px 'Space Mono',monospace;font-style:normal;letter-spacing:1px;color:var(--muted);width:18px;flex:none}
+.sl i.ig{color:var(--violet)}.sl i.tt{color:var(--cyan)}
+.sl em{font-style:normal;font:700 9px 'Space Mono',monospace;color:var(--yellow);border:1px solid #5b4a1f;border-radius:4px;padding:0 4px}
+.sl em.car{color:var(--violet);border-color:#4a2b6e}
+.phase{grid-column:1/-1;margin:12px 0 2px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.phase b{font:800 18px 'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.phase span{color:var(--muted);font-size:13px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.box h3{font:800 18px 'Barlow Condensed',sans-serif;letter-spacing:1px;margin:0 0 6px;text-transform:uppercase}
+.box p{margin:6px 0;color:#cfcfdc}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chips span{border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:12px;color:var(--muted)}
+.up{color:#34d399}.down{color:var(--red)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#000}
 </style>
 </head>
 <body>
@@ -43,10 +70,11 @@ input{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--tex
   <p id="gerr" class="err"></p>
 </div>
 <div id="app" class="wrap" hidden>
-  <div class="top"><h1>iRUN <b>COMMAND</b></h1><span class="mono">@hsw365media autopilot</span></div>
+  <div class="top"><h1>iRUN <b>COMMAND</b></h1><span class="mono">autopilot</span>
+    <label class="pick"><span class="mono">Account</span><select id="acct"></select></label></div>
   <div class="stats" id="stats"></div>
-  <div class="tabs"><button class="on" data-t="leads">Leads</button><button data-t="posts">Posts</button><button data-t="conn">Connections</button></div>
-  <section id="leads"></section><section id="posts" hidden></section><section id="conn" hidden></section>
+  <div class="tabs"><button class="on" data-t="leads">Leads</button><button data-t="posts">Posts</button><button data-t="plan">30-day plan</button><button data-t="results">Results</button><button data-t="brand">Brand</button><button data-t="rivals">Competitors</button><button data-t="ads">Ads</button><button data-t="orders">Orders</button><button data-t="conn">Connections</button></div>
+  <section id="leads"></section><section id="posts" hidden></section><section id="plan" hidden></section><section id="results" hidden></section><section id="brand" hidden></section><section id="rivals" hidden></section><section id="ads" hidden></section><section id="orders" hidden></section><section id="conn" hidden></section>
 </div>
 <script>
 const API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook";
@@ -54,7 +82,7 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 const when = s => s ? new Date(s).toLocaleString() : "";
 let key = (location.hash.match(/key=([a-f0-9]+)/) || [])[1] || sessionStorageGet();
 function sessionStorageGet(){ try { return sessionStorage.getItem("irun_key"); } catch { return null; } }
-function login(){ key = document.getElementById("k").value.trim(); load(); }
+function login(){ key = document.getElementById("k").value.trim(); start(); }
 async function load(){
   if(!key){ document.getElementById("gate").hidden=false; return; }
   const r = await fetch(`${API}?view=data&key=${encodeURIComponent(key)}`);
@@ -86,8 +114,120 @@ async function load(){
     ${["tiktok","instagram"].map(n=>`<tr><td>${n}</td><td>${conn(n)?'<span class="pill ok">connected</span>':'<span class="pill bad">not connected</span>'}</td><td>${when(conn(n)?.updated_at)}</td></tr>`).join("")}</table></div>
     <h2>Apps being promoted</h2><div class="tw"><table><tr><th>App</th><th>Keyword</th><th>Link</th></tr>${d.products.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.keyword)}</td><td>${esc(p.link)}</td></tr>`).join("")}</table></div>`;
 }
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));["leads","posts","conn"].forEach(id=>document.getElementById(id).hidden=id!==b.dataset.t);});
-load();
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));TABS.forEach(id=>document.getElementById(id).hidden=id!==b.dataset.t);});
+
+// ---- Growth: plan, results, brand, competitors, ads, orders ----
+const TABS = ["leads","posts","plan","results","brand","rivals","ads","orders","conn"];
+const GROWTH = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-growth";
+const $ = id => document.getElementById(id);
+const num = n => Number(n || 0).toLocaleString();
+const money = (n, c) => n == null ? "-" : new Intl.NumberFormat(undefined, {style:"currency", currency: c || cur}).format(n);
+const empty = (title, how) => `<div class="empty"><b>${title}</b><br>${how}</div>`;
+const file = async path => { try { const r = await fetch(path, {cache:"no-store"}); return r.ok ? await r.json() : null; } catch { return null; } };
+let accts = [], growth = {orders:[], posts:[]}, cur = "USD";
+
+async function loadGrowth(){
+  const cfg = await file("config/accounts.json");
+  accts = (cfg?.accounts || []);
+  $("acct").innerHTML = accts.map(a=>`<option value="${esc(a.id)}">@${esc(a.handle||a.id)}${a.enabled===false?" (paused)":""}</option>`).join("");
+  $("acct").onchange = showAccount;
+  try { const r = await fetch(`${GROWTH}?view=growth&key=${encodeURIComponent(key)}`); if(r.ok) growth = await r.json(); } catch {}
+  showAccount();
+}
+
+async function showAccount(){
+  const id = $("acct").value, a = accts.find(x=>x.id===id);
+  if(!a) return;
+  cur = a.currency || "USD";
+  const [plan, perf, store, rivals, ads] = await Promise.all([
+    file(`content/plans/${id}.json`), file(`content/intel/${id}-performance.json`), file(`content/intel/${id}-store.json`),
+    file(`content/intel/${id}-competitors.json`), file(`content/intel/${id}-ads.json`)]);
+  const names = Object.fromEntries((Array.isArray(a.products)?a.products:[]).map(p=>[p.id,p.name]));
+  const pname = pid => names[pid] || String(pid||"").toUpperCase();
+  drawPlan(plan, pname); drawResults(perf, pname, id); drawBrand(a, store); drawRivals(rivals, a); drawAds(ads, a); drawOrders(id);
+}
+
+function drawPlan(plan, pname){
+  if(!plan){ $("plan").innerHTML = "<h2>30-day plan</h2>" + empty("No plan yet.", "It is built by the next morning run of the growth engine (Actions > iRun growth engine)."); return; }
+  const today = new Date().toISOString().slice(0,10), days = {};
+  plan.slots.forEach(s=>(days[s.date] = days[s.date] || []).push(s));
+  const tests = plan.slots.filter(s=>s.variant==="A").length, cars = plan.slots.filter(s=>s.format==="carousel").length;
+  let last = "", html = "";
+  Object.keys(days).sort().forEach(d=>{
+    const sl = days[d], ph = sl[0].phase;
+    if(ph !== last){ html += `<div class="phase"><b>${esc(ph)}</b><span>${esc(sl[0].focus)}</span></div>`; last = ph; }
+    const dt = new Date(d+"T12:00:00");
+    html += `<div class="day ${d===today?"today":d<today?"past":""}"><div class="d"><span>${dt.toLocaleDateString(undefined,{weekday:"short"})}</span><span>${dt.toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span></div>
+      ${sl.map(s=>`<div class="sl" title="${esc(s.angle)}"><i class="${s.platform==="instagram"?"ig":"tt"}">${s.platform==="instagram"?"IG":"TT"}</i><span>${esc(pname(s.product))}</span>${s.variant?`<em>${esc(s.variant)}</em>`:""}${s.format==="carousel"?'<em class="car">SLIDES</em>':""}</div>`).join("")}</div>`;
+  });
+  $("plan").innerHTML = `<h2>30-day plan</h2>
+    <p class="note">${esc(plan.start)} to ${esc(plan.end)}. ${plan.slots.length} posts, ${tests} A/B hook tests, ${cars} Instagram carousels. Rebuilt each morning from today forward so what is performing gets more slots. Hover a post to see its angle. Scripts waiting in the queue still post first.</p>
+    <div class="cal">${html}</div>`;
+}
+
+function drawResults(perf, pname, id){
+  if(!perf || !perf.posts_measured){
+    $("results").innerHTML = "<h2>Results</h2>" + empty("No measured posts yet.", "Numbers appear once posts are live and the morning run has pulled their views and engagement. Until then every subject gets an equal share of the plan."); return; }
+  const t = perf.totals, w = perf.weights.products || {};
+  const rows = Object.entries(perf.by_product).sort((a,b)=>b[1].avg_score-a[1].avg_score);
+  const badge = s => s==="settled"?"ok":s==="running"?"draft":"";
+  $("results").innerHTML = `<h2>Results</h2>
+    <div class="stats">${[["Posts measured",perf.posts_measured],["Views",t.views],["Likes",t.likes],["Comments",t.comments],["Shares",t.shares],["Saves",t.saves]].map(([l,n])=>`<div class="stat"><div class="mono">${l}</div><div class="n">${num(n)}</div></div>`).join("")}</div>
+    <p class="note">Score = views + 5 x likes + 10 x comments + 15 x shares + 15 x saves. It ranks posts against each other. Share of plan shows how much more or less of the next 30 days a subject gets (1.00 is an equal share; it moves after 2 measured posts).</p>
+    <div class="tw"><table><tr><th>Subject</th><th class="num">Posts</th><th class="num">Avg score</th><th class="num">Share of plan</th></tr>
+    ${rows.map(([k,v])=>`<tr><td>${esc(pname(k))}</td><td class="num">${v.posts}</td><td class="num">${num(v.avg_score)}</td><td class="num ${w[k]>1?"up":w[k]<1?"down":""}">${w[k]?w[k].toFixed(2)+"x":"1.00x"}</td></tr>`).join("")}</table></div>
+    <h2>A/B hook tests</h2>${perf.experiments.length?`<div class="tw"><table><tr><th>Test</th><th>Subject</th><th>Hook A</th><th class="num">Score</th><th>Hook B</th><th class="num">Score</th><th>Result</th></tr>
+    ${perf.experiments.map(e=>`<tr><td class="mono">${esc(e.experiment.replace(id+"-",""))}</td><td>${esc(pname(e.product))}</td><td>${esc(e.A?.hook||"-")}</td><td class="num">${e.A?.score!=null?num(e.A.score):"-"}</td><td>${esc(e.B?.hook||"-")}</td><td class="num">${e.B?.score!=null?num(e.B.score):"-"}</td>
+      <td><span class="pill ${badge(e.status)}">${e.winner?"winner: "+esc(e.winner):esc(e.status)}</span></td></tr>`).join("")}</table></div>`:empty("No tests yet.","Every other day the first two TikToks share a subject and angle with different hooks. A test settles 48 hours after both are live.")}
+    <h2>Top posts</h2><div class="tw"><table><tr><th>Hook</th><th>Where</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Comments</th><th class="num">Score</th></tr>
+    ${perf.top_posts.map(p=>`<tr><td>${esc(p.hook)}</td><td>${esc(p.platform)} / ${esc(pname(p.product))}</td><td class="num">${num(p.metrics?.views)}</td><td class="num">${num(p.metrics?.likes)}</td><td class="num">${num(p.metrics?.comments)}</td><td class="num">${num(p.score)}</td></tr>`).join("")}</table></div>`;
+}
+
+function drawBrand(a, store){
+  const subjects = Array.isArray(a.products) ? a.products : [];
+  const c = store?.catalog;
+  $("brand").innerHTML = `<h2>${esc(a.brand)}</h2>
+    <div class="two"><div class="box"><h3>Voice</h3><p>${esc(a.voice||store?.voice||"Not written yet.")}</p></div>
+    <div class="box"><h3>Audience</h3><p>${esc(store?.audience || [...new Set(subjects.map(p=>p.audience).filter(Boolean))].join("; ") || "Not written yet.")}</p></div></div>
+    <h2>Store catalog</h2>${c?`<div class="stats">${[["Products",num(c.products)],["Lowest price",money(c.price?.min,cur)],["Typical price",money(c.price?.median,cur)],["Highest price",money(c.price?.max,cur)],["On sale",c.on_sale_pct+"%"],["In stock",c.in_stock_pct+"%"]].map(([l,n])=>`<div class="stat"><div class="mono">${l}</div><div class="n">${n}</div></div>`).join("")}</div>
+      <p class="note">Read from ${esc(store.store)} on ${when(store.scanned_at)}. Profile written from ${store.profile_source==="claude"?"the catalog by Claude":"the store's own words"}. Prices are as the store lists them.</p>
+      <div class="tw"><table><tr><th>Product type</th><th class="num">Products</th><th class="num">Typical price</th></tr>${Object.entries(c.types).map(([t,v])=>`<tr><td>${esc(t)}</td><td class="num">${v.count}</td><td class="num">${money(v.price?.median,cur)}</td></tr>`).join("")}</table></div>
+      <div class="chips">${c.top_tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`
+      :empty("No store scan for this account.", a.store?"The scan runs when you start it: Actions > iRun growth engine > job scan.":"Scan a Shopify store to fill this in: Actions > iRun growth engine > job <b>scan</b>, with the store URL.")}
+    <h2>What iRun posts about</h2><div class="tw"><table><tr><th>Subject</th><th>Keyword</th><th>Who it's for</th><th>Angles</th></tr>
+    ${subjects.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.keyword)}</td><td>${esc(p.audience)}</td><td>${(p.angles||[]).map(esc).join("<br>")}</td></tr>`).join("")}</table></div>`;
+}
+
+function drawRivals(r, a){
+  if(!r){ $("rivals").innerHTML = "<h2>Competitors</h2>" + empty("No competitors tracked for this account.", 'Add their store addresses to this account in config/accounts.json: <span class="mono">"competitors": ["https://their-store.com"]</span>. Works for stores built on Shopify.'); return; }
+  const pct = v => v==null?"-":`<span class="${v>0?"down":v<0?"up":""}">${v>0?"+":""}${v}%</span>`;
+  $("rivals").innerHTML = `<h2>Competitors</h2><p class="note">Checked ${when(r.checked_at)}. Typical price is the median. The last column is this store's typical price against theirs.</p>
+    <div class="tw"><table><tr><th>Store</th><th class="num">Products</th><th class="num">Their typical price</th><th class="num">Range</th><th class="num">On sale</th><th class="num">Yours vs theirs</th></tr>
+    ${r.stores.map(s=>s.readable?`<tr><td>${esc(s.store)}</td><td class="num">${num(s.catalog.products)}</td><td class="num">${money(s.catalog.price?.median)}</td><td class="num">${money(s.catalog.price?.min)} - ${money(s.catalog.price?.max)}</td><td class="num">${s.catalog.on_sale_pct}%</td><td class="num">${pct(s.vs_own?.overall?.own_vs_theirs_pct)}</td></tr>
+      ${Object.entries(s.vs_own?.by_type||{}).map(([t,v])=>`<tr><td style="padding-left:28px;color:var(--muted)">${esc(t)}</td><td></td><td class="num">${money(v.their_median)}</td><td></td><td></td><td class="num">${pct(v.own_vs_theirs_pct)}</td></tr>`).join("")}`
+      :`<tr><td>${esc(s.store)}</td><td colspan="5"><span class="pill bad">could not read</span> <span style="color:var(--muted)">${esc(s.error)}</span></td></tr>`).join("")}</table></div>
+    <h2>What changed</h2>${r.changes.length?`<div class="tw"><table><tr><th>When</th><th>Store</th><th>Change</th><th>Product</th><th class="num">Price</th></tr>
+    ${r.changes.map(c=>`<tr><td>${when(c.at)}</td><td>${esc(c.store)}</td><td>${esc(c.change)}</td><td>${esc(c.title)}</td><td class="num">${c.from!=null?money(c.from)+" to ":""}${money(c.price)}</td></tr>`).join("")}</table></div>`:empty("Nothing has changed since tracking started.","New products, removed products and price moves show up here.")}`;
+}
+
+function drawAds(r, a){
+  if(!r){ $("ads").innerHTML = "<h2>Ads</h2>" + empty("Ad budget management is off for this account.", 'To turn it on: add the secret META_ADS_TOKEN and an <span class="mono">"ads"</span> block for this account with its Meta campaign ids (see SETUP.md). iRun only moves budget between ad sets you list. It never raises total spend.'); return; }
+  const m = n => money(n/100);
+  $("ads").innerHTML = `<h2>Ads</h2><p class="note">Last run ${when(r.ran_at)}, ${esc(r.window)}. Mode: <span class="pill ${r.mode==="live"?"ok":"draft"}">${r.mode==="live"?"live: budgets are moved":"dry run: nothing is changed"}</span> Total daily budget ${m(r.total_daily_budget)}.</p>
+    <div class="tw"><table><tr><th>Ad set</th><th class="num">Spend</th><th class="num">Clicks</th><th class="num">CTR</th><th class="num">ROAS</th><th class="num">Daily budget</th><th class="num">${r.mode==="live"?"Moved to":"Would move to"}</th></tr>
+    ${r.adsets.map(s=>{const c=r.changes.find(x=>x.id===s.id);return `<tr><td>${esc(s.name)}</td><td class="num">${money(s.spend)}</td><td class="num">${num(s.clicks)}</td><td class="num">${s.ctr.toFixed(2)}%</td><td class="num">${s.roas?s.roas.toFixed(2):"-"}</td><td class="num">${m(s.daily_budget)}</td><td class="num ${c?(c.to>c.from?"up":"down"):""}">${c?m(c.to)+(c.error?' <span class="pill bad" title="'+esc(c.error)+'">failed</span>':""):"no change"}</td></tr>`}).join("")||'<tr><td colspan="7">No active ad sets with their own daily budget in the listed campaigns.</td></tr>'}</table></div>`;
+}
+
+function drawOrders(id){
+  const o = growth.orders.filter(x=>x.account===id), week = Date.now()-7*864e5, cur = o[0]?.currency;
+  const o7 = o.filter(x=>new Date(x.created_at)>week);
+  $("orders").innerHTML = `<h2>Orders</h2>${o.length?`<div class="stats">${[["Orders (7 days)",o7.length],["Sales (7 days)",money(o7.reduce((n,x)=>n+Number(x.total||0),0),cur)],["Orders logged",o.length]].map(([l,n])=>`<div class="stat"><div class="mono">${l}</div><div class="n c">${n}</div></div>`).join("")}</div>
+    <div class="tw"><table><tr><th>When</th><th>Order</th><th>Items</th><th class="num">Total</th><th>Came from</th></tr>
+    ${o.map(x=>`<tr><td>${when(x.placed_at||x.created_at)}</td><td>${esc(x.name)}</td><td>${(x.items||[]).map(i=>esc(i.quantity+" x "+i.title)).join("<br>")}</td><td class="num">${money(x.total,x.currency)}</td><td>${esc((x.referring_site||"").replace(/^https?:\/\/(www\.)?/,"").split("/")[0]||"direct")}</td></tr>`).join("")}</table></div>`
+    :empty("No orders logged for this account.","Connect the store once: Shopify admin > Settings > Notifications > Webhooks > Order creation, pointed at iRun (steps in SETUP.md). New orders then show here as they happen.")}`;
+}
+function start(){ return load().then(()=>{ if(key && !$("app").hidden) loadGrowth(); }); }
+start();
 </script>
 </body>
 </html>

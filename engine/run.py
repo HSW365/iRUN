@@ -1,5 +1,7 @@
 """iRun engine: for each account -> pick product -> script (queue or writer) -> voice -> render -> upload
 -> publish (live mode, when that account's login is connected) -> log.
+When iRun writes the script itself it follows the 30-day plan (engine/planner.py): product, angle, weekly goal,
+video or Instagram carousel, and A/B hook tests.
 
 Usage:
   python engine/run.py                                   # schedule slot for the current UTC hour, all enabled accounts
@@ -19,23 +21,21 @@ import traceback
 
 sys.path.insert(0, os.path.dirname(__file__))
 import accounts  # noqa: E402
+import carousel  # noqa: E402
 import content_queue  # noqa: E402
 import db  # noqa: E402
+import insights  # noqa: E402
+import planner  # noqa: E402
 import render  # noqa: E402
 import voice  # noqa: E402
 import writer  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-# UTC hour -> platforms. 4 TikTok + 2 Instagram per account per day (8am, 11am, 2pm, 6pm ET during EDT).
-# GitHub often starts scheduled runs late, so a run belongs to the nearest slot at or before its start hour.
-SCHEDULE = {12: ["tiktok"], 15: ["tiktok", "instagram"], 18: ["tiktok"], 22: ["tiktok", "instagram"]}
+SCHEDULE = planner.SCHEDULE  # UTC hour -> platforms; the 30-day plan is laid out on the same slots
 
 
 def slot_platforms(hour):
-    for h in sorted(SCHEDULE, reverse=True):
-        if hour >= h:
-            return SCHEDULE[h]
-    return SCHEDULE[max(SCHEDULE)]  # just after midnight UTC = the previous evening's late slot
+    return SCHEDULE[planner.slot_hour(hour)]
 
 
 def sync_products(accts):
@@ -90,16 +90,27 @@ def cta_for(acct, product, platform):
     return ("Link in bio", ("LINK IN BIO", f"@{h.upper()}"), "Link in bio.")
 
 
-def make_one(acct, product, platform, mode, outdir, queued=None):
+def make_one(acct, product, platform, mode, outdir, queued=None, slot=None):
+    """slot: this moment's entry in the 30-day plan (product, angle, weekly goal, format, A/B variant), if any."""
     spoken_cta, screen_cta, caption_cta = cta_for(acct, product, platform)
+    if slot and slot["product"] != product["id"]:
+        slot = None  # a queued script or --product took this slot; the plan's angle and test don't apply to it
     if queued:
         qpath, qitem, script = queued
         source = f"queue:{os.path.basename(qpath)}"
+        angle, fmt = qitem.get("angle"), qitem.get("format") or "video"
+        experiment, variant = qitem.get("experiment"), qitem.get("variant")
     else:
-        angle = random.choice(product.get("angles") or [product["pitch"]])
+        angle = slot["angle"] if slot else random.choice(product.get("angles") or [product["pitch"]])
+        fmt = slot["format"] if slot else "video"
+        experiment, variant = (slot["experiment"], slot["variant"]) if slot else (None, None)
         script = writer.write_script(product, angle, platform, spoken_cta,
-                                     recent_hooks(acct["id"], product["id"]), voice=acct.get("voice"))
+                                     recent_hooks(acct["id"], product["id"]), voice=acct.get("voice"),
+                                     focus=slot["focus"] if slot else None,
+                                     winning_hooks=insights.load(acct["id"]).get("winning_hooks") or (), fmt=fmt)
         source = "writer"
+    if fmt == "carousel" and (platform != "instagram" or not 2 <= len(script["beats"]) <= 10):
+        fmt = "video"
     caption = script["caption"]
     if caption_cta.lower()[:20] not in caption.lower():
         caption = f"{caption}\n\n{caption_cta}"
@@ -109,20 +120,30 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     os.makedirs(outdir, exist_ok=True)
     stamp = dt.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
     slug = f"{stamp}-{acct['id']}-{platform}-{product['id']}"
-    work = tempfile.mkdtemp(prefix="irun-")
-    audio, alen, vsrc = voice.speak(" ".join(script["beats"]), os.path.join(work, "vo.mp3"))
-    video = os.path.join(outdir, f"{slug}.mp4")
-    render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
-                  brand=acct["brand"], handle=acct["handle"])
+    video, slides, media, vsrc = None, [], [], None
+    if fmt == "carousel":
+        slides = carousel.render_slides(script["beats"], script["emphasis"], product, outdir, slug, cta=screen_cta,
+                                        brand=acct["brand"], handle=acct["handle"])
+    else:
+        work = tempfile.mkdtemp(prefix="irun-")
+        audio, alen, vsrc = voice.speak(" ".join(script["beats"]), os.path.join(work, "vo.mp3"))
+        video = os.path.join(outdir, f"{slug}.mp4")
+        render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
+                      brand=acct["brand"], handle=acct["handle"])
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
         f.write(caption + "\n\n---\n" + "\n".join(script["beats"]))
 
     row = {"account": acct["id"], "platform": platform, "product_id": product["id"], "hook": script["beats"][0],
-           "caption": caption, "script": script["beats"], "voice": vsrc, "status": "draft", "mode": mode}
+           "caption": caption, "script": script["beats"], "voice": vsrc, "status": "draft", "mode": mode,
+           "angle": angle, "format": fmt, "experiment": experiment, "variant": variant}
     video_url = None
     if db.enabled():
-        video_url = db.upload_public(video, f"{slug}.mp4")
-        row["video_url"] = video_url
+        if slides:
+            media = [db.upload_public(s, os.path.basename(s), content_type="image/jpeg") for s in slides]
+            row["media"] = media
+        else:
+            video_url = db.upload_public(video, f"{slug}.mp4")
+            row["video_url"] = video_url
 
     ok, why = accounts.connected(acct["id"], platform)
     attempted = False
@@ -135,6 +156,9 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
             if platform == "tiktok":
                 import tiktok
                 res = tiktok.publish(video, caption, account=acct["id"])
+            elif slides:
+                import instagram
+                res = instagram.publish_carousel(media, caption, account=acct["id"])
             else:
                 import instagram
                 res = instagram.publish(video_url, caption, account=acct["id"])
@@ -148,7 +172,8 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     if db.enabled():
         db.insert("irun_posts", row)
     print(json.dumps({"account": acct["id"], "platform": platform, "product": product["id"], "status": row["status"],
-                      "source": source, "hook": row["hook"], "voice": vsrc, "video": video_url or video}, indent=2))
+                      "source": source, "format": fmt, "hook": row["hook"], "voice": vsrc, "variant": variant,
+                      "media": video_url or video or media or slides}, indent=2))
     return row
 
 
@@ -193,20 +218,24 @@ def main():
 
     failed, made, skipped = 0, 0, 0
     has_writer = bool(os.environ.get("ANTHROPIC_API_KEY"))
+    now = dt.datetime.utcnow()
     for acct in accts:
         for pf in [p for p in wanted if p in acct["platforms"]]:
             try:
                 ids = [p["id"] for p in acct["products"]]
+                slot = planner.slot_for(acct["id"], now, pf)
                 queued = None if a.product else content_queue.take(acct["id"], pf, ids)
                 if queued:
                     product = next(p for p in acct["products"] if p["id"] == queued[1]["product"])
+                elif has_writer and slot and not a.product and slot["product"] in ids:
+                    product = next(p for p in acct["products"] if p["id"] == slot["product"])
                 elif has_writer:
                     product = pick_product(acct, pf, a.product)
                 else:
                     skipped += 1
                     print(f"[{acct['id']}/{pf}] skipped: queue is empty and no ANTHROPIC_API_KEY to write a script")
                     continue
-                row = make_one(acct, product, pf, a.mode, a.out, queued)
+                row = make_one(acct, product, pf, a.mode, a.out, queued, slot)
                 made += 1
                 failed += row["status"] == "failed"
             except Exception:

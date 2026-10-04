@@ -26,7 +26,7 @@ accounts.get(a.account)  # fail early on a typo
 REDIRECT = os.environ.get("TIKTOK_REDIRECT_URI", "https://hsw365.github.io/iRUN/callback.html")
 ck, cs = os.environ["TIKTOK_CLIENT_KEY"], os.environ["TIKTOK_CLIENT_SECRET"]
 url = "https://www.tiktok.com/v2/auth/authorize/?" + urllib.parse.urlencode({
-    "client_key": ck, "scope": "user.info.basic,video.publish", "response_type": "code",
+    "client_key": ck, "scope": os.environ.get("TIKTOK_SCOPES", "user.info.basic,video.publish"), "response_type": "code",
     "redirect_uri": REDIRECT, "state": secrets.token_urlsafe(12)})
 print(f"\nLog in as @{a.account} and approve:\n\n" + url + "\n")
 code = urllib.parse.unquote(input("Paste the code: ").strip())

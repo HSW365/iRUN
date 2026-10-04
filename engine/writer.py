@@ -24,24 +24,38 @@ Return ONLY JSON: {"beats": [..], "emphasis": [one word from each beat to highli
 Caption: 1-3 sentences, ends with the CTA line provided. 4-6 relevant hashtags without the # sign."""
 
 
-def write_script(product, angle, platform, cta, avoid_hooks=(), voice=None):
-    key = os.environ["ANTHROPIC_API_KEY"]
-    user = (
-        f"Product: {product['name']}\nWhat it does: {product['pitch']}\nWho it's for: {product['audience']}\n"
-        f"Angle for this video: {angle}\nPlatform: {platform}\nKeyword: {product['keyword']}\n"
-        f"Call to action to use (spoken as last beat, adapted naturally): {cta}\n"
-        + (f"Do not reuse these recent hooks: {list(avoid_hooks)}\n" if avoid_hooks else "")
-    )
+def ask_json(system, user, max_tokens=1200):
+    """One Claude call that must answer with a JSON object."""
     r = requests.post(
         "https://api.anthropic.com/v1/messages",
-        headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-        json={"model": MODEL, "max_tokens": 1200, "system": SYSTEM.replace("{voice}", voice or DEFAULT_VOICE), "messages": [{"role": "user", "content": user}]},
+        headers={"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01",
+                 "content-type": "application/json"},
+        json={"model": MODEL, "max_tokens": max_tokens, "system": system, "messages": [{"role": "user", "content": user}]},
         timeout=120,
     )
     r.raise_for_status()
     text = "".join(b.get("text", "") for b in r.json()["content"] if b.get("type") == "text")
     m = re.search(r"\{.*\}", text, re.S)
-    data = json.loads(m.group(0))
+    if not m:
+        raise RuntimeError(f"writer returned no JSON: {text[:200]}")
+    return json.loads(m.group(0))
+
+
+def write_script(product, angle, platform, cta, avoid_hooks=(), voice=None, focus=None, winning_hooks=(), fmt="video"):
+    """focus: this week's goal from the 30-day plan. winning_hooks: hooks that scored best so far (style reference).
+    fmt 'carousel' asks for swipeable slides instead of spoken beats (same JSON shape)."""
+    user = (
+        f"Product: {product['name']}\nWhat it does: {product['pitch']}\nWho it's for: {product['audience']}\n"
+        f"Angle for this video: {angle}\nPlatform: {platform}\nKeyword: {product['keyword']}\n"
+        f"Call to action to use (spoken as last beat, adapted naturally): {cta}\n"
+        + (f"This week's goal: {focus}\n" if focus else "")
+        + (f"Do not reuse these recent hooks: {list(avoid_hooks)}\n" if avoid_hooks else "")
+        + (f"These hooks performed best so far. Match their style, do not copy them: {list(winning_hooks)}\n"
+           if winning_hooks else "")
+        + ("Format: Instagram carousel. Each beat is one swipeable slide, read not spoken. "
+           "First slide is the hook, last slide is the call to action.\n" if fmt == "carousel" else "")
+    )
+    data = ask_json(SYSTEM.replace("{voice}", voice or DEFAULT_VOICE), user)
     beats = [re.sub(r"[^\x00-\x7F]+", "", b).strip() for b in data["beats"] if b.strip()]
     emph = data.get("emphasis") or []
     emph = (emph + [""] * len(beats))[: len(beats)]

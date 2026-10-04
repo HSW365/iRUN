@@ -1,0 +1,71 @@
+name: iRun growth engine
+
+on:
+  schedule:
+    # 6:37am ET, before the first posting slot: numbers, A/B results, competitors, ad budgets, then the 30-day plan.
+    - cron: "37 10 * * *"
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "daily, scan, plan, insights, competitors, ads, or fill"
+        default: "daily"
+      store_url:
+        description: "scan only: the Shopify store to onboard, e.g. hsw365.co"
+        default: ""
+      handle:
+        description: "scan only: the brand's social handle (blank = same as the store name)"
+        default: ""
+      account:
+        description: "limit the job to one account id (blank = all enabled accounts)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -q -r requirements.txt
+      - name: Run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          META_ADS_TOKEN: ${{ secrets.META_ADS_TOKEN }}
+          # Ad budgets only move when repo variable IRUN_ADS_MODE is "live". Anything else is a dry run.
+          IRUN_ADS_MODE: ${{ vars.IRUN_ADS_MODE || 'dry-run' }}
+          JOB: ${{ github.event.inputs.job || 'daily' }}
+          STORE_URL: ${{ github.event.inputs.store_url }}
+          HANDLE: ${{ github.event.inputs.handle }}
+          ACCOUNT: ${{ github.event.inputs.account }}
+        run: |
+          ARGS=("$JOB")
+          if [ -n "$STORE_URL" ]; then ARGS+=(--url "$STORE_URL"); fi
+          if [ -n "$HANDLE" ]; then ARGS+=(--handle "$HANDLE"); fi
+          if [ -n "$ACCOUNT" ]; then ARGS+=(--account "$ACCOUNT"); fi
+          python engine/growth.py "${ARGS[@]}"
+      - name: Save plan and intel
+        if: always()
+        run: |
+          git config user.name "iRun"
+          git config user.email "hsw365media@gmail.com"
+          git add content config || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "iRun: plan and intel [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done

@@ -4,7 +4,14 @@ iRun runs short-form video for any brand, not just HSW365. Each brand is an **ac
 `config/accounts.json`. Every scheduled run makes videos for every enabled account: 4 TikToks and 2 Reels a day
 per account at 8am, 11am, 2pm and 6pm ET.
 
-## Add a client
+## Add a client from their store URL
+
+If the client sells on Shopify: **Actions > iRun growth engine > Run workflow**, job `scan`, store URL, and their
+social handle. iRun reads their catalog and adds the account (paused) with its voice, audience, subjects and a
+30-day plan. Read `content/intel/<id>-store.json` and the account entry, fix anything the store got wrong, then
+set `"enabled": true` and connect their logins (step 2 below).
+
+## Add a client by hand
 
 1. Add an entry to `config/accounts.json`:
 
