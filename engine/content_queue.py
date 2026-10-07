@@ -34,8 +34,14 @@ def _clean(item):
     return {"beats": beats, "emphasis": emph, "caption": str(item.get("caption", "")).strip(), "hashtags": tags}
 
 
-def take(account, platform, product_ids):
-    """Oldest valid queued item for this account and platform. Returns (path, item, script) or None."""
+def take(account, platform, product_ids, offset=0):
+    """A valid queued item for this account and platform. Returns (path, item, script) or None.
+
+    offset 0 is the oldest item, which is what live runs use: they post it and it leaves the queue.
+    Draft runs never remove anything, so they pass a rotating offset. Without it every draft run
+    would render the same first script again.
+    """
+    found = []
     for path in sorted(glob.glob(os.path.join(QUEUE, "*.json"))):
         try:
             with open(path) as f:
@@ -51,10 +57,12 @@ def take(account, platform, product_ids):
             print(f"[queue] {os.path.basename(path)}: unknown product {item.get('product')!r} for @{account}; skipping")
             continue
         try:
-            return path, item, _clean(item)
+            found.append((path, item, _clean(item)))
         except ValueError as e:
             print(f"[queue] {os.path.basename(path)}: {e}; skipping")
-    return None
+        if found and not offset:
+            break
+    return found[offset % len(found)] if found else None
 
 
 def finish(path, item, row):

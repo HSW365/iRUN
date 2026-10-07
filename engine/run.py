@@ -31,6 +31,15 @@ ROOT = os.path.join(os.path.dirname(__file__), "..")
 SCHEDULE = {12: ["tiktok"], 15: ["tiktok", "instagram"], 18: ["tiktok"], 22: ["tiktok", "instagram"]}
 
 
+def draft_offset(now=None):
+    """Which queued script a draft run should render: a new one every slot, wrapping around the queue."""
+    now = now or dt.datetime.utcnow()
+    slots = sorted(SCHEDULE)
+    idx = max([i for i, h in enumerate(slots) if now.hour >= h], default=len(slots) - 1)
+    day = now.toordinal() - (1 if now.hour < slots[0] else 0)  # just after midnight UTC = yesterday's late slot
+    return day * len(slots) + idx
+
+
 def slot_platforms(hour):
     for h in sorted(SCHEDULE, reverse=True):
         if hour >= h:
@@ -197,7 +206,8 @@ def main():
         for pf in [p for p in wanted if p in acct["platforms"]]:
             try:
                 ids = [p["id"] for p in acct["products"]]
-                queued = None if a.product else content_queue.take(acct["id"], pf, ids)
+                offset = 0 if a.mode == "live" else draft_offset()
+                queued = None if a.product else content_queue.take(acct["id"], pf, ids, offset)
                 if queued:
                     product = next(p for p in acct["products"] if p["id"] == queued[1]["product"])
                 elif has_writer:
