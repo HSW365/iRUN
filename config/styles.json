@@ -1,0 +1,18 @@
+{
+  "_note": "Visual styles for faceless videos. 'prompt' is added to every scene's image prompt. 'tint' is the fallback backdrop colour pair used if an image can't be generated.",
+  "default": "cinematic",
+  "styles": [
+    {"id": "cinematic", "label": "Cinematic", "prompt": "cinematic film still, dramatic natural lighting, shallow depth of field, rich color grade, 35mm, highly detailed", "tint": ["#0e4654", "#3e1a5c"]},
+    {"id": "noir", "label": "Black & White Noir", "prompt": "black and white film noir photograph, hard shadows, high contrast, moody street lighting, grain", "tint": ["#2a2a2e", "#0c0c10"]},
+    {"id": "anime", "label": "Anime", "prompt": "hand-drawn anime illustration, clean line art, soft cel shading, atmospheric background, vivid sky", "tint": ["#23538a", "#7a2d6b"]},
+    {"id": "comic", "label": "Comic Book", "prompt": "graphic novel illustration, bold ink outlines, halftone shading, dynamic composition, saturated colors", "tint": ["#7a1f1f", "#1f2f7a"]},
+    {"id": "3d", "label": "3D Animation", "prompt": "stylized 3D animated film render, soft global illumination, expressive shapes, detailed textures", "tint": ["#1d5a6e", "#6e4a1d"]},
+    {"id": "dark-fantasy", "label": "Dark Fantasy", "prompt": "dark fantasy concept art, moody volumetric fog, dramatic rim light, painterly detail, epic scale", "tint": ["#2b1640", "#0f2a2a"]},
+    {"id": "cyberpunk", "label": "Cyberpunk Neon", "prompt": "cyberpunk city at night, neon cyan and magenta light, rain-slick reflections, cinematic atmosphere", "tint": ["#0b4f6c", "#6c0b5a"]},
+    {"id": "oil", "label": "Oil Painting", "prompt": "classical oil painting, visible brush strokes, chiaroscuro lighting, museum quality, warm palette", "tint": ["#5c3a12", "#2b1a0a"]},
+    {"id": "watercolor", "label": "Watercolor", "prompt": "soft watercolor painting, flowing washes, paper texture, gentle light, muted palette", "tint": ["#3f6b78", "#7a5f8f"]},
+    {"id": "vintage", "label": "Vintage Film", "prompt": "1970s vintage film photograph, faded warm tones, soft grain, lens flare, nostalgic", "tint": ["#6b4a22", "#3a2a3f"]},
+    {"id": "photoreal", "label": "Documentary Photo", "prompt": "photorealistic documentary photograph, natural light, candid moment, sharp detail, true-to-life color", "tint": ["#2f3f4f", "#1a1a22"]},
+    {"id": "minimal", "label": "Minimal Illustration", "prompt": "minimal flat vector illustration, bold simple shapes, limited color palette, strong negative space", "tint": ["#124a5c", "#5c1244"]}
+  ]
+}

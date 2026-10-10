@@ -3,6 +3,7 @@ name: iRun autopilot
 on:
   schedule:
     # UTC. 4 TikTok + 2 Instagram per day = 8am, 11am, 2pm, 6pm ET (EDT). Slot->platform map lives in engine/run.py
+    # The 6pm ET slot is also the daily faceless video (TikTok + Reels + YouTube Shorts) for accounts with a series.
     - cron: "7 12 * * *"
     - cron: "7 15 * * *"
     - cron: "7 18 * * *"
@@ -10,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       platform:
-        description: "tiktok, instagram, or both"
+        description: "tiktok, instagram, youtube, both (tiktok+instagram) or all"
         default: "both"
       account:
         description: "account id from config/accounts.json (blank = all enabled accounts)"
@@ -21,6 +22,15 @@ on:
       mode:
         description: "draft (render + save only) or live (actually post)"
         default: "draft"
+      kind:
+        description: "promo, faceless (next queued faceless script), or auto"
+        default: "promo"
+      idea:
+        description: "Faceless video idea. Type any topic and iRun writes, illustrates, voices and captions it (needs ANTHROPIC_API_KEY)"
+        default: ""
+      style:
+        description: "Faceless look: cinematic, noir, anime, comic, 3d, dark-fantasy, cyberpunk, oil, watercolor, vintage, photoreal, minimal"
+        default: ""
 
 permissions:
   contents: write
@@ -32,7 +42,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -54,6 +64,13 @@ jobs:
           TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          IRUN_IDEA: ${{ github.event.inputs.idea }}
+          IRUN_STYLE: ${{ github.event.inputs.style }}
+          IRUN_KIND: ${{ github.event.inputs.kind }}
           # Scheduled runs use repo variable IRUN_MODE (set it to "live" once you approve drafts). Manual runs use the input.
           IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'draft' }}
         run: |
@@ -61,7 +78,13 @@ jobs:
           if [ -n "${{ github.event.inputs.platform }}" ]; then ARGS="$ARGS --platform ${{ github.event.inputs.platform }}"; fi
           if [ -n "${{ github.event.inputs.account }}" ]; then ARGS="$ARGS --account ${{ github.event.inputs.account }}"; fi
           if [ -n "${{ github.event.inputs.product }}" ]; then ARGS="$ARGS --product ${{ github.event.inputs.product }}"; fi
-          python engine/run.py $ARGS
+          if [ -n "$IRUN_KIND" ]; then ARGS="$ARGS --kind $IRUN_KIND"; fi
+          if [ -n "$IRUN_STYLE" ]; then ARGS="$ARGS --style $IRUN_STYLE"; fi
+          if [ -n "$IRUN_IDEA" ]; then
+            python engine/run.py $ARGS --idea "$IRUN_IDEA"
+          else
+            python engine/run.py $ARGS
+          fi
       - name: Save queue progress
         if: always()
         run: |

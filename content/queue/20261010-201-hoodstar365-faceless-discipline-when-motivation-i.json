@@ -1,0 +1,44 @@
+{
+  "kind": "faceless",
+  "account": "hoodstar365",
+  "series": "tnip",
+  "title": "Discipline when motivation is gone",
+  "scenes": [
+    {
+      "say": "Motivation will leave you by Wednesday.",
+      "visual": "an alarm clock glowing in a dark bedroom before sunrise"
+    },
+    {
+      "say": "Discipline is what shows up when it is gone.",
+      "visual": "a man tying running shoes on the edge of a bed in the dark, one lamp on"
+    },
+    {
+      "say": "Nobody claps for the early mornings.",
+      "visual": "an empty street at dawn with fog and a single street light"
+    },
+    {
+      "say": "Nobody sees the work you do alone.",
+      "visual": "a man shadow boxing in an empty gym, dust in a shaft of light"
+    },
+    {
+      "say": "Do it anyway.",
+      "visual": "close up of a hand gripping a barbell, chalk in the air"
+    },
+    {
+      "say": "That is the part that changes your life.",
+      "visual": "a man standing on a rooftop watching the sun rise over the city, seen from behind"
+    },
+    {
+      "say": "Follow for more. Turn negative into positive.",
+      "visual": "wide shot of a sunrise over a quiet neighborhood, warm light on the houses"
+    }
+  ],
+  "caption": "Motivation leaves. Discipline stays. Do it anyway.",
+  "hashtags": [
+    "discipline",
+    "motivation",
+    "turnnegativeintopositive",
+    "earlymorning",
+    "mindset"
+  ]
+}
