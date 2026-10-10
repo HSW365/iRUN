@@ -1,328 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0f">
 <title>iRun | Six short videos a day for your brand, made and posted for you</title>
-<meta name="description" content="iRun writes the script, records the voiceover, cuts the video and posts it to TikTok and Instagram for your brand, six times a day. By HSW365 Media.">
-<meta property="og:title" content="iRun | Your brand posts six times a day">
-<meta property="og:description" content="Scripts, voiceover, editing and posting for TikTok and Instagram, done for your brand every day. By HSW365 Media.">
+<meta name="description" content="iRun writes the script, records the voiceover, cuts a vertical video and posts it to TikTok and Instagram on a fixed schedule. Six posts a day, made and posted for you.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="canonical" href="https://hsw365.github.io/iRUN/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hsw365.github.io/iRUN/">
+<meta property="og:title" content="iRun | Six videos a day. Zero editing.">
+<meta property="og:description" content="iRun writes the script, records the voiceover, cuts a vertical video and posts it to TikTok and Instagram on a fixed schedule. Six posts a day, made and posted for you.">
 <meta property="og:image" content="https://hsw365.github.io/iRUN/assets/video/irun-sample-calltwin.jpg">
-<link rel="canonical" href="https://hsw365.github.io/iRUN/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0a0a0f; --panel:#111118; --panel2:#16161f; --line:#23232f; --line2:#30303f;
-  --text:#f2f2f7; --soft:#c6c6d4; --muted:#8a8aa0;
-  --cyan:#22d3ee; --violet:#a855f7; --yellow:#fbbf24; --red:#ef4444;
-  --display:'Barlow Condensed','Arial Narrow',sans-serif; --body:Inter,system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
-  --w:1160px;
-}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit}
-img,video{display:block;max-width:100%}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-.wrap{max-width:var(--w);margin:0 auto;padding:0 28px}
-
-/* nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(10,10,15,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:20px}
-.mark{font:800 30px/1 var(--display);letter-spacing:.5px;text-decoration:none}
-.mark b{color:var(--cyan);font-weight:800}
-.nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:500;color:var(--soft)}
-.nav-links a{text-decoration:none}
-.nav-links a:hover{color:var(--text)}
-
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;font:700 15px/1 var(--body);padding:15px 24px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s,color .15s}
-.btn-main{background:var(--cyan);color:#04222a}
-.btn-main:hover{background:#5fe1f3}
-.btn-line{border-color:var(--line2);color:var(--text);background:transparent}
-.btn-line:hover{border-color:var(--soft)}
-.btn-sm{padding:11px 18px;font-size:14px}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-
-/* hero */
-.hero{padding:76px 0 88px;position:relative}
-.hero::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(620px 420px at 82% 38%,rgba(168,85,247,.16),transparent 70%),
-  radial-gradient(520px 380px at 70% 8%,rgba(34,211,238,.10),transparent 70%);pointer-events:none}
-.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 336px;gap:72px;align-items:center}
-h1{font:800 clamp(52px,7.4vw,104px)/.9 var(--display);text-transform:uppercase;letter-spacing:-.5px}
-.lede{font-size:19px;line-height:1.6;color:var(--soft);max-width:33em;margin-top:28px}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.hero-fine{font-size:13px;color:var(--muted);margin-top:16px}
-
-.phone{position:relative;border-radius:30px;border:1px solid var(--line2);background:#000;padding:8px;box-shadow:0 40px 90px -30px rgba(168,85,247,.5),0 0 0 1px rgba(255,255,255,.02)}
-.phone video{width:100%;aspect-ratio:9/16;border-radius:23px;object-fit:cover;background:#07070b}
-.sound{position:absolute;right:20px;bottom:20px;background:rgba(10,10,15,.82);color:var(--text);border:1px solid var(--line2);font:700 12px/1 var(--body);padding:9px 12px;border-radius:999px;cursor:pointer}
-.sound:hover{border-color:var(--soft)}
-.proof{font-size:13px;line-height:1.55;color:var(--muted);margin-top:16px}
-.proof strong{color:var(--soft);font-weight:600}
-
-/* sections */
-section{padding:92px 0;border-top:1px solid var(--line)}
-h2{font:800 clamp(38px,4.6vw,60px)/.95 var(--display);text-transform:uppercase;letter-spacing:-.2px}
-.sec-lede{font-size:17px;color:var(--soft);max-width:36em;margin-top:18px}
-.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
-
-/* day */
-.day{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
-.slot{padding:26px 24px 28px;border-left:1px solid var(--line)}
-.slot:first-child{border-left:0}
-.slot time{font:700 13px/1 var(--mono);color:var(--cyan);letter-spacing:.5px}
-.slot h3{font:800 30px/1 var(--display);text-transform:uppercase;margin:14px 0 8px}
-.slot p{font-size:14px;color:var(--muted);line-height:1.55}
-.day-note{font-size:14px;color:var(--muted);margin-top:18px}
-
-/* script */
-.script{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.script-head{display:flex;justify-content:space-between;gap:16px;padding:16px 22px;border-bottom:1px solid var(--line);font:700 12px/1.4 var(--mono);color:var(--muted)}
-.beats{list-style:none;padding:8px 0;counter-reset:b}
-.beats li{counter-increment:b;display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:11px 22px;font:800 24px/1.1 var(--display);text-transform:uppercase;letter-spacing:.2px}
-.beats li::before{content:counter(b,decimal-leading-zero);font:700 12px/1 var(--mono);color:var(--muted)}
-.beats li:last-child{color:var(--yellow)}
-.cap{padding:20px 22px 22px;border-top:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--soft)}
-.cap span{display:block;color:var(--muted);margin-top:8px}
-.does{list-style:none;padding:0;margin-top:34px;display:grid;gap:22px}
-.does h3{font:700 16px/1.3 var(--body)}
-.does p{font-size:15px;color:var(--muted);margin-top:4px}
-
-/* brands */
-.brands{margin-top:44px;border-top:1px solid var(--line)}
-.brand{display:grid;grid-template-columns:220px 1fr auto;gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line)}
-.brand h3{font:800 28px/1 var(--display);text-transform:uppercase}
-.brand p{font-size:15px;color:var(--soft)}
-.brand a{font:700 13px/1 var(--mono);color:var(--cyan);text-decoration:none;white-space:nowrap}
-.brand a:hover{text-decoration:underline}
-
-/* setup */
-.steps{list-style:none;padding:0;margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;counter-reset:s}
-.steps li{counter-increment:s;border-top:2px solid var(--violet);padding-top:20px}
-.steps li::before{content:"Step " counter(s);font:700 12px/1 var(--mono);color:var(--violet)}
-.steps h3{font:800 28px/1 var(--display);text-transform:uppercase;margin:12px 0 8px}
-.steps p{font-size:15px;color:var(--muted)}
-
-/* apply */
-.apply{background:linear-gradient(180deg,rgba(168,85,247,.07),transparent 46%)}
-.form{background:var(--panel);border:1px solid var(--line2);border-radius:16px;padding:32px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{margin-bottom:16px}
-label{display:block;font-size:13px;font-weight:600;color:var(--soft);margin-bottom:7px}
-label small{font-weight:400;color:var(--muted)}
-input[type=text],input[type=email],input[type=url],textarea{width:100%;background:#0c0c13;border:1px solid var(--line2);color:var(--text);padding:13px 14px;border-radius:8px;font:16px/1.4 var(--body)}
-input:focus,textarea:focus{outline:none;border-color:var(--cyan)}
-textarea{min-height:104px;resize:vertical}
-.checks{display:flex;gap:10px;flex-wrap:wrap}
-.checks label{display:inline-flex;align-items:center;gap:9px;margin:0;padding:11px 15px;border:1px solid var(--line2);border-radius:8px;font-weight:500;color:var(--text);cursor:pointer}
-.checks input{accent-color:var(--cyan);width:16px;height:16px}
-.form .btn{width:100%;margin-top:6px}
-.err{display:none;font-size:14px;color:var(--red);margin:0 0 14px}
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3Ei%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="assets/hsw/fonts/barlow-condensed-latin-900-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/hsw/fonts/inter-latin-wght-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>:root{--acc:#ef4444;--acc-ink:#0a0a0f}
+.phone-col{display:grid;justify-items:center;gap:18px}
+.phone{position:relative;width:min(300px,78vw);aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:1px solid var(--line2);border-top:4px solid var(--acc);background:#000;box-shadow:0 44px 90px -40px #000}
+.phone video{width:100%;height:100%;object-fit:cover}
+.sound{position:absolute;right:12px;bottom:12px;height:40px;padding:0 14px;border-radius:3px;border:0;background:#fff;color:#0a0a0f;font-weight:700;font-size:14px;cursor:pointer}
+.proof{font-size:14.5px;color:var(--mut);max-width:34ch;text-align:center;line-height:1.5}
+.proof strong{color:#fff;display:block}
+.pick{display:flex;gap:22px;margin-top:4px}
+.pick label{display:flex;align-items:center;gap:9px;font-size:16px;color:#fff;font-weight:500}
+.pick input{width:20px;height:20px;accent-color:var(--acc)}
+.err{display:none;margin-top:14px;font-size:14.5px;color:#ff8a8a}
 .err.on{display:block}
-.form-fine{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.55}
 .sent{display:none}
 .sent.on{display:block}
-.sent h3{font:800 34px/1 var(--display);text-transform:uppercase;margin-bottom:12px}
-.sent p{color:var(--soft);font-size:15px;margin-bottom:12px}
-.facts{list-style:none;padding:0;margin-top:30px;display:grid;gap:14px}
-.facts li{font-size:15px;color:var(--soft);padding-left:18px;position:relative}
-.facts li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:2px;background:var(--cyan)}
-
-footer{border-top:1px solid var(--line);padding:38px 0 46px;font-size:14px;color:var(--muted)}
-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
-footer a{color:var(--soft);text-decoration:none}
-footer a:hover{color:var(--text)}
-.foot-links{display:flex;gap:24px;flex-wrap:wrap}
-
-@media (max-width:960px){
-  .hero{padding:48px 0 64px}
-  .hero-grid{grid-template-columns:1fr;gap:44px}
-  .phone-col{max-width:300px;margin:0 auto;width:100%}
-  .split{grid-template-columns:1fr;gap:40px}
-  .day{grid-template-columns:1fr 1fr}
-  .slot:nth-child(3){border-left:0}
-  .slot:nth-child(n+3){border-top:1px solid var(--line)}
-  .steps{grid-template-columns:1fr;gap:28px}
-  .brand{grid-template-columns:1fr;gap:8px}
-  section{padding:64px 0}
-}
-@media (max-width:560px){
-  .wrap{padding:0 16px}
-  .nav-links a:not(.btn){display:none}
-  .row{grid-template-columns:1fr}
-  .form{padding:22px 18px}
-  .hero-cta .btn{flex:1 1 100%}
-  .beats li{font-size:21px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.sent h3{margin-bottom:12px}
+.sent p{color:var(--text2);margin-bottom:12px}
+.sent a{color:#fff;font-weight:600;text-decoration:underline;text-decoration-color:var(--acc);text-underline-offset:4px}
+.sent .btn{margin:6px 8px 0 0}
 </style>
+<script>document.documentElement.classList.add("js")</script>
+
+
 </head>
 <body>
-
+<a class="skip" href="#main">Skip to content</a>
+<div class="util"><div class="wrap"><span class="util-l">iRun is a product of HSW365 Media LLC. Posting to TikTok and Instagram.</span><span class="util-r"><a href="app.html">Owner sign in</a></span></div></div>
 <header class="nav">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="iRun home">i<b>RUN</b></a>
-    <nav class="nav-links" aria-label="Page">
-      <a href="#day">The day</a>
-      <a href="#video">What it makes</a>
-      <a href="#setup">Setup</a>
-      <a class="btn btn-main btn-sm" href="#apply">Apply for a spot</a>
-    </nav>
+    <a class="logo" href="#top" aria-label="iRun home"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Short video, made and posted for you</small></span></a>
+    <nav class="nav-links" aria-label="Page"><a href="#day">The day</a><a href="#video">What it makes</a><a href="#brands">Who it runs</a><a href="#setup">Setup</a><a href="#apply">Apply</a></nav>
+    <div class="nav-cta">
+      
+      <a class="btn btn-acc btn-sm" href="#apply" >Apply for a spot</a>
+      <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+    </div>
   </div>
+  <nav class="mnav" aria-label="Menu"><a href="#day">The day</a><a href="#video">What it makes</a><a href="#brands">Who it runs</a><a href="#setup">Setup</a><a href="#apply">Apply</a><a class="btn btn-acc" href="#apply" >Apply for a spot</a></nav>
 </header>
-
-<main id="top">
-  <div class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <h1>Your brand posts six times a day. You never open an editor.</h1>
-        <p class="lede">iRun writes the script, records the voiceover, cuts a vertical video and posts it to TikTok and Instagram on a fixed schedule. You tell it what you sell once.</p>
-        <div class="hero-cta">
-          <a class="btn btn-main" href="#apply">Apply for a spot</a>
-          <a class="btn btn-line" href="#day">See a day of posts</a>
-        </div>
-        <p class="hero-fine">Applying is free. You get the price before anything is connected.</p>
-      </div>
-      <div class="phone-col">
-        <div class="phone">
-          <video id="sample" src="assets/video/irun-sample-calltwin.mp4" poster="assets/video/irun-sample-calltwin.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A 15 second video iRun made for CallTwin"></video>
-          <button class="sound" id="sound" type="button" aria-pressed="false">Sound on</button>
-        </div>
-        <p class="proof"><strong>iRun made this on October 7 for CallTwin.</strong> Script, voice and edit, start to finish. Nobody touched it.</p>
-      </div>
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="status"><i></i>Posting four TikToks and two Reels a day for three brands.</p>
+      <h1 class="fit"><span>Six videos a day.</span><span>Zero editing.</span></h1>
+      <p class="lede">iRun writes the script, records the voiceover, cuts a vertical video and posts it to TikTok and Instagram on a fixed schedule. You tell it what you sell once.</p>
+      <div class="hero-ctas"><a class="btn btn-acc" href="#apply" >Apply for a spot</a><a class="btn btn-line" href="#day" >See a day of posts</a></div>
+      <p class="hero-fine">Applying is free. You get the price before anything is connected.</p>
     </div>
+    <div><div class="phone-col">
+  <div class="phone">
+    <video id="sample" src="assets/video/irun-sample-calltwin.mp4" poster="assets/video/irun-sample-calltwin.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A 15 second video iRun made for CallTwin"></video>
+    <button class="sound" id="sound" type="button" aria-pressed="false">Sound on</button>
   </div>
-
-  <section id="day">
-    <div class="wrap">
-      <h2>One day on one account</h2>
-      <p class="sec-lede">Four TikToks and two Reels, every day, at the same times. Each one is a new script about something you actually sell.</p>
-      <div class="day">
-        <div class="slot"><time>8:00 AM ET</time><h3>TikTok</h3><p>The morning scroll. A hook about a problem your customer has today.</p></div>
-        <div class="slot"><time>11:00 AM ET</time><h3>TikTok + Reel</h3><p>Two different videos, one per platform. Never the same clip twice.</p></div>
-        <div class="slot"><time>2:00 PM ET</time><h3>TikTok</h3><p>A second product or a second angle on the first.</p></div>
-        <div class="slot"><time>6:00 PM ET</time><h3>TikTok + Reel</h3><p>The after-work slot, where people have time to tap the link.</p></div>
-      </div>
-      <p class="day-note">That is 42 videos a week per brand. Run more than one account and each gets its own six.</p>
-    </div>
-  </section>
-
-  <section id="video">
-    <div class="wrap split">
-      <div>
-        <h2>What goes into one video</h2>
-        <p class="sec-lede">This is the script behind the video at the top of the page. iRun wrote it from two sentences about what CallTwin does.</p>
-        <ul class="does">
-          <li><h3>A script built to be read on screen</h3><p>Short lines, one idea each, with the hook first and the ask last.</p></li>
-          <li><h3>A voiceover and captions that match</h3><p>Every line is spoken and shown, so it works with the sound off.</p></li>
-          <li><h3>A caption, hashtags and one keyword</h3><p>Each video asks viewers to comment or DM a single word. On Instagram, iRun answers with your link and saves who asked.</p></li>
-          <li><h3>Only what you told it</h3><p>iRun uses the facts you gave it. It does not invent prices, reviews or results for your business.</p></li>
-        </ul>
-      </div>
-      <div class="script" aria-label="Script of the sample video">
-        <div class="script-head"><span>CallTwin, TikTok</span><span>15 seconds</span></div>
-        <ol class="beats">
-          <li>Your phone rang while you were working</li>
-          <li>That caller didn't leave a voicemail</li>
-          <li>They called the next business instead</li>
-          <li>CallTwin answers every call for you</li>
-          <li>Gets their name, number and the job</li>
-          <li>Texts it to you the second it ends</li>
-          <li>DM CALL to @hsw365media on Instagram</li>
-        </ol>
-        <div class="cap">Every missed call is a customer calling your competitor next. CallTwin picks up when you can't.<span>#smallbusiness #contractor #aireceptionist #missedcalls #entrepreneur</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="brands">
-    <div class="wrap">
-      <h2>Three brands it runs every day</h2>
-      <p class="sec-lede">iRun was built to promote HSW365's own products first. These accounts get a fresh batch of videos from it daily.</p>
-      <div class="brands">
-        <div class="brand"><h3>Software</h3><p>Apps for business owners and creators: an AI receptionist, a stream clipper, a website builder.</p><a href="https://www.tiktok.com/@hsw365media" target="_blank" rel="noopener">@hsw365media</a></div>
-        <div class="brand"><h3>A speaker and author</h3><p>Speaking bookings, four books and a podcast from an Army veteran.</p><a href="https://www.tiktok.com/@hoodstar365" target="_blank" rel="noopener">@hoodstar365</a></div>
-        <div class="brand"><h3>A streetwear store</h3><p>One-of-one hand-bleached tees and prints, each with its own story.</p><a href="https://www.instagram.com/hsw365.co" target="_blank" rel="noopener">@hsw365.co</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="setup">
-    <div class="wrap">
-      <h2>Getting your brand on it</h2>
-      <ol class="steps">
-        <li><h3>Tell it what you sell</h3><p>Your products or services, who buys them and where the link should go. Plain words are enough.</p></li>
-        <li><h3>Watch the first videos</h3><p>iRun makes your first batch as drafts. You see them before anything goes out under your name.</p></li>
-        <li><h3>Connect your accounts</h3><p>You approve iRun on TikTok and Instagram and it posts on schedule. Until you do, the videos come to you as files to post yourself.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="apply" class="apply">
-    <div class="wrap split">
-      <div>
-        <h2>Apply for a spot</h2>
-        <p class="sec-lede">iRun is taking a small number of outside brands. Tell us about yours and Elvin Torres Sr., the founder, will reply himself.</p>
-        <ul class="facts">
-          <li>No charge to apply and nothing to sign.</li>
-          <li>You hear the monthly price before any account is connected.</li>
-          <li>Instagram posting needs a Business or Creator account.</li>
-          <li>You can pause or stop whenever you want.</li>
-        </ul>
-      </div>
-      <div class="form">
-        <form id="apply-form" novalidate>
-          <div class="row">
-            <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" maxlength="80" required></div>
-            <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div>
-          </div>
-          <div class="field"><label for="f-brand">Brand or business name</label><input id="f-brand" type="text" autocomplete="organization" maxlength="120" required></div>
-          <div class="row">
-            <div class="field"><label for="f-handles">Social handles <small>(optional)</small></label><input id="f-handles" type="text" maxlength="200" placeholder="@yourbrand" autocapitalize="none"></div>
-            <div class="field"><label for="f-link">Website or shop link <small>(optional)</small></label><input id="f-link" type="url" maxlength="300" placeholder="https://" autocapitalize="none"></div>
-          </div>
-          <div class="field"><label for="f-sells">What do you sell, and to who?</label><textarea id="f-sells" maxlength="1000" required></textarea></div>
-          <div class="field">
-            <label id="pf-label">Where should iRun post?</label>
-            <div class="checks" role="group" aria-labelledby="pf-label">
-              <label><input type="checkbox" name="pf" value="TikTok" checked> TikTok</label>
-              <label><input type="checkbox" name="pf" value="Instagram" checked> Instagram</label>
-            </div>
-          </div>
-          <p class="err" id="apply-err" role="alert"></p>
-          <button class="btn btn-main" type="submit" id="apply-btn">Send my application</button>
-          <p class="form-fine">This opens an email to hsw365media@gmail.com with your answers filled in. Press send in your mail app to finish.</p>
-        </form>
-        <div class="sent" id="apply-sent" role="status">
-          <h3>One more tap</h3>
-          <p>Your application is in a new email, addressed to hsw365media@gmail.com. Press send there and it is in.</p>
-          <p>If no email opened, copy your answers and send them to <a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a>.</p>
-          <button class="btn btn-line btn-sm" type="button" id="apply-copy">Copy my answers</button>
-          <button class="btn btn-line btn-sm" type="button" id="apply-back">Edit my answers</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <p class="proof"><strong>iRun made this on October 7 for CallTwin.</strong>Script, voice and edit, start to finish. Nobody touched it.</p>
+</div></div>
+  </div>
+</section>
+<div class="plate"><div class="wrap"><div><b>6 a day</b><strong>Four TikToks and two Reels</strong><span>Every day, at the same times</span></div><div><b>42 a week</b><strong>Per brand</strong><span>Run more than one account and each gets its own six</span></div><div><b>Never twice</b><strong>A new script every post</strong><span>Each one about something you actually sell</span></div><div><b>Free to apply</b><strong>Nothing to sign</strong><span>You hear the monthly price first</span></div></div></div>
+<section class="block" id="day"><div class="wrap"><div class="sec-head"><h2>One day on one account.</h2><p class="lede">Four TikToks and two Reels, every day, at the same times. Each one is a new script about something you actually sell.</p></div><ol class="steps timed" style="--n:4"><li><time>8:00 AM ET</time><h3>TikTok</h3><p>The morning scroll. A hook about a problem your customer has today.</p></li><li><time>11:00 AM ET</time><h3>TikTok and a Reel</h3><p>Two different videos, one per platform. Never the same clip twice.</p></li><li><time>2:00 PM ET</time><h3>TikTok</h3><p>A second product or a second angle on the first.</p></li><li><time>6:00 PM ET</time><h3>TikTok and a Reel</h3><p>The after-work slot, where people have time to tap the link.</p></li></ol><p class="steps-note">That is 42 videos a week per brand. Run more than one account and each gets its own six.</p></div></section>
+<section class="block tint" id="video"><div class="wrap"><div class="split"><div><h2>What goes into one video.</h2><p class="lede">This is the script behind the video at the top of the page. iRun wrote it from two sentences about what CallTwin does.</p><ul class="points"><li><h4>A script built to be read on screen</h4><p>Short lines, one idea each, with the hook first and the ask last.</p></li><li><h4>A voiceover and captions that match</h4><p>Every line is spoken and shown, so it works with the sound off.</p></li><li><h4>A caption, hashtags and one keyword</h4><p>Each video asks viewers to comment or DM a single word. On Instagram, iRun answers with your link and saves who asked.</p></li><li><h4>Only what you told it</h4><p>iRun uses the facts you gave it. It does not invent prices, reviews or results for your business.</p></li></ul></div><div class="ticket" style="margin-top:0" aria-label="Script of the sample video"><div class="ticket-head"><span>CallTwin, TikTok</span><b>15 SECONDS</b></div><ol><li>Your phone rang while you were working</li><li>That caller didn't leave a voicemail</li><li>They called the next business instead</li><li>CallTwin answers every call for you</li><li>Gets their name, number and the job</li><li>Texts it to you the second it ends</li><li>DM CALL to @hsw365media on Instagram</li></ol><div class="cap">Every missed call is a customer calling your competitor next. CallTwin picks up when you can't.<span>#smallbusiness #contractor #aireceptionist #missedcalls #entrepreneur</span></div></div></div></div></section>
+<section class="block" id="brands"><div class="wrap"><div class="sec-head"><h2>Three brands it runs every day.</h2><p class="lede">iRun was built to promote HSW365's own products first. These accounts get a fresh batch of videos from it daily.</p></div><div class="ledger"><a href="https://www.tiktok.com/@hsw365media" target="_blank" rel="noopener"><div><h3>Software</h3><span>@hsw365media</span></div><div><span class="k">Platform</span><span class="v">TikTok and Instagram</span></div><p>Apps for business owners and creators: an AI receptionist, a stream clipper, a website builder.</p><span class="go">View @hsw365media</span></a><a href="https://www.tiktok.com/@hoodstar365" target="_blank" rel="noopener"><div><h3>A speaker and author</h3><span>@hoodstar365</span></div><div><span class="k">Platform</span><span class="v">TikTok</span></div><p>Speaking bookings, four books and a podcast from an Army veteran.</p><span class="go">View @hoodstar365</span></a><a href="https://www.instagram.com/hsw365.co" target="_blank" rel="noopener"><div><h3>A streetwear store</h3><span>@hsw365.co</span></div><div><span class="k">Platform</span><span class="v">Instagram</span></div><p>One-of-one hand-bleached tees and prints, each with its own story.</p><span class="go">View @hsw365.co</span></a></div></div></section>
+<section class="block tint" id="setup"><div class="wrap"><div class="sec-head"><h2>Getting your brand on it.</h2><p class="lede">Nothing goes out under your name until you have seen it.</p></div><ol class="steps" style="--n:3"><li><h3>Tell it what you sell</h3><p>Your products or services, who buys them and where the link should go. Plain words are enough.</p></li><li><h3>Watch the first videos</h3><p>iRun makes your first batch as drafts. You see them before anything goes out under your name.</p></li><li><h3>Connect your accounts</h3><p>You approve iRun on TikTok and Instagram and it posts on schedule. Until you do, the videos come to you as files to post yourself.</p></li></ol></div></section>
+<section class="block" id="apply"><div class="wrap"><div class="split"><div><h2>Apply for a spot.</h2><p class="lede">iRun is taking a small number of outside brands. Tell us about yours and Elvin Torres Sr., the founder, will reply himself.</p><ul class="checks"><li>No charge to apply and nothing to sign.</li><li>You hear the monthly price before any account is connected.</li><li>Instagram posting needs a Business or Creator account.</li><li>You can pause or stop whenever you want.</li></ul></div><div class="panel"><form id="apply-form" novalidate><div class="row2"><div class="field" style="margin-top:0"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" maxlength="80" required></div><div class="field" style="margin-top:0"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div></div><div class="field"><label for="f-brand">Brand or business name</label><input id="f-brand" type="text" autocomplete="organization" maxlength="120" required></div><div class="row2"><div class="field"><label for="f-handles">Social handles <small>(optional)</small></label><input id="f-handles" type="text" maxlength="200" placeholder="@yourbrand" autocapitalize="none"></div><div class="field"><label for="f-link">Website or shop link <small>(optional)</small></label><input id="f-link" type="url" maxlength="300" placeholder="https://" autocapitalize="none"></div></div><div class="field"><label for="f-sells">What do you sell, and to who?</label><textarea id="f-sells" maxlength="1000" required></textarea></div><div class="field"><label id="pf-label">Where should iRun post?</label><div class="pick" role="group" aria-labelledby="pf-label"><label><input type="checkbox" name="pf" value="TikTok" checked> TikTok</label><label><input type="checkbox" name="pf" value="Instagram" checked> Instagram</label></div></div><p class="err" id="apply-err" role="alert"></p><button class="btn btn-acc" type="submit" id="apply-btn" style="width:100%;margin-top:18px">Send my application</button><p class="panel-foot">This opens an email to hsw365media@gmail.com with your answers filled in. Press send in your mail app to finish.</p></form><div class="sent" id="apply-sent" role="status"><h3>One more tap</h3><p>Your application is in a new email, addressed to hsw365media@gmail.com. Press send there and it is in.</p><p>If no email opened, copy your answers and send them to <a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a>.</p><button class="btn btn-line btn-sm" type="button" id="apply-copy">Copy my answers</button><button class="btn btn-line btn-sm" type="button" id="apply-back">Edit my answers</button></div></div></div></div></section>
+<section class="block tint" id="about"><div class="wrap"><p class="motto">Turn negative into positive.<cite>The HSW365 motto. An account nobody sees becomes an account that posts six times a day.</cite></p><div class="about-grid"><div class="about-body"><h2>Who is behind iRun</h2><p class="lede">iRun is built and run by HSW365 Media LLC in New Jersey.</p><p>HSW365 Media LLC is run by its founder, Elvin Torres Sr., a U.S. Army veteran, author and speaker. He builds each product himself and answers the email himself.</p></div><div class="creds"><div><b>Drafts first</b><span>You see the first batch before anything posts</span></div><div><b>Your facts only</b><span>No invented prices, reviews or results</span></div><div><b>Founder replies</b><span>Applications are answered by Elvin Torres Sr.</span></div><div><b>Pause or stop</b><span>Whenever you want</span></div></div></div></div></section>
+<section class="block" id="family"><div class="wrap"><div class="sec-head"><h2>More from HSW365.</h2><p class="lede">iRun is one of five products HSW365 Media builds and runs. It makes the videos for the other four.</p></div><div class="ledger"><a href="https://hsw365.github.io/calltwin/"><div><h3>CallTwin</h3><span>AI receptionist</span></div><div><span class="k">Made for</span><span class="v">Local businesses</span></div><p>Answers the business line day and night, takes the caller&#x27;s name, number and the job, and sends it to the owner.</p><span class="go">Open CallTwin</span></a><a href="https://hsw365.github.io/queenee/"><div><h3>QUEENEE</h3><span>Website building</span></div><div><span class="k">Made for</span><span class="v">Indie artists and businesses</span></div><p>Real websites built from your details. Music, video, merch, booking and contact in one place you own.</p><span class="go">Open QUEENEE</span></a><div class="here"><div><h3>iRun</h3><span>Short video, made and posted</span></div><div><span class="k">Made for</span><span class="v">Brands that need to post daily</span></div><p>Writes the script, records the voiceover, cuts the vertical video and posts it to TikTok and Instagram on a schedule.</p><span></span></div><a href="https://hsw365.github.io/STUDIO365/"><div><h3>HSW365studio</h3><span>Vocal studio in the browser</span></div><div><span class="k">Made for</span><span class="v">Artists and writers</span></div><p>Record over your beat, tune the vocal to key, mix it, master it to streaming loudness and export the file.</p><span class="go">Open HSW365studio</span></a><a href="https://klipit.onrender.com/"><div><h3>Klipit</h3><span>Stream clipper</span></div><div><span class="k">Made for</span><span class="v">Streamers and clip pages</span></div><p>Paste a stream link and get the best moments back as vertical clips ready to post.</p><span class="go">Open Klipit</span></a></div></div></section>
+<section class="band"><div class="wrap"><div><h2>Put your brand on the schedule.</h2><p>Applying is free. You hear the price before anything is connected.</p></div><div class="band-ctas"><a class="btn btn-ink" href="#apply" >Apply for a spot</a></div></div></section>
 </main>
-
 <footer>
   <div class="wrap">
-    <div>iRun is a product of HSW365 Media LLC. Turn negative into positive.</div>
-    <div class="foot-links">
-      <a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a>
-      <a href="https://hsw365.co" target="_blank" rel="noopener">hsw365.co</a>
-      <a href="app.html">Owner sign in</a>
+    <div class="foot">
+      <div><a class="logo" href="#top" aria-label="iRun home"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Short video, made and posted for you</small></span></a><p>Six short videos a day for your brand: written, voiced, cut and posted on a fixed schedule.</p></div>
+      <div><h4>iRun</h4><ul><li><a href="#apply">Apply for a spot</a></li><li><a href="#day">A day of posts</a></li><li><a href="app.html">Owner sign in</a></li></ul></div>
+      <div><h4>More from HSW365</h4><ul><li><a href="https://hsw365.github.io/calltwin/">CallTwin</a></li><li><a href="https://hsw365.github.io/queenee/">QUEENEE</a></li><li><a href="https://hsw365.github.io/STUDIO365/">HSW365studio</a></li><li><a href="https://klipit.onrender.com/">Klipit</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a></li><li><a href="https://hsw365.co">hsw365.co</a></li></ul></div>
     </div>
+    <div class="legal"><p>Instagram posting needs a Business or Creator account.</p><p>&copy; 2026 HSW365 Media LLC. Turn negative into positive.</p></div>
   </div>
 </footer>
-
+<div class="sticky"><a class="btn btn-acc" href="#apply" >Apply for a spot</a></div>
+<script src="assets/hsw/hsw.js"></script>
 <script>
 (function () {
   var TO = 'hsw365media@gmail.com';
