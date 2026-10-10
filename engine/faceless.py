@@ -165,14 +165,14 @@ def _shade():
     return Image.merge("RGB", [col.resize((W, H))] * 3)
 
 
-def _brand(handle, series_name):
+def _brand(tag, series_name):
     img = Image.new("RGBA", (W, 240), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     mono = _font("SpaceMono-Bold.ttf", 30)
     for dx, dy, fill in ((2, 3, (0, 0, 0, 170)), (0, 0, None)):
-        d.text((70 + dx, 150 + dy), "@" + handle.upper(), font=mono, fill=fill or CYAN)
+        d.text((70 + dx, 150 + dy), tag.upper(), font=mono, fill=fill or CYAN)
         tw = d.textlength(series_name, font=mono)
-        if tw <= W - 140 - d.textlength("@" + handle.upper() + "   ", font=mono):
+        if tw <= W - 140 - d.textlength(tag.upper() + "   ", font=mono):
             d.text((W - 70 - tw + dx, 150 + dy), series_name, font=mono, fill=fill or WHITE)
     d.rectangle([70, 205, 190, 211], fill=VIOLET)
     return img
@@ -214,7 +214,7 @@ def _fade(img, a):
 
 # ---------- build ----------
 
-def build(script, style_id, workdir, out_path, cta, handle, series_name, seed=None):
+def build(script, style_id, workdir, out_path, cta, tag, series_name, seed=None):
     """Make the video. Returns {"voice", "seconds", "media": [{"visual", "source"}], "images": [paths]}."""
     scenes = script["scenes"]
     seed = seed if seed is not None else random.randrange(1, 10**6)
@@ -266,7 +266,7 @@ def build(script, style_id, workdir, out_path, cta, handle, series_name, seed=No
         a["end"] = min(b["start"], a["scene_end"])
     cards[-1]["end"] = cards[-1]["scene_end"]
 
-    caps, shade, brand, card = Captions(), _shade(), _brand(handle, series_name), _cta_card(cta)
+    caps, shade, brand, card = Captions(), _shade(), _brand(tag, series_name), _cta_card(cta)
     speech_end = clips[-1]["start"] + clips[-1]["len"]
     n = int(total * FPS)
     enc = subprocess.Popen(

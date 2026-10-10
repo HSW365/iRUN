@@ -1,0 +1,45 @@
+{
+  "kind": "faceless",
+  "account": "newark",
+  "series": "newark-tips",
+  "title": "Water heater leaking?",
+  "scenes": [
+    {
+      "say": "Water on the floor around your water heater?",
+      "visual": "a water heater in a basement with a puddle spreading on the concrete floor"
+    },
+    {
+      "say": "Turn off the cold water valve on top of the tank.",
+      "visual": "a hand turning a valve handle on a pipe above a water heater"
+    },
+    {
+      "say": "Gas heater? Turn the control to off or pilot.",
+      "visual": "close up of a gas control dial on the front of a water heater"
+    },
+    {
+      "say": "Electric heater? Switch off its breaker.",
+      "visual": "a finger flipping a breaker switch in an electrical panel"
+    },
+    {
+      "say": "Read the brand and age off the label if you can.",
+      "visual": "a flashlight shining on the rating label on the side of a water heater"
+    },
+    {
+      "say": "It helps us bring the right parts.",
+      "visual": "an open toolbox with pipe fittings and wrenches on a basement floor"
+    },
+    {
+      "say": "Call New Ark at 908-454-4043. Answered 24/7.",
+      "visual": "a clean white plumbing service van parked on a quiet small-town street at dusk, warm lights in the houses"
+    }
+  ],
+  "caption": "Leaking water heater? Do these steps, then call. Repairs and full replacements for homes and businesses.",
+  "hashtags": [
+    "phillipsburgnj",
+    "warrencountynj",
+    "njplumber",
+    "plumber",
+    "newjersey",
+    "waterheater"
+  ]
+}

@@ -174,7 +174,8 @@ def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, st
     slug = f"{stamp}-{acct['id']}-faceless-{ser['id']}"
     work = tempfile.mkdtemp(prefix="irun-")
     video = os.path.join(outdir, f"{slug}.mp4")
-    res = faceless.build(script, style, work, video, tuple(cta["screen"]), acct["handle"], ser["name"])
+    tag = "@" + acct["handle"] if acct.get("handle") else acct["brand"]  # clients without a handle show their name
+    res = faceless.build(script, style, work, video, tuple(cta["screen"]), tag, ser["name"])
     says = [sc["say"] for sc in script["scenes"]]
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
         f.write(script["title"] + "\n\n" + caption + "\n\n---\n" + "\n".join(says))

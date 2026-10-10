@@ -19,7 +19,10 @@
       ],
       "cta": {
         "spoken": "Follow for more. Turn negative into positive.",
-        "screen": ["FOLLOW @HOODSTAR365", "TURN NEGATIVE INTO POSITIVE"],
+        "screen": [
+          "FOLLOW @HOODSTAR365",
+          "TURN NEGATIVE INTO POSITIVE"
+        ],
         "caption": "Follow @hoodstar365 for more. Turn Negative Into Positive."
       }
     },
@@ -41,8 +44,37 @@
       ],
       "cta": {
         "spoken": "Follow for more. Build every day.",
-        "screen": ["FOLLOW @HSW365MEDIA", "BUILD EVERY DAY"],
+        "screen": [
+          "FOLLOW @HSW365MEDIA",
+          "BUILD EVERY DAY"
+        ],
         "caption": "Follow @hsw365media for more."
+      }
+    },
+    {
+      "id": "newark-tips",
+      "account": "newark",
+      "name": "WHAT TO DO RIGHT NOW",
+      "enabled": true,
+      "style": "photoreal",
+      "topic": "Calm, practical first steps for a home plumbing, heating or cooling problem in Western New Jersey, before the plumber arrives. Safety first: stay clear of water near electricity; if you smell gas, leave and call the gas utility or 911 first. Only New Ark facts from its own site. Never quote prices.",
+      "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+      "angles": [
+        "burst or frozen pipe",
+        "no heat on a cold night",
+        "water heater leaking",
+        "sewer backing up",
+        "smell of gas",
+        "getting the furnace ready for winter",
+        "AC not cooling"
+      ],
+      "cta": {
+        "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+        "screen": [
+          "CALL 908-454-4043",
+          "NEW ARK. ANSWERED 24/7."
+        ],
+        "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
       }
     }
   ]

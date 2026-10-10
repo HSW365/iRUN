@@ -1,0 +1,45 @@
+{
+  "kind": "faceless",
+  "account": "newark",
+  "series": "newark-tips",
+  "title": "Burst pipe? Do this first",
+  "scenes": [
+    {
+      "say": "A pipe just burst in your house.",
+      "visual": "water spraying from a broken copper pipe under a kitchen sink, water on the floor"
+    },
+    {
+      "say": "First, shut off the main water valve.",
+      "visual": "a hand turning a round main water shutoff valve on a pipe in a basement"
+    },
+    {
+      "say": "It is usually where the water line enters the house.",
+      "visual": "a basement wall where a water pipe comes through the foundation, dim light"
+    },
+    {
+      "say": "Stay clear of water near outlets and appliances.",
+      "visual": "water pooling on a basement floor near a wall outlet, seen from a distance"
+    },
+    {
+      "say": "Move your valuables out of the way.",
+      "visual": "hands lifting a cardboard box off a wet basement floor"
+    },
+    {
+      "say": "Then call and tell us what is leaking and where.",
+      "visual": "a hand holding a phone in a dim hallway at night"
+    },
+    {
+      "say": "Call New Ark at 908-454-4043. Answered 24/7.",
+      "visual": "a clean white plumbing service van parked on a quiet small-town street at dusk, warm lights in the houses"
+    }
+  ],
+  "caption": "Burst pipe? Shut off the main valve, stay away from water near electricity, then call. Every call is answered.",
+  "hashtags": [
+    "phillipsburgnj",
+    "warrencountynj",
+    "njplumber",
+    "plumber",
+    "newjersey",
+    "burstpipe"
+  ]
+}

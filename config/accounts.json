@@ -212,6 +212,166 @@
           ]
         }
       ]
+    },
+    {
+      "id": "newark",
+      "brand": "New Ark",
+      "handle": "",
+      "type": "client",
+      "enabled": true,
+      "platforms": [
+        "tiktok",
+        "instagram"
+      ],
+      "lead_bot": false,
+      "voice": "New Ark Plumbing, Heating & Air Conditioning, 412 Firth St, Phillipsburg NJ. Plain, calm, local and straight-talking. Licensed and insured in New Jersey, four decades of industry experience, residential and commercial. Every call to 908-454-4043 is answered 24/7 and emergencies go first. Never quote prices. If someone smells gas, tell them to leave and call the gas utility or 911 first.",
+      "products": [
+        {
+          "id": "emergency",
+          "name": "EMERGENCY PLUMBER",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Burst pipes, leaking water heaters, sewer backups and no water. Calls are answered 24 hours a day, emergencies go to the front of the line, and a licensed plumber calls back.",
+          "angles": [
+            "burst pipe at 2am",
+            "water spreading across the floor",
+            "who actually answers at night"
+          ]
+        },
+        {
+          "id": "heating",
+          "name": "NO HEAT",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Furnace, boiler and heating system repair and replacement for homes and businesses. No-heat calls are answered day or night.",
+          "angles": [
+            "the heat quit on a cold night",
+            "check the thermostat and breaker first",
+            "fall furnace check before winter"
+          ]
+        },
+        {
+          "id": "waterheater",
+          "name": "WATER HEATERS",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Water heater repair and full replacement for homes and businesses: no hot water, leaks, pilot or burner problems, rusty water.",
+          "angles": [
+            "no hot water this morning",
+            "the tank is leaking",
+            "repair or replace"
+          ]
+        },
+        {
+          "id": "drain",
+          "name": "DRAIN AND SEWER",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Clears clogged drains and sewer backups and looks for why it happened: slow drains, backed-up toilets, basement floor drain backups, recurring clogs.",
+          "angles": [
+            "water coming up the basement drain",
+            "it keeps clogging",
+            "skip the chemical cleaner"
+          ]
+        },
+        {
+          "id": "plumbing",
+          "name": "PLUMBING",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Plumbing installations and repairs for homes and businesses: kitchens, bathrooms, fixtures, pipe repair, exterior and commercial plumbing. Written estimates online.",
+          "angles": [
+            "one contractor for the whole job",
+            "written estimate you can approve",
+            "homes and businesses"
+          ]
+        },
+        {
+          "id": "geothermal",
+          "name": "GEOTHERMAL",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Installs geothermal heating and cooling in new construction, retrofits existing homes and adds auxiliary heating. Geothermal does not burn fossil fuels.",
+          "angles": [
+            "heat without burning fuel",
+            "retrofit an existing home"
+          ]
+        },
+        {
+          "id": "sprinklers",
+          "name": "FIRE SPRINKLERS",
+          "keyword": "CALL",
+          "link": "",
+          "cta": {
+            "spoken": "Call New Ark at 908-454-4043. Answered 24/7.",
+            "screen": [
+              "CALL 908-454-4043",
+              "NEW ARK. ANSWERED 24/7."
+            ],
+            "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
+          },
+          "audience": "homeowners and businesses in Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+          "pitch": "Designs and installs fire protection and sprinkler systems for homes and commercial buildings, alongside plumbing and HVAC, so one contractor coordinates the job.",
+          "angles": [
+            "one contractor for water, heat, air and fire",
+            "new construction and renovations"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "kind": "faceless",
+  "account": "newark",
+  "series": "newark-tips",
+  "title": "No heat tonight? Check these",
+  "scenes": [
+    {
+      "say": "The heat just quit on a cold night.",
+      "visual": "frost on a window at night with a dark living room behind it"
+    },
+    {
+      "say": "Check that the thermostat is set to heat.",
+      "visual": "a hand adjusting a wall thermostat in a hallway, close up"
+    },
+    {
+      "say": "Make sure its batteries are not dead.",
+      "visual": "hands holding two AA batteries next to an open thermostat"
+    },
+    {
+      "say": "Then check the breaker and the service switch.",
+      "visual": "a hand opening a gray electrical breaker panel in a basement"
+    },
+    {
+      "say": "If you smell gas, leave and call the gas utility or 911 first.",
+      "visual": "a front door standing open to a cold night, porch light on, nobody inside"
+    },
+    {
+      "say": "Still no heat? Tell us the system type and what it is doing.",
+      "visual": "an older furnace in a basement with a flashlight beam on it"
+    },
+    {
+      "say": "Call New Ark at 908-454-4043. Answered 24/7.",
+      "visual": "a clean white plumbing service van parked on a quiet small-town street at dusk, warm lights in the houses"
+    }
+  ],
+  "caption": "No heat? Two quick checks before you call. No-heat calls are answered day or night.",
+  "hashtags": [
+    "phillipsburgnj",
+    "warrencountynj",
+    "njhvac",
+    "noheat",
+    "newjersey"
+  ]
+}

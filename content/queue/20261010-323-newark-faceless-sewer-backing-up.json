@@ -1,0 +1,45 @@
+{
+  "kind": "faceless",
+  "account": "newark",
+  "series": "newark-tips",
+  "title": "Sewer backing up?",
+  "scenes": [
+    {
+      "say": "Water coming up through the basement drain?",
+      "visual": "dark water rising around a floor drain in a concrete basement floor"
+    },
+    {
+      "say": "Stop running water anywhere in the house.",
+      "visual": "a hand turning off a kitchen faucet, close up"
+    },
+    {
+      "say": "No showers, no laundry, no dishwasher.",
+      "visual": "a washing machine in a basement laundry area, turned off, dim light"
+    },
+    {
+      "say": "Do not pour chemical cleaner into a blocked line.",
+      "visual": "a plastic bottle of drain cleaner left unopened on a shelf"
+    },
+    {
+      "say": "Notice which fixtures are backing up.",
+      "visual": "a bathroom with a toilet and tub, water sitting high in the tub drain"
+    },
+    {
+      "say": "If sewage is coming into the house, call any time.",
+      "visual": "a phone lighting up on a kitchen counter at night"
+    },
+    {
+      "say": "Call New Ark at 908-454-4043. Answered 24/7.",
+      "visual": "a clean white plumbing service van parked on a quiet small-town street at dusk, warm lights in the houses"
+    }
+  ],
+  "caption": "Sewer backup? Stop running water and call. We clear it and find out why it happened.",
+  "hashtags": [
+    "phillipsburgnj",
+    "warrencountynj",
+    "njplumber",
+    "plumber",
+    "newjersey",
+    "sewerbackup"
+  ]
+}
