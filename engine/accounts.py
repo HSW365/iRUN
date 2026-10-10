@@ -6,6 +6,7 @@ import db
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 MAIN = "hsw365media"  # the original account: its logins live in GitHub secrets and the un-suffixed token rows
+YT_MAIN = "hoodstar365"  # the account GitHub secret YOUTUBE_REFRESH_TOKEN belongs to
 
 
 def load():
@@ -20,6 +21,16 @@ def load():
         a.setdefault("enabled", True)
         a.setdefault("lead_bot", False)
     return accts
+
+
+def series(account_id=None):
+    """Enabled faceless series (config/series.json), optionally just one account's."""
+    path = os.path.join(ROOT, "config", "series.json")
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        rows = json.load(f)["series"]
+    return [s for s in rows if s.get("enabled", True) and (account_id is None or s["account"] == account_id)]
 
 
 def get(account_id):
@@ -55,4 +66,11 @@ def connected(account_id, platform):
         if st.get("value") or (account_id == MAIN and os.environ.get("IG_ACCESS_TOKEN")):
             return True, "connected"
         return False, f"Instagram login not connected for @{account_id}"
+    if platform == "youtube":
+        if not (os.environ.get("YOUTUBE_CLIENT_ID") and os.environ.get("YOUTUBE_CLIENT_SECRET")):
+            return False, "YouTube app keys missing (YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET)"
+        st = _stored("youtube", account_id) or {}
+        if st.get("refresh_value") or (account_id == YT_MAIN and os.environ.get("YOUTUBE_REFRESH_TOKEN")):
+            return True, "connected"
+        return False, f"YouTube login not connected for @{account_id} (run engine/youtube_auth.py --account {account_id})"
     return False, f"unknown platform {platform}"

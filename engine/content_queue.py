@@ -11,6 +11,19 @@ Queue item shape:
   "caption": "1-3 sentences",
   "hashtags": ["tag", ...]             # without '#'
 }
+
+Faceless item shape (story-style video with AI scenes; see engine/faceless.py and config/series.json):
+{
+  "kind": "faceless",
+  "account": "hoodstar365",
+  "series": "tnip",                    # id from config/series.json
+  "style": "cinematic",                # optional, id from config/styles.json (defaults to the series style)
+  "title": "Your setback is the setup",
+  "scenes": [{"say": "spoken line", "visual": "what the picture shows"}, ...],
+  "caption": "1-3 sentences",
+  "hashtags": ["tag", ...]
+}
+One faceless video is cross-posted to all of the account's platforms, so it has no "platform" field.
 """
 import datetime as dt
 import glob
@@ -34,6 +47,55 @@ def _clean(item):
     return {"beats": beats, "emphasis": emph, "caption": str(item.get("caption", "")).strip(), "hashtags": tags}
 
 
+def take_faceless(account, series_ids, offset=0):
+    """A valid queued faceless item for this account. Returns (path, item, script) or None. offset as in take()."""
+    import faceless
+    found = []
+    for path in sorted(glob.glob(os.path.join(QUEUE, "*.json"))):
+        try:
+            with open(path) as f:
+                item = json.load(f)
+        except Exception as e:
+            print(f"[queue] unreadable {os.path.basename(path)}: {e}")
+            continue
+        if item.get("kind") != "faceless" or item.get("account") != account:
+            continue
+        if item.get("series") not in series_ids:
+            print(f"[queue] {os.path.basename(path)}: unknown or paused series {item.get('series')!r} for @{account}; skipping")
+            continue
+        try:
+            found.append((path, item, faceless.clean(item)))
+        except ValueError as e:
+            print(f"[queue] {os.path.basename(path)}: {e}; skipping")
+        if found and not offset:
+            break
+    return found[offset % len(found)] if found else None
+
+
+def finish_faceless(path, item, rows):
+    """After a cross-post: done if any platform took it; otherwise keep for retry until MAX_ATTEMPTS runs."""
+    item.setdefault("attempts", [])
+    now = dt.datetime.utcnow().isoformat() + "Z"
+    for row in rows:
+        item["attempts"].append({"at": now, "platform": row["platform"], "status": row["status"],
+                                 "error": row.get("error"), "external_id": row.get("external_id")})
+    runs = len({a["at"] for a in item["attempts"]})
+    if any(r["status"] == "posted" for r in rows):
+        dest = POSTED
+    elif runs >= MAX_ATTEMPTS:
+        dest = FAILED
+    else:
+        with open(path, "w") as f:
+            json.dump(item, f, indent=2)
+        return path
+    os.makedirs(dest, exist_ok=True)
+    new = os.path.join(dest, os.path.basename(path))
+    with open(new, "w") as f:
+        json.dump(item, f, indent=2)
+    os.remove(path)
+    return new
+
+
 def take(account, platform, product_ids, offset=0):
     """A valid queued item for this account and platform. Returns (path, item, script) or None.
 
@@ -48,6 +110,8 @@ def take(account, platform, product_ids, offset=0):
                 item = json.load(f)
         except Exception as e:
             print(f"[queue] unreadable {os.path.basename(path)}: {e}")
+            continue
+        if item.get("kind", "promo") != "promo":  # faceless items are handled by take_faceless
             continue
         if item.get("account", "hsw365media") != account:
             continue

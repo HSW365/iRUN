@@ -1,0 +1,49 @@
+{
+  "_note": "Faceless series: story-style videos with AI scenes, voiceover and word captions (no product pitch). One video per series account per day, cross-posted to that account's connected platforms at the 6pm ET slot. 'style' is an id from config/styles.json. Set enabled=false to pause a series. Only use facts that are true; no made-up stories about real people.",
+  "series": [
+    {
+      "id": "tnip",
+      "account": "hoodstar365",
+      "name": "TURN NEGATIVE INTO POSITIVE",
+      "enabled": true,
+      "style": "cinematic",
+      "topic": "Short motivational pieces built on Hoodstar365's message, Turn Negative Into Positive: discipline, setbacks, faith, starting over, doing the work when nobody is watching.",
+      "audience": "people going through a hard season who need a push to keep going",
+      "angles": [
+        "your setback is the setup",
+        "discipline when motivation is gone",
+        "nobody is coming, so get up",
+        "pain is information, not a sentence",
+        "small wins stacked every day",
+        "faith when nothing makes sense"
+      ],
+      "cta": {
+        "spoken": "Follow for more. Turn negative into positive.",
+        "screen": ["FOLLOW @HOODSTAR365", "TURN NEGATIVE INTO POSITIVE"],
+        "caption": "Follow @hoodstar365 for more. Turn Negative Into Positive."
+      }
+    },
+    {
+      "id": "founder",
+      "account": "hsw365media",
+      "name": "SOLO FOUNDER NOTES",
+      "enabled": true,
+      "style": "noir",
+      "topic": "Plain lessons for people building a business alone: showing up daily, shipping before it is perfect, answering customers fast, using tools instead of excuses.",
+      "audience": "solo founders, side hustlers and small business owners",
+      "angles": [
+        "ship it before it is perfect",
+        "consistency beats talent that stays home",
+        "the customer who could not reach you",
+        "one person, many tools",
+        "stop planning and post",
+        "build while they sleep"
+      ],
+      "cta": {
+        "spoken": "Follow for more. Build every day.",
+        "screen": ["FOLLOW @HSW365MEDIA", "BUILD EVERY DAY"],
+        "caption": "Follow @hsw365media for more."
+      }
+    }
+  ]
+}

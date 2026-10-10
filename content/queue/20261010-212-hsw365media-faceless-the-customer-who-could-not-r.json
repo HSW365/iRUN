@@ -1,0 +1,44 @@
+{
+  "kind": "faceless",
+  "account": "hsw365media",
+  "series": "founder",
+  "title": "The customer who could not reach you",
+  "scenes": [
+    {
+      "say": "The customer who could not reach you already called someone else.",
+      "visual": "a phone ringing on an empty counter in a closed shop"
+    },
+    {
+      "say": "They did not leave because of your price.",
+      "visual": "a hand hanging up a phone, close up"
+    },
+    {
+      "say": "They left because nobody answered.",
+      "visual": "a missed call notification light blinking on a phone in a dark room"
+    },
+    {
+      "say": "Being easy to reach is part of the product.",
+      "visual": "a shop owner smiling while talking on the phone behind a counter"
+    },
+    {
+      "say": "Answer fast. Follow up the same day.",
+      "visual": "a man writing a note on a pad next to a phone on a desk"
+    },
+    {
+      "say": "Speed is the cheapest way to stand out.",
+      "visual": "a busy small shop with customers at the counter, warm light"
+    },
+    {
+      "say": "Follow for more. Build every day.",
+      "visual": "an open sign glowing in a shop window at dusk"
+    }
+  ],
+  "caption": "They did not leave over price. They left because nobody answered.",
+  "hashtags": [
+    "smallbusiness",
+    "customerservice",
+    "entrepreneur",
+    "solofounder",
+    "businesstips"
+  ]
+}

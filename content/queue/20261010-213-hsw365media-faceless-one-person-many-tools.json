@@ -1,0 +1,44 @@
+{
+  "kind": "faceless",
+  "account": "hsw365media",
+  "series": "founder",
+  "title": "One person, many tools",
+  "scenes": [
+    {
+      "say": "You are not behind because you are alone.",
+      "visual": "a man alone at a desk in a big empty office at night"
+    },
+    {
+      "say": "One person with the right tools can do the work of a team.",
+      "visual": "a workbench with tools laid out in neat rows, overhead light"
+    },
+    {
+      "say": "Let the tools handle the repeat work.",
+      "visual": "a row of machines running in a quiet workshop"
+    },
+    {
+      "say": "Keep your hours for what only you can do.",
+      "visual": "a man sketching ideas in a notebook by a window"
+    },
+    {
+      "say": "Talk to customers. Make the thing better.",
+      "visual": "two people shaking hands across a counter in a small shop"
+    },
+    {
+      "say": "Stop making excuses and start building systems.",
+      "visual": "a hand flipping a large power switch on a wall, close up"
+    },
+    {
+      "say": "Follow for more. Build every day.",
+      "visual": "city skyline at sunrise with the first lights coming on"
+    }
+  ],
+  "caption": "One person with the right tools can do the work of a team.",
+  "hashtags": [
+    "solofounder",
+    "automation",
+    "entrepreneur",
+    "smallbusiness",
+    "buildeveryday"
+  ]
+}
