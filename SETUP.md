@@ -28,6 +28,7 @@ Read that first when something isn't posting.
 | FLIP | FLIPIT | flipit-m5ig.onrender.com |
 | AUTO | iRun | hsw365.github.io/iRUN/ |
 | BUILD | Build Series | hsw365.co |
+| RUN | iRun Operator | hsw365.github.io/iRUN/start.html |
 
 To change these, edit `config/products.json`. The next run syncs them to the bot.
 
