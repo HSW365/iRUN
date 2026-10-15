@@ -11,7 +11,7 @@
   "plans": {
     "starter": {
       "name": "Starter",
-      "cents": 2000,
+      "cents": 1000,
       "credits": 15,
       "hours": [
         15
@@ -29,7 +29,7 @@
     },
     "pro": {
       "name": "Pro",
-      "cents": 5000,
+      "cents": 3500,
       "credits": 30,
       "hours": [
         12,
@@ -49,7 +49,7 @@
     },
     "elite": {
       "name": "Elite",
-      "cents": 20000,
+      "cents": 9900,
       "credits": 60,
       "hours": [
         12,
