@@ -37,6 +37,11 @@
 .field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%);background-position:calc(100% - 20px) 23px,calc(100% - 15px) 23px;background-size:5px 5px;background-repeat:no-repeat}
 .plan.picked{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
 .badge{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--acc-ink);background:var(--acc);padding:3px 8px;border-radius:2px;margin-left:10px;vertical-align:middle}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line2);border-radius:3px;padding:12px 14px;cursor:pointer;background:var(--bg)}
+.pay label:has(input:checked){border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pay input{width:18px;height:18px;margin-top:3px;accent-color:var(--acc);flex:none}
+.pay b{display:block;color:#fff;font-size:15.5px}.pay small{display:block;color:var(--mut);font-size:13px}
 .closed{border:1px dashed var(--line2);border-radius:4px;padding:14px 16px;color:var(--text2);font-size:15px;margin-top:18px}
 @media (max-width:980px){.cost{grid-template-columns:1fr}.cost>div+div{border-left:0;border-top:1px solid var(--line)}.plans{grid-template-columns:1fr}.loop li{grid-template-columns:96px minmax(0,1fr)}}
 @media (max-width:640px){.row2{grid-template-columns:1fr}.feed div{grid-template-columns:52px minmax(0,1fr)}.feed em{display:none}}
@@ -104,10 +109,14 @@
   <div class="field"><label for="f-name">Business name</label><input id="f-name" maxlength="80" autocomplete="organization" required></div>
   <div class="row2"><div class="field"><label for="f-email">Your email</label><input id="f-email" type="email" inputmode="email" autocomplete="email" maxlength="254" required></div><div class="field"><label for="f-url">Website</label><input id="f-url" type="url" placeholder="https://" autocapitalize="none" maxlength="300"></div></div>
   <div class="row2"><div class="field"><label for="f-ig">Instagram <small>(optional)</small></label><input id="f-ig" placeholder="@yourbusiness" autocapitalize="none" maxlength="40"></div><div class="field"><label for="f-tt">TikTok <small>(optional)</small></label><input id="f-tt" placeholder="@yourbusiness" autocapitalize="none" maxlength="40"></div></div>
+  <div class="field" id="pay-row" hidden><span id="pay-label">Pay with</span><div class="pay" role="radiogroup" aria-labelledby="pay-label">
+    <label id="pay-card-l"><input type="radio" name="pay" value="card" checked><span><b>Card</b><small>Stripe, renews monthly</small></span></label>
+    <label id="pay-zelle-l"><input type="radio" name="pay" value="zelle"><span><b>Zelle</b><small>Send it from your bank app</small></span></label>
+  </div></div>
   <div class="field"><label for="f-notes">Anything it should know <small>(needed if you have no website)</small></label><textarea id="f-notes" maxlength="2000" placeholder="What you sell, who buys it, where you work, what to never say."></textarea></div>
   <p class="msg" id="msg" role="alert"></p>
   <button class="btn btn-acc" type="submit" id="go" style="width:100%;margin-top:8px">Continue to payment</button>
-  <p class="panel-foot">Secure checkout by Stripe. You can cancel any time from your live page.</p>
+  <p class="panel-foot" id="pay-foot">Secure checkout by Stripe. You can cancel any time from your live page.</p>
 </form><div class="closed" id="closed" hidden>Sign-up opens soon. Email <a class="tlink" href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a> to get a spot first.</div></div></div></div></section>
 </main>
 <footer><div class="wrap"><div class="foot">
@@ -157,14 +166,28 @@
       if (d.plans && Object.keys(d.plans).length) { PLANS = d.plans; draw(); }
       open = !!d.open;
       $("f").hidden = !open; $("closed").hidden = open;
+      var card = !!d.card, z = !!d.zelle;
+      $("pay-row").hidden = !(card && z);
+      $("pay-card-l").hidden = !card; $("pay-zelle-l").hidden = !z;
+      if (!card && z) { form.querySelector("input[value=zelle]").checked = true; }
+      payFoot();
     })
     .catch(function () { $("f").hidden = true; $("closed").hidden = false; });
 
+  var form = $("f");
+  function method() { var r = form.querySelector("input[name=pay]:checked"); return r ? r.value : "card"; }
+  function payFoot() {
+    var z = method() === "zelle";
+    $("pay-foot").textContent = z ? "Next you get the Zelle details and a memo code. Your autopilot starts as soon as the payment is confirmed."
+                                  : "Secure checkout by Stripe. You can cancel any time from your live page.";
+    $("go").textContent = z ? "Continue to Zelle" : "Continue to payment";
+  }
+  form.addEventListener("change", function (e) { if (e.target.name === "pay") payFoot(); });
   $("f").addEventListener("submit", function (e) {
     e.preventDefault();
     var m = $("msg"); m.className = "msg"; m.textContent = "";
     var v = function (id) { return $(id).value.trim(); };
-    var body = { a: "checkout", plan: $("f-plan").value, name: v("f-name"), email: v("f-email"), url: v("f-url"), notes: v("f-notes"),
+    var body = { a: method() === "zelle" ? "zelle_signup" : "checkout", plan: $("f-plan").value, name: v("f-name"), email: v("f-email"), url: v("f-url"), notes: v("f-notes"),
       handles: { instagram: v("f-ig"), tiktok: v("f-tt") } };
     var fail = function (t, id) { m.className = "msg err"; m.textContent = t; if (id) $(id).focus(); };
     if (body.name.length < 2) return fail("Add your business name.", "f-name");
@@ -173,8 +196,12 @@
     var btn = $("go"); btn.disabled = true; btn.textContent = "Opening checkout";
     fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (d.url) location.href = d.url; else throw new Error(d.error || "Something went wrong."); })
-      .catch(function (x) { fail(x.message); btn.disabled = false; btn.textContent = "Continue to payment"; });
+      .then(function (d) {
+        if (d.url) location.href = d.url;
+        else if (d.c && d.k) location.href = "client.html?c=" + encodeURIComponent(d.c) + "&k=" + encodeURIComponent(d.k);
+        else throw new Error(d.error || "Something went wrong.");
+      })
+      .catch(function (x) { fail(x.message); btn.disabled = false; payFoot(); });
   });
 })();
 </script>

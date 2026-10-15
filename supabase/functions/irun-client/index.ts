@@ -3,10 +3,13 @@
 //   POST {a:"checkout", plan, name, email, url, handles, notes[, owner_key]}  -> Stripe Checkout URL (subscription)
 //   POST {a:"claim", c, s}                                  -> client key for a paid checkout session
 //   POST {a:"view", c, k}                                   -> the customer's live view of their company
-//   POST {a:"credits", c, k, qty}                           -> Stripe Checkout URL for a credit pack ($1 per credit)
+//   POST {a:"credits", c, k, qty}                           -> Stripe Checkout URL for a credit pack
 //   POST {a:"portal", c, k}                                 -> Stripe billing portal URL
 //   POST {a:"prospects", c, k, rows:[{email,name,business,note}]}  -> add to the outreach list
 //   POST {a:"settings", c, k, outreach_enabled?, approve_site?, rebuild_site?}
+//   POST {a:"zelle_signup", plan, name, email, url, handles, notes}  -> company + Zelle payment instructions
+//   POST {a:"zelle_pay", c, k, kind:"plan"|"credits", qty?}  -> Zelle payment instructions (renewal or credit pack)
+//   POST {a:"zelle_sent", c, k, id, note?}                 -> customer says the Zelle payment is sent; owner confirms it
 //   POST with stripe-signature                              -> Stripe webhook
 // JWT verification is off: Stripe calls this directly; customer actions check the company's client key.
 // Plans live in irun_settings.plans (synced from config/plans.json). Sign-up opens when irun_settings.billing_live = on.
@@ -66,6 +69,45 @@ async function verifySig(body: string, header: string, secret: string) {
 const days = (n: number) => new Date(Date.now() + n * 86400_000).toISOString();
 const slug = (s: string) => (s.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 32) || "company");
 const emailOk = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+
+async function zelle() {
+  const [phone, email, name] = await Promise.all([setting("zelle_phone"), setting("zelle_email"), setting("zelle_name")]);
+  return phone || email ? { phone, email, name } : null;
+}
+// A Zelle payment the owner confirms in the dashboard. The memo code ties the transfer to the company.
+async function zellePayment(c: { id: string }, kind: "plan" | "credits", planId: string | null, qty: number | null, cents: number) {
+  const ref = `IRUN-${c.id.slice(0, 10).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+  const { data } = await db.from("irun_payments").insert({ company_id: c.id, kind, plan: planId, qty, amount_cents: cents, ref })
+    .select("id,kind,plan,qty,amount_cents,ref,status,created_at").single();
+  await log(c.id, "billing", `Zelle payment requested: $${(cents / 100).toFixed(2)} (${kind === "plan" ? planId + " plan" : qty + " credits"}), memo ${ref}`);
+  return data;
+}
+async function newCompany(b: any, pl: Plans, payMethod: string) {
+  const plan = pl.plans[b.plan];
+  const name = String(b.name ?? "").trim().slice(0, 80);
+  const email = String(b.email ?? "").trim().toLowerCase();
+  const url = String(b.url ?? "").trim().slice(0, 300);
+  if (!plan) throw new Error("Pick a plan.");
+  if (name.length < 2) throw new Error("Enter your business name.");
+  if (!emailOk(email)) throw new Error("Enter a valid email.");
+  if (!url && !String(b.notes ?? "").trim()) throw new Error("Add your website, or tell us about your business.");
+  const handles: Record<string, string> = {};
+  for (const k of ["instagram", "tiktok", "youtube"]) {
+    const v = String(b.handles?.[k] ?? "").trim().replace(/^@/, "").replace(/[^A-Za-z0-9._]/g, "").slice(0, 40);
+    if (v) handles[k] = v;
+  }
+  let id = slug(name);
+  for (let n = 2; ; n++) {
+    const { data } = await db.from("irun_companies").select("id").eq("id", id).maybeSingle();
+    if (!data && !["hsw365media", "hoodstar365", "hsw365co", "newark"].includes(id)) break;
+    id = slug(name) + n;
+  }
+  const { data, error } = await db.from("irun_companies").insert({ id, name, email, source_url: url || null, handles,
+    notes: String(b.notes ?? "").slice(0, 2000) || null, plan: b.plan, status: "awaiting_payment", pay_method: payMethod })
+    .select("id,client_key").single();
+  if (error) throw new Error(error.message);
+  return { ...data, plan, planId: b.plan as string };
+}
 
 async function company(c: string, k: string) {
   if (!c || !k) return null;
@@ -144,12 +186,14 @@ async function webhook(req: Request) {
 }
 
 async function view(c: any) {
-  const [acts, posts, ledger, pros] = await Promise.all([
+  const [acts, posts, ledger, pros, pays] = await Promise.all([
     db.from("irun_activity").select("agent,action,detail,created_at").eq("company_id", c.id).order("created_at", { ascending: false }).limit(120),
     db.from("irun_posts").select("platform,product_id,hook,caption,video_url,status,error,created_at,posted_at,format")
       .eq("account", c.id).order("created_at", { ascending: false }).limit(40),
     db.from("irun_credit_ledger").select("delta,reason,created_at").eq("company_id", c.id).order("created_at", { ascending: false }).limit(40),
     db.from("irun_prospects").select("status").eq("company_id", c.id),
+    db.from("irun_payments").select("id,kind,plan,qty,amount_cents,ref,status,created_at").eq("company_id", c.id)
+      .order("created_at", { ascending: false }).limit(10),
   ]);
   const counts: Record<string, number> = {};
   for (const p of pros.data ?? []) counts[p.status] = (counts[p.status] ?? 0) + 1;
@@ -167,6 +211,7 @@ async function view(c: any) {
     },
     activity: acts.data ?? [], posts: posts.data ?? [], ledger: ledger.data ?? [], prospects: counts,
     credit_price_cents: pl.credit_price_cents, pack: [pl.credit_pack_min, pl.credit_pack_max],
+    payments: pays.data ?? [], zelle: await zelle(), card: !!STRIPE, pay_method: c.pay_method,
   };
 }
 
@@ -179,35 +224,28 @@ Deno.serve(async (req) => {
     const pl = await plans();
 
     if (b.a === "plans") {
+      const z = await zelle();
       return json({ plans: pl.plans, credit_price_cents: pl.credit_price_cents, pack: [pl.credit_pack_min, pl.credit_pack_max],
-        open: (await setting("billing_live")) === "on" && !!STRIPE });
+        open: (await setting("billing_live")) === "on" && (!!STRIPE || !!z), card: !!STRIPE, zelle: z });
+    }
+
+    if (b.a === "zelle_signup") {
+      const z = await zelle();
+      if ((await setting("billing_live")) !== "on" || !z) return json({ error: "Sign-up opens soon." }, 403);
+      let nc;
+      try { nc = await newCompany(b, pl, "zelle"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      const pay = await zellePayment(nc, "plan", nc.planId, null, nc.plan.cents);
+      return json({ c: nc.id, k: nc.client_key, payment: pay, zelle: z });
     }
 
     if (b.a === "checkout") {
       const owner = b.owner_key && b.owner_key === (await setting("owner_key"));
       if ((await setting("billing_live")) !== "on" && !owner) return json({ error: "Sign-up opens soon." }, 403);
       if (!STRIPE) return json({ error: "Payments are not configured yet." }, 503);
-      const plan = pl.plans[b.plan];
-      const name = String(b.name ?? "").trim().slice(0, 80);
-      const email = String(b.email ?? "").trim().toLowerCase();
-      const url = String(b.url ?? "").trim().slice(0, 300);
-      if (!plan) return json({ error: "Pick a plan." }, 400);
-      if (name.length < 2) return json({ error: "Enter your business name." }, 400);
-      if (!emailOk(email)) return json({ error: "Enter a valid email." }, 400);
-      if (!url && !String(b.notes ?? "").trim()) return json({ error: "Add your website, or tell us about your business." }, 400);
-      const handles: Record<string, string> = {};
-      for (const k of ["instagram", "tiktok", "youtube"]) {
-        const v = String(b.handles?.[k] ?? "").trim().replace(/^@/, "").replace(/[^A-Za-z0-9._]/g, "").slice(0, 40);
-        if (v) handles[k] = v;
-      }
-      let id = slug(name);
-      for (let n = 2; ; n++) {
-        const { data } = await db.from("irun_companies").select("id").eq("id", id).maybeSingle();
-        if (!data && !["hsw365media", "hoodstar365", "hsw365co", "newark"].includes(id)) break;
-        id = slug(name) + n;
-      }
-      await db.from("irun_companies").insert({ id, name, email, source_url: url || null, handles,
-        notes: String(b.notes ?? "").slice(0, 2000) || null, plan: b.plan, status: "awaiting_payment" });
+      let nc;
+      try { nc = await newCompany(b, pl, "card"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      const { id, plan } = nc;
+      const email = String(b.email).trim().toLowerCase();
       await ensureWebhook();
       const s = await stripe("checkout/sessions", {
         mode: "subscription", customer_email: email, client_reference_id: id,
@@ -238,6 +276,30 @@ Deno.serve(async (req) => {
     if (!c) return json({ error: "This link is not valid." }, 401);
 
     if (b.a === "view") return json(await view(c));
+
+    if (b.a === "zelle_pay") {
+      const z = await zelle();
+      if (!z) return json({ error: "Zelle is not set up." }, 503);
+      if (b.kind === "credits") {
+        const qty = Math.floor(Number(b.qty));
+        if (!(qty >= pl.credit_pack_min && qty <= pl.credit_pack_max)) return json({ error: `Buy between ${pl.credit_pack_min} and ${pl.credit_pack_max} credits.` }, 400);
+        return json({ payment: await zellePayment(c, "credits", null, qty, qty * pl.credit_price_cents), zelle: z });
+      }
+      const plan = pl.plans[c.plan];
+      if (!plan) return json({ error: "No plan to renew." }, 400);
+      const { data: open } = await db.from("irun_payments").select("id,kind,plan,qty,amount_cents,ref,status,created_at")
+        .eq("company_id", c.id).eq("kind", "plan").in("status", ["pending", "sent"]).limit(1);
+      if (open?.length) return json({ payment: open[0], zelle: z });
+      return json({ payment: await zellePayment(c, "plan", c.plan, null, plan.cents), zelle: z });
+    }
+
+    if (b.a === "zelle_sent") {
+      const { data: p } = await db.from("irun_payments").select("id,status,ref,amount_cents").eq("id", Number(b.id)).eq("company_id", c.id).maybeSingle();
+      if (!p || p.status !== "pending") return json({ error: "Payment not found." }, 404);
+      await db.from("irun_payments").update({ status: "sent", note: String(b.note ?? "").slice(0, 300) || null }).eq("id", p.id);
+      await log(c.id, "billing", `customer says Zelle payment ${p.ref} ($${(p.amount_cents / 100).toFixed(2)}) is sent: waiting for confirmation`);
+      return json({ ok: true });
+    }
 
     if (b.a === "credits") {
       if (!STRIPE) return json({ error: "Payments are not configured yet." }, 503);

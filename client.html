@@ -55,6 +55,13 @@ body{font-size:16px}
 .ledger-mini b{font-family:var(--mono);color:#fff;font-weight:700}
 .toggle{display:flex;align-items:center;gap:10px;font-weight:600;color:#fff;cursor:pointer}
 .toggle input{width:20px;height:20px;accent-color:var(--acc)}
+.zcard{border-color:var(--acc)}
+.zdl{display:grid;grid-template-columns:auto 1fr;margin-top:12px;border-top:1px solid var(--line2)}
+.zdl dt,.zdl dd{padding:10px 0;border-bottom:1px solid var(--line)}
+.zdl dt{font-family:var(--mono);font-size:12px;color:var(--mut);padding-right:16px;padding-top:12px}
+.zdl dd{color:#fff;font-weight:600;display:flex;justify-content:space-between;gap:10px;align-items:center;overflow-wrap:anywhere}
+.zdl dd b{font-family:var(--disp);font-size:30px;font-weight:900;line-height:1}
+.copy{background:none;border:1px solid var(--line2);color:var(--text2);border-radius:3px;font-size:12px;padding:4px 9px;cursor:pointer;flex:none}
 .gate{max-width:520px;margin:14vh auto;padding:0 16px}
 .muted{color:var(--mut);font-size:14px;margin-top:8px}
 @media (max-width:980px){.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.kpis>div:nth-child(3){border-left:0}.kpis>div:nth-child(n+3){border-top:1px solid var(--line)}}
@@ -80,6 +87,7 @@ body{font-size:16px}
       <div class="card"><h2>Videos</h2><div class="vids" id="vids"></div></div>
     </div>
     <div>
+      <div class="card zcard" id="pay-card" hidden><h2>Payment <small>ZELLE</small></h2><div id="pay"></div></div>
       <div class="card" id="need-card" hidden><h2>Needs you</h2><ul class="need" id="need"></ul></div>
       <div class="card rep" id="rep-card" hidden><h2>Last night's review <small id="rep-when"></small></h2><div id="rep"></div></div>
       <div class="card"><h2>Website</h2><div id="site"></div></div>
@@ -141,7 +149,7 @@ body{font-size:16px}
     clearTimeout(timer); timer = setTimeout(load, 20000);
   }
 
-  var STATES = { awaiting_payment: "Waiting for payment", pending: "Onboarding: reading your business", active: "Running on autopilot", paused: "Paused", error: "Needs attention" };
+  var STATES = { awaiting_payment: "Waiting for your payment", pending: "Onboarding: reading your business", active: "Running on autopilot", paused: "Paused", error: "Needs attention" };
 
   function render(d) {
     var c = d.company;
@@ -211,16 +219,48 @@ body{font-size:16px}
         .catch(function (e) { m.className = "msg err"; m.textContent = e.message; });
     };
 
+    renderPay(d);
     $("ledger").innerHTML = d.ledger.slice(0, 12).map(function (l) {
       return "<div><span>" + esc(l.reason) + " &middot; " + esc(when(l.created_at)) + "</span><b>" + (l.delta > 0 ? "+" : "") + esc(l.delta) + "</b></div>";
     }).join("");
   }
 
+  function zbox(p, z) {
+    var amt = "$" + (p.amount_cents / 100).toFixed(2);
+    var what = p.kind === "plan" ? "your " + esc(p.plan) + " plan for one month" : esc(p.qty) + " credits";
+    var row = function (k, v, copy) { return "<dt>" + k + "</dt><dd><span>" + v + "</span>" + (copy ? '<button class="copy" data-copy="' + esc(copy) + '">Copy</button>' : "") + "</dd>"; };
+    return '<p class="muted">Send ' + amt + ' by Zelle for ' + what + '. Put the memo code in the Zelle note so it is matched to you.</p><dl class="zdl">' +
+      row("Amount", "<b>" + amt + "</b>", amt.slice(1)) +
+      (z.email ? row("Zelle email", esc(z.email), z.email) : "") + (z.phone ? row("Zelle phone", esc(z.phone), z.phone.replace(/\D/g, "")) : "") +
+      (z.name ? row("Name", esc(z.name)) : "") + row("Memo", esc(p.ref), p.ref) + "</dl>" +
+      (p.status === "pending" ? '<div class="row"><button class="btn btn-acc btn-sm" data-sent="' + p.id + '">I sent it</button></div>'
+        : '<p class="msg ok">Marked as sent. It is confirmed by hand, usually within a few hours, and this page updates on its own.</p>');
+  }
+  function renderPay(d) {
+    var c = d.company, z = d.zelle, open = (d.payments || []).filter(function (p) { return p.status === "pending" || p.status === "sent"; });
+    var html = "";
+    if (z && open.length) html = open.map(function (p) { return zbox(p, z); }).join('<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">');
+    var soon = c.paid_until && new Date(c.paid_until).getTime() - Date.now() < 7 * 864e5;
+    if (z && d.pay_method === "zelle" && c.plan !== "comp" && !open.some(function (p) { return p.kind === "plan"; }) && (soon || c.status === "paused"))
+      html += '<p class="muted">' + (c.status === "paused" ? "Your autopilot is paused." : "Your month ends " + esc(when(c.paid_until)) + ".") + '</p><div class="row"><button class="btn btn-acc btn-sm" id="renew">Renew by Zelle</button></div>';
+    else if (d.pay_method === "zelle" && c.paid_until && !open.length) html += '<p class="muted">Paid through ' + esc(when(c.paid_until)) + ".</p>";
+    $("pay-card").hidden = !html; $("pay").innerHTML = html;
+    $("pay").querySelectorAll("[data-copy]").forEach(function (b) { b.onclick = function () {
+      var t = b.getAttribute("data-copy"); if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500); });
+    }; });
+    $("pay").querySelectorAll("[data-sent]").forEach(function (b) { b.onclick = function () { b.disabled = true; call({ a: "zelle_sent", id: +b.getAttribute("data-sent") }).then(load); }; });
+    if ($("renew")) $("renew").onclick = function () { this.disabled = true; call({ a: "zelle_pay", kind: "plan" }).then(load); };
+    window.CREDIT_CENTS = d.credit_price_cents || 50; price();
+    buyZelle = !d.card || d.pay_method === "zelle";
+  }
+  var buyZelle = false;
+
   function price() { var n = Math.max(5, Math.min(1000, Math.floor(+$("qty").value || 0))); $("buy").textContent = "Buy " + n + " credits for $" + (n * (window.CREDIT_CENTS || 50) / 100).toFixed(2); return n; }
   $("qty").addEventListener("input", price);
   $("buy").addEventListener("click", function () {
     var b = this, m = $("buy-msg"); b.disabled = true;
-    call({ a: "credits", qty: price() }).then(function (d) { location.href = d.url; })
+    (buyZelle ? call({ a: "zelle_pay", kind: "credits", qty: price() }).then(function () { b.disabled = false; load(); window.scrollTo({ top: 0, behavior: "smooth" }); })
+      : call({ a: "credits", qty: price() }).then(function (d) { location.href = d.url; }))
       .catch(function (e) { m.className = "msg err"; m.textContent = e.message; b.disabled = false; });
   });
   $("portal").addEventListener("click", function () {

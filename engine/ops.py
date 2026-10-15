@@ -52,6 +52,15 @@ def add(name, url=None, handles=None, notes=None, email=None, plan="comp"):
     return cid
 
 
+def zelle_expiry():
+    """Zelle customers pay month by month. 3 days after the paid month ends with no renewal, pause the autopilot."""
+    cutoff = (dt.datetime.utcnow() - dt.timedelta(days=3)).isoformat() + "Z"
+    for c in companies.all_companies("active"):
+        if c.get("pay_method") == "zelle" and c.get("plan") != "comp" and c.get("paid_until") and c["paid_until"] < cutoff:
+            companies.save(c["id"], status="paused", credits=0)
+            companies.log(c["id"], "billing", "month ended without a Zelle renewal: autopilot paused. Renew from your page to restart.")
+
+
 def onboard_pending(only=None):
     import onboard
     import website
@@ -138,6 +147,8 @@ def main():
 
     hour = dt.datetime.utcnow().hour
     t = a.task
+    if t == "auto":
+        zelle_expiry()
     if t in ("auto", "onboard", "all"):
         onboard_pending(a.company)
     if t in ("auto", "site", "all"):

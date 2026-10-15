@@ -2,7 +2,7 @@
 // - GET  ?hub.mode=subscribe&hub.verify_token=..&hub.challenge=..  -> Meta webhook verification
 // - POST (Meta webhook): comment "KEYWORD" -> private-reply DM with the link; DM "KEYWORD" -> reply with link. Every lead logged.
 // - GET  ?view=data&key=OWNER_KEY -> JSON for the owner dashboard (dashboard.html)
-// - POST {owner:KEY, a:"add_company"|"company"|"prospects"|"credits", ...} -> Operator controls (dashboard.html)
+// - POST {owner:KEY, a:"add_company"|"company"|"prospects"|"credits"|"confirm_payment"|"reject_payment", ...} -> Operator controls (dashboard.html)
 // - GET  ?view=unsub&c=..&e=..&t=..  -> one-click unsubscribe from Operator outreach email (also POST, RFC 8058)
 // - Optional AI replies: with secret ANTHROPIC_API_KEY set and irun_settings.ai_dm_replies = on, a DM without a
 //   keyword gets a short, factual answer built only from the product list, and is still logged for a human.
@@ -150,10 +150,11 @@ async function ownerData(key: string | null) {
       .order("created_at", { ascending: false }),
     sb.from("irun_activity").select("company_id,agent,action,detail,created_at").order("created_at", { ascending: false }).limit(200),
   ]);
-  const settings = await sb.from("irun_settings").select("key,value").in("key", ["billing_live", "ai_dm_replies"]);
+  const settings = await sb.from("irun_settings").select("key,value").in("key", ["billing_live", "ai_dm_replies", "zelle_phone", "zelle_email"]);
+  const pays = await sb.from("irun_payments").select("*").order("created_at", { ascending: false }).limit(100);
   return json({ posts: posts.data ?? [], leads: leads.data ?? [], products: prods.data ?? [], connections: tokens.data ?? [],
     companies: (cos.data ?? []).map((c: any) => ({ ...c, offers: (c.profile?.products ?? []).map((p: any) => p.name), profile: undefined })),
-    activity: acts.data ?? [], settings: Object.fromEntries((settings.data ?? []).map((r: any) => [r.key, r.value])) });
+    activity: acts.data ?? [], payments: pays.data ?? [], settings: Object.fromEntries((settings.data ?? []).map((r: any) => [r.key, r.value])) });
 }
 
 const slug = (s: string) => (s.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 32) || "company");
@@ -184,6 +185,34 @@ async function ownerAction(b: any) {
     if (error) return json({ error: error.message }, 500);
     await log(id, `company added: ${name}. Onboarding starts within the hour.`);
     return json({ id });
+  }
+  if (b.a === "confirm_payment" || b.a === "reject_payment") {
+    const { data: p } = await sb.from("irun_payments").select("*").eq("id", Number(b.pid)).maybeSingle();
+    if (!p || !["pending", "sent"].includes(p.status)) return json({ error: "payment not open" }, 400);
+    if (b.a === "reject_payment") {
+      await sb.from("irun_payments").update({ status: "rejected" }).eq("id", p.id);
+      await log(p.company_id, `Zelle payment ${p.ref} marked not received`);
+      return json({ ok: true });
+    }
+    const { data: co } = await sb.from("irun_companies").select("*").eq("id", p.company_id).maybeSingle();
+    if (!co) return json({ error: "no such company" }, 404);
+    const plans = JSON.parse((await setting("plans")) ?? "{}").plans ?? {};
+    if (p.kind === "plan") {
+      const pl = plans[p.plan];
+      if (!pl) return json({ error: "unknown plan" }, 400);
+      const base = co.paid_until && new Date(co.paid_until).getTime() > Date.now() ? new Date(co.paid_until).getTime() : Date.now();
+      await sb.from("irun_companies").update({ plan: p.plan, credits: pl.credits, paid_until: new Date(base + 31 * 86400_000).toISOString(),
+        status: ["awaiting_payment", "paused"].includes(co.status) ? (co.profile ? "active" : "pending") : co.status,
+        updated_at: new Date().toISOString() }).eq("id", co.id);
+      await sb.from("irun_credit_ledger").insert({ company_id: co.id, delta: pl.credits, reason: `${pl.name} plan via Zelle`, ref: `zelle:${p.id}` });
+      await log(co.id, `Zelle payment ${p.ref} confirmed: ${pl.name} plan active, ${pl.credits} credits loaded`);
+    } else {
+      await sb.from("irun_companies").update({ bonus_credits: co.bonus_credits + p.qty, updated_at: new Date().toISOString() }).eq("id", co.id);
+      await sb.from("irun_credit_ledger").insert({ company_id: co.id, delta: p.qty, reason: `bought ${p.qty} credits via Zelle`, ref: `zelle:${p.id}` });
+      await log(co.id, `Zelle payment ${p.ref} confirmed: ${p.qty} credits added`);
+    }
+    await sb.from("irun_payments").update({ status: "confirmed", confirmed_at: new Date().toISOString() }).eq("id", p.id);
+    return json({ ok: true });
   }
   const { data: c } = await sb.from("irun_companies").select("*").eq("id", String(b.id ?? "")).maybeSingle();
   if (!c) return json({ error: "no such company" }, 404);

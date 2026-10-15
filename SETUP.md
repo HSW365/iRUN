@@ -114,5 +114,5 @@ Give it a website and it runs the business's marketing: **onboard** (reads the s
 **Switch it on**
 1. Repo secrets: `ANTHROPIC_API_KEY`, `SUPABASE_SERVICE_KEY` (already used), plus `SMTP_USER` / `SMTP_PASS` (a Gmail address and an app password) for outreach and nightly report emails.
 2. Repo variable `OUTREACH_ADDRESS`: the postal address printed in every outreach email (required by CAN-SPAM; nothing sends without it).
-3. Paid sign-up: Supabase secret `STRIPE_SECRET_KEY` (shared with HSW365 Stream), then set `irun_settings.billing_live` = `on`. Until then start.html shows "opening soon".
+3. Payments: Zelle (856-796-8081 / elvintorressr@gmail.com, in `irun_settings`) works now; customers get a memo code and you confirm in dashboard > Operator > Zelle payments. Card: Supabase secret `STRIPE_SECRET_KEY` (shared with HSW365 Stream), then set `irun_settings.billing_live` = `on`. Until then start.html shows "opening soon".
 4. Optional AI DM replies: Supabase secret `ANTHROPIC_API_KEY` and `irun_settings.ai_dm_replies` = `on`.

@@ -118,6 +118,10 @@ function renderOps(d){
   const billing = d.settings?.billing_live==="on";
   document.getElementById("ops").innerHTML = `<h2>Operator</h2>
   <p class="mono">Sign-up page: <a href="${SITE}start.html" target="_blank" style="color:var(--cyan)">start.html</a> &nbsp;|&nbsp; paid sign-up is ${billing?'<span class="pill ok">OPEN</span>':'<span class="pill draft">CLOSED</span> (set irun_settings.billing_live = on to open)'}</p>
+  ${(()=>{const open=(d.payments||[]).filter(p=>p.status==="pending"||p.status==="sent");
+    return `<div class="co"><h3>Zelle payments <span class="mono">${esc(d.settings?.zelle_email||"")} ${esc(d.settings?.zelle_phone||"")}</span></h3>
+    <p>Check your bank for the memo code, then confirm. Confirming switches the plan on or adds the credits.</p>
+    ${open.length?`<div class="tw"><table><tr><th>When</th><th>Company</th><th>For</th><th>Amount</th><th>Memo</th><th>Status</th><th></th></tr>${open.map(p=>`<tr><td>${when(p.created_at)}</td><td>${esc((cos.find(c=>c.id===p.company_id)||{}).name||p.company_id)}</td><td>${p.kind==="plan"?esc(p.plan)+" plan":esc(p.qty)+" credits"}</td><td><b>$${(p.amount_cents/100).toFixed(2)}</b></td><td class="mono">${esc(p.ref)}</td><td><span class="pill ${p.status==="sent"?"ok":"draft"}">${p.status==="sent"?"customer says sent":"waiting"}</span></td><td><button class="sm" data-pay="confirm" data-pid="${p.id}">Received</button> <button class="sm" data-pay="reject" data-pid="${p.id}">Not received</button></td></tr>`).join("")}</table></div>`:"<p>No open Zelle payments.</p>"}</div>`})()}
   <div class="co"><h3>Add a company</h3><p>Runs free on the comp plan. Onboarding starts within the hour.</p>
     <div class="form2"><input id="nc-name" placeholder="Business name"><input id="nc-url" placeholder="Website"><input id="nc-ig" placeholder="Instagram handle"><input id="nc-tt" placeholder="TikTok handle"><input id="nc-email" placeholder="Owner email (gets nightly reports)"></div>
     <textarea id="nc-notes" placeholder="Notes: what they sell, who buys, what to never say"></textarea>
@@ -141,6 +145,10 @@ function renderOps(d){
     </div>
     <textarea data-a="rows" placeholder="Prospects, one per line: email, name, business, note"></textarea><button class="sm" data-a="prospects">Add prospects</button>
   </div>`}).join("")||"<p>No companies yet.</p>"}`;
+  document.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>{
+    if(b.dataset.pay==="confirm" ? confirm("Confirm you received this Zelle payment?") : confirm("Mark as not received?"))
+      act({a:b.dataset.pay==="confirm"?"confirm_payment":"reject_payment",pid:Number(b.dataset.pid)});
+  });
   document.getElementById("nc-go").onclick=()=>{const v=id=>document.getElementById(id).value.trim();
     act({a:"add_company",name:v("nc-name"),url:v("nc-url"),email:v("nc-email"),notes:v("nc-notes"),handles:{instagram:v("nc-ig"),tiktok:v("nc-tt")}});};
   document.querySelectorAll("#ops .co[data-id]").forEach(el=>{
