@@ -7,7 +7,7 @@
   "plans": {
     "starter": {
       "name": "Starter",
-      "cents": 4900,
+      "cents": 2000,
       "credits": 60,
       "hours": [15],
       "faceless": false,
@@ -17,7 +17,7 @@
     },
     "pro": {
       "name": "Pro",
-      "cents": 9900,
+      "cents": 5000,
       "credits": 250,
       "hours": [12, 15, 18, 22],
       "faceless": true,
@@ -27,7 +27,7 @@
     },
     "elite": {
       "name": "Elite",
-      "cents": 19900,
+      "cents": 20000,
       "credits": 500,
       "hours": [12, 15, 18, 22],
       "faceless": true,
