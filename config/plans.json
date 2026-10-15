@@ -1,6 +1,6 @@
 {
   "_note": "iRun Operator plans. One subscription = one company run on autopilot. Credits pay for the work: 1 credit = 1 video, or 10 outreach emails, or 1 website build. Plan credits refill every billing month; purchased credits never expire. Extra credits cost credit_price_cents each. No revenue share, ever. Synced to irun_settings.plans on every Operator run; the irun-client function reads it from there.",
-  "credit_price_cents": 100,
+  "credit_price_cents": 50,
   "credit_pack_min": 5,
   "credit_pack_max": 1000,
   "costs": {
@@ -12,7 +12,7 @@
     "starter": {
       "name": "Starter",
       "cents": 2000,
-      "credits": 10,
+      "credits": 15,
       "hours": [
         15
       ],
@@ -24,13 +24,13 @@
         "2 videos a day on TikTok and Instagram",
         "Nightly AI CEO review and plan",
         "Live activity feed",
-        "10 credits a month"
+        "15 credits a month"
       ]
     },
     "pro": {
       "name": "Pro",
       "cents": 5000,
-      "credits": 35,
+      "credits": 30,
       "hours": [
         12,
         15,
@@ -44,13 +44,13 @@
         "Everything in Starter",
         "6 videos a day plus a daily faceless story video",
         "Cold email outreach to your prospect list, 20 a day",
-        "35 credits a month"
+        "30 credits a month"
       ]
     },
     "elite": {
       "name": "Elite",
       "cents": 20000,
-      "credits": 99,
+      "credits": 60,
       "hours": [
         12,
         15,
@@ -64,7 +64,7 @@
         "Everything in Pro",
         "Outreach up to 50 emails a day",
         "YouTube Shorts on the faceless videos",
-        "99 credits a month"
+        "60 credits a month"
       ]
     }
   }

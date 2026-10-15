@@ -85,8 +85,8 @@ body{font-size:16px}
       <div class="card"><h2>Website</h2><div id="site"></div></div>
       <div class="card"><h2>Outreach</h2><div id="out"></div></div>
       <div class="card"><h2>Credits</h2>
-        <p class="muted">$1 a credit. 1 credit = 1 video, 10 emails or 1 website build. Bought credits never expire.</p>
-        <div class="row"><div class="field" style="margin:0;flex:0 0 120px"><input id="qty" type="number" min="5" max="1000" step="1" value="25" aria-label="Credits to buy"></div><button class="btn btn-acc btn-sm" id="buy">Buy 25 credits for $25</button></div>
+        <p class="muted">50 cents a credit. 1 credit = 1 video, 10 emails or 1 website build. Bought credits never expire.</p>
+        <div class="row"><div class="field" style="margin:0;flex:0 0 120px"><input id="qty" type="number" min="5" max="1000" step="1" value="25" aria-label="Credits to buy"></div><button class="btn btn-acc btn-sm" id="buy">Buy 25 credits for $12.50</button></div>
         <p class="msg" id="buy-msg"></p>
         <div class="ledger-mini" id="ledger"></div>
       </div>
@@ -216,7 +216,7 @@ body{font-size:16px}
     }).join("");
   }
 
-  function price() { var n = Math.max(5, Math.min(1000, Math.floor(+$("qty").value || 0))); $("buy").textContent = "Buy " + n + " credits for $" + n; return n; }
+  function price() { var n = Math.max(5, Math.min(1000, Math.floor(+$("qty").value || 0))); $("buy").textContent = "Buy " + n + " credits for $" + (n * (window.CREDIT_CENTS || 50) / 100).toFixed(2); return n; }
   $("qty").addEventListener("input", price);
   $("buy").addEventListener("click", function () {
     var b = this, m = $("buy-msg"); b.disabled = true;

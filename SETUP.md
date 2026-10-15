@@ -109,7 +109,7 @@ Give it a website and it runs the business's marketing: **onboard** (reads the s
 - Data: `irun_companies`, `irun_memory`, `irun_activity`, `irun_prospects`, `irun_suppress`, `irun_credit_ledger`.
 - Owner: `dashboard.html` > **Operator** (add companies free on the comp plan, approve sites, prospects, credits) and **Live**.
 - Customers: `start.html` (3 plans + $1 credits, Stripe) and `client.html` (their live page). Function: `irun-client`.
-- Plans and credit costs: `config/plans.json`. 1 credit = 1 video, 10 emails or 1 website. No revenue share.
+- Plans and credit costs: `config/plans.json`. 1 credit (50 cents) = 1 video, 10 emails or 1 website. No revenue share.
 
 **Switch it on**
 1. Repo secrets: `ANTHROPIC_API_KEY`, `SUPABASE_SERVICE_KEY` (already used), plus `SMTP_USER` / `SMTP_PASS` (a Gmail address and an app password) for outreach and nightly report emails.
