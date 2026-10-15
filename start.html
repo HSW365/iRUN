@@ -133,9 +133,9 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
   // Shown until the live plans load (same numbers as config/plans.json)
-  var PLANS = {starter:{name:"Starter",cents:1000,features:["AI-built website for your business","2 videos a day on TikTok and Instagram","Nightly AI CEO review and plan","Live activity feed","15 credits a month"]},
+  var PLANS = {starter:{name:"Starter",cents:1500,features:["AI-built website for your business","2 videos a day on TikTok and Instagram","Nightly AI CEO review and plan","Live activity feed","15 credits a month"]},
     pro:{name:"Pro",cents:3500,features:["Everything in Starter","6 videos a day plus a daily faceless story video","Cold email outreach to your prospect list, 20 a day","30 credits a month"]},
-    elite:{name:"Elite",cents:9900,features:["Everything in Pro","Outreach up to 50 emails a day","YouTube Shorts on the faceless videos","60 credits a month"]}};
+    elite:{name:"Elite",cents:6000,features:["Everything in Pro","Outreach up to 50 emails a day","YouTube Shorts on the faceless videos","60 credits a month"]}};
   var FOR = {starter:"A site and a steady daily presence", pro:"Full marketing on autopilot", elite:"The most volume and outreach"};
   var open = false, picked = new URLSearchParams(location.search).get("plan") || "pro";
 
