@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0f">
+<title>iRun Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--panel:#111119;--panel2:#16161f;--panel3:#1c1c28;--line:#24243a;--line2:#30304a;--text:#f2f2f7;--muted:#8a8aa0;--dim:#5c5c74;--cyan:#22d3ee;--violet:#a855f7;--red:#ef4444;--yellow:#fbbf24;--green:#34d399}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(1200px 600px at 85% -10%,rgba(168,85,247,.10),transparent 60%),radial-gradient(900px 500px at -10% 10%,rgba(34,211,238,.07),transparent 60%),var(--bg);min-height:100vh}
+a{color:var(--cyan)}
+button{font-family:inherit}
+.mono{font:700 11px 'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1180px;margin:0 auto;padding:14px 16px 100px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 16px;flex-wrap:wrap}
+.logo{font:800 30px 'Barlow Condensed',sans-serif;letter-spacing:1px;text-decoration:none;color:var(--text)}.logo b{color:var(--cyan)}
+.prof{display:flex;align-items:center;gap:8px}
+.prof select{max-width:220px}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:18px;scrollbar-width:none}
+nav.tabs button,nav.tabs a{flex:0 0 auto;background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:9px 15px;border-radius:999px;font:600 14px Inter,sans-serif;cursor:pointer;text-decoration:none}
+nav.tabs button.on{color:var(--text);border-color:var(--violet);background:linear-gradient(180deg,rgba(168,85,247,.16),rgba(168,85,247,.04))}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+h1,h2,h3{margin:0}
+h2{font:800 26px 'Barlow Condensed',sans-serif;letter-spacing:.5px;margin:0 0 6px}
+h3{font:800 19px 'Barlow Condensed',sans-serif;letter-spacing:.5px}
+.lead{color:var(--muted);margin:0 0 12px;font-size:14px}
+label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px;font-weight:600}
+input,select,textarea{width:100%;background:#0c0c13;border:1px solid var(--line);color:var(--text);padding:11px 12px;border-radius:10px;font:15px Inter,sans-serif;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--violet)}
+textarea{min-height:84px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.row{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--violet);color:#fff;border:0;padding:11px 16px;border-radius:10px;font:700 14px Inter,sans-serif;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.cy{background:var(--cyan);color:#06222a}.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--text)}.btn.red{background:transparent;border:1px solid rgba(239,68,68,.5);color:var(--red)}
+.btn.sm{padding:7px 11px;font-size:13px;border-radius:8px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.status{margin-top:10px;font-size:13px;color:var(--muted);min-height:18px}.status.err{color:var(--red)}.status.ok{color:var(--green)}
+.note{font-size:13px;color:var(--muted)}.note b{color:var(--text)}
+[hidden]{display:none!important}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.hero h1{font:800 44px/1 'Barlow Condensed',sans-serif;letter-spacing:.5px;margin:6px 0 10px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.delegate{display:flex;gap:8px;margin-top:6px}.delegate textarea{min-height:52px;height:52px}
+.delegate .btn{align-self:stretch}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.kpi{background:var(--panel3);border:1px solid var(--line);border-radius:12px;padding:12px}
+.kpi .n{font:800 32px/1.1 'Barlow Condensed',sans-serif;color:var(--cyan)}
+.kpi:nth-child(2) .n{color:var(--violet)}.kpi:nth-child(3) .n{color:var(--yellow)}.kpi:nth-child(4) .n{color:var(--green)}
+
+/* team grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.emp{position:relative;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:transform .15s,border-color .15s;text-align:left;color:var(--text);font:inherit;width:100%}
+.emp:hover{transform:translateY(-2px);border-color:var(--hue)}
+.emp .hd{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.av{flex:0 0 auto;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font:800 22px 'Barlow Condensed',sans-serif;color:#0a0a0f;background:linear-gradient(135deg,var(--hue),color-mix(in srgb,var(--hue) 45%,#0a0a0f));box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 8px 24px -10px var(--hue)}
+.av.lg{width:56px;height:56px;font-size:26px;border-radius:16px}
+.emp .nm{font:800 22px/1 'Barlow Condensed',sans-serif;letter-spacing:.5px}
+.emp .rl{font-size:12px;color:var(--hue);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.emp p{margin:0;color:var(--muted);font-size:13.5px}
+.emp .cnt{position:absolute;top:14px;right:14px;font:700 10px 'Space Mono',monospace;color:var(--dim)}
+
+/* chat */
+.chat{display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px}.chat>*{min-width:0}
+@media(max-width:860px){.chat{grid-template-columns:minmax(0,1fr)}.side{display:none}.pane .ph{flex-wrap:wrap}#pane .ph .meta{flex:1 1 calc(100% - 70px)}#pane .ph select{flex:1}.m{max-width:96%}}
+@media(min-width:861px){#cSwitch{display:none}}
+.side{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px;align-self:start;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+.side button{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:0;color:var(--text);padding:8px;border-radius:10px;cursor:pointer;text-align:left}
+.side button.on,.side button:hover{background:var(--panel3)}
+.side .av{width:32px;height:32px;font-size:16px;border-radius:10px}
+.side small{display:block;color:var(--muted);font-size:11.5px}
+.pane{min-width:0;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-height:72vh}
+.pane .ph{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.pane .ph .meta{flex:1;min-width:0}
+.pane .ph .nm{font:800 24px/1 'Barlow Condensed',sans-serif}
+.pane .ph .rl{font-size:12px;color:var(--muted)}
+.msgs{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.m{max-width:88%;padding:12px 14px;border-radius:14px;font-size:14.5px;overflow-wrap:anywhere}
+.m.u{align-self:flex-end;background:linear-gradient(135deg,rgba(168,85,247,.22),rgba(168,85,247,.10));border:1px solid rgba(168,85,247,.35);white-space:pre-wrap}
+.m.a{align-self:flex-start;background:var(--panel3);border:1px solid var(--line)}
+.m.a .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.m.a .acts button{background:transparent;border:1px solid var(--line2);color:var(--muted);padding:5px 10px;border-radius:8px;font:600 12px Inter,sans-serif;cursor:pointer}
+.m.a .acts button:hover{color:var(--text);border-color:var(--hue,var(--violet))}
+.m .mem{margin-top:8px;font:700 10.5px 'Space Mono',monospace;letter-spacing:1px;color:var(--green);text-transform:uppercase}
+.md h1,.md h2,.md h3,.md h4{font:800 20px 'Barlow Condensed',sans-serif;margin:12px 0 6px;letter-spacing:.3px}.md h1{font-size:24px}
+.md p{margin:0 0 9px}.md p:last-child{margin-bottom:0}
+.md ul,.md ol{margin:0 0 9px;padding-left:20px}.md li{margin:3px 0}
+.md code{font:13px 'Space Mono',monospace;background:#0c0c13;padding:1px 5px;border-radius:5px}
+.md pre{background:#0c0c13;border:1px solid var(--line);padding:10px;border-radius:10px;overflow:auto}.md pre code{background:none;padding:0}
+.md blockquote{margin:0 0 9px;padding:4px 12px;border-left:3px solid var(--violet);color:#cfcfe0}
+.md hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+.md table{border-collapse:collapse;margin:0 0 9px;display:block;overflow:auto}.md th,.md td{border:1px solid var(--line);padding:6px 9px;font-size:13.5px;text-align:left}
+.md img.gen{display:block;width:100%;max-width:360px;border-radius:12px;border:1px solid var(--line);margin:8px 0;background:#0c0c13;min-height:120px}
+.typing{display:inline-flex;gap:4px}.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:b 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,100%{opacity:.25}50%{opacity:1}}
+.pups{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none}
+.pups button{flex:0 0 auto;background:var(--panel3);border:1px solid var(--line);color:var(--text);padding:7px 12px;border-radius:999px;font:600 12.5px Inter,sans-serif;cursor:pointer}
+.pups button:hover{border-color:var(--hue)}
+.comp{display:flex;gap:8px;padding:12px 16px 16px;align-items:flex-end}
+.comp textarea{min-height:48px;max-height:220px;height:48px}
+.empty{margin:auto;text-align:center;color:var(--muted);max-width:420px;padding:20px}
+.empty h3{color:var(--text);margin-bottom:6px}
+
+/* brain + library */
+.facts{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.fact{display:flex;gap:8px;align-items:flex-start;background:var(--panel3);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px}
+.fact span{flex:1}.fact small{color:var(--dim);font:700 10px 'Space Mono',monospace;white-space:nowrap;margin-top:3px}
+.x{background:transparent;border:0;color:var(--dim);cursor:pointer;font:700 15px Inter;padding:0 4px;line-height:1}.x:hover{color:var(--red)}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.item{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer}
+.item:hover{border-color:var(--line2)}
+.item .who{display:flex;align-items:center;gap:8px}.item .who .av{width:26px;height:26px;font-size:13px;border-radius:8px}
+.item .t{font-weight:700;font-size:14.5px}
+.item .s{color:var(--muted);font-size:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.item .d{font:700 10px 'Space Mono',monospace;color:var(--dim);letter-spacing:1px}
+.pin{color:var(--yellow)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filters input{flex:1;min-width:180px}.filters select{width:auto}
+.sync{display:inline-flex;align-items:center;gap:6px;font:700 10px 'Space Mono',monospace;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.sync i{width:7px;height:7px;border-radius:50%;background:var(--dim)}.sync.on i{background:var(--green);box-shadow:0 0 10px var(--green)}.sync.err i{background:var(--red)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(5,5,10,.78);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;z-index:50}
+.modal .box{width:min(760px,100%);max-height:88vh;overflow:auto;background:var(--panel);border:1px solid var(--line2);border-radius:18px;padding:20px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--panel3);border:1px solid var(--line2);padding:10px 16px;border-radius:12px;font-size:14px;z-index:60;box-shadow:0 20px 40px -20px #000}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="app.html">iRUN <b>TEAM</b></a>
+    <div class="prof">
+      <span class="sync" id="sync"><i></i><span>This device</span></span>
+      <select id="profSel" aria-label="Business"></select>
+      <button class="btn ghost sm" id="profNew">New business</button>
+    </div>
+  </header>
+  <nav class="tabs">
+    <button data-v="team" class="on">Team</button>
+    <button data-v="chat">Chat</button>
+    <button data-v="brain">Brain</button>
+    <button data-v="library">Library</button>
+    <a href="app.html">Studio</a>
+  </nav>
+
+  <!-- TEAM -->
+  <section id="v-team">
+    <div class="hero">
+      <div class="card">
+        <span class="mono">Your AI staff for <b id="heroBiz" style="color:var(--text)"></b></span>
+        <h1>Twelve employees. <em>One brain.</em> Zero days off.</h1>
+        <p class="lead">Tell the team what you need. iRun hands it to the right employee, who already knows your business from the Brain and saves every finished piece to your Library.</p>
+        <div class="delegate">
+          <textarea id="dTask" placeholder="e.g. Write 5 TikTok hooks for my new tee drop"></textarea>
+          <button class="btn" id="dGo">Delegate</button>
+        </div>
+        <div class="status" id="dStatus"></div>
+      </div>
+      <div class="card">
+        <span class="mono">This business</span>
+        <div class="kpis" style="margin-top:10px">
+          <div class="kpi"><div class="mono">Deliverables</div><div class="n" id="kLib">0</div></div>
+          <div class="kpi"><div class="mono">Brain facts</div><div class="n" id="kFacts">0</div></div>
+          <div class="kpi"><div class="mono">Documents</div><div class="n" id="kDocs">0</div></div>
+          <div class="kpi"><div class="mono">Messages</div><div class="n" id="kMsgs">0</div></div>
+        </div>
+        <p class="note" id="keyNote" style="margin:12px 0 0"></p>
+      </div>
+    </div>
+    <div class="grid" id="teamGrid"></div>
+  </section>
+
+  <!-- CHAT -->
+  <section id="v-chat" hidden>
+    <div class="chat">
+      <div class="side" id="side"></div>
+      <div class="pane" id="pane">
+        <div class="ph">
+          <div class="av lg" id="cAv"></div>
+          <div class="meta"><div class="nm" id="cName"></div><div class="rl" id="cRole"></div></div>
+          <select id="cSwitch" style="width:auto;max-width:150px" aria-label="Switch employee"></select>
+          <button class="btn ghost sm" id="cClear" title="Start a new conversation">New chat</button>
+        </div>
+        <div class="msgs" id="msgs"></div>
+        <div class="pups" id="pups"></div>
+        <div class="comp">
+          <textarea id="cIn" placeholder="Message"></textarea>
+          <button class="btn" id="cSend">Send</button>
+          <button class="btn red" id="cStop" hidden>Stop</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAIN -->
+  <section id="v-brain" hidden>
+    <div class="card">
+      <h2>Brain</h2>
+      <p class="lead">Everything your employees know about this business. Every employee reads it before every task, and they add new facts here on their own when you tell them something worth keeping.</p>
+      <div class="row">
+        <div><label>Business name</label><input id="bName"></div>
+        <div><label>Language for all work</label><input id="bLang" placeholder="English"></div>
+      </div>
+      <label>What you sell (products, services, prices, links)</label><textarea id="bSells"></textarea>
+      <div class="row">
+        <div><label>Who you sell to</label><textarea id="bAud"></textarea></div>
+        <div><label>Brand voice and tone</label><textarea id="bVoice"></textarea></div>
+      </div>
+      <div class="row">
+        <div><label>Goals right now</label><textarea id="bGoals"></textarea></div>
+        <div><label>Rules every employee follows</label><textarea id="bRules"></textarea></div>
+      </div>
+      <label>Website, socials, contact</label><textarea id="bLinks" style="min-height:60px"></textarea>
+      <label class="chk" style="display:flex;gap:8px;align-items:center;margin-top:12px" id="bCatWrap"><input type="checkbox" id="bCat" style="width:auto"> Include the live iRun product list (config/products.json)</label>
+      <div class="btns"><button class="btn" id="bSave">Save brain</button><button class="btn red" id="bDel">Delete this business</button></div>
+      <div class="status" id="bStatus"></div>
+    </div>
+    <div class="row" style="align-items:start">
+      <div class="card">
+        <h3>Facts</h3>
+        <p class="note" style="margin:4px 0 0">Saved by you or learned by your team in chat.</p>
+        <div class="delegate"><input id="fNew" placeholder="Add a fact, e.g. We ship in 2-4 business days"><button class="btn sm" id="fAdd">Add</button></div>
+        <div class="facts" id="facts"></div>
+      </div>
+      <div class="card">
+        <h3>Documents</h3>
+        <p class="note" style="margin:4px 0 0">Price sheets, FAQs, brand guides, scripts. Text, Markdown, CSV or JSON.</p>
+        <div class="btns"><label class="btn ghost sm" style="margin:0;color:var(--text)">Upload files<input type="file" id="docFile" multiple accept=".txt,.md,.csv,.json,.html,.tsv,text/*" hidden></label><button class="btn ghost sm" id="docPaste">Paste text</button></div>
+        <div class="facts" id="docs"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Memory across devices</h3>
+      <p class="note" id="syncNote">With your iRun owner key saved in Studio Settings, the whole Brain, every chat and the Library sync to your iRun cloud, so your phone and PC see the same team. Without it, everything stays in this browser.</p>
+      <div class="btns">
+        <button class="btn cy sm" id="syncNow">Sync now</button>
+        <button class="btn ghost sm" id="exp">Export backup</button>
+        <label class="btn ghost sm" style="margin:0;color:var(--text)">Import backup<input type="file" id="imp" accept=".json" hidden></label>
+      </div>
+      <div class="status" id="syncStatus"></div>
+    </div>
+  </section>
+
+  <!-- LIBRARY -->
+  <section id="v-library" hidden>
+    <div class="filters">
+      <input id="lQ" placeholder="Search everything your team made">
+      <select id="lWho"><option value="">All employees</option></select>
+      <select id="lPin"><option value="">All</option><option value="pin">Pinned</option></select>
+    </div>
+    <div class="lib" id="lib"></div>
+  </section>
+</div>
+
+<div class="modal" id="modal" hidden><div class="box" id="mBox"></div></div>
+
+<script>
+/* ================= config ================= */
+const MODELS = ["claude-sonnet-5-5", "claude-sonnet-5"];
+const FAST = ["claude-haiku-5-5", "claude-sonnet-5-5"];
+const SYNC_API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook";
+const KEY = "irun_team_v1";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const ls = {
+  get(k, d = "") { try { return localStorage.getItem(k) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } }
+};
+const anthKey = () => ls.get("irun_anth");
+const ownerKey = () => ls.get("irun_owner");
+
+const TEAM = [
+  {id:"vibe", name:"Vibe", role:"Social Media Manager", hue:"#22d3ee",
+   blurb:"Plans your content calendar, writes posts and captions, finds trends and turns them into posts for TikTok, Instagram, YouTube and X.",
+   job:"You run social media. You plan calendars, write post copy, captions, hooks, scripts for short videos, hashtags, and comment replies. Give finished, ready-to-post content with the platform named. For a calendar use a table with date, platform, format, hook, caption.",
+   pups:["30-day content calendar","10 scroll-stopping hooks","Reply to comments in my voice","Turn a trend into 3 posts","Make a post graphic"]},
+  {id:"rank", name:"Rank", role:"SEO Specialist", hue:"#34d399",
+   blurb:"Finds the keywords your buyers search, writes SEO blog posts, meta tags and page copy that ranks on Google and in AI answers.",
+   job:"You are an SEO specialist. You do keyword research (with intent and difficulty estimates clearly labeled as estimates), write SEO blog posts with H1/H2 structure, meta titles under 60 characters, meta descriptions under 155, FAQ schema, internal-link plans, and on-page fixes. Optimise for Google and AI answer engines.",
+   pups:["Keyword plan for my site","Write an SEO blog post","Meta titles and descriptions","FAQ section with schema","Local SEO checklist"]},
+  {id:"ace", name:"Ace", role:"Sales Manager", hue:"#fbbf24",
+   blurb:"Writes cold emails, DM openers, call scripts and objection handlers, and builds pitches that close.",
+   job:"You are a sales manager. You write cold emails, follow-up sequences, DM openers, cold call scripts, objection handling, pitch outlines, offers and proposals. Keep outreach short, specific and human. Every email has a subject line. Never invent results, client names or statistics.",
+   pups:["Cold email sequence","Cold call script","Handle 'too expensive'","DM opener for owners","One-page sales pitch"]},
+  {id:"grind", name:"Grind", role:"Growth Coach", hue:"#f97316",
+   blurb:"Keeps you focused: daily priorities, weekly plans, habits, and the mindset work that keeps a solo founder moving.",
+   job:"You are a growth and productivity coach for a busy founder. You build daily and weekly plans, prioritise ruthlessly, break goals into steps with deadlines, build routines, and keep the person accountable. Be direct and motivating, never preachy.",
+   pups:["Plan my week","Top 3 moves today","90-day goal breakdown","Morning routine","Beat procrastination"]},
+  {id:"stock", name:"Stock", role:"eCommerce Manager", hue:"#a3e635",
+   blurb:"Writes product listings, plans drops and launches, sets up bundles and upsells, and fixes what's killing your conversion rate.",
+   job:"You are an eCommerce manager (Shopify, TikTok Shop, Amazon, Etsy). You write product titles and descriptions, plan product drops and launches, bundles, upsells, discounts strategy, collection structure, abandoned-cart flows, and store conversion fixes.",
+   pups:["Product description","Launch plan for a drop","Bundle and upsell ideas","Store conversion audit","TikTok Shop listing"]},
+  {id:"quill", name:"Quill", role:"Copywriter", hue:"#a855f7",
+   blurb:"Ads, landing pages, emails, bios, scripts and slogans that turn readers into buyers, in your voice.",
+   job:"You are a direct-response copywriter. You write ad copy, landing pages, headlines, bios, scripts, slogans, product copy and advertorials. Give several strong options when the task is short copy (headlines, hooks, slogans). Write in the brand voice.",
+   pups:["Facebook and IG ad copy","Landing page copy","10 headline options","Bio for my socials","Video ad script"]},
+  {id:"metric", name:"Metric", role:"Data Analyst", hue:"#60a5fa",
+   blurb:"Turns your numbers into answers: break-even, pricing, forecasts, ROI and what to fix first.",
+   job:"You are a data analyst. You calculate and explain: pricing, margins, break-even, ROI, CAC/LTV, forecasts and what-if scenarios, and you read data the user pastes (CSV, tables). Show the math in a table, state assumptions, and finish with the one decision the numbers point to. Never fabricate data the user did not give; label estimates.",
+   pups:["Break-even calculator","Price my product","Analyze these numbers","Revenue forecast","Ad spend ROI"]},
+  {id:"talent", name:"Talent", role:"Recruiter", hue:"#f472b6",
+   blurb:"Job posts, interview questions, contractor briefs and onboarding plans for every hire.",
+   job:"You are a recruiter. You write job posts, freelancer/contractor briefs (Upwork, Fiverr), screening questions, interview guides with scoring, offer emails and onboarding plans.",
+   pups:["Job post","Freelancer brief","Interview questions","Onboarding checklist","Offer email"]},
+  {id:"chief", name:"Chief", role:"Executive Assistant", hue:"#e2e8f0",
+   blurb:"Drafts your emails, plans your day, preps meetings, writes agendas and keeps your to-do list clean.",
+   job:"You are an executive assistant. You draft and reply to emails, plan schedules, prep meeting briefs and agendas, summarise long text the user pastes, turn notes into to-do lists, plan trips. Be crisp and organised.",
+   pups:["Draft a reply email","Plan my day","Meeting prep brief","Turn notes into tasks","Summarize this"]},
+  {id:"boss", name:"Boss", role:"Business Strategist", hue:"#ef4444",
+   blurb:"Business plans, offers, pricing strategy, competitor breakdowns and launch roadmaps.",
+   job:"You are a business strategist. You build business plans, offers, pricing strategy, competitor analysis, positioning, partnerships, funding and launch roadmaps, SWOTs. Be decisive: recommend one path and explain why.",
+   pups:["Competitor breakdown","Build an irresistible offer","Launch roadmap","SWOT analysis","One-page business plan"]},
+  {id:"inbox", name:"Inbox", role:"Email Marketer", hue:"#38bdf8",
+   blurb:"Newsletters, welcome flows, win-back sequences and launch campaigns that turn your list into revenue.",
+   job:"You are an email marketer. You write newsletters, welcome flows, launch sequences, win-back and abandoned-cart flows, subject line variants, and segmentation plans. Every email has subject, preview text and body.",
+   pups:["Welcome email flow","Weekly newsletter","Launch email sequence","Win-back campaign","20 subject lines"]},
+  {id:"care", name:"Care", role:"Customer Support", hue:"#2dd4bf",
+   blurb:"Answers customers in your voice, writes FAQs, refund replies and help-center articles, and calms angry buyers.",
+   job:"You are customer support. You write replies to customers (email, DM, reviews), FAQs, help-center articles, return/refund responses, and canned replies. Be warm, fast and clear. Only state policies that are in the Brain; if a policy is unknown, write the reply with a clearly marked [placeholder] and say what to fill in.",
+   pups:["Reply to an upset customer","Write my FAQ","Respond to a bad review","Refund policy","Canned replies pack"]}
+];
+const emp = id => TEAM.find(e => e.id === id) || TEAM[0];
+
+/* ================= state ================= */
+function hswProfile() {
+  return {id: "hsw365", name: "HSW365 Media", lang: "English", catalog: true,
+    sells: "Apps and services by HSW365 Media LLC: iRun (AI content machine and iRun Operator), CallTwin (AI phone receptionist), QUEENEE (websites), Klipit (stream clipping), HSW365studio (browser music studio), FLIPIT, plus HSW365 streetwear at hsw365.co and the HSW365 Media Build Series ebooks.",
+    audience: "Small business owners, solo founders, creators, streamers and independent artists.",
+    voice: "Direct, confident, street-smart and motivational. No corporate fluff. Philosophy: Turn Negative Into Positive.",
+    goals: "Get paying subscribers for every live app and grow the HSW365 socials.",
+    rules: "No emojis. Never write HOODSTAR alone, always HSW365. Never invent prices, results, testimonials or statistics.",
+    links: "hsw365.co | IG and TikTok @hsw365media, @hoodstar365 | hsw365media@gmail.com",
+    facts: [], docs: [], library: [], chats: {}};
+}
+function blankProfile(name) {
+  return {id: uid(), name, lang: "English", catalog: false, sells: "", audience: "", voice: "", goals: "", rules: "", links: "", facts: [], docs: [], library: [], chats: {}};
+}
+let S = load();
+function load() {
+  try { const s = JSON.parse(ls.get(KEY, "")); if (s && s.profiles && s.profiles.length) return s; } catch {}
+  return {v: 1, active: "hsw365", profiles: [hswProfile()], updatedAt: 0};
+}
+const P = () => S.profiles.find(p => p.id === S.active) || S.profiles[0];
+let syncTimer = null;
+function save(skipSync) {
+  S.updatedAt = Date.now();
+  for (const p of S.profiles) for (const k in p.chats) if (p.chats[k].length > 300) p.chats[k] = p.chats[k].slice(-300);
+  if (!ls.set(KEY, JSON.stringify(S))) toast("This browser is out of storage. Export a backup, then delete old chats.");
+  if (!skipSync && ownerKey()) { clearTimeout(syncTimer); syncTimer = setTimeout(() => pushCloud(), 2500); }
+}
+
+/* ================= cloud sync ================= */
+function syncBadge(state, label) { const el = $("sync"); el.className = "sync " + state; el.querySelector("span").textContent = label; }
+async function cloud(a, extra = {}) {
+  const r = await fetch(SYNC_API, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({owner: ownerKey(), a, ...extra})});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(r.status === 401 ? "Owner key not accepted" : (j.error || `Sync error ${r.status}`));
+  return j;
+}
+async function pullCloud(force) {
+  if (!ownerKey()) { syncBadge("", "This device"); return; }
+  try {
+    const j = await cloud("brain_get");
+    if (j.data && j.data.profiles && (force || (j.data.updatedAt || 0) > (S.updatedAt || 0))) { S = j.data; save(true); renderAll(); }
+    else if (!j.data || (S.updatedAt || 0) > (j.data.updatedAt || 0)) await pushCloud();
+    syncBadge("on", "Synced");
+  } catch (e) { syncBadge("err", "Sync off"); setStatus("syncStatus", e.message, "err"); }
+}
+async function pushCloud() {
+  if (!ownerKey()) return;
+  try { await cloud("brain_put", {data: S}); syncBadge("on", "Synced"); }
+  catch (e) { syncBadge("err", "Sync off"); setStatus("syncStatus", e.message, "err"); }
+}
+
+/* ================= helpers ================= */
+function setStatus(id, msg, cls = "") { const el = $(id); if (!el) return; el.textContent = msg; el.className = "status " + cls; }
+let toastT;
+function toast(msg) { let t = document.querySelector(".toast"); if (!t) { t = document.createElement("div"); t.className = "toast"; document.body.appendChild(t); } t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2600); }
+const ago = t => { const s = (Date.now() - t) / 1000; if (s < 60) return "now"; if (s < 3600) return Math.floor(s / 60) + "m"; if (s < 86400) return Math.floor(s / 3600) + "h"; return new Date(t).toLocaleDateString(); };
+function avatar(e, cls = "") { return `<div class="av ${cls}" style="--hue:${e.hue}">${esc(e.name[0])}</div>`; }
+function imgUrl(prompt) { return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&private=true&model=flux&seed=${Math.abs([...prompt].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)) % 99999}`; }
+function download(name, text, type = "text/markdown") { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+const slug = s => (s || "irun").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 50) || "irun";
+
+/* minimal safe markdown */
+function md(src) {
+  const blocks = [];
+  let s = String(src || "").replace(/```([\s\S]*?)```/g, (_, c) => { blocks.push(`<pre><code>${esc(c.replace(/^\w*\n/, ""))}</code></pre>`); return `\u0000${blocks.length - 1}\u0000`; });
+  s = s.replace(/<image>([\s\S]*?)<\/image>/g, (_, p) => { blocks.push(`<img class="gen" loading="lazy" alt="${esc(p.trim())}" src="${imgUrl(p.trim())}">`); return `\u0000${blocks.length - 1}\u0000`; });
+  s = s.replace(/<image>[\s\S]*$/, "").replace(/<remember>[\s\S]*?(<\/remember>|$)/g, "");
+  const inline = t => esc(t)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<i>$2</i>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  const lines = s.split("\n"), out = [];
+  let list = null, para = [], table = [];
+  const flushP = () => { if (para.length) { out.push(`<p>${para.map(inline).join("<br>")}</p>`); para = []; } };
+  const flushL = () => { if (list) { out.push(`<${list.t}>${list.items.map(i => `<li>${inline(i)}</li>`).join("")}</${list.t}>`); list = null; } };
+  const flushT = () => { if (table.length) { const rows = table.filter(r => !/^\s*\|?\s*:?-{2,}/.test(r)).map(r => r.trim().replace(/^\||\|$/g, "").split("|").map(c => c.trim())); out.push(`<table>${rows.map((r, i) => `<tr>${r.map(c => i ? `<td>${inline(c)}</td>` : `<th>${inline(c)}</th>`).join("")}</tr>`).join("")}</table>`); table = []; } };
+  for (const ln of lines) {
+    let m;
+    if (/^\s*\|.*\|\s*$/.test(ln)) { flushP(); flushL(); table.push(ln); continue; } else flushT();
+    if (/^\u0000\d+\u0000$/.test(ln.trim())) { flushP(); flushL(); out.push(ln.trim()); continue; }
+    if ((m = ln.match(/^(#{1,4})\s+(.*)/))) { flushP(); flushL(); out.push(`<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`); continue; }
+    if (/^\s*(---|\*\*\*)\s*$/.test(ln)) { flushP(); flushL(); out.push("<hr>"); continue; }
+    if ((m = ln.match(/^\s*>\s?(.*)/))) { flushP(); flushL(); out.push(`<blockquote>${inline(m[1])}</blockquote>`); continue; }
+    if ((m = ln.match(/^\s*([-*•]|\d+[.)])\s+(.*)/))) { flushP(); const t = /\d/.test(m[1]) ? "ol" : "ul"; if (!list || list.t !== t) { flushL(); list = {t, items: []}; } list.items.push(m[2]); continue; }
+    if (!ln.trim()) { flushP(); flushL(); continue; }
+    flushL(); para.push(ln);
+  }
+  flushP(); flushL(); flushT();
+  return out.join("").replace(/\u0000(\d+)\u0000/g, (_, i) => blocks[+i]);
+}
+
+/* ================= Claude ================= */
+let CATALOG = "";
+async function loadCatalog() {
+  try { const d = await (await fetch("config/products.json", {cache: "no-cache"})).json();
+    CATALOG = d.products.map(p => `- ${p.name} (DM keyword ${p.keyword}): ${p.pitch} Link: ${p.link}. For: ${p.audience}`).join("\n"); } catch {}
+}
+function brainText(p) {
+  const f = (l, v) => v && v.trim() ? `${l}: ${v.trim()}\n` : "";
+  let t = `BUSINESS: ${p.name}\n` + f("What we sell", p.sells) + f("Customers", p.audience) + f("Brand voice", p.voice) + f("Goals", p.goals) + f("Rules", p.rules) + f("Links and contact", p.links);
+  if (p.catalog && CATALOG) t += `Live product list:\n${CATALOG}\n`;
+  if (p.facts.length) t += `\nKNOWN FACTS:\n${p.facts.map(x => "- " + x.t).join("\n")}\n`;
+  let budget = 24000;
+  if (p.docs.length) { t += "\nDOCUMENTS:\n"; for (const d of p.docs) { const body = d.text.slice(0, Math.max(0, budget)); budget -= body.length; if (body) t += `--- ${d.name} ---\n${body}\n`; } }
+  const recent = p.library.slice(-12).reverse();
+  if (recent.length) t += `\nRECENT WORK BY THE TEAM (newest first, so you stay consistent and don't repeat):\n${recent.map(i => `- [${emp(i.agent).name}] ${i.title}: ${i.body.replace(/\s+/g, " ").slice(0, 220)}`).join("\n")}\n`;
+  return t;
+}
+function systemFor(e, p) {
+  const others = TEAM.filter(x => x.id !== e.id).map(x => `${x.name} (${x.role})`).join(", ");
+  return `You are ${e.name}, the ${e.role} on the iRun AI team working for ${p.name}. ${e.job}
+
+How you work:
+- Deliver finished work the owner can use right now, not advice about how they could do it. Skip preamble.
+- Use everything in the BRAIN below. It is the truth about this business. Never contradict it and never invent prices, policies, results, testimonials, client names or statistics. If something essential is missing, make the work anyway with a clearly marked [placeholder] and ask one short question at the end.
+- Write in ${p.lang || "English"} unless the owner writes to you in another language or asks for one.
+- Use Markdown: short headings, lists, tables when they help.
+- To create an image, write <image>a detailed visual description, style, lighting, composition, no text in the image</image> on its own line. Only when an image is asked for or clearly useful.
+- MEMORY: when the owner tells you a lasting fact about the business (a price, policy, product, audience, preference, goal, decision), add it on its own line at the very end as <remember>the fact in one short sentence</remember>. Only facts the owner actually stated, never your own suggestions. Most replies have none.
+- If a task belongs to a teammate (${others}), still do your best version, then name who to hand it to.
+
+BRAIN
+${brainText(p)}`;
+}
+async function claude({system, messages, max = 4000, stream = false, onText, signal, models = MODELS}) {
+  const key = anthKey();
+  if (!key) throw new Error("Add your Anthropic API key in Studio > Settings first.");
+  let lastErr;
+  for (const model of models) {
+    const r = await fetch("https://api.anthropic.com/v1/messages", {method: "POST", signal,
+      headers: {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "anthropic-dangerous-direct-browser-access": "true"},
+      body: JSON.stringify({model, max_tokens: max, system, messages, stream})});
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      lastErr = new Error(r.status === 401 ? "Your Anthropic key was rejected. Check it in Studio > Settings." : (j.error?.message || `Claude error ${r.status}`));
+      if (r.status === 404 || /model/i.test(j.error?.message || "")) continue;
+      throw lastErr;
+    }
+    if (!stream) { const j = await r.json(); return (j.content || []).filter(b => b.type === "text").map(b => b.text).join(""); }
+    const rd = r.body.getReader(), dec = new TextDecoder(); let buf = "", full = "";
+    while (true) {
+      const {done, value} = await rd.read(); if (done) break;
+      buf += dec.decode(value, {stream: true});
+      let i; while ((i = buf.indexOf("\n")) >= 0) {
+        const ln = buf.slice(0, i).trim(); buf = buf.slice(i + 1);
+        if (!ln.startsWith("data:")) continue;
+        try { const ev = JSON.parse(ln.slice(5));
+          if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") { full += ev.delta.text; onText && onText(full); }
+          if (ev.type === "error") throw new Error(ev.error?.message || "Stream error");
+        } catch (e) { if (e.message && !/JSON/.test(e.message)) throw e; }
+      }
+    }
+    return full;
+  }
+  throw lastErr || new Error("No model available.");
+}
+
+/* ================= nav ================= */
+let VIEW = "team", CUR = "vibe";
+function go(v) {
+  VIEW = v;
+  document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+  ["team", "chat", "brain", "library"].forEach(x => $("v-" + x).hidden = x !== v);
+  if (v === "chat") renderChat(); if (v === "brain") renderBrain(); if (v === "library") renderLib(); if (v === "team") renderTeam();
+  window.scrollTo({top: 0});
+}
+document.querySelectorAll("nav.tabs button").forEach(b => b.onclick = () => go(b.dataset.v));
+
+/* ================= profiles ================= */
+function renderProfiles() {
+  $("profSel").innerHTML = S.profiles.map(p => `<option value="${esc(p.id)}"${p.id === S.active ? " selected" : ""}>${esc(p.name)}</option>`).join("");
+}
+$("profSel").onchange = () => { S.active = $("profSel").value; save(); renderAll(); };
+$("profNew").onclick = () => {
+  openModal(`<h2>New business</h2><p class="lead">Each business gets its own Brain, team chats and Library.</p>
+    <label>Business name</label><input id="npName" placeholder="e.g. New Ark Plumbing">
+    <label>What it sells</label><textarea id="npSells"></textarea>
+    <div class="btns"><button class="btn" id="npGo">Create</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+  $("npName").focus();
+  $("npGo").onclick = () => { const n = $("npName").value.trim(); if (!n) return $("npName").focus();
+    const p = blankProfile(n); p.sells = $("npSells").value.trim(); S.profiles.push(p); S.active = p.id; save(); closeModal(); renderAll(); go("brain"); toast("Fill in the Brain so your team knows the business."); };
+};
+
+/* ================= team ================= */
+function renderTeam() {
+  const p = P();
+  $("heroBiz").textContent = p.name;
+  $("kLib").textContent = p.library.length; $("kFacts").textContent = p.facts.length; $("kDocs").textContent = p.docs.length;
+  $("kMsgs").textContent = Object.values(p.chats).reduce((a, c) => a + c.length, 0);
+  $("keyNote").innerHTML = anthKey() ? `Team is on. ${ownerKey() ? "Memory syncs across your devices." : "Memory is saved in this browser. Add your owner key in <a href=\"app.html\">Studio Settings</a> to sync devices."}` : `<b>One step left:</b> add your Anthropic API key in <a href="app.html">Studio &gt; Settings</a> to switch the team on.`;
+  $("teamGrid").innerHTML = TEAM.map(e => { const n = (p.chats[e.id] || []).length;
+    return `<button class="emp" style="--hue:${e.hue}" data-e="${e.id}">${n ? `<span class="cnt">${n} MSG</span>` : ""}<div class="hd">${avatar(e)}<div><div class="nm">${esc(e.name)}</div><div class="rl">${esc(e.role)}</div></div></div><p>${esc(e.blurb)}</p></button>`; }).join("");
+  document.querySelectorAll(".emp").forEach(b => b.onclick = () => { CUR = b.dataset.e; go("chat"); });
+}
+$("dGo").onclick = async () => {
+  const task = $("dTask").value.trim(); if (!task) return $("dTask").focus();
+  $("dGo").disabled = true; setStatus("dStatus", "Picking the right employee...");
+  let pick = null;
+  try {
+    const out = await claude({models: FAST, max: 60, system: `Route the task to exactly one employee. Reply with only the id.\n${TEAM.map(e => `${e.id}: ${e.role} - ${e.blurb}`).join("\n")}`, messages: [{role: "user", content: task}]});
+    pick = TEAM.find(e => out.toLowerCase().includes(e.id));
+  } catch (e) { setStatus("dStatus", e.message, "err"); $("dGo").disabled = false; return; }
+  pick = pick || emp("boss");
+  setStatus("dStatus", ""); $("dGo").disabled = false; $("dTask").value = "";
+  CUR = pick.id; go("chat"); toast(`${pick.name} (${pick.role}) is on it.`); send(task);
+};
+$("dTask").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("dGo").click(); } });
+
+/* ================= chat ================= */
+let busy = null;
+function renderChat() {
+  const e = emp(CUR), p = P(), h = p.chats[e.id] || [];
+  $("pane").style.setProperty("--hue", e.hue);
+  $("cAv").outerHTML = `<div class="av lg" id="cAv" style="--hue:${e.hue}">${esc(e.name[0])}</div>`;
+  $("cName").textContent = e.name; $("cRole").textContent = `${e.role} for ${p.name}`;
+  $("cSwitch").innerHTML = TEAM.map(x => `<option value="${x.id}"${x.id === e.id ? " selected" : ""}>${esc(x.name)}</option>`).join("");
+  $("side").innerHTML = TEAM.map(x => `<button data-e="${x.id}" class="${x.id === e.id ? "on" : ""}">${avatar(x)}<span><b>${esc(x.name)}</b><small>${esc(x.role)}</small></span></button>`).join("");
+  document.querySelectorAll("#side button").forEach(b => b.onclick = () => { if (busy) return; CUR = b.dataset.e; renderChat(); });
+  $("pups").innerHTML = e.pups.map(t => `<button>${esc(t)}</button>`).join("");
+  document.querySelectorAll("#pups button").forEach(b => b.onclick = () => { $("cIn").value = b.textContent + (/[:?]$/.test(b.textContent) ? " " : ": "); $("cIn").focus(); });
+  $("msgs").innerHTML = h.length ? h.map((m, i) => msgHTML(m, i)).join("") :
+    `<div class="empty">${avatar(e, "lg").replace('class="av lg"', 'class="av lg" style="margin:0 auto 12px;--hue:' + e.hue + '"')}<h3>${esc(e.name)}, ${esc(e.role)}</h3><p>${esc(e.blurb)}</p><p class="note">Pick a power-up below or type what you need. ${esc(e.name)} already knows ${esc(p.name)} from the Brain.</p></div>`;
+  bindMsgActs(); scrollDown();
+}
+$("cSwitch").onchange = () => { if (busy) return; CUR = $("cSwitch").value; renderChat(); };
+function msgHTML(m, i) {
+  if (m.role === "user") return `<div class="m u">${esc(m.content)}</div>`;
+  const saved = P().library.some(x => x.msgAt === m.at);
+  return `<div class="m a"><div class="md">${md(m.content)}</div>${m.mem && m.mem.length ? `<div class="mem">Saved to Brain: ${esc(m.mem.join(" | "))}</div>` : ""}<div class="acts"><button data-a="copy" data-i="${i}">Copy</button><button data-a="pin" data-i="${i}">${saved ? "In Library" : "Save to Library"}</button><button data-a="dl" data-i="${i}">Download</button><button data-a="again" data-i="${i}">Redo</button></div></div>`;
+}
+function bindMsgActs() {
+  document.querySelectorAll("#msgs .acts button").forEach(b => b.onclick = async () => {
+    const h = P().chats[CUR], m = h[+b.dataset.i]; if (!m) return;
+    if (b.dataset.a === "copy") { await navigator.clipboard.writeText(clean(m.content)).catch(() => {}); toast("Copied"); }
+    if (b.dataset.a === "dl") download(`${slug(titleOf(m.content))}.md`, clean(m.content));
+    if (b.dataset.a === "pin") { const it = P().library.find(x => x.msgAt === m.at); if (it) it.pinned = true; else addLib(CUR, m, true); save(); b.textContent = "In Library"; toast("Pinned in Library"); }
+    if (b.dataset.a === "again") { if (busy) return; let j = +b.dataset.i - 1; while (j >= 0 && h[j].role !== "user") j--; if (j < 0) return; const ask = h[j].content, gone = new Set(h.slice(j).map(x => x.at)); P().library = P().library.filter(x => x.pinned || !gone.has(x.msgAt)); P().chats[CUR] = h.slice(0, j); save(); send(ask); }
+  });
+}
+const clean = t => String(t).replace(/<remember>[\s\S]*?<\/remember>/g, "").replace(/<image>([\s\S]*?)<\/image>/g, (_, p) => `![image](${imgUrl(p.trim())})`).trim();
+function titleOf(t) { const c = clean(t).replace(/!\[image\]\([^)]*\)/g, ""); const h = c.match(/^#{1,4}\s+(.+)$/m); return (h ? h[1] : c.split("\n").find(l => l.trim()) || "Untitled").replace(/[*#`>|_]/g, "").trim().slice(0, 80); }
+function addLib(agent, m, pinned = false) { const p = P(); p.library.push({id: uid(), agent, title: titleOf(m.content), body: clean(m.content), at: Date.now(), msgAt: m.at, pinned}); }
+const scrollDown = () => { const el = $("msgs"); el.scrollTop = el.scrollHeight; };
+
+async function send(text) {
+  text = (text ?? $("cIn").value).trim();
+  if (!text || busy) return;
+  if (!anthKey()) { toast("Add your Anthropic API key in Studio > Settings first."); return; }
+  const e = emp(CUR), p = P(), agent = e.id;
+  p.chats[agent] = p.chats[agent] || [];
+  p.chats[agent].push({role: "user", content: text, at: Date.now()});
+  $("cIn").value = ""; $("cIn").style.height = "48px"; save(); renderChat();
+  const live = document.createElement("div"); live.className = "m a"; live.innerHTML = `<div class="md"><span class="typing"><i></i><i></i><i></i></span></div>`;
+  $("msgs").querySelector(".empty")?.remove(); $("msgs").appendChild(live); scrollDown();
+  busy = new AbortController(); $("cSend").hidden = true; $("cStop").hidden = false;
+  const history = p.chats[agent].slice(-30).map(m => ({role: m.role, content: m.content}));
+  let full = "";
+  try {
+    let raf = 0;
+    full = await claude({system: systemFor(e, p), messages: history, stream: true, signal: busy.signal, max: 6000,
+      onText: t => { full = t; if (!raf) raf = requestAnimationFrame(() => { raf = 0; const near = $("msgs").scrollHeight - $("msgs").scrollTop - $("msgs").clientHeight < 140; live.querySelector(".md").innerHTML = md(t); if (near) scrollDown(); }); }});
+  } catch (err) {
+    if (err.name !== "AbortError") { live.querySelector(".md").innerHTML = `<p style="color:var(--red)">${esc(err.message)}</p>`; busy = null; $("cSend").hidden = false; $("cStop").hidden = true; return; }
+  }
+  busy = null; $("cSend").hidden = false; $("cStop").hidden = true;
+  if (!full.trim()) { renderChat(); return; }
+  const mem = [...full.matchAll(/<remember>([\s\S]*?)<\/remember>/g)].map(x => x[1].trim()).filter(Boolean);
+  const target = S.profiles.find(x => x.id === p.id) || p;
+  for (const f of mem) if (!target.facts.some(x => x.t.toLowerCase() === f.toLowerCase())) target.facts.push({id: uid(), t: f, src: e.name, at: Date.now()});
+  const m = {role: "assistant", content: full, at: Date.now(), mem};
+  target.chats[agent].push(m);
+  if (clean(full).length > 280) target.library.push({id: uid(), agent, title: titleOf(full), body: clean(full), at: Date.now(), msgAt: m.at, pinned: false});
+  save(); if (VIEW === "chat" && CUR === agent && S.active === target.id) renderChat();
+}
+$("cSend").onclick = () => send();
+$("cStop").onclick = () => busy && busy.abort();
+$("cIn").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !matchMedia("(pointer:coarse)").matches) { e.preventDefault(); send(); } });
+$("cIn").addEventListener("input", e => { e.target.style.height = "48px"; e.target.style.height = Math.min(220, e.target.scrollHeight + 2) + "px"; });
+$("cClear").onclick = () => { if (busy) return; const h = P().chats[CUR] || []; if (!h.length) return;
+  if (!confirm(`Start a new chat with ${emp(CUR).name}? Finished work stays in your Library and facts stay in the Brain.`)) return;
+  P().chats[CUR] = []; save(); renderChat(); };
+
+/* ================= brain ================= */
+const BF = {bName: "name", bLang: "lang", bSells: "sells", bAud: "audience", bVoice: "voice", bGoals: "goals", bRules: "rules", bLinks: "links"};
+function renderBrain() {
+  const p = P();
+  for (const [id, k] of Object.entries(BF)) $(id).value = p[k] || "";
+  $("bCat").checked = !!p.catalog;
+  $("facts").innerHTML = p.facts.length ? p.facts.slice().reverse().map(f => `<div class="fact"><span>${esc(f.t)}</span><small>${esc(f.src || "You")}</small><button class="x" data-f="${f.id}" aria-label="Remove">&times;</button></div>`).join("") : `<p class="note">No facts yet. Add one, or just tell any employee something about your business in chat.</p>`;
+  document.querySelectorAll("#facts .x").forEach(b => b.onclick = () => { p.facts = p.facts.filter(f => f.id !== b.dataset.f); save(); renderBrain(); });
+  $("docs").innerHTML = p.docs.length ? p.docs.map(d => `<div class="fact"><span><b>${esc(d.name)}</b><br><span class="note">${(d.text.length / 1000).toFixed(1)}k characters</span></span><button class="x" data-d="${d.id}" aria-label="Remove">&times;</button></div>`).join("") : `<p class="note">No documents yet.</p>`;
+  document.querySelectorAll("#docs .x").forEach(b => b.onclick = () => { p.docs = p.docs.filter(d => d.id !== b.dataset.d); save(); renderBrain(); });
+  $("syncNote").innerHTML = ownerKey() ? "Your owner key is set, so the Brain, every chat and the Library sync to your iRun cloud. Phone and PC see the same team." : "Add your iRun owner key in <a href=\"app.html\">Studio &gt; Settings</a> to sync the Brain, chats and Library across your phone and PC. Until then everything stays in this browser, so export a backup now and then.";
+}
+$("bSave").onclick = () => { const p = P(); for (const [id, k] of Object.entries(BF)) p[k] = $(id).value.trim(); p.name = p.name || "My business"; p.catalog = $("bCat").checked; save(); renderProfiles(); setStatus("bStatus", "Saved. Every employee uses this from their next reply.", "ok"); };
+$("bDel").onclick = () => { if (S.profiles.length < 2) return setStatus("bStatus", "You need at least one business.", "err");
+  if (!confirm(`Delete ${P().name} with its Brain, chats and Library? This can't be undone.`)) return;
+  S.profiles = S.profiles.filter(p => p.id !== S.active); S.active = S.profiles[0].id; save(); renderAll(); };
+$("fAdd").onclick = () => { const t = $("fNew").value.trim(); if (!t) return; P().facts.push({id: uid(), t, src: "You", at: Date.now()}); $("fNew").value = ""; save(); renderBrain(); };
+$("fNew").addEventListener("keydown", e => { if (e.key === "Enter") $("fAdd").click(); });
+$("docFile").onchange = async ev => { for (const f of ev.target.files) { if (f.size > 600000) { toast(`${f.name} is too big. Keep documents under 600 KB.`); continue; } P().docs.push({id: uid(), name: f.name, text: await f.text(), at: Date.now()}); } ev.target.value = ""; save(); renderBrain(); };
+$("docPaste").onclick = () => {
+  openModal(`<h2>Paste a document</h2><label>Name</label><input id="dpN" placeholder="e.g. Price sheet"><label>Text</label><textarea id="dpT" style="min-height:260px"></textarea><div class="btns"><button class="btn" id="dpGo">Add to Brain</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+  $("dpGo").onclick = () => { const t = $("dpT").value.trim(); if (!t) return; P().docs.push({id: uid(), name: $("dpN").value.trim() || "Pasted document", text: t.slice(0, 600000), at: Date.now()}); save(); closeModal(); renderBrain(); };
+};
+$("exp").onclick = () => download(`irun-team-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(S, null, 1), "application/json");
+$("imp").onchange = async ev => { const f = ev.target.files[0]; ev.target.value = ""; if (!f) return;
+  try { const d = JSON.parse(await f.text()); if (!d.profiles?.length) throw 0;
+    if (!confirm("Replace everything on this device with this backup?")) return; S = d; save(); renderAll(); toast("Backup restored"); }
+  catch { toast("That file isn't an iRun Team backup."); } };
+$("syncNow").onclick = async () => { if (!ownerKey()) return setStatus("syncStatus", "Add your owner key in Studio > Settings first.", "err"); setStatus("syncStatus", "Syncing..."); await pullCloud(); if (!$("syncStatus").classList.contains("err")) setStatus("syncStatus", "Synced.", "ok"); };
+
+/* ================= library ================= */
+function renderLib() {
+  const p = P(), q = $("lQ").value.trim().toLowerCase(), who = $("lWho").value, pin = $("lPin").value;
+  if ($("lWho").options.length < 2) $("lWho").innerHTML += TEAM.map(e => `<option value="${e.id}">${esc(e.name)} (${esc(e.role)})</option>`).join("");
+  const items = p.library.filter(i => (!who || i.agent === who) && (!pin || i.pinned) && (!q || (i.title + " " + i.body).toLowerCase().includes(q))).sort((a, b) => (b.pinned - a.pinned) || (b.at - a.at));
+  $("lib").innerHTML = items.length ? items.map(i => { const e = emp(i.agent); return `<div class="item" data-i="${i.id}"><div class="who">${avatar(e)}<span class="mono" style="color:${e.hue}">${esc(e.name)}</span>${i.pinned ? '<span class="mono pin" style="margin-left:auto">Pinned</span>' : ""}</div><div class="t">${esc(i.title)}</div><div class="s">${esc(i.body.replace(/!\[image\]\([^)]*\)/g, "").replace(/[#*`>|]/g, "").slice(0, 300))}</div><div class="d">${esc(ago(i.at))}</div></div>`; }).join("")
+    : `<div class="card" style="grid-column:1/-1"><h3>${p.library.length ? "Nothing matches" : "Your Library is empty"}</h3><p class="note">Every finished piece your team makes lands here automatically, searchable forever.</p></div>`;
+  document.querySelectorAll(".item").forEach(el => el.onclick = () => openItem(el.dataset.i));
+}
+["lQ", "lWho", "lPin"].forEach(id => $(id).addEventListener("input", renderLib));
+function openItem(id) {
+  const p = P(), i = p.library.find(x => x.id === id); if (!i) return; const e = emp(i.agent);
+  openModal(`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">${avatar(e)}<div><b>${esc(e.name)}</b><div class="note">${esc(e.role)} · ${new Date(i.at).toLocaleString()}</div></div></div><div class="md">${md(i.body.replace(/!\[image\]\((https:\/\/image\.pollinations\.ai\/prompt\/[^?]+)[^)]*\)/g, (_, u) => `<image>${decodeURIComponent(u.split("/prompt/")[1])}</image>`))}</div>
+    <div class="btns"><button class="btn sm" id="iCopy">Copy</button><button class="btn ghost sm" id="iDl">Download</button><button class="btn ghost sm" id="iPin">${i.pinned ? "Unpin" : "Pin"}</button><button class="btn ghost sm" id="iMore">Ask ${esc(e.name)} to improve</button><button class="btn red sm" id="iDel">Delete</button><button class="btn ghost sm" onclick="closeModal()">Close</button></div>`);
+  $("iCopy").onclick = async () => { await navigator.clipboard.writeText(i.body).catch(() => {}); toast("Copied"); };
+  $("iDl").onclick = () => download(`${slug(i.title)}.md`, i.body);
+  $("iPin").onclick = () => { i.pinned = !i.pinned; save(); closeModal(); renderLib(); };
+  $("iDel").onclick = () => { if (!confirm("Delete this from the Library?")) return; p.library = p.library.filter(x => x.id !== id); save(); closeModal(); renderLib(); };
+  $("iMore").onclick = () => { closeModal(); CUR = i.agent; go("chat"); $("cIn").value = `Improve this, keep what works:\n\n${i.body.slice(0, 6000)}`; $("cIn").focus(); };
+}
+
+/* ================= modal ================= */
+function openModal(html) { $("mBox").innerHTML = html; $("modal").hidden = false; }
+function closeModal() { $("modal").hidden = true; $("mBox").innerHTML = ""; }
+$("modal").onclick = e => { if (e.target === $("modal")) closeModal(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("modal").hidden) closeModal(); });
+
+/* ================= boot ================= */
+function renderAll() { renderProfiles(); if (VIEW === "team") renderTeam(); if (VIEW === "chat") renderChat(); if (VIEW === "brain") renderBrain(); if (VIEW === "library") renderLib(); }
+(async () => {
+  const q = new URLSearchParams(location.search);
+  if (q.get("e") && TEAM.some(e => e.id === q.get("e"))) { CUR = q.get("e"); }
+  renderAll(); await loadCatalog();
+  if (q.get("v")) go(q.get("v"));
+  pullCloud();
+})();
+window.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !busy) pullCloud(); else if (document.visibilityState === "hidden" && ownerKey()) { clearTimeout(syncTimer); pushCloud(); } });
+</script>
+</body>
+</html>

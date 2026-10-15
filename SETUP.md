@@ -117,3 +117,17 @@ Give it a website and it runs the business's marketing: **onboard** (reads the s
 2. Repo variable `OUTREACH_ADDRESS`: the postal address printed in every outreach email (required by CAN-SPAM; nothing sends without it).
 3. Payments: Zelle (856-796-8081 / elvintorressr@gmail.com, in `irun_settings`) works now; customers get a memo code and you confirm in dashboard > Operator > Zelle payments. Card: Supabase secret `STRIPE_SECRET_KEY` (shared with HSW365 Stream), then set `irun_settings.billing_live` = `on`. Until then start.html shows "opening soon".
 4. Optional AI DM replies: Supabase secret `ANTHROPIC_API_KEY` and `irun_settings.ai_dm_replies` = `on`.
+
+## AI Team (`team.html`)
+
+`https://hsw365.github.io/iRUN/team.html` is a 12-person AI staff that works from one shared memory:
+
+- **Employees:** Vibe (social media), Rank (SEO), Ace (sales), Grind (growth coach), Stock (eCommerce), Quill (copywriter), Metric (data analyst), Talent (recruiter), Chief (executive assistant), Boss (business strategist), Inbox (email marketing), Care (customer support). Each has one-tap power-ups.
+- **Delegate:** type any task on the Team tab and iRun hands it to the right employee.
+- **Brain:** business details, facts and documents every employee reads before every reply. Employees save new facts you tell them in chat on their own.
+- **Library:** every finished piece the team makes is saved and searchable. Pin, copy, download, or send it back for a rewrite.
+- **Businesses:** unlimited profiles (your own brands and clients), each with its own Brain, chats and Library.
+- **Images:** employees can generate images inside their replies.
+- **Memory across devices:** with the owner key saved in Studio Settings, everything syncs to the `irun_brain` table through the `irun-ig-webhook` function (`brain_get` / `brain_put`). Without it, it stays in the browser; use Export backup.
+
+Uses the same Anthropic key as Studio (Studio > Settings).

@@ -3,6 +3,7 @@
 // - POST (Meta webhook): comment "KEYWORD" -> private-reply DM with the link; DM "KEYWORD" -> reply with link. Every lead logged.
 // - GET  ?view=data&key=OWNER_KEY -> JSON for the owner dashboard (dashboard.html)
 // - POST {owner:KEY, a:"add_company"|"company"|"prospects"|"credits"|"confirm_payment"|"reject_payment", ...} -> Operator controls (dashboard.html)
+// - POST {owner:KEY, a:"brain_get"|"brain_put", data} -> iRun Team memory sync (team.html)
 // - GET  ?view=unsub&c=..&e=..&t=..  -> one-click unsubscribe from Operator outreach email (also POST, RFC 8058)
 // - Optional AI replies: with secret ANTHROPIC_API_KEY set and irun_settings.ai_dm_replies = on, a DM without a
 //   keyword gets a short, factual answer built only from the product list, and is still logged for a human.
@@ -165,6 +166,18 @@ async function ownerAction(b: any) {
   const owner = await setting("owner_key");
   if (!owner || b.owner !== owner) return json({ error: "unauthorized" }, 401);
   const log = (company_id: string | null, action: string) => sb.from("irun_activity").insert({ company_id, agent: "owner", action });
+  // iRun Team (team.html): one shared Brain, chats and Library for the owner across devices
+  if (b.a === "brain_get") {
+    const { data } = await sb.from("irun_brain").select("data,updated_at").eq("id", "owner").maybeSingle();
+    return json({ data: data?.data ?? null, updated_at: data?.updated_at ?? null });
+  }
+  if (b.a === "brain_put") {
+    if (!b.data || !Array.isArray(b.data.profiles)) return json({ error: "bad brain data" }, 400);
+    if (JSON.stringify(b.data).length > 15_000_000) return json({ error: "Brain is over 15 MB. Delete old chats or documents." }, 413);
+    const { error } = await sb.from("irun_brain").upsert({ id: "owner", data: b.data, updated_at: new Date().toISOString() });
+    if (error) return json({ error: error.message }, 500);
+    return json({ ok: true });
+  }
   if (b.a === "add_company") {
     const name = String(b.name ?? "").trim().slice(0, 80);
     if (name.length < 2) return json({ error: "Business name is required." }, 400);
