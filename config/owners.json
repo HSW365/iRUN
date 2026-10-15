@@ -4,11 +4,20 @@
   "emails": [
     "hsw365media@gmail.com",
     "hoodstarent365@gmail.com",
-    "book@hoodstar365.com"
+    "book@hoodstar365.com",
+    "elvintorressr@gmail.com"
   ],
   "handles": {
-    "tiktok": ["hsw365media", "hoodstar365"],
-    "instagram": ["hsw365media", "hoodstar365"],
-    "youtube": ["hoodstar365"]
+    "tiktok": [
+      "hsw365media",
+      "hoodstar365"
+    ],
+    "instagram": [
+      "hsw365media",
+      "hoodstar365"
+    ],
+    "youtube": [
+      "hoodstar365"
+    ]
   }
 }

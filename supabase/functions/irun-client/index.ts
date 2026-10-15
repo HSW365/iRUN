@@ -82,6 +82,11 @@ async function zellePayment(c: { id: string }, kind: "plan" | "credits", planId:
   await log(c.id, "billing", `Zelle payment requested: $${(cents / 100).toFixed(2)} (${kind === "plan" ? planId + " plan" : qty + " credits"}), memo ${ref}`);
   return data;
 }
+// Owner emails (irun_settings.owner_emails, synced from config/owners.json) get every plan free, forever.
+async function isOwner(email: string) {
+  const list = JSON.parse((await setting("owner_emails")) ?? "[]") as string[];
+  return list.map((e) => e.toLowerCase()).includes(email.trim().toLowerCase());
+}
 async function newCompany(b: any, pl: Plans, payMethod: string) {
   const plan = pl.plans[b.plan];
   const name = String(b.name ?? "").trim().slice(0, 80);
@@ -102,11 +107,14 @@ async function newCompany(b: any, pl: Plans, payMethod: string) {
     if (!data && !["hsw365media", "hoodstar365", "hsw365co", "newark"].includes(id)) break;
     id = slug(name) + n;
   }
+  const owner = await isOwner(email);
   const { data, error } = await db.from("irun_companies").insert({ id, name, email, source_url: url || null, handles,
-    notes: String(b.notes ?? "").slice(0, 2000) || null, plan: b.plan, status: "awaiting_payment", pay_method: payMethod })
+    notes: String(b.notes ?? "").slice(0, 2000) || null, plan: owner ? "comp" : b.plan,
+    status: owner ? "pending" : "awaiting_payment", pay_method: owner ? "comp" : payMethod })
     .select("id,client_key").single();
   if (error) throw new Error(error.message);
-  return { ...data, plan, planId: b.plan as string };
+  if (owner) await log(id, "billing", "owner account: full access, no charge. Onboarding starts within the hour.");
+  return { ...data, plan, planId: b.plan as string, owner };
 }
 
 async function company(c: string, k: string) {
@@ -234,6 +242,7 @@ Deno.serve(async (req) => {
       if ((await setting("billing_live")) !== "on" || !z) return json({ error: "Sign-up opens soon." }, 403);
       let nc;
       try { nc = await newCompany(b, pl, "zelle"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      if (nc.owner) return json({ c: nc.id, k: nc.client_key });
       const pay = await zellePayment(nc, "plan", nc.planId, null, nc.plan.cents);
       return json({ c: nc.id, k: nc.client_key, payment: pay, zelle: z });
     }
@@ -241,9 +250,10 @@ Deno.serve(async (req) => {
     if (b.a === "checkout") {
       const owner = b.owner_key && b.owner_key === (await setting("owner_key"));
       if ((await setting("billing_live")) !== "on" && !owner) return json({ error: "Sign-up opens soon." }, 403);
-      if (!STRIPE) return json({ error: "Payments are not configured yet." }, 503);
+      if (!STRIPE && !(await isOwner(String(b.email ?? "")))) return json({ error: "Payments are not configured yet." }, 503);
       let nc;
       try { nc = await newCompany(b, pl, "card"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      if (nc.owner) return json({ c: nc.id, k: nc.client_key });
       const { id, plan } = nc;
       const email = String(b.email).trim().toLowerCase();
       await ensureWebhook();

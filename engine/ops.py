@@ -36,6 +36,9 @@ OUTREACH_HOUR = 14
 def sync_plans():
     cfg = companies.plans()
     db.insert("irun_settings", {"key": "plans", "value": json.dumps(cfg)}, upsert_on="key")
+    with open(os.path.join(os.path.dirname(__file__), "..", "config", "owners.json")) as f:
+        owners = [e.lower() for e in json.load(f)["emails"]]
+    db.insert("irun_settings", {"key": "owner_emails", "value": json.dumps(owners)}, upsert_on="key")
 
 
 def add(name, url=None, handles=None, notes=None, email=None, plan="comp"):
