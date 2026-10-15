@@ -100,3 +100,19 @@ python engine/run.py --platform both --product klipit --mode draft
 python engine/run.py --kind faceless --account hoodstar365 --mode draft
 python engine/run.py --idea "why discipline beats motivation" --account hoodstar365 --style anime
 ```
+
+# iRun Operator (runs whole businesses, Polsia-style)
+
+Give it a website and it runs the business's marketing: **onboard** (reads the site, writes the profile), **website** (builds a one-page site, live after approval), **content** (the video engine above posts for every active company on its plan's slots), **outreach** (cold email to the prospect list, one follow-up, replies and bounces tracked), **CEO** (nightly review that keeps a memory, rewrites angles, sets tomorrow's plan and emails a report).
+
+- Engine: `engine/ops.py` (+ `onboard.py`, `website.py`, `outreach.py`, `ceo.py`, `companies.py`). Schedule: `.github/workflows/operator.yml`, hourly; outreach at 10am ET, CEO at 11pm ET.
+- Data: `irun_companies`, `irun_memory`, `irun_activity`, `irun_prospects`, `irun_suppress`, `irun_credit_ledger`.
+- Owner: `dashboard.html` > **Operator** (add companies free on the comp plan, approve sites, prospects, credits) and **Live**.
+- Customers: `start.html` (3 plans + $1 credits, Stripe) and `client.html` (their live page). Function: `irun-client`.
+- Plans and credit costs: `config/plans.json`. 1 credit = 1 video, 10 emails or 1 website. No revenue share.
+
+**Switch it on**
+1. Repo secrets: `ANTHROPIC_API_KEY`, `SUPABASE_SERVICE_KEY` (already used), plus `SMTP_USER` / `SMTP_PASS` (a Gmail address and an app password) for outreach and nightly report emails.
+2. Repo variable `OUTREACH_ADDRESS`: the postal address printed in every outreach email (required by CAN-SPAM; nothing sends without it).
+3. Paid sign-up: Supabase secret `STRIPE_SECRET_KEY` (shared with HSW365 Stream), then set `irun_settings.billing_live` = `on`. Until then start.html shows "opening soon".
+4. Optional AI DM replies: Supabase secret `ANTHROPIC_API_KEY` and `irun_settings.ai_dm_replies` = `on`.

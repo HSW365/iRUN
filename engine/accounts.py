@@ -20,17 +20,40 @@ def load():
         a.setdefault("platforms", ["tiktok", "instagram"])
         a.setdefault("enabled", True)
         a.setdefault("lead_bot", False)
-    return accts
+    return accts + operator_accounts({a["id"] for a in accts})
+
+
+_OPS = None
+
+
+def _operator_rows():
+    """Active Operator companies (Supabase irun_companies), fetched once per run."""
+    global _OPS
+    if _OPS is None:
+        import companies
+        _OPS = companies.all_companies("active") if db.enabled() else []
+    return _OPS
+
+
+def operator_accounts(taken=()):
+    import companies
+    return [companies.to_account(c) for c in _operator_rows() if c["id"] not in taken]
 
 
 def series(account_id=None):
     """Enabled faceless series (config/series.json), optionally just one account's."""
     path = os.path.join(ROOT, "config", "series.json")
-    if not os.path.exists(path):
-        return []
-    with open(path) as f:
-        rows = json.load(f)["series"]
-    return [s for s in rows if s.get("enabled", True) and (account_id is None or s["account"] == account_id)]
+    rows = []
+    if os.path.exists(path):
+        with open(path) as f:
+            rows = json.load(f)["series"]
+    rows = [s for s in rows if s.get("enabled", True)]
+    import companies
+    for c in _operator_rows():
+        s = companies.to_series(c)
+        if s and companies.plan_of(c)["faceless"]:
+            rows.append(s)
+    return [s for s in rows if account_id is None or s["account"] == account_id]
 
 
 def get(account_id):

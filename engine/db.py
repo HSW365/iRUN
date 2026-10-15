@@ -1,5 +1,7 @@
 """Supabase REST + Storage helpers (service-role key; server-side only)."""
 import os
+import urllib.parse
+
 import requests
 
 URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
@@ -37,9 +39,15 @@ def insert(table, row, upsert_on=None):
 
 
 def update(table, match, fields):
-    q = "&".join(f"{k}=eq.{v}" for k, v in match.items())
+    q = "&".join(f"{k}=eq.{urllib.parse.quote(str(v), safe='')}" for k, v in match.items())
     r = requests.patch(f"{URL}/rest/v1/{table}?{q}", headers=_h({"Prefer": "return=minimal"}), json=fields, timeout=30)
     r.raise_for_status()
+
+
+def rpc(fn, args):
+    r = requests.post(f"{URL}/rest/v1/rpc/{fn}", headers=_h(), json=args, timeout=30)
+    r.raise_for_status()
+    return r.json()
 
 
 def get_token(name):

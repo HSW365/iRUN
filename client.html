@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>iRun Operator | Your company</title>
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3Ei%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>
+:root{--acc:#ef4444;--acc-ink:#0a0a0f}
+body{font-size:16px}
+.top{border-bottom:1px solid var(--line);background:#050508}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;flex-wrap:wrap;padding-block:12px}
+.head{padding:clamp(36px,5vw,64px) 0 28px}
+.head h1{font-size:clamp(46px,6vw,88px)}
+.state{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--text2);margin-bottom:16px}
+.state i{width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
+.state.active i{background:var(--ok);box-shadow:0 0 0 4px rgba(52,211,153,.2)}
+.state.error i,.state.paused i{background:var(--bad)}
+.state.pending i{background:#fbbf24}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--card);border:1px solid var(--line2);border-radius:6px;margin-top:26px}
+.kpis>div{padding:20px 22px}.kpis>div+div{border-left:1px solid var(--line)}
+.kpis b{display:block;font-family:var(--disp);font-size:clamp(34px,3vw,46px);font-weight:900;line-height:.9;color:#fff}
+.kpis span{display:block;font-size:13.5px;color:var(--mut);margin-top:6px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:start;margin-top:22px}
+.card{background:var(--card);border:1px solid var(--line2);border-radius:6px;padding:22px}
+.card h2{font-family:var(--body);font-size:19px;font-weight:800;letter-spacing:-.01em;line-height:1.25;color:#fff}
+.card h2 small{font-family:var(--mono);font-size:11.5px;color:var(--mut);font-weight:400;margin-left:8px;letter-spacing:.06em}
+.card+.card{margin-top:22px}
+.feed{margin-top:12px;max-height:620px;overflow:auto}
+.feed div{display:grid;grid-template-columns:88px 84px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.feed time{font-family:var(--mono);font-size:12px;color:var(--mut);padding-top:2px}
+.feed em{font-style:normal;font-family:var(--mono);color:var(--acc);text-transform:uppercase;letter-spacing:.06em;font-size:11.5px;padding-top:3px}
+.feed span{color:#fff;font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
+.need{list-style:none;margin-top:12px}
+.need li{padding:10px 0 10px 26px;border-bottom:1px solid var(--line);position:relative;color:#fff;font-size:15px}
+.need li::before{content:"";position:absolute;left:4px;top:17px;width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.rep p{color:var(--text2);margin-top:10px;font-size:15px}
+.rep h4{margin-top:14px;font-size:14px;color:var(--mut);font-weight:600}
+.rep ul{margin:6px 0 0 18px;color:#fff;font-size:15px}
+.frame{margin-top:12px;border:1px solid var(--line2);border-radius:4px;overflow:hidden;background:#fff;height:420px}
+.frame iframe{width:100%;height:100%;border:0}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:12px}
+.vid{background:var(--bg);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.vid video{width:100%;aspect-ratio:9/16;background:#000;display:block}
+.vid p{padding:8px 10px;font-size:13px;color:var(--text2);line-height:1.35}
+.vid p b{display:block;font-family:var(--mono);font-size:11px;color:var(--mut);font-weight:400;margin-bottom:4px;text-transform:uppercase}
+.field input,.field textarea{width:100%;height:48px;background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:0 12px;color:#fff}
+.field textarea{height:auto;min-height:120px;padding:10px 12px;font-family:var(--mono);font-size:13px}
+.ledger-mini{margin-top:10px;font-size:14px}
+.ledger-mini div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);color:var(--text2)}
+.ledger-mini b{font-family:var(--mono);color:#fff;font-weight:700}
+.toggle{display:flex;align-items:center;gap:10px;font-weight:600;color:#fff;cursor:pointer}
+.toggle input{width:20px;height:20px;accent-color:var(--acc)}
+.gate{max-width:520px;margin:14vh auto;padding:0 16px}
+.muted{color:var(--mut);font-size:14px;margin-top:8px}
+@media (max-width:980px){.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.kpis>div:nth-child(3){border-left:0}.kpis>div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:560px){.feed div{grid-template-columns:62px minmax(0,1fr)}.feed em{display:none}.frame{height:340px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><a class="logo" href="start.html"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Operator</small></span></a><div class="row" style="margin:0"><span class="small" id="sync"></span><button class="btn btn-line btn-sm" id="portal" hidden>Billing</button></div></div></div>
+
+<div class="gate" id="gate" hidden><h2>Open your company</h2><p class="lede" id="gate-msg" style="margin-top:14px">Use the link from your welcome page or your nightly report email.</p></div>
+
+<main class="wrap" id="app" hidden>
+  <section class="head">
+    <p class="state" id="state"><i></i><span></span></p>
+    <h1 id="name"></h1>
+    <p class="lede" id="summary" style="margin-top:16px"></p>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <div class="grid2">
+    <div>
+      <div class="card"><h2>Live feed <small id="live">LIVE</small></h2><div class="feed" id="feed"></div></div>
+      <div class="card"><h2>Videos</h2><div class="vids" id="vids"></div></div>
+    </div>
+    <div>
+      <div class="card" id="need-card" hidden><h2>Needs you</h2><ul class="need" id="need"></ul></div>
+      <div class="card rep" id="rep-card" hidden><h2>Last night's review <small id="rep-when"></small></h2><div id="rep"></div></div>
+      <div class="card"><h2>Website</h2><div id="site"></div></div>
+      <div class="card"><h2>Outreach</h2><div id="out"></div></div>
+      <div class="card"><h2>Credits</h2>
+        <p class="muted">$1 a credit. 1 credit = 1 video, 10 emails or 1 website build. Bought credits never expire.</p>
+        <div class="row"><div class="field" style="margin:0;flex:0 0 120px"><input id="qty" type="number" min="5" max="1000" step="1" value="25" aria-label="Credits to buy"></div><button class="btn btn-acc btn-sm" id="buy">Buy 25 credits for $25</button></div>
+        <p class="msg" id="buy-msg"></p>
+        <div class="ledger-mini" id="ledger"></div>
+      </div>
+    </div>
+  </div>
+  <p class="small" style="margin:40px 0 80px">Questions: <a class="tlink" href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a>. Keep this page's link private; it opens your company.</p>
+</main>
+
+<script>
+(function () {
+  var API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-client";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+  var q = new URLSearchParams(location.search);
+  var C = q.get("c"), K = q.get("k"), S = q.get("s");
+  var store = { get: function () { try { return localStorage.getItem("irun_k_" + C); } catch (e) { return null; } },
+                set: function (v) { try { localStorage.setItem("irun_k_" + C, v); } catch (e) {} } };
+  if (!K && C) K = store.get();
+  var timer = null, last = null, draftHtml = null;
+
+  function call(body) {
+    body.c = C; body.k = K;
+    return fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || "Request failed"); return d; }); });
+  }
+  function when(s) { if (!s) return ""; var d = new Date(s); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
+  function gate(msg) { $("gate").hidden = false; $("app").hidden = true; if (msg) $("gate-msg").textContent = msg; }
+
+  function start() {
+    if (!C) return gate();
+    if (S && !K) {
+      $("gate").hidden = false; $("gate-msg").textContent = "Confirming your payment...";
+      fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ a: "claim", c: C, s: S }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d.k) throw new Error(d.error || "Payment not found yet.");
+          K = d.k; store.set(K);
+          history.replaceState(null, "", "client.html?c=" + encodeURIComponent(C) + "&k=" + encodeURIComponent(K));
+          $("gate").hidden = true; load();
+        })
+        .catch(function (e) { gate(e.message + " Refresh in a minute, or email hsw365media@gmail.com."); });
+      return;
+    }
+    if (!K) return gate();
+    store.set(K);
+    load();
+  }
+
+  function load() {
+    call({ a: "view" }).then(function (d) { last = d; render(d); $("sync").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); })
+      .catch(function (e) { if (!last) gate(e.message); });
+    clearTimeout(timer); timer = setTimeout(load, 20000);
+  }
+
+  var STATES = { awaiting_payment: "Waiting for payment", pending: "Onboarding: reading your business", active: "Running on autopilot", paused: "Paused", error: "Needs attention" };
+
+  function render(d) {
+    var c = d.company;
+    $("app").hidden = false; $("gate").hidden = true;
+    $("state").className = "state " + c.status; $("state").querySelector("span").textContent = STATES[c.status] || c.status;
+    $("name").textContent = c.name; document.title = "iRun Operator | " + c.name;
+    $("summary").textContent = c.error ? "Onboarding stopped: " + c.error : (c.summary || "Your Operator is getting to know your business. This page updates on its own.");
+    var posted = d.posts.filter(function (p) { return p.status === "posted"; }).length;
+    var credits = (c.credits || 0) + (c.bonus_credits || 0);
+    $("kpis").innerHTML = [[c.plan_name, "Plan"], [c.plan === "comp" ? "Unlimited" : credits, "Credits left"], [posted, "Videos posted (recent)"],
+      [Object.values(d.prospects).reduce(function (a, b) { return a + b; }, 0), "Prospects on your list"]]
+      .map(function (x) { return "<div><b>" + esc(x[0]) + "</b><span>" + esc(x[1]) + "</span></div>"; }).join("");
+    $("portal").hidden = c.plan === "comp";
+
+    $("feed").innerHTML = d.activity.length ? d.activity.map(function (a) {
+      return "<div><time>" + esc(when(a.created_at)) + "</time><em>" + esc(a.agent) + "</em><span>" + esc(a.action) + "</span></div>";
+    }).join("") : '<p class="muted">Nothing yet. Onboarding starts within the hour after you pay.</p>';
+
+    $("vids").innerHTML = d.posts.length ? d.posts.map(function (p) {
+      return '<div class="vid">' + (p.video_url ? '<video src="' + esc(p.video_url) + '" controls preload="none" playsinline></video>' : "") +
+        "<p><b>" + esc(p.platform) + " / " + esc(p.status) + "</b>" + esc(p.hook) + "</p></div>";
+    }).join("") : '<p class="muted">Your first videos show up here. They post once TikTok or Instagram is connected.</p>';
+
+    var r = c.last_report;
+    $("need-card").hidden = !(r && r.owner_actions && r.owner_actions.length);
+    if (r && r.owner_actions) $("need").innerHTML = r.owner_actions.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
+    $("rep-card").hidden = !r;
+    if (r) {
+      $("rep-when").textContent = (r.health || "").toUpperCase() + " " + when(r.at);
+      var list = function (t, a) { return a && a.length ? "<h4>" + t + "</h4><ul>" + a.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : ""; };
+      $("rep").innerHTML = "<p>" + esc(r.summary) + "</p>" + list("Decided", r.decisions) + list("Tomorrow", r.plan_tomorrow);
+    }
+
+    var s = "";
+    if (c.site_status === "published") s += '<p class="muted">Live at <a class="tlink" href="' + esc(c.site_url) + '" target="_blank" rel="noopener">' + esc(c.site_url) + "</a></p>";
+    if (c.site_status === "draft") s += '<p class="muted">A new version is ready. Look it over, then approve it to go live.</p><div class="frame"><iframe id="draft" sandbox title="Website draft"></iframe></div>' +
+      '<div class="row"><button class="btn btn-acc btn-sm" id="approve">Approve and publish</button><button class="btn btn-line btn-sm" id="rebuild">Make a new version (1 credit)</button></div>';
+    else if (c.site_status === "approved") s += '<p class="muted">Approved. It goes live within the hour.</p>';
+    else if (c.site_status === "none") s += '<p class="muted">Your website is being designed. The draft appears here for approval.</p>';
+    if (c.site_status === "published") s += '<div class="row"><button class="btn btn-line btn-sm" id="rebuild">Make a new version (1 credit)</button></div>';
+    $("site").innerHTML = s;
+    if (c.site_status === "draft" && c.site_draft_url) {
+      var show = function (h) { var f = $("draft"); if (f) f.srcdoc = h; };
+      if (draftHtml && draftHtml.url === c.site_draft_url) show(draftHtml.html);
+      else fetch(c.site_draft_url + "?v=" + Date.now()).then(function (r) { return r.text(); }).then(function (h) { draftHtml = { url: c.site_draft_url, html: h }; show(h); });
+    }
+    if ($("approve")) $("approve").onclick = function () { this.disabled = true; call({ a: "settings", approve_site: true }).then(load); };
+    if ($("rebuild")) $("rebuild").onclick = function () { this.disabled = true; call({ a: "settings", rebuild_site: true }).then(load); };
+
+    var o = "";
+    if (!c.outreach_available) o = '<p class="muted">Outreach is on the Pro and Elite plans.</p>';
+    else {
+      var counts = Object.keys(d.prospects).map(function (k) { return esc(k.replace("_", " ")) + ": " + d.prospects[k]; }).join(" &middot; ");
+      o = '<label class="toggle" style="margin-top:12px"><input type="checkbox" id="o-on"' + (c.outreach_enabled ? " checked" : "") + '> Send outreach emails</label>' +
+        '<p class="muted">' + (counts || "No prospects yet.") + '</p>' +
+        '<div class="field"><label for="o-rows">Add business contacts, one per line: email, name, business, note</label><textarea id="o-rows" placeholder="jane@acmeproperties.com, Jane, Acme Properties, manages 40 rentals in Easton"></textarea></div>' +
+        '<div class="row"><button class="btn btn-line btn-sm" id="o-add">Add to the list</button></div><p class="msg" id="o-msg"></p>' +
+        '<p class="muted">Only business contacts you have a reason to email. Every email has an unsubscribe link and stops after one follow-up.</p>';
+    }
+    $("out").innerHTML = o;
+    if ($("o-on")) $("o-on").onchange = function () { call({ a: "settings", outreach_enabled: this.checked }).then(load); };
+    if ($("o-add")) $("o-add").onclick = function () {
+      var rows = $("o-rows").value.split(/\n+/).map(function (l) { var p = l.split(",").map(function (x) { return x.trim(); }); return { email: p[0], name: p[1], business: p[2], note: p.slice(3).join(", ") }; })
+        .filter(function (r) { return r.email; });
+      var m = $("o-msg");
+      call({ a: "prospects", rows: rows }).then(function (x) { m.className = "msg ok"; m.textContent = x.added + " added."; $("o-rows").value = ""; load(); })
+        .catch(function (e) { m.className = "msg err"; m.textContent = e.message; });
+    };
+
+    $("ledger").innerHTML = d.ledger.slice(0, 12).map(function (l) {
+      return "<div><span>" + esc(l.reason) + " &middot; " + esc(when(l.created_at)) + "</span><b>" + (l.delta > 0 ? "+" : "") + esc(l.delta) + "</b></div>";
+    }).join("");
+  }
+
+  function price() { var n = Math.max(5, Math.min(1000, Math.floor(+$("qty").value || 0))); $("buy").textContent = "Buy " + n + " credits for $" + n; return n; }
+  $("qty").addEventListener("input", price);
+  $("buy").addEventListener("click", function () {
+    var b = this, m = $("buy-msg"); b.disabled = true;
+    call({ a: "credits", qty: price() }).then(function (d) { location.href = d.url; })
+      .catch(function (e) { m.className = "msg err"; m.textContent = e.message; b.disabled = false; });
+  });
+  $("portal").addEventListener("click", function () {
+    call({ a: "portal" }).then(function (d) { location.href = d.url; }).catch(function (e) { alert(e.message); });
+  });
+  if (q.get("bought")) { $("buy-msg").className = "msg ok"; $("buy-msg").textContent = q.get("bought") + " credits are on the way. They show up here in a few seconds."; }
+  start();
+})();
+</script>
+</body>
+</html>

@@ -32,6 +32,18 @@ th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vert
 input{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--text);padding:12px;border-radius:10px;margin:12px 0}
 .btn{background:var(--violet);color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
 .err{color:var(--red)}
+.co{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.co .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.co h3{font:800 24px 'Barlow Condensed',sans-serif;letter-spacing:.5px;margin:0}
+.co p{margin:6px 0;color:var(--muted)}
+.sm{background:#0d0d14;color:var(--text);border:1px solid var(--line);padding:7px 12px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px}
+.sm:hover{border-color:var(--violet)}
+textarea,select{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--text);padding:10px;border-radius:10px;margin:6px 0;font:13px Inter,sans-serif}
+.form2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.form2 input{margin:4px 0}
+.feed div{display:grid;grid-template-columns:140px 110px 90px 1fr;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px}
+.feed .a{color:var(--cyan);font:700 11px 'Space Mono',monospace;text-transform:uppercase}
+.feed{background:var(--panel);border:1px solid var(--line);border-radius:12px;max-height:70vh;overflow:auto}
+@media(max-width:700px){.form2{grid-template-columns:1fr}.feed div{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -45,13 +57,14 @@ input{width:100%;background:#0d0d14;border:1px solid var(--line);color:var(--tex
 <div id="app" class="wrap" hidden>
   <div class="top"><h1>iRUN <b>COMMAND</b></h1><span class="mono">@hsw365media autopilot</span></div>
   <div class="stats" id="stats"></div>
-  <div class="tabs"><button class="on" data-t="leads">Leads</button><button data-t="posts">Posts</button><button data-t="conn">Connections</button></div>
-  <section id="leads"></section><section id="posts" hidden></section><section id="conn" hidden></section>
+  <div class="tabs"><button class="on" data-t="leads">Leads</button><button data-t="posts">Posts</button><button data-t="ops">Operator</button><button data-t="live">Live</button><button data-t="conn">Connections</button></div>
+  <section id="leads"></section><section id="posts" hidden></section><section id="ops" hidden></section><section id="live" hidden></section><section id="conn" hidden></section>
 </div>
 <script>
 const API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const when = s => s ? new Date(s).toLocaleString() : "";
+const TABS = ["leads","posts","ops","live","conn"];
 let key = (location.hash.match(/key=([a-f0-9]+)/) || [])[1] || sessionStorageGet();
 function sessionStorageGet(){ try { return sessionStorage.getItem("irun_key"); } catch { return null; } }
 function login(){ key = document.getElementById("k").value.trim(); load(); }
@@ -85,8 +98,70 @@ async function load(){
   document.getElementById("conn").innerHTML = `<h2>Connections</h2><div class="tw"><table><tr><th>Platform</th><th>Status</th><th>Token refreshed</th></tr>
     ${["tiktok","instagram"].map(n=>`<tr><td>${n}</td><td>${conn(n)?'<span class="pill ok">connected</span>':'<span class="pill bad">not connected</span>'}</td><td>${when(conn(n)?.updated_at)}</td></tr>`).join("")}</table></div>
     <h2>Apps being promoted</h2><div class="tw"><table><tr><th>App</th><th>Keyword</th><th>Link</th></tr>${d.products.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.keyword)}</td><td>${esc(p.link)}</td></tr>`).join("")}</table></div>`;
+  renderOps(d);
+  clearTimeout(window._rt); window._rt=setTimeout(load,30000);
 }
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));["leads","posts","conn"].forEach(id=>document.getElementById(id).hidden=id!==b.dataset.t);});
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));TABS.forEach(id=>document.getElementById(id).hidden=id!==b.dataset.t);});
+async function act(body){
+  const r = await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({owner:key,...body})});
+  const d = await r.json().catch(()=>({}));
+  if(!r.ok){ alert(d.error||"Failed"); return null; }
+  load(); return d;
+}
+const SITE = "https://hsw365.github.io/iRUN/";
+function renderOps(d){
+  const cos = d.companies||[];
+  const ops = document.getElementById("ops");
+  const busy = ops.contains(document.activeElement) || [...ops.querySelectorAll("input,textarea")].some(x=>x.value.trim());
+  renderLive(d, cos);
+  if(busy) return; // don't wipe what the owner is typing on an auto refresh
+  const billing = d.settings?.billing_live==="on";
+  document.getElementById("ops").innerHTML = `<h2>Operator</h2>
+  <p class="mono">Sign-up page: <a href="${SITE}start.html" target="_blank" style="color:var(--cyan)">start.html</a> &nbsp;|&nbsp; paid sign-up is ${billing?'<span class="pill ok">OPEN</span>':'<span class="pill draft">CLOSED</span> (set irun_settings.billing_live = on to open)'}</p>
+  <div class="co"><h3>Add a company</h3><p>Runs free on the comp plan. Onboarding starts within the hour.</p>
+    <div class="form2"><input id="nc-name" placeholder="Business name"><input id="nc-url" placeholder="Website"><input id="nc-ig" placeholder="Instagram handle"><input id="nc-tt" placeholder="TikTok handle"><input id="nc-email" placeholder="Owner email (gets nightly reports)"></div>
+    <textarea id="nc-notes" placeholder="Notes: what they sell, who buys, what to never say"></textarea>
+    <button class="btn" id="nc-go">Add and onboard</button></div>
+  ${cos.map(c=>{const r=c.last_report||{};const cl=`${SITE}client.html?c=${encodeURIComponent(c.id)}&k=${encodeURIComponent(c.client_key)}`;return `<div class="co" data-id="${esc(c.id)}">
+    <h3>${esc(c.name)} <span class="pill ${c.status==="active"?"ok":c.status==="error"||c.status==="paused"?"bad":"draft"}">${esc(c.status)}</span> <span class="mono">${esc(c.plan)}</span></h3>
+    <p>${esc(c.source_url||"")} ${Object.entries(c.handles||{}).map(([k,v])=>`${k}: @${esc(v)}`).join(" ")} ${c.email?" | "+esc(c.email):""}</p>
+    <p>Credits: <b>${c.plan==="comp"?"comp":(c.credits+c.bonus_credits)}</b> (used ${c.credits_used_total}) | Offers: ${esc((c.offers||[]).join(", ")||"-")} | Site: ${esc(c.site_status)} ${c.site_url?`<a href="${esc(c.site_url)}" target="_blank" style="color:var(--cyan)">open</a>`:""} | Outreach: ${c.outreach_enabled?"on":"off"}</p>
+    ${c.error?`<p class="err">${esc(c.error)}</p>`:""}
+    ${r.summary?`<p><span class="mono">${esc((r.health||"").toUpperCase())} ${when(r.at)}</span> ${esc(r.summary)}</p>`:""}
+    ${(r.owner_actions||[]).length?`<p>Needs a human: ${esc(r.owner_actions.join(" | "))}</p>`:""}
+    <div class="row">
+      <a class="sm" href="${cl}" target="_blank">Client page</a>
+      ${c.site_draft_url&&c.site_status==="draft"?`<button class="sm" data-a="preview">Preview site</button><button class="sm" data-a="approve">Approve site</button>`:""}
+      <button class="sm" data-a="rebuild">New site version</button>
+      <button class="sm" data-a="status" data-v="${c.status==="active"?"paused":"active"}">${c.status==="active"?"Pause":"Resume"}</button>
+      ${c.status==="error"?`<button class="sm" data-a="status" data-v="pending">Retry onboarding</button>`:""}
+      <button class="sm" data-a="outreach">${c.outreach_enabled?"Outreach off":"Outreach on"}</button>
+      <button class="sm" data-a="credits">Credits +/-</button>
+      <select data-a="plan" style="width:auto;margin:0">${["comp","starter","pro","elite"].map(p=>`<option ${p===c.plan?"selected":""}>${p}</option>`).join("")}</select>
+    </div>
+    <textarea data-a="rows" placeholder="Prospects, one per line: email, name, business, note"></textarea><button class="sm" data-a="prospects">Add prospects</button>
+  </div>`}).join("")||"<p>No companies yet.</p>"}`;
+  document.getElementById("nc-go").onclick=()=>{const v=id=>document.getElementById(id).value.trim();
+    act({a:"add_company",name:v("nc-name"),url:v("nc-url"),email:v("nc-email"),notes:v("nc-notes"),handles:{instagram:v("nc-ig"),tiktok:v("nc-tt")}});};
+  document.querySelectorAll("#ops .co[data-id]").forEach(el=>{
+    const id=el.dataset.id, c=cos.find(x=>x.id===id);
+    el.querySelectorAll("button[data-a]").forEach(b=>b.onclick=async()=>{
+      const a=b.dataset.a;
+      if(a==="approve") act({a:"company",id,approve_site:true});
+      if(a==="rebuild" && confirm("Build a new version of the website? Paid plans spend 1 credit.")) act({a:"company",id,rebuild_site:true});
+      if(a==="status") act({a:"company",id,status:b.dataset.v});
+      if(a==="outreach") act({a:"company",id,outreach_enabled:!c.outreach_enabled});
+      if(a==="credits"){const n=prompt("Credits to add (negative to remove):","25"); if(n) act({a:"credits",id,n:Number(n)});}
+      if(a==="prospects"){const rows=el.querySelector("textarea[data-a=rows]").value.split(/\n+/).map(l=>{const p=l.split(",").map(x=>x.trim());return{email:p[0],name:p[1],business:p[2],note:p.slice(3).join(", ")}}).filter(r=>r.email); act({a:"prospects",id,rows});}
+      if(a==="preview"){const h=await (await fetch(c.site_draft_url+"?v="+Date.now())).text(); const w=window.open("","_blank"); if(w){w.document.open();w.document.write(h);w.document.close();}}
+    });
+    const sel=el.querySelector("select[data-a=plan]"); sel.onchange=()=>act({a:"company",id,plan:sel.value});
+  });
+}
+function renderLive(d, cos){
+  const names=Object.fromEntries(cos.map(c=>[c.id,c.name]));
+  document.getElementById("live").innerHTML = `<h2>Live <span class="mono">every agent, every company, newest first</span></h2><div class="feed">${(d.activity||[]).map(a=>`<div><span class="mono">${when(a.created_at)}</span><span>${esc(names[a.company_id]||a.company_id||"-")}</span><span class="a">${esc(a.agent)}</span><span>${esc(a.action)}</span></div>`).join("")||"<div>No activity yet.</div>"}</div>`;
+}
 load();
 </script>
 </body>

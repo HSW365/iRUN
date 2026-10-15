@@ -28,6 +28,7 @@ import traceback
 
 sys.path.insert(0, os.path.dirname(__file__))
 import accounts  # noqa: E402
+import companies  # noqa: E402
 import content_queue  # noqa: E402
 import db  # noqa: E402
 import faceless  # noqa: E402
@@ -246,6 +247,26 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     return row
 
 
+def charge(acct, what):
+    """Operator companies pay 1 credit per video. HSW365's own accounts are never charged."""
+    if acct.get("type") != "company" or not db.enabled():
+        return True
+    return companies.spend(acct["id"], companies.plans()["costs"]["video"], what)
+
+
+def refund(acct, why):
+    if acct.get("type") == "company" and db.enabled():
+        companies.refund(acct["id"], companies.plans()["costs"]["video"], why)
+
+
+def log_video(acct, rows, kind):
+    if acct.get("type") != "company":
+        return
+    r = rows[0]
+    companies.log(acct["id"], "content", f"{kind} video: {r.get('hook') or r.get('angle') or ''}"[:200],
+                  {"platforms": {x["platform"]: x["status"] for x in rows}, "video": r.get("video_url")})
+
+
 def preflight(accts, mode):
     def has(k):
         return "set" if os.environ.get(k) else "MISSING"
@@ -309,8 +330,17 @@ def main():
         a.kind == "auto" and not a.platform and not a.product and slot_hour(now.hour) == FACELESS_HOUR)
 
     failed, made, skipped = 0, 0, 0
+    scheduled = not (a.platform or a.product or a.idea or a.account)
     for acct in accts:
         pfs = [p for p in wanted if p in acct["platforms"]]
+        if acct.get("type") == "company" and scheduled:
+            # Operator companies post on their plan's slots, and only to platforms whose login is connected
+            if slot_hour(now.hour) not in acct.get("hours", []):
+                continue
+            pfs = [p for p in pfs if accounts.connected(acct["id"], p)[0]]
+            if not pfs:
+                companies.log(acct["id"], "content", "no video this slot: connect TikTok or Instagram to start posting")
+                continue
         if want_faceless and pfs:
             try:
                 sers = [s for s in accounts.series(acct["id"]) if not a.series or s["id"] == a.series]
@@ -327,10 +357,17 @@ def main():
                     if sers:
                         skipped += 1
                         print(f"[{acct['id']}/faceless] skipped: no faceless script queued and no ANTHROPIC_API_KEY to write one")
+                if ser and not charge(acct, f"faceless video ({ser['id']})"):
+                    ser = None
                 if ser:
-                    rows = make_faceless(acct, ser, pfs, a.mode, a.out, queued, a.idea, a.style)
+                    try:
+                        rows = make_faceless(acct, ser, pfs, a.mode, a.out, queued, a.idea, a.style)
+                    except Exception:
+                        refund(acct, "faceless video failed")
+                        raise
                     made += 1
                     failed += any(r["status"] == "failed" for r in rows)
+                    log_video(acct, rows, "faceless")
                     continue  # the faceless video is this slot's post on these platforms
             except Exception:
                 traceback.print_exc()
@@ -351,7 +388,15 @@ def main():
                     skipped += 1
                     print(f"[{acct['id']}/{pf}] skipped: queue is empty and no ANTHROPIC_API_KEY to write a script")
                     continue
-                row = make_one(acct, product, pf, a.mode, a.out, queued)
+                if not charge(acct, f"{pf} video ({product['id']})"):
+                    skipped += 1
+                    continue
+                try:
+                    row = make_one(acct, product, pf, a.mode, a.out, queued)
+                except Exception:
+                    refund(acct, f"{pf} video failed")
+                    raise
+                log_video(acct, [row], "promo")
                 made += 1
                 failed += row["status"] == "failed"
             except Exception:

@@ -1,0 +1,85 @@
+name: iRun Operator
+
+on:
+  schedule:
+    # Hourly: onboard new companies, build and publish websites. 14:xx UTC also runs outreach (10am ET);
+    # 03:xx UTC also runs the nightly CEO review (11pm ET). See engine/ops.py.
+    - cron: "37 * * * *"
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "auto, onboard, site, outreach, ceo or all"
+        default: "auto"
+      company:
+        description: "only this company id (blank = every company)"
+        default: ""
+      add_name:
+        description: "Add a company: business name (uses the fields below)"
+        default: ""
+      add_url:
+        description: "Add a company: website"
+        default: ""
+      add_handles:
+        description: "Add a company: handles, e.g. instagram=acme tiktok=acme"
+        default: ""
+      mode:
+        description: "draft or live (outreach only sends in live)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun-operator
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -q -r requirements.txt
+      - name: Operate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          IMAP_HOST: ${{ vars.IMAP_HOST }}
+          OUTREACH_ADDRESS: ${{ vars.OUTREACH_ADDRESS }}
+          IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'draft' }}
+          ADD_NAME: ${{ github.event.inputs.add_name }}
+          ADD_URL: ${{ github.event.inputs.add_url }}
+          ADD_HANDLES: ${{ github.event.inputs.add_handles }}
+          TASK: ${{ github.event.inputs.task || 'auto' }}
+          COMPANY: ${{ github.event.inputs.company }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ] || [ -z "$SUPABASE_SERVICE_KEY" ]; then
+            echo "Operator is idle: add the ANTHROPIC_API_KEY and SUPABASE_SERVICE_KEY repo secrets to switch it on."
+            exit 0
+          fi
+          ARGS="--task $TASK"
+          if [ -n "$COMPANY" ]; then ARGS="$ARGS --company $COMPANY"; fi
+          if [ -n "$ADD_NAME" ]; then
+            H=""; for h in $ADD_HANDLES; do H="$H --handle $h"; done
+            python engine/ops.py --add "$ADD_NAME" --url "$ADD_URL" $H
+          else
+            python engine/ops.py $ARGS
+          fi
+      - name: Save published websites
+        if: always()
+        run: |
+          git config user.name "iRun"
+          git config user.email "hsw365media@gmail.com"
+          git add sites || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "iRun Operator: publish websites [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
