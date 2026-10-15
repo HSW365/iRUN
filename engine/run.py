@@ -295,6 +295,7 @@ def main():
     ap.add_argument("--idea", help="make a faceless video about this idea (needs ANTHROPIC_API_KEY)")
     ap.add_argument("--series", help="series id from config/series.json")
     ap.add_argument("--style", help="visual style id from config/styles.json")
+    ap.add_argument("--count", type=int, default=1, help="with --product: render this many queued scripts for it (one per platform each)")
     ap.add_argument("--mode", default=os.environ.get("IRUN_MODE", "draft"), choices=["draft", "live"])
     ap.add_argument("--out", default=os.path.join(ROOT, "out"))
     a = ap.parse_args()
@@ -379,7 +380,22 @@ def main():
             try:
                 ids = [p["id"] for p in acct["products"]]
                 offset = 0 if a.mode == "live" else draft_offset()
-                queued = None if a.product else content_queue.take(acct["id"], pf, ids, offset)
+                if a.product:  # a named product renders its own queued scripts first: a.count of them
+                    seen, queued = set(), None
+                    for n in range(max(1, a.count)):
+                        q = content_queue.take(acct["id"], pf, [a.product], n)
+                        if not q or q[0] in seen:
+                            break
+                        seen.add(q[0])
+                        if n == 0:
+                            queued = q  # rendered by the normal path below
+                            continue
+                        prod = next(p for p in acct["products"] if p["id"] == a.product)
+                        if charge(acct, f"{pf} video ({prod['id']})"):
+                            made += 1
+                            failed += make_one(acct, prod, pf, a.mode, a.out, q)["status"] == "failed"
+                else:
+                    queued = content_queue.take(acct["id"], pf, ids, offset)
                 if queued:
                     product = next(p for p in acct["products"] if p["id"] == queued[1]["product"])
                 elif has_writer:
