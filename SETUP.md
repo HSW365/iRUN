@@ -54,13 +54,18 @@ With just these, **Actions > iRun autopilot > Run workflow** (mode `draft`) make
 ## 3. Instagram
 1. @hsw365media must be a **Professional** (Business or Creator) account.
 2. Go to developers.facebook.com, create an app (type Business), and add **Instagram > API setup with Instagram login**. Add @hsw365media and generate a token. Permissions: `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_messages`, `instagram_business_manage_comments`.
-3. Add the secret `IG_ACCESS_TOKEN` (the long-lived token). Optionally add `IG_USER_ID`. iRun refreshes the token on every run and stores the fresh copy.
-4. Set up webhooks for the lead bot:
+3. **Business login** (Instagram > API setup with Instagram login > Set up Instagram business login):
+   - OAuth redirect URI: `https://hsw365.github.io/iRUN/callback.html`
+   - Deauthorize callback URL: `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth?a=deauthorize`
+   - Data deletion request URL: `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth?a=delete`
+   - Supabase (klipit project) > Edge Functions > Secrets: `IG_APP_ID` and `IG_APP_SECRET` (the **Instagram** app ID and secret shown on that page, not the Facebook app ID).
+4. Connect accounts at `https://hsw365.github.io/iRUN/instagram.html`. To connect one of your iRun brands so the engine posts with it, open `instagram.html?account=<id>&o=<owner key>` (for example `account=hoodstar365`). A client connects from `instagram.html?c=<company id>&k=<client key>`. The token is stored server side and refreshed automatically. `IG_ACCESS_TOKEN` still works as a fallback for @hsw365media.
+5. Set up webhooks for the lead bot:
    - Callback URL: `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook`
    - Verify token: stored in `irun_settings.ig_verify_token`
    - Subscribe to the `comments` and `messages` fields.
-5. Optionally, to enforce webhook signatures, insert your app secret as `ig_app_secret` into `irun_settings`.
-6. For the bot to DM people other than your app's testers, Meta has to approve the messaging and comments permissions through App Review. Until then, the bot only works for accounts that have a role on the app.
+6. Optionally, to enforce webhook signatures, insert your app secret as `ig_app_secret` into `irun_settings`.
+7. App Review: see `APP_REVIEW.md`. For the bot to DM people other than your app's testers, Meta has to approve the messaging and comments permissions through App Review. Until then, the bot only works for accounts that have a role on the app.
 
 ## 4. YouTube Shorts (optional)
 1. Go to console.cloud.google.com, create a project, and enable **YouTube Data API v3**.

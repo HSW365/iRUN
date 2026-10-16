@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>iRun | Instagram</title>
+<meta name="description" content="Connect your Instagram Business or Creator account to iRun: publish posts and reels, manage comments and answer DMs from one place.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3Ei%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="assets/hsw/fonts/barlow-condensed-latin-900-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/hsw/fonts/inter-latin-wght-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>
+:root{--acc:#ef4444;--acc-ink:#0a0a0f}
+body{font-size:16px}
+.top{border-bottom:1px solid var(--line);background:#050508;position:sticky;top:0;z-index:40}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;flex-wrap:wrap;padding-block:12px}
+.who{display:flex;align-items:center;gap:12px}
+.who img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--line2);background:var(--card)}
+.who b{display:block;color:#fff;font-weight:700;line-height:1.2}
+.who small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--mut);letter-spacing:.04em}
+
+/* connect */
+.gate{min-height:calc(100vh - 77px);display:grid;align-items:center;padding-block:clamp(40px,7vw,96px)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,80px);align-items:center}
+.gate h1{font-size:clamp(56px,7.6vw,118px)}
+.gate h1 em{font-style:normal;color:var(--acc)}
+.gate .lede{margin-top:22px;color:var(--text2);font-size:clamp(17px,1.4vw,19.5px);max-width:52ch;line-height:1.55}
+.gate .row{margin-top:30px}
+.perm{list-style:none;border-top:2px solid #fff}
+.perm li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:20px 0;border-bottom:1px solid var(--line)}
+.perm li i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--acc);padding-top:4px;letter-spacing:.06em}
+.perm b{display:block;color:#fff;font-size:17px}
+.perm span{display:block;color:var(--mut);font-size:14.5px;margin-top:4px;line-height:1.45}
+.fine{margin-top:18px;font-size:13.5px;color:var(--mut);max-width:60ch}
+.fine a{color:#fff;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+
+/* workspace */
+.ws{padding-block:28px 96px}
+.tabs-x{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs-x::-webkit-scrollbar{display:none}
+.tabs-x button{background:none;border:0;padding:16px 18px 14px;font-weight:700;font-size:15px;color:var(--mut);cursor:pointer;position:relative;white-space:nowrap}
+.tabs-x button:hover{color:#fff}
+.tabs-x button[aria-selected="true"]{color:#fff}
+.tabs-x button[aria-selected="true"]::after{content:"";position:absolute;left:18px;right:18px;bottom:-1px;height:3px;background:var(--acc)}
+.tabs-x button em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--mut);margin-left:6px}
+section[role="tabpanel"]{padding-top:28px}
+
+.prof{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:center}
+.prof img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid var(--line2);background:var(--card)}
+.prof h1{font-size:clamp(40px,5vw,68px)}
+.prof p{color:var(--mut);font-family:var(--mono);font-size:13px;margin-top:6px;letter-spacing:.04em}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--card);border:1px solid var(--line2);border-radius:6px;margin-top:24px}
+.kpis>div{padding:18px 22px}.kpis>div+div{border-left:1px solid var(--line)}
+.kpis b{display:block;font-family:var(--disp);font-size:clamp(32px,3vw,44px);font-weight:900;line-height:.9;color:#fff}
+.kpis span{display:block;font-size:13.5px;color:var(--mut);margin-top:6px}
+.sub{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:36px}
+.sub h2{font-family:var(--body);font-size:19px;font-weight:800;letter-spacing:-.01em;color:#fff;line-height:1.25}
+.sub small{font-family:var(--mono);font-size:11.5px;color:var(--mut);letter-spacing:.06em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:14px}
+.tile{position:relative;aspect-ratio:1;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:block}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.tile:hover img{transform:scale(1.04)}
+.tile .meta{position:absolute;inset:auto 0 0 0;padding:28px 10px 8px;background:linear-gradient(transparent,rgba(0,0,0,.82));font-family:var(--mono);font-size:11.5px;color:#fff;display:flex;gap:12px}
+.tile .kind{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:10.5px;background:rgba(10,10,15,.8);color:#fff;padding:3px 7px;border-radius:2px;letter-spacing:.06em}
+.empty{border:1px dashed var(--line2);border-radius:6px;padding:28px;color:var(--mut);text-align:center;margin-top:14px}
+
+.card{background:var(--card);border:1px solid var(--line2);border-radius:6px;padding:24px}
+.compose{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.62fr);gap:22px;align-items:start}
+.drop{display:grid;place-items:center;text-align:center;border:1.5px dashed var(--line2);border-radius:4px;min-height:200px;padding:20px;cursor:pointer;transition:border-color .15s,background .15s;color:var(--text2)}
+.drop:hover,.drop.over{border-color:var(--acc);background:rgba(239,68,68,.05)}
+.drop b{display:block;color:#fff;font-size:17px}
+.drop span{display:block;font-size:13.5px;color:var(--mut);margin-top:6px}
+.seg{display:inline-flex;width:auto;border:1px solid var(--line2);border-radius:3px;overflow:hidden;margin-top:6px}
+.seg button{background:none;border:0;padding:10px 16px;font-weight:600;font-size:14px;color:var(--mut);cursor:pointer}
+.seg button[aria-pressed="true"]{background:#fff;color:#0a0a0f}
+.count{float:right;font-family:var(--mono);font-size:11.5px;color:var(--mut);font-weight:400}
+.phone{background:#000;border:1px solid var(--line2);border-radius:18px;padding:10px;position:sticky;top:110px}
+.phone .ph-top{display:flex;align-items:center;gap:8px;padding:6px 4px 10px}
+.phone .ph-top img{width:26px;height:26px;border-radius:50%;object-fit:cover;background:var(--card)}
+.phone .ph-top b{font-size:13px;color:#fff}
+.phone .media{aspect-ratio:4/5;background:var(--card);border-radius:4px;overflow:hidden;display:grid;place-items:center;color:var(--mut);font-size:13px}
+.phone .media img,.phone .media video{width:100%;height:100%;object-fit:cover}
+.phone .cap{padding:10px 4px 4px;font-size:13px;color:#e6e6ec;white-space:pre-wrap;overflow-wrap:anywhere;max-height:140px;overflow:auto}
+.phone .cap b{color:#fff;margin-right:6px}
+.steps-x{list-style:none;margin-top:16px;display:grid;gap:8px;font-size:14px}
+.steps-x li{display:flex;gap:10px;align-items:center;color:var(--mut)}
+.steps-x li i{width:9px;height:9px;border-radius:50%;background:var(--line2);flex:none}
+.steps-x li.on{color:#fff}.steps-x li.on i{background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.18)}
+.steps-x li.done{color:var(--text2)}.steps-x li.done i{background:var(--ok)}
+.steps-x li.bad{color:#ff8a8a}.steps-x li.bad i{background:var(--bad)}
+
+.thread{border:1px solid var(--line2);border-radius:6px;background:var(--card);overflow:hidden}
+.thread+.thread{margin-top:16px}
+.thread-head{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--raise)}
+.thread-head img{width:64px;height:64px;object-fit:cover;border-radius:3px;background:var(--card)}
+.thread-head p{color:var(--text2);font-size:14px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.thread-head a{font-family:var(--mono);font-size:11.5px;color:var(--mut);letter-spacing:.04em}
+.cm{padding:14px 16px;border-bottom:1px solid var(--line)}
+.cm:last-child{border-bottom:0}
+.cm.hid{opacity:.55}
+.cm-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.cm-top b{color:#fff;font-size:14.5px}
+.cm-top time{font-family:var(--mono);font-size:11.5px;color:var(--mut)}
+.cm-text{color:#e6e6ec;margin-top:4px;font-size:15px;overflow-wrap:anywhere}
+.cm-acts{display:flex;gap:16px;margin-top:8px}
+.cm-acts button{background:none;border:0;padding:0;font-weight:600;font-size:13.5px;color:var(--mut);cursor:pointer}
+.cm-acts button:hover{color:#fff}
+.cm-acts button.danger:hover{color:#ff8a8a}
+.reply{margin:10px 0 0 18px;padding-left:12px;border-left:2px solid var(--line2)}
+.reply .cm-text{font-size:14px}
+.rbox{display:flex;gap:8px;margin-top:10px}
+.rbox input{flex:1;min-width:0;height:44px;border-radius:3px;border:1.5px solid var(--line2);padding:0 12px;background:var(--bg);color:#fff;outline:0}
+.rbox input:focus{border-color:var(--acc)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:2px 6px;border-radius:2px;border:1px solid var(--line2);color:var(--mut);margin-left:8px;vertical-align:middle}
+
+.inbox{display:grid;grid-template-columns:minmax(240px,.4fr) minmax(0,1fr);border:1px solid var(--line2);border-radius:6px;overflow:hidden;min-height:520px;background:var(--card)}
+.clist{border-right:1px solid var(--line);overflow:auto;max-height:640px}
+.clist button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:14px 16px;cursor:pointer}
+.clist button:hover{background:var(--card2)}
+.clist button[aria-current="true"]{background:var(--card2);box-shadow:inset 4px 0 0 var(--acc)}
+.clist b{display:block;color:#fff;font-size:14.5px}
+.clist span{display:block;color:var(--mut);font-size:13px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat{display:flex;flex-direction:column;min-width:0}
+.chat-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.chat-head b{color:#fff}
+.msgs{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:8px;max-height:520px}
+.bub{max-width:76%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.bub.in{background:var(--card2);color:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.bub.out{background:#fff;color:#0a0a0f;align-self:flex-end;border-bottom-right-radius:4px}
+.bub time{display:block;font-family:var(--mono);font-size:10.5px;opacity:.6;margin-top:4px}
+.chat form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.chat form input{flex:1;min-width:0;height:48px;border-radius:3px;border:1.5px solid var(--line2);padding:0 14px;background:var(--bg);color:#fff;outline:0}
+.chat form input:focus{border-color:var(--acc)}
+.chat .note{padding:0 18px 12px;font-size:12.5px;color:var(--mut)}
+.chat .blank{flex:1;display:grid;place-items:center;color:var(--mut);padding:24px;text-align:center}
+
+.dl{display:grid;grid-template-columns:auto 1fr;border-top:1px solid var(--line2);margin-top:14px}
+.dl dt,.dl dd{padding:12px 0;border-bottom:1px solid var(--line)}
+.dl dt{color:var(--mut);padding-right:24px;font-size:14px}
+.dl dd{color:#fff;font-family:var(--mono);font-size:13px;overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#fff;color:#0a0a0f;padding:12px 18px;border-radius:3px;font-weight:600;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s var(--ease);z-index:90;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast.err{background:var(--bad);color:#fff}
+.spin{width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .7s linear infinite;flex:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+.skel{background:linear-gradient(90deg,var(--card) 0,var(--card2) 50%,var(--card) 100%);background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+@media (max-width:900px){
+  .gate-grid,.compose{grid-template-columns:1fr}
+  .phone{position:static}
+  .inbox{grid-template-columns:1fr}
+  .clist{max-height:240px;border-right:0;border-bottom:1px solid var(--line)}
+  .prof{grid-template-columns:auto minmax(0,1fr)}
+  .prof .btn{grid-column:1/-1}
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .kpis>div{padding:14px}
+}
+@media (max-width:520px){
+  .prof img{width:72px;height:72px}
+  .grid{grid-template-columns:repeat(3,1fr);gap:4px}
+  .tile .meta{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Instagram</small></span></a>
+  <div class="who" id="who" hidden><img id="who-pic" alt=""><div><b id="who-name"></b><small id="who-type"></small></div></div>
+</div></header>
+
+<main id="main">
+  <!-- Connect -->
+  <div class="gate wrap" id="gate" hidden>
+    <div class="gate-grid">
+      <div>
+        <p class="status"><i></i>Instagram Business Login</p>
+        <h1>Run your Instagram from <em>one place.</em></h1>
+        <p class="lede">Connect your Instagram Business or Creator account. Publish posts and reels, answer comments and reply to customer DMs without switching apps.</p>
+        <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn-acc" id="connect" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Connect Instagram</a>
+          <a class="btn btn-line" href="index.html">What is iRun</a>
+        </div>
+        <p class="msg" id="gate-msg" role="status"></p>
+        <p class="fine">You sign in on Instagram, not here. iRun never sees your password, and you can disconnect at any time. Read the <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms</a>.</p>
+      </div>
+      <ul class="perm" aria-label="What iRun asks for">
+        <li><i>01</i><div><b>Your profile and posts</b><span>Username, profile photo and recent media, so you can see which account is connected.</span></div></li>
+        <li><i>02</i><div><b>Publish content</b><span>Posts and reels you create or approve in iRun go to your account, only when you press Publish.</span></div></li>
+        <li><i>03</i><div><b>Comments</b><span>Read, reply to, hide or delete comments on your own posts.</span></div></li>
+        <li><i>04</i><div><b>Messages</b><span>Reply to DMs people send you. iRun never starts conversations or sends bulk messages.</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Workspace -->
+  <div class="wrap ws" id="ws" hidden>
+    <div class="prof">
+      <img id="p-pic" alt="">
+      <div><h1 id="p-user"></h1><p id="p-meta"></p></div>
+      <a class="btn btn-acc btn-sm" href="#create" data-go="create">New post</a>
+    </div>
+    <div class="kpis"><div><b id="k-posts">–</b><span>Posts</span></div><div><b id="k-fol">–</b><span>Followers</span></div><div><b id="k-fing">–</b><span>Following</span></div></div>
+
+    <nav class="tabs-x" role="tablist" aria-label="Workspace" style="margin-top:30px">
+      <button role="tab" id="t-overview" aria-controls="overview" aria-selected="true">Overview</button>
+      <button role="tab" id="t-create" aria-controls="create" aria-selected="false">Create post</button>
+      <button role="tab" id="t-comments" aria-controls="comments" aria-selected="false">Comments</button>
+      <button role="tab" id="t-inbox" aria-controls="inbox" aria-selected="false">Inbox</button>
+      <button role="tab" id="t-settings" aria-controls="settings" aria-selected="false">Settings</button>
+    </nav>
+
+    <section role="tabpanel" id="overview" aria-labelledby="t-overview">
+      <div class="sub" style="margin-top:0"><h2>Recent posts</h2><small>FROM INSTAGRAM</small></div>
+      <div class="grid" id="media"></div>
+    </section>
+
+    <section role="tabpanel" id="create" aria-labelledby="t-create" hidden>
+      <div class="compose">
+        <form class="card" id="post-form" novalidate>
+          <div class="field" style="margin-top:0"><span>Type</span>
+            <div class="seg" role="group" aria-label="Post type"><button type="button" data-kind="IMAGE" aria-pressed="true">Photo</button><button type="button" data-kind="REELS" aria-pressed="false">Reel</button></div>
+          </div>
+          <label class="drop" id="drop" for="file" style="margin-top:16px">
+            <div><b id="drop-t">Drop a photo here or click to choose</b><span id="drop-s">JPG or PNG, up to 8 MB. Converted to JPG for Instagram.</span></div>
+          </label>
+          <input type="file" id="file" accept="image/jpeg,image/png,image/webp" class="sr">
+          <label class="field"><span>Or paste a public media URL <small>(optional)</small></span><input id="murl" type="url" placeholder="https://"></label>
+          <label class="field"><span>Caption <span class="count" id="cc">0 / 2200</span></span><textarea id="cap" maxlength="2200" placeholder="Write a caption. Hashtags and @mentions work."></textarea></label>
+          <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap"><button class="btn btn-acc" id="pub" type="submit">Publish to Instagram</button><button class="btn btn-line" type="reset">Clear</button></div>
+          <ol class="steps-x" id="steps" hidden>
+            <li data-s="up"><i></i>Uploading media</li>
+            <li data-s="make"><i></i>Sending to Instagram</li>
+            <li data-s="proc"><i></i>Instagram is processing</li>
+            <li data-s="live"><i></i>Published</li>
+          </ol>
+          <p class="msg" id="post-msg" role="status"></p>
+        </form>
+        <div class="phone" aria-label="Preview">
+          <div class="ph-top"><img id="pv-pic" alt=""><b id="pv-user"></b></div>
+          <div class="media" id="pv-media">Preview</div>
+          <div class="cap"><b id="pv-user2"></b><span id="pv-cap"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section role="tabpanel" id="comments" aria-labelledby="t-comments" hidden>
+      <div class="sub" style="margin-top:0"><h2>Comments on your posts</h2><button class="btn btn-line btn-sm" id="c-refresh">Refresh</button></div>
+      <div id="threads" style="margin-top:14px"></div>
+    </section>
+
+    <section role="tabpanel" id="inbox" aria-labelledby="t-inbox" hidden>
+      <div class="sub" style="margin-top:0"><h2>Messages people sent you</h2><button class="btn btn-line btn-sm" id="i-refresh">Refresh</button></div>
+      <div class="inbox" style="margin-top:14px">
+        <div class="clist" id="clist"></div>
+        <div class="chat" id="chat"><div class="blank">Pick a conversation.</div></div>
+      </div>
+    </section>
+
+    <section role="tabpanel" id="settings" aria-labelledby="t-settings" hidden>
+      <div class="card" style="max-width:720px">
+        <div class="sub" style="margin-top:0"><h2>Connected account</h2><small>INSTAGRAM</small></div>
+        <dl class="dl">
+          <dt>Account</dt><dd id="s-user"></dd>
+          <dt>Account type</dt><dd id="s-type"></dd>
+          <dt>Instagram user ID</dt><dd id="s-id"></dd>
+          <dt>Linked to iRun brand</dt><dd id="s-acct"></dd>
+          <dt>Access renews by</dt><dd id="s-exp"></dd>
+        </dl>
+        <p class="small" style="margin-top:16px">Disconnecting deletes your Instagram access token and everything iRun stored about this account. You can also remove iRun in Instagram under Settings, Website permissions, Apps and websites.</p>
+        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap"><button class="btn btn-line" id="disc">Disconnect Instagram</button><a class="btn btn-line" href="privacy.html">Privacy policy</a></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth";
+  const $ = (id) => document.getElementById(id);
+  const q = new URLSearchParams(location.search);
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem("irun_ig") || "null"); } catch { return null; } },
+    set(v) { try { v ? localStorage.setItem("irun_ig", JSON.stringify(v)) : localStorage.removeItem("irun_ig"); } catch {} },
+  };
+  let S = store.get();
+  let ME = null;
+  let kind = "IMAGE";
+  let file = null;
+
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const num = (n) => n == null ? "–" : n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M" : n >= 1e4 ? (n / 1e3).toFixed(1).replace(/\.0$/, "") + "K" : Number(n).toLocaleString();
+  const ago = (t) => { const s = (Date.now() - new Date(t)) / 1000; return s < 60 ? "now" : s < 3600 ? Math.floor(s / 60) + "m" : s < 86400 ? Math.floor(s / 3600) + "h" : s < 604800 ? Math.floor(s / 86400) + "d" : new Date(t).toLocaleDateString(); };
+  let tt;
+  function toast(m, err) { const t = $("toast"); t.textContent = m; t.className = "toast show" + (err ? " err" : ""); clearTimeout(tt); tt = setTimeout(() => t.className = "toast", 3600); }
+
+  async function call(a, body = {}) {
+    const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ a, u: S?.u, s: S?.s, ...body }) });
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 401) { store.set(null); S = null; showGate("Your Instagram session ended. Connect again."); throw new Error("signed out"); }
+    if (!r.ok || j.error) throw new Error(j.error || "Something went wrong.");
+    return j;
+  }
+
+  // ---- connect ----
+  function loginUrl() {
+    const u = new URL(API); u.searchParams.set("a", "login");
+    for (const k of ["account", "o", "c", "k"]) if (q.get(k)) u.searchParams.set(k, q.get(k));
+    return u.toString();
+  }
+  function showGate(msg) {
+    $("ws").hidden = true; $("who").hidden = true; $("gate").hidden = false;
+    $("connect").href = loginUrl();
+    $("gate-msg").textContent = msg || ""; $("gate-msg").className = "msg" + (msg ? " err" : "");
+  }
+  fetch(API + "?a=config").then((r) => r.json()).then((j) => {
+    if (!j.ready && !S) { $("gate-msg").textContent = "Instagram login is being set up. Check back shortly."; $("connect").setAttribute("aria-disabled", "true"); $("connect").classList.add("btn-line"); }
+  }).catch(() => {});
+
+  // ---- tabs ----
+  const tabs = ["overview", "create", "comments", "inbox", "settings"];
+  const loaded = {};
+  function go(name, push = true) {
+    if (!tabs.includes(name)) name = "overview";
+    for (const t of tabs) { $(t).hidden = t !== name; $("t-" + t).setAttribute("aria-selected", t === name); }
+    if (push) history.replaceState(null, "", location.pathname + location.search + "#" + name);
+    if (name === "comments" && !loaded.comments) loadComments();
+    if (name === "inbox" && !loaded.inbox) loadInbox();
+  }
+  for (const t of tabs) $("t-" + t).addEventListener("click", () => go(t));
+  document.querySelectorAll("[data-go]").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); go(a.dataset.go); }));
+  $("main").querySelector(".tabs-x").addEventListener("keydown", (e) => {
+    const i = tabs.findIndex((t) => $("t-" + t).getAttribute("aria-selected") === "true");
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; go(n); $("t-" + n).focus(); }
+  });
+
+  // ---- overview ----
+  async function loadMe() {
+    $("gate").hidden = true; $("ws").hidden = false;
+    $("media").innerHTML = Array.from({ length: 6 }, () => '<div class="tile skel"></div>').join("");
+    const j = await call("me");
+    ME = j; const p = j.profile;
+    const pic = p.profile_picture_url || "";
+    for (const id of ["p-pic", "who-pic", "pv-pic"]) $(id).src = pic;
+    $("p-user").textContent = "@" + p.username;
+    $("p-meta").textContent = [p.name, (p.account_type || "").replace("_", " ")].filter(Boolean).join("  ·  ").toUpperCase();
+    $("who-name").textContent = "@" + p.username; $("who-type").textContent = (p.account_type || "").replace("_", " "); $("who").hidden = false;
+    $("pv-user").textContent = p.username; $("pv-user2").textContent = p.username;
+    $("k-posts").textContent = num(p.media_count); $("k-fol").textContent = num(p.followers_count); $("k-fing").textContent = num(p.follows_count);
+    $("s-user").textContent = "@" + p.username; $("s-type").textContent = p.account_type || "–"; $("s-id").textContent = p.user_id || S.u;
+    $("s-acct").textContent = j.account || "Not linked"; $("s-exp").textContent = j.expires_at ? new Date(j.expires_at).toLocaleDateString() + " (renews automatically)" : "–";
+    const m = j.media || [];
+    $("media").innerHTML = m.length ? m.map((x) => {
+      const img = x.media_type === "VIDEO" ? x.thumbnail_url : x.media_url;
+      const k = x.media_type === "VIDEO" ? "REEL" : x.media_type === "CAROUSEL_ALBUM" ? "ALBUM" : "";
+      return `<a class="tile" href="${esc(x.permalink)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(img)}" alt="${esc((x.caption || "Instagram post").slice(0, 90))}">${k ? `<span class="kind">${k}</span>` : ""}<span class="meta"><span>♥ ${num(x.like_count)}</span><span>💬 ${num(x.comments_count)}</span><span>${ago(x.timestamp)}</span></span></a>`;
+    }).join("") : '<div class="empty" style="grid-column:1/-1">No posts yet. Make your first one in Create post.</div>';
+  }
+
+  // ---- create ----
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
+    kind = b.dataset.kind;
+    document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    $("file").accept = kind === "REELS" ? "video/mp4,video/quicktime" : "image/jpeg,image/png,image/webp";
+    $("drop-t").textContent = kind === "REELS" ? "Drop a video here or click to choose" : "Drop a photo here or click to choose";
+    $("drop-s").textContent = kind === "REELS" ? "MP4 or MOV, 3 to 90 seconds, vertical 9:16 works best. Up to 100 MB." : "JPG or PNG, up to 8 MB. Converted to JPG for Instagram.";
+    setFile(null);
+  }));
+  $("cap").addEventListener("input", () => { $("cc").textContent = $("cap").value.length + " / 2200"; $("pv-cap").textContent = $("cap").value; });
+  $("murl").addEventListener("input", () => { if ($("murl").value) { file = null; preview($("murl").value); } });
+  $("file").addEventListener("change", () => setFile($("file").files[0] || null));
+  const drop = $("drop");
+  ["dragenter", "dragover"].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", (ev) => setFile(ev.dataTransfer.files[0] || null));
+  function preview(src) {
+    const isVid = kind === "REELS";
+    $("pv-media").innerHTML = src ? (isVid ? `<video src="${esc(src)}" muted loop autoplay playsinline></video>` : `<img src="${esc(src)}" alt="Preview">`) : "Preview";
+  }
+  function setFile(f) {
+    if (f) {
+      const okType = kind === "REELS" ? /^video\/(mp4|quicktime)$/.test(f.type) : /^image\/(jpeg|png|webp)$/.test(f.type);
+      if (!okType) { toast(kind === "REELS" ? "Use an MP4 or MOV video." : "Use a JPG or PNG image.", true); f = null; }
+      else if (f.size > (kind === "REELS" ? 100 : 8) * 1048576) { toast("That file is too large.", true); f = null; }
+    }
+    file = f;
+    if (f) { $("murl").value = ""; $("drop-t").textContent = f.name; preview(URL.createObjectURL(f)); } else { preview(""); }
+  }
+  async function toJpeg(f) {
+    if (f.type === "image/jpeg") return f;
+    const img = await createImageBitmap(f);
+    const c = document.createElement("canvas"); c.width = img.width; c.height = img.height;
+    const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0);
+    return await new Promise((res) => c.toBlob((b) => res(new File([b], "post.jpg", { type: "image/jpeg" })), "image/jpeg", 0.92));
+  }
+  function step(s, state) { const li = $("steps").querySelector(`[data-s="${s}"]`); li.className = state; }
+  $("post-form").addEventListener("reset", () => setTimeout(() => { setFile(null); $("cc").textContent = "0 / 2200"; $("pv-cap").textContent = ""; $("steps").hidden = true; $("post-msg").textContent = ""; }));
+  $("post-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const url0 = $("murl").value.trim();
+    if (!file && !url0) { toast(kind === "REELS" ? "Add a video first." : "Add a photo first.", true); return; }
+    const btn = $("pub"); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Publishing';
+    $("steps").hidden = false; ["up", "make", "proc", "live"].forEach((s) => step(s, "")); $("post-msg").textContent = ""; $("post-msg").className = "msg";
+    let cur = "up";
+    try {
+      let url = url0;
+      step("up", "on");
+      if (file) {
+        const f = kind === "IMAGE" ? await toJpeg(file) : file;
+        const u = await call("upload_url", { type: f.type });
+        const fd = new FormData(); fd.append("cacheControl", "3600"); fd.append("", f);
+        const r = await fetch(u.upload, { method: "PUT", body: fd });
+        if (!r.ok) throw new Error("Upload failed. Try again.");
+        url = u.url;
+      }
+      step("up", "done"); cur = "make"; step("make", "on");
+      const c = await call("create", { kind, url, caption: $("cap").value });
+      step("make", "done"); cur = "proc"; step("proc", "on");
+      for (let i = 0; i < 90; i++) {
+        const st = await call("status", { id: c.id });
+        if (st.status === "FINISHED") break;
+        if (st.status === "ERROR" || st.status === "EXPIRED") throw new Error("Instagram could not process this media. " + (st.detail || ""));
+        if (i === 89) throw new Error("Instagram is taking too long. Try again in a minute.");
+        await new Promise((r) => setTimeout(r, i < 3 ? 2000 : 4000));
+      }
+      step("proc", "done"); cur = "live";
+      const p = await call("publish", { id: c.id });
+      step("live", "done");
+      $("post-msg").className = "msg ok";
+      $("post-msg").innerHTML = "Live on Instagram. " + (p.permalink ? `<a href="${esc(p.permalink)}" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">View the post</a>` : "");
+      toast("Published to Instagram");
+      loadMe().catch(() => {});
+    } catch (err) {
+      step(cur, "bad"); $("post-msg").className = "msg err"; $("post-msg").textContent = err.message;
+    } finally { btn.disabled = false; btn.textContent = "Publish to Instagram"; }
+  });
+
+  // ---- comments ----
+  async function loadComments() {
+    loaded.comments = true;
+    $("threads").innerHTML = '<div class="thread skel" style="height:160px"></div>';
+    try {
+      const j = await call("comments");
+      if (!j.posts.length) { $("threads").innerHTML = '<div class="empty">No comments on your recent posts yet.</div>'; return; }
+      $("threads").innerHTML = j.posts.map(({ post, comments }) => `
+        <article class="thread">
+          <div class="thread-head"><img src="${esc(post.media_type === "VIDEO" ? post.thumbnail_url : post.media_url)}" alt=""><div><p>${esc(post.caption || "(no caption)")}</p><a href="${esc(post.permalink)}" target="_blank" rel="noopener">${ago(post.timestamp).toUpperCase()} · OPEN ON INSTAGRAM</a></div><span class="tag">${comments.length} COMMENTS</span></div>
+          ${comments.map(cmHtml).join("")}
+        </article>`).join("");
+    } catch (e) { loaded.comments = false; $("threads").innerHTML = `<div class="empty">${esc(e.message)}</div>`; }
+  }
+  function cmHtml(c) {
+    const reps = (c.replies?.data || []).map((r) => `<div class="reply"><div class="cm-top"><b>@${esc(r.username)}</b><time>${ago(r.timestamp)}</time></div><div class="cm-text">${esc(r.text)}</div></div>`).join("");
+    return `<div class="cm${c.hidden ? " hid" : ""}" data-id="${esc(c.id)}">
+      <div class="cm-top"><b>@${esc(c.username)}${c.hidden ? '<span class="tag">HIDDEN</span>' : ""}</b><time>${ago(c.timestamp)}</time></div>
+      <div class="cm-text">${esc(c.text)}</div>
+      <div class="cm-acts"><button data-act="reply">Reply</button><button data-act="${c.hidden ? "unhide" : "hide"}">${c.hidden ? "Unhide" : "Hide"}</button><button class="danger" data-act="delete">Delete</button></div>
+      ${reps}
+      <form class="rbox" hidden><input placeholder="Reply to @${esc(c.username)}" maxlength="1000" aria-label="Reply"><button class="btn btn-acc btn-sm" type="submit">Send</button></form>
+    </div>`;
+  }
+  $("threads").addEventListener("click", async (e) => {
+    const b = e.target.closest("button[data-act]"); if (!b) return;
+    const cm = b.closest(".cm"); const id = cm.dataset.id;
+    if (b.dataset.act === "reply") { const f = cm.querySelector(".rbox"); f.hidden = !f.hidden; if (!f.hidden) f.querySelector("input").focus(); return; }
+    if (b.dataset.act === "delete" && !confirm("Delete this comment from Instagram?")) return;
+    b.disabled = true;
+    try {
+      if (b.dataset.act === "delete") { await call("delete_comment", { id }); cm.remove(); toast("Comment deleted"); }
+      else { const hide = b.dataset.act === "hide"; await call("hide_comment", { id, hide }); toast(hide ? "Comment hidden" : "Comment visible again"); loadComments(); }
+    } catch (err) { toast(err.message, true); b.disabled = false; }
+  });
+  $("threads").addEventListener("submit", async (e) => {
+    e.preventDefault(); const f = e.target; const cm = f.closest(".cm"); const inp = f.querySelector("input");
+    if (!inp.value.trim()) return;
+    const btn = f.querySelector("button"); btn.disabled = true;
+    try { await call("reply_comment", { id: cm.dataset.id, text: inp.value }); toast("Reply posted"); loadComments(); }
+    catch (err) { toast(err.message, true); btn.disabled = false; }
+  });
+  $("c-refresh").addEventListener("click", loadComments);
+
+  // ---- inbox ----
+  let convos = [], openId = null;
+  async function loadInbox() {
+    loaded.inbox = true;
+    $("clist").innerHTML = '<div style="padding:16px"><div class="skel" style="height:44px;border-radius:3px"></div></div>';
+    try {
+      const j = await call("conversations");
+      convos = j.conversations.filter((c) => c.with);
+      if (!convos.length) { $("clist").innerHTML = '<div class="empty" style="margin:16px">No messages yet. When someone DMs you, it shows up here.</div>'; $("chat").innerHTML = '<div class="blank">Nothing to reply to yet.</div>'; return; }
+      $("clist").innerHTML = convos.map((c) => {
+        const last = c.messages[c.messages.length - 1];
+        return `<button data-id="${esc(c.id)}" aria-current="${c.id === openId}"><b>@${esc(c.with.username || c.with.id)}</b><span>${esc(last?.message || "(attachment)")} · ${ago(c.updated)}</span></button>`;
+      }).join("");
+      openConvo(openId && convos.some((c) => c.id === openId) ? openId : convos[0].id);
+    } catch (e) { loaded.inbox = false; $("clist").innerHTML = `<div class="empty" style="margin:16px">${esc(e.message)}</div>`; }
+  }
+  function openConvo(id) {
+    openId = id; const c = convos.find((x) => x.id === id); if (!c) return;
+    $("clist").querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", b.dataset.id === id));
+    const mine = (m) => String(m.from?.id) === String(S.u) || (ME && m.from?.username === ME.profile.username);
+    $("chat").innerHTML = `
+      <div class="chat-head"><b>@${esc(c.with.username || c.with.id)}</b><span class="tag">${c.can_reply ? "REPLY WINDOW OPEN" : "WINDOW CLOSED"}</span></div>
+      <div class="msgs" id="msgs">${c.messages.map((m) => `<div class="bub ${mine(m) ? "out" : "in"}">${esc(m.message || "(attachment)")}<time>${ago(m.created_time)}</time></div>`).join("")}</div>
+      <form id="send"><input id="send-t" maxlength="1000" placeholder="${c.can_reply ? "Write a reply" : "You can reply within 24 hours of their last message"}" ${c.can_reply ? "" : "disabled"} aria-label="Reply"><button class="btn btn-acc btn-sm" type="submit" ${c.can_reply ? "" : "disabled"}>Send</button></form>
+      <p class="note">iRun only replies to people who messaged you first, within Instagram's 24-hour window.</p>`;
+    const box = $("msgs"); box.scrollTop = box.scrollHeight;
+    $("send").addEventListener("submit", async (e) => {
+      e.preventDefault(); const t = $("send-t").value.trim(); if (!t) return;
+      const btn = e.target.querySelector("button"); btn.disabled = true;
+      try { await call("send", { to: c.with.id, text: t }); $("send-t").value = ""; toast("Reply sent"); await loadInbox(); }
+      catch (err) { toast(err.message, true); btn.disabled = false; }
+    });
+  }
+  $("clist").addEventListener("click", (e) => { const b = e.target.closest("button[data-id]"); if (b) openConvo(b.dataset.id); });
+  $("i-refresh").addEventListener("click", loadInbox);
+
+  // ---- settings ----
+  $("disc").addEventListener("click", async () => {
+    if (!confirm("Disconnect Instagram and delete the data iRun stored for this account?")) return;
+    try { await call("disconnect"); } catch {}
+    store.set(null); S = null; showGate(); toast("Instagram disconnected");
+  });
+
+  // ---- boot ----
+  if (q.get("connected") && S) toast("Instagram connected: @" + S.username);
+  if (S) loadMe().then(() => { go(location.hash.slice(1) || "overview", false); window.scrollTo(0, 0); }).catch((e) => { if (S) showGate(e.message); });
+  else showGate(q.get("error") || "");
+})();
+</script>
+</body>
+</html>
