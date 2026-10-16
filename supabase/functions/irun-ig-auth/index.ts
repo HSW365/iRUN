@@ -2,7 +2,7 @@
 //
 // Login (Instagram API with Instagram Login):
 //   GET  ?a=login[&account=<iRun account id>&o=<owner key>][&c=<company id>&k=<client key>]
-//        -> 302 to instagram.com/oauth/authorize. Redirect URI is callback.html, state is "ig.<signed>".
+//        -> 302 to instagram.com/oauth/authorize. Redirect URI is instagram.html, state is "ig.<signed>".
 //   POST {a:"exchange", code, state}   -> short-lived token -> long-lived token (60 days), stored server side.
 //        Returns {u, s, username}: the browser keeps the session key, never the Instagram token.
 //        If the login was started for an iRun account, the token is also stored in irun_tokens so the engine posts with it.
@@ -33,7 +33,7 @@ const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SE
 const APP_ID = Deno.env.get("IG_APP_ID") ?? "";
 const APP_SECRET = Deno.env.get("IG_APP_SECRET") ?? "";
 const SITE = "https://hsw365.github.io/iRUN/";
-const REDIRECT = SITE + "callback.html";
+const REDIRECT = SITE + "instagram.html"; // must match OAuth redirect URIs in Business login settings exactly
 const GRAPH = "https://graph.instagram.com/v23.0";
 const BUCKET = "irun-media";
 const MAIN = "hsw365media";

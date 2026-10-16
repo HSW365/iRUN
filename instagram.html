@@ -526,6 +526,25 @@ section[role="tabpanel"]{padding-top:28px}
   });
 
   // ---- boot ----
+  // Instagram sends people back here with ?code=..&state=ig.... : finish the login server side.
+  if ((q.get("state") || "").startsWith("ig.")) {
+    const code = q.get("code"), err = q.get("error_description") || q.get("error_reason") || q.get("error");
+    $("gate").hidden = false; $("connect").href = loginUrl();
+    $("gate-msg").className = "msg"; $("gate-msg").textContent = code ? "Finishing your Instagram login…" : "";
+    const clean = () => history.replaceState(null, "", location.pathname);
+    if (!code) { clean(); showGate(err ? "Instagram login was cancelled: " + err : "Instagram did not send a login code. Try again."); return; }
+    fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ a: "exchange", code, state: q.get("state") }) })
+      .then((r) => r.json().then((j) => ({ ok: r.ok, j })))
+      .then(({ ok, j }) => {
+        clean();
+        if (!ok || j.error) return showGate(j.error || "Instagram login failed. Try again.");
+        S = { u: j.u, s: j.s, username: j.username }; store.set(S);
+        toast("Instagram connected: @" + j.username);
+        loadMe().then(() => { go("overview", false); window.scrollTo(0, 0); }).catch((e) => showGate(e.message));
+      })
+      .catch(() => { clean(); showGate("Could not reach iRun. Check your connection and try again."); });
+    return;
+  }
   if (q.get("connected") && S) toast("Instagram connected: @" + S.username);
   if (S) loadMe().then(() => { go(location.hash.slice(1) || "overview", false); window.scrollTo(0, 0); }).catch((e) => { if (S) showGate(e.message); });
   else showGate(q.get("error") || "");

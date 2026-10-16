@@ -7,7 +7,7 @@ https://hsw365.github.io/iRUN/instagram.html (backend: Supabase edge function `i
 
 | Field | Value |
 |---|---|
-| OAuth redirect URI | `https://hsw365.github.io/iRUN/callback.html` |
+| OAuth redirect URI | `https://hsw365.github.io/iRUN/instagram.html` |
 | Deauthorize callback URL | `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth?a=deauthorize` |
 | Data deletion request URL | `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth?a=delete` |
 | Privacy policy URL | `https://hsw365.github.io/iRUN/privacy.html` |

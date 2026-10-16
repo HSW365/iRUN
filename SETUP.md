@@ -55,7 +55,7 @@ With just these, **Actions > iRun autopilot > Run workflow** (mode `draft`) make
 1. @hsw365media must be a **Professional** (Business or Creator) account.
 2. Go to developers.facebook.com, create an app (type Business), and add **Instagram > API setup with Instagram login**. Add @hsw365media and generate a token. Permissions: `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_messages`, `instagram_business_manage_comments`.
 3. **Business login** (Instagram > API setup with Instagram login > Set up Instagram business login):
-   - OAuth redirect URI: `https://hsw365.github.io/iRUN/callback.html`
+   - OAuth redirect URI: `https://hsw365.github.io/iRUN/instagram.html`
    - Deauthorize callback URL: `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth?a=deauthorize`
    - Data deletion request URL: `https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-auth?a=delete`
    - Supabase (klipit project) > Edge Functions > Secrets: `IG_APP_ID` and `IG_APP_SECRET` (the **Instagram** app ID and secret shown on that page, not the Facebook app ID).
