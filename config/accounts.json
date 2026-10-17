@@ -9,11 +9,13 @@
       "enabled": true,
       "platforms": [
         "tiktok",
-        "instagram"
+        "instagram",
+        "youtube"
       ],
       "lead_bot": true,
       "voice": "HSW365 Media, run by Hoodstar365: a solo founder and U.S. Army veteran whose philosophy is \"Turn Negative Into Positive\". Direct, confident, street-smart, motivational, no corporate fluff.",
-      "products": "config/products.json"
+      "products": "config/products.json",
+      "youtube_account": "hoodstar365"
     },
     {
       "id": "hoodstar365",

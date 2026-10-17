@@ -4,6 +4,8 @@ import os
 import re
 import requests
 
+import seo
+
 MODEL = os.environ.get("IRUN_MODEL", "claude-sonnet-5-5")
 
 DEFAULT_VOICE = ("HSW365 Media, run by Hoodstar365: a solo founder and U.S. Army veteran whose philosophy is "
@@ -19,6 +21,9 @@ Hard rules:
 - Only describe what the product actually does per the pitch given. Do not invent features.
 - No emojis anywhere. No hashtags inside beats.
 - The last beat is the call to action and must contain the keyword in capitals.
+- Search: TikTok, Reels and Shorts index the spoken words and on-screen text. Say the search phrase you are
+  given (or a natural close variant of it) out loud in the first or second beat, and open the caption with it.
+- The hook must open a loop or name a pain the viewer feels right now, so they watch to the end.
 Return ONLY JSON: {"beats": [..], "emphasis": [one word from each beat to highlight, same length as beats],
 "caption": "...", "hashtags": ["..."]}.
 Caption: 1-3 sentences, ends with the CTA line provided. 4-6 relevant hashtags without the # sign."""
@@ -29,6 +34,7 @@ def write_script(product, angle, platform, cta, avoid_hooks=(), voice=None):
     user = (
         f"Product: {product['name']}\nWhat it does: {product['pitch']}\nWho it's for: {product['audience']}\n"
         f"Angle for this video: {angle}\nPlatform: {platform}\nKeyword: {product['keyword']}\n"
+        f"Search phrase buyers type: {(product.get('seo') or {}).get('search') or seo.DEFAULTS.get(product.get('id'), {}).get('search') or product['name']}\n"
         f"Call to action to use (spoken as last beat, adapted naturally): {cta}\n"
         + (f"Do not reuse these recent hooks: {list(avoid_hooks)}\n" if avoid_hooks else "")
     )

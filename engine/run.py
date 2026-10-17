@@ -33,13 +33,14 @@ import content_queue  # noqa: E402
 import db  # noqa: E402
 import faceless  # noqa: E402
 import render  # noqa: E402
+import seo  # noqa: E402
 import voice  # noqa: E402
 import writer  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 # UTC hour -> platforms. 4 TikTok + 2 Instagram per account per day (8am, 11am, 2pm, 6pm ET during EDT).
 # GitHub often starts scheduled runs late, so a run belongs to the nearest slot at or before its start hour.
-SCHEDULE = {12: ["tiktok"], 15: ["tiktok", "instagram"], 18: ["tiktok"], 22: ["tiktok", "instagram", "youtube"]}
+SCHEDULE = {12: ["tiktok"], 15: ["tiktok", "instagram", "youtube"], 18: ["tiktok"], 22: ["tiktok", "instagram", "youtube"]}
 FACELESS_HOUR = 22  # the slot where an account's daily faceless video goes out on every platform in that slot
 
 
@@ -117,7 +118,8 @@ def cta_for(acct, product, platform):
 
 def publish(acct, platform, mode, video, video_url, caption, row, title=None, tags=()):
     """Post one video to one platform in live mode. Fills row with the outcome. Returns True if it tried."""
-    ok, why = accounts.connected(acct["id"], platform)
+    login = acct.get("youtube_account", acct["id"]) if platform == "youtube" else acct["id"]
+    ok, why = accounts.connected(login, platform)
     if mode != "live":
         return False
     if not ok:
@@ -130,7 +132,7 @@ def publish(acct, platform, mode, video, video_url, caption, row, title=None, ta
             res = tiktok.publish(video, caption, account=acct["id"])
         elif platform == "youtube":
             import youtube
-            res = youtube.publish(video, title or row.get("hook") or acct["brand"], caption, tags, account=acct["id"])
+            res = youtube.publish(video, title or row.get("hook") or acct["brand"], caption, tags, account=login)
         else:
             import instagram
             res = instagram.publish(video_url, caption, account=acct["id"])
@@ -164,11 +166,11 @@ def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, st
                                                       voice=acct.get("voice")))
         source = "writer"
     style = style or script.get("style") or ser.get("style") or "cinematic"
-    caption = script["caption"]
-    if cta["caption"].lower()[:20] not in caption.lower():
-        caption = f"{caption}\n\n{cta['caption']}".strip()
-    if script["hashtags"]:
-        caption += "\n\n" + " ".join("#" + t for t in script["hashtags"])
+    seo_item = {"id": ser.get("product") or ser["id"], "name": ser["name"], "seo": ser.get("seo")}
+    seo_item = {k: v for k, v in seo_item.items() if v}
+    caption, _ = seo.caption(acct, seo_item, "tiktok", script["caption"], cta["caption"], script.get("hashtags", ()))
+    script["title"] = seo.youtube_title(acct, seo_item, script["title"]).replace(" #Shorts", "")
+    script["hashtags"] = seo.youtube_tags(acct, seo_item, script.get("hashtags", ()))
 
     os.makedirs(outdir, exist_ok=True)
     stamp = dt.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
@@ -213,11 +215,9 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
         script = writer.write_script(product, angle, platform, spoken_cta,
                                      recent_hooks(acct["id"], product["id"]), voice=acct.get("voice"))
         source = "writer"
-    caption = script["caption"]
-    if caption_cta.lower()[:20] not in caption.lower():
-        caption = f"{caption}\n\n{caption_cta}"
-    if script["hashtags"]:
-        caption += "\n\n" + " ".join("#" + t for t in script["hashtags"])
+    caption, tags = seo.caption(acct, product, platform, script["caption"], caption_cta, script.get("hashtags", ()))
+    yt_title = seo.youtube_title(acct, product, script["beats"][0]) if platform == "youtube" else None
+    yt_tags = seo.youtube_tags(acct, product, script.get("hashtags", ())) if platform == "youtube" else ()
 
     os.makedirs(outdir, exist_ok=True)
     stamp = dt.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
@@ -237,7 +237,7 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
         video_url = db.upload_public(video, f"{slug}.mp4")
         row["video_url"] = video_url
 
-    attempted = publish(acct, platform, mode, video, video_url, caption, row)
+    attempted = publish(acct, platform, mode, video, video_url, caption, row, yt_title, yt_tags)
     if queued and attempted:
         content_queue.finish(qpath, qitem, row)
     if db.enabled():
@@ -376,7 +376,7 @@ def main():
                 continue
         if a.idea or a.kind == "faceless":
             continue
-        for pf in [p for p in pfs if p != "youtube"]:  # YouTube only gets the faceless video
+        for pf in pfs:  # promos go to every platform in the slot, YouTube Shorts included
             try:
                 ids = [p["id"] for p in acct["products"]]
                 offset = 0 if a.mode == "live" else draft_offset()
