@@ -8,6 +8,9 @@ on:
     - cron: "7 15 * * *"
     - cron: "7 18 * * *"
     - cron: "7 22 * * *"
+  push:
+    branches: [main]
+    paths: ["config/golive.txt"]  # edit this file to fire a live run right away
   workflow_dispatch:
     inputs:
       platform:
@@ -21,7 +24,7 @@ on:
         default: ""
       mode:
         description: "draft (render + save only) or live (actually post)"
-        default: "draft"
+        default: "live"
       kind:
         description: "promo, faceless (next queued faceless script), or auto"
         default: "promo"
@@ -74,10 +77,11 @@ jobs:
           IRUN_IDEA: ${{ github.event.inputs.idea }}
           IRUN_STYLE: ${{ github.event.inputs.style }}
           IRUN_KIND: ${{ github.event.inputs.kind }}
-          # Scheduled runs use repo variable IRUN_MODE (set it to "live" once you approve drafts). Manual runs use the input.
-          IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'draft' }}
+          # Live by default (owner approved going live Oct 17 2026). Set repo variable IRUN_MODE=draft to pause posting.
+          IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'live' }}
         run: |
           ARGS=""
+          if [ "${{ github.event_name }}" = "push" ]; then ARGS="$ARGS --platform all"; fi
           if [ -n "${{ github.event.inputs.platform }}" ]; then ARGS="$ARGS --platform ${{ github.event.inputs.platform }}"; fi
           if [ -n "${{ github.event.inputs.account }}" ]; then ARGS="$ARGS --account ${{ github.event.inputs.account }}"; fi
           if [ -n "${{ github.event.inputs.product }}" ]; then ARGS="$ARGS --product ${{ github.event.inputs.product }} --count ${{ github.event.inputs.count || 1 }}"; fi
