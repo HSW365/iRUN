@@ -61,10 +61,12 @@
       "keyword": "FLIP",
       "link": "https://flipit-m5ig.onrender.com",
       "audience": "real estate investors, wholesalers, flippers",
-      "pitch": "A deal workspace for real estate flippers to run numbers and organize deals in one place.",
+      "pitch": "FLIPIT is a deal workspace for flippers, wholesalers and buy-and-hold investors: run the max offer, check the risks, match cash buyers and draft the paperwork in one place.",
       "angles": [
-        "run the numbers before you get emotional",
-        "stop tracking deals in your notes app"
+        "know your number before you make the offer",
+        "the 70% rule in five seconds",
+        "stop tracking deals in your notes app",
+        "match the deal to a cash buyer"
       ]
     },
     {
@@ -135,6 +137,62 @@
         "no studio time, no plugins",
         "your vocal in key without the engineer",
         "a finished master from a browser tab"
+      ]
+    },
+    {
+      "id": "stream",
+      "name": "HSW365 STREAM",
+      "keyword": "STREAM",
+      "link": "https://hsw365stream.com",
+      "audience": "streamers, gamers, artists and podcasters tired of algorithms and low payouts",
+      "pitch": "HSW365 Stream is an independent live streaming and video platform. Go live from your camera or screen, upload videos and chat with viewers. Watching is free; creators get 7 days free, then $7 a month.",
+      "angles": [
+        "go live and keep your audience",
+        "be first on a brand new platform",
+        "Kick, Twitch and YouTube in one",
+        "no algorithm burying your stream"
+      ]
+    },
+    {
+      "id": "nil",
+      "name": "NIL365",
+      "keyword": "NIL",
+      "link": "https://nil365.onrender.com",
+      "audience": "student athletes, their parents, student creators and local brands that want to sponsor them",
+      "pitch": "NIL365 connects student athletes, students and creators with brands for paid NIL deals. Build a profile, apply to deals and sign agreements online, with parent or guardian signing for anyone under 18. Talent $9 a month, brands $49.",
+      "angles": [
+        "your name is worth money",
+        "get paid for posts you already make",
+        "local brands want athletes",
+        "parents sign right in the app"
+      ]
+    },
+    {
+      "id": "speekzone",
+      "name": "SPEEKZONE",
+      "keyword": "ZONE",
+      "link": "https://hsw365.github.io/SPEEKZONE/",
+      "audience": "people fed up with algorithm feeds, shadowbans and boosted strangers",
+      "pitch": "SpeekZone is a social network with no algorithm: every post from everyone you follow, in the order it was posted. Free for 90 days, then $9.99 a month with a verified check.",
+      "angles": [
+        "no algorithm, just people",
+        "your feed in order, nothing hidden",
+        "no shadowbans",
+        "see everything your friends post"
+      ]
+    },
+    {
+      "id": "captureitlive",
+      "name": "CAPTUREITLIVE",
+      "keyword": "YOGA",
+      "link": "https://hsw365.github.io/captureitlive/",
+      "audience": "yoga instructors and yoga students",
+      "pitch": "CaptureItLive connects yoga instructors and students: list and fill classes, RSVP, message each other and keep practicing together. One $8 a month membership, instructors keep 100% of class pay.",
+      "angles": [
+        "yoga is better with people in it",
+        "fill your classes without a studio",
+        "find an instructor who fits you",
+        "instructors keep every dollar"
       ]
     }
   ]
