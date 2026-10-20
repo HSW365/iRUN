@@ -312,13 +312,14 @@ def outreach():
             continue
         try:
             mid = send(l["email"], subject, body)
-        except smtplib.SMTPDataError as e:
-            log("send_error", l["email"], f"stopping run, sending limit or block: {e}")
-            break
-        except Exception as e:
+        except smtplib.SMTPRecipientsRefused as e:
             save(l["email"], error=str(e)[:500], status="bounced")
-            log("send_error", l["email"], str(e))
+            suppress(l["email"], "refused")
+            log("bounced", l["email"], str(e))
             continue
+        except Exception as e:
+            log("send_error", l["email"], f"stopping run, mail server problem (check SMTP_USER / SMTP_PASS): {e}")
+            break
         save(l["email"], status="sent", sends=1, last_sent_at=dt.datetime.utcnow().isoformat() + "Z",
              last_subject=subject, message_id=mid, error=None)
         log("sent", l["email"], subject)
@@ -342,8 +343,8 @@ def followups():
         try:
             send(l["email"], subject, body, in_reply_to=l.get("message_id"))
         except Exception as e:
-            log("send_error", l["email"], str(e))
-            continue
+            log("send_error", l["email"], f"stopping follow-ups: {e}")
+            break
         save(l["email"], status="followed_up", sends=2, last_sent_at=dt.datetime.utcnow().isoformat() + "Z")
         log("followup", l["email"], subject)
         n += 1
