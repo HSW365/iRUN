@@ -1,0 +1,45 @@
+name: HSW365 Sales Autopilot
+
+on:
+  schedule:
+    # Hourly: answer replies. 14:xx UTC (10am ET) new outreach, 17:xx UTC follow-ups, 00:xx UTC nightly summary.
+    - cron: "23 * * * *"
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "auto, outreach, replies, followups, summary or all"
+        default: "auto"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hsw365-sales
+  cancel-in-progress: false
+
+jobs:
+  sell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - name: Run
+        env:
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          IMAP_HOST: ${{ vars.IMAP_HOST }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OUTREACH_ADDRESS: ${{ vars.OUTREACH_ADDRESS }}
+          SALES_DAILY_CAP: ${{ vars.SALES_DAILY_CAP }}
+          SALES_MODE: ${{ vars.SALES_MODE }}
+        run: |
+          if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Add the SUPABASE_SERVICE_KEY repo secret to switch the sales autopilot on."; exit 0; fi
+          python engine/sales.py --task "${{ github.event.inputs.task || 'auto' }}"
