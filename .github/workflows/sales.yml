@@ -4,6 +4,9 @@ on:
   schedule:
     # Hourly: answer replies. 14:xx UTC (10am ET) new outreach, 17:xx UTC follow-ups, 00:xx UTC nightly summary.
     - cron: "23 * * * *"
+  push:
+    branches: [main]
+    paths: ["config/salesgo.txt"]  # edit this file to fire a full run (outreach + replies + follow-ups) right away
   workflow_dispatch:
     inputs:
       task:
@@ -42,4 +45,4 @@ jobs:
           SALES_MODE: ${{ vars.SALES_MODE }}
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Add the SUPABASE_SERVICE_KEY repo secret to switch the sales autopilot on."; exit 0; fi
-          python engine/sales.py --task "${{ github.event.inputs.task || 'auto' }}"
+          python engine/sales.py --task "${{ github.event_name == 'push' && 'all' || github.event.inputs.task || 'auto' }}"
