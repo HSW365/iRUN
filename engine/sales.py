@@ -225,11 +225,14 @@ def text_version(h):
     return re.sub(r"\n{3,}", "\n\n", t).strip()
 
 
+SERVICE_TRADES = {"plumber", "hvac", "roofer", "electrician", "carpenter", "painter", "gardener", "builder", "tiler",
+                  "plasterer", "stonemason", "floorer", "glaziery", "locksmith", "cleaning", "window construction",
+                  "insulation", "sweep", "handyman", "landscaper", "construction company", "contractor", "car repair", "tyres"}
 TRADE_WORDS = {"plumber": "plumbing", "roofer": "roofing", "electrician": "electrical", "gardener": "landscaping",
                "landscaper": "landscaping", "hairdresser": "salon", "car repair": "auto repair", "tyres": "tire",
                "builder": "construction", "construction company": "construction", "contractor": "contracting",
                "hvac": "HVAC", "carpenter": "carpentry", "painter": "painting", "tiler": "tile", "floorer": "flooring",
-               "glaziery": "glass", "window construction": "window", "sweep": "chimney", "pet grooming": "pet grooming",
+               "glaziery": "glass", "window construction": "window", "sweep": "chimney", "pet grooming": "pet grooming", "beauty": "beauty", "bakery": "bakery", "florist": "floral",
                "local business": "local"}
 
 
@@ -237,18 +240,23 @@ def first_email(l):
     who = html.escape((l.get("contact") or "").strip() or f"{l['business']} team")
     trade = TRADE_WORDS.get((l.get("trade") or "").lower(), l.get("trade") or "local")
     where = f" in {l['city']}" if l.get("city") else ""
+    service = (l.get("trade") or "").lower() in SERVICE_TRADES
+    hook = ("Jobs go to whoever answers first. <b>CallTwin</b> is an AI receptionist that answers every call, text and "
+            "website chat 24/7, captures the customer's name, number, address and job, and sends it straight to your phone. "
+            "Pair it with a new website that's built to book work." if service else
+            "Customers book with whoever answers first. <b>CallTwin</b> is an AI receptionist that answers every call, text "
+            "and website chat 24/7, takes the customer's name, number and what they need, and sends it straight to your phone. "
+            "Pair it with a new website that brings in more customers.")
     inner = (f"<p>Hi {who},</p>"
              f"<p>I'm Elvin Torres Sr., founder of HSW365 Media. I build websites and AI tools for {html.escape(trade)} "
              f"businesses like {html.escape(l['business'])}{html.escape(where)}.</p>"
-             "<p>Jobs go to whoever answers first. <b>CallTwin</b> is an AI receptionist that answers every call, text and "
-             "website chat 24/7, captures the customer's name, number, address and job, and sends it straight to your phone. "
-             "Pair it with a new website that's built to book work.</p>"
+             f"<p>{hook}</p>"
              f"{price_table()}"
              f'<p>Full details: <a href="{LINKS["calltwin_pdf"]}">CallTwin brochure</a> &middot; '
              f'<a href="{LINKS["queenee_pdf"]}">Website brochure</a></p>'
              f"<p>Reply <b>\"YES\"</b> and I'll send a free written estimate and proposal for {html.escape(l['business'])}. "
              "No cost, no obligation.</p>")
-    return f"{l['business']} — never miss another job call", wrap(inner)
+    return f"{l['business']} — never miss another {'job' if service else 'customer'} call", wrap(inner)
 
 
 def followup_email(l):
@@ -266,6 +274,8 @@ def send(to, subject, body_html, in_reply_to=None):
     msg = EmailMessage()
     msg["From"] = email.utils.formataddr(("Elvin Torres Sr. | HSW365 Media", user))
     msg["To"] = to
+    if OWNER.lower() != user.lower():
+        msg["Reply-To"] = OWNER
     msg["Subject"] = subject
     msg["Date"] = email.utils.formatdate(localtime=False)
     mid = email.utils.make_msgid(domain=user.split("@")[-1])
