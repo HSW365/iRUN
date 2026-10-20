@@ -190,8 +190,27 @@ def stock_leads(need):
 
 # ---------------------------------------------------------------- mail
 
+_RELAY = None
+
+
+def relay():
+    """(url, token) of the CallTwin mail relay, stored in irun_settings. Preferred over SMTP when present."""
+    global _RELAY
+    if _RELAY is None:
+        try:
+            url, tok = setting("calltwin_relay_url"), setting("calltwin_relay_token")
+            _RELAY = (url.rstrip("/"), tok) if url and tok else ()
+        except Exception:
+            _RELAY = ()
+    return _RELAY
+
+
+class RecipientRefused(Exception):
+    pass
+
+
 def smtp_ready():
-    return bool(os.environ.get("SMTP_USER") and os.environ.get("SMTP_PASS"))
+    return bool(relay()) or bool(os.environ.get("SMTP_USER") and os.environ.get("SMTP_PASS"))
 
 
 LAST = ' style="background:#f4f4f6"'
@@ -270,6 +289,16 @@ def followup_email(l):
 
 
 def send(to, subject, body_html, in_reply_to=None):
+    if relay():
+        url, tok = relay()
+        r = requests.post(f"{url}/send", headers={"x-relay-token": tok}, timeout=90,
+                          json={"to": to, "subject": subject, "html": body_html, "text": text_version(body_html),
+                                "inReplyTo": in_reply_to})
+        if r.status_code == 422:
+            raise RecipientRefused(r.text[:300])
+        if r.status_code != 200:
+            raise RuntimeError(f"relay {r.status_code}: {r.text[:300]}")
+        return r.json().get("messageId")
     user = os.environ["SMTP_USER"]
     msg = EmailMessage()
     msg["From"] = email.utils.formataddr(("Elvin Torres Sr. | HSW365 Media", user))
@@ -310,7 +339,7 @@ def outreach():
             continue
         try:
             mid = send(l["email"], subject, body)
-        except smtplib.SMTPRecipientsRefused as e:
+        except (smtplib.SMTPRecipientsRefused, RecipientRefused) as e:
             save(l["email"], error=str(e)[:500], status="bounced")
             suppress(l["email"], "refused")
             log("bounced", l["email"], str(e))
@@ -433,12 +462,11 @@ def question_html(l):
             "<p>Reply \"YES\" with the best number to reach you and I'll put together your proposal.</p>")
 
 
-def handle_reply(l, msg, text):
+def handle_reply(l, subject, mid, text):
     addr = l["email"]
-    subject = header_text(msg.get("Subject")) or l.get("last_subject") or "Your HSW365 proposal"
+    subject = subject or l.get("last_subject") or "Your HSW365 proposal"
     if not subject.lower().startswith("re:"):
         subject = "Re: " + subject
-    mid = msg.get("Message-ID")
     save(addr, replied_at=dt.datetime.utcnow().isoformat() + "Z", last_reply=text[:2000])
     if UNSUB_RE.search(text) or NO_RE.search(text):
         save(addr, status="unsubscribed")
@@ -467,10 +495,43 @@ def handle_reply(l, msg, text):
     log("answered", addr, f"{intent}: {text[:200]}")
 
 
+def process_message(mid, sender, subject, text, done):
+    """Returns 1 when a lead's reply was handled."""
+    if not mid or mid in done:
+        return 0
+    sender = (sender or "").lower()
+    if "mailer-daemon" in sender or "postmaster" in sender:
+        for l in db.select("irun_sales_leads", "status=in.(sent,followed_up)&select=email&order=last_sent_at.desc&limit=500"):
+            if l["email"] in text.lower():
+                save(l["email"], status="bounced")
+                suppress(l["email"], "bounced")
+                log("bounced", l["email"])
+        log("seen", None, mid)
+        return 0
+    l = lead(sender)
+    if not l or l["status"] in ("unsubscribed", "bounced"):
+        return 0
+    try:
+        handle_reply(l, subject, mid, fresh_text(text) or text[:2000])
+    except Exception as e:
+        log("reply_error", sender, str(e))
+        return 0
+    log("seen", sender, mid)
+    return 1
+
+
 def replies():
     if not smtp_ready():
-        print("replies: SMTP_USER / SMTP_PASS not set")
+        print("replies: no mailbox configured")
         return 0
+    done = {r["detail"] for r in db.select("irun_sales_log", "kind=eq.seen&select=detail&order=id.desc&limit=2000")}
+    if relay():
+        url, tok = relay()
+        r = requests.get(f"{url}/inbox", params={"days": 3}, headers={"x-relay-token": tok}, timeout=240)
+        if r.status_code != 200:
+            raise RuntimeError(f"relay inbox {r.status_code}: {r.text[:300]}")
+        return sum(process_message(m.get("messageId"), m.get("from"), m.get("subject"), m.get("text") or "", done)
+                   for m in r.json().get("messages", []))
     m = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST") or "imap.gmail.com")
     m.login(os.environ["SMTP_USER"], os.environ["SMTP_PASS"])
     m.select("INBOX")
@@ -500,7 +561,7 @@ def replies():
         if not l or l["status"] in ("unsubscribed", "bounced"):
             continue
         try:
-            handle_reply(l, msg, fresh_text(text) or text[:2000])
+            handle_reply(l, header_text(msg.get("Subject")), mid, fresh_text(text) or text[:2000])
             n += 1
         except Exception as e:
             log("reply_error", sender, str(e))
