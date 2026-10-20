@@ -274,8 +274,6 @@ def send(to, subject, body_html, in_reply_to=None):
     msg = EmailMessage()
     msg["From"] = email.utils.formataddr(("Elvin Torres Sr. | HSW365 Media", user))
     msg["To"] = to
-    if OWNER.lower() != user.lower():
-        msg["Reply-To"] = OWNER
     msg["Subject"] = subject
     msg["Date"] = email.utils.formatdate(localtime=False)
     mid = email.utils.make_msgid(domain=user.split("@")[-1])
