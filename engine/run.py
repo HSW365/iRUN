@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import accounts  # noqa: E402
 import companies  # noqa: E402
 import content_queue  # noqa: E402
+import flyer  # noqa: E402
 import db  # noqa: E402
 import faceless  # noqa: E402
 import render  # noqa: E402
@@ -225,8 +226,11 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     work = tempfile.mkdtemp(prefix="irun-")
     audio, alen, vsrc = voice.speak(" ".join(script["beats"]), os.path.join(work, "vo.mp3"))
     video = os.path.join(outdir, f"{slug}.mp4")
-    render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
-                  brand=acct["brand"], handle=acct["handle"])
+    if queued and qitem.get("flyer"):  # a designed flyer, voiced over (engine/flyer.py)
+        flyer.video(qitem["flyer"], audio, alen, work, video)
+    else:
+        render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
+                      brand=acct["brand"], handle=acct["handle"])
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
         f.write(caption + "\n\n---\n" + "\n".join(script["beats"]))
 
