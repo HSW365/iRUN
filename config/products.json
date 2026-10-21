@@ -2,6 +2,21 @@
   "_note": "Products iRun promotes for @hsw365media. keyword = what viewers comment/DM to get the link. Do not put prices here unless they are confirmed live.",
   "products": [
     {
+      "id": "affiliate",
+      "name": "HSW365 AFFILIATES",
+      "keyword": "EARN",
+      "link": "https://hsw365.co/pages/affiliates",
+      "audience": "creators, indie artists, influencers, entrepreneurs and business owners with an audience who want recurring income",
+      "pitch": "The HSW365 Affiliate Partner Program is free to join. Partners earn 20% recurring commission on HSW365 app subscriptions like iRun, Friendy, Klipit and HSW365studio for as long as the customer stays subscribed, with a live dashboard, ready-made posts and monthly payouts by Zelle, Cash App or PayPal.",
+      "angles": [
+        "turn your followers into recurring income",
+        "20% every month, not once",
+        "get paid to share tools you already use",
+        "your network is already worth something",
+        "build together, earn together, grow together"
+      ]
+    },
+    {
       "id": "operator",
       "name": "IRUN OPERATOR",
       "keyword": "RUN",
