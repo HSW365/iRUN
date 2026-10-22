@@ -116,6 +116,29 @@
             ],
             "caption": "Join the HSW365 Affiliate Partner Program free: https://hsw365.co/pages/affiliates"
           }
+        },
+        {
+          "id": "operator",
+          "name": "IRUN OPERATOR",
+          "keyword": "RUN",
+          "link": "https://hsw365.github.io/iRUN/start.html",
+          "audience": "small business owners and solo founders who don't have time for marketing",
+          "pitch": "Give iRun Operator your website and it runs your marketing: builds a new site, posts videos every day, emails your prospects and reviews everything every night. Plans from $15 a month, no cut of your sales.",
+          "angles": [
+            "fire your marketing agency",
+            "your business runs while you sleep",
+            "one website link in, a whole marketing team out",
+            "$15 a month vs a $3,000 agency",
+            "wake up to the nightly report"
+          ],
+          "cta": {
+            "spoken": "Comment RUN or tap the link in bio to start iRun",
+            "screen": [
+              "COMMENT RUN",
+              "LINK IN BIO"
+            ],
+            "caption": "Start iRun: https://hsw365.github.io/iRUN/start.html"
+          }
         }
       ]
     },
