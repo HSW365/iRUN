@@ -27,5 +27,14 @@
     "hvacnj",
     "freeestimate",
     "newjersey"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-22T19:58:41.870373Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17885201442688865"
+    }
   ]
 }
