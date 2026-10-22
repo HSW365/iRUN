@@ -35,5 +35,14 @@
     "warrencountynj",
     "freeestimate",
     "newjersey"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-22T22:25:27.825340Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17955104964037763"
+    }
   ]
 }
