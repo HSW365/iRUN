@@ -16,6 +16,9 @@ import subprocess
 import sys
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
+sys.path.insert(0, os.path.dirname(__file__))
+import client_flyer  # noqa: E402
+
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 F = os.path.join(ROOT, "assets", "hsw", "fonts")
 OUT = os.path.join(ROOT, "assets", "flyers")
@@ -125,9 +128,43 @@ def _alpha_box(img, box, fill, outline=None, radius=18, alpha=210, width=2):
                                           outline=(outline + (255,)) if outline else None, width=width)
     img.paste(Image.alpha_composite(img.convert("RGBA"), over).convert("RGB"))
 
+NEWARK = {
+    "layout": "service", "brand": "newark",
+    "colors": {"bg": "#06182b", "bg2": "#0b2a4a", "panel": "#0d2340", "accent": "#c4161c", "accent2": "#1c5fb8",
+               "ink": "#ffffff", "soft": "#c9d4e2", "mute": "#8797ab", "line": "#1f3d61"},
+    "fonts": {"display": "big-shoulders.woff2", "body": "libre-franklin.woff2"},
+    "name": ["NEW ARK", "PLUMBING, HEATING & AIR CONDITIONING"],
+    "tiles": [("Plumbing", "Kitchens, baths, water heaters, drains, sewers"),
+              ("Heating & AC", "Furnaces, boilers, ducts and equipment"),
+              ("Geothermal", "Heating and cooling from the earth"),
+              ("Fire Protection", "Sprinklers designed, installed, inspected")],
+    "proof": ["NJ MASTER PLUMBER #36BI00464600", "HVAC #19HC00178300", "FIRE SPRINKLER #P01631"],
+    "cta": "FREE ESTIMATE",
+    "url": "ARK-HVAC.COM",
+    "alt": "Message us 24/7 or call 908-454-4043",
+    "foot": "412 Firth St, Phillipsburg, NJ",
+    "foot_right": "Licensed and insured",
+}
+FLYERS.update({
+    "newark-estimate": {**NEWARK, "photo": "hero.webp", "kicker": "Phillipsburg, NJ  /  nearly 40 years",
+                        "head": ["FREE ESTIMATES.", "PRICED BY THE OWNER."],
+                        "sub": "Plumbing, heating, air conditioning, geothermal and fire protection for homes and businesses. On time. On budget. On spec."},
+    "newark-heat": {**NEWARK, "photo": "hvac.webp", "kicker": "Heating season is here",
+                    "head": ["NO HEAT?", "WE REPLY IN MINUTES."],
+                    "sub": "Furnaces, boilers and full HVAC systems repaired, replaced and installed. Message us any time, day or night, and get a free estimate."},
+    "newark-trades": {**NEWARK, "photo": "plumbing.webp", "kicker": "Warren and Hunterdon County, NJ",
+                      "head": ["FOUR TRADES.", "ONE CONTRACTOR."],
+                      "sub": "Commercial and residential plumbing, HVAC, geothermal and fire protection from one licensed New Jersey contractor."},
+    "newark-fire": {**NEWARK, "photo": "fire.webp", "kicker": "Commercial fire protection",
+                    "head": ["FIRE SPRINKLERS.", "DONE TO CODE."],
+                    "sub": "Sprinkler systems designed, installed and inspected by a licensed New Jersey fire sprinkler contractor."},
+})
+
 
 def draw(fid, w, h):
     s = FLYERS[fid]
+    if s.get("layout") == "service":
+        return client_flyer.draw(s, w, h)
     img = _bg(w, h)
     d = ImageDraw.Draw(img)
     M = 72

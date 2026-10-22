@@ -209,6 +209,28 @@
         "find an instructor who fits you",
         "instructors keep every dollar"
       ]
+    },
+    {
+      "id": "arkhvac",
+      "name": "NEW ARK PLUMBING & HVAC",
+      "keyword": "ARK",
+      "link": "https://ark-hvac.com",
+      "cta": {
+        "spoken": "Get a free estimate at ark hyphen h vac dot com, or call 908-454-4043.",
+        "screen": [
+          "ARK-HVAC.COM",
+          "FREE ESTIMATE / 908-454-4043"
+        ],
+        "caption": "Free estimates: ark-hvac.com. Message New Ark 24/7 or call 908-454-4043. Phillipsburg, NJ."
+      },
+      "audience": "homeowners and businesses in Phillipsburg and Warren, Hunterdon, Sussex, Morris and Somerset County, NJ",
+      "pitch": "New Ark Plumbing, Heating & Air Conditioning in Phillipsburg NJ: licensed master plumber, HVAC and fire sprinkler contractor, nearly 40 years, residential and commercial. Free estimates priced by the owner at ark-hvac.com. Never quote prices.",
+      "angles": [
+        "free estimates priced by the owner",
+        "no heat as the cold sets in",
+        "four trades, one contractor",
+        "fire sprinklers done to code"
+      ]
     }
   ]
 }
