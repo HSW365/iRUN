@@ -58,7 +58,7 @@ canvas#stage{display:none}
 </head>
 <body>
 <div class="wrap">
-  <header><div class="logo">iRUN <b>STUDIO</b></div><span class="mono">HSW365 Media</span></header>
+  <header><div class="logo">iRUN <b>STUDIO</b></div><span class="mono" id="hdrOwner">HSW365 Media</span></header>
   <nav>
     <button data-v="make" class="on">Make</button>
     <button data-v="faceless">Faceless</button>
@@ -66,7 +66,7 @@ canvas#stage{display:none}
     <button data-v="today">Today's 6</button>
     <button data-v="leads">Leads</button>
     <button data-v="settings">Settings</button>
-    <a href="team.html">AI Team</a>
+    <a href="team.html" id="teamLink">AI Team</a>
   </nav>
 
   <!-- MAKE -->
@@ -275,7 +275,7 @@ $("btnSave").onclick = () => {
   store.set("owner", $("sOwner").value.trim());
   setStatus("sStatus", "Saved on this device.", "ok");
 };
-const handle = () => store.get("handle", "hsw365media");
+const handle = () => (window.IRUN_SUB && window.IRUN_SUB.handle) || store.get("handle", "hsw365media");
 function setStatus(id, msg, cls = "") { const el = $(id); el.textContent = msg; el.className = "status " + cls; }
 
 /* ---------- products ---------- */
@@ -963,8 +963,37 @@ async function loadLeads() {
 }
 $("btnLeads").onclick = loadLeads;
 
+/* ---------- subscriber mode: iRun Operator customers open Studio from their company page ---------- */
+const SUBQ = new URLSearchParams(location.search);
+if (SUBQ.get("c") && SUBQ.get("k")) window.IRUN_SUB = {c: SUBQ.get("c"), k: SUBQ.get("k"), handle: ""};
+async function subscriberMode() {
+  const S = window.IRUN_SUB;
+  ["make", "today", "leads", "settings"].forEach(v => { const b = document.querySelector(`nav [data-v="${v}"]`); if (b) b.hidden = true; });
+  $("teamLink").href = `client.html?c=${encodeURIComponent(S.c)}&k=${encodeURIComponent(S.k)}`; $("teamLink").textContent = "My company";
+  try {
+    const r = await fetch("https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-client", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({a: "view", c: S.c, k: S.k})});
+    const d = await r.json(); if (!r.ok) throw new Error(d.error || "Couldn't open your company.");
+    const c = d.company;
+    if (c.status === "awaiting_payment") throw new Error("Studio opens once your plan payment goes through.");
+    const h = c.handles || {}, hv = typeof h === "string" ? h : (h.instagram || h.tiktok || Object.values(h).find(Boolean) || "");
+    S.handle = String(hv || c.name || "").replace(/^@/, "").replace(/\s+/g, "").toLowerCase(); S.name = c.name;
+    $("hdrOwner").textContent = c.name;
+    const slug = t => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "brand";
+    const kw = t => (String(t).toUpperCase().match(/[A-Z0-9]{3,}/) || ["INFO"])[0].slice(0, 10);
+    const offers = (c.offers || []).filter(o => o && o.name);
+    PRODUCTS = (offers.length ? offers : [{name: c.name, angles: []}]).map(o => ({
+      id: slug(o.name), name: o.name, keyword: kw(o.name), link: c.site_url || "",
+      audience: "customers of " + c.name, pitch: `${o.name} from ${c.name}. ${c.summary || ""}`.trim(), angles: o.angles && o.angles.length ? o.angles : [c.summary || o.name]}));
+    pmFill(); if ($("product")) $("product").innerHTML = PRODUCTS.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join("");
+    if ($("kName") && $("kName").value === "My brand") { $("kName").value = c.name; $("kHandle").value = S.handle; $("kSite").value = c.site_url || ""; $("kSave").click(); setStatus("kStatus", ""); }
+    const ads = document.querySelector('nav [data-v="ads"]'); if (ads) ads.click();
+  } catch (e) {
+    document.querySelector(".wrap").innerHTML = `<header><div class="logo">iRUN <b>STUDIO</b></div></header><div class="card"><h2>Can't open Studio</h2><p class="note">${esc(e.message)} Open Studio from your company page, or email hsw365media@gmail.com.</p></div>`;
+  }
+}
+
 /* ---------- boot ---------- */
-loadSettings(); loadProducts().then(pmFill); loadStyles();
+loadSettings(); (window.IRUN_SUB ? subscriberMode() : loadProducts().then(pmFill)); loadStyles();
 if (!window.MediaRecorder || !cv.captureStream) setStatus("wStatus", "This browser can't record video. Use Safari (iPhone) or Chrome.", "err");
 </script>
 <script src="ads.js"></script>

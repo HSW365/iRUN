@@ -90,6 +90,7 @@ body{font-size:16px}
       <div class="card zcard" id="pay-card" hidden><h2>Payment <small>ZELLE</small></h2><div id="pay"></div></div>
       <div class="card" id="need-card" hidden><h2>Needs you</h2><ul class="need" id="need"></ul></div>
       <div class="card rep" id="rep-card" hidden><h2>Last night's review <small id="rep-when"></small></h2><div id="rep"></div></div>
+      <div class="card"><h2>Ad Studio <small>INCLUDED</small></h2><p class="muted" style="margin-top:0">Make your own ads any time: static ad sets in every size and 33 languages, app and website showcase videos, promo videos from your clips, faceless videos and competitor ad tracking. Included with your plan.</p><div class="row"><a class="btn btn-acc btn-sm" id="studio" href="#">Open Ad Studio</a></div></div>
       <div class="card"><h2>Website</h2><div id="site"></div></div>
       <div class="card"><h2>Outreach</h2><div id="out"></div></div>
       <div class="card"><h2>Credits</h2>
@@ -153,6 +154,7 @@ body{font-size:16px}
 
   function render(d) {
     var c = d.company;
+    $("studio").href = "app.html?c=" + encodeURIComponent(C) + "&k=" + encodeURIComponent(K);
     $("app").hidden = false; $("gate").hidden = true;
     $("state").className = "state " + c.status; $("state").querySelector("span").textContent = STATES[c.status] || c.status;
     $("name").textContent = c.name; document.title = "iRun Operator | " + c.name;

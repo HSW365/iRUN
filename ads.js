@@ -17,7 +17,7 @@
     {id: "Inter", w: 700, label: "Inter (modern)"}
   ];
   const LAYOUTS = ["bold", "photo", "split", "frame"];
-  const KITS_KEY = "kits", ACTIVE_KEY = "kit_active", COMP_KEY = "competitors";
+  const NS = window.IRUN_SUB ? "_" + window.IRUN_SUB.c : "", KITS_KEY = "kits" + NS, ACTIVE_KEY = "kit_active" + NS, COMP_KEY = "competitors" + NS;
 
   /* ---------- markup ---------- */
   const nav = document.querySelector("nav"), promoBtn = nav.querySelector('[data-v="promo"]');
@@ -144,7 +144,7 @@
   }
 
   /* ---------- brand kits ---------- */
-  function defaultKit() { return {id: "k" + Date.now(), name: "HSW365 Media", handle: handle(), site: "hsw365.co", bg: "#0a0a0f", main: "#22d3ee", acc: "#a855f7", font: "Barlow Condensed", logo: ""}; }
+  function defaultKit() { const S = window.IRUN_SUB; return {id: "k" + Date.now(), name: S ? (S.name || "My brand") : "HSW365 Media", handle: handle(), site: S ? "" : "hsw365.co", bg: "#0a0a0f", main: "#22d3ee", acc: "#a855f7", font: "Barlow Condensed", logo: ""}; }
   let kits = J(KITS_KEY, null); if (!Array.isArray(kits) || !kits.length) kits = [defaultKit()];
   let activeId = store.get(ACTIVE_KEY) || kits[0].id; if (!kits.find(k => k.id === activeId)) activeId = kits[0].id;
   const kit = () => kits.find(k => k.id === activeId) || kits[0];
