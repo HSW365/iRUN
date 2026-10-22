@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0a0a0f">
 <title>iRun Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600;700&family=Space+Mono:wght@700&family=Anton&family=Bebas+Neue&family=Montserrat:wght@800&family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0a0f;--panel:#12121a;--panel2:#171722;--line:#25253a;--text:#f2f2f7;--muted:#8a8aa0;--cyan:#22d3ee;--violet:#a855f7;--red:#ef4444;--yellow:#fbbf24;--green:#34d399}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
@@ -259,7 +259,7 @@ let current = null; // {product, platform, beats, emphasis, caption}
 /* ---------- nav ---------- */
 document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
   document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b));
-  ["make","faceless","promo","today","leads","settings"].forEach(v => $("v-" + v).hidden = v !== b.dataset.v);
+  document.querySelectorAll("section[id^='v-']").forEach(x => x.hidden = x.id !== "v-" + b.dataset.v);
   if (b.dataset.v === "leads") loadLeads();
 });
 
@@ -900,7 +900,7 @@ async function renderPromo(onProgress, onStage) {
   let cur = -1;
   await new Promise(resolve => {
     const tick = () => {
-      const el = ac.currentTime - t0;
+      const el = Math.max(0, ac.currentTime - t0);
       if (el >= total || PSTOP) return resolve();
       g2.setTransform(1, 0, 0, 1, 0, 0);
       if (el < clipsEnd) {
@@ -967,5 +967,6 @@ $("btnLeads").onclick = loadLeads;
 loadSettings(); loadProducts().then(pmFill); loadStyles();
 if (!window.MediaRecorder || !cv.captureStream) setStatus("wStatus", "This browser can't record video. Use Safari (iPhone) or Chrome.", "err");
 </script>
+<script src="ads.js"></script>
 </body>
 </html>
