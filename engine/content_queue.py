@@ -40,8 +40,9 @@ MAX_ATTEMPTS = 3
 
 def _clean(item):
     beats = [re.sub(r"[^\x00-\x7F]+", "", b).strip() for b in item.get("beats", []) if str(b).strip()]
-    if not 3 <= len(beats) <= 9:
-        raise ValueError(f"needs 3-9 beats, got {len(beats)}")
+    most = 12 if item.get("ad") else 9  # a scene-based client ad carries one line per scene
+    if not 3 <= len(beats) <= most:
+        raise ValueError(f"needs 3-{most} beats, got {len(beats)}")
     emph = (list(item.get("emphasis") or []) + [""] * len(beats))[: len(beats)]
     tags = [str(t).lstrip("#").replace(" ", "") for t in item.get("hashtags", [])][:6]
     return {"beats": beats, "emphasis": emph, "caption": str(item.get("caption", "")).strip(), "hashtags": tags}
