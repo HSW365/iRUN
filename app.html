@@ -49,6 +49,8 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;
 .scene .th{width:84px;aspect-ratio:9/16;border-radius:8px;background:#0d0d14 center/cover;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);text-align:center;overflow:hidden}
 .scene .th img{width:100%;height:100%;object-fit:cover;display:block}
 .scene textarea{min-height:58px;margin-bottom:6px}.scene .vis{font-size:13px;color:var(--muted)}
+.pmc{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;margin-bottom:10px}.pmc video{width:64px;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#000}.pmc .ctl{display:flex;gap:4px}.pmc .ctl button{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;width:34px;height:34px;cursor:pointer}
+.pmp{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}.pmp p{margin:6px 0;white-space:pre-wrap;font-size:14px}
 .scene .mini{background:transparent;border:0;color:var(--cyan);font:600 12px Inter,sans-serif;padding:6px 0;cursor:pointer}
 canvas#stage{display:none}
 [hidden]{display:none!important}
@@ -60,6 +62,7 @@ canvas#stage{display:none}
   <nav>
     <button data-v="make" class="on">Make</button>
     <button data-v="faceless">Faceless</button>
+    <button data-v="promo">Promo</button>
     <button data-v="today">Today's 6</button>
     <button data-v="leads">Leads</button>
     <button data-v="settings">Settings</button>
@@ -115,6 +118,48 @@ canvas#stage{display:none}
       <div class="status" id="frStatus"></div>
     </div>
     <div class="out" id="fOut"></div>
+  </section>
+
+  <!-- PROMO -->
+  <section id="v-promo" hidden>
+    <div class="card">
+      <h2>Promo clip prompts</h2>
+      <p class="note">Writes prompts sized for each video generator so they don't get refused. One prompt per clip, no on-screen text, no logos, no real people. Generate each clip, then stitch them below.</p>
+      <div class="row">
+        <div><label>App to promote</label><select id="pmProduct"></select></div>
+        <div><label>Video generator</label><select id="pmGen">
+          <option value="gemini" data-s="8">Gemini / Veo (8 sec clips)</option>
+          <option value="sora" data-s="10">Sora (10 sec clips)</option>
+          <option value="kling" data-s="10">Kling (10 sec clips)</option>
+          <option value="runway" data-s="10">Runway (10 sec clips)</option>
+          <option value="other" data-s="5">Other (5 sec clips)</option>
+        </select></div>
+      </div>
+      <div class="row">
+        <div><label>Number of clips</label><select id="pmCount"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></div>
+        <div><label>Angle (optional)</label><input id="pmAngle" placeholder="Leave blank to cover everything it does"></div>
+      </div>
+      <div class="btns"><button class="btn" id="pmWrite">Write clip prompts</button></div>
+      <div class="status" id="pmwStatus"></div>
+      <div id="pmPrompts"></div>
+    </div>
+    <div class="card">
+      <h2>Stitch clips into a promo</h2>
+      <p class="note">Add your generated clips in order. iRun cuts them into one vertical promo with captions, a hook, an end card with your call to action, and music.</p>
+      <label>Clips</label><input id="pmFiles" type="file" accept="video/*" multiple>
+      <div id="pmClips" style="margin-top:10px"></div>
+      <div class="row">
+        <div><label>End card headline</label><input id="pmTag" placeholder="Short tagline"></div>
+        <div><label>Music file (optional)</label><input id="pmMusic" type="file" accept="audio/*"></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="pmSound"> Keep the clips' own sound</label>
+      <label class="chk"><input type="checkbox" id="pmBeat" checked> Background beat (if no music file)</label>
+      <label>Post caption</label><textarea id="pmCaption"></textarea>
+      <div class="btns"><button class="btn cy" id="pmRender" disabled>Render promo</button><button class="btn ghost" id="pmStop" hidden>Stop</button></div>
+      <div class="bar"><i id="pmBar"></i></div>
+      <div class="status" id="pmrStatus"></div>
+    </div>
+    <div class="out" id="pmOut"></div>
   </section>
 
   <!-- TODAY -->
@@ -214,7 +259,7 @@ let current = null; // {product, platform, beats, emphasis, caption}
 /* ---------- nav ---------- */
 document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
   document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b));
-  ["make","faceless","today","leads","settings"].forEach(v => $("v-" + v).hidden = v !== b.dataset.v);
+  ["make","faceless","promo","today","leads","settings"].forEach(v => $("v-" + v).hidden = v !== b.dataset.v);
   if (b.dataset.v === "leads") loadLeads();
 });
 
@@ -728,6 +773,177 @@ $("fRender").onclick = async () => {
   $("fRender").disabled = false;
 };
 
+/* ---------- promo: clip prompts + stitcher ---------- */
+const PROMPT_SYSTEM = `You write text-to-video prompts for short vertical promo clips. Each prompt is pasted into an AI video generator on its own, so each must stand alone.
+Hard rules, so generators don't refuse:
+- Vertical 9:16. Each clip fits the given length in seconds. One continuous shot, or at most two quick cuts.
+- No on-screen text, words, numbers, logos, app names, brand names or watermarks. Phone and laptop screens show abstract glowing interfaces only.
+- No real, famous or named people. Describe people generically by clothing and action only. No children.
+- No weapons, violence, injury, police, eviction or distress. Keep it positive, aspirational and professional.
+- Cinematic: name the camera move, lighting and color grade. Use the accent color given.
+- Together the clips tell a story: hook, what the product does (cover its main features), payoff.
+Also write for each clip an on-screen caption of 2-6 words that iRun burns in (plain words, no emojis), and one post caption.
+Return ONLY JSON: {"clips":[{"prompt":"...","caption":"..."}],"tagline":"3-6 word end card line","caption":"1-2 sentence post caption","hashtags":["..."]}.`;
+let PM = {clips: [], meta: null};
+function pmFill() { $("pmProduct").innerHTML = PRODUCTS.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join(""); }
+$("pmWrite").onclick = async () => {
+  const p = prod($("pmProduct").value); if (!p) return;
+  const gen = $("pmGen"), secs = +gen.selectedOptions[0].dataset.s, n = +$("pmCount").value;
+  $("pmWrite").disabled = true; setStatus("pmwStatus", "Writing prompts...");
+  try {
+    const j = jsonOut(await ai(PROMPT_SYSTEM, `Product: ${p.name}\nWhat it does: ${p.pitch}\nWho it's for: ${p.audience}\nAngle: ${$("pmAngle").value.trim() || "show everything it does"}\nGenerator: ${gen.selectedOptions[0].textContent}\nClip length: ${secs} seconds\nNumber of clips: ${n}\nAccent color: ${C.cyan} cyan and ${C.violet} violet on deep black`, 2500));
+    const clips = (j.clips || []).slice(0, n).filter(c => c.prompt);
+    if (!clips.length) throw new Error("No prompts came back. Tap again.");
+    PM.meta = {product: p, clips, tagline: j.tagline || "", caption: j.caption || "", hashtags: j.hashtags || []};
+    $("pmPrompts").innerHTML = clips.map((c, i) => `<div class="pmp"><div class="mono">Clip ${i + 1} · ${secs}s · caption: ${esc(c.caption || "")}</div><p>${esc(c.prompt)}</p><button class="btn ghost" data-cp="${i}">Copy</button></div>`).join("") +
+      `<div class="btns"><button class="btn ghost" id="pmCopyAll">Copy all</button></div>`;
+    $("pmPrompts").querySelectorAll("[data-cp]").forEach(b => b.onclick = async () => { try { await navigator.clipboard.writeText(clips[+b.dataset.cp].prompt); b.textContent = "Copied"; } catch { b.textContent = "Copy failed"; } });
+    $("pmCopyAll").onclick = async e => { try { await navigator.clipboard.writeText(clips.map((c, i) => `CLIP ${i + 1}\n${c.prompt}`).join("\n\n")); e.target.textContent = "Copied"; } catch { e.target.textContent = "Copy failed"; } };
+    $("pmTag").value = PM.meta.tagline;
+    const c = cta("instagram", p.keyword.toUpperCase());
+    $("pmCaption").value = `${PM.meta.caption}\n\n${c.caption}\n\n${PM.meta.hashtags.slice(0, 6).map(t => "#" + String(t).replace(/^#/, "").replace(/\s/g, "")).join(" ")}`.trim();
+    PM.clips.forEach((cl, i) => { if (!cl.caption && clips[i]) cl.caption = clips[i].caption; }); pmList();
+    setStatus("pmwStatus", "Prompts ready. Generate each clip, then add them below.", "ok");
+  } catch (e) { setStatus("pmwStatus", e.message, "err"); }
+  $("pmWrite").disabled = false;
+};
+function pmList() {
+  $("pmClips").innerHTML = PM.clips.map((c, i) => `<div class="pmc"><video src="${c.url}" muted playsinline preload="metadata"></video>
+    <div><label style="margin-top:0">Clip ${i + 1} caption</label><input data-cap="${i}" value="${esc(c.caption || "")}" placeholder="2-6 words on screen"></div>
+    <div class="ctl"><button data-up="${i}" aria-label="Move up">↑</button><button data-dn="${i}" aria-label="Move down">↓</button><button data-rm="${i}" aria-label="Remove">✕</button></div></div>`).join("");
+  const box = $("pmClips");
+  box.querySelectorAll("[data-cap]").forEach(x => x.oninput = () => PM.clips[+x.dataset.cap].caption = x.value);
+  const mv = (i, d) => { const j = i + d; if (j < 0 || j >= PM.clips.length) return; [PM.clips[i], PM.clips[j]] = [PM.clips[j], PM.clips[i]]; pmList(); };
+  box.querySelectorAll("[data-up]").forEach(x => x.onclick = () => mv(+x.dataset.up, -1));
+  box.querySelectorAll("[data-dn]").forEach(x => x.onclick = () => mv(+x.dataset.dn, 1));
+  box.querySelectorAll("[data-rm]").forEach(x => x.onclick = () => { const [c] = PM.clips.splice(+x.dataset.rm, 1); URL.revokeObjectURL(c.url); pmList(); });
+  $("pmRender").disabled = !PM.clips.length;
+}
+$("pmFiles").onchange = e => {
+  const caps = PM.meta?.clips || [];
+  [...e.target.files].sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true})).forEach(f => {
+    const i = PM.clips.length; PM.clips.push({file: f, url: URL.createObjectURL(f), caption: caps[i]?.caption || ""});
+  });
+  e.target.value = ""; pmList();
+};
+function pmLoad(c) {
+  return new Promise((res, rej) => {
+    const v = document.createElement("video"); v.src = c.url; v.playsInline = true; v.preload = "auto"; v.crossOrigin = "anonymous";
+    v.onloadeddata = () => res(v); v.onerror = () => rej(new Error(`Can't read ${c.file.name}. Use MP4 or WebM.`));
+  });
+}
+function pmCover(v, alpha, zoom) {
+  if (!v.videoWidth) return;
+  const sc = Math.max(W / v.videoWidth, H / v.videoHeight) * zoom, dw = v.videoWidth * sc, dh = v.videoHeight * sc;
+  g2.globalAlpha = alpha; g2.drawImage(v, (W - dw) / 2, (H - dh) / 2, dw, dh); g2.globalAlpha = 1;
+}
+function pmText(text, cy, maxSize, color, appear) {
+  const up = String(text || "").toUpperCase().trim(); if (!up) return;
+  let size = maxSize, lines;
+  do {
+    g2.font = `800 ${size}px "Barlow Condensed"`;
+    lines = []; let cur = "";
+    up.split(/\s+/).forEach(w => { const t = cur ? cur + " " + w : w; if (cur && g2.measureText(t).width > W - 160) { lines.push(cur); cur = w; } else cur = t; });
+    lines.push(cur); size -= 6;
+  } while ((lines.length > 2 || lines.some(l => g2.measureText(l).width > W - 160)) && size > 60);
+  size += 6; const lh = size * 1.04, a = Math.min(appear, 1), pop = 0.88 + 0.12 * a;
+  g2.save(); g2.globalAlpha = a; g2.translate(W / 2, cy); g2.scale(pop, pop); g2.translate(-W / 2, -cy);
+  g2.textAlign = "center"; g2.textBaseline = "middle"; g2.lineJoin = "round"; g2.lineWidth = Math.max(size / 5.5, 14); g2.strokeStyle = "#08080c";
+  lines.forEach((l, i) => { const y = cy + (i - (lines.length - 1) / 2) * lh; g2.strokeText(l, W / 2, y); g2.fillStyle = color; g2.fillText(l, W / 2, y); });
+  g2.restore(); g2.textAlign = "left";
+}
+function pmEnd(p, tag, t, prog) {
+  const a = Math.min(t / 0.4, 1);
+  g2.fillStyle = C.base; g2.fillRect(0, 0, W, H);
+  const gl = (x, y, r, col) => { const gr = g2.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, col); gr.addColorStop(1, "rgba(0,0,0,0)"); g2.fillStyle = gr; g2.fillRect(0, 0, W, H); };
+  gl(W * 0.2, H * 0.28, 900, "rgba(168,85,247,.35)"); gl(W * 0.85, H * 0.75, 900, "rgba(34,211,238,.28)");
+  pmText(p.name, H * 0.38, 190, C.white, a);
+  pmText(tag, H * 0.50, 78, C.cyan, Math.max(0, (t - 0.25) / 0.4));
+  const kw = p.keyword.toUpperCase(), label = `DM "${kw}" TO @${handle().toUpperCase()}`, b = Math.max(0, Math.min((t - 0.5) / 0.4, 1));
+  if (b > 0) {
+    g2.globalAlpha = b; let size = 70;
+    do { g2.font = `800 ${size}px "Barlow Condensed"`; size -= 4; } while (g2.measureText(label).width > W - 260 && size > 44);
+    size += 4; const tw = g2.measureText(label).width, bw = tw + 90, bh = size * 1.6, bx = (W - bw) / 2, by = H * 0.62;
+    g2.fillStyle = C.red; roundRect(bx, by, bw, bh, 22); g2.fill();
+    g2.textBaseline = "middle"; g2.fillStyle = C.white; g2.fillText(label, bx + 45, by + bh / 2 + 3); g2.globalAlpha = 1;
+  }
+  g2.fillStyle = "#1e1e2a"; g2.fillRect(70, H - 420, W - 140, 5);
+  g2.fillStyle = C.cyan; g2.fillRect(70, H - 420, (W - 140) * Math.min(prog, 1), 5);
+}
+let PSTOP = false;
+async function renderPromo(onProgress, onStage) {
+  const p = prod($("pmProduct").value) || PRODUCTS[0];
+  await Promise.all(["800 100px 'Barlow Condensed'", "700 30px 'Space Mono'"].map(f => document.fonts.load(f)));
+  const ac = ctx(); await ac.resume();
+  onStage("Loading clips...");
+  const vids = []; for (const c of PM.clips) vids.push(await pmLoad(c));
+  const durs = vids.map(v => Math.min(isFinite(v.duration) && v.duration > 0 ? v.duration : 8, 20)), END = 3.2;
+  const total = durs.reduce((a, b) => a + b, 0) + END;
+  const dest = ac.createMediaStreamDestination(), sound = $("pmSound").checked;
+  vids.forEach(v => { try { const src = ac.createMediaElementSource(v), gn = ac.createGain(); gn.gain.value = sound ? 1 : 0; src.connect(gn).connect(dest); } catch {} v.muted = false; });
+  const t0 = ac.currentTime + 0.3, mf = $("pmMusic").files[0];
+  if (mf) {
+    const buf = await ac.decodeAudioData(await mf.arrayBuffer()), src = ac.createBufferSource(), gn = ac.createGain();
+    src.buffer = buf; src.loop = buf.duration < total; gn.gain.setValueAtTime(sound ? 0.35 : 0.9, t0); gn.gain.setValueAtTime(sound ? 0.35 : 0.9, t0 + total - 1.2); gn.gain.linearRampToValueAtTime(0.001, t0 + total);
+    src.connect(gn).connect(dest); src.start(t0); src.stop(t0 + total);
+  } else if ($("pmBeat").checked) scheduleBeat(ac, dest, t0, total, sound ? 0.15 : 0.45);
+  else { const o = ac.createConstantSource(), z = ac.createGain(); z.gain.value = 0; o.connect(z).connect(dest); o.start(); o.stop(t0 + total); }
+  g2.fillStyle = "#000"; g2.fillRect(0, 0, W, H);
+  const stream = new MediaStream([...cv.captureStream(FPS).getVideoTracks(), ...dest.stream.getAudioTracks()]);
+  const mime = pickMime();
+  const rec = new MediaRecorder(stream, mime ? {mimeType: mime, videoBitsPerSecond: 10_000_000, audioBitsPerSecond: 160_000} : undefined);
+  const chunks = []; rec.ondataavailable = e => e.data.size && chunks.push(e.data);
+  const done = new Promise(res => rec.onstop = res);
+  while (ac.currentTime < t0 - 0.02) await new Promise(r => setTimeout(r, 10));
+  rec.start(250); onStage("Rendering... keep this tab open.");
+  const starts = durs.map((_, i) => durs.slice(0, i).reduce((a, b) => a + b, 0)), clipsEnd = starts[starts.length - 1] + durs[durs.length - 1];
+  let cur = -1;
+  await new Promise(resolve => {
+    const tick = () => {
+      const el = ac.currentTime - t0;
+      if (el >= total || PSTOP) return resolve();
+      g2.setTransform(1, 0, 0, 1, 0, 0);
+      if (el < clipsEnd) {
+        let i = starts.findIndex((s, k) => el >= s && el < s + durs[k]); if (i < 0) i = vids.length - 1;
+        if (i !== cur) { if (cur >= 0) vids[cur].pause(); cur = i; vids[i].currentTime = 0; vids[i].play().catch(() => {}); }
+        const lt = el - starts[i], v = vids[i];
+        if (v.currentTime >= durs[i] - 0.05) v.pause();
+        g2.fillStyle = "#000"; g2.fillRect(0, 0, W, H);
+        pmCover(v, Math.min(lt / 0.18, 1), 1.0 + 0.04 * (lt / durs[i]));
+        const sh = g2.createLinearGradient(0, H * 0.5, 0, H); sh.addColorStop(0, "rgba(0,0,0,0)"); sh.addColorStop(1, "rgba(0,0,0,.55)");
+        g2.fillStyle = sh; g2.fillRect(0, 0, W, H);
+        g2.textBaseline = "top"; g2.font = `700 30px "Space Mono"`;
+        g2.fillStyle = "rgba(0,0,0,.65)"; g2.fillText("@" + handle().toUpperCase(), 72, 153);
+        g2.fillStyle = C.cyan; g2.fillText("@" + handle().toUpperCase(), 70, 150);
+        g2.fillStyle = C.violet; g2.fillRect(70, 205, 120, 6);
+        const cap = PM.clips[i].caption;
+        if (cap && lt > 0.2 && lt < durs[i] - 0.15) pmText(cap, H * 0.66, i === 0 ? 130 : 112, i === 0 ? C.yellow : C.white, (lt - 0.2) / 0.15);
+        g2.fillStyle = "#1e1e2a"; g2.fillRect(70, H - 420, W - 140, 5);
+        g2.fillStyle = C.cyan; g2.fillRect(70, H - 420, (W - 140) * Math.min(el / total, 1), 5);
+      } else { if (cur >= 0) { vids[cur].pause(); cur = -2; } pmEnd(p, $("pmTag").value.trim(), el - clipsEnd, el / total); }
+      onProgress(el / total); setTimeout(tick, 1000 / FPS);
+    };
+    tick();
+  });
+  vids.forEach(v => v.pause());
+  rec.stop(); await done;
+  const type = (rec.mimeType || mime || "video/webm").split(";")[0];
+  return {blob: new Blob(chunks, {type}), ext: type.includes("mp4") ? "mp4" : "webm", product: p};
+}
+$("pmRender").onclick = async () => {
+  if (!PM.clips.length) return;
+  $("pmRender").disabled = true; $("pmStop").hidden = false; PSTOP = false;
+  try {
+    const res = await renderPromo(f => $("pmBar").style.width = (f * 100).toFixed(0) + "%", m => setStatus("pmrStatus", m));
+    let cap = $("pmCaption").value.trim();
+    if (!cap) { const c = cta("instagram", res.product.keyword.toUpperCase()); cap = `${res.product.pitch.split(".")[0]}.\n\n${c.caption}`; }
+    outCard({platform: "promo", pill: "Promo", product: res.product, caption: cap}, res, $("pmOut")); $("pmBar").style.width = "100%";
+    setStatus("pmrStatus", `Done (${res.ext.toUpperCase()}). Tap Share to post, or Download.`, "ok");
+  } catch (e) { setStatus("pmrStatus", e.message, "err"); }
+  $("pmRender").disabled = false; $("pmStop").hidden = true;
+};
+$("pmStop").onclick = () => PSTOP = true;
+
 /* ---------- leads ---------- */
 async function loadLeads() {
   const key = store.get("owner");
@@ -748,7 +964,7 @@ async function loadLeads() {
 $("btnLeads").onclick = loadLeads;
 
 /* ---------- boot ---------- */
-loadSettings(); loadProducts(); loadStyles();
+loadSettings(); loadProducts().then(pmFill); loadStyles();
 if (!window.MediaRecorder || !cv.captureStream) setStatus("wStatus", "This browser can't record video. Use Safari (iPhone) or Chrome.", "err");
 </script>
 </body>
