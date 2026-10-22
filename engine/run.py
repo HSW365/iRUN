@@ -31,6 +31,7 @@ import accounts  # noqa: E402
 import companies  # noqa: E402
 import content_queue  # noqa: E402
 import flyer  # noqa: E402
+import client_ad  # noqa: E402
 import db  # noqa: E402
 import faceless  # noqa: E402
 import render  # noqa: E402
@@ -226,7 +227,9 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     work = tempfile.mkdtemp(prefix="irun-")
     audio, alen, vsrc = voice.speak(" ".join(script["beats"]), os.path.join(work, "vo.mp3"))
     video = os.path.join(outdir, f"{slug}.mp4")
-    if queued and qitem.get("flyer"):  # a designed flyer, voiced over (engine/flyer.py)
+    if queued and qitem.get("ad"):  # a cinematic client commercial (engine/client_ad.py)
+        client_ad.video(qitem["ad"], script["beats"], audio, alen, work, video)
+    elif queued and qitem.get("flyer"):  # a designed flyer, voiced over (engine/flyer.py)
         flyer.video(qitem["flyer"], audio, alen, work, video)
     else:
         render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
