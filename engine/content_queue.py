@@ -114,7 +114,7 @@ def take(account, platform, product_ids, offset=0):
             continue
         if item.get("kind", "promo") != "promo":  # faceless items are handled by take_faceless
             continue
-        if item.get("account", "hsw365media") != account:
+        if item.get("account", "hoodstar365") != account:
             continue
         if item.get("platform", "any") not in ("any", platform):
             continue
@@ -156,7 +156,7 @@ def counts():
     for path in glob.glob(os.path.join(QUEUE, "*.json")):
         try:
             with open(path) as f:
-                a = json.load(f).get("account", "hsw365media")
+                a = json.load(f).get("account", "hoodstar365")
         except Exception:
             continue
         out[a] = out.get(a, 0) + 1

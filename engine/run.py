@@ -70,7 +70,7 @@ def sync_products(accts):
     if not db.enabled():
         return
     for a in accts:
-        if a["id"] != accounts.MAIN:  # the IG lead bot reads irun_products; it only runs on the main account today
+        if not a.get("lead_bot"):  # the IG lead bot reads irun_products for accounts with lead_bot on
             continue
         for p in a["products"]:
             if not p.get("link"):
@@ -319,7 +319,7 @@ def main():
             sys.exit("--idea needs ANTHROPIC_API_KEY so Claude can write the script")
         if not a.account:  # an idea is one video, not one per account
             first = next((s for s in accounts.series() if not a.series or s["id"] == a.series), None)
-            accts = [x for x in accts if x["id"] == (first["account"] if first else accounts.MAIN)]
+            accts = [x for x in accts if x["id"] == (first["account"] if first else accounts.LEAD)]
     preflight(accts, a.mode)
     sync_products(accts)
 

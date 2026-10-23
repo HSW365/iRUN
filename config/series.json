@@ -28,7 +28,7 @@
     },
     {
       "id": "founder",
-      "account": "hsw365media",
+      "account": "hoodstar365",
       "name": "SOLO FOUNDER NOTES",
       "enabled": true,
       "style": "noir",
@@ -45,10 +45,10 @@
       "cta": {
         "spoken": "Follow for more. Build every day.",
         "screen": [
-          "FOLLOW @HSW365MEDIA",
+          "FOLLOW @HOODSTAR365",
           "BUILD EVERY DAY"
         ],
-        "caption": "Follow @hsw365media for more."
+        "caption": "Follow @hoodstar365 for more."
       }
     },
     {

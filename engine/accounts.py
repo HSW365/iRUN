@@ -5,7 +5,8 @@ import os
 import db
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-MAIN = "hsw365media"  # the original account: its logins live in GitHub secrets and the un-suffixed token rows
+MAIN = "hsw365media"  # legacy id: GitHub-secret logins and un-suffixed token rows belong to it (account removed Oct 23 2026)
+LEAD = "hoodstar365"  # the main account iRun posts for
 YT_MAIN = "hoodstar365"  # the account GitHub secret YOUTUBE_REFRESH_TOKEN belongs to
 
 

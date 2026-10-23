@@ -2,22 +2,6 @@
   "_note": "Every brand iRun runs content for. Owner accounts are HSW365's own; add clients the same way (see CLIENTS.md). 'products' is a file path or an inline list in the same shape as config/products.json. An account only posts to a platform once its login is connected; until then iRun renders drafts for it.",
   "accounts": [
     {
-      "id": "hsw365media",
-      "brand": "HSW365 Media",
-      "handle": "hsw365media",
-      "type": "owner",
-      "enabled": true,
-      "platforms": [
-        "tiktok",
-        "instagram",
-        "youtube"
-      ],
-      "lead_bot": true,
-      "voice": "HSW365 Media, run by Hoodstar365: a solo founder and U.S. Army veteran whose philosophy is \"Turn Negative Into Positive\". Direct, confident, street-smart, motivational, no corporate fluff.",
-      "products": "config/products.json",
-      "youtube_account": "hoodstar365"
-    },
-    {
       "id": "hoodstar365",
       "brand": "Hoodstar365",
       "handle": "hoodstar365",
@@ -28,7 +12,7 @@
         "instagram",
         "youtube"
       ],
-      "lead_bot": false,
+      "lead_bot": true,
       "voice": "Hoodstar365 (Elvin Torres Sr.): U.S. Army veteran who served honorably, former college basketball player, published author, recording artist, podcast host and motivational speaker. His message is \"Turn Negative Into Positive\". Real, raw, faith-driven, motivational, speaks from lived experience.",
       "products": [
         {
@@ -182,6 +166,186 @@
             "self-care in a few minutes a day",
             "red + infrared, full face and neck",
             "wireless, use it anywhere"
+          ]
+        },
+        {
+          "id": "klipit",
+          "name": "KLIPIT",
+          "keyword": "CLIP",
+          "link": "https://klipit.onrender.com",
+          "audience": "streamers and gamers (Twitch, Kick, YouTube), especially GTA6 streamers",
+          "pitch": "Paste a stream or VOD link and Klipit finds your best moments and cuts them into ready-to-post vertical and wide clips automatically.",
+          "angles": [
+            "stop scrubbing 6-hour VODs",
+            "one link in, clips out",
+            "grow on TikTok off streams you already did"
+          ]
+        },
+        {
+          "id": "calltwin",
+          "name": "CALLTWIN",
+          "keyword": "CALL",
+          "link": "https://calltwin.onrender.com",
+          "audience": "small business owners, contractors, barbers, salons, service businesses",
+          "pitch": "An AI receptionist that answers and follows up on missed calls so a busy owner stops losing customers to voicemail.",
+          "angles": [
+            "every missed call is a lost customer",
+            "your phone rings while your hands are full",
+            "AI picks up when you can't"
+          ]
+        },
+        {
+          "id": "queenee",
+          "name": "QUEENEE",
+          "keyword": "SITE",
+          "link": "https://hsw365.github.io/queenee/",
+          "audience": "business owners and hustlers with no website or an outdated one",
+          "pitch": "QUEENEE builds a professional website for your business, with CallTwin available as an add-on.",
+          "angles": [
+            "no website means customers can't find you",
+            "your Instagram is not a website",
+            "look legit in one move"
+          ]
+        },
+        {
+          "id": "flipit",
+          "name": "FLIPIT",
+          "keyword": "FLIP",
+          "link": "https://flipit-m5ig.onrender.com",
+          "audience": "real estate investors, wholesalers, flippers, and people who want to earn doing property preservation work on foreclosed homes",
+          "pitch": "FLIPIT is a deal workspace for flippers, wholesalers and buy-and-hold investors: run the max offer, check the risks, match cash buyers and draft the paperwork in one place. Its Preservation tab runs a property preservation business on foreclosed, bank-owned homes: occupancy inspections, lock changes, trash-outs, lawn care and winterization, with work orders, photo checklists, inspection reports and invoices.",
+          "angles": [
+            "know your number before you make the offer",
+            "the 70% rule in five seconds",
+            "stop tracking deals in your notes app",
+            "match the deal to a cash buyer",
+            "get paid to secure and maintain foreclosed homes"
+          ]
+        },
+        {
+          "id": "irun",
+          "name": "iRUN",
+          "keyword": "AUTO",
+          "link": "https://hsw365.github.io/iRUN/",
+          "audience": "creators, indie artists, entrepreneurs who don't post consistently",
+          "pitch": "iRun writes, voices, renders and posts short videos for your brand on autopilot and turns comments into DM leads.",
+          "angles": [
+            "this video was made and posted by AI",
+            "consistency without the burnout",
+            "your content team is a robot"
+          ]
+        },
+        {
+          "id": "build-series",
+          "name": "HSW365 BUILD SERIES",
+          "keyword": "BUILD",
+          "link": "https://hsw365.co",
+          "audience": "people who want to start or scale a one-person business",
+          "pitch": "The HSW365 Media Build Series: ebooks and a course from a solo founder and Army veteran on shipping real products alone.",
+          "angles": [
+            "one man, multiple businesses",
+            "turn negative into positive",
+            "stop planning, ship it"
+          ]
+        },
+        {
+          "id": "friendy",
+          "name": "FRIENDY",
+          "keyword": "TALK",
+          "link": "https://hsw365.github.io/FRIENDY/",
+          "cta": {
+            "spoken": "Three days free. Link in bio",
+            "screen": [
+              "3 DAYS FREE",
+              "LINK IN BIO"
+            ],
+            "caption": "3 days free, no card. Link in bio."
+          },
+          "audience": "adults who want someone to talk to at any hour: night owls, overthinkers, people having a rough week",
+          "pitch": "Friendy is someone to talk to, any hour. Five friends (Maya, Dre, Sage, Kai, Nova) who listen, keep it real and help you turn negative into positive. 3 days free, then from $8 a month. Friendy is an AI companion app for adults 18 and older, not therapy.",
+          "angles": [
+            "the friend who answers at 2am",
+            "vent first, fix it later",
+            "straight talk when you need it",
+            "someone remembers how your day went"
+          ]
+        },
+        {
+          "id": "studio",
+          "name": "HSW365STUDIO",
+          "keyword": "STUDIO",
+          "link": "https://hsw365.github.io/STUDIO365/",
+          "cta": {
+            "spoken": "First three songs are free. Link in bio",
+            "screen": [
+              "FIRST 3 SONGS FREE",
+              "LINK IN BIO"
+            ],
+            "caption": "Your first 3 projects are free. Link in bio."
+          },
+          "audience": "indie artists, rappers and singers who record at home over beats",
+          "pitch": "HSW365studio is a vocal studio in your browser: record over your beat, tune the vocal to the key, mix on a real console, master to streaming loudness and export a WAV. No download. First 3 projects free, then plans from $15 a month.",
+          "angles": [
+            "record it tonight, release it tonight",
+            "no studio time, no plugins",
+            "your vocal in key without the engineer",
+            "a finished master from a browser tab"
+          ]
+        },
+        {
+          "id": "stream",
+          "name": "HSW365 STREAM",
+          "keyword": "STREAM",
+          "link": "https://hsw365stream.com",
+          "audience": "streamers, gamers, artists and podcasters tired of algorithms and low payouts",
+          "pitch": "HSW365 Stream is an independent live streaming and video platform. Go live from your camera or screen, upload videos and chat with viewers. Watching is free; creators get 7 days free, then $7 a month.",
+          "angles": [
+            "go live and keep your audience",
+            "be first on a brand new platform",
+            "Kick, Twitch and YouTube in one",
+            "no algorithm burying your stream"
+          ]
+        },
+        {
+          "id": "nil",
+          "name": "NIL365",
+          "keyword": "NIL",
+          "link": "https://nil365.onrender.com",
+          "audience": "student athletes, their parents, student creators and local brands that want to sponsor them",
+          "pitch": "NIL365 connects student athletes, students and creators with brands for paid NIL deals. Build a profile, apply to deals and sign agreements online, with parent or guardian signing for anyone under 18. Talent $9 a month, brands $49.",
+          "angles": [
+            "your name is worth money",
+            "get paid for posts you already make",
+            "local brands want athletes",
+            "parents sign right in the app"
+          ]
+        },
+        {
+          "id": "speekzone",
+          "name": "SPEEKZONE",
+          "keyword": "ZONE",
+          "link": "https://hsw365.github.io/SPEEKZONE/",
+          "audience": "people fed up with algorithm feeds, shadowbans and boosted strangers",
+          "pitch": "SpeekZone is a social network with no algorithm: every post from everyone you follow, in the order it was posted. Free for 90 days, then $9.99 a month with a verified check.",
+          "angles": [
+            "no algorithm, just people",
+            "your feed in order, nothing hidden",
+            "no shadowbans",
+            "see everything your friends post"
+          ]
+        },
+        {
+          "id": "captureitlive",
+          "name": "CAPTUREITLIVE",
+          "keyword": "YOGA",
+          "link": "https://hsw365.github.io/captureitlive/",
+          "audience": "yoga instructors and yoga students",
+          "pitch": "CaptureItLive connects yoga instructors and students: list and fill classes, RSVP, message each other and keep practicing together. One $8 a month membership, instructors keep 100% of class pay.",
+          "angles": [
+            "yoga is better with people in it",
+            "fill your classes without a studio",
+            "find an instructor who fits you",
+            "instructors keep every dollar"
           ]
         }
       ]
