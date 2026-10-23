@@ -34,6 +34,12 @@ on:
       count:
         description: "With product: how many of its queued scripts to render (per platform)"
         default: "1"
+      video:
+        description: "Post a finished video from the repo (e.g. assets/ads/x.mp4) as-is"
+        default: ""
+      caption:
+        description: "Caption for the finished video"
+        default: ""
       style:
         description: "Faceless look: cinematic, noir, anime, comic, 3d, dark-fantasy, cyberpunk, oil, watercolor, vintage, photoreal, minimal"
         default: ""
@@ -77,6 +83,8 @@ jobs:
           IRUN_IDEA: ${{ github.event.inputs.idea }}
           IRUN_STYLE: ${{ github.event.inputs.style }}
           IRUN_KIND: ${{ github.event.inputs.kind }}
+          IRUN_VIDEO: ${{ github.event.inputs.video }}
+          IRUN_CAPTION: ${{ github.event.inputs.caption }}
           # Live by default (owner approved going live Oct 17 2026). Set repo variable IRUN_MODE=draft to pause posting.
           IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'live' }}
         run: |
@@ -87,7 +95,9 @@ jobs:
           if [ -n "${{ github.event.inputs.product }}" ]; then ARGS="$ARGS --product ${{ github.event.inputs.product }} --count ${{ github.event.inputs.count || 1 }}"; fi
           if [ -n "$IRUN_KIND" ]; then ARGS="$ARGS --kind $IRUN_KIND"; fi
           if [ -n "$IRUN_STYLE" ]; then ARGS="$ARGS --style $IRUN_STYLE"; fi
-          if [ -n "$IRUN_IDEA" ]; then
+          if [ -n "$IRUN_VIDEO" ]; then
+            python engine/run.py $ARGS --video "$IRUN_VIDEO" --caption "$IRUN_CAPTION"
+          elif [ -n "$IRUN_IDEA" ]; then
             python engine/run.py $ARGS --idea "$IRUN_IDEA"
           else
             python engine/run.py $ARGS

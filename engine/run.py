@@ -292,6 +292,29 @@ def preflight(accts, mode):
     print("======================")
 
 
+def post_video(a):
+    """Post a finished video (an ad made outside the engine) to the chosen account/platforms. Returns exit code."""
+    acct = next((x for x in accounts.load() if x["id"] == (a.account or accounts.LEAD)), None)
+    if not acct:
+        return f"No account '{a.account}'"
+    path = a.video if os.path.isabs(a.video) else os.path.join(ROOT, a.video)
+    if not os.path.exists(path):
+        return f"No video at {a.video}"
+    pfs = {"both": ["tiktok", "instagram"], "all": ["tiktok", "instagram", "youtube"]}.get(a.platform, [a.platform or "instagram"])
+    video_url = None
+    if "instagram" in pfs:
+        stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
+        video_url = db.upload_public(path, f"{acct['id']}/ads/{stamp}-{os.path.basename(path)}")
+    failed = 0
+    for pf in pfs:
+        row = {"account": acct["id"], "platform": pf, "kind": "ad", "status": "draft",
+               "caption": a.caption, "video_url": video_url}
+        publish(acct, pf, a.mode, path, video_url, a.caption, row, title=a.caption.split(".")[0][:90])
+        print(f"[{acct['id']}/{pf}] {row.get('status')} {row.get('external_id') or row.get('error') or ''}")
+        failed += row.get("status") != "posted"
+    return 1 if failed else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--platform", choices=["tiktok", "instagram", "youtube", "both", "all"])
@@ -305,8 +328,12 @@ def main():
     ap.add_argument("--count", type=int, default=1, help="with --product: render this many queued scripts for it (one per platform each)")
     ap.add_argument("--mode", default=os.environ.get("IRUN_MODE", "draft"), choices=["draft", "live"])
     ap.add_argument("--out", default=os.path.join(ROOT, "out"))
+    ap.add_argument("--video", help="post this finished video file (repo path) as-is instead of rendering one")
+    ap.add_argument("--caption", default="", help="caption for --video")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    if a.video:
+        sys.exit(post_video(a))
     if a.style and a.style not in faceless.visuals.styles()[0]:
         sys.exit(f"No style '{a.style}'. Choose from: {', '.join(faceless.visuals.styles()[0])}")
 
