@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HSW365 Ad Studio | Micro-drama ads for your brand</title>
+<meta name="description" content="Short acted ads for your business, clothing line or music. Scripted, produced, QR-coded and posted to your Instagram by iRun. From $247.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="HSW365 Ad Studio">
+<meta property="og:description" content="Micro-drama ads for your business, clothing line or music. From $247.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3EA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>
+:root{--acc:#ef4444;--acc-ink:#0a0a0f;--gold:#fbbf24}
+body{font-size:17px}
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,10,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:16px}
+.mark{font-family:var(--disp);font-weight:900;font-size:24px;letter-spacing:.04em;text-transform:uppercase}
+.mark b{color:var(--acc)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:16px;border:1px solid var(--line2);transition:transform .2s var(--ease),background .2s,border-color .2s;cursor:pointer;background:transparent}
+.btn:hover{transform:translateY(-1px);border-color:var(--text2)}
+.btn.p{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.btn.sm{min-height:42px;padding:0 18px;font-size:14px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.eyebrow .rec{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--acc);margin-right:10px;vertical-align:1px;animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+h1,h2,h3{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.9;letter-spacing:-.005em}
+.hero{padding:clamp(48px,8vw,110px) 0 clamp(40px,6vw,80px);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:70vw;max-width:900px;max-height:900px;background:radial-gradient(closest-side,rgba(239,68,68,.22),transparent 70%);pointer-events:none}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:center;position:relative}
+.hero h1{font-size:clamp(58px,9.4vw,148px);margin:18px 0 22px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.lede{font-size:clamp(18px,1.6vw,21px);color:var(--text2);max-width:34ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.from{font-family:var(--mono);color:var(--mut);font-size:14px;margin-top:16px}
+.from b{color:var(--text)}
+.phone{position:relative;aspect-ratio:9/16;width:min(100%,380px);margin-inline:auto;border-radius:38px;padding:10px;background:linear-gradient(160deg,#2a2a36,#0c0c12);box-shadow:0 40px 120px -30px rgba(239,68,68,.45),0 0 0 1px #2c2c38}
+.phone video{width:100%;height:100%;object-fit:cover;border-radius:30px;background:#000}
+.phone .tag{position:absolute;left:24px;bottom:24px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;background:rgba(10,10,15,.75);border:1px solid var(--line2);padding:6px 10px;border-radius:999px;text-transform:uppercase}
+section{padding:clamp(56px,8vw,110px) 0;border-top:1px solid var(--line)}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
+.sh h2{font-size:clamp(42px,6vw,84px)}
+.sh p{color:var(--text2);max-width:46ch}
+.reel{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+.clip{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.clip .v{aspect-ratio:9/16;background:#000;position:relative}
+.clip .v video,.clip .v img{width:100%;height:100%;object-fit:cover}
+.clip .meta{padding:16px 18px 20px}
+.clip .meta .k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.clip .meta h3{font-size:30px;margin:8px 0 6px}
+.clip .meta p{color:var(--text2);font-size:15px;line-height:1.5}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.step{padding:28px 24px 32px;border-right:1px solid var(--line);background:var(--raise)}
+.step:last-child{border-right:0}
+.step .n{font-family:var(--mono);font-weight:700;color:var(--acc);font-size:14px}
+.step h3{font-size:32px;margin:14px 0 10px}
+.step p{color:var(--text2);font-size:15px;line-height:1.55}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px);align-items:stretch}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;position:relative}
+.tier.hot{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 30px 80px -40px rgba(239,68,68,.6)}
+.tier .badge{position:absolute;top:-13px;left:28px;background:var(--acc);color:var(--acc-ink);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;padding:5px 12px;border-radius:999px;text-transform:uppercase}
+.tier h3{font-size:40px}
+.tier .who{color:var(--mut);font-size:15px;margin-top:6px;min-height:46px}
+.price{font-family:var(--mono);font-weight:700;font-size:clamp(46px,4.6vw,60px);margin:18px 0 2px;letter-spacing:-.03em}
+.price small{font-size:16px;color:var(--mut);font-weight:400;letter-spacing:0}
+.vs{font-family:var(--mono);font-size:13px;color:var(--mut);margin-bottom:22px}
+.vs s{color:#6b6b7a}
+.tier ul{list-style:none;display:grid;gap:11px;margin-bottom:28px;flex:1}
+.tier li{padding-left:22px;position:relative;color:var(--text2);font-size:15px;line-height:1.45}
+.tier li::before{content:"";position:absolute;left:0;top:.55em;width:10px;height:2px;background:var(--acc)}
+.tier .btn{width:100%}
+.addons{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.addon{border:1px dashed var(--line2);border-radius:16px;padding:16px 18px;display:flex;justify-content:space-between;gap:14px;color:var(--text2);font-size:15px}
+.addon b{font-family:var(--mono);color:var(--text);white-space:nowrap}
+.order{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+form{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3vw,34px);display:grid;gap:16px}
+label{display:grid;gap:7px;font-size:14px;font-weight:600;color:var(--text2)}
+input,select,textarea{background:var(--bg);border:1px solid var(--line2);border-radius:12px;padding:13px 14px;font-size:16px;width:100%}
+textarea{min-height:110px;resize:vertical}
+.pay{display:grid;gap:12px;margin-top:22px}
+.payrow{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--raise);flex-wrap:wrap}
+.payrow .t{font-family:var(--mono);font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
+.payrow .h{font-family:var(--mono);font-weight:700;font-size:18px}
+.note{color:var(--mut);font-size:14px;margin-top:14px}
+footer{border-top:1px solid var(--line);padding:36px 0 54px;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:960px){
+  .hero .grid,.order{grid-template-columns:1fr}
+  .reel,.tiers{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:0}
+  .step:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .addons{grid-template-columns:1fr}
+  .reel .clip .v{max-height:640px}
+}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.nav .btn{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="mark" href="#top">HSW365 <b>Ad Studio</b></a>
+  <a class="btn p sm" href="#order">Book your ad</a>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap grid">
+  <div>
+    <p class="eyebrow"><span class="rec"></span>Now booking &middot; Businesses &middot; Clothing lines &middot; Artists</p>
+    <h1>Stop posting. <em>Start acting.</em></h1>
+    <p class="lede">Nobody stops scrolling for a flyer. They stop for a story. We script a 30-second scene around your product, produce it, put a scan-to-buy QR on the end, and post it to your Instagram.</p>
+    <div class="cta-row">
+      <a class="btn p" href="#order">Book your ad</a>
+      <a class="btn" href="#work">See the work</a>
+    </div>
+    <p class="from">From <b>$247</b> per ad &middot; delivered in 72 hours</p>
+  </div>
+  <div class="phone">
+    <video src="assets/ads/adstudio-microdrama.mp4" poster="assets/ads/adstudio-poster.jpg" autoplay muted loop playsinline></video>
+    <span class="tag">Our own ad &middot; 0:30</span>
+  </div>
+</div></div>
+
+<section id="work"><div class="wrap">
+  <div class="sh"><h2>Real ads.<br>Real businesses.</h2><p>Every one of these was written, produced and posted by HSW365. Same process, same quality, for your brand.</p></div>
+  <div class="reel">
+    <article class="clip"><div class="v"><video src="assets/ads/newark-microdrama.mp4" muted loop playsinline preload="metadata" controls></video></div>
+      <div class="meta"><p class="k">Home services &middot; Northern NJ</p><h3>New Ark Plumbing</h3><p>11 PM, the furnace dies, nobody picks up. New Ark does. A family-in-crisis scene that sells 24/7 service without saying "24/7 service."</p></div></article>
+    <article class="clip"><div class="v"><video src="assets/ads/friendy-microdrama.mp4" muted loop playsinline preload="metadata" controls></video></div>
+      <div class="meta"><p class="k">App launch</p><h3>Friendy</h3><p>"Seen at 2:14 AM." A lonely late-night text thread that turns warm. The app is the answer to the scene, not a feature list.</p></div></article>
+    <article class="clip"><div class="v"><img src="assets/clients/hsw365-ledmask/hero.png" alt="LED Photon Mask ad, hero frame" loading="lazy"></div>
+      <div class="meta"><p class="k">Product &middot; E-commerce</p><h3>LED Photon Mask</h3><p>A seven-scene cinematic product spot with voiceover, red-light glow and a comment-keyword CTA. Posted to Instagram the same day.</p></div></article>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="sh"><h2>How we make them</h2><p>No templates. Every ad starts from your customer's worst moment and ends at your product.</p></div>
+  <div class="steps">
+    <div class="step"><p class="n">01</p><h3>Find the scene</h3><p>You send your link or your handle. We find the moment your customer feels the problem: the dead furnace, the empty DMs, the drop nobody saw.</p></div>
+    <div class="step"><p class="n">02</p><h3>Script it</h3><p>A hook in the first two seconds, tension, the turn, your product, the payoff. Thirty seconds, vertical, built for sound-off viewing.</p></div>
+    <div class="step"><p class="n">03</p><h3>Produce it</h3><p>Cinematic frames, motion, captions, sound design and your brand colors. You approve the cut before anything goes live.</p></div>
+    <div class="step"><p class="n">04</p><h3>QR + post</h3><p>Every ad ends on a QR code to your store, booking page or music. iRun posts it to your Instagram with researched hashtags.</p></div>
+  </div>
+</div></section>
+
+<section id="packages"><div class="wrap">
+  <div class="sh"><h2>Packages</h2><p>Priced under the going agency rate on every tier. Pay with Cash App or Zelle. No contracts on the monthly plan.</p></div>
+  <div class="tiers">
+    <div class="tier">
+      <h3>The Scene</h3><p class="who">One ad to launch a drop, a single or a business.</p>
+      <p class="price">$247</p><p class="vs">Agencies: <s>$250 to $600</s> per ad</p>
+      <ul><li>1 micro-drama ad, 15 to 30 seconds</li><li>Custom script built on your product</li><li>Scan-to-buy QR end card</li><li>Captions and sound design</li><li>Posted to your Instagram, or file delivered</li><li>1 round of revisions &middot; 72-hour delivery</li></ul>
+      <a class="btn" href="#order" data-pkg="The Scene ($247)">Book The Scene</a>
+    </div>
+    <div class="tier hot"><span class="badge">Most booked</span>
+      <h3>The Series</h3><p class="who">A full campaign for a launch, release or grand opening.</p>
+      <p class="price">$1,247</p><p class="vs">Agencies: <s>$1,250</s> for 5 ads</p>
+      <ul><li>5 micro-drama ads, 5 different scenes</li><li>Hook variations to test what hits</li><li>QR end card on every ad</li><li>Posting schedule and hashtag research</li><li>All 5 posted to your Instagram by iRun</li><li>2 rounds of revisions &middot; 7-day delivery</li></ul>
+      <a class="btn p" href="#order" data-pkg="The Series ($1,247)">Book The Series</a>
+    </div>
+    <div class="tier">
+      <h3>The Takeover</h3><p class="who">Your brand posting new ads all month while you work.</p>
+      <p class="price">$3,597<small>/mo</small></p><p class="vs">Agency retainers: <s>$3,600/mo</s> for 12 ads</p>
+      <ul><li>12 micro-drama ads every month</li><li>iRun posting daily to your Instagram</li><li>DM lead capture on every post</li><li>Monthly performance report</li><li>48-hour revisions</li><li>Cancel anytime</li></ul>
+      <a class="btn" href="#order" data-pkg="The Takeover ($3,597/mo)">Book The Takeover</a>
+    </div>
+  </div>
+  <div class="addons">
+    <div class="addon"><span>Your own voice or a cast voiceover</span><b>+$47</b></div>
+    <div class="addon"><span>Rush, delivered in 24 hours</span><b>+$97</b></div>
+    <div class="addon"><span>Extra ad on any package</span><b>$197</b></div>
+  </div>
+</div></section>
+
+<section id="order"><div class="wrap order">
+  <div>
+    <div class="sh" style="margin-bottom:20px"><h2>Book your ad</h2></div>
+    <p class="lede" style="max-width:40ch">Tell us what you sell. You get the script for approval within 24 hours, then the finished ad.</p>
+    <div class="pay">
+      <div class="payrow"><div><p class="t">Cash App</p><p class="h">$hsw365</p></div><a class="btn p sm" href="https://cash.app/$hsw365" target="_blank" rel="noopener">Pay with Cash App</a></div>
+      <div class="payrow"><div><p class="t">Zelle</p><p class="h">856-796-8081</p></div><span class="t">elvintorressr@gmail.com</span></div>
+    </div>
+    <p class="note">Put your business name in the payment note. Work starts when payment lands. Questions: hsw365media@gmail.com</p>
+  </div>
+  <form id="f">
+    <label>Package<select name="pkg" id="pkg">
+      <option>The Scene ($247)</option><option selected>The Series ($1,247)</option><option>The Takeover ($3,597/mo)</option></select></label>
+    <label>Your name<input name="name" required autocomplete="name"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email"></label>
+    <label>Business, brand or artist name<input name="biz" required></label>
+    <label>What are we promoting?<select name="kind"><option>Business or service</option><option>Clothing line</option><option>Music or artist</option><option>App or online product</option><option>Event</option><option>Other</option></select></label>
+    <label>Instagram handle or website<input name="link" placeholder="@yourbrand or yourbrand.com"></label>
+    <label>Anything we should know?<textarea name="notes" placeholder="Your product, your customer, the vibe you want"></textarea></label>
+    <button class="btn p" type="submit">Send my order</button>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>HSW365 Media LLC &middot; Turn Negative Into Positive</span><span>Ads posted by <a href="index.html" style="color:var(--text)">iRun</a></span></div></footer>
+
+<script>
+document.querySelectorAll('[data-pkg]').forEach(a=>a.addEventListener('click',()=>{document.getElementById('pkg').value=a.dataset.pkg}));
+document.querySelectorAll('.clip video').forEach(v=>{
+  const io=new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?v.play().catch(()=>{}):v.pause()}),{threshold:.5});io.observe(v)});
+document.getElementById('f').addEventListener('submit',e=>{
+  e.preventDefault();const d=Object.fromEntries(new FormData(e.target));
+  const body=`Package: ${d.pkg}\nName: ${d.name}\nEmail: ${d.email}\nBrand: ${d.biz}\nPromoting: ${d.kind}\nLink: ${d.link}\n\n${d.notes}`;
+  location.href=`mailto:hsw365media@gmail.com?subject=${encodeURIComponent('Ad Studio order: '+d.biz+' / '+d.pkg)}&body=${encodeURIComponent(body)}`;
+});
+</script>
+</body>
+</html>
