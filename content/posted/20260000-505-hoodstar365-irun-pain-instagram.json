@@ -28,5 +28,14 @@
     "marketingautomation",
     "entrepreneurlife",
     "irun"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-23T12:47:09.259602Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17888131761621036"
+    }
   ]
 }
