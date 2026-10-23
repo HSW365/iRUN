@@ -27,5 +27,14 @@
     "hvacnj",
     "phillipsburgnj",
     "warrencountynj"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-23T02:33:17.950417Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18130729198828178"
+    }
   ]
 }
