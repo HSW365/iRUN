@@ -32,5 +32,14 @@
     "beautytech",
     "glowup",
     "hsw365"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-23T04:35:23.830701Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18157494097464071"
+    }
   ]
 }
