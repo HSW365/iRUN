@@ -160,11 +160,34 @@ FLYERS.update({
                     "sub": "Sprinkler systems designed, installed and inspected by a licensed New Jersey fire sprinkler contractor."},
 })
 
+SURVIVOR = {
+    "layout": "collection", "set": "survivor", "brand": "HSW365.CO", "tag": "// SURVIVOR COLLECTION",
+    "pieces": [("001", "CRIMSON FRACTURE"), ("002", "GOLD RUSH"), ("003", "MIDNIGHT SHRAPNEL"),
+               ("004", "BLOOD ORBIT"), ("005", "STARS & STRIPES"), ("006", "BLUE GOLD FRACTURE"),
+               ("007", "GOLD STARBURST"), ("008", "FOUNDER'S MARK")],
+    "list_title": "THE DROP  /  8 PIECES",
+    "price": "$120", "price_note": ["EACH  /  1 OF 1", "HAND-BLEACHED. SIGNED."],
+    "cta": "SHOP NOW", "url": "HSW365.CO", "alt": "LINK IN BIO  /  @HSW365.CO",
+}
+FLYERS.update({
+    "survivor-drop": {**SURVIVOR, "kicker": "FOUNDER'S EDITION  /  HAND-BLEACHED  /  SIGNED",
+                      "head": ["ONE OF ONE.", "NO RESTOCKS."],
+                      "sub": "Eight tees. Eight chapters of surviving and coming out stronger. When one sells, it's gone for good.",
+                      "hero": ("002", "004", "003")},
+    "survivor-story": {**SURVIVOR, "kicker": "BY HOODSTAR365  /  U.S. ARMY VETERAN",
+                       "head": ["EVERY SCAR", "IS A CHAPTER."],
+                       "sub": "Each Survivor tee is bleached by hand and signed by Hoodstar365. Wear the story, not the logo.",
+                       "hero": ("005", "008", "001")},
+})
+
 
 def draw(fid, w, h):
     s = FLYERS[fid]
     if s.get("layout") == "service":
         return client_flyer.draw(s, w, h)
+    if s.get("layout") == "collection":
+        import collection_flyer
+        return collection_flyer.draw(s, w, h)
     img = _bg(w, h)
     d = ImageDraw.Draw(img)
     M = 72
