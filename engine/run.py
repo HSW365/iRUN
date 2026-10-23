@@ -34,6 +34,7 @@ import flyer  # noqa: E402
 import client_ad  # noqa: E402
 import db  # noqa: E402
 import faceless  # noqa: E402
+import qr  # noqa: E402
 import render  # noqa: E402
 import seo  # noqa: E402
 import voice  # noqa: E402
@@ -181,6 +182,7 @@ def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, st
     video = os.path.join(outdir, f"{slug}.mp4")
     tag = "@" + acct["handle"] if acct.get("handle") else acct["brand"]  # clients without a handle show their name
     res = faceless.build(script, style, work, video, tuple(cta["screen"]), tag, ser["name"])
+    qr.stamp(video, ser.get("link") or qr.link_for(acct, ser.get("product")))
     says = [sc["say"] for sc in script["scenes"]]
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
         f.write(script["title"] + "\n\n" + caption + "\n\n---\n" + "\n".join(says))
@@ -234,6 +236,7 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     else:
         render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
                       brand=acct["brand"], handle=acct["handle"])
+    qr.stamp(video, product.get("link") or qr.link_for(acct))
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
         f.write(caption + "\n\n---\n" + "\n".join(script["beats"]))
 
