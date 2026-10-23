@@ -56,7 +56,37 @@ NEWARK_AD = {
          "alt": "Message 24/7  ·  908-454-4043", "foot": "412 Firth St, Phillipsburg, NJ  ·  Serving North Jersey"},
     ],
 }
-ADS = {"newark-premium": NEWARK_AD}
+HSW_MASK_AD = {
+    "brand": "hsw365-ledmask",
+    "grade": "none",
+    "colors": {"bg": "#070506", "bg2": "#1a0709", "accent": "#ff2a36", "accent2": "#b3121c",
+               "ink": "#ffffff", "soft": "#e6d4d2", "mute": "#9a8784", "line": "#3a1a1c"},
+    "fonts": {"display": "big-shoulders.woff2", "body": "libre-franklin.woff2"},
+    "name": "HSW365",
+    "tagline": "LED PHOTON MASK  ·  RED + INFRARED",
+    "hud_sub": "LED PHOTON MASK",
+    "hud_url": "HSW365.CO",
+    "index_label": "FEATURE",
+    "index_total": "03",
+    "button": "SHOP NOW",
+    "license": "Cosmetic skincare device  ·  Not a medical treatment",
+    "scenes": [
+        {"type": "logo"},
+        {"type": "statement", "photo": "hero.png", "kicker": "THE SPA, AT HOME",
+         "lines": ["YOUR GLOW.", "ON DEMAND."]},
+        {"type": "trade", "photo": "face.png", "n": "01", "title": ["FULL FACE", "+ NECK"],
+         "items": ["Forehead to collarbone", "Flexible, contoured fit", "Even light, edge to edge"]},
+        {"type": "trade", "photo": "glow.png", "n": "02", "title": ["RED +", "INFRARED"],
+         "items": ["Multiple light modes", "Adjustable levels", "Hands-free sessions"]},
+        {"type": "trade", "photo": "control.png", "n": "03", "title": ["WIRELESS"],
+         "items": ["Magnetic snap-on controller", "USB rechargeable", "Use it anywhere"]},
+        {"type": "statement", "photo": "hero2.png", "kicker": "RELAX. PRESS PLAY.",
+         "lines": ["SELF-CARE", "SIMPLIFIED."], "sub": "A few minutes a day. Your routine, upgraded."},
+        {"type": "end", "url": "HSW365.CO", "cta": "LED PHOTON MASK  ·  $299",
+         "alt": "Link in bio  ·  Ships to your door", "foot": "HSW365  ·  Turn Negative Into Positive"},
+    ],
+}
+ADS = {"newark-premium": NEWARK_AD, "hsw365-ledmask": HSW_MASK_AD}
 
 
 # ---------- easing ----------
@@ -139,10 +169,13 @@ class Ad:
             # cool, contrasty grade toward the brand navy
             arr = np.asarray(im).astype("float32")
             lum = arr.mean(axis=2, keepdims=True)
-            arr = lum + (arr - lum) * 0.82
-            arr = (arr - 128) * 1.12 + 120
-            arr[..., 2] += 8
-            arr[..., 0] -= 4
+            if self.s.get("grade", "cool") == "cool":
+                arr = lum + (arr - lum) * 0.82
+                arr = (arr - 128) * 1.12 + 120
+                arr[..., 2] += 8
+                arr[..., 0] -= 4
+            else:  # "none": the photo is already graded (product key art)
+                arr = (arr - 128) * 1.04 + 126
             self.photos[name] = Image.fromarray(arr.clip(0, 255).astype("uint8"))
         return self.photos[name]
 
@@ -192,8 +225,8 @@ class Ad:
         lg = self.logo.resize((86, 86), Image.LANCZOS)
         img.paste(lg, (M, 96), lg)
         d.text((M + 104, 104), self.s["name"], font=self.f("display", 44, 800), fill=c["ink"])
-        d.text((M + 106, 152), "PHILLIPSBURG, NJ", font=self.f("body", 22, 600), fill=c["soft"])
-        lbl = "ARK-HVAC.COM"
+        d.text((M + 106, 152), self.s.get("hud_sub", "PHILLIPSBURG, NJ"), font=self.f("body", 22, 600), fill=c["soft"])
+        lbl = self.s.get("hud_url", "ARK-HVAC.COM")
         fb = self.f("body", 24, 700)
         d.text((W - M - d.textlength(lbl, font=fb), 122), lbl, font=fb, fill=c["soft"])
         # progress hairline
@@ -261,7 +294,7 @@ class Ad:
                                          fill=(0, 0, 0, 0), stroke_width=3,
                                          stroke_fill=c["accent"] + (int(230 * p),))
                 img.paste(lay, (0, int((1 - p) * 60)), lay)
-            self.text_in(img, (M, y - 40), f"SERVICE {sc['n']} / 04", f("body", 28, 700), c["soft"], fr / .35, rise=20)
+            self.text_in(img, (M, y - 40), f"{self.s.get('index_label', 'SERVICE')} {sc['n']} / {self.s.get('index_total', '04')}", f("body", 28, 700), c["soft"], fr / .35, rise=20)
             self.bar(img, M, y + 4, 120, 8, (fr - .1) / .4, c["accent"])
             ts = 168 if max(len(x) for x in sc["title"]) <= 10 else 118
             ft = f("display", ts, 900)
@@ -338,14 +371,14 @@ class Ad:
                 lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 ld = ImageDraw.Draw(lay)
                 ld.rounded_rectangle([bx, by, bx + bw, by + bh], radius=64, fill=c["accent"] + (int(255 * pb),))
-                ld.text((W / 2, by + bh / 2), "FREE ESTIMATE", font=f("display", 64, 900),
+                ld.text((W / 2, by + bh / 2), self.s.get("button", "FREE ESTIMATE"), font=f("display", 64, 900),
                         fill=(255, 255, 255, int(255 * pb)), anchor="mm")
                 img.paste(lay, (0, 0), lay)
             self.text_in(img, (W / 2, H * .57 + 170), sc["alt"], f("body", 40, 700), c["ink"], (fr - 1.0) / .4,
                          rise=16, anchor="mt")
             self.text_in(img, (W / 2, H * .57 + 236), sc["foot"], f("body", 28, 500), c["mute"], (fr - 1.15) / .4,
                          rise=12, anchor="mt")
-            lic = "NJ Master Plumber #36BI00464600  ·  HVAC #19HC00178300  ·  Fire #P01631"
+            lic = self.s.get("license", "NJ Master Plumber #36BI00464600  ·  HVAC #19HC00178300  ·  Fire #P01631")
             self.text_in(img, (W / 2, H - 230), lic, f("body", 22, 600), c["mute"], (fr - 1.3) / .4, rise=8,
                          anchor="mt")
             return img

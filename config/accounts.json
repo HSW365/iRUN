@@ -161,6 +161,28 @@
             "four trades, one contractor",
             "fire sprinklers done to code"
           ]
+        },
+        {
+          "id": "ledmask",
+          "name": "LED PHOTON MASK",
+          "keyword": "GLOW",
+          "link": "https://hsw365.co/products/light-therapy-device-led-photon-mask-device-infrared-light-magnetic-wireless-model",
+          "cta": {
+            "spoken": "Get yours at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "LED MASK  ·  $299"
+            ],
+            "caption": "Shop it at hsw365.co. Link in bio."
+          },
+          "audience": "skincare and self-care buyers who want a spa-level LED routine at home",
+          "pitch": "The LED Photon Mask: a flexible full-face and neck LED mask with red and infrared light modes, adjustable levels and a wireless magnetic USB-rechargeable controller. Hands-free sessions at home. $299 at hsw365.co.",
+          "angles": [
+            "the spa, at home",
+            "self-care in a few minutes a day",
+            "red + infrared, full face and neck",
+            "wireless, use it anywhere"
+          ]
         }
       ]
     },
@@ -177,6 +199,28 @@
       "lead_bot": false,
       "voice": "HSW365, the veteran-owned streetwear and tech brand from Hoodstar365, a U.S. Army veteran. Every piece carries the message \"Turn Negative Into Positive\". Bold, proud, real, survival-to-success energy, no hype words.",
       "products": [
+        {
+          "id": "ledmask",
+          "name": "LED PHOTON MASK",
+          "keyword": "GLOW",
+          "link": "https://hsw365.co/products/light-therapy-device-led-photon-mask-device-infrared-light-magnetic-wireless-model",
+          "cta": {
+            "spoken": "Get yours at hsw365 dot co",
+            "screen": [
+              "SHOP HSW365.CO",
+              "LED MASK  ·  $299"
+            ],
+            "caption": "Shop it at hsw365.co. Link in bio."
+          },
+          "audience": "skincare and self-care buyers who want a spa-level LED routine at home",
+          "pitch": "The LED Photon Mask: a flexible full-face and neck LED mask with red and infrared light modes, adjustable levels and a wireless magnetic USB-rechargeable controller. Hands-free sessions at home. $299 at hsw365.co.",
+          "angles": [
+            "the spa, at home",
+            "self-care in a few minutes a day",
+            "red + infrared, full face and neck",
+            "wireless, use it anywhere"
+          ]
+        },
         {
           "id": "survivor",
           "name": "SURVIVOR COLLECTION",
