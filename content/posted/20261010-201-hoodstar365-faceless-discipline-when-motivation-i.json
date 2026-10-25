@@ -40,5 +40,28 @@
     "turnnegativeintopositive",
     "earlymorning",
     "mindset"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-25T00:24:36.247468Z",
+      "platform": "tiktok",
+      "status": "draft",
+      "error": "not posted: TikTok app keys missing (TIKTOK_CLIENT_KEY / TIKTOK_CLIENT_SECRET)",
+      "external_id": null
+    },
+    {
+      "at": "2026-10-25T00:24:36.247468Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18113431721180170"
+    },
+    {
+      "at": "2026-10-25T00:24:36.247468Z",
+      "platform": "youtube",
+      "status": "draft",
+      "error": "not posted: YouTube app keys missing (YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET)",
+      "external_id": null
+    }
   ]
 }
