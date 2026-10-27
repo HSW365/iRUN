@@ -1,0 +1,48 @@
+name: iRun post now
+
+# Direct posting hook: commit config/postnow.json and iRun posts that finished video right away.
+# {"video": "assets/ads/x.mp4", "caption": "...", "account": "hoodstar365", "platform": "instagram"}
+on:
+  push:
+    branches: [main]
+    paths: ["config/postnow.json"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt
+      - name: Post
+        env:
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+        run: |
+          VIDEO=$(jq -r '.video' config/postnow.json)
+          CAPTION=$(jq -r '.caption // ""' config/postnow.json)
+          ACCOUNT=$(jq -r '.account // "hoodstar365"' config/postnow.json)
+          PLATFORM=$(jq -r '.platform // "instagram"' config/postnow.json)
+          python engine/run.py --account "$ACCOUNT" --platform "$PLATFORM" --video "$VIDEO" --caption "$CAPTION"
