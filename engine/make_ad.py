@@ -19,6 +19,7 @@ import qr  # noqa: E402
 def main(spec_path, out_path):
     with open(spec_path) as f:
         spec = json.load(f)
+    os.environ.setdefault("IRUN_IMAGE_TRIES", "8")
     if spec.get("voice"):
         os.environ["IRUN_EDGE_VOICE"] = spec["voice"]
     script = faceless.clean(spec)
@@ -26,7 +27,7 @@ def main(spec_path, out_path):
     work = tempfile.mkdtemp(prefix="irun-ad-")
     res = faceless.build(script, spec.get("style", "photoreal"), work, out_path, tuple(spec["cta"]),
                          spec.get("brand", "HSW365"), spec.get("name", script["title"]), seed=spec.get("seed"))
-    qr.stamp(out_path, spec.get("link"))
+    qr.stamp(out_path, spec.get("link"), x="(W-w)/2", y="H-h-70")  # under the CTA card, centered
     print(json.dumps({"out": out_path, "voice": res["voice"], "seconds": res.get("seconds"),
                       "images": [m.get("source") for m in res.get("media", [])]}))
 

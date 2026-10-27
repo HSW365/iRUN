@@ -5,8 +5,11 @@
   "style": "photoreal",
   "voice": "en-US-AvaMultilingualNeural",
   "seed": 365027,
-  "link": "https://hsw365.co/products/hsw365-tear-off-microfiber-cleaning-roll-30-sheets?src=ig-agency-ad",
-  "cta": ["$10.99 AT HSW365.CO", "SCAN TO SUBSCRIBE"],
+  "link": "https://hsw365.co/products/hsw365-tear-off-microfiber-cleaning-roll-30-sheets?src=ig-agency-ad-v2",
+  "cta": [
+    "$10.99 AT HSW365.CO",
+    "SCAN TO SUBSCRIBE"
+  ],
   "scenes": [
     {
       "say": "Monday. Seven forty two. Running late. Of course.",
@@ -37,10 +40,17 @@
       "visual": "beautiful stylish Black woman with natural curly hair and a cream knit sweater smiling while tossing a gray microfiber cloth into a modern white front-load washing machine in a bright minimalist laundry room, soft daylight, lifestyle commercial photography"
     },
     {
-      "say": "I'm never buying paper towels again. Ten ninety nine at H S W three six five dot co.",
-      "visual": "confident beautiful Black woman with natural curly hair, gold hoop earrings and a cream knit sweater leaning on a spotless white marble kitchen counter, holding a gray microfiber cloth roll, looking straight at camera with a satisfied smile, warm golden light, luxury lifestyle advertising portrait"
+      "say": "Never buying paper towels again. Ten ninety nine. Link in bio.",
+      "visual": "smiling Black woman with natural curly hair and gold hoop earrings in a cream sweater, standing in a bright white marble kitchen holding a roll of gray microfiber cloths, looking at camera, warm light, lifestyle advertising portrait"
     }
   ],
   "caption": "Third pack of paper towels this month? Never again. One rip, one wipe, gone. Then wash it and use it again. HSW365 Tear-Off Microfiber Roll, 30 reusable sheets, $10.99. Scan the QR or shop hsw365.co, link in bio.",
-  "hashtags": ["cleaninghacks", "kitchenhacks", "microfiber", "homehacks", "cleaningmotivation", "hsw365"]
+  "hashtags": [
+    "cleaninghacks",
+    "kitchenhacks",
+    "microfiber",
+    "homehacks",
+    "cleaningmotivation",
+    "hsw365"
+  ]
 }

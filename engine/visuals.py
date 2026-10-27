@@ -79,8 +79,9 @@ def _pollinations(prompt, seed):
 WAITS = [12, 25, 40]  # the free tier allows a short burst, then refuses (HTTP 402/429) until it refills
 
 
-def scene_image(visual, style_id, seed, out, tries=4):
+def scene_image(visual, style_id, seed, out, tries=None):
     """Make one scene image. Returns (path, source) where source is 'pollinations' or 'backdrop'."""
+    tries = tries or int(os.environ.get("IRUN_IMAGE_TRIES", "4"))
     st = style(style_id)
     prompt = prompt_for(visual, st)
     err = None
