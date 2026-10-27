@@ -47,17 +47,18 @@ jobs:
           VIDEO=$(jq -r '.video // ""' config/postnow.json)
           if [ -n "$SPEC" ]; then
             VIDEO="out/$(basename "$SPEC" .json)-ad.mp4"
-            python engine/make_ad.py "$SPEC" "$VIDEO"
+            mkdir -p out && python engine/make_ad.py "$SPEC" "$VIDEO" 2>&1 | tee out/build.log; test ${PIPESTATUS[0]} -eq 0
           fi
           CAPTION=$(jq -r '.caption // ""' config/postnow.json)
           ACCOUNT=$(jq -r '.account // "hoodstar365"' config/postnow.json)
           PLATFORM=$(jq -r '.platform // "instagram"' config/postnow.json)
-          python engine/run.py --account "$ACCOUNT" --platform "$PLATFORM" --video "$VIDEO" --caption "$CAPTION"
+          python engine/run.py --account "$ACCOUNT" --platform "$PLATFORM" --video "$VIDEO" --caption "$CAPTION" 2>&1 | tee -a out/build.log; test ${PIPESTATUS[0]} -eq 0
       - name: Keep the built ad
         if: always()
         run: |
-          ls out/*-ad.mp4 >/dev/null 2>&1 || exit 0
-          mkdir -p assets/ads/built && cp out/*-ad.mp4 assets/ads/built/
+          mkdir -p assets/ads/built
+          cp out/*-ad.mp4 assets/ads/built/ 2>/dev/null || true
+          cp out/build.log assets/ads/built/last-build.log 2>/dev/null || true
           git config user.name "iRun"; git config user.email "hsw365media@gmail.com"
           git add assets/ads/built
           git diff --cached --quiet && exit 0
