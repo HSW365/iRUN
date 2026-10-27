@@ -49,7 +49,7 @@ jobs:
             VIDEO="out/$(basename "$SPEC" .json)-ad.mp4"
             mkdir -p out && python engine/make_ad.py "$SPEC" "$VIDEO" 2>&1 | tee out/build.log; test ${PIPESTATUS[0]} -eq 0
           fi
-          if [ "$(jq -r '.post // true' config/postnow.json)" = "false" ]; then echo "build only"; exit 0; fi
+          if [ "$(jq -r 'if .post == false then "false" else "true" end' config/postnow.json)" = "false" ]; then echo "build only"; exit 0; fi
           CAPTION=$(jq -r '.caption // ""' config/postnow.json)
           ACCOUNT=$(jq -r '.account // "hoodstar365"' config/postnow.json)
           PLATFORM=$(jq -r '.platform // "instagram"' config/postnow.json)
