@@ -40,5 +40,28 @@
     "turnnegativeintopositive",
     "motivation",
     "selfdiscipline"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-27T22:17:43.509563Z",
+      "platform": "tiktok",
+      "status": "draft",
+      "error": "not posted: TikTok app keys missing (TIKTOK_CLIENT_KEY / TIKTOK_CLIENT_SECRET)",
+      "external_id": null
+    },
+    {
+      "at": "2026-10-27T22:17:43.509563Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18117709808278440"
+    },
+    {
+      "at": "2026-10-27T22:17:43.509563Z",
+      "platform": "youtube",
+      "status": "draft",
+      "error": "not posted: YouTube app keys missing (YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET)",
+      "external_id": null
+    }
   ]
 }
