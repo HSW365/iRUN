@@ -5,7 +5,7 @@
       "id": "hoodlum-soldier",
       "account": "hoodstar365",
       "name": "HOODLUM SOLDIER",
-      "enabled": true,
+      "enabled": false,
       "style": "cinematic",
       "every_hours": 48,
       "_note": "Episodes 1-25 of the book, told one ~1 minute episode every 48 hours on Instagram, in queue file order. Queued scripts only; stops when the queue is empty.",
