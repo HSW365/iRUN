@@ -1,0 +1,58 @@
+{
+  "title": "The call he missed",
+  "name": "HSW365 MEDIA",
+  "brand": "HSW365 MEDIA",
+  "style": "photoreal",
+  "voice": "en-US-AndrewMultilingualNeural",
+  "seed": 365777,
+  "link": "https://hsw365.co/pages/ai-front-office",
+  "cta": [
+    "HSW365 MEDIA: AI AGENTS",
+    "SCAN TO SUBSCRIBE"
+  ],
+  "scenes": [
+    {
+      "say": "Under a sink all day. Phone rings in the truck. Again.",
+      "visual": "cinematic photo, tired Latino plumber in his 40s in a navy work shirt lying under a kitchen sink with a wrench, flashlight beam cutting through the dark cabinet, gritty realistic film still, vertical portrait composition"
+    },
+    {
+      "say": "Three missed calls. Three jobs gone to the next guy.",
+      "visual": "close up of a cracked smartphone on the dashboard of a work van showing three missed calls notifications, rain streaks on the windshield, cold blue dusk light, dramatic cinematic commercial photography"
+    },
+    {
+      "say": "His wife looks at the books. Babe, we can't keep losing calls like this.",
+      "visual": "cinematic photo, worried woman in her 40s at a kitchen table at night with bills and a laptop, warm lamp light, husband in work clothes standing behind her rubbing his neck, emotional family drama film still, vertical portrait composition"
+    },
+    {
+      "say": "So he hired HSW365 Media. Not a person. AI agents.",
+      "visual": "hero shot of a laptop on a dark desk showing a sleek black dashboard with glowing cyan and violet panels, light rays across the room, premium tech commercial product photography, crisp detail"
+    },
+    {
+      "say": "Now every missed call gets caught. Name, number, address, the job. Straight to his phone.",
+      "visual": "close up of a man's hand in a work glove holding a smartphone showing a new job lead notification, cyan glow on the glove, shallow depth of field, cinematic commercial photography"
+    },
+    {
+      "say": "Estimates write themselves from a photo. Content posts every day. Sales emails go out while he sleeps.",
+      "visual": "cinematic photo, the plumber smiling in his van taking a photo of a pipe repair with his phone, golden hour light through the window, confident and relaxed, lifestyle advertising photography, vertical portrait composition"
+    },
+    {
+      "say": "Phone's buzzing again. This time, it's booked work.",
+      "visual": "cinematic photo, the plumber and his wife laughing together at the kitchen table, phone lit up between them with a calendar full of jobs, warm happy light, emotional film still, vertical portrait composition"
+    },
+    {
+      "say": "Your business, run by AI agents. Scan the code. HSW365 Media.",
+      "visual": "the plumber looking straight into the camera with arms crossed in front of his work van, confident smile, cyan and violet rim light, dark background, bold advertising portrait, vertical portrait composition"
+    }
+  ],
+  "caption": "Three missed calls. Three jobs gone. So he hired HSW365 Media to build his AI agents: missed-call lead capture, photo-to-estimate proposals, daily content and sales outreach that runs while he sleeps.\n\nYour business, run by AI agents. Built, deployed and managed by HSW365 Media.\n\nScan the QR or start here: hsw365.co/pages/ai-front-office (link in bio)",
+  "hashtags": [
+    "hsw365media",
+    "aiagents",
+    "aiautomation",
+    "smallbusiness",
+    "businessowner",
+    "contractor",
+    "plumbing",
+    "aiconsultant"
+  ]
+}
