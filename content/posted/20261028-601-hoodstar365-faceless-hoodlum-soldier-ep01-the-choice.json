@@ -58,5 +58,14 @@
     "turnnegativeintopositive",
     "newark",
     "storytime"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-28T22:48:43.267805Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17906443266355497"
+    }
   ]
 }
