@@ -40,8 +40,12 @@ def clean(script):
     for s in script.get("scenes", []):
         say = re.sub(r"[^\x00-\x7F]+", "", str(s.get("say", ""))).strip()
         vis = str(s.get("visual", "")).strip()
-        if say and vis:
-            scenes.append({"say": say, "visual": vis})
+        photo = str(s.get("photo", "")).strip()
+        if say and (vis or photo):
+            sc = {"say": say, "visual": vis or "real photo"}
+            if photo:
+                sc["photo"] = photo
+            scenes.append(sc)
     if not 4 <= len(scenes) <= 12:
         raise ValueError(f"needs 4-12 scenes with 'say' and 'visual', got {len(scenes)}")
     tags = [str(t).lstrip("#").replace(" ", "") for t in script.get("hashtags", [])][:6]
@@ -247,7 +251,10 @@ def build(script, style_id, workdir, out_path, cta, tag, series_name, seed=None)
     media, images, moves = [], [], []
     last = None
     for i, sc in enumerate(scenes):
-        path, source = visuals.scene_image(sc["visual"], style_id, seed * 100 + i, os.path.join(workdir, f"img{i}.jpg"))
+        if sc.get("photo") and os.path.exists(sc["photo"]):  # a real photo (e.g. the client in the ad) instead of an AI image
+            path, source = sc["photo"], "photo"
+        else:
+            path, source = visuals.scene_image(sc["visual"], style_id, seed * 100 + i, os.path.join(workdir, f"img{i}.jpg"))
         media.append({"visual": sc["visual"], "source": source})
         images.append(path)
         move = rnd.choice([m for m in MOVES if m != last])

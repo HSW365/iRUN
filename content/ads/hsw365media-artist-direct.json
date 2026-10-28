@@ -1,0 +1,58 @@
+{
+  "title": "A million streams, no rent",
+  "name": "HSW365 MEDIA",
+  "brand": "HSW365 MEDIA",
+  "style": "photoreal",
+  "voice": "en-US-AndrewMultilingualNeural",
+  "seed": 365888,
+  "link": "https://hsw365.github.io/queenee/",
+  "cta": [
+    "BUILD YOUR OWN PAGE",
+    "SCAN TO SUBSCRIBE"
+  ],
+  "scenes": [
+    {
+      "say": "Two in the morning. Another song done. Another drop for the streams.",
+      "photo": "assets/ads/people/artist-studio.jpg"
+    },
+    {
+      "say": "A million plays. Check comes in. Barely covers the light bill.",
+      "visual": "close up of a hand holding a smartphone in a dark recording studio showing a music streaming payout screen with a tiny dollar amount, red studio light glow, shallow depth of field, gritty cinematic commercial photography"
+    },
+    {
+      "say": "Then a fan hits my DMs. Where can I buy your music direct? I want the shirt too.",
+      "visual": "cinematic photo, young woman in a hoodie on her bed at night smiling at her phone, typing a message, warm lamp light and phone glow on her face, candid film still, vertical portrait composition"
+    },
+    {
+      "say": "That's when it hit me. The fans were never the problem. I had no store.",
+      "photo": "assets/ads/people/artist-studio-close.jpg"
+    },
+    {
+      "say": "So I had HSW365 Media build my own page. My music, my merch, my shows. One link.",
+      "visual": "hero shot of a smartphone held up in a dark studio showing a sleek black artist website with album covers, a merch section with hoodies and a concert tickets button, red and cyan glow, premium tech commercial product photography, crisp detail"
+    },
+    {
+      "say": "No middleman. No algorithm. The fans pay me. Straight to my account.",
+      "visual": "cinematic photo, a packed small concert crowd at night holding up phones with screen glow, fans wearing matching black band hoodies, red stage light haze, energetic film still, vertical portrait composition"
+    },
+    {
+      "say": "First weekend, I sold more off my page than a year of streams.",
+      "visual": "close up of a work table covered in shipping boxes and folded black hoodies with packing slips, a laptop showing a list of new orders in the background, warm studio light, lifestyle advertising photography, vertical portrait composition"
+    },
+    {
+      "say": "Artists, stop renting your fans. Own them. Scan the code. Build your page with HSW365 Media.",
+      "photo": "assets/ads/people/artist-studio.jpg"
+    }
+  ],
+  "caption": "A million streams and the check barely covers the light bill. Then a fan asks where to buy direct, and it hits: the fans were never the problem. There was no store.\n\nArtists: build your own page. Your music, your merch, your shows, one link, and your fans pay you directly. No middleman, no algorithm.\n\nBuilt by HSW365 Media. Scan the QR or start here: hsw365.github.io/queenee (link in bio)",
+  "hashtags": [
+    "independentartist",
+    "hsw365media",
+    "directtofan",
+    "musicbusiness",
+    "indieartist",
+    "artistwebsite",
+    "sellyourmusic",
+    "hiphop"
+  ]
+}
