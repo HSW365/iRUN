@@ -24,12 +24,18 @@ Faceless item shape (story-style video with AI scenes; see engine/faceless.py an
   "hashtags": ["tag", ...]
 }
 One faceless video is cross-posted to all of the account's platforms, so it has no "platform" field.
+
+Trailer item shape ("kind": "trailer"): the house ad format. A ~19s micro-drama cut like a movie trailer, built from
+Canva-made stills in content/shots/<slug>/ (see engine/trailer.py for the full spec and engine/canva_shots.py).
+Trailer items take the account's promo slots and go out before any old-style promo.
 """
 import datetime as dt
 import glob
 import json
 import os
 import re
+
+import trailer
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 QUEUE = os.path.join(ROOT, "content", "queue")
@@ -143,7 +149,8 @@ def take(account, platform, product_ids, offset=0):
         except Exception as e:
             print(f"[queue] unreadable {os.path.basename(path)}: {e}")
             continue
-        if item.get("kind", "promo") != "promo":  # faceless items are handled by take_faceless
+        kind = item.get("kind", "promo")
+        if kind not in ("promo", "trailer"):  # faceless items are handled by take_faceless
             continue
         if item.get("account", "hoodstar365") != account:
             continue
@@ -153,11 +160,10 @@ def take(account, platform, product_ids, offset=0):
             print(f"[queue] {os.path.basename(path)}: unknown product {item.get('product')!r} for @{account}; skipping")
             continue
         try:
-            found.append((path, item, _clean(item)))
+            found.append((path, item, trailer.clean(item) if kind == "trailer" else _clean(item)))
         except ValueError as e:
             print(f"[queue] {os.path.basename(path)}: {e}; skipping")
-        if found and not offset:
-            break
+    found.sort(key=lambda f: f[1].get("kind") != "trailer")  # trailers first, then oldest first
     return found[offset % len(found)] if found else None
 
 

@@ -19,6 +19,10 @@ import qr  # noqa: E402
 def main(spec_path, out_path):
     with open(spec_path) as f:
         spec = json.load(f)
+    if spec.get("kind") == "trailer":  # trailer-cut micro-drama (engine/trailer.py)
+        import trailer
+        print(json.dumps({"out": out_path, "seconds": trailer.build(spec, out_path)}))
+        return
     os.environ.setdefault("IRUN_IMAGE_TRIES", "8")
     if spec.get("voice"):
         os.environ["IRUN_EDGE_VOICE"] = spec["voice"]

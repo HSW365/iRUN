@@ -345,6 +345,27 @@
             "find an instructor who fits you",
             "instructors keep every dollar"
           ]
+        },
+        {
+          "id": "dispute365",
+          "name": "DISPUTE365",
+          "keyword": "CREDIT",
+          "link": "https://hsw365.github.io/DISPUTE365/#signup",
+          "cta": {
+            "spoken": "Scan the code to sign up for DISPUTE365",
+            "screen": [
+              "DISPUTE365",
+              "SCAN TO SIGN UP"
+            ],
+            "caption": "Sign up for DISPUTE365: hsw365.github.io/DISPUTE365 (link in bio)"
+          },
+          "audience": "people with errors or unfair items on their credit reports who want to dispute them themselves",
+          "pitch": "DISPUTE365 reads your credit report, finds errors and negative items, and writes the dispute letters for you. Free letter builder; full app $9.99/month.",
+          "angles": [
+            "denied for something that isn't yours",
+            "stop paying $100 a month to mail letters you can send yourself",
+            "find the errors, send the letters"
+          ]
         }
       ]
     },

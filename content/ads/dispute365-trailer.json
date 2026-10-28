@@ -1,0 +1,36 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "dispute365",
+  "platform": "instagram",
+  "shots_dir": "content/shots/dispute365-denied",
+  "accent": "#ef4444",
+  "title": "DISPUTE365",
+  "open": {"shot": "stamp", "impact": "DENIED"},
+  "scenes": [
+    {"shot": "officer", "sub": "We can't approve you. Not today.", "cy": 0.42},
+    {"shot": "man", "sub": "That account... that's not mine.", "cy": 0.36, "zoom": [1.12, 1.26]},
+    {"card": {"title": "Credit report · negative items", "tag": "ERROR", "rows": [["Collection account", "$1,284 · not mine"], ["Late payment", "03/2024 · paid on time"], ["Hard inquiry", "never applied"]]}, "bg": "night"},
+    {"shot": "man", "sub": "Not this time.", "cy": 0.33, "zoom": [1.42, 1.55], "sat": 0.55, "tense": true}
+  ],
+  "slams": [
+    {"word": "FIGHT", "shot": "night", "cy": 0.4},
+    {"word": "IT", "shot": "night", "panel": {"label": "DISPUTE365", "title": "3 errors found", "working": "Writing dispute letters...", "done": "3 letters ready to mail", "steps": ["Letter 1", "Letter 2", "Letter 3"]}},
+    {"word": "BACK", "shot": "envelope", "cy": 0.45, "zoom": [1.08, 1.2]}
+  ],
+  "callback": {"shot": "stamp", "impact": "DELETED"},
+  "payoff": [
+    {"shot": "keys", "cy": 0.45},
+    {"shot": "hero", "sub": "Turn negative into positive.", "zoom": [1.04, 1.12]}
+  ],
+  "end": {
+    "wordmark": ["DISPUTE", "365"],
+    "tagline": "Find the errors. Send the letters.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": ["FREE LETTER BUILDER  ·  FULL APP $9.99/MO", "hsw365.github.io/DISPUTE365"],
+    "fine": "Self-help dispute tool. Results vary. Not legal advice.",
+    "link": "https://hsw365.github.io/DISPUTE365/#signup"
+  },
+  "caption": "Denied for an account that was never his. So he pulled the report, found the errors and fought back. DISPUTE365 finds the mistakes on your credit report and writes the dispute letters for you. Scan the QR to sign up, or go to hsw365.github.io/DISPUTE365 (link in bio).",
+  "hashtags": ["creditrepair", "creditreport", "disputeletters", "fixyourcredit", "dispute365", "hsw365media"]
+}

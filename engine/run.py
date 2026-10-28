@@ -37,6 +37,7 @@ import faceless  # noqa: E402
 import qr  # noqa: E402
 import render  # noqa: E402
 import seo  # noqa: E402
+import trailer  # noqa: E402
 import voice  # noqa: E402
 import writer  # noqa: E402
 
@@ -248,16 +249,24 @@ def make_one(acct, product, platform, mode, outdir, queued=None):
     stamp = dt.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
     slug = f"{stamp}-{acct['id']}-{platform}-{product['id']}"
     work = tempfile.mkdtemp(prefix="irun-")
-    audio, alen, vsrc = voice.speak(" ".join(script["beats"]), os.path.join(work, "vo.mp3"))
     video = os.path.join(outdir, f"{slug}.mp4")
-    if queued and qitem.get("ad"):  # a cinematic client commercial (engine/client_ad.py)
+    is_trailer = bool(queued and qitem.get("kind") == "trailer")
+    if is_trailer:  # the house ad format: trailer-cut micro-drama, own score, QR to sign-up on the end card
+        trailer.build(qitem, video)
+        vsrc = "score"
+    else:
+        audio, alen, vsrc = voice.speak(" ".join(script["beats"]), os.path.join(work, "vo.mp3"))
+    if is_trailer:
+        pass
+    elif queued and qitem.get("ad"):  # a cinematic client commercial (engine/client_ad.py)
         client_ad.video(qitem["ad"], script["beats"], audio, alen, work, video)
     elif queued and qitem.get("flyer"):  # a designed flyer, voiced over (engine/flyer.py)
         flyer.video(qitem["flyer"], audio, alen, work, video)
     else:
         render.render(script["beats"], script["emphasis"], audio, alen, product, work, video, cta=screen_cta,
                       brand=acct["brand"], handle=acct["handle"])
-    qr.stamp(video, product.get("link") or qr.link_for(acct))
+    if not is_trailer:  # trailers carry their own QR on the end card
+        qr.stamp(video, product.get("link") or qr.link_for(acct))
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
         f.write(caption + "\n\n---\n" + "\n".join(script["beats"]))
 
