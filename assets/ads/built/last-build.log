@@ -1,31 +1,6 @@
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/make_ad.py", line 36, in <module>
-    main(sys.argv[1], sys.argv[2])
-  File "/home/runner/work/iRUN/iRUN/engine/make_ad.py", line 28, in main
-    res = faceless.build(script, spec.get("style", "photoreal"), work, out_path, tuple(spec["cta"]),
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/iRUN/iRUN/engine/faceless.py", line 228, in build
-    _, length, vsrc, marks = voice.speak_timed(sc["say"], mp3)
-                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/iRUN/iRUN/engine/voice.py", line 120, in speak_timed
-    marks = _edge_timed(text, out)
-            ^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/iRUN/iRUN/engine/voice.py", line 99, in _edge_timed
-    return asyncio.run(go())
-           ^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/runners.py", line 195, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "/home/runner/work/iRUN/iRUN/engine/voice.py", line 92, in go
-    async for ch in com.stream():
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/edge_tts/communicate.py", line 588, in stream
-    async for message in self.__stream():
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/edge_tts/communicate.py", line 562, in __stream
-    raise NoAudioReceived(
-edge_tts.exceptions.NoAudioReceived: No audio was received. Please verify that your parameters are correct.
+{"out": "out/hsw365media-ai-agents-ad.mp4", "voice": "edge-tts", "seconds": 41.7, "images": ["pollinations", "pollinations", "pollinations", "pollinations", "pollinations", "pollinations", "pollinations", "pollinations"]}
+/home/runner/work/iRUN/iRUN/engine/run.py:309: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
+/home/runner/work/iRUN/iRUN/engine/run.py:143: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
+[hoodstar365/instagram] posted 17910361602563054
