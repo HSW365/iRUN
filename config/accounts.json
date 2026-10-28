@@ -170,7 +170,7 @@
           "id": "klipit",
           "name": "KLIPIT",
           "keyword": "CLIP",
-          "link": "https://klipit.onrender.com",
+          "link": "https://klipit.onrender.com/?signup",
           "audience": "streamers and gamers (Twitch, Kick, YouTube), especially GTA6 streamers",
           "pitch": "Paste a stream or VOD link and Klipit finds your best moments and cuts them into ready-to-post vertical and wide clips automatically.",
           "angles": [
@@ -183,7 +183,7 @@
           "id": "calltwin",
           "name": "CALLTWIN",
           "keyword": "CALL",
-          "link": "https://calltwin.onrender.com",
+          "link": "https://hsw365.github.io/calltwin/signup.html",
           "audience": "small business owners, contractors, barbers, salons, service businesses",
           "pitch": "An AI receptionist that answers and follows up on missed calls so a busy owner stops losing customers to voicemail.",
           "angles": [
@@ -196,7 +196,7 @@
           "id": "queenee",
           "name": "QUEENEE",
           "keyword": "SITE",
-          "link": "https://hsw365.github.io/queenee/",
+          "link": "https://hsw365.github.io/queenee/#signup",
           "audience": "business owners and hustlers with no website or an outdated one",
           "pitch": "QUEENEE builds a professional website for your business, with CallTwin available as an add-on.",
           "angles": [
@@ -209,7 +209,7 @@
           "id": "flipit",
           "name": "FLIPIT",
           "keyword": "FLIP",
-          "link": "https://flipit-m5ig.onrender.com",
+          "link": "https://flipit-m5ig.onrender.com/?signup",
           "audience": "real estate investors, wholesalers, flippers, and people who want to earn doing property preservation work on foreclosed homes",
           "pitch": "FLIPIT is a deal workspace for flippers, wholesalers and buy-and-hold investors: run the max offer, check the risks, match cash buyers and draft the paperwork in one place. Its Preservation tab runs a property preservation business on foreclosed, bank-owned homes: occupancy inspections, lock changes, trash-outs, lawn care and winterization, with work orders, photo checklists, inspection reports and invoices.",
           "angles": [
@@ -250,7 +250,7 @@
           "id": "friendy",
           "name": "FRIENDY",
           "keyword": "TALK",
-          "link": "https://hsw365.github.io/FRIENDY/",
+          "link": "https://hsw365.github.io/FRIENDY/?signup",
           "cta": {
             "spoken": "Three days free. Link in bio",
             "screen": [
@@ -272,7 +272,7 @@
           "id": "studio",
           "name": "HSW365STUDIO",
           "keyword": "STUDIO",
-          "link": "https://hsw365.github.io/STUDIO365/",
+          "link": "https://hsw365.github.io/STUDIO365/?signup",
           "cta": {
             "spoken": "First three songs are free. Link in bio",
             "screen": [
@@ -322,7 +322,7 @@
           "id": "speekzone",
           "name": "SPEEKZONE",
           "keyword": "ZONE",
-          "link": "https://hsw365.github.io/SPEEKZONE/",
+          "link": "https://hsw365.github.io/SPEEKZONE/?signup",
           "audience": "people fed up with algorithm feeds, shadowbans and boosted strangers",
           "pitch": "SpeekZone is a social network with no algorithm: every post from everyone you follow, in the order it was posted. Free for 90 days, then $9.99 a month with a verified check.",
           "angles": [
@@ -336,7 +336,7 @@
           "id": "captureitlive",
           "name": "CAPTUREITLIVE",
           "keyword": "YOGA",
-          "link": "https://hsw365.github.io/captureitlive/",
+          "link": "https://hsw365.github.io/captureitlive/?signup",
           "audience": "yoga instructors and yoga students",
           "pitch": "CaptureItLive connects yoga instructors and students: list and fill classes, RSVP, message each other and keep practicing together. One $8 a month membership, instructors keep 100% of class pay.",
           "angles": [
