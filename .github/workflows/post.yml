@@ -43,6 +43,7 @@ jobs:
           IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
         run: |
           # "spec" = build the ad with iRun's own engine first (images + free voice), then post it
+          mkdir -p out
           SPEC=$(jq -r '.spec // ""' config/postnow.json)
           VIDEO=$(jq -r '.video // ""' config/postnow.json)
           if [ -n "$SPEC" ]; then
