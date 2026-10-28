@@ -4,7 +4,7 @@
   "brand": "HSW365 MEDIA",
   "style": "photoreal",
   "voice": "en-US-AndrewMultilingualNeural",
-  "seed": 365888,
+  "seed": 365889,
   "link": "https://hsw365.github.io/queenee/",
   "cta": [
     "BUILD YOUR OWN PAGE",
@@ -25,7 +25,7 @@
     },
     {
       "say": "That's when it hit me. The fans were never the problem. I had no store.",
-      "photo": "assets/ads/people/artist-studio-close.jpg"
+      "photo": "assets/ads/people/artist-talk-close.jpg"
     },
     {
       "say": "So I had HSW365 Media build my own page. My music, my merch, my shows. One link.",
@@ -41,7 +41,7 @@
     },
     {
       "say": "Artists, stop renting your fans. Own them. Scan the code. Build your page with HSW365 Media.",
-      "photo": "assets/ads/people/artist-studio.jpg"
+      "photo": "assets/ads/people/artist-talk.jpg"
     }
   ],
   "caption": "A million streams and the check barely covers the light bill. Then a fan asks where to buy direct, and it hits: the fans were never the problem. There was no store.\n\nArtists: build your own page. Your music, your merch, your shows, one link, and your fans pay you directly. No middleman, no algorithm.\n\nBuilt by HSW365 Media. Scan the QR or start here: hsw365.github.io/queenee (link in bio)",
