@@ -73,6 +73,37 @@ def take_faceless(account, series_ids, offset=0):
     return found[offset % len(found)] if found else None
 
 
+def last_posted(account, series_id):
+    """When this series last went out (UTC datetime) according to content/posted, or None."""
+    latest = None
+    for path in glob.glob(os.path.join(POSTED, "*.json")):
+        try:
+            with open(path) as f:
+                item = json.load(f)
+        except Exception:
+            continue
+        if item.get("kind") != "faceless" or item.get("account") != account or item.get("series") != series_id:
+            continue
+        for a in item.get("attempts", []):
+            if a.get("status") == "posted" and a.get("at"):
+                at = dt.datetime.fromisoformat(a["at"].rstrip("Z"))
+                latest = at if latest is None or at > latest else latest
+    return latest
+
+
+def has_faceless(account, series_id):
+    """True when a queued script is waiting for this series."""
+    for path in glob.glob(os.path.join(QUEUE, "*.json")):
+        try:
+            with open(path) as f:
+                item = json.load(f)
+        except Exception:
+            continue
+        if item.get("kind") == "faceless" and item.get("account") == account and item.get("series") == series_id:
+            return True
+    return False
+
+
 def finish_faceless(path, item, rows):
     """After a cross-post: done if any platform took it; otherwise keep for retry until MAX_ATTEMPTS runs."""
     item.setdefault("attempts", [])

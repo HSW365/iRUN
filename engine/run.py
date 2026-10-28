@@ -156,6 +156,27 @@ def adhoc_series(acct):
                                   "caption": f"Follow @{h} for more."}}
 
 
+def paced(acct, sers, now):
+    """Split out series with "every_hours" (one episode per N hours, queued scripts only, in file order).
+    Returns (series allowed this slot, paced series that are due now)."""
+    keep, due = [], []
+    for s in sers:
+        hours = s.get("every_hours")
+        if not hours:
+            keep.append(s)
+            continue
+        if not content_queue.has_faceless(acct["id"], s["id"]):
+            print(f"[{acct['id']}/faceless] {s['id']}: no episodes left in the queue")
+            continue
+        last = content_queue.last_posted(acct["id"], s["id"])
+        if last is None or (now - last).total_seconds() >= (hours - 3) * 3600:  # 3h slack for late GitHub runs
+            due.append(s)
+        else:
+            nxt = last + dt.timedelta(hours=hours)
+            print(f"[{acct['id']}/faceless] {s['id']}: next episode due {nxt:%Y-%m-%d %H:%M} UTC")
+    return keep, due
+
+
 def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, style=None):
     """One faceless video for this account, posted to every platform given. Returns the list of post rows."""
     cta = ser["cta"]
@@ -382,6 +403,10 @@ def main():
         if want_faceless and pfs:
             try:
                 sers = [s for s in accounts.series(acct["id"]) if not a.series or s["id"] == a.series]
+                if not a.idea and not a.series:
+                    sers, due = paced(acct, sers, now)
+                    if due:  # a paced series (e.g. a story told one episode every 48h) takes the slot when it's due
+                        sers = due
                 if a.idea and not sers:
                     sers = [adhoc_series(acct)]
                 queued = None if a.idea or not sers else content_queue.take_faceless(

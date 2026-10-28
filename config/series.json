@@ -2,6 +2,27 @@
   "_note": "Faceless series: story-style videos with AI scenes, voiceover and word captions (no product pitch). One video per series account per day, cross-posted to that account's connected platforms at the 6pm ET slot. 'style' is an id from config/styles.json. Set enabled=false to pause a series. Only use facts that are true; no made-up stories about real people.",
   "series": [
     {
+      "id": "hoodlum-soldier",
+      "account": "hoodstar365",
+      "name": "HOODLUM SOLDIER",
+      "enabled": true,
+      "style": "cinematic",
+      "every_hours": 48,
+      "_note": "Episodes 1-25 of the book, told one ~1 minute episode every 48 hours on Instagram, in queue file order. Queued scripts only; stops when the queue is empty.",
+      "link": "https://www.instagram.com/hoodstar365/",
+      "topic": "The book Hoodlum Soldier by Elvin Torres Sr.",
+      "audience": "people who grew up hard, veterans, anyone starting over",
+      "angles": [],
+      "cta": {
+        "spoken": "Follow for the next episode. Turn negative into positive.",
+        "screen": [
+          "HOODLUM SOLDIER",
+          "FOLLOW @HOODSTAR365"
+        ],
+        "caption": "Follow @hoodstar365 so you don't miss the next episode. Turn Negative Into Positive."
+      }
+    },
+    {
       "id": "tnip",
       "account": "hoodstar365",
       "name": "TURN NEGATIVE INTO POSITIVE",
