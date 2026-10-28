@@ -1,7 +1,6 @@
 {
-  "spec": "content/ads/hsw365media-artist-direct.json",
-  "caption": "A million streams and the check barely covers the light bill. Then a fan asks where to buy direct, and it hits: the fans were never the problem. There was no store.\n\nArtists: build your own page. Your music, your merch, your shows, one link, and your fans pay you directly. No middleman, no algorithm.\n\nBuilt by HSW365 Media. Scan the QR or start here: hsw365.github.io/queenee (link in bio)\n\n#independentartist #hsw365media #directtofan #musicbusiness #indieartist #artistwebsite #sellyourmusic #hiphop",
+  "spec": "content/ads/klipit-signup.json",
+  "caption": "Six hours live, and the best play happened at hour four. Nobody saw it.\n\nKlipit: paste your YouTube, Twitch or Kick link and it finds your best moments for you.\n- Up to 40 clips from one stream\n- Cut vertical for Reels, TikTok and Shorts\n- 1080p with hook captions, no watermark on Pro and Elite\n- Plans from $20/month, cancel anytime\n\nScan the QR to sign up, or go to klipit.onrender.com/?signup (link in bio)\n\n#klipit #streamer #twitchstreamer #kickstreamer #gamingclips #contentcreator #streamhighlights #hsw365media",
   "account": "hoodstar365",
-  "platform": "instagram",
-  "run": 2
+  "platform": "instagram"
 }

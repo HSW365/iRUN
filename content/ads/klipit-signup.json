@@ -1,0 +1,58 @@
+{
+  "title": "Six hours live, zero clips",
+  "name": "KLIPIT",
+  "brand": "KLIPIT",
+  "style": "photoreal",
+  "voice": "en-US-AndrewMultilingualNeural",
+  "seed": 365412,
+  "link": "https://klipit.onrender.com/?signup=pro",
+  "cta": [
+    "KLIPIT: PASTE. CLIP. POST.",
+    "SCAN TO SIGN UP"
+  ],
+  "scenes": [
+    {
+      "say": "Six hours live. The craziest play of my life happened at hour four.",
+      "visual": "cinematic photo, young Black streamer in his early 20s with a headset leaning back from a gaming desk at 3am, exhausted, RGB keyboard and dual monitors glowing purple and cyan in a dark bedroom, film still, vertical portrait composition"
+    },
+    {
+      "say": "Nobody saw it. I'm not scrubbing six hours of footage to find it.",
+      "visual": "extreme close up of a computer monitor showing a long video editing timeline with hours of footage, a tired reflection in the screen, cold blue light, shallow depth of field, dramatic cinematic commercial photography"
+    },
+    {
+      "say": "My boy calls. Bro, you're still clipping by hand? Use Klipit.",
+      "visual": "cinematic photo, confident young Latino gamer with a backwards cap laughing on a phone call in a neon lit room, controller in his other hand, purple and orange glow, film grain, vertical portrait composition"
+    },
+    {
+      "say": "Paste the link. YouTube, Twitch or Kick. Klipit finds the best moments for you.",
+      "visual": "hero shot of a laptop in a dark gaming room showing a sleek black web app with a single link input box and a glowing cyan button, light rays, premium tech commercial product photography, crisp detail"
+    },
+    {
+      "say": "Up to forty clips from one stream. Cut vertical for Reels, TikTok and Shorts. Hook captions on. No watermark.",
+      "visual": "close up of a hand holding a smartphone showing a vertical gaming highlight clip with bold captions, a grid of more clips blurred behind it on a monitor, cyan rim light, premium tech commercial photography, vertical portrait composition"
+    },
+    {
+      "say": "I posted the hour four clip that night. Woke up to fifty thousand views.",
+      "visual": "cinematic photo, the young Black streamer sitting up in bed in the morning staring at his phone in shock and joy, sunlight through blinds, notifications glowing on the screen, candid film still, vertical portrait composition"
+    },
+    {
+      "say": "Now every stream turns into a week of content. While I sleep.",
+      "visual": "cinematic photo, the streamer live on camera at his desk smiling and talking to chat, ring light on, chat scrolling on a side monitor, warm and cyan light, energetic lifestyle advertising photography, vertical portrait composition"
+    },
+    {
+      "say": "Plans start at twenty a month. Cancel anytime. Scan the code and sign up right now.",
+      "visual": "the young Black streamer looking straight into the camera holding up his phone toward the viewer, headset around his neck, confident smile, cyan and violet rim light, dark background, bold advertising portrait, vertical portrait composition"
+    }
+  ],
+  "caption": "Six hours live, and the best play happened at hour four. Nobody saw it.\n\nKlipit: paste your YouTube, Twitch or Kick link and it finds your best moments for you.\n- Up to 40 clips from one stream\n- Cut vertical for Reels, TikTok and Shorts\n- 1080p with hook captions, no watermark on Pro and Elite\n- Plans from $20/month, cancel anytime\n\nScan the QR to sign up, or go to klipit.onrender.com/?signup (link in bio)",
+  "hashtags": [
+    "klipit",
+    "streamer",
+    "twitchstreamer",
+    "kickstreamer",
+    "gamingclips",
+    "contentcreator",
+    "streamhighlights",
+    "hsw365media"
+  ]
+}
