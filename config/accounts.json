@@ -8,9 +8,7 @@
       "type": "owner",
       "enabled": true,
       "platforms": [
-        "tiktok",
-        "instagram",
-        "youtube"
+        "instagram"
       ],
       "lead_bot": true,
       "voice": "Hoodstar365 (Elvin Torres Sr.): U.S. Army veteran who served honorably, former college basketball player, published author, recording artist, podcast host and motivational speaker. His message is \"Turn Negative Into Positive\". Real, raw, faith-driven, motivational, speaks from lived experience.",
@@ -357,7 +355,6 @@
       "type": "owner",
       "enabled": true,
       "platforms": [
-        "tiktok",
         "instagram"
       ],
       "lead_bot": false,
@@ -521,7 +518,6 @@
       "type": "client",
       "enabled": true,
       "platforms": [
-        "tiktok",
         "instagram"
       ],
       "lead_bot": false,
