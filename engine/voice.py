@@ -96,7 +96,18 @@ def _edge_timed(text, out):
                     marks.append((ch["offset"] / 1e7, (ch["offset"] + ch["duration"]) / 1e7))
         return marks
 
-    return asyncio.run(go())
+    import time
+    last = None
+    for attempt in range(4):
+        try:
+            return asyncio.run(go())
+        except Exception as e:  # edge-tts drops out now and then: retry, then try another voice
+            last = e
+            print(f"[voice] edge-tts attempt {attempt + 1} failed ({e}); retrying")
+            time.sleep(3 * (attempt + 1))
+            if attempt == 1:
+                voice = "en-US-GuyNeural"
+    raise last
 
 
 def spread(n, length, lead=0.05):
