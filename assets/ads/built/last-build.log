@@ -1,6 +1,6 @@
-{"out": "out/hsw365media-artist-direct-ad.mp4", "voice": "edge-tts", "seconds": 43.0, "images": ["photo", "pollinations", "pollinations", "photo", "pollinations", "pollinations", "pollinations", "photo"]}
+{"out": "out/klipit-signup-ad.mp4", "voice": "edge-tts", "seconds": 42.3, "images": ["pollinations", "pollinations", "pollinations", "pollinations", "pollinations", "pollinations", "pollinations", "pollinations"]}
 /home/runner/work/iRUN/iRUN/engine/run.py:309: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
 /home/runner/work/iRUN/iRUN/engine/run.py:143: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18032497256895540
+[hoodstar365/instagram] posted 18115837145617625
