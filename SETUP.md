@@ -18,6 +18,9 @@ Data lives on the Supabase project `klipit` (`lsxdlmrjrcivxwgfkpop`) in the `iru
 Every run starts with a **preflight** block in the log that lists which keys are set and which accounts are connected.
 Read that first when something isn't posting.
 
+## Owner voice
+Ads use Elvin's own voice, cloned from `assets/voice/elvin_ref.wav` with open-source Chatterbox (`engine/myvoice.py`). Record lines, then add a `vo` list to a trailer spec (see the top of `engine/trailer.py`). The score ducks under the voice and each line is burned in as a caption.
+
 ## Keywords
 
 | Keyword | App | Link |

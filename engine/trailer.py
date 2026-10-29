@@ -10,7 +10,10 @@ Structure (fixed, timings derived from the spec):
   payoff    1-2 warm resolution shots
   flash     accent-colour flash
   end       wordmark, tagline, QR straight to the product's sign-up, CTA, fine print
-Score is synthesized (booms, braams, risers, ticking pulse). No voiceover.
+Score is synthesized (booms, braams, risers, ticking pulse). Optional voiceover in the owner's own voice:
+  "vo": [{"file": "assets/voice/<slug>/vo1.wav", "at": 0.25, "text": "caption line"}], "vo_captions": true, "duck": 0.6
+  (lines are recorded/cloned from assets/voice/elvin_ref.wav with engine/myvoice.py; the score ducks under the voice
+  and each line is burned in as a caption). Any segment accepts "dur" to retime it; "title_dur"/"end_dur" at top level.
 
 Shots are full-res 1080x1920 stills made with Canva (see engine/canva_shots.py) in spec["shots_dir"].
 
@@ -109,6 +112,11 @@ class Trailer:
                     a = self._cover(a)
                 self.img[n] = a.astype(np.float32)
         self._timeline()
+        for v in spec.get("vo", []):
+            raw = subprocess.run(["ffmpeg", "-v", "error", "-i", os.path.join(ROOT, v["file"]), "-f", "s16le", "-ac", "1", "-ar", "44100", "-"],
+                                 capture_output=True, check=True).stdout
+            v["pcm"] = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+            v["len"] = len(v["pcm"]) / 44100
         self._static()
 
     @staticmethod
@@ -121,11 +129,12 @@ class Trailer:
     # ---------- timeline ----------
     def _timeline(self):
         s = self.s; segs = []; t = 0.0
-        def add(kind, dur, **kw):
+        def add(kind, default, **kw):
             nonlocal t
+            dur = float(kw.pop("dur", default))
             segs.append(dict(kind=kind, t0=t, t1=t + dur, **kw)); t += dur
         add("open", 1.8, **s["open"])
-        add("title", 1.2)
+        add("title", float(s.get("title_dur", 1.2)))
         for i, sc in enumerate(s["scenes"]):
             add("card" if "card" in sc else "scene", 1.4 if "card" in sc else 1.0 if i == len(s["scenes"]) - 1 else 1.1, **sc)
         for sl in s["slams"]:
@@ -134,7 +143,7 @@ class Trailer:
         for i, p in enumerate(s["payoff"]):
             add("payoff", 1.8 if i == len(s["payoff"]) - 1 else 1.1, **p)
         add("flash", 0.25)
-        add("end", 3.75)
+        add("end", float(s.get("end_dur", 3.75)))
         self.segs = segs; self.dur = t; self.n = int(round(t * FPS))
         self.cuts = [g["t0"] for g in segs[1:]]
 
@@ -161,6 +170,18 @@ class Trailer:
         self.impact = {g["impact"]: self.stamp_word(g["impact"]) for g in self.segs if g.get("impact")}
         self.f_sub = FI("Inter-SemiBold.otf", 52)
         self.end = self.end_layer()
+        self.vo = []
+        f_cap = FI("Inter-Bold.otf", 58)
+        for v in self.s.get("vo", []):
+            lay = None
+            if self.s.get("vo_captions", True) and v.get("text"):
+                lines = _wrap(v["text"], f_cap, W * 0.84)
+                parts = [self.text(ln, f_cap, fill=(255, 255, 255, 255), stroke=5, stroke_fill=(0, 0, 0, 235)) for ln in lines]
+                hh = sum(pp.height - 30 for pp in parts) + 30; ww = max(pp.width for pp in parts)
+                lay = Image.new("RGBA", (ww, hh), (0, 0, 0, 0)); y = 0
+                for pp in parts:
+                    lay.alpha_composite(pp, ((ww - pp.width) // 2, y)); y += pp.height - 30
+            self.vo.append(dict(v, layer=lay))
         r = np.random.default_rng(3); n = 70
         self.emb = dict(x=r.uniform(0, W, n), y0=r.uniform(0, H, n), v=r.uniform(40, 160, n), s=r.uniform(1.2, 3.6, n), ph=r.uniform(0, 6.28, n))
         self.bursts = []
@@ -401,6 +422,11 @@ class Trailer:
             arr += glow * (0.8 + 0.2 * np.sin(t * 2))
             self.embers(arr, t, 0.6)
             self.comp(arr, self.end, W / 2, H / 2, 1.03 - 0.03 * ease((t - g["t0"]) / 0.5), clamp((t - g["t0"]) * 3))
+        if k not in ("end", "flash") and not (k == "slam" and g.get("panel")):
+            for v in self.vo:
+                if v["layer"] is not None and v["at"] - 0.05 <= t < v["at"] + v["len"] + 0.15:
+                    a = clamp((t - v["at"] + 0.05) * 8) * clamp((v["at"] + v["len"] + 0.15 - t) * 8)
+                    self.comp(arr, v["layer"], W / 2, v.get("y", 1580), 1.0, a)
         for c in self.cuts:
             if 0 <= t - c < 2 / FPS:
                 arr = arr * 1.18 + 8
@@ -480,6 +506,16 @@ class Trailer:
         ir_n = int(SR * 1.6); ir = r.normal(0, 1, ir_n) * np.exp(-np.arange(ir_n) / SR * 4.2); ir[0] = 0
         mix = a + np.fft.irfft(np.fft.rfft(a, 2 * n) * np.fft.rfft(ir, 2 * n))[:n] * 0.012
         mix *= np.clip((D - tt) / 0.6, 0, 1); mix = np.tanh(mix * 1.2); mix = mix / max(1e-6, np.max(np.abs(mix))) * 0.9
+        voice = np.zeros(n)
+        for v in self.vo:
+            vi = (v["pcm"] * float(v.get("gain", 1.0)))
+            i0 = int(v["at"] * SR); m = max(0, min(n - i0, len(vi)))
+            voice[i0:i0 + m] += vi[:m]
+        if self.vo:
+            act = np.convolve((np.abs(voice) > 0.02).astype(float), np.ones(int(SR * 0.25)) / int(SR * 0.25), "same")
+            env = 1 - float(self.s.get("duck", 0.6)) * np.clip(act * 3, 0, 1)
+            mix = mix * env * 0.85 + voice * 0.95
+            mix = np.tanh(mix * 1.05); mix = mix / max(1e-6, np.max(np.abs(mix))) * 0.92
         dl = int(SR * 0.011); R = np.concatenate([np.zeros(dl), mix[:-dl]]) * 0.5 + mix * 0.5
         with wave.open(path, "wb") as w:
             w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
