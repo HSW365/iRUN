@@ -1,6 +1,5 @@
-{"out": "out/calltwin-missed-trailer-ad.mp4", "seconds": 19.6}
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
 /home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18285460528292149
+[hoodstar365/instagram] posted 18168426157489763
