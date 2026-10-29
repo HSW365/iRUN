@@ -6,40 +6,158 @@
   "shots_dir": "content/shots/flipit-taxlien",
   "accent": "#FF5A1F",
   "title": "FLIPIT",
-  "open": {"shot": "notice", "impact": "TAX LIEN", "cy": 0.4},
+  "open": {
+    "shot": "notice",
+    "impact": "TAX LIEN",
+    "cy": 0.4
+  },
   "scenes": [
-    {"shot": "man", "cy": 0.36, "zoom": [1.1, 1.24], "dur": 1.2},
-    {"card": {"title": "FLIPIT · Tax-lien leads · NJ", "tag": "DEAL", "rows": [["Salem, NJ", "$32,467 owed · sale 11/16"], ["Penns Grove, NJ", "$17,304 owed · sale 12/14"], ["Wilmington, DE", "city tax lien · sale 11/10"]]}, "bg": "night", "dur": 1.7},
-    {"shot": "laptop", "cy": 0.38, "zoom": [1.12, 1.3], "dur": 1.6}
+    {
+      "shot": "man",
+      "cy": 0.36,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.2
+    },
+    {
+      "card": {
+        "title": "FLIPIT \u00b7 Tax-lien leads \u00b7 NJ",
+        "tag": "DEAL",
+        "rows": [
+          [
+            "Salem, NJ",
+            "$32,467 owed \u00b7 sale 11/16"
+          ],
+          [
+            "Penns Grove, NJ",
+            "$17,304 owed \u00b7 sale 12/14"
+          ],
+          [
+            "Wilmington, DE",
+            "city tax lien \u00b7 sale 11/10"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    },
+    {
+      "shot": "laptop",
+      "cy": 0.38,
+      "zoom": [
+        1.12,
+        1.3
+      ],
+      "dur": 1.6
+    }
   ],
   "slams": [
-    {"word": "INTENT", "shot": "night", "cy": 0.45, "dur": 1.65},
-    {"word": "CASH", "shot": "pen", "dur": 1.7, "panel": {"label": "FLIPIT DEAL DESK", "title": "1 entry", "working": "Filling your forms...", "done": "3 forms ready to sign", "steps": ["LOI", "Purchase", "Assign"]}},
-    {"word": "ASSIGN", "shot": "pen", "cy": 0.5, "zoom": [1.1, 1.24], "dur": 1.15}
+    {
+      "word": "INTENT",
+      "shot": "night",
+      "cy": 0.45,
+      "dur": 1.4
+    },
+    {
+      "word": "CASH",
+      "shot": "pen",
+      "dur": 1.55,
+      "panel": {
+        "label": "FLIPIT DEAL DESK",
+        "title": "1 entry",
+        "working": "Filling your forms...",
+        "done": "3 forms ready to sign",
+        "steps": [
+          "LOI",
+          "Purchase",
+          "Assign"
+        ]
+      }
+    },
+    {
+      "word": "ASSIGN",
+      "shot": "pen",
+      "cy": 0.5,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.55
+    }
   ],
-  "callback": {"shot": "notice", "impact": "CLOSED", "dur": 1.3},
+  "callback": {
+    "shot": "notice",
+    "impact": "CLOSED",
+    "dur": 1.3
+  },
   "payoff": [
-    {"shot": "keys", "cy": 0.42, "dur": 1.3},
-    {"shot": "hero", "zoom": [1.04, 1.12], "cy": 0.38, "dur": 1.8}
+    {
+      "shot": "keys",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "dur": 1.8
+    }
   ],
   "end_dur": 3.9,
   "vo_captions": true,
   "duck": 0.62,
   "vo": [
-    {"file": "assets/voice/flipit-taxlien/vo1.wav", "at": 0.25, "text": "Everybody told me flipping houses takes money and a mountain of paperwork."},
-    {"file": "assets/voice/flipit-taxlien/vo2.wav", "at": 4.95, "text": "Then I found a tax lien deal on FLIPIT."},
-    {"file": "assets/voice/flipit-taxlien/vo3.wav", "at": 7.6, "text": "Letter of intent. Cash purchase agreement. Assignment."},
-    {"file": "assets/voice/flipit-taxlien/vo4.wav", "at": 12.1, "text": "Every form fills itself from one entry."},
-    {"file": "assets/voice/flipit-taxlien/vo5.wav", "at": 16.35}
+    {
+      "file": "assets/voice/flipit-taxlien/vo1.wav",
+      "at": 0.25,
+      "text": "They told him flipping houses takes money... and a mountain of paperwork."
+    },
+    {
+      "file": "assets/voice/flipit-taxlien/vo2.wav",
+      "at": 4.95,
+      "text": "Then he found a tax lien deal on FLIPIT."
+    },
+    {
+      "file": "assets/voice/flipit-taxlien/vo3.wav",
+      "at": 7.6,
+      "text": "Letter of intent. Cash purchase agreement. Assignment."
+    },
+    {
+      "file": "assets/voice/flipit-taxlien/vo4.wav",
+      "at": 12.1,
+      "text": "Every form fills itself. From one entry."
+    },
+    {
+      "file": "assets/voice/flipit-taxlien/vo5.wav",
+      "at": 16.35
+    }
   ],
   "end": {
-    "wordmark": ["FLIP", "IT"],
+    "wordmark": [
+      "FLIP",
+      "IT"
+    ],
     "tagline": "Find the deal. Fill the forms. Flip it.",
     "cta": "SCAN TO SIGN UP",
-    "lines": ["TAX LIENS · FORECLOSURES · FLIPS · WHOLESALE", "flipit-m5ig.onrender.com"],
+    "lines": [
+      "TAX LIENS \u00b7 FORECLOSURES \u00b7 FLIPS \u00b7 WHOLESALE",
+      "flipit-m5ig.onrender.com"
+    ],
     "fine": "Not a broker, lender or law firm. Have an attorney review contracts.",
     "link": "https://flipit-m5ig.onrender.com/?src=ig#signup"
   },
-  "caption": "Everybody said flipping houses takes money and a mountain of paperwork. FLIPIT finds tax-lien and foreclosure deals from public records, then fills your letter of intent, cash purchase agreement and assignment from one entry. Scan the QR to sign up, or go to flipit-m5ig.onrender.com (link in bio).",
-  "hashtags": ["realestateinvesting", "taxliens", "wholesalerealestate", "houseflipping", "foreclosure", "flipit"]
+  "caption": "They told him flipping houses takes money and a mountain of paperwork. FLIPIT finds tax-lien and foreclosure deals from public records, then fills your letter of intent, cash purchase agreement and assignment from one entry. Scan the QR to sign up, or go to flipit-m5ig.onrender.com (link in bio).",
+  "hashtags": [
+    "realestateinvesting",
+    "taxliens",
+    "wholesalerealestate",
+    "houseflipping",
+    "foreclosure",
+    "flipit"
+  ]
 }
