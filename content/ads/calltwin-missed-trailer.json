@@ -6,37 +6,166 @@
   "shots_dir": "content/shots/calltwin-missed",
   "accent": "#22D3EE",
   "title": "CALLTWIN",
-  "open": {"shot": "phone", "impact": "MISSED", "cy": 0.55},
+  "open": {
+    "shot": "phone",
+    "impact": "MISSED",
+    "cy": 0.55
+  },
   "scenes": [
-    {"shot": "plumber", "sub": "Hands full. Phone ringing. Again.", "cy": 0.38, "zoom": [1.1, 1.26]},
-    {"shot": "homeowner", "sub": "Nobody's picking up... next plumber.", "cy": 0.38, "zoom": [1.06, 1.2]},
-    {"card": {"title": "Today's calls · Your business", "tag": "LOST",
-              "rows": [["Burst pipe · Main St", "missed"],
-                       ["Water heater · Oak Ave", "missed"],
-                       ["No heat · 2nd St", "went to competitor"]]},
-     "bg": "night", "dur": 1.7}
+    {
+      "shot": "plumber",
+      "sub": "Hands full. Phone ringing. Again.",
+      "cy": 0.38,
+      "zoom": [
+        1.1,
+        1.26
+      ]
+    },
+    {
+      "shot": "homeowner",
+      "sub": "Nobody's picking up... next plumber.",
+      "cy": 0.38,
+      "zoom": [
+        1.06,
+        1.2
+      ]
+    },
+    {
+      "card": {
+        "title": "Today's calls \u00b7 Your business",
+        "tag": "LOST",
+        "rows": [
+          [
+            "Burst pipe \u00b7 Main St",
+            "missed"
+          ],
+          [
+            "Water heater \u00b7 Oak Ave",
+            "missed"
+          ],
+          [
+            "No heat \u00b7 2nd St",
+            "went to competitor"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    }
   ],
   "slams": [
-    {"word": "NEVER", "shot": "van", "cy": 0.5, "dur": 1.3},
-    {"word": "MISS", "shot": "night", "dur": 1.55,
-     "panel": {"label": "CALLTWIN AI", "title": "Incoming call", "working": "Answering...",
-               "done": "Job sent to owner", "steps": ["Answer", "Take the job", "Send to owner"]}},
-    {"word": "AGAIN", "shot": "van", "cy": 0.45, "zoom": [1.06, 1.18], "dur": 1.4}
+    {
+      "word": "NEVER",
+      "shot": "van",
+      "cy": 0.5,
+      "dur": 1.3
+    },
+    {
+      "word": "MISS",
+      "shot": "night",
+      "dur": 1.55,
+      "panel": {
+        "label": "CALLTWIN AI",
+        "title": "Incoming call",
+        "working": "Answering...",
+        "done": "Job sent to owner",
+        "steps": [
+          "Answer",
+          "Take the job",
+          "Send to owner"
+        ]
+      }
+    },
+    {
+      "word": "AGAIN",
+      "shot": "van",
+      "cy": 0.45,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.4
+    }
   ],
-  "callback": {"shot": "phone", "impact": "ANSWERED", "cy": 0.55, "dur": 1.3},
+  "callback": {
+    "shot": "phone",
+    "impact": "ANSWERED",
+    "cy": 0.55,
+    "dur": 1.3
+  },
   "payoff": [
-    {"shot": "relieved", "cy": 0.4, "warm": true, "dur": 1.2, "sub": "Finally, somebody picked up."},
-    {"shot": "owner", "cy": 0.38, "zoom": [1.04, 1.12], "warm": true, "dur": 1.8, "sub": "The job came in while I worked."}
+    {
+      "shot": "relieved",
+      "cy": 0.4,
+      "warm": true,
+      "dur": 1.2,
+      "sub": "Finally, somebody picked up."
+    },
+    {
+      "shot": "owner",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8,
+      "sub": "The job came in while I worked."
+    }
   ],
   "end_dur": 3.9,
   "end": {
-    "wordmark": ["CALL", "TWIN"],
+    "wordmark": [
+      "CALL",
+      "TWIN"
+    ],
     "tagline": "Hear your AI receptionist. Free.",
-    "cta": "SCAN · GET YOUR AI CALL FREE",
-    "lines": ["AI CALLS YOU IN ~30 SECONDS", "BUILT FROM YOUR WEBSITE"],
+    "cta": "SCAN \u00b7 GET YOUR AI CALL FREE",
+    "lines": [
+      "AI CALLS YOU IN ~30 SECONDS",
+      "BUILT FROM YOUR WEBSITE"
+    ],
     "fine": "AI demo call to the number you enter. Reply STOP anytime.",
     "link": "https://hsw365.github.io/calltwin/call.html?src=ig"
   },
   "caption": "Every call you miss is a job your competitor just booked. CallTwin answers your business line 24/7, takes the job and sends it straight to you. Want to hear it? Scan the QR, drop in your website, and our AI calls you in about 30 seconds as YOUR receptionist. Free. Link in bio.",
-  "hashtags": ["smallbusiness", "plumber", "hvac", "contractor", "aireceptionist", "businessowner", "calltwin", "hsw365media"]
+  "hashtags": [
+    "smallbusiness",
+    "plumber",
+    "hvac",
+    "contractor",
+    "aireceptionist",
+    "businessowner",
+    "calltwin",
+    "hsw365media"
+  ],
+  "vo": [
+    {
+      "file": "assets/voice/calltwin-missed/vo1.wav",
+      "at": 0.2,
+      "text": "Every call you miss... is a job your competitor just booked."
+    },
+    {
+      "file": "assets/voice/calltwin-missed/vo2.wav",
+      "at": 4.3,
+      "text": "You're under a sink. Your phone's ringing. And they're calling the next guy."
+    },
+    {
+      "file": "assets/voice/calltwin-missed/vo3.wav",
+      "at": 8.6,
+      "text": "CallTwin answers every call. Day and night."
+    },
+    {
+      "file": "assets/voice/calltwin-missed/vo4.wav",
+      "at": 11.9,
+      "text": "Takes the job... and sends it straight to you."
+    },
+    {
+      "file": "assets/voice/calltwin-missed/vo5.wav",
+      "at": 15.8,
+      "text": "Scan the code. Hear your own AI receptionist. Free."
+    }
+  ],
+  "vo_captions": true,
+  "duck": 0.6
 }
