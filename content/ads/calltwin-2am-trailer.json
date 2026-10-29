@@ -1,0 +1,172 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "calltwin",
+  "platform": "instagram",
+  "shots_dir": "content/shots/calltwin-2am",
+  "accent": "#22D3EE",
+  "title": "CALLTWIN",
+  "presents": "HSW365 MEDIA PRESENTS",
+  "open": {
+    "shot": "phone",
+    "impact": "2:47 AM",
+    "cy": 0.6,
+    "zoom": [
+      1.0,
+      1.14
+    ]
+  },
+  "scenes": [
+    {
+      "shot": "flood",
+      "cy": 0.3,
+      "zoom": [
+        1.08,
+        1.24
+      ]
+    },
+    {
+      "shot": "sleep",
+      "cy": 0.35,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    },
+    {
+      "card": {
+        "title": "After-hours calls \u00b7 Your business",
+        "tag": "LOST",
+        "rows": [
+          [
+            "Burst pipe \u00b7 2:47 AM",
+            "voicemail"
+          ],
+          [
+            "No heat \u00b7 11:15 PM",
+            "voicemail"
+          ],
+          [
+            "Leak \u00b7 Sunday 6 AM",
+            "booked by competitor"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    }
+  ],
+  "slams": [
+    {
+      "word": "WHILE",
+      "shot": "street",
+      "cy": 0.5,
+      "dur": 1.3
+    },
+    {
+      "word": "YOU",
+      "shot": "night",
+      "dur": 1.55,
+      "panel": {
+        "label": "CALLTWIN AI",
+        "title": "Incoming call \u00b7 2:47 AM",
+        "working": "Answering...",
+        "done": "Job sent to owner",
+        "steps": [
+          "Answer",
+          "Take the job",
+          "Send to owner"
+        ]
+      }
+    },
+    {
+      "word": "SLEEP",
+      "shot": "sleep",
+      "cy": 0.35,
+      "zoom": [
+        1.02,
+        1.12
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "BOOKED",
+    "cy": 0.6,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "morning",
+      "cy": 0.4,
+      "warm": true,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "cy": 0.35,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": [
+      "CALL",
+      "TWIN"
+    ],
+    "tagline": "Your AI receptionist. Day and night.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "ANSWERS 24/7 \u00b7 SENDS YOU THE JOB",
+      "14 DAYS FREE AFTER SETUP"
+    ],
+    "fine": "$500 one-time setup, then $99/mo after 14 days. Cancel anytime.",
+    "link": "https://hsw365.github.io/calltwin/signup.html?src=ig"
+  },
+  "caption": "2:47 AM. A pipe bursts. She calls you, you're asleep, and she books the next guy. CallTwin is the AI receptionist that answers your business line 24/7, takes the job, and sends it straight to you. Wake up booked. Scan the QR or hit the link in bio to sign up.",
+  "hashtags": [
+    "smallbusiness",
+    "plumber",
+    "hvac",
+    "contractor",
+    "aireceptionist",
+    "businessowner",
+    "calltwin",
+    "hsw365media"
+  ],
+  "vo": [
+    {
+      "file": "assets/voice/calltwin-2am/vo1.wav",
+      "at": 0.2,
+      "text": "2:47 AM. A pipe just burst."
+    },
+    {
+      "file": "assets/voice/calltwin-2am/vo2.wav",
+      "at": 4.3,
+      "text": "She's calling every plumber in town. You're asleep."
+    },
+    {
+      "file": "assets/voice/calltwin-2am/vo3.wav",
+      "at": 8.6,
+      "text": "CallTwin answers. Day and night."
+    },
+    {
+      "file": "assets/voice/calltwin-2am/vo4.wav",
+      "at": 11.9,
+      "text": "Takes the job... and sends it straight to you."
+    },
+    {
+      "file": "assets/voice/calltwin-2am/vo5.wav",
+      "at": 16.0,
+      "text": "Wake up booked. Scan to sign up."
+    }
+  ],
+  "vo_captions": true,
+  "duck": 0.6
+}
