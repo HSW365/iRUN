@@ -1,0 +1,176 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "survivor",
+  "platform": "instagram",
+  "shots_dir": "content/shots/hsw365co-survivor-court",
+  "accent": "#f59e0b",
+  "title": "SURVIVOR COLLECTION",
+  "presents": "HOODSTARWORLD PRESENTS",
+  "open": {
+    "shot": "tunnel",
+    "impact": "GAME DAY",
+    "cy": 0.45,
+    "zoom": [
+      1.0,
+      1.12
+    ],
+    "dur": 2.4
+  },
+  "scenes": [
+    {
+      "shot": "layup",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.16
+      ],
+      "dur": 1.3
+    },
+    {
+      "shot": "focus",
+      "cy": 0.38,
+      "zoom": [
+        1.08,
+        1.2
+      ],
+      "dur": 1.3
+    },
+    {
+      "shot": "courtside",
+      "cy": 0.42,
+      "zoom": [
+        1.02,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.4
+    },
+    {
+      "card": {
+        "title": "Survivor Collection \u00b7 one of one",
+        "tag": "1 OF 1",
+        "rows": [
+          [
+            "#001 Crimson Fracture",
+            "hand-bleached \u00b7 signed"
+          ],
+          [
+            "#004 Blood Orbit",
+            "hand-bleached \u00b7 signed"
+          ],
+          [
+            "#007 Gold Starburst",
+            "hand-bleached \u00b7 signed"
+          ]
+        ]
+      },
+      "bg": "courtside",
+      "dur": 1.6
+    }
+  ],
+  "slams": [
+    {
+      "word": "WEAR",
+      "shot": "sign",
+      "cy": 0.5,
+      "dur": 1.1
+    },
+    {
+      "word": "YOUR",
+      "shot": "her",
+      "cy": 0.36,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "warm": true,
+      "dur": 1.1
+    },
+    {
+      "word": "STORY",
+      "shot": "focus",
+      "cy": 0.36,
+      "zoom": [
+        1.16,
+        1.3
+      ],
+      "dur": 1.2
+    }
+  ],
+  "callback": {
+    "shot": "tunnel",
+    "impact": "UNBROKEN",
+    "cy": 0.45,
+    "zoom": [
+      1.12,
+      1.2
+    ],
+    "dur": 1.2
+  },
+  "payoff": [
+    {
+      "shot": "together",
+      "cy": 0.45,
+      "zoom": [
+        1.03,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.6
+    }
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": [
+      "SURVIVOR ",
+      "1 OF 1"
+    ],
+    "tagline": "Hand-bleached. Signed. Never restocked.",
+    "cta": "SCAN TO SHOP",
+    "lines": [
+      "WHEN ONE SELLS, IT'S GONE",
+      "hsw365.co"
+    ],
+    "fine": "One-of-one tees $120 \u00b7 Founder's Print $65",
+    "link": "https://hsw365.co/collections/survivor-collection"
+  },
+  "vo_captions": true,
+  "duck": 0.6,
+  "vo": [
+    {
+      "file": "assets/voice/survivor-court/vo1.wav",
+      "at": 0.2,
+      "text": "Before the lights. Before the crowd."
+    },
+    {
+      "file": "assets/voice/survivor-court/vo2.wav",
+      "at": 3.75,
+      "text": "Everybody sees the game. Nobody sees what you survived."
+    },
+    {
+      "file": "assets/voice/survivor-court/vo3.wav",
+      "at": 9.3,
+      "text": "Wear your story."
+    },
+    {
+      "file": "assets/voice/survivor-court/vo4.wav",
+      "at": 13.0,
+      "text": "The Survivor Collection. Hand-bleached. One of one."
+    },
+    {
+      "file": "assets/voice/survivor-court/vo5.wav",
+      "at": 17.0,
+      "text": "When it's gone, it's gone. Scan to shop."
+    }
+  ],
+  "caption": "Before the lights. Before the crowd. Everybody sees the game, nobody sees what you survived. The Survivor Collection: one-of-one tees, hand-bleached and signed by Hoodstar365. When one sells, it's gone. Scan the QR or hit the link in bio to shop hsw365.co.",
+  "hashtags": [
+    "survivorcollection",
+    "streetwear",
+    "oneofone",
+    "hoopsfashion",
+    "veteranowned",
+    "hsw365"
+  ]
+}
