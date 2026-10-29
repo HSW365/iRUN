@@ -1,0 +1,42 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "affiliates",
+  "platform": "instagram",
+  "shots_dir": "content/shots/affiliate-earn",
+  "accent": "#22F58A",
+  "title": "HSW365 PARTNERS",
+  "open": {"shot": "phone", "impact": "PAID", "cy": 0.6},
+  "scenes": [
+    {"shot": "man", "sub": "Wait... I got paid while I was sleeping?", "cy": 0.4, "zoom": [1.1, 1.26]},
+    {"card": {"title": "HSW365 Affiliate · Commissions", "tag": "EARNED",
+              "rows": [["iRun Pro · referral", "+$7.00 every month"],
+                       ["SpeekZone Verified · referral", "+$2.00 every month"],
+                       ["CallTwin · referral", "+20% every month"]]},
+     "bg": "night", "dur": 1.7},
+    {"shot": "creator", "sub": "One link. Every HSW365 app.", "cy": 0.4, "zoom": [1.06, 1.18]}
+  ],
+  "slams": [
+    {"word": "BUILD", "shot": "laptop", "cy": 0.55, "dur": 1.3},
+    {"word": "EARN", "shot": "night", "dur": 1.55,
+     "panel": {"label": "HSW365 AFFILIATES", "title": "Your link", "working": "Tracking referrals...",
+               "done": "20% recurring · paid", "steps": ["Share", "Sign up", "Get paid"]}},
+    {"word": "GROW", "shot": "crew", "cy": 0.45, "zoom": [1.06, 1.18], "dur": 1.4}
+  ],
+  "callback": {"shot": "phone", "impact": "AGAIN", "cy": 0.6, "dur": 1.3},
+  "payoff": [
+    {"shot": "crew", "cy": 0.42, "dur": 1.2, "sub": "Build together. Earn together."},
+    {"shot": "hero", "cy": 0.38, "zoom": [1.04, 1.12], "warm": true, "dur": 1.8, "sub": "Grow together."}
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": ["HSW365", "PARTNERS"],
+    "tagline": "Share the apps. Earn every month.",
+    "cta": "SCAN TO APPLY · FREE",
+    "lines": ["20% RECURRING COMMISSION · FREE TO JOIN", "hsw365.co/pages/affiliates"],
+    "fine": "Example commissions. Earnings depend on your referrals and are not guaranteed.",
+    "link": "https://hsw365.co/pages/affiliates?src=ig#/apply"
+  },
+  "caption": "He woke up to a payment he didn't work for that night. The HSW365 Affiliate Partner Program pays 20% recurring commission on every app subscription you refer: iRun, SpeekZone, CallTwin and more. One link, every month it renews, you get paid. Free to join. Scan the QR or comment PARTNER and I'll DM you the link (also in bio).",
+  "hashtags": ["affiliatemarketing", "passiveincome", "sidehustle", "creatoreconomy", "recurringincome", "hsw365media"]
+}
