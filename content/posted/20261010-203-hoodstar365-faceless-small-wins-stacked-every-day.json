@@ -40,5 +40,14 @@
     "turnnegativeintopositive",
     "motivation",
     "discipline"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-29T01:54:45.308218Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17996656647057997"
+    }
   ]
 }
