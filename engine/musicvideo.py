@@ -585,10 +585,11 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
             song = os.path.join(work, "roomtone.wav")
             M.sh(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", f"anoisesrc=d={total_len + 1:.2f}:c=pink:a=0.003",
                   "-ar", "48000", "-ac", "2", song])
+        bed = 0.28 if kind == "ugc" else 0.6
         ins = ["-i", cut, "-ss", f"{t0:.3f}", "-i", song] + sum((["-i", f] for _, f in vo_at), [])
         fc = ["[0:a]volume=1.0[dlg]",
               f"[1:a]aresample=48000,aformat=channel_layouts=stereo,apad,atrim=0:{total_len:.2f},"
-              f"afade=t=in:d=1.2,afade=t=out:st={total_len - 2.5:.2f}:d=2.5,volume={0.28 if kind == "ugc" else 0.6}[sc]"]
+              f"afade=t=in:d=1.2,afade=t=out:st={total_len - 2.5:.2f}:d=2.5,volume={bed}[sc]"]
         names = []
         for k, (at, _) in enumerate(vo_at):
             ms = int(at * 1000)
