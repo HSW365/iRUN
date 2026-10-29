@@ -1,0 +1,136 @@
+name: iRun Movie (draft render, never posts)
+
+# Renders AI-filmed series episodes with engine/movie.py. Output goes to content/review/<series>/ (a review
+# manifest with links to the finished mp4s). Nothing here touches content/queue or any social account.
+# Edit config/moviego.txt (series=..., episodes=1-25) and push to start a run.
+
+on:
+  push:
+    branches: [main]
+    paths: ["config/moviego.txt"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun-movie
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      series: ${{ steps.p.outputs.series }}
+      eps: ${{ steps.p.outputs.eps }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        run: |
+          python3 - <<'E' >> "$GITHUB_OUTPUT"
+          import json
+          cfg = dict(l.strip().split("=", 1) for l in open("config/moviego.txt") if "=" in l and not l.startswith("#"))
+          eps = []
+          for part in cfg.get("episodes", "1").split(","):
+              a, _, b = part.strip().partition("-")
+              eps += list(range(int(a), int(b or a) + 1))
+          print("series=" + cfg.get("series", "hoodlum-soldier"))
+          print("eps=" + json.dumps(eps))
+          E
+
+  cast:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install -q requests pillow segno
+      - name: Cast reference portraits (once per series, kept in the repo)
+        env:
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+        run: |
+          python engine/movie.py "${{ needs.plan.outputs.series }}" --refs-only --work /tmp/work
+          curl -s -H "Authorization: Bearer $POLLINATIONS_TOKEN" https://gen.pollinations.ai/account/balance > /tmp/bal.json || true
+          mkdir -p "content/review/${{ needs.plan.outputs.series }}" && cp /tmp/bal.json "content/review/${{ needs.plan.outputs.series }}/balance.json"
+      - name: Commit refs
+        run: |
+          git config user.name "iRun" && git config user.email "irun@users.noreply.github.com"
+          git add content/movie content/review
+          git diff --cached --quiet || git commit -m "Movie: cast references for ${{ needs.plan.outputs.series }}"
+          for i in 1 2 3 4 5; do git pull -q --rebase && git push -q && break; sleep 5; done
+
+  episode:
+    needs: [plan, cast]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        ep: ${{ fromJSON(needs.plan.outputs.eps) }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - run: git pull -q
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rubberband-cli
+          pip install -q requests pillow segno numpy kokoro-onnx soundfile
+      - name: Narrator model
+        uses: actions/cache@v4
+        with:
+          path: assets/voice/models
+          key: kokoro-v1.0
+      - run: |
+          mkdir -p assets/voice/models && cd assets/voice/models
+          for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done
+      - name: Render episode ${{ matrix.ep }}
+        id: r
+        env:
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+        run: |
+          S="${{ needs.plan.outputs.series }}"; N=$(printf "%02d" ${{ matrix.ep }})
+          mkdir -p out "content/review/$S"
+          set +e
+          python engine/movie.py "$S" ${{ matrix.ep }} "out/ep$N.mp4" --work /tmp/work 2>&1 | tee out/log.txt
+          code=${PIPESTATUS[0]}
+          set -e
+          python3 - "$S" "$N" "$code" <<'E'
+          import json, os, sys, requests
+          s, n, code = sys.argv[1], sys.argv[2], int(sys.argv[3])
+          key = os.environ["POLLINATIONS_TOKEN"]
+          rep = {}
+          if os.path.exists(f"out/ep{n}.json"):
+              rep = json.load(open(f"out/ep{n}.json"))
+          def up(p, ctype):
+              with open(p, "rb") as f:
+                  r = requests.post("https://media.pollinations.ai/upload", data=f, timeout=900,
+                                    headers={"Authorization": f"Bearer {key}", "Content-Type": ctype,
+                                             "X-File-Name": os.path.basename(p)})
+              r.raise_for_status(); j = r.json(); return j.get("url") or f"https://media.pollinations.ai/{j['id']}"
+          if code == 0 and os.path.exists(f"out/ep{n}.mp4"):
+              rep["video"] = up(f"out/ep{n}.mp4", "video/mp4")
+              rep["poster"] = up(f"out/ep{n}.jpg", "image/jpeg")
+              rep["status"] = "rendered"
+          else:
+              rep["status"] = "failed"
+              rep["log_tail"] = open("out/log.txt").read()[-4000:]
+          json.dump(rep, open(f"content/review/{s}/ep{n}.json", "w"), indent=2)
+          print(rep.get("status"), rep.get("video"))
+          E
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ep${{ matrix.ep }}
+          path: out/
+          retention-days: 30
+      - name: Commit review entry
+        if: always()
+        run: |
+          git config user.name "iRun" && git config user.email "irun@users.noreply.github.com"
+          git add content/review content/movie/*/refs.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Movie review: ${{ needs.plan.outputs.series }} ep ${{ matrix.ep }}"
+          for i in 1 2 3 4 5 6 7 8; do git pull -q --rebase && git push -q && break; sleep $((RANDOM % 10 + 3)); done

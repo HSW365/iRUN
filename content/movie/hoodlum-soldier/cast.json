@@ -1,0 +1,40 @@
+{
+  "_note": "Hoodlum Soldier cast bible. Every shot that names a cast id gets that look in its prompt and that character's reference portrait as an identity reference, so faces stay the same across all 25 episodes. Invented actors; not real people.",
+  "film": "HOODLUM SOLDIER",
+  "look": "shot on ARRI Alexa 35 with anamorphic lenses, 35mm film grain, shallow depth of field, motivated practical lighting, deep blacks, gritty realistic prestige-drama cinematography, vertical 9:16 frame",
+  "grades": {
+    "street": "cold teal night, sodium-vapor orange streetlights, wet asphalt, crushed blacks",
+    "camp": "hard Georgia sun, washed olive and khaki, dust in the air",
+    "war": "bleached desert amber, heat haze, smoke, overexposed sky, gritty and handheld",
+    "home": "muted winter blue-grey, cold fluorescent, lonely",
+    "healing": "warm golden hour, soft amber light, hopeful"
+  },
+  "cast": {
+    "ali_teen": "Ali Torres at 17, a lean Puerto Rican teenager from Newark, light brown skin, short dark fade haircut, thin pale scar through his left eyebrow, intense dark brown eyes, black hoodie, guarded hard stare",
+    "ali_recruit": "Ali Torres at 18, a lean Puerto Rican army recruit, light brown skin, fresh buzz cut, thin pale scar through his left eyebrow, intense dark brown eyes, army PT shirt or OCP camouflage uniform",
+    "ali_soldier": "Ali Torres at 20, a lean muscular Puerto Rican US Army infantry soldier, light brown skin, short buzz cut, thin pale scar through his left eyebrow, intense dark brown eyes, sun-darkened face, desert camouflage, body armor and helmet",
+    "ali_vet": "Ali Torres at 23, a Puerto Rican combat veteran back in Newark, light brown skin, short dark hair, light stubble, thin pale scar through his left eyebrow, tired haunted dark brown eyes, black hoodie and an olive field jacket",
+    "ali_mentor": "Ali Torres in his 30s, a Puerto Rican veteran and author, light brown skin, short neat dark hair, groomed short beard, thin pale scar through his left eyebrow, calm strong dark brown eyes, dark crewneck or black hoodie",
+    "mom": "Ali's mother, a Puerto Rican woman in her late 40s, tired kind eyes, dark hair pulled back, simple cardigan",
+    "sister": "Ali's little sister, a Puerto Rican girl about 10 years old, curly dark hair in a ponytail, bright eyes",
+    "dre": "Dre, a Black man from Newark in his early 20s, slim, cornrows, gold chain, puffer jacket, street-smart smirk",
+    "mack": "Drill Sergeant Mack, a Black US Army drill sergeant in his 40s, broad shoulders, clean-shaven head under a brown campaign hat, fierce eyes, pressed uniform",
+    "roddy": "Roddy, a 19-year-old white army soldier from Kentucky, freckles, sandy buzz cut, big easy grin, lanky",
+    "flores": "Flores, a Latina army soldier in her early 20s, tight dark bun, sharp eyebrows, confident smirk",
+    "doc": "Doc, a Black army combat medic in his mid 20s, stocky, round face, calm eyes, medic patch",
+    "q": "Q, a Black army soldier from Detroit in his early 20s, tall and slim, short twists, storyteller's grin",
+    "judge": "a stern older white judge in black robes, silver hair, reading glasses",
+    "chaplain": "an army chaplain in his 50s, grey hair, gentle weathered face, cross on his collar",
+    "msjames": "Ms. James, a Black woman VA therapist in her 50s, short natural grey hair, warm steady eyes, cardigan, notepad",
+    "trainer": "a grizzled boxing gym trainer in his 60s, bald, grey goatee, towel over shoulder",
+    "pastor": "a Black pastor in his 60s, robe, deep commanding presence",
+    "daughter": "Ali's daughter, a Puerto Rican girl about 7, curly hair with a bow, big smile",
+    "nephew": "Ali's nephew, a small Puerto Rican boy about 6, baseball cap"
+  },
+  "same_person": {
+    "ali_recruit": "ali_teen",
+    "ali_soldier": "ali_teen",
+    "ali_vet": "ali_teen",
+    "ali_mentor": "ali_teen"
+  }
+}

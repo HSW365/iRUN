@@ -1,0 +1,254 @@
+{
+  "_note": "Shot lists for the 25-episode Hoodlum Soldier AI series, adapted from Elvin's screenplay episodes. t=talk: characters say the line on camera (lip-synced, generated with audio). t=vo: Ali's older narrator voice over the shot. t=act: picture and sound only. c=cast ids in frame (first = main subject). g=grade from cast.json. s for talk uses 'id: line | id: line'. d=seconds. loc=location super typed on screen.",
+  "episodes": [
+    {"n": 1, "title": "The Choice", "next": "Y'all Mine Now", "shots": [
+      {"t": "act", "g": "street", "loc": "NEWARK, NEW JERSEY", "v": "slow push down a cracked empty Newark street at night, a streetlight flickering, a skinny stray pitbull limps across the wet pavement, distant sirens", "d": 5},
+      {"t": "act", "g": "street", "v": "red and blue police lights pulse at the far end of a dark block of rowhouses, a man on a stoop doesn't even look up, distant gunshots echo", "d": 4},
+      {"t": "act", "c": ["ali_teen"], "g": "street", "v": "inside a parked old Cutlass Supreme at night, the teenager sits low in the driver seat, hood up, jaw clenched, streetlight sliding across his face, slow push in", "d": 5},
+      {"t": "act", "c": ["ali_teen"], "g": "street", "v": "extreme close up of his trembling fingers resting near a snub-nose revolver on his lap in the dark car, then his eyes in the rearview mirror", "d": 4},
+      {"t": "vo", "c": ["ali_teen"], "g": "street", "s": "Seventeen. And I already thought I knew how my story ended.", "v": "the teenager steps out of the car and crosses the street toward a rundown trap house, hood up, tracking shot from behind", "d": 5},
+      {"t": "talk", "c": ["sister", "ali_teen"], "g": "street", "s": "girl: You my brother Dre's friend? | ali_teen: Used to be.", "v": "a small girl sits on porch steps under a bare bulb holding a headless doll, she looks up at the hooded teenager standing at the bottom of the steps, he answers quietly", "d": 8},
+      {"t": "act", "c": ["ali_teen"], "g": "street", "v": "his fist knocks twice on a battered door, a long tense silence, then red and blue police lights suddenly flood the whole porch and his face", "d": 5},
+      {"t": "act", "c": ["ali_teen", "mom"], "g": "home", "loc": "ESSEX COUNTY COURTHOUSE", "v": "a courtroom, the teenager in an orange jumpsuit and handcuffs stands at the defense table, behind him in the gallery his mother sobs quietly into her hands", "d": 5},
+      {"t": "talk", "c": ["judge"], "g": "home", "s": "judge: You got two options, son. Prison. Or the United States Army. You choose.", "v": "the judge leans forward over the bench in a wood-paneled courtroom, window light, speaking directly down to the defendant", "d": 8},
+      {"t": "act", "c": ["ali_teen"], "g": "home", "v": "close up of the teenager in the orange jumpsuit, he looks down, then slowly lifts his eyes to the judge, and nods once", "d": 4},
+      {"t": "vo", "g": "camp", "s": "That nod was the first real choice I ever made.", "v": "slow push in on a folded American flag resting beside a red bandana on a wooden table, dust in a shaft of light", "d": 5}
+    ]},
+    {"n": 2, "title": "Y'all Mine Now", "next": "The Mud", "shots": [
+      {"t": "act", "g": "camp", "loc": "FORT BENNING, GEORGIA", "v": "dawn heat, an army bus pulls up on a training base, the door hisses and creaks open, low angle", "d": 4},
+      {"t": "talk", "c": ["mack"], "g": "camp", "s": "mack: Welcome to the United States Army! Y'all think this is a game? Y'all mine now!", "v": "the drill sergeant storms the bus door screaming at recruits, spit flying, low angle, recruits scrambling off behind him", "d": 8},
+      {"t": "act", "c": ["ali_recruit"], "g": "camp", "v": "the recruit steps off the bus last with a duffel bag, unsure but determined, recruits scrambling into formation around him, handheld", "d": 5},
+      {"t": "vo", "g": "camp", "s": "This ain't redemption. It's war. And war don't care where you from.", "v": "wide shot of rows of recruits standing at attention on a parade field under a hard white sky, flag snapping", "d": 6},
+      {"t": "act", "c": ["ali_recruit"], "g": "home", "v": "night in a dark barracks, the recruit lies awake on a bottom bunk staring at the ceiling, a distant marching cadence echoes", "d": 5},
+      {"t": "talk", "c": ["roddy", "ali_recruit"], "g": "home", "s": "roddy: Yo. You from Jersey? I'm Roddy. Kentucky. | ali_recruit: Yeah. Newark.", "v": "the freckled recruit leans over from the next bunk in the moonlit barracks whispering with a grin, the other recruit turns his head toward him", "d": 8},
+      {"t": "talk", "c": ["roddy", "ali_recruit"], "g": "home", "s": "roddy: Bet y'all got good pizza. And bad cops. | ali_recruit: Facts.", "v": "both recruits laughing quietly on their bunks in the dark so the drill sergeant won't hear, the first smile on his face", "d": 6},
+      {"t": "vo", "g": "home", "s": "Didn't know it then. But that bunk was my first taste of brotherhood.", "v": "two pairs of boots side by side under neighboring bunks, moonlight through a barracks window, slow dolly", "d": 6},
+      {"t": "act", "g": "home", "v": "dog tags swaying gently from a bunk rail in the moonlight", "d": 3}
+    ]},
+    {"n": 3, "title": "The Mud", "next": "No Make-Up Test", "shots": [
+      {"t": "act", "c": ["ali_recruit"], "g": "camp", "loc": "OBSTACLE COURSE", "v": "recruits crawling on their bellies under barbed wire through deep mud, the recruit pushes through, mud on his face, rain falling, low ground-level camera", "d": 5},
+      {"t": "act", "c": ["mack", "ali_recruit"], "g": "camp", "v": "the drill sergeant walks up and stands over the muddy recruit on his knees, rain dripping off the campaign hat", "d": 4},
+      {"t": "talk", "c": ["mack"], "g": "camp", "s": "mack: You think the streets made you tough? The enemy don't care where you from. You fight for the man next to you. Got it?", "v": "close up, the drill sergeant leans down nose to nose in the rain, intense", "d": 8},
+      {"t": "talk", "c": ["ali_recruit", "mack"], "g": "camp", "s": "ali_recruit: Got it, Sergeant. | mack: Then show me.", "v": "the recruit covered in mud stares back and answers, the drill sergeant straightens up", "d": 5},
+      {"t": "vo", "c": ["ali_recruit"], "g": "camp", "s": "Every step in that mud, I was stepping further from who I used to be.", "v": "the recruit pushes to his feet with his rifle and charges forward through the mud, slow motion boots splashing", "d": 6},
+      {"t": "act", "c": ["ali_recruit"], "g": "home", "v": "night, the recruit sits alone on his bunk in a dark barracks, headphones in, phone glowing on his face", "d": 4},
+      {"t": "talk", "c": ["ali_recruit"], "g": "home", "s": "mom (voicemail, off screen): Baby boy, just checking in. I know you're doing good. I'm proud of you.", "v": "close on the recruit's face lit by the phone as a woman's warm voice plays through the voicemail, his eyes well up", "d": 8},
+      {"t": "act", "c": ["ali_recruit"], "g": "home", "v": "extreme close up of his thumb pressing delete on the voicemail, the screen goes dark", "d": 3},
+      {"t": "vo", "c": ["ali_recruit"], "g": "home", "s": "It hurt too much to hear love when I didn't feel it for myself.", "v": "the recruit sits in silence in the dark barracks, head down, slow push in", "d": 6}
+    ]},
+    {"n": 4, "title": "No Make-Up Test", "next": "Letters", "shots": [
+      {"t": "talk", "c": ["mack"], "g": "camp", "loc": "TACTICS CLASSROOM", "s": "mack: Know the terrain. Know your brothers. Don't rely on luck. Rely on instinct. Your life depends on how well you listen today.", "v": "the drill sergeant walks between rows of desks in an army classroom, tactics diagrams on a screen behind him", "d": 8},
+      {"t": "act", "c": ["ali_recruit"], "g": "camp", "v": "the recruit writing notes furiously in a notebook, completely locked in", "d": 4},
+      {"t": "vo", "g": "camp", "s": "I used to zone out in school. But war ain't got no make-up test.", "v": "a notebook full of handwritten notes and diagrams, a pencil pressing hard", "d": 5},
+      {"t": "act", "c": ["ali_recruit"], "g": "camp", "loc": "FIRING RANGE", "v": "the recruit prone on a firing line, calm breath, rifle cracks, a distant target pops with tight hits, shell casings flying", "d": 5},
+      {"t": "talk", "c": ["flores", "ali_recruit"], "g": "camp", "s": "flores: Damn, Jersey. You got that assassin vibe. | ali_recruit: Just blockin' out the noise.", "v": "the female soldier kneels beside him on the range grinning, he answers without looking up from his rifle", "d": 8},
+      {"t": "talk", "c": ["doc"], "g": "camp", "s": "doc: That's why you dangerous. Calm outside. Chaos inside.", "v": "the stocky medic leans on a range barrier laughing, pointing at the shooter", "d": 5},
+      {"t": "act", "c": ["q", "flores", "ali_recruit"], "g": "healing", "loc": "CHOW HALL", "v": "a crowded army chow hall, the tall soldier tells a story with big hand gestures, the female soldier mimics a drill sergeant, the whole table erupts in laughter, the recruit actually smiles", "d": 6},
+      {"t": "vo", "g": "healing", "s": "In that mess hall, I found more family than I ever had back home.", "v": "wide warm shot of a long table of soldiers eating and laughing together", "d": 6}
+    ]},
+    {"n": 5, "title": "Letters", "next": "Blood. Real.", "shots": [
+      {"t": "act", "c": ["ali_recruit"], "g": "home", "loc": "MAIL CALL", "v": "evening in a base mail room, the soldier tears open an envelope, a child's crayon drawing slides out with a handwritten letter", "d": 5},
+      {"t": "act", "g": "home", "v": "close up of a child's crayon drawing of a little house and a stick soldier holding hands with a little girl", "d": 4},
+      {"t": "talk", "c": ["mom"], "g": "home", "s": "mom: We miss you. Keep your head up. Don't forget who you are.", "v": "a memory: his mother at her kitchen table writing a letter by lamplight, speaking the words softly as she writes", "d": 6},
+      {"t": "act", "c": ["ali_recruit"], "g": "home", "v": "the soldier stares at the drawing, a tear forms, he quickly wipes it and hides it", "d": 4},
+      {"t": "talk", "c": ["roddy", "ali_recruit"], "g": "home", "s": "roddy: That your girl? | ali_recruit: Nah. That's my lil' sister. She the only one still innocent.", "v": "the freckled soldier leans over on the bench to look at the drawing, the other soldier answers quietly holding it", "d": 8},
+      {"t": "act", "c": ["ali_recruit"], "g": "home", "v": "he folds the letter and drawing carefully and slides it into his uniform chest pocket, pats it twice", "d": 4},
+      {"t": "act", "g": "war", "loc": "NEXT STOP: IRAQ", "v": "a C-17 cargo plane on a runway at dusk, soldiers with rucksacks marching up the ramp into the belly of the plane", "d": 6},
+      {"t": "vo", "g": "war", "s": "I carried that drawing everywhere. It was the only part of me still clean.", "v": "a folded letter tucked behind dog tags on a cot as the plane engines roar", "d": 6}
+    ]},
+    {"n": 6, "title": "Blood. Real.", "next": "Even in the Innocent", "shots": [
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "loc": "IRAQ", "v": "a squad moving through a narrow dusty alley, weapons up, heat haze, handheld, tense silence", "d": 5},
+      {"t": "talk", "c": ["flores"], "g": "war", "s": "flores: Movement on the roof!", "v": "the female soldier in helmet snaps her rifle up toward a rooftop and shouts", "d": 4},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "gunfire erupts, dust kicking up, the soldier dives behind a parked vehicle and returns fire, chaos and smoke, shaky camera", "d": 5},
+      {"t": "talk", "c": ["q", "doc"], "g": "war", "s": "q: Stay low! | doc: I'm hit! I'm hit!", "v": "the tall soldier shouting while crouched in smoke, the medic falls clutching his leg behind him", "d": 6},
+      {"t": "act", "c": ["ali_soldier", "doc"], "g": "war", "v": "the soldier sprints out, grabs the wounded medic by the vest and drags him behind cover through flying dust", "d": 5},
+      {"t": "vo", "g": "war", "s": "This wasn't a movie. This was blood. Real. And everywhere.", "v": "aftermath, a dusty helmet lying alone in a silent alley, smoke drifting", "d": 6},
+      {"t": "act", "g": "war", "v": "night inside an army tent, lantern light, soldiers sitting silently, one writes a letter, one stares at nothing", "d": 4},
+      {"t": "talk", "c": ["roddy", "ali_soldier"], "g": "war", "s": "roddy: You saved Doc's life, man. | ali_soldier: He would've done it for me.", "v": "the freckled soldier sits down beside him on a cot, the other keeps cleaning his rifle and answers without looking up", "d": 7},
+      {"t": "vo", "g": "war", "s": "For the first time, I wasn't just surviving. I was protecting. I mattered.", "v": "desert stars over a military camp, slow tilt up", "d": 6}
+    ]},
+    {"n": 7, "title": "Even in the Innocent", "next": "Fix What I Broke", "shots": [
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "loc": "FORWARD OPERATING BASE", "v": "night, the soldier on watch at a desert base gate, wind howling sand across the spotlight beam", "d": 5},
+      {"t": "act", "g": "war", "v": "a small local boy about ten walks slowly toward the gate in the dark holding a round object against his chest", "d": 4},
+      {"t": "talk", "c": ["flores"], "g": "war", "s": "flores: Ali! That kid's not allowed in the zone!", "v": "the female soldier shouts from the guard tower, spotlight swinging", "d": 4},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "close up, the soldier raises his rifle and aims, breath held, sweat on his face", "d": 4},
+      {"t": "act", "g": "war", "v": "the boy drops the object, it rolls into the spotlight, it's just a worn soccer ball", "d": 4},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier slowly lowers his rifle and bows his head, shaken", "d": 4},
+      {"t": "vo", "g": "war", "s": "We were trained to see threats. Even in the innocent.", "v": "the empty gate at night, the soccer ball sitting alone in the sand", "d": 5},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "a makeshift tent chapel, the soldier lights a single candle, he doesn't pray, just stares at the flame", "d": 4},
+      {"t": "talk", "c": ["chaplain", "ali_soldier"], "g": "war", "s": "chaplain: You don't gotta believe in God. Just believe you ain't alone. That's harder.", "v": "the chaplain sits down on the bench beside him in candlelight and speaks gently", "d": 8},
+      {"t": "vo", "g": "war", "s": "I wasn't religious. But I was desperate.", "v": "a candle flame flickering in the dark, extreme close up", "d": 4}
+    ]},
+    {"n": 8, "title": "Fix What I Broke", "next": "The Cursed Road", "shots": [
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier on his bunk in a desert barracks opens a letter, a gold star sticker on the page", "d": 4},
+      {"t": "talk", "c": ["sister"], "g": "healing", "s": "sister: I made honor roll! I hope you come home soon. Mommy says you're a hero.", "v": "a memory: his little sister at her kitchen table proudly holding up a report card and talking to the camera", "d": 7},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier smiles and leans back against the wall, eyes closed, the letter resting on his chest", "d": 4},
+      {"t": "vo", "g": "war", "s": "I was fighting more for her now than myself.", "v": "he tucks the letter into his helmet band", "d": 4},
+      {"t": "act", "c": ["ali_soldier", "q"], "g": "war", "v": "night, two soldiers sit on top of the base wall with their legs hanging over the ledge, base lights below and stars above, from behind", "d": 4},
+      {"t": "talk", "c": ["q", "ali_soldier"], "g": "war", "s": "q: I enlisted to pay off my grandma's house. Thought I'd do four and bounce. | ali_soldier: I ran from a jail cell.", "v": "the two soldiers talking quietly on the wall at night, profile shot, faces lit by distant base lights", "d": 8},
+      {"t": "talk", "c": ["q", "ali_soldier"], "g": "war", "s": "q: And now? | ali_soldier: Now I just wanna live long enough to fix what I broke.", "v": "close on the soldier as he answers, looking out at the desert", "d": 7},
+      {"t": "act", "g": "war", "v": "dawn breaking over the desert from the base wall, razor wire in silhouette", "d": 4}
+    ]},
+    {"n": 9, "title": "The Cursed Road", "next": "Smiling One Second", "shots": [
+      {"t": "act", "g": "war", "loc": "FALLUJAH", "v": "a convoy of Humvees rolling down a dusty road, heat haze, drone shot", "d": 4},
+      {"t": "talk", "c": ["roddy", "ali_soldier"], "g": "war", "s": "roddy: Why this road always feel cursed?", "v": "inside a Humvee, the freckled soldier in helmet looks out the window and mutters, tension", "d": 5},
+      {"t": "act", "g": "war", "v": "a massive roadside IED blast engulfs a Humvee in fire and dust, shockwave, debris", "d": 4},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier wakes up dazed upside down in smoke, blood on his forehead, muffled ringing", "d": 4},
+      {"t": "talk", "c": ["q"], "g": "war", "s": "q: We got casualties! We got casualties!", "v": "the tall soldier shouting into a radio in the smoke beside the wreck", "d": 4},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier crawls out of the wreckage into the dust, dazed but alive", "d": 4},
+      {"t": "talk", "c": ["flores", "ali_soldier", "doc"], "g": "war", "loc": "FIELD HOSPITAL", "s": "flores: That's your second close call. | ali_soldier: Death don't want me yet. | doc: You too stubborn.", "v": "a field medical tent, the bandaged soldier on a cot, his squad standing around him, a tired joke", "d": 8},
+      {"t": "talk", "c": ["ali_soldier"], "g": "home", "s": "doctor (off screen): Trouble sleeping? Flashbacks? | ali_soldier: Only when I close my eyes.", "v": "a stark psych evaluation office under fluorescent light, the soldier sits across a desk and answers flatly", "d": 7},
+      {"t": "vo", "g": "war", "s": "They knew it. And sent us back anyway.", "v": "the soldier walks back toward the trucks alone, seen from behind, dusk", "d": 5}
+    ]},
+    {"n": 10, "title": "Smiling One Second", "next": "You Carry It", "shots": [
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "an alarm blares, distant gunfire, the soldier straps on body armor fast with steady hands, quick cuts", "d": 4},
+      {"t": "vo", "g": "war", "s": "The scariest part of war? Ain't the bullets. It's how normal it starts to feel.", "v": "an empty cot with a helmet resting on it, slow push", "d": 6},
+      {"t": "act", "c": ["roddy", "q", "flores"], "g": "war", "loc": "WEEKS LATER", "v": "a calm dusk patrol, soldiers walking and joking, the freckled soldier laughing and throwing a playful punch", "d": 5},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier walks rear security at the back of the patrol, watching the rooftops", "d": 4},
+      {"t": "act", "g": "war", "v": "a sudden blinding explosion of dust and fire at dusk, everyone thrown to the ground", "d": 4},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "ears ringing, dust settling, the soldier lifts his head from the ground and looks over, a fallen soldier lies motionless", "d": 5},
+      {"t": "talk", "c": ["ali_soldier"], "g": "war", "s": "ali_soldier: Roddy! Roddy! Come on, man!", "v": "the soldier crawls through the dust to his fallen friend screaming his name, shaking him", "d": 6},
+      {"t": "talk", "c": ["mack"], "g": "war", "s": "mack: Move, soldier! We're under attack!", "v": "the sergeant in combat gear grabs him by the vest and drags him toward cover through smoke", "d": 5},
+      {"t": "vo", "g": "war", "s": "And just like that, he was gone. Smiling one second. Gone the next.", "v": "an empty helmet lying in the sand as smoke drifts across the sunset", "d": 7}
+    ]},
+    {"n": 11, "title": "You Carry It", "next": "Home", "shots": [
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "a helicopter pad, soldiers stand in silence around a flag-draped body bag being loaded, rotor wind whipping sand", "d": 5},
+      {"t": "talk", "c": ["mack"], "g": "war", "s": "mack: He gave everything. And we honor that by finishing the fight.", "v": "the sergeant standing at attention addressing the squad, voice tight", "d": 7},
+      {"t": "act", "c": ["ali_soldier"], "g": "war", "v": "the soldier wipes a tear with his gloved hand and stands straight, composed", "d": 4},
+      {"t": "vo", "g": "war", "s": "You don't bury your past in a coffin. You carry it.", "v": "the helicopter lifts off into a hazy amber sky", "d": 6},
+      {"t": "act", "c": ["ali_soldier"], "g": "home", "v": "night inside a military transport plane, the soldier stares out the small window at the clouds, red cabin light", "d": 5},
+      {"t": "act", "c": ["ali_soldier"], "g": "home", "v": "extreme close up of his hand opening to reveal a pair of dog tags stamped RODDY", "d": 4},
+      {"t": "vo", "g": "home", "s": "I went to war a hoodlum. And came back haunted.", "v": "clouds below the plane wing in moonlight", "d": 6}
+    ]},
+    {"n": 12, "title": "Home", "next": "Change Uniforms", "shots": [
+      {"t": "act", "c": ["ali_vet"], "g": "home", "loc": "NEWARK PENN STATION", "v": "a nearly empty bus station at night, cold breath in the air, no welcome party, the veteran stands alone with a duffel bag", "d": 5},
+      {"t": "act", "c": ["ali_vet"], "g": "street", "v": "he pulls the duffel over his shoulder and walks into the dark Newark streets, seen from behind", "d": 5},
+      {"t": "vo", "g": "street", "s": "Home didn't feel like home anymore. And I didn't feel like me anymore.", "v": "a quiet Newark rowhouse street at night, one window lit", "d": 6},
+      {"t": "talk", "c": ["mom", "ali_vet"], "g": "home", "s": "mom: You look older. | ali_vet: I feel it.", "v": "his mother stands frozen in the kitchen doorway staring at him, warm lamp light, he stands in the hall", "d": 6},
+      {"t": "act", "c": ["mom", "ali_vet"], "g": "healing", "v": "she rushes to him and hugs him tight in the small kitchen, he breaks down in her arms", "d": 5},
+      {"t": "vo", "g": "healing", "s": "I ain't cry in combat. But I did cry in her arms.", "v": "the kitchen at night, two figures embracing in silhouette", "d": 5},
+      {"t": "act", "c": ["ali_vet"], "g": "home", "v": "his old teenage bedroom, faded posters, creaky bed, he hangs dog tags on a nail and looks into the mirror, not recognizing himself", "d": 6},
+      {"t": "vo", "g": "home", "s": "The boy that left this room never came back.", "v": "an empty bed in a dim bedroom, streetlight through the blinds", "d": 5}
+    ]},
+    {"n": 13, "title": "Change Uniforms", "next": "Still From Here", "shots": [
+      {"t": "act", "c": ["ali_vet"], "g": "home", "loc": "VETERANS AFFAIRS OFFICE", "v": "a crowded VA office, fluorescent lights, long lines, paperwork, the veteran waits holding a folder", "d": 5},
+      {"t": "talk", "c": ["ali_vet"], "g": "home", "s": "clerk (off screen): You're not in our system yet. Could take a few months. | ali_vet: Months? I need help now.", "v": "the veteran at a service counter, a clerk's hand stamps a form, his face tightens with frustration", "d": 8},
+      {"t": "talk", "c": ["ali_vet"], "g": "home", "s": "clerk (off screen): Everyone does, sir. Next.", "v": "the veteran stares, then slowly steps aside as the line moves forward", "d": 4},
+      {"t": "vo", "g": "home", "s": "The war ain't over when you come home. It just change uniforms.", "v": "the veteran walks out of the office into grey daylight", "d": 6},
+      {"t": "act", "c": ["ali_vet", "sister"], "g": "home", "v": "night, the kitchen, the veteran eats cereal with his little sister at the table, she looks up at him", "d": 4},
+      {"t": "talk", "c": ["sister", "ali_vet"], "g": "healing", "s": "sister: Are you okay now? | ali_vet: Yeah. Just tired.", "v": "close two shot at the kitchen table, she asks softly, he forces a small smile", "d": 6},
+      {"t": "talk", "c": ["sister", "ali_vet"], "g": "healing", "s": "sister: Don't worry. I'll be strong for both of us.", "v": "the girl puts her small hand on top of his big hand on the table", "d": 6},
+      {"t": "vo", "g": "healing", "s": "She grew up while I was gone. But kept my heart safe.", "v": "the kitchen light glowing in a dark house, her crayon drawing on the fridge", "d": 6}
+    ]},
+    {"n": 14, "title": "Still From Here", "next": "Surrender", "shots": [
+      {"t": "talk", "c": ["dre", "ali_vet"], "g": "street", "loc": "THE OLD CORNER", "s": "dre: Yo! My man back from the sandbox!", "v": "daylight on a Newark street corner, the young man in a puffer jacket spots him and comes in for a dap and hug", "d": 6},
+      {"t": "talk", "c": ["ali_vet", "dre"], "g": "street", "s": "ali_vet: I'm not that dude no more. | dre: You still from here. Never forget that.", "v": "the two men face each other on the corner, tension under the smiles", "d": 8},
+      {"t": "vo", "c": ["ali_vet"], "g": "street", "s": "He was right. But that didn't mean I had to stay stuck here.", "v": "the veteran walks away from the corner, not looking back", "d": 6},
+      {"t": "act", "c": ["roddy"], "g": "war", "v": "nightmare flashes, fire and smoke, explosions, a soldier screaming in slow motion, dreamlike blur", "d": 4},
+      {"t": "act", "c": ["ali_vet"], "g": "home", "v": "the veteran jolts upright in bed in the dark, drenched in sweat, breathing hard", "d": 4},
+      {"t": "act", "c": ["ali_vet"], "g": "home", "v": "in a dark bathroom he splashes water on his face and stares at himself in the mirror", "d": 5},
+      {"t": "vo", "g": "home", "s": "Sleep used to be my escape. Now it's where the demons live.", "v": "the bathroom mirror reflection in deep shadow, water dripping", "d": 6}
+    ]},
+    {"n": 15, "title": "Surrender", "next": "A Mirror", "shots": [
+      {"t": "talk", "c": ["msjames"], "g": "home", "loc": "VA COUNSELING", "s": "msjames: You've been through more than most. That changes people. That's okay.", "v": "a therapy room with soft window light, the therapist speaks gently from her chair", "d": 7},
+      {"t": "talk", "c": ["ali_vet", "msjames"], "g": "home", "s": "ali_vet: I don't need help. | msjames: Then why are you here?", "v": "the veteran sits with arms crossed, distant, then he has no answer", "d": 6},
+      {"t": "talk", "c": ["msjames"], "g": "home", "s": "msjames: You can't fight your mind like it's Fallujah. You gotta surrender to healing.", "v": "close on the therapist leaning forward, steady and kind", "d": 7},
+      {"t": "vo", "c": ["ali_vet"], "g": "home", "s": "I hated hearing that. But part of me knew she was right.", "v": "the veteran looks down at his hands", "d": 5},
+      {"t": "act", "c": ["ali_vet"], "g": "street", "loc": "IRONBOUND BOXING", "v": "an old boxing gym, the veteran pounds a heavy bag with fury, sweat flying, people glance over", "d": 5},
+      {"t": "talk", "c": ["trainer", "ali_vet"], "g": "street", "s": "trainer: You fight? | ali_vet: I survived. | trainer: Same thing. You want a job?", "v": "the old trainer steps up beside the heavy bag, the veteran catches his breath and answers", "d": 8},
+      {"t": "vo", "c": ["ali_vet"], "g": "healing", "s": "I needed purpose. Even if it started with pain.", "v": "dawn, the veteran wraps his hands alone in the quiet gym, one light over the ring", "d": 6}
+    ]},
+    {"n": 16, "title": "A Mirror", "next": "Qualifies the Called", "shots": [
+      {"t": "talk", "c": ["ali_vet"], "g": "home", "loc": "VETERANS GROUP", "s": "ali_vet: We all wore the uniform. But none of us got the same salute coming home.", "v": "a circle of veterans in a community room, the veteran speaks to the group", "d": 7},
+      {"t": "talk", "c": ["ali_vet"], "g": "home", "s": "vet (off screen): Preach that, Jersey.", "v": "an older veteran's hand pats his back, the circle nods", "d": 4},
+      {"t": "act", "c": ["ali_vet", "nephew"], "g": "healing", "v": "a sunny park, the veteran plays catch with his little nephew, laughing for real", "d": 5},
+      {"t": "vo", "g": "healing", "s": "Healing ain't a straight line. But moments like this? They matter.", "v": "a baseball in the air against a bright sky, slow motion", "d": 6},
+      {"t": "act", "c": ["ali_vet"], "g": "street", "v": "night on Newark streets, a dealer on the corner nods at him, the veteran keeps walking", "d": 4},
+      {"t": "talk", "c": ["ali_vet"], "g": "street", "s": "kid (off screen): You was in the Army, right? That's crazy. You from here and made it out.", "v": "a teenage boy calls out from across the street under a streetlight, the veteran pauses and turns", "d": 7},
+      {"t": "act", "c": ["ali_vet"], "g": "street", "v": "the veteran nods at the boy, a small proud nod", "d": 3},
+      {"t": "vo", "g": "street", "s": "Maybe I ain't a hero. But maybe I could be a mirror for the next kid.", "v": "a reflection of the city street in a shop window at night", "d": 6}
+    ]},
+    {"n": 17, "title": "Qualifies the Called", "next": "Scars Mean We Survived", "shots": [
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "loc": "YOUTH MENTORSHIP NIGHT", "s": "ali_mentor: You ain't weak for crying. You strong for surviving.", "v": "a school gym, kids on the bleachers, the man speaks into a microphone, kids hold up phones", "d": 7},
+      {"t": "vo", "g": "healing", "s": "I stopped chasing validation and started giving back.", "v": "the bleachers erupt in applause, warm light", "d": 5},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "a church, the man sits alone in the back pew, quiet", "d": 4},
+      {"t": "talk", "c": ["pastor"], "g": "healing", "s": "pastor: God don't just call the qualified. He qualifies the called.", "v": "the pastor at the pulpit looks right at the back pew, stained glass light", "d": 7},
+      {"t": "vo", "c": ["ali_mentor"], "g": "healing", "s": "I wasn't perfect. But I was chosen.", "v": "the man bows his head in the pew, light streaming through stained glass", "d": 5},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "outside, the man helps neighborhood kids paint a huge colorful mural on a brick wall of a soldier in a hoodie", "d": 5},
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "s": "kid (off screen): You really lived all that? | ali_mentor: Yeah. And I'm still living through it.", "v": "a kid with a paintbrush looks up at him, he answers and they fist bump in front of the mural", "d": 7}
+    ]},
+    {"n": 18, "title": "Scars Mean We Survived", "next": "I Was You", "shots": [
+      {"t": "talk", "c": ["ali_mentor"], "g": "street", "loc": "ON AIR", "s": "ali_mentor: We ain't crazy. We're scarred. And scars mean we survived.", "v": "a radio studio, on-air light glowing red, the man speaks into a studio microphone with headphones on", "d": 7},
+      {"t": "talk", "c": ["ali_mentor"], "g": "street", "s": "caller (on the line): Thank you, man. I needed this.", "v": "phone lines lighting up on the studio board, he listens and nods", "d": 5},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "a school field, the man coaches kids playing flag football, shouting and celebrating a touchdown with them", "d": 5},
+      {"t": "vo", "g": "healing", "s": "Joy found me when I stopped running from it.", "v": "kids jumping and hugging their coach in golden light, slow motion", "d": 5},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "loc": "BOOK SIGNING", "v": "a bookstore, a long line of readers, the man signs copies of a book titled HOODLUM SOLDIER", "d": 5},
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "s": "teen (off screen): This saved me, for real. | ali_mentor: Then it was worth it.", "v": "a teenager holds the book tight to his chest at the table, the man looks up at him moved", "d": 7}
+    ]},
+    {"n": 19, "title": "I Was You", "next": "You Ain't Done", "shots": [
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "loc": "VETERANS JOB FAIR", "v": "a community center job fair, young veterans start forming a circle around the man", "d": 5},
+      {"t": "vo", "g": "healing", "s": "When your story touches others, it ain't just yours anymore.", "v": "hands reaching out for handshakes", "d": 5},
+      {"t": "talk", "c": ["msjames", "ali_mentor"], "g": "healing", "s": "msjames: You've come a long way. Still got miles to go. | ali_mentor: True. But I'm not walking alone anymore.", "v": "a sunny therapy room, the therapist, softer now, smiles at him, they shake hands", "d": 8},
+      {"t": "act", "c": ["ali_mentor"], "g": "street", "v": "night, two teenage boys brawling in the street under a streetlight, the man pulls them apart", "d": 5},
+      {"t": "talk", "c": ["ali_mentor"], "g": "street", "s": "ali_mentor: This how y'all wanna end up? Dead or in a cell?", "v": "the man standing between the two boys, firm, pointing at both", "d": 5},
+      {"t": "talk", "c": ["ali_mentor"], "g": "street", "s": "boy (off screen): You don't know our life! | ali_mentor: I am your life. I was you.", "v": "close on the man as a boy shouts at him, he answers low and steady", "d": 7},
+      {"t": "act", "g": "street", "v": "the two boys freeze and lower their fists, silence, respect lingers under the streetlight", "d": 4}
+    ]},
+    {"n": 20, "title": "You Ain't Done", "next": "Showed Up Anyway", "shots": [
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "loc": "MORNING TV", "s": "host (off screen): From the battlefield to bestselling author. What would you tell the youth? | ali_mentor: Pain ain't permanent. But neither is peace. You gotta fight for both.", "v": "a bright television studio couch, the man answers the host", "d": 8},
+      {"t": "act", "c": ["ali_mentor"], "g": "home", "loc": "STATE PRISON", "v": "a stark prison classroom, rows of inmates in tan uniforms, the man walks to the front", "d": 4},
+      {"t": "talk", "c": ["ali_mentor"], "g": "home", "s": "ali_mentor: I had a record. I had nothing. But I used my pain as power. You ain't done, unless you say you are.", "v": "the man speaking intensely at the front of the classroom", "d": 8},
+      {"t": "act", "g": "home", "v": "an inmate in the back row wipes a tear from his face", "d": 3},
+      {"t": "act", "c": ["ali_mentor"], "g": "street", "v": "a candlelight vigil at night, mothers holding posters with photos of lost sons", "d": 4},
+      {"t": "talk", "c": ["ali_mentor"], "g": "street", "s": "mother (off screen): Thank you for remembering our boys. | ali_mentor: They ain't forgotten. Not while I breathe.", "v": "a grieving mother holding a candle speaks to him, he answers and lights his candle from hers", "d": 8},
+      {"t": "act", "g": "street", "v": "many candles glowing in the dark, the man bows his head", "d": 4}
+    ]},
+    {"n": 21, "title": "Showed Up Anyway", "next": "Responsibility", "shots": [
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "s": "ali_mentor: Even soldiers cry. And that's okay.", "v": "the man sits reading his book to a classroom of fifth graders on a rug", "d": 5},
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "s": "boy (off screen): Were you scared? | ali_mentor: Every day. But I showed up anyway.", "v": "a small boy raises his hand, the man smiles and answers him", "d": 7},
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "loc": "VA HOSPITAL", "s": "vet (off screen): They all forgot me. | ali_mentor: Not me.", "v": "a hospital parking lot at dusk, the man kneels to shake hands with a wounded veteran in a wheelchair", "d": 6},
+      {"t": "vo", "g": "healing", "s": "Real soldiers never leave one behind. Even when the battle's over.", "v": "the wheelchair silhouette against a sunset as he pushes it", "d": 6},
+      {"t": "talk", "c": ["mom", "ali_mentor"], "g": "healing", "s": "mom: You really here for good this time? | ali_mentor: Yeah, Ma. I'm home.", "v": "a warm family dinner, his mother and grown sister laughing, glasses of iced tea clink", "d": 7},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "a memorial wall, his finger slowly traces an engraved name", "d": 4},
+      {"t": "vo", "g": "healing", "s": "Some names live forever. Not 'cause they lived long. But 'cause they lived right.", "v": "dog tags left hanging beside the name on the memorial wall at sunrise", "d": 7}
+    ]},
+    {"n": 22, "title": "Responsibility", "next": "A Decision", "shots": [
+      {"t": "act", "c": ["ali_mentor"], "g": "home", "v": "a home office at night, war photos and a child's drawings on the wall, the man writes CHAPTER ONE in a notebook under a desk lamp", "d": 5},
+      {"t": "vo", "g": "home", "s": "We gotta own our pain. Or someone else will profit off it.", "v": "a stack of handwritten pages under lamplight", "d": 5},
+      {"t": "act", "c": ["ali_mentor", "daughter"], "g": "home", "loc": "FAMILY COURT", "v": "a courtroom, the man sits holding hands with his young daughter", "d": 4},
+      {"t": "talk", "c": ["judge"], "g": "healing", "s": "judge: Mister Torres, you've shown growth and stability. Full visitation granted.", "v": "the judge looks up from papers and speaks, window light", "d": 6},
+      {"t": "vo", "c": ["ali_mentor"], "g": "healing", "s": "Redemption looks a lot like responsibility.", "v": "the man closes his eyes and exhales, his daughter hugs his arm", "d": 5},
+      {"t": "act", "c": ["ali_mentor", "daughter"], "g": "healing", "v": "a grassy field at sunset, father and daughter run and fly a kite together", "d": 5},
+      {"t": "talk", "c": ["daughter", "ali_mentor"], "g": "healing", "s": "daughter: I love when you're here, Daddy. | ali_mentor: I love being here, baby girl.", "v": "the girl looks up at him holding the kite string, he kneels down to her", "d": 7},
+      {"t": "vo", "g": "healing", "s": "She saved me. Without even knowing.", "v": "the kite high in a golden sky", "d": 4}
+    ]},
+    {"n": 23, "title": "A Decision", "next": "Still Here", "shots": [
+      {"t": "talk", "c": ["ali_mentor"], "g": "home", "loc": "JUVENILE DETENTION", "s": "ali_mentor: Y'all remind me of me. What saved me wasn't the Army. It was a decision.", "v": "a fenced detention yard, teenage boys in orange jumpsuits, the man speaks to them", "d": 8},
+      {"t": "talk", "c": ["ali_mentor"], "g": "home", "s": "boy (off screen): I wanna choose too.", "v": "one boy in orange locks eyes with him, light on the fence", "d": 4},
+      {"t": "act", "c": ["ali_mentor"], "g": "street", "v": "the old Newark corner at dusk, same stoop, kids wave and run up to greet him", "d": 5},
+      {"t": "vo", "g": "street", "s": "Legacy ain't what you leave. It's who you lift.", "v": "the man walks down the block with kids around him", "d": 5},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "a cemetery, the man places a photo of himself in uniform against his father's headstone", "d": 4},
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "s": "ali_mentor: I used to hate you for not being there. Now I just hope I did better.", "v": "the man speaks quietly to the grave, then stands", "d": 7},
+      {"t": "talk", "c": ["ali_mentor"], "g": "home", "s": "ali_mentor: If I could tell my seventeen year old self one thing? You ain't a mistake. You just ain't been molded yet.", "v": "the man sits in front of a black backdrop, a single key light, speaking straight to camera like a documentary interview", "d": 8}
+    ]},
+    {"n": 24, "title": "Still Here", "next": "Protect Your Peace", "shots": [
+      {"t": "act", "c": ["ali_mentor"], "g": "home", "v": "his bedroom at night, the man kneels beside his bed in prayer for the first time, moonlight", "d": 5},
+      {"t": "vo", "g": "home", "s": "I didn't know what to say. But I knew what I needed. Peace.", "v": "moonlight through the window over the kneeling silhouette", "d": 6},
+      {"t": "act", "c": ["ali_mentor", "pastor"], "g": "healing", "v": "a church baptism, the pastor lowers the man into the water and helps him rise, water streaming off his face", "d": 5},
+      {"t": "vo", "g": "healing", "s": "Rebirth ain't always easy. But it's always worth it.", "v": "water drops falling through light, slow motion", "d": 5},
+      {"t": "talk", "c": ["ali_mentor"], "g": "healing", "s": "vet (off screen): I got nothin' left. | ali_mentor: You got breath. That's more than some had.", "v": "a vet support group, the man hugs a broken young veteran tight", "d": 7},
+      {"t": "talk", "c": ["doc", "q", "ali_mentor"], "g": "healing", "s": "doc: You still overcook chicken, bruh!", "v": "a backyard barbecue, smoke rising, the stocky man and the tall man walk up laughing, older now, the host turns from the grill", "d": 6},
+      {"t": "act", "c": ["doc", "q", "ali_mentor"], "g": "healing", "v": "the three old friends hug and laugh at the grill, kids running around at sunset", "d": 5},
+      {"t": "vo", "g": "healing", "s": "We made it. Somehow. Some way.", "v": "the grill glowing at dusk, laughter", "d": 4}
+    ]},
+    {"n": 25, "title": "Protect Your Peace", "next": "", "shots": [
+      {"t": "act", "c": ["ali_mentor"], "g": "street", "v": "a Jersey street, a mural of a smiling freckled soldier with the words HE GAVE ALL, the man touches the wall, hand over heart, keeps walking", "d": 6},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "another huge mural of a soldier in army gear and a hoodie with the words HOODLUM SOLDIER PROTECT YOUR PEACE, the man looks up at it", "d": 5},
+      {"t": "act", "c": ["ali_mentor"], "g": "home", "v": "a cemetery, the man kneels at a grave with a folded flag and a photo of his old squad", "d": 5},
+      {"t": "vo", "c": ["ali_mentor"], "g": "home", "s": "Some stories don't end happy. But they end honest. And sometimes that's enough.", "v": "the man stands and salutes the grave, seen from behind", "d": 7},
+      {"t": "talk", "c": ["daughter", "ali_mentor"], "g": "healing", "s": "daughter: You miss them? | ali_mentor: Every day. But I carry them in every step I take.", "v": "a veterans memorial at sunset, father and daughter place flowers, she looks up at him", "d": 8},
+      {"t": "act", "c": ["ali_mentor"], "g": "healing", "v": "a city rooftop at sunset, the man stands calm and peaceful looking over the Newark skyline, seen from behind", "d": 5},
+      {"t": "vo", "g": "healing", "s": "I fought wars in foreign lands. And in my own mind. But the real victory was choosing to heal.", "v": "the sun setting over the skyline, slow aerial pull back", "d": 8}
+    ]}
+  ]
+}
