@@ -1,0 +1,137 @@
+{
+  "kind": "trailer",
+  "account": "newark",
+  "product": "waterheater",
+  "platform": "instagram",
+  "shots_dir": "content/shots/newark-home",
+  "accent": "#a855f7",
+  "title": "WATER HEATERS",
+  "open": {
+    "shot": "heater",
+    "impact": "LEAKING",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "homeowner",
+      "sub": "Cold shower. Rusty water. Now this.",
+      "cy": 0.36,
+      "zoom": [
+        1.08,
+        1.22
+      ]
+    },
+    {
+      "card": {
+        "title": "Water heater · warning signs",
+        "tag": "FAILING",
+        "rows": [
+          [
+            "Hot water",
+            "none"
+          ],
+          [
+            "Tank",
+            "leaking"
+          ],
+          [
+            "Water",
+            "rusty"
+          ]
+        ]
+      },
+      "bg": "heater",
+      "dur": 1.6
+    },
+    {
+      "shot": "homeowner",
+      "sub": "Do I fix it or replace it?",
+      "cy": 0.32,
+      "zoom": [
+        1.3,
+        1.44
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "FIX",
+      "shot": "tech",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "word": "OR",
+      "shot": "van",
+      "dur": 1.55,
+      "panel": {
+        "label": "NEW ARK",
+        "title": "Water heater check",
+        "working": "Finding the problem...",
+        "done": "Repair or full replacement",
+        "steps": [
+          "Inspect",
+          "Repair",
+          "Replace"
+        ]
+      }
+    },
+    {
+      "word": "REPLACE",
+      "shot": "tech",
+      "cy": 0.4,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "heater",
+    "impact": "HANDLED",
+    "cy": 0.5,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "family",
+      "cy": 0.4,
+      "warm": true,
+      "dur": 1.1
+    },
+    {
+      "shot": "hero",
+      "sub": "Hot water's back. Finally.",
+      "cy": 0.36,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.9
+    }
+  ],
+  "end": {
+    "cta": "SCAN · FREE ESTIMATE",
+    "link": "https://ark-hvac.com",
+    "wordmark": [
+      "NEW",
+      "ARK"
+    ],
+    "tagline": "Water heater repair and replacement.",
+    "lines": [
+      "FREE ESTIMATES · HOMES AND BUSINESSES",
+      "908-454-4043 · ark-hvac.com"
+    ]
+  },
+  "caption": "No hot water, a leaking tank, rusty water or a pilot that won't stay lit? New Ark repairs and fully replaces water heaters for homes and businesses across Warren, Hunterdon, Sussex, Morris and Somerset County. Licensed and insured in New Jersey. Scan the QR for a free estimate, or go to ark-hvac.com (link in bio).",
+  "hashtags": [
+    "waterheater",
+    "waterheaterrepair",
+    "phillipsburgnj",
+    "warrencountynj",
+    "newjersey",
+    "plumbing"
+  ]
+}

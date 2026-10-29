@@ -1,0 +1,131 @@
+{
+  "kind": "trailer",
+  "account": "newark",
+  "product": "heating",
+  "platform": "instagram",
+  "shots_dir": "content/shots/newark-home",
+  "accent": "#fbbf24",
+  "title": "NO HEAT",
+  "open": {
+    "shot": "flame",
+    "impact": "FAILED",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "cold",
+      "sub": "Furnace quit. It's freezing in here.",
+      "cy": 0.36,
+      "zoom": [
+        1.08,
+        1.22
+      ]
+    },
+    {
+      "card": {
+        "title": "Tonight · your house",
+        "tag": "NO HEAT",
+        "rows": [
+          [
+            "Furnace",
+            "not firing"
+          ],
+          [
+            "Inside",
+            "dropping fast"
+          ],
+          [
+            "Bedrooms",
+            "freezing"
+          ]
+        ]
+      },
+      "bg": "cold",
+      "dur": 1.6
+    },
+    {
+      "shot": "cold",
+      "sub": "Who even answers this late?",
+      "cy": 0.32,
+      "zoom": [
+        1.3,
+        1.44
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "DAY",
+      "shot": "van",
+      "cy": 0.5,
+      "dur": 1.3
+    },
+    {
+      "word": "OR",
+      "shot": "tech",
+      "dur": 1.55,
+      "panel": {
+        "label": "NEW ARK",
+        "title": "No-heat call · 11:30 PM",
+        "working": "Answering...",
+        "done": "No-heat call answered",
+        "steps": [
+          "Call",
+          "Answered",
+          "Repair"
+        ]
+      }
+    },
+    {
+      "word": "NIGHT",
+      "shot": "van",
+      "cy": 0.45,
+      "zoom": [
+        1.08,
+        1.2
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "flame",
+    "impact": "FIRED UP",
+    "cy": 0.5,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "family",
+      "sub": "We're warm again.",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.0
+    }
+  ],
+  "end": {
+    "cta": "SCAN · FREE ESTIMATE",
+    "link": "https://ark-hvac.com",
+    "wordmark": [
+      "NEW",
+      "ARK"
+    ],
+    "tagline": "Furnace and boiler repair. Day or night.",
+    "lines": [
+      "NO-HEAT CALLS ANSWERED DAY OR NIGHT",
+      "908-454-4043 · ark-hvac.com"
+    ]
+  },
+  "caption": "Furnace quit on the coldest night of the year? New Ark repairs and replaces furnaces, boilers and heating systems for homes and businesses, and no-heat calls are answered day or night. Licensed and insured in New Jersey, priced by the owner himself. Scan the QR for a free estimate, or go to ark-hvac.com (link in bio).",
+  "hashtags": [
+    "noheat",
+    "furnacerepair",
+    "boilerrepair",
+    "phillipsburgnj",
+    "newjersey",
+    "hvac"
+  ]
+}

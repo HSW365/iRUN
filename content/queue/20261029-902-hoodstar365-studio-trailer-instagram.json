@@ -1,0 +1,145 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "studio",
+  "platform": "instagram",
+  "shots_dir": "content/shots/studio365-silent",
+  "accent": "#a855f7",
+  "title": "HSW365STUDIO",
+  "open": {
+    "shot": "mic",
+    "impact": "SILENT",
+    "cy": 0.42
+  },
+  "scenes": [
+    {
+      "shot": "door",
+      "sub": "Can't afford studio time. Not tonight.",
+      "cy": 0.38,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    },
+    {
+      "shot": "closet",
+      "sub": "Closet. Blankets. One cheap mic.",
+      "cy": 0.34,
+      "zoom": [
+        1.1,
+        1.24
+      ]
+    },
+    {
+      "card": {
+        "title": "Tonight's session · home",
+        "tag": "UNFINISHED",
+        "rows": [
+          [
+            "Vocal",
+            "off key"
+          ],
+          [
+            "Mix",
+            "muddy"
+          ],
+          [
+            "Master",
+            "too quiet"
+          ]
+        ]
+      },
+      "bg": "closet",
+      "dur": 1.6
+    },
+    {
+      "shot": "sing",
+      "sub": "I'm not stopping now.",
+      "cy": 0.36,
+      "zoom": [
+        1.2,
+        1.34
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "RECORD",
+      "shot": "sing",
+      "cy": 0.38,
+      "dur": 1.3
+    },
+    {
+      "word": "IT",
+      "shot": "console",
+      "dur": 1.55,
+      "panel": {
+        "label": "HSW365STUDIO",
+        "title": "Browser session",
+        "working": "Tuning to the key...",
+        "done": "Mastered WAV ready",
+        "steps": [
+          "Tune",
+          "Mix",
+          "Master"
+        ]
+      }
+    },
+    {
+      "word": "TONIGHT",
+      "shot": "console",
+      "cy": 0.5,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "mic",
+    "impact": "LOUD",
+    "cy": 0.42,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "stage",
+      "cy": 0.35,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.36,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "HSW365",
+      "STUDIO"
+    ],
+    "tagline": "Record. Tune. Mix. Master. In your browser.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "FIRST 3 PROJECTS FREE · PLANS FROM $15/MO",
+      "hsw365.github.io/STUDIO365"
+    ],
+    "link": "https://hsw365.github.io/STUDIO365/?signup"
+  },
+  "caption": "No budget for studio time, just a closet, some blankets and a song that won't wait. HSW365studio is a vocal studio in your browser: record over your beat, tune to the key, mix on a real console, master to streaming loudness and export a WAV. Your first 3 projects are free. Scan the QR to sign up, or go to hsw365.github.io/STUDIO365 (link in bio).",
+  "hashtags": [
+    "homestudio",
+    "independentartist",
+    "recording",
+    "mixingandmastering",
+    "hsw365studio",
+    "hsw365media"
+  ]
+}

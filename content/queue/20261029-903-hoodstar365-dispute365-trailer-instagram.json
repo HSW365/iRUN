@@ -1,0 +1,144 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "dispute365",
+  "platform": "instagram",
+  "shots_dir": "content/shots/dispute365-denied",
+  "accent": "#ef4444",
+  "title": "DISPUTE365",
+  "open": {
+    "shot": "stamp",
+    "impact": "REJECTED",
+    "cy": 0.4
+  },
+  "scenes": [
+    {
+      "shot": "officer",
+      "sub": "Something on your report flagged it.",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.2
+      ]
+    },
+    {
+      "shot": "man",
+      "sub": "I never opened that account.",
+      "cy": 0.36,
+      "zoom": [
+        1.1,
+        1.24
+      ]
+    },
+    {
+      "card": {
+        "title": "Credit report · flagged items",
+        "tag": "ERROR",
+        "rows": [
+          [
+            "Collection",
+            "not his account"
+          ],
+          [
+            "Late payment",
+            "paid on time"
+          ],
+          [
+            "Hard inquiry",
+            "never applied"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.6
+    },
+    {
+      "shot": "night",
+      "sub": "So I'm fixing it myself.",
+      "cy": 0.4,
+      "zoom": [
+        1.16,
+        1.3
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "READ",
+      "shot": "night",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "word": "EVERY",
+      "shot": "night",
+      "dur": 1.55,
+      "panel": {
+        "label": "DISPUTE365",
+        "title": "Report scanned",
+        "working": "Finding errors...",
+        "done": "Dispute letters written",
+        "steps": [
+          "Scan",
+          "Flag",
+          "Letters"
+        ]
+      }
+    },
+    {
+      "word": "LINE",
+      "shot": "envelope",
+      "cy": 0.45,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "stamp",
+    "impact": "DISPUTED",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "keys",
+      "cy": 0.45,
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "dur": 1.8
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "DISPUTE",
+      "365"
+    ],
+    "tagline": "Find the errors. Send the letters.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "FREE LETTER BUILDER · FULL APP $9.99/MO",
+      "hsw365.github.io/DISPUTE365"
+    ],
+    "fine": "Self-help dispute tool. Results vary. Not legal advice.",
+    "link": "https://hsw365.github.io/DISPUTE365/#signup"
+  },
+  "caption": "Rejected over an account he never opened. So he read every line of his report and disputed what was wrong. DISPUTE365 reads your credit report, finds errors and negative items, and writes the dispute letters for you. Scan the QR to sign up, or go to hsw365.github.io/DISPUTE365 (link in bio).",
+  "hashtags": [
+    "creditreport",
+    "creditrepair",
+    "disputeletters",
+    "fixyourcredit",
+    "dispute365",
+    "hsw365media"
+  ]
+}

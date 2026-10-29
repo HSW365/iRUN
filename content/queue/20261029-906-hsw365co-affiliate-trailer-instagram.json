@@ -1,0 +1,137 @@
+{
+  "kind": "trailer",
+  "account": "hsw365co",
+  "product": "affiliate",
+  "platform": "instagram",
+  "shots_dir": "content/shots/affiliate-earn",
+  "accent": "#34d399",
+  "title": "HSW365 AFFILIATES",
+  "open": {
+    "shot": "phone",
+    "impact": "ONCE",
+    "cy": 0.6
+  },
+  "scenes": [
+    {
+      "shot": "creator",
+      "sub": "Posted for them. Paid once. Gone.",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    },
+    {
+      "shot": "man",
+      "sub": "There has to be a better deal.",
+      "cy": 0.4,
+      "zoom": [
+        1.1,
+        1.26
+      ]
+    },
+    {
+      "card": {
+        "title": "HSW365 Affiliate · how it pays",
+        "tag": "20%",
+        "rows": [
+          [
+            "Join",
+            "free"
+          ],
+          [
+            "Commission",
+            "20% recurring"
+          ],
+          [
+            "Payouts",
+            "monthly"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    }
+  ],
+  "slams": [
+    {
+      "word": "SHARE",
+      "shot": "laptop",
+      "cy": 0.55,
+      "dur": 1.3
+    },
+    {
+      "word": "GET",
+      "shot": "night",
+      "dur": 1.55,
+      "panel": {
+        "label": "HSW365 AFFILIATES",
+        "title": "Your dashboard",
+        "working": "Tracking your referrals...",
+        "done": "20% every month they stay",
+        "steps": [
+          "Share",
+          "Subscribe",
+          "Get paid"
+        ]
+      }
+    },
+    {
+      "word": "PAID",
+      "shot": "crew",
+      "cy": 0.45,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "MONTHLY",
+    "cy": 0.6,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "crew",
+      "cy": 0.42,
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "HSW365",
+      "PARTNERS"
+    ],
+    "tagline": "Share the apps. Earn every month.",
+    "cta": "SCAN TO APPLY · FREE",
+    "lines": [
+      "FREE TO JOIN · 20% RECURRING COMMISSION",
+      "hsw365.co/pages/affiliates"
+    ],
+    "fine": "Earnings depend on your referrals and are not guaranteed.",
+    "link": "https://hsw365.co/pages/affiliates#/apply"
+  },
+  "caption": "He was done getting paid once for a post. The HSW365 Affiliate Partner Program is free to join and pays 20% recurring commission on HSW365 app subscriptions like iRun, Friendy, Klipit and HSW365studio for as long as the customer stays subscribed. Live dashboard, ready-made posts, monthly payouts by Zelle, Cash App or PayPal. Scan the QR to sign up, or go to hsw365.co/pages/affiliates (link in bio).",
+  "hashtags": [
+    "affiliatemarketing",
+    "creators",
+    "recurringincome",
+    "veteranowned",
+    "hsw365affiliates",
+    "hsw365"
+  ]
+}

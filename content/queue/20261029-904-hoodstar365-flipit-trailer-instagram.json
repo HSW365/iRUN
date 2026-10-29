@@ -1,0 +1,135 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "flipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/flipit-taxlien",
+  "accent": "#34d399",
+  "title": "FLIPIT",
+  "open": {
+    "shot": "notice",
+    "impact": "VACANT",
+    "cy": 0.4
+  },
+  "scenes": [
+    {
+      "shot": "man",
+      "sub": "Everybody says this house is a steal.",
+      "cy": 0.36,
+      "zoom": [
+        1.08,
+        1.22
+      ]
+    },
+    {
+      "card": {
+        "title": "FLIPIT · deal check",
+        "tag": "RISK",
+        "rows": [
+          [
+            "Max offer",
+            "run the 70% rule"
+          ],
+          [
+            "Repairs",
+            "check the risks"
+          ],
+          [
+            "Cash buyers",
+            "match before you sign"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    },
+    {
+      "shot": "laptop",
+      "sub": "Not until I run the numbers.",
+      "cy": 0.38,
+      "zoom": [
+        1.12,
+        1.28
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "KNOW",
+      "shot": "night",
+      "cy": 0.45,
+      "dur": 1.3
+    },
+    {
+      "word": "YOUR",
+      "shot": "pen",
+      "dur": 1.55,
+      "panel": {
+        "label": "FLIPIT",
+        "title": "Deal workspace",
+        "working": "Running your max offer...",
+        "done": "Buyer matched, paperwork drafted",
+        "steps": [
+          "Offer",
+          "Buyers",
+          "Paperwork"
+        ]
+      }
+    },
+    {
+      "word": "NUMBER",
+      "shot": "pen",
+      "cy": 0.5,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "notice",
+    "impact": "FLIPPED",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "keys",
+      "cy": 0.42,
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "dur": 1.8
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "FLIP",
+      "IT"
+    ],
+    "tagline": "Run the offer. Match the buyer. Flip it.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "MAX OFFER · RISKS · CASH BUYERS · PAPERWORK",
+      "flipit-m5ig.onrender.com"
+    ],
+    "fine": "Not a broker, lender or law firm. Have an attorney review contracts.",
+    "link": "https://flipit-m5ig.onrender.com/?signup"
+  },
+  "caption": "Everybody said it was a steal. He ran the numbers first. FLIPIT is a deal workspace for flippers, wholesalers and buy-and-hold investors: run the max offer, check the risks, match cash buyers and draft the paperwork in one place. Scan the QR to sign up, or go to flipit-m5ig.onrender.com (link in bio).",
+  "hashtags": [
+    "realestateinvesting",
+    "wholesaling",
+    "houseflipping",
+    "realestate",
+    "flipit",
+    "hsw365media"
+  ]
+}

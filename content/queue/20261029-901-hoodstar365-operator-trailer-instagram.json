@@ -1,0 +1,146 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "operator",
+  "platform": "instagram",
+  "shots_dir": "content/shots/irun-operator-offline",
+  "accent": "#22d3ee",
+  "title": "IRUN OPERATOR",
+  "open": {
+    "shot": "bulb",
+    "impact": "OFFLINE",
+    "cy": 0.4
+  },
+  "scenes": [
+    {
+      "shot": "owner",
+      "sub": "Best bread in town. Empty again.",
+      "cy": 0.3,
+      "zoom": [
+        1.08,
+        1.22
+      ]
+    },
+    {
+      "shot": "empty",
+      "sub": "Nobody even knows we're here.",
+      "cy": 0.45,
+      "zoom": [
+        1.04,
+        1.14
+      ]
+    },
+    {
+      "card": {
+        "title": "Your marketing · this week",
+        "tag": "MISSING",
+        "rows": [
+          [
+            "Website",
+            "outdated"
+          ],
+          [
+            "Videos posted",
+            "0"
+          ],
+          [
+            "Prospect emails",
+            "0"
+          ]
+        ]
+      },
+      "bg": "empty",
+      "dur": 1.6
+    },
+    {
+      "shot": "laptop",
+      "sub": "I can't do it all by myself.",
+      "cy": 0.32,
+      "zoom": [
+        1.18,
+        1.32
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "WHILE",
+      "shot": "city",
+      "cy": 0.45,
+      "dur": 1.3
+    },
+    {
+      "word": "YOU",
+      "shot": "laptop",
+      "dur": 1.55,
+      "panel": {
+        "label": "IRUN OPERATOR",
+        "title": "1 website link",
+        "working": "Running your marketing...",
+        "done": "Site, videos and emails live",
+        "steps": [
+          "New site",
+          "Videos",
+          "Emails"
+        ]
+      }
+    },
+    {
+      "word": "SLEEP",
+      "shot": "empty",
+      "cy": 0.45,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "bulb",
+    "impact": "LIVE",
+    "cy": 0.4,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "packed",
+      "cy": 0.4,
+      "warm": true,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.36,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "IRUN ",
+      "OPERATOR"
+    ],
+    "tagline": "One link in. A whole marketing team out.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "PLANS FROM $15/MO · NO CUT OF YOUR SALES",
+      "hsw365.github.io/iRUN/start.html"
+    ],
+    "link": "https://hsw365.github.io/iRUN/start.html"
+  },
+  "caption": "Best bread in town, and an empty room every night. Give iRun Operator your website and it runs your marketing: a new site, videos posted every day, emails to your prospects and a review every night. Plans from $15 a month, no cut of your sales. Scan the QR to sign up, or go to hsw365.github.io/iRUN/start.html (link in bio).",
+  "hashtags": [
+    "smallbusiness",
+    "smallbusinessowner",
+    "marketing",
+    "bakery",
+    "irun",
+    "hsw365media"
+  ]
+}

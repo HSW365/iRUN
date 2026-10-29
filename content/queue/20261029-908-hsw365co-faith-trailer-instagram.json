@@ -1,0 +1,113 @@
+{
+  "kind": "trailer",
+  "account": "hsw365co",
+  "product": "faith",
+  "platform": "instagram",
+  "shots_dir": "content/shots/hsw365co-survivor",
+  "accent": "#a855f7",
+  "title": "FAITH OVER FEAR",
+  "open": {
+    "shot": "candle",
+    "impact": "FEAR",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "storm",
+      "sub": "What if it all falls apart?",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.2
+      ]
+    },
+    {
+      "shot": "mirror",
+      "sub": "I can't keep running from it.",
+      "cy": 0.36,
+      "zoom": [
+        1.12,
+        1.26
+      ]
+    },
+    {
+      "shot": "pray",
+      "sub": "Lord, I'm listening.",
+      "cy": 0.45,
+      "zoom": [
+        1.04,
+        1.16
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "FAITH",
+      "shot": "pray",
+      "cy": 0.4,
+      "dur": 1.3
+    },
+    {
+      "word": "OVER",
+      "shot": "cliff",
+      "cy": 0.4,
+      "dur": 1.4
+    },
+    {
+      "word": "FEAR",
+      "shot": "embers",
+      "cy": 0.38,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "candle",
+    "impact": "FAITH",
+    "cy": 0.5,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "cliff",
+      "cy": 0.4,
+      "warm": true,
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "FAITH ",
+      "OVER FEAR"
+    ],
+    "tagline": "Where every Survivor starts.",
+    "cta": "SCAN TO SHOP",
+    "lines": [
+      "THE FAITH OVER FEAR TEE",
+      "hsw365.co"
+    ],
+    "link": "https://hsw365.co/products/faith-over-fear"
+  },
+  "caption": "Every Survivor starts with one decision: faith over fear. The FAITH OVER FEAR tee from HSW365, the veteran-owned brand from Hoodstar365, is the piece where it all begins. Scan the QR to shop, or go to hsw365.co (link in bio).",
+  "hashtags": [
+    "faithoverfear",
+    "faith",
+    "streetwear",
+    "veteranowned",
+    "hsw365"
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "kind": "trailer",
+  "account": "newark",
+  "product": "drain",
+  "platform": "instagram",
+  "shots_dir": "content/shots/newark-home",
+  "accent": "#34d399",
+  "title": "DRAIN AND SEWER",
+  "open": {
+    "shot": "drain",
+    "impact": "BACKED UP",
+    "cy": 0.55
+  },
+  "scenes": [
+    {
+      "shot": "homeowner",
+      "sub": "The floor drain's coming up.",
+      "cy": 0.36,
+      "zoom": [
+        1.08,
+        1.22
+      ]
+    },
+    {
+      "card": {
+        "title": "Your drains · this month",
+        "tag": "RECURRING",
+        "rows": [
+          [
+            "Kitchen sink",
+            "slow"
+          ],
+          [
+            "Toilet",
+            "backed up"
+          ],
+          [
+            "Floor drain",
+            "overflowing"
+          ]
+        ]
+      },
+      "bg": "drain",
+      "dur": 1.6
+    },
+    {
+      "shot": "homeowner",
+      "sub": "Third time this month.",
+      "cy": 0.32,
+      "zoom": [
+        1.3,
+        1.44
+      ],
+      "sat": 0.6
+    }
+  ],
+  "slams": [
+    {
+      "word": "FIND",
+      "shot": "tech",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "word": "THE",
+      "shot": "van",
+      "dur": 1.55,
+      "panel": {
+        "label": "NEW ARK",
+        "title": "Drain call",
+        "working": "Clearing the line...",
+        "done": "Found why it happened",
+        "steps": [
+          "Clear",
+          "Inspect",
+          "Cause"
+        ]
+      }
+    },
+    {
+      "word": "CAUSE",
+      "shot": "tech",
+      "cy": 0.4,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "drain",
+    "impact": "CLEARED",
+    "cy": 0.55,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "hero",
+      "sub": "They found why it kept happening.",
+      "cy": 0.36,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.0
+    }
+  ],
+  "end": {
+    "cta": "SCAN · FREE ESTIMATE",
+    "link": "https://ark-hvac.com",
+    "wordmark": [
+      "NEW",
+      "ARK"
+    ],
+    "tagline": "Drains and sewers, cleared and checked.",
+    "lines": [
+      "FREE ESTIMATES · HOMES AND BUSINESSES",
+      "908-454-4043 · ark-hvac.com"
+    ]
+  },
+  "caption": "Slow drains, backed-up toilets, a basement floor drain coming up again? New Ark clears clogged drains and sewer backups and looks for why it happened, so it stops coming back. Licensed and insured in New Jersey, nearly 40 years in the trade. Scan the QR for a free estimate, or go to ark-hvac.com (link in bio).",
+  "hashtags": [
+    "drainclog",
+    "sewerbackup",
+    "drainservice",
+    "phillipsburgnj",
+    "newjersey",
+    "plumbing"
+  ]
+}

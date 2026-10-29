@@ -1,0 +1,120 @@
+{
+  "kind": "trailer",
+  "account": "hsw365co",
+  "product": "survivor",
+  "platform": "instagram",
+  "shots_dir": "content/shots/hsw365co-survivor",
+  "accent": "#22d3ee",
+  "title": "SURVIVOR COLLECTION",
+  "open": {
+    "shot": "bleach",
+    "impact": "BROKEN",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "storm",
+      "sub": "They counted me out.",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.2
+      ]
+    },
+    {
+      "shot": "mirror",
+      "sub": "Every scar is a chapter.",
+      "cy": 0.36,
+      "zoom": [
+        1.1,
+        1.24
+      ]
+    },
+    {
+      "card": {
+        "title": "Survivor Collection · one of one",
+        "tag": "1 OF 1",
+        "rows": [
+          [
+            "Crimson Fracture",
+            "hand-bleached · signed"
+          ],
+          [
+            "Midnight Shrapnel",
+            "hand-bleached · signed"
+          ],
+          [
+            "Gold Rush",
+            "hand-bleached · signed"
+          ]
+        ]
+      },
+      "bg": "storm",
+      "dur": 1.7
+    }
+  ],
+  "slams": [
+    {
+      "word": "WEAR",
+      "shot": "sign",
+      "cy": 0.5,
+      "dur": 1.3
+    },
+    {
+      "word": "YOUR",
+      "shot": "embers",
+      "cy": 0.4,
+      "dur": 1.4
+    },
+    {
+      "word": "STORY",
+      "shot": "embers",
+      "cy": 0.36,
+      "zoom": [
+        1.14,
+        1.28
+      ],
+      "dur": 1.4
+    }
+  ],
+  "callback": {
+    "shot": "bleach",
+    "impact": "UNBROKEN",
+    "cy": 0.5,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.0
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "SURVIVOR ",
+      "1 OF 1"
+    ],
+    "tagline": "Eight one-of-ones. Hand-bleached. Signed.",
+    "cta": "SCAN TO SHOP",
+    "lines": [
+      "WHEN ONE SELLS, IT'S GONE",
+      "hsw365.co"
+    ],
+    "link": "https://hsw365.co"
+  },
+  "caption": "Eight one-of-one tees, each hand-bleached and personally signed by Hoodstar365, each telling a chapter of surviving and coming out stronger. Crimson Fracture, Midnight Shrapnel, Gold Rush and more. When one sells, it's gone. Scan the QR to shop, or go to hsw365.co (link in bio).",
+  "hashtags": [
+    "survivorcollection",
+    "streetwear",
+    "oneofone",
+    "veteranowned",
+    "hsw365"
+  ]
+}
