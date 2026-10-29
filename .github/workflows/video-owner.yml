@@ -1,0 +1,99 @@
+name: iRun Video (owner productions)
+
+# Full productions for Hoodstar365's own records. Each folder content/video/<slug>/ holds photo.jpg,
+# song.mp3 (optional for UGC) and brief.json (title, artist, style, length, kind, chapters with shot pools).
+# Pushing a brief renders it with engine/musicvideo.py and writes content/video/<slug>/result.json with the
+# finished mp4 link. Never posts anywhere on its own.
+
+on:
+  push:
+    branches: [main]
+    paths: ["content/video/*/brief.json"]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "folder under content/video/"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun-video-owner
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 2}
+      - name: Which production
+        id: s
+        run: |
+          if [ -n "${{ github.event.inputs.slug }}" ]; then echo "slugs=${{ github.event.inputs.slug }}" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "slugs=$(git diff --name-only HEAD~1 HEAD -- 'content/video/*/brief.json' | cut -d/ -f3 | sort -u | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rubberband-cli
+          pip install -q requests pillow segno numpy kokoro-onnx soundfile
+      - uses: actions/cache@v4
+        with:
+          path: assets/voice/models
+          key: kokoro-v1.0
+      - name: Render
+        env:
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IRUN_MOVIE_PARALLEL: "5"
+        run: |
+          mkdir -p assets/voice/models && (cd assets/voice/models && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done)
+          mkdir -p out
+          for S in ${{ steps.s.outputs.slugs }}; do
+            D="content/video/$S"
+            SONG="$D/song.mp3"; [ -f "$SONG" ] || SONG=-
+            python3 - "$D" "$SONG" "$S" <<'E'
+          import json, os, subprocess, sys, traceback, requests
+          d, song, slug = sys.argv[1:4]
+          b = json.load(open(f"{d}/brief.json"))
+          sys.path.insert(0, "engine")
+          import musicvideo
+          out = f"out/{slug}.mp4"
+          res = {"slug": slug, "status": "failed"}
+          try:
+              rep = musicvideo.build(f"{d}/photo.jpg", None if song == "-" else song, out, b.get("kind", "music_video"),
+                                     b.get("desc", ""), b.get("style", "cinematic"), b.get("length", 60),
+                                     b.get("title", ""), b.get("artist", ""), f"/tmp/work/{slug}",
+                                     brief=b if b.get("chapters") else None)
+              key = os.environ["POLLINATIONS_TOKEN"]
+              def up(p, ctype):
+                  with open(p, "rb") as f:
+                      r = requests.post("https://media.pollinations.ai/upload", data=f, timeout=1800,
+                                        headers={"Authorization": f"Bearer {key}", "Content-Type": ctype,
+                                                 "X-File-Name": os.path.basename(p)})
+                  r.raise_for_status(); j = r.json(); return j.get("url") or f"https://media.pollinations.ai/{j['id']}"
+              res.update(status="rendered", video=up(out, "video/mp4"), poster=up(out[:-4] + ".jpg", "image/jpeg"),
+                         **{k: rep.get(k) for k in ("duration", "bpm", "song_start", "stills", "failed",
+                                                     "balance_start", "balance_end")})
+          except Exception as e:
+              traceback.print_exc(); res["error"] = str(e)[-2000:]
+          json.dump(res, open(f"{d}/result.json", "w"), indent=2)
+          print(json.dumps(res, indent=2))
+          E
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: video
+          path: out/
+          retention-days: 30
+      - name: Save result
+        if: always()
+        run: |
+          git config user.name "iRun" && git config user.email "irun@users.noreply.github.com"
+          git add content/video/*/result.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Video: rendered ${{ steps.s.outputs.slugs }} [skip ci]"
+          for i in 1 2 3 4 5; do git pull -q --rebase && git push -q && break; sleep 5; done

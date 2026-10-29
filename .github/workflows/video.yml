@@ -1,0 +1,65 @@
+name: iRun Video (member music videos and short films)
+
+# Renders the music videos / short films members order in HSW365studio (studio.html -> Music Video).
+# The irun-video edge function queues a row in irun_video_jobs and pings this workflow (repository_dispatch);
+# the schedule below is the backstop so nothing waits more than ~10 minutes. Idle runs exit in seconds.
+
+on:
+  repository_dispatch:
+    types: [irun-video]
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "only this job id (re-runs a failed one)"
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: irun-video-${{ github.event.client_payload.id || github.event.inputs.id || 'queue' }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      IRUN_BUCKET: irun-media
+      JOB_ID: ${{ github.event.client_payload.id || github.event.inputs.id }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Anything to render?
+        id: peek
+        run: |
+          pip install -q requests
+          if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "n=0" >> "$GITHUB_OUTPUT"; exit 0; fi
+          ARGS=""; [ -n "$JOB_ID" ] && ARGS="--id $JOB_ID"
+          echo "n=$(python engine/video_jobs.py --peek $ARGS)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v5
+        if: steps.peek.outputs.n != '0'
+        with: {python-version: "3.11"}
+      - name: Install
+        if: steps.peek.outputs.n != '0'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rubberband-cli
+          pip install -q requests pillow segno numpy kokoro-onnx soundfile
+      - name: Narrator model
+        if: steps.peek.outputs.n != '0'
+        uses: actions/cache@v4
+        with:
+          path: assets/voice/models
+          key: kokoro-v1.0
+      - name: Render
+        if: steps.peek.outputs.n != '0'
+        env:
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p assets/voice/models && (cd assets/voice/models && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done)
+          ARGS="--max 2"; [ -n "$JOB_ID" ] && ARGS="--id $JOB_ID"
+          python engine/video_jobs.py $ARGS
