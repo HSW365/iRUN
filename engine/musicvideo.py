@@ -32,6 +32,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import movie as M  # noqa: E402
 
 W, H, FPS = M.W, M.H, M.FPS
+# Free mode: only Pollinations' free models. Identity-locked stills of the artist in every scene (FLUX Kontext
+# takes the photo as reference), brought to life with camera moves and the full effects finish, cut to the song.
+# No paid video models, so no lip-sync. IRUN_VIDEO_FREE=0 switches the paid motion/lip-sync models back on.
+FREE = os.environ.get("IRUN_VIDEO_FREE", "1") == "1"
+if FREE:
+    M.IMAGE_MODEL = os.environ.get("IRUN_VIDEO_FREE_IMAGE_MODEL", "black-forest-labs/flux.1-kontext-pro")
 LIPSYNC_MODELS = [m for m in os.environ.get("IRUN_VIDEO_LIPSYNC_MODELS",
                   "bytedance/seedance-2.0,alibaba/wan-3.0,minimax/minimax-h3-max-turbo").split(",") if m]
 BROLL_MODEL = os.environ.get("IRUN_VIDEO_BROLL_MODEL", M.BROLL_MODEL)
@@ -280,6 +286,8 @@ def slice_song(song, t0, dur, work):
 
 
 def clip_for(shot, look_style, frame_url, work, seed, dur, audio_url=None):
+    if FREE:
+        return None, None, []
     v = shot["v"].replace("the STAR", "the person").replace("STAR", "the person")
     kind = shot["type"]
     if kind == "perform":
@@ -491,7 +499,7 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
             fpath, furl = frame_for(s, look_style, look, photo_url, work, seed)
             rec["frame"] = furl
             aurl = None
-            if s["type"] == "perform":
+            if s["type"] == "perform" and not FREE:
                 need = max(4.0, durs[i])
                 aurl = slice_song(song, t0 + starts[i], min(need, total - (t0 + starts[i])), work)
             clip, model, errs = clip_for(s, look_style, furl, work, seed, durs[i], aurl)
