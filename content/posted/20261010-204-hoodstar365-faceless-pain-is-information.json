@@ -40,5 +40,14 @@
     "turnnegativeintopositive",
     "motivation",
     "growth"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-29T22:51:50.333330Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18142939669615778"
+    }
   ]
 }
