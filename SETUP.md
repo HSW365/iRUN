@@ -139,3 +139,10 @@ Give it a website and it runs the business's marketing: **onboard** (reads the s
 - **Memory across devices:** with the owner key saved in Studio Settings, everything syncs to the `irun_brain` table through the `irun-ig-webhook` function (`brain_get` / `brain_put`). Without it, it stays in the browser; use Export backup.
 
 Uses the same Anthropic key as Studio (Studio > Settings).
+
+## Shopify product ads
+iRun turns any Shopify product into a trailer ad and posts it to Instagram (`engine/shopify_ad.py`, workflow `iRun Shopify ad`).
+Edit `config/shopifyad.json` with the product handle (or full product URL) and commit, or run the workflow from the Actions tab.
+It reads the product from the store's public feed, picks a micro-drama playbook (beauty, wellness, apparel, tech/default),
+makes the shots, records the narrator (ElevenLabs), renders the trailer, and the end-card QR goes straight to checkout.
+Fine-tune any product's card rows, narrator lines, accent or tagline in `config/shopify_ads.json`.

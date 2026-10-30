@@ -1,0 +1,71 @@
+name: iRun Shopify ad
+
+# Make a trailer ad for any Shopify product and post it to Instagram.
+# Commit config/shopifyad.json  {"product": "<handle or product URL>", "store": "hsw365.co", "account": "hoodstar365", "post": true}
+# or run it from the Actions tab with a product handle.
+on:
+  push:
+    branches: [main]
+    paths: ["config/shopifyad.json"]
+  workflow_dispatch:
+    inputs:
+      product: {description: "product handle or URL", required: true}
+      store: {description: "store domain", default: "hsw365.co"}
+      account: {description: "iRun account", default: "hoodstar365"}
+      post: {description: "post to Instagram", type: boolean, default: true}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  ad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+      ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
+      IRUN_NARRATOR: ${{ vars.IRUN_NARRATOR || 'elevenlabs' }}
+      IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+      IRUN_IMAGE_TRIES: "8"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rubberband-cli fonts-inter
+          pip install -q -r requirements.txt kokoro-onnx soundfile
+      - name: Narrator model
+        uses: actions/cache@v4
+        with: {path: assets/voice/models, key: kokoro-v1.0}
+      - name: Build and post
+        run: |
+          mkdir -p assets/voice/models && (cd assets/voice/models && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PRODUCT="${{ inputs.product }}"; STORE="${{ inputs.store }}"; ACCOUNT="${{ inputs.account }}"; POST="${{ inputs.post }}"
+          else
+            PRODUCT=$(jq -r .product config/shopifyad.json); STORE=$(jq -r '.store // "hsw365.co"' config/shopifyad.json)
+            ACCOUNT=$(jq -r '.account // "hoodstar365"' config/shopifyad.json); POST=$(jq -r 'if .post == false then "false" else "true" end' config/shopifyad.json)
+          fi
+          ARGS="--store $STORE --account $ACCOUNT"; [ "$POST" = "true" ] && ARGS="$ARGS --post"
+          python engine/shopify_ad.py "$PRODUCT" $ARGS 2>&1 | tee out-build.log; test ${PIPESTATUS[0]} -eq 0
+      - name: Keep the ad, spec and shots
+        if: always()
+        run: |
+          mkdir -p assets/ads/built
+          cp out/shop-*-ad.mp4 assets/ads/built/ 2>/dev/null || true
+          cp out-build.log assets/ads/built/last-shopify-build.log 2>/dev/null || true
+          git config user.name "iRun"; git config user.email "hsw365media@gmail.com"
+          git add assets/ads/built content/ads content/shots assets/voice/shop-* 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "iRun Shopify ad [skip ci]"
+          git pull --rebase -q && git push -q || true

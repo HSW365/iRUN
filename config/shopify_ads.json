@@ -1,0 +1,14 @@
+{
+  "hsw365-glow-led-red-light-therapy-mask": {
+    "playbook": "beauty",
+    "short": "HSW365 GLOW",
+    "accent": "#ff2d55",
+    "tagline": "The spa, at home. Ten minutes a day.",
+    "rows": [["Red + near-infrared LED", "full-face array"], ["Hands-free session", "about 10 minutes"], ["Rechargeable controller", "auto shut-off timer"]],
+    "vo": [[0.3, "Every morning, the mirror told her the same story."],
+           [4.0, "Ten products. Nothing changed."],
+           [8.0, "Then she gave it ten minutes of red light."],
+           [12.4, "Now the mirror tells a new one."],
+           [15.6, "{short}. Scan to get yours."]]
+  }
+}
