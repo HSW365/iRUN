@@ -32,7 +32,7 @@
     },
     {
       "card": {
-        "title": "Your marketing · this week",
+        "title": "Your marketing \u00b7 this week",
         "tag": "MISSING",
         "rows": [
           [
@@ -129,7 +129,7 @@
     "tagline": "One link in. A whole marketing team out.",
     "cta": "SCAN TO SIGN UP",
     "lines": [
-      "PLANS FROM $15/MO · NO CUT OF YOUR SALES",
+      "PLANS FROM $15/MO \u00b7 NO CUT OF YOUR SALES",
       "hsw365.github.io/iRUN/start.html"
     ],
     "link": "https://hsw365.github.io/iRUN/start.html"
@@ -142,5 +142,14 @@
     "bakery",
     "irun",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-30T18:01:42.422470Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18332639458302530"
+    }
   ]
 }
