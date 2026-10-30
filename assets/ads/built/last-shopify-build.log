@@ -1,4 +1,4 @@
-[0;93m2026-10-30 17:25:24.827735049 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-30 17:29:27.585904456 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [narrator] vo1.wav  Every morning, the mirror told her the same story.
 [narrator] vo2.wav  Ten products. Nothing changed.
 [narrator] vo3.wav  Then she gave it ten minutes of red light.
@@ -11,5 +11,5 @@
   "spec": "/home/runner/work/iRUN/iRUN/engine/../content/ads/shop-hsw365-glow-led-red-light-therapy-mask-trailer.json",
   "qr": "https://hsw365.co/cart/48083948306593:1"
 }
-{"shots": {"mirror": "cached", "shelf": "cached", "closeup": "cached", "night": "pollinations", "glow": "pollinations", "morning": "cached", "out": "cached", "product": "store photo"}}
-{"video": "/home/runner/work/iRUN/iRUN/engine/../out/shop-hsw365-glow-led-red-light-therapy-mask-ad.mp4", "seconds": 19.65}
+{"shots": {"mirror": "cached", "shelf": "cached", "closeup": "cached", "night": "cached", "morning": "cached", "out": "cached", "product": "store photo"}}
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/shop-hsw365-glow-led-red-light-therapy-mask-ad.mp4", "seconds": 18.55}

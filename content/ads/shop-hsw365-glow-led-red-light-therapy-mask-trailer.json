@@ -69,7 +69,7 @@
   "slams": [
     {
       "word": "YOUR",
-      "shot": "glow",
+      "shot": "closeup",
       "cy": 0.42,
       "zoom": [
         1.0,
@@ -87,7 +87,7 @@
     },
     {
       "word": "BACK",
-      "shot": "glow",
+      "shot": "out",
       "cy": 0.42,
       "zoom": [
         1.12,
@@ -101,11 +101,6 @@
     "warm": true
   },
   "payoff": [
-    {
-      "shot": "out",
-      "cy": 0.45,
-      "warm": true
-    },
     {
       "shot": "product",
       "cy": 0.45,
@@ -155,12 +150,12 @@
     },
     {
       "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo4.wav",
-      "at": 12.4,
+      "at": 11.3,
       "text": "Now the mirror tells a new one."
     },
     {
       "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo5.wav",
-      "at": 15.6,
+      "at": 14.5,
       "text": "HSW365 GLOW. Scan to get yours."
     }
   ],
