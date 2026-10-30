@@ -1,0 +1,169 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "hsw365-glow-led-red-light-therapy-mask",
+  "platform": "instagram",
+  "shots_dir": "content/shots/shop-hsw365-glow-led-red-light-therapy-mask",
+  "accent": "#ff2d55",
+  "title": "HSW365 GLOW",
+  "presents": "HSW365 PRESENTS",
+  "end_dur": 4.2,
+  "open": {
+    "shot": "mirror",
+    "impact": "TIRED",
+    "cy": 0.42,
+    "zoom": [
+      1.0,
+      1.1
+    ],
+    "dur": 2.0
+  },
+  "scenes": [
+    {
+      "shot": "shelf",
+      "cy": 0.45,
+      "zoom": [
+        1.04,
+        1.16
+      ]
+    },
+    {
+      "shot": "closeup",
+      "cy": 0.42,
+      "zoom": [
+        1.12,
+        1.26
+      ]
+    },
+    {
+      "card": {
+        "title": "HSW365 GLOW \u00b7 what's inside",
+        "tag": "INCLUDED",
+        "rows": [
+          [
+            "Red + near-infrared LED",
+            "full-face array"
+          ],
+          [
+            "Hands-free session",
+            "about 10 minutes"
+          ],
+          [
+            "Rechargeable controller",
+            "auto shut-off timer"
+          ]
+        ]
+      },
+      "bg": "night"
+    },
+    {
+      "shot": "night",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "YOUR",
+      "shot": "glow",
+      "cy": 0.42,
+      "zoom": [
+        1.0,
+        1.12
+      ]
+    },
+    {
+      "word": "GLOW",
+      "shot": "glow",
+      "cy": 0.42,
+      "zoom": [
+        1.06,
+        1.1800000000000002
+      ]
+    },
+    {
+      "word": "BACK",
+      "shot": "glow",
+      "cy": 0.42,
+      "zoom": [
+        1.12,
+        1.2400000000000002
+      ]
+    }
+  ],
+  "callback": {
+    "shot": "morning",
+    "impact": "GLOWING",
+    "warm": true
+  },
+  "payoff": [
+    {
+      "shot": "out",
+      "cy": 0.45,
+      "warm": true
+    },
+    {
+      "shot": "product",
+      "cy": 0.45,
+      "warm": true
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "HSW365 ",
+      "GLOW"
+    ],
+    "tagline": "The spa, at home. Ten minutes a day.",
+    "cta": "SCAN TO SHOP",
+    "lines": [
+      "$299  \u00b7  STRAIGHT TO CHECKOUT",
+      "HSW365.CO"
+    ],
+    "fine": "For cosmetic use. Results vary.",
+    "link": "https://hsw365.co/cart/48083948306593:1"
+  },
+  "caption": "Every morning, the mirror told her the same story. Then she gave it ten minutes of red light. HSW365 GLOW \u2014 LED Red Light Therapy Mask, $299. Scan the QR in the video to go straight to checkout, or shop hsw365.co/products/hsw365-glow-led-red-light-therapy-mask (link in bio).",
+  "hashtags": [
+    "beautytech",
+    "ledmask",
+    "redlighttherapy",
+    "skincaredevice",
+    "wellness",
+    "hsw365",
+    "hsw365co",
+    "shopnow"
+  ],
+  "vo": [
+    {
+      "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo1.wav",
+      "at": 0.3,
+      "text": "Every morning, the mirror told her the same story."
+    },
+    {
+      "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo2.wav",
+      "at": 4.0,
+      "text": "Ten products. Nothing changed."
+    },
+    {
+      "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo3.wav",
+      "at": 8.0,
+      "text": "Then she gave it ten minutes of red light."
+    },
+    {
+      "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo4.wav",
+      "at": 12.4,
+      "text": "Now the mirror tells a new one."
+    },
+    {
+      "file": "assets/voice/shop-hsw365-glow-led-red-light-therapy-mask/vo5.wav",
+      "at": 15.6,
+      "text": "HSW365 GLOW. Scan to get yours."
+    }
+  ],
+  "vo_captions": true,
+  "duck": 0.55
+}

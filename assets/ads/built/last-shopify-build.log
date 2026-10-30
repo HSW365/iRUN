@@ -1,0 +1,25 @@
+[0;93m2026-10-30 16:57:47.171071764 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator] vo1.wav  Every morning, the mirror told her the same story.
+[narrator] vo2.wav  Ten products. Nothing changed.
+[narrator] vo3.wav  Then she gave it ten minutes of red light.
+[narrator] vo4.wav  Now the mirror tells a new one.
+[narrator] vo5.wav  H S W three sixty five GLOW. Scan to get yours.
+[hoodstar365/instagram] publish failed: Expecting value: line 1 column 1 (char 0)
+[hoodstar365/instagram] failed Expecting value: line 1 column 1 (char 0)
+{
+  "product": "HSW365 GLOW \u2014 LED Red Light Therapy Mask",
+  "price": 299.0,
+  "playbook": "beauty",
+  "spec": "/home/runner/work/iRUN/iRUN/engine/../content/ads/shop-hsw365-glow-led-red-light-therapy-mask-trailer.json",
+  "qr": "https://hsw365.co/cart/48083948306593:1"
+}
+{"shots": {"mirror": "pollinations", "shelf": "pollinations", "closeup": "pollinations", "night": "pollinations", "glow": "pollinations", "morning": "pollinations", "out": "pollinations", "product": "store photo"}}
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/shop-hsw365-glow-led-red-light-therapy-mask-ad.mp4", "seconds": 19.65}
+Traceback (most recent call last):
+  File "/home/runner/work/iRUN/iRUN/engine/shopify_ad.py", line 332, in <module>
+    main()
+  File "/home/runner/work/iRUN/iRUN/engine/shopify_ad.py", line 326, in main
+    subprocess.run([sys.executable, os.path.join(HERE, "run.py"), "--account", a.account, "--platform", "instagram",
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.11.17/x64/bin/python', '/home/runner/work/iRUN/iRUN/engine/run.py', '--account', 'hoodstar365', '--platform', 'instagram', '--video', '/home/runner/work/iRUN/iRUN/engine/../out/shop-hsw365-glow-led-red-light-therapy-mask-ad.mp4', '--caption', 'Every morning, the mirror told her the same story. Then she gave it ten minutes of red light. HSW365 GLOW — LED Red Light Therapy Mask, $299. Scan the QR in the video to go straight to checkout, or shop hsw365.co/products/hsw365-glow-led-red-light-therapy-mask (link in bio).\n\n#beautytech #ledmask #redlighttherapy #skincaredevice #wellness #hsw365 #hsw365co #shopnow', '--mode', 'live']' returned non-zero exit status 1.
