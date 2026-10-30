@@ -23,6 +23,10 @@ def main(spec_path, out_path):
         import trailer
         print(json.dumps({"out": out_path, "seconds": trailer.build(spec, out_path)}))
         return
+    if spec.get("kind") == "caption":  # lo-fi POV caption-box ad (engine/caption_ad.py)
+        import caption_ad
+        print(json.dumps({"out": out_path, "seconds": caption_ad.build(spec, out_path)}))
+        return
     os.environ.setdefault("IRUN_IMAGE_TRIES", "8")
     if spec.get("voice"):
         os.environ["IRUN_EDGE_VOICE"] = spec["voice"]

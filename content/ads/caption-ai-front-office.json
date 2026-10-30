@@ -1,0 +1,37 @@
+{
+  "kind": "caption",
+  "name": "AI Front Office",
+  "brand": "HSW365 MEDIA",
+  "link": "https://hsw365.co/pages/ai-front-office",
+  "qr_label": "SCAN TO SIGN UP",
+  "lines": [
+    "Let AI run your business",
+    "Not to replace you",
+    "To give you your life back",
+    "Ask us anything"
+  ],
+  "cta": "Scan to get started",
+  "say": [
+    "Let A.I. run your business.",
+    "Not to replace you.",
+    "To give you your life back.",
+    "Ask us anything.",
+    "Scan the code. H.S.W. three sixty five Media."
+  ],
+  "vo": [
+    "assets/voice/caption-ai-front-office/vo1.wav",
+    "assets/voice/caption-ai-front-office/vo2.wav",
+    "assets/voice/caption-ai-front-office/vo3.wav",
+    "assets/voice/caption-ai-front-office/vo4.wav",
+    "assets/voice/caption-ai-front-office/vo5.wav"
+  ],
+  "broll": {
+    "image": "candid handheld iPhone photo, point of view of a business owner sitting at a dark slate table in an upscale moody restaurant lounge, black tufted leather booth chairs with brass studs in the background, warm amber light, a frosted glass of iced water with a straw, an open laptop on the left edge of frame glowing with a dashboard of booked appointments and incoming calls, shallow depth of field, natural phone camera look, slight motion blur, true-to-life color, no people, no faces, no text, no logos",
+    "motion": "handheld phone camera slowly drifts from the glowing laptop across the slate table toward the iced drink, natural hand shake, subtle focus breathing, ambient restaurant light flicker, realistic candid Instagram story footage, no people, no text",
+    "seconds": 10
+  },
+  "first_at": 0.8,
+  "gap": 0.4,
+  "hold": 0.5,
+  "end": 3.8
+}
