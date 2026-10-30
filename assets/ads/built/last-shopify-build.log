@@ -1,11 +1,9 @@
-[0;93m2026-10-30 16:57:47.171071764 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-30 17:19:40.204221716 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [narrator] vo1.wav  Every morning, the mirror told her the same story.
 [narrator] vo2.wav  Ten products. Nothing changed.
 [narrator] vo3.wav  Then she gave it ten minutes of red light.
 [narrator] vo4.wav  Now the mirror tells a new one.
 [narrator] vo5.wav  H S W three sixty five GLOW. Scan to get yours.
-[hoodstar365/instagram] publish failed: Expecting value: line 1 column 1 (char 0)
-[hoodstar365/instagram] failed Expecting value: line 1 column 1 (char 0)
 {
   "product": "HSW365 GLOW \u2014 LED Red Light Therapy Mask",
   "price": 299.0,
@@ -13,13 +11,6 @@
   "spec": "/home/runner/work/iRUN/iRUN/engine/../content/ads/shop-hsw365-glow-led-red-light-therapy-mask-trailer.json",
   "qr": "https://hsw365.co/cart/48083948306593:1"
 }
-{"shots": {"mirror": "pollinations", "shelf": "pollinations", "closeup": "pollinations", "night": "pollinations", "glow": "pollinations", "morning": "pollinations", "out": "pollinations", "product": "store photo"}}
+[visuals] image failed after 8 tries (503 Server Error: Service Unavailable for url: https://image.pollinations.ai/prompt/the%20same%20woman%20throughout%3A%20a%2032-year-old%20Black%20woman%20with%20deep%20brown%20skin%2C%20shoulder-length%20natural%20curly%20black%20hair%2C%20small%20gold%20hoop%20earrings%2C%20wearing%20an%20oversized%20cream%20knit%20sweater%2C%20seated%20upright%20in%20a%20dark%20minimalist%20living%20room%2C%20eyes%20closed%20and%20calm%2C%20wearing%20a%20flexible%20black%20silicone%20full-face%20LED%20mask%20with%20eye%20openings%20that%20glows%20deep%20red%2C%20the%20red%20light%20spilling%20across%20her%20sweater%20and%20the%20room%2C%20cinematic%2C%20cinematic%20film%20still%2C%20anamorphic%2C%20high-contrast%20grade%2C%20shallow%20depth%20of%20field%2C%20film%20grain%2C%20photoreal%2C%2035mm%2C%20vertical%20composition%2C%20tasteful%2C%20fully%20clothed%2C%20no%20text%2C%20no%20logos%2C%20no%20watermark.%20photorealistic%20documentary%20photograph%2C%20natural%20light%2C%20candid%20moment%2C%20sharp%20detail%2C%20true-to-life%20color.%20Vertical%20composition.%20no%20text%2C%20no%20words%2C%20no%20letters%2C%20no%20captions%2C%20no%20watermark%2C%20no%20logo.?width=1080&height=1920&seed=3657&nologo=true&private=true&model=flux); using a plain backdrop for this scene
+{"shots": {"mirror": "pollinations", "shelf": "pollinations", "closeup": "pollinations", "night": "pollinations", "glow": "backdrop", "morning": "pollinations", "out": "pollinations", "product": "store photo"}}
 {"video": "/home/runner/work/iRUN/iRUN/engine/../out/shop-hsw365-glow-led-red-light-therapy-mask-ad.mp4", "seconds": 19.65}
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/shopify_ad.py", line 332, in <module>
-    main()
-  File "/home/runner/work/iRUN/iRUN/engine/shopify_ad.py", line 326, in main
-    subprocess.run([sys.executable, os.path.join(HERE, "run.py"), "--account", a.account, "--platform", "instagram",
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.11.17/x64/bin/python', '/home/runner/work/iRUN/iRUN/engine/run.py', '--account', 'hoodstar365', '--platform', 'instagram', '--video', '/home/runner/work/iRUN/iRUN/engine/../out/shop-hsw365-glow-led-red-light-therapy-mask-ad.mp4', '--caption', 'Every morning, the mirror told her the same story. Then she gave it ten minutes of red light. HSW365 GLOW — LED Red Light Therapy Mask, $299. Scan the QR in the video to go straight to checkout, or shop hsw365.co/products/hsw365-glow-led-red-light-therapy-mask (link in bio).\n\n#beautytech #ledmask #redlighttherapy #skincaredevice #wellness #hsw365 #hsw365co #shopnow', '--mode', 'live']' returned non-zero exit status 1.
