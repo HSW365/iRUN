@@ -34,8 +34,8 @@ W, H = 1080, 1920
 
 # ---------- playbooks: one micro-drama per kind of product ----------
 # {title} {short} {price} are filled from the product. Shot prompts are cinematic stills, vertical, no text.
-LOOK = ("cinematic film still, anamorphic, dark moody high-contrast grade, shallow depth of field, film grain, "
-        "photoreal, 35mm, vertical composition, no text, no logos, no watermark")
+LOOK = ("cinematic film still, anamorphic, high-contrast grade, shallow depth of field, film grain, photoreal, 35mm, "
+        "vertical composition, tasteful, fully clothed, no text, no logos, no watermark")
 PLAYBOOKS = {
     "beauty": {
         "match": ["beauty", "skin", "mask", "led", "facial", "glow", "serum", "red light"],
@@ -43,28 +43,33 @@ PLAYBOOKS = {
         "presents": "HSW365 PRESENTS",
         "open_impact": "TIRED", "callback_impact": "GLOWING",
         "slams": ["YOUR", "GLOW", "BACK"],
+        "char": ("the same woman throughout: a 32-year-old Black woman with deep brown skin, shoulder-length natural "
+                 "curly black hair, small gold hoop earrings"),
         "shots": {
-            "mirror": "a beautiful Black woman in her early 30s leaning into a bathroom mirror at 6am, harsh cold light, "
-                      "tired eyes, touching her cheek, reflection in focus, quiet frustration",
-            "shelf": "a crowded bathroom shelf of half-used skincare bottles and jars, cold blue light, one bottle tipped over",
-            "closeup": "extreme close-up of a woman's eyes in a mirror, cold blue light, single tear of frustration, "
-                       "skin texture visible",
-            "night": "the same woman sitting on the edge of her bed at night in a dark bedroom, city lights behind her, "
-                     "holding a sleek matte black LED face mask in her lap",
-            "glow": "a woman reclining on a velvet couch wearing a flexible LED face mask glowing deep red, the red light "
-                    "spilling across a dark room, serene, luxurious",
-            "morning": "the same woman in warm golden morning sunlight at the mirror, radiant healthy skin, confident "
-                       "smile, warm tones",
-            "out": "the same woman walking out of a luxury apartment building into golden hour light, confident, glowing, "
-                   "turning heads",
+            "mirror": "{char}, wearing an oversized cream knit sweater, leaning toward a bathroom mirror at dawn, cold "
+                      "blue light, tired eyes, fingertips on her cheek, quiet frustration, dark moody grade",
+            "shelf": "a crowded marble bathroom counter of half-used skincare bottles and jars, cold blue light, one "
+                     "bottle tipped over, dark moody grade",
+            "closeup": "{char}, extreme close-up of her eyes and cheek in a mirror reflection, cold blue light, skin "
+                       "texture visible, weary, dark moody grade",
+            "night": "{char}, wearing an oversized cream knit sweater, sitting on the edge of her bed at night, city "
+                     "lights through the window, holding a sleek matte black flexible LED face mask in both hands, "
+                     "looking at it, dark moody grade",
+            "glow": "{char}, wearing an oversized cream knit sweater, seated upright in a dark minimalist living room, "
+                    "eyes closed and calm, wearing a flexible black silicone full-face LED mask with eye openings that "
+                    "glows deep red, the red light spilling across her sweater and the room, cinematic",
+            "morning": "{char}, wearing a white linen shirt, at a bathroom mirror flooded with bright golden morning "
+                       "sunlight, radiant healthy skin, small confident smile, warm tones",
+            "out": "{char}, wearing a camel coat, walking out of a modern apartment building onto a city street at "
+                   "golden hour, confident, warm sunlight, people glancing at her",
         },
         "open": "mirror", "scenes": ["shelf", "closeup", "night"], "slam_shots": ["glow", "glow", "glow"],
         "callback": "morning", "payoff": ["out", "product"],
-        "subs": ["Ten products. Nothing changed.", "", "", ""],
+        "subs": ["", "", "", ""],
         "tagline": "The spa, at home. Ten minutes a day.",
         "vo": [[0.3, "Every morning, the mirror told her the same story."],
                [4.0, "Ten products. Nothing changed."],
-               [8.0, "Then she found ten minutes of red light."],
+               [8.0, "Then she gave it ten minutes of red light."],
                [12.4, "Now the mirror tells a new one."],
                [15.6, "{short}. Scan to get yours."]],
         "fine": "For cosmetic use. Results vary.",
@@ -223,11 +228,14 @@ def make_shots(pb, p, shots_dir, seed):
     import visuals
     os.makedirs(shots_dir, exist_ok=True)
     src = {}
+    char = pb.get("char", "")
     for i, (name, prompt) in enumerate(pb["shots"].items()):
         out = os.path.join(shots_dir, f"{name}.jpg")
-        if os.path.exists(out):
+        if os.path.exists(out) and not os.environ.get("IRUN_FRESH_SHOTS"):
             src[name] = "cached"; continue
-        _, src[name] = visuals.scene_image(f"{prompt}, {LOOK}", "photoreal", seed + i * 7, out)
+        # character shots share one seed so the same person carries through the whole trailer
+        s = seed if "{char}" in prompt else seed + 101 + i * 7
+        _, src[name] = visuals.scene_image(f"{prompt.format(char=char)}, {LOOK}", "photoreal", s, out)
     if p["images"]:
         hero_shot(p["images"][0], pb["accent"], os.path.join(shots_dir, "product.jpg"))
         src["product"] = "store photo"
