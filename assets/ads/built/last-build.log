@@ -1,5 +1,8 @@
+[caption] 4 lines, 15.6s
+[caption] b-roll from still
+{"out": "out/caption-ai-front-office-ad.mp4", "seconds": 15.61}
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
 /home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18111829835072057
+[hoodstar365/instagram] posted 18122738998938593
