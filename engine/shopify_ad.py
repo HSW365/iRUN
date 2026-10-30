@@ -55,22 +55,20 @@ PLAYBOOKS = {
             "night": "{char}, wearing an oversized cream knit sweater, sitting on the edge of her bed at night, city "
                      "lights through the window, lifting the lid of a matte black gift box with deep red light glowing "
                      "out of it onto her face, curious, dark moody grade",
-            "glow": "{char}, wearing an oversized cream knit sweater, relaxing in a dark room, her face covered by a "
-                    "black LED light therapy beauty mask glowing bright red, red light falling on her sweater, serene",
             "morning": "{char}, wearing a white linen shirt, at a bathroom mirror flooded with bright golden morning "
                        "sunlight, radiant healthy skin, small confident smile, warm tones",
             "out": "{char}, wearing a camel coat, walking out of a modern apartment building onto a city street at "
                    "golden hour, confident, warm sunlight, people glancing at her",
         },
-        "open": "mirror", "scenes": ["shelf", "closeup", "night"], "slam_shots": ["glow", "product", "glow"],
-        "callback": "morning", "payoff": ["out", "product"],
+        "open": "mirror", "scenes": ["shelf", "closeup", "night"], "slam_shots": ["closeup", "product", "out"],  # tired -> the real device glowing -> her, out the door
+        "callback": "morning", "payoff": ["product"],
         "subs": ["", "", "", ""],
         "tagline": "The spa, at home. Ten minutes a day.",
         "vo": [[0.3, "Every morning, the mirror told her the same story."],
                [4.0, "Ten products. Nothing changed."],
                [8.0, "Then she gave it ten minutes of red light."],
-               [12.4, "Now the mirror tells a new one."],
-               [15.6, "{short}. Scan to get yours."]],
+               [11.3, "Now the mirror tells a new one."],
+               [14.5, "{short}. Scan to get yours."]],
         "fine": "For cosmetic use. Results vary.",
     },
     "wellness": {
