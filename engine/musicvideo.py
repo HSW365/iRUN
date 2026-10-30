@@ -12,7 +12,8 @@ Short film
   Same casting. Claude writes scenes with spoken lines (dialogue model, lip-synced), narration (Kokoro, free) and
   b-roll; the member's song is the score, ducked under dialogue and narration. Title card + end card.
 
-All generation goes through Pollinations (POLLINATIONS_TOKEN), reusing engine/movie.py's job/cache helpers.
+Generation goes through Pollinations (POLLINATIONS_TOKEN) by default, or ElevenLabs (ELEVENLABS_API_KEY) with
+IRUN_VIDEO_ENGINE=elevenlabs / "engine": "elevenlabs" in a brief: lyric-driven scenes, lip-synced performance.
 
   python engine/musicvideo.py photo.jpg song.mp3 out.mp4 --kind music_video --desc "..." [--style neon]
          [--length 60] [--title "No Lane"] [--artist "Hoodstar365"] [--work work/]
@@ -38,6 +39,12 @@ W, H, FPS = M.W, M.H, M.FPS
 FREE = os.environ.get("IRUN_VIDEO_FREE", "1") == "1"
 if FREE:
     M.IMAGE_MODEL = os.environ.get("IRUN_VIDEO_FREE_IMAGE_MODEL", "black-forest-labs/flux.1-kontext-pro")
+# ElevenLabs engine (IRUN_VIDEO_ENGINE=elevenlabs or "engine": "elevenlabs" in a brief): identity-locked stills from
+# the Image & Video API with the photo as reference, lip-synced performance shots (still + the song's vocal slice),
+# image-to-video b-roll, and lyric-driven scenes (the words sung over each shot are written into its prompt).
+import elevenlabs as EL  # noqa: E402
+ENGINE = os.environ.get("IRUN_VIDEO_ENGINE", "pollinations")
+EL_RESERVE = int(os.environ.get("IRUN_ELEVEN_RESERVE", "500"))  # credits left untouched; below it shots stay stills
 LIPSYNC_MODELS = [m for m in os.environ.get("IRUN_VIDEO_LIPSYNC_MODELS",
                   "bytedance/seedance-2.0,alibaba/wan-3.0,minimax/minimax-h3-max-turbo").split(",") if m]
 BROLL_MODEL = os.environ.get("IRUN_VIDEO_BROLL_MODEL", M.BROLL_MODEL)
@@ -277,6 +284,48 @@ def frame_for(shot, look_style, look, photo_url, work, seed):
     return out, (u or M.public_url(out))
 
 
+def _lyric(shot):
+    ly = shot.get("lyric")
+    return f' The scene shows what these lyrics say: "{ly}".' if ly else ""
+
+
+def el_frame_for(shot, look_style, look, photo_ref, work, seed):
+    v = shot["v"].replace("the STAR", "the person from the reference photo").replace("STAR", "the person")
+    p = (f"Cinematic vertical film still, {look_style}. {v}.{_lyric(shot)} {look}. {STAR} Photorealistic, real"
+         " people, no gore, no text, no captions, no watermark, no logos.")
+    out = os.path.join(work, f"elframe_{M._h(p, EL.IMAGE_MODEL, seed)}.png")
+    gid = EL.image(p, out, refs=[photo_ref], aspect="9:16")
+    return out, EL.ref_gen(gid)
+
+
+def el_clip_for(shot, look_style, frame_ref, work, dur, song=None, t=0.0):
+    """Perform: the still sings the vocal slice (lip-sync). Story: the still comes alive (image-to-video).
+    Below the credit reserve the shot stays a still with camera motion."""
+    try:
+        left = EL.credits()["remaining"]
+    except Exception:  # noqa: BLE001
+        left = EL_RESERVE + 1
+    if left <= EL_RESERVE:
+        return None, None, [f"credits {left} at reserve, kept as still"]
+    v = shot["v"].replace("the STAR", "the person").replace("STAR", "the person")
+    out = os.path.join(work, f"elclip_{M._h(v, shot.get('lyric'), dur, shot['type'])}.mp4")
+    try:
+        if shot["type"] == "perform" and song:
+            sl = os.path.join(work, f"elslice_{t:.2f}_{dur:.2f}.mp3")
+            if not os.path.exists(sl):
+                M.sh(["ffmpeg", "-y", "-v", "error", "-ss", f"{t:.3f}", "-t", f"{max(4.0, dur):.3f}", "-i", song,
+                      "-ac", "2", "-ar", "44100", "-b:a", "192k", sl])
+            EL.perform(frame_ref, EL.ref_file(sl, "audio/mpeg"), out)
+            return out, EL.LIPSYNC_MODEL, []
+        prompt = (f"{v}.{_lyric(shot)} Realistic cinematic movement, the person keeps walking forward, subtle camera"
+                  f" move. {look_style}. Keep the face identical to the first frame. No gore, no text on screen.")
+        EL.video(prompt, out, start=frame_ref, seconds=dur)
+        return out, EL.VIDEO_MODEL, []
+    except Exception as e:  # noqa: BLE001
+        log("elevenlabs clip failed, keeping still:", str(e)[:200])
+        return None, None, [str(e)[:200]]
+
+
 def slice_song(song, t0, dur, work):
     out = os.path.join(work, f"slice_{t0:.2f}_{dur:.2f}.mp3")
     if not os.path.exists(out):
@@ -451,13 +500,25 @@ def end_png(path, artist, title, accent, kind, poster=None):
 
 
 # ---------------------------------------------------------------- build
+def _credits():
+    try:
+        return EL.credits()
+    except Exception as e:  # noqa: BLE001
+        return {"error": str(e)}
+
+
 def build(photo, song, out, kind="music_video", desc="", style="cinematic", length=60, title="", artist="",
           work="work", progress=None, brief=None):
+    global ENGINE
+    if brief and brief.get("engine"):
+        ENGINE = brief["engine"]
+    el = ENGINE == "elevenlabs"
     style = style if style in STYLES else "cinematic"
     look_style, grade, accent = STYLES[style]
     os.makedirs(work, exist_ok=True)
     step = progress or (lambda p, s: log(f"{p:3d}%", s))
-    report = {"kind": kind, "style": style, "balance_start": M.balance(), "shots": []}
+    report = {"kind": kind, "style": style, "engine": ENGINE, "shots": [],
+              "balance_start": _credits() if el else M.balance()}
 
     step(4, "Listening to your song")
     if kind == "ugc":
@@ -473,6 +534,16 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
     step(8, "Writing your shot list")
     pl = brief_plan(brief, durs) if brief else plan(kind, desc, style, title, artist, durs)
     look = pl.get("look", "")
+    starts = np.concatenate([[0.0], np.cumsum(durs)[:-1]])
+    if el and song and kind == "music_video":
+        step(10, "Reading your lyrics")
+        try:
+            ly = EL.lyrics(song, work, (brief or {}).get("lyrics"))
+            for i, s in enumerate(pl["shots"]):
+                s["lyric"] = EL.lines_between(ly, t0 + starts[i], t0 + starts[i] + durs[i])[:220]
+            report["lyrics"] = ly.get("text", "")[:4000]
+        except Exception as e:  # noqa: BLE001
+            log("lyrics unavailable:", e)
     report["plan"] = pl
 
     step(12, "Casting you")
@@ -483,9 +554,7 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
     pimg.thumbnail((1536, 1536))
     ref = os.path.join(work, "star.jpg")
     pimg.save(ref, quality=93)
-    photo_url = M.public_url(ref)
-
-    starts = np.concatenate([[0.0], np.cumsum(durs)[:-1]])
+    photo_url = EL.ref_file(ref, "image/jpeg") if el else M.public_url(ref)
     done = [0]
 
     def one(i):
@@ -493,9 +562,16 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
         s["type"] = s.get("type") if s.get("type") in ("perform", "story", "talk", "vo") else "story"
         if kind == "music_video" and s["type"] in ("talk", "vo"):
             s["type"] = "perform"
-        seed = int(M._h(photo_url, desc, i), 16) % 2_000_000_000
-        rec = {"i": i, "type": s["type"], "v": s.get("v", "")[:90]}
+        seed = int(M._h(ref if el else photo_url, desc, i), 16) % 2_000_000_000
+        rec = {"i": i, "type": s["type"], "v": s.get("v", "")[:90], "lyric": s.get("lyric", "")}
         try:
+            if el:
+                fpath, fref = el_frame_for(s, look_style, look, photo_url, work, seed)
+                clip, model, errs = el_clip_for(s, look_style, fref, work, durs[i], song, t0 + starts[i])
+                rec.update(model=model or "still", errors=errs)
+                done[0] += 1
+                step(14 + int(66 * done[0] / len(durs)), f"Filming shot {done[0]} of {len(durs)}")
+                return (i, fpath, clip, rec)
             fpath, furl = frame_for(s, look_style, look, photo_url, work, seed)
             rec["frame"] = furl
             aurl = None
@@ -513,7 +589,7 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
         return res
 
     step(14, f"Filming shot 1 of {len(durs)}")
-    with cf.ThreadPoolExecutor(max_workers=int(os.environ.get("IRUN_MOVIE_PARALLEL", "4"))) as ex:
+    with cf.ThreadPoolExecutor(max_workers=int(os.environ.get("IRUN_ELEVEN_PARALLEL", "3") if el else os.environ.get("IRUN_MOVIE_PARALLEL", "4"))) as ex:
         results = sorted(ex.map(one, range(len(durs))), key=lambda r: r[0])
 
     good = [r for r in results if r[1]]
@@ -616,7 +692,7 @@ def build(photo, song, out, kind="music_video", desc="", style="cinematic", leng
     poster = out.rsplit(".", 1)[0] + ".jpg"
     M.sh(["ffmpeg", "-y", "-v", "error", "-ss", f"{min(1.2, body / 2):.2f}", "-i", out, "-frames:v", "1",
           "-q:v", "3", poster])
-    report.update(duration=round(M.probe_dur(out), 2), balance_end=M.balance(),
+    report.update(duration=round(M.probe_dur(out), 2), balance_end=_credits() if el else M.balance(),
                   stills=[r["i"] for r in report["shots"] if r.get("model") == "still"],
                   failed=[r["i"] for r in report["shots"] if r.get("error")])
     json.dump(report, open(out.rsplit(".", 1)[0] + ".json", "w"), indent=2)
@@ -637,6 +713,9 @@ if __name__ == "__main__":
     ap.add_argument("--artist", default="")
     ap.add_argument("--work", default=os.path.join(M.ROOT, "work", "video"))
     ap.add_argument("--brief", help="director's brief json (chapters with shot pools)")
+    ap.add_argument("--engine", choices=["pollinations", "elevenlabs"])
     a = ap.parse_args()
     br = json.load(open(a.brief)) if a.brief else None
+    if a.engine:
+        ENGINE = a.engine
     build(a.photo, None if a.song == "-" else a.song, a.out, a.kind, a.desc, a.style, a.length, a.title, a.artist, a.work, brief=br)

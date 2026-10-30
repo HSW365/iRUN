@@ -58,6 +58,11 @@ jobs:
         if: steps.peek.outputs.n != '0'
         env:
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
+          IRUN_NARRATOR: ${{ vars.IRUN_NARRATOR }}
+          IRUN_SCORE: ${{ vars.IRUN_SCORE }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           mkdir -p assets/voice/models && (cd assets/voice/models && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done)

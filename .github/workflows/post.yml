@@ -40,6 +40,11 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
+          IRUN_NARRATOR: ${{ vars.IRUN_NARRATOR }}
+          IRUN_SCORE: ${{ vars.IRUN_SCORE }}
           IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
         run: |
           # "spec" = build the ad with iRun's own engine first (images + free voice), then post it

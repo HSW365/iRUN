@@ -296,6 +296,14 @@ def make_score(ep, total, work):
     prompt = (f"Cinematic orchestral film score for a prestige drama, {m}. Low strings, deep piano notes, subtle"
               f" pulsing percussion, slow build, no vocals, no lyrics.")
     out = os.path.join(work, f"score_{ep['n']}_{int(total)}.mp3")
+    if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("IRUN_SCORE") == "elevenlabs":
+        try:
+            import elevenlabs as EL
+            if not os.path.exists(out):
+                EL.music(prompt, out, seconds=min(300, total + 4))
+            return out
+        except Exception as e:  # noqa: BLE001
+            log("ElevenLabs score failed, trying Pollinations:", e)
     try:
         media_job("audio", prompt, {"model": SCORE_MODEL, "duration": int(min(180, total + 4)), "seed": ep["n"]}, out)
         return out

@@ -20,7 +20,36 @@ FX = ("aresample=44100,rubberband=pitch=0.94:formant=preserved,"
       "acompressor=threshold=-20dB:ratio=3:attack=8:release=120,aecho=0.8:0.5:28|46:0.12|0.07,loudnorm=I=-16:TP=-1.5")
 
 
+# ElevenLabs narrator with IRUN_NARRATOR=elevenlabs and ELEVENLABS_API_KEY set (default stays free Kokoro). The voice is
+# ELEVENLABS_NARRATOR_VOICE_ID, else ELEVENLABS_VOICE_ID, else a deep stock narrator. Falls back to Kokoro on any error.
+EL_FX = ("aresample=44100,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,"
+         "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1,areverse,highpass=f=55,"
+         "equalizer=f=140:t=q:w=1:g=2,acompressor=threshold=-20dB:ratio=3:attack=8:release=120,"
+         "aecho=0.8:0.5:28|46:0.08|0.05,loudnorm=I=-16:TP=-1.5")
+
+
+def _eleven(outdir, lines):
+    import elevenlabs as EL
+    voice = (os.environ.get("ELEVENLABS_NARRATOR_VOICE_ID") or os.environ.get("ELEVENLABS_VOICE_ID")
+             or "onwK4e9ZLuTAKqWW03F9")
+    os.makedirs(outdir, exist_ok=True)
+    for i, text in enumerate(lines, 1):
+        raw = os.path.join(outdir, f".raw{i}.mp3")
+        EL.tts(text, raw, voice=voice, settings={"stability": 0.55, "similarity_boost": 0.8, "style": 0.45})
+        out = os.path.join(outdir, f"vo{i}.wav")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", raw, "-af", EL_FX, "-ac", "1", "-ar", "44100", out],
+                       check=True)
+        os.remove(raw)
+        print(f"[narrator:elevenlabs] vo{i}.wav  {text}")
+
+
 def main(outdir, lines, speed=0.84):
+    if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("IRUN_NARRATOR") == "elevenlabs":
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        try:
+            return _eleven(outdir, lines)
+        except Exception as e:  # noqa: BLE001
+            print(f"[narrator] ElevenLabs failed ({e}); using Kokoro")
     import soundfile as sf
     from kokoro_onnx import Kokoro
     d = os.environ.get("KOKORO_DIR", os.path.join(ROOT, "assets", "voice", "models"))

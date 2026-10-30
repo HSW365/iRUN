@@ -1,56 +1,90 @@
 {
-  "title": "Prayer Hands",
-  "artist": "Hoodstar365",
-  "style": "cinematic",
-  "length": 240,
-  "mirror_photo": true,
-  "look": "He wears his bleached black W365ORLD hoodie, black snapback and dark sunglasses in every shot. Epic world-scale cinematography: drone sweeps, golden dust in the air, long lenses, volumetric god rays, anamorphic flares, IMAX-scale wides. Recurring motif: his two hands pressed together in prayer, raised to the sky.",
-  "chapters": [
-    {"loc": "", "weight": 1, "open": "story", "fx": "leak", "perform": [
-        "the STAR alone in a pitch black void, a single shaft of light from above, he slowly brings his hands together in prayer, extreme close-up"],
-     "story": [
-        "slow motion extreme close-up of two hands pressing together in prayer, dust particles floating in a beam of golden light",
-        "satellite view of planet Earth at night, city lights glowing, camera falls toward the surface through clouds",
-        "the STAR seen from behind on a cliff edge at dawn, hands together, the whole world spread out below him"]},
-    {"loc": "Gaza", "weight": 2, "open": "perform", "fx": "split", "perform": [
-        "the STAR sings to camera standing in a dusty Gaza street of damaged concrete buildings at golden hour, warm dust in the air, hands in prayer between lines",
-        "the STAR performs on a rooftop in Gaza at sunset, the Mediterranean sea glowing behind him, slow orbit around him",
-        "the STAR sings in a crowd of local families and children who raise their hands in prayer with him, hopeful faces, soft golden light"],
-     "story": [
-        "children in Gaza flying a hand-made kite above the rubble against an orange sky, slow motion, hope",
-        "an old man and a young boy holding hands walking through a dusty Gaza street, backlit by the sun",
-        "drone shot rising over Gaza rooftops at dusk, white doves taking off into the sky"]},
-    {"loc": "Iran", "weight": 2, "open": "perform", "fx": "leak", "perform": [
-        "the STAR sings to camera in the grand courtyard of a Persian mosque in Isfahan, turquoise tile domes behind him, morning light",
-        "the STAR performs on a Tehran rooftop at night with the Milad tower and city lights behind him, wind in his hoodie",
-        "the STAR sings surrounded by young Iranian men and women raising their hands in prayer together, candlelight, unity"],
-     "story": [
-        "slow push through ornate Persian tile arches as sunlight streams in, dust floating",
-        "a woman lighting a candle in a quiet Iranian alley at dusk, the flame reflected in her eyes",
-        "aerial sweep over snowy Alborz mountains above Tehran at sunrise"]},
-    {"loc": "Iraq", "weight": 2, "open": "perform", "fx": "split", "perform": [
-        "the STAR sings to camera on the banks of the Tigris river in Baghdad at sunset, palm trees silhouetted behind him",
-        "the STAR performs in front of ancient Babylonian ruins in a desert wind storm, sand blowing, dramatic sky",
-        "the STAR sings in a busy Baghdad market street at night, lanterns glowing, locals turning to join him with hands in prayer"],
-     "story": [
-        "veterans and soldiers from many nations standing together in the desert, removing their helmets and pressing their hands together in prayer",
-        "a little girl in Iraq releasing a paper lantern into the night sky over the river",
-        "drone shot over the Tigris river and Baghdad bridges glowing at blue hour"]},
-    {"loc": "United States", "weight": 2, "open": "perform", "fx": "split", "perform": [
-        "the STAR sings to camera in the middle of a massive American political rally in a packed arena, thousands of people, huge American flags, red white and blue confetti falling, stadium lights",
-        "the STAR performs standing on a barricade above the rally crowd, the crowd slowly lowering their signs and raising their hands in prayer with him, arena lights sweeping",
-        "the STAR sings on a giant stadium stage at night, pyrotechnics and sparks behind him, a sea of phones and raised hands"],
-     "story": [
-        "slow motion of a huge rally crowd under a giant waving American flag, faces turning quiet, people of every color putting their hands together in prayer",
-        "a red white and blue confetti storm in slow motion over an arena crowd, golden stadium lights flaring",
-        "a US Army veteran in uniform alone in an empty stadium aisle pressing his hands together in prayer, backlit"]},
-    {"loc": "The World", "weight": 2, "open": "perform", "fx": "leak", "perform": [
-        "the STAR sings to camera on top of a mountain at sunrise above the clouds, arms raised, hands pressed together in prayer, epic god rays",
-        "the STAR performs at the center of a huge crowd from every nation, flags of Palestine, Iran, Iraq and the United States waving together around him",
-        "the STAR raises his hands in prayer to the sky as golden light bursts behind him, slow motion, final note"],
-     "story": [
-        "a montage-style shot of people from Gaza, Iran, Iraq and America all raising their hands in prayer at the same moment, golden light",
-        "a giant crowd forming the shape of praying hands seen from a drone high above, sunrise",
-        "camera rises from the STAR up into the clouds and back out to planet Earth glowing at dawn"]}
-  ]
+ "title": "Prayer Hands",
+ "artist": "Hoodstar365",
+ "style": "cinematic",
+ "length": 240,
+ "mirror_photo": true,
+ "look": "He wears his bleached black W365ORLD hoodie, black snapback and dark sunglasses in every shot. He is always walking forward, singing, through the aftermath of war: drifting smoke, dust, rubble, burned-out cars, broken walls, shell casings in the dirt, distant fires on the horizon. No blood, no bodies, no gore. Handheld tracking shots that walk backwards in front of him, long lenses, golden dust in god rays, anamorphic flares, IMAX-scale drone wides. Recurring motif: his two hands pressed together in prayer, raised to the sky.",
+ "chapters": [
+  {
+   "loc": "New Jersey",
+   "weight": 1,
+   "open": "perform",
+   "fx": "leak",
+   "perform": [
+    "the STAR walks forward through a cold empty New Jersey street at dawn, steam rising from the sewer grates, singing to camera, hands together between lines",
+    "the STAR sings on a Jersey City rooftop at night with the Manhattan skyline behind him, wind in his hoodie, TV news of war glowing on screens below"
+   ],
+   "story": [
+    "a New Jersey family watching war news on a television in a dark living room, faces lit by the screen",
+    "slow motion extreme close-up of two hands pressing together in prayer, dust floating in a beam of light",
+    "a jet passing overhead the New Jersey Turnpike at sunset, the sky turning orange"
+   ]
+  },
+  {
+   "loc": "Gaza",
+   "weight": 2,
+   "open": "perform",
+   "fx": "split",
+   "perform": [
+    "the STAR walks forward through a Gaza street of collapsed concrete buildings, smoke drifting, dust in golden light, singing to camera",
+    "the STAR walks forward through rubble and twisted rebar in Gaza at sunset, children watching from a broken doorway as he sings",
+    "the STAR stops in the middle of a destroyed Gaza block and raises his hands in prayer as families around him do the same"
+   ],
+   "story": [
+    "children in Gaza flying a hand-made kite above the rubble against an orange sky, slow motion",
+    "an old man and a young boy holding hands walking through dust and ruins, backlit by the sun",
+    "drone shot rising over the damaged Gaza skyline at dusk, smoke columns and white doves"
+   ]
+  },
+  {
+   "loc": "Israel",
+   "weight": 2,
+   "open": "perform",
+   "fx": "leak",
+   "perform": [
+    "the STAR walks forward through a burned-out Israeli border town street, scorched cars and shattered windows, smoke drifting, singing to camera",
+    "the STAR walks forward through a Tel Aviv street at night as air-defense interceptor lights streak across the sky far above, people sheltering in doorways",
+    "the STAR sings among Israeli families in a shelter entrance who lower their heads and press their hands together with him"
+   ],
+   "story": [
+    "a mother holding her child at the entrance of a concrete bomb shelter, sirens, warm light from inside",
+    "interceptor trails crossing a night sky over a city, seen from a rooftop, slow and silent",
+    "an Israeli soldier and an old woman standing together at sunrise, both with eyes closed in prayer"
+   ]
+  },
+  {
+   "loc": "Iran",
+   "weight": 2,
+   "open": "perform",
+   "fx": "split",
+   "perform": [
+    "the STAR walks forward through a damaged Tehran street after a strike, smoke over the buildings, the Alborz mountains behind, singing to camera",
+    "the STAR walks forward through the courtyard of a Persian mosque with cracked turquoise tiles and dust in the sunlight, singing",
+    "the STAR sings surrounded by young Iranian men and women who raise their hands in prayer with him at candlelight"
+   ],
+   "story": [
+    "a woman lighting a candle in a quiet Tehran alley at dusk, smoke on the horizon behind her",
+    "slow push through ornate Persian tile arches with smoke drifting through the sunlight",
+    "aerial over Tehran at night, fires glowing far in the distance, city lights flickering"
+   ]
+  },
+  {
+   "loc": "The World",
+   "weight": 2,
+   "open": "perform",
+   "fx": "leak",
+   "perform": [
+    "the STAR walks forward through a vast battlefield at sunrise where the smoke is clearing, the sun breaking through, singing his final lines",
+    "the STAR stands on a hill above the clearing smoke and raises his hands in prayer to the sky as golden light bursts behind him",
+    "the STAR sings at the center of a crowd of people from New Jersey, Gaza, Israel and Iran, all with hands pressed together"
+   ],
+   "story": [
+    "people from Gaza, Israel, Iran and America all raising their hands in prayer at the same moment, golden light",
+    "drone rising from the STAR on the battlefield up through the smoke into clear sky and out to Earth at dawn",
+    "a single flower growing out of the rubble in the morning light, slow motion"
+   ]
+  }
+ ],
+ "engine": "elevenlabs"
 }
