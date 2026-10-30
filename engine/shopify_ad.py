@@ -53,17 +53,16 @@ PLAYBOOKS = {
             "closeup": "{char}, extreme close-up of her eyes and cheek in a mirror reflection, cold blue light, skin "
                        "texture visible, weary, dark moody grade",
             "night": "{char}, wearing an oversized cream knit sweater, sitting on the edge of her bed at night, city "
-                     "lights through the window, holding a sleek matte black flexible LED face mask in both hands, "
-                     "looking at it, dark moody grade",
-            "glow": "{char}, wearing an oversized cream knit sweater, seated upright in a dark minimalist living room, "
-                    "eyes closed and calm, wearing a flexible black silicone full-face LED mask with eye openings that "
-                    "glows deep red, the red light spilling across her sweater and the room, cinematic",
+                     "lights through the window, lifting the lid of a matte black gift box with deep red light glowing "
+                     "out of it onto her face, curious, dark moody grade",
+            "glow": "{char}, wearing an oversized cream knit sweater, relaxing in a dark room, her face covered by a "
+                    "black LED light therapy beauty mask glowing bright red, red light falling on her sweater, serene",
             "morning": "{char}, wearing a white linen shirt, at a bathroom mirror flooded with bright golden morning "
                        "sunlight, radiant healthy skin, small confident smile, warm tones",
             "out": "{char}, wearing a camel coat, walking out of a modern apartment building onto a city street at "
                    "golden hour, confident, warm sunlight, people glancing at her",
         },
-        "open": "mirror", "scenes": ["shelf", "closeup", "night"], "slam_shots": ["glow", "glow", "glow"],
+        "open": "mirror", "scenes": ["shelf", "closeup", "night"], "slam_shots": ["glow", "product", "glow"],
         "callback": "morning", "payoff": ["out", "product"],
         "subs": ["", "", "", ""],
         "tagline": "The spa, at home. Ten minutes a day.",
@@ -239,6 +238,11 @@ def make_shots(pb, p, shots_dir, seed):
     if p["images"]:
         hero_shot(p["images"][0], pb["accent"], os.path.join(shots_dir, "product.jpg"))
         src["product"] = "store photo"
+        import shutil  # a shot that failed to generate never airs as a plain backdrop: the real product stands in
+        for name, how in src.items():
+            if how == "backdrop":
+                shutil.copy(os.path.join(shots_dir, "product.jpg"), os.path.join(shots_dir, f"{name}.jpg"))
+                src[name] = "store photo (fallback)"
     else:
         pb["payoff"] = [x for x in pb["payoff"] if x != "product"] or ["morning"]
     return src
