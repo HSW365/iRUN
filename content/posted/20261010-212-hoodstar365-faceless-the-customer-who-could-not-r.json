@@ -40,5 +40,14 @@
     "entrepreneur",
     "solofounder",
     "businesstips"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-31T01:42:20.887231Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17939054310125580"
+    }
   ]
 }
