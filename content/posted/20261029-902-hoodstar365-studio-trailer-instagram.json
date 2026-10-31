@@ -32,7 +32,7 @@
     },
     {
       "card": {
-        "title": "Tonight's session · home",
+        "title": "Tonight's session \u00b7 home",
         "tag": "UNFINISHED",
         "rows": [
           [
@@ -128,7 +128,7 @@
     "tagline": "Record. Tune. Mix. Master. In your browser.",
     "cta": "SCAN TO SIGN UP",
     "lines": [
-      "FIRST 3 PROJECTS FREE · PLANS FROM $15/MO",
+      "FIRST 3 PROJECTS FREE \u00b7 PLANS FROM $15/MO",
       "hsw365.github.io/STUDIO365"
     ],
     "link": "https://hsw365.github.io/STUDIO365/?signup"
@@ -141,5 +141,14 @@
     "mixingandmastering",
     "hsw365studio",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-10-31T17:15:27.698796Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18136703497700193"
+    }
   ]
 }
