@@ -1,0 +1,35 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-buried",
+  "accent": "#22d3ee",
+  "title": "KLIPIT",
+  "open": {"shot": "controller", "impact": "BURIED", "cy": 0.55},
+  "scenes": [
+    {"shot": "streamer", "sub": "Eight hours live. Nobody saw it.", "cy": 0.36, "zoom": [1.06, 1.18]},
+    {"card": {"title": "Last night's stream · 8h 12m", "tag": "UNCLIPPED", "rows": [["The getaway", "2:41:07 · buried"], ["Five stars", "4:12:30 · buried"], ["Chat lost it", "6:55:18 · buried"]]}, "bg": "editing", "dur": 1.6},
+    {"shot": "editing", "sub": "I can't edit all of this.", "cy": 0.4, "zoom": [1.08, 1.2]},
+    {"shot": "tense", "sub": "Not this time.", "cy": 0.38, "zoom": [1.2, 1.34], "sat": 0.6, "tense": true}
+  ],
+  "slams": [
+    {"word": "JUST", "shot": "rig", "cy": 0.45, "dur": 1.3},
+    {"word": "KLIP", "shot": "rig", "dur": 1.55, "panel": {"label": "KLIPIT", "title": "Stream scanned", "working": "Finding the moments...", "done": "Clips ready to post", "steps": ["Getaway", "Five stars", "Chat lost it"]}},
+    {"word": "IT", "shot": "phone", "cy": 0.45, "zoom": [1.08, 1.2], "dur": 1.4}
+  ],
+  "callback": {"shot": "controller", "impact": "CLIPPED", "cy": 0.55, "dur": 1.3},
+  "payoff": [
+    {"shot": "win", "cy": 0.3, "dur": 1.3},
+    {"shot": "hero", "sub": "Turn negative into positive.", "cy": 0.32, "zoom": [1.04, 1.12], "warm": true, "dur": 1.8}
+  ],
+  "end": {
+    "wordmark": ["KLIP", "IT"],
+    "tagline": "Paste the stream. Post the clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": ["YOUTUBE · TWITCH · KICK  ·  PLANS FROM $20/MO", "klipit.onrender.com"],
+    "link": "https://klipit.onrender.com/"
+  },
+  "caption": "Eight hours live and the best moments of the night stayed buried in the VOD. Klipit takes your GTA 6 stream link from YouTube, Twitch or Kick, finds the clutch plays, fails and chaos, and cuts them into vertical clips ready to post. No editor, no timeline. Scan the QR to sign up, or go to klipit.onrender.com (link in bio).",
+  "hashtags": ["gta6", "streamer", "twitchclips", "contentcreator", "klipit", "hsw365media"]
+}
