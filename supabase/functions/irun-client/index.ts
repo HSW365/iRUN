@@ -277,7 +277,7 @@ Deno.serve(async (req) => {
     if (b.a === "claim") {
       if (!STRIPE) return json({ error: "Payments are not configured yet." }, 503);
       const s = await stripe(`checkout/sessions/${encodeURIComponent(String(b.s ?? ""))}`);
-      if (s.metadata?.app !== "irun" || s.metadata?.company_id !== b.c || s.payment_status !== "paid") return json({ error: "Payment not found." }, 404);
+      if (s.metadata?.app !== "irun" || s.metadata?.company_id !== b.c || !["paid", "no_payment_required"].includes(s.payment_status)) return json({ error: "Payment not found." }, 404);
       await activate(s); // in case the webhook has not landed yet
       const { data } = await db.from("irun_companies").select("client_key").eq("id", b.c).maybeSingle();
       return json({ k: data?.client_key });
