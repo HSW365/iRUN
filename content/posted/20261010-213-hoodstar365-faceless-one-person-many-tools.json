@@ -40,5 +40,14 @@
     "entrepreneur",
     "smallbusiness",
     "buildeveryday"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-01T01:12:32.923168Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17993953839100226"
+    }
   ]
 }
