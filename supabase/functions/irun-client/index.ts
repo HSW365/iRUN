@@ -142,7 +142,7 @@ async function activate(session: any) {
   if (!c) return;
   await db.from("irun_companies").update({
     plan: planId, credits: p.credits, stripe_customer: session.customer, stripe_sub: session.subscription,
-    paid_until: days(33), status: c.status === "awaiting_payment" || c.status === "paused" ? "pending" : c.status,
+    paid_until: days(3), status: c.status === "awaiting_payment" || c.status === "paused" ? "pending" : c.status,
     updated_at: new Date().toISOString(),
   }).eq("id", cid);
   await db.from("irun_credit_ledger").insert({ company_id: cid, delta: p.credits, reason: `${p.name} plan: first month`, ref: session.id });
@@ -165,7 +165,7 @@ async function webhook(req: Request) {
   if (!secret || !(await verifySig(body, req.headers.get("stripe-signature")!, secret))) return json({ error: "Bad signature" }, 400);
   const ev = JSON.parse(body);
   const o = ev.data?.object ?? {};
-  if (ev.type === "checkout.session.completed" && o.metadata?.app === "irun" && o.payment_status === "paid") {
+  if (ev.type === "checkout.session.completed" && o.metadata?.app === "irun" && ["paid", "no_payment_required"].includes(o.payment_status)) {
     if (o.metadata.kind === "plan") await activate(o);
     if (o.metadata.kind === "credits") await addCredits(o);
   }
@@ -261,6 +261,7 @@ Deno.serve(async (req) => {
         mode: "subscription", customer_email: email, client_reference_id: id,
         "metadata[app]": "irun", "metadata[kind]": "plan", "metadata[plan]": b.plan, "metadata[company_id]": id,
         "subscription_data[metadata][app]": "irun", "subscription_data[metadata][company_id]": id,
+        "subscription_data[trial_period_days]": "3",
         success_url: `${SITE}client.html?c=${id}&s={CHECKOUT_SESSION_ID}`,
         cancel_url: `${SITE}start.html?plan=${b.plan}`,
         "line_items[0][quantity]": "1",
