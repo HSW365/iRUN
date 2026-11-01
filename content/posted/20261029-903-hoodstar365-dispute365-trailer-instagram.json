@@ -32,7 +32,7 @@
     },
     {
       "card": {
-        "title": "Credit report · flagged items",
+        "title": "Credit report \u00b7 flagged items",
         "tag": "ERROR",
         "rows": [
           [
@@ -126,7 +126,7 @@
     "tagline": "Find the errors. Send the letters.",
     "cta": "SCAN TO SIGN UP",
     "lines": [
-      "FREE LETTER BUILDER · FULL APP $9.99/MO",
+      "FREE LETTER BUILDER \u00b7 FULL APP $9.99/MO",
       "hsw365.github.io/DISPUTE365"
     ],
     "fine": "Self-help dispute tool. Results vary. Not legal advice.",
@@ -140,5 +140,14 @@
     "fixyourcredit",
     "dispute365",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-01T17:57:08.208867Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18120893738066905"
+    }
   ]
 }
