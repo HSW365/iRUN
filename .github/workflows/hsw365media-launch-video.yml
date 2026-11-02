@@ -3,7 +3,7 @@ name: HSW365MEDIA launch video (iRun)
 on:
   push:
     branches: [main]
-    paths: ["config/hsw365media-launch.json"]
+    paths: ["content/queue/hsw365media-launch.json"]
   workflow_dispatch:
 
 permissions:
@@ -27,21 +27,14 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
           pip install -q -r requirements.txt
-      - name: Render HSW365MEDIA video in draft mode
+      - name: Render queued HSW365MEDIA video in draft mode
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
           IRUN_IMAGE_TRIES: "3"
         run: |
-          python - <<'PY'
-          import json
-          cfg = json.load(open("config/hsw365media-launch.json"))
-          open("/tmp/hsw365media-idea.txt", "w").write(cfg["idea"])
-          PY
           python engine/run.py \
             --account hsw365media \
             --series hsw365media-ecosystem \
-            --idea "$(cat /tmp/hsw365media-idea.txt)" \
             --platform instagram \
             --kind faceless \
             --style photoreal \
