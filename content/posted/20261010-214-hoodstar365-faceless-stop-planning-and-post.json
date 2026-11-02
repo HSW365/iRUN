@@ -40,5 +40,14 @@
     "entrepreneur",
     "smallbusiness",
     "marketing"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-02T01:38:29.060621Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18345234784255699"
+    }
   ]
 }
