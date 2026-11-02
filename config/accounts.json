@@ -690,6 +690,19 @@
           ]
         }
       ]
+    },
+    {
+      "id": "hsw365media",
+      "brand": "HSW365MEDIA",
+      "handle": "hsw365media",
+      "type": "owner",
+      "enabled": true,
+      "platforms": [
+        "instagram"
+      ],
+      "lead_bot": false,
+      "voice": "HSW365MEDIA is an independent technology and entertainment company founded by Elvin Torres Sr. Its message is Turn Negative Into Positive. It builds practical apps and digital products for creators, artists, entrepreneurs and small businesses. Voice: confident, uplifting, human, direct, positive, commercially credible; never make guaranteed income or growth claims.",
+      "products": []
     }
   ]
 }
