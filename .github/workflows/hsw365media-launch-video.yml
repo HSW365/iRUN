@@ -30,7 +30,8 @@ jobs:
       - name: Render queued HSW365MEDIA video in draft mode
         env:
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
-          IRUN_IMAGE_TRIES: "3"
+          IRUN_IMAGE_TRIES: "2"
+          IRUN_EDGE_VOICE: "en-US-JennyNeural"
         run: |
           python engine/run.py \
             --account hsw365media \
