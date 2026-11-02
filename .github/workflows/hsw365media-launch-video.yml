@@ -1,0 +1,71 @@
+name: HSW365MEDIA launch video (iRun)
+
+on:
+  push:
+    branches: [main]
+    paths: ["config/hsw365media-launch.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hsw365media-launch-video
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install video tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt
+      - name: Render HSW365MEDIA video in draft mode
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          IRUN_IMAGE_TRIES: "3"
+        run: |
+          python - <<'PY'
+          import json
+          cfg = json.load(open("config/hsw365media-launch.json"))
+          open("/tmp/hsw365media-idea.txt", "w").write(cfg["idea"])
+          PY
+          python engine/run.py \
+            --account hsw365media \
+            --series hsw365media-ecosystem \
+            --idea "$(cat /tmp/hsw365media-idea.txt)" \
+            --platform instagram \
+            --kind faceless \
+            --style photoreal \
+            --mode draft \
+            --out out/hsw365media-launch
+          test -n "$(find out/hsw365media-launch -maxdepth 1 -name '*.mp4' -print -quit)"
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hsw365media-launch-video
+          path: out/hsw365media-launch/
+          retention-days: 30
+      - name: Publish downloadable video release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VIDEO="$(find out/hsw365media-launch -maxdepth 1 -name '*.mp4' -print -quit)"
+          test -n "$VIDEO"
+          TAG="hsw365media-launch"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$VIDEO" --clobber
+          else
+            gh release create "$TAG" "$VIDEO" \
+              --title "HSW365MEDIA Launch Video" \
+              --notes "Draft promotional video rendered by iRun for HSW365MEDIA. Review before publishing to social channels." \
+              --latest=false
+          fi
