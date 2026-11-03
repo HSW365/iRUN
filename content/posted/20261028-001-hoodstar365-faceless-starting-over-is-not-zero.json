@@ -44,5 +44,14 @@
     "motivation",
     "mindset",
     "keepgoing"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-03T01:05:12.696691Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17910040752572458"
+    }
   ]
 }
