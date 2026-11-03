@@ -1,0 +1,17 @@
+[0;93m2026-11-03 15:12:48.366434565 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator] vo1.wav  He was told his story didn't matter.
+[narrator] vo2.wav  A soldier. A ballplayer. An author.
+[narrator] vo3.wav  Now he brings all of it to your stage.
+[narrator] vo4.wav  The stories. The build. The music.
+[narrator] vo5.wav  HSW365 Live. Scan to book the night.
+[shots] dark: pollinations
+[shots] barracks: pollinations
+[shots] court: pollinations
+[shots] pages: pollinations
+[shots] phone: pollinations
+[shots] crowd: pollinations
+[shots] mic: pollinations
+[shots] packed: pollinations
+[shots] students: pollinations
+[shots] signing: pollinations
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/hsw365-live-ad.mp4", "seconds": 20.699999999999996}
