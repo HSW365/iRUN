@@ -23,7 +23,7 @@
     },
     {
       "card": {
-        "title": "FLIPIT · deal check",
+        "title": "FLIPIT \u00b7 deal check",
         "tag": "RISK",
         "rows": [
           [
@@ -117,7 +117,7 @@
     "tagline": "Run the offer. Match the buyer. Flip it.",
     "cta": "SCAN TO SIGN UP",
     "lines": [
-      "MAX OFFER · RISKS · CASH BUYERS · PAPERWORK",
+      "MAX OFFER \u00b7 RISKS \u00b7 CASH BUYERS \u00b7 PAPERWORK",
       "flipit-m5ig.onrender.com"
     ],
     "fine": "Not a broker, lender or law firm. Have an attorney review contracts.",
@@ -131,5 +131,14 @@
     "realestate",
     "flipit",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-03T23:18:42.760638Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18133144936818228"
+    }
   ]
 }
