@@ -44,5 +44,14 @@
     "motivation",
     "grind",
     "mindset"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-03T03:39:28.627092Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "17997140340018091"
+    }
   ]
 }
