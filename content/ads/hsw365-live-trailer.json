@@ -1,0 +1,178 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "hsw365-live",
+  "platform": "instagram",
+  "shots_dir": "content/shots/hsw365-live",
+  "accent": "#fbbf24",
+  "title": "HSW365 LIVE",
+  "presents": "ELVIN TORRES SR. PRESENTS",
+  "shot_prompts": {
+    "dark": "an empty dark theater auditorium, rows of empty red velvet seats, a single hard white spotlight cone cutting through haze onto a lone vintage microphone stand at center stage, dust floating in the beam, ominous and quiet",
+    "barracks": "silhouette of a young soldier in army fatigues sitting on a metal bunk in a dim barracks at night, writing in a worn notebook by the light of a small flashlight, cold blue moonlight through a window",
+    "court": "a lone basketball resting on a cracked outdoor court under a single sodium streetlight at night, chain-link fence, rain-wet asphalt reflecting orange light, city in the distance",
+    "pages": "extreme close-up of weathered hands opening a worn hardcover book, warm tungsten light raking across the pages, dust in the light, deep shadows",
+    "phone": "close-up of a hand holding a smartphone glowing with a sleek dark app interface, held up in a dark crowd, cyan light on fingers, shallow depth of field, stage lights bokeh behind",
+    "crowd": "a packed concert crowd from behind, hundreds of hands raised toward a stage blasting golden spotlights through thick haze, confetti in the air, euphoric energy",
+    "mic": "silhouette of a man performing on stage gripping a microphone with both hands, head tilted back, massive golden backlight and haze rays behind him, sparks falling, epic",
+    "packed": "the same theater auditorium now completely packed with a standing cheering audience, golden spotlight on center stage where a man stands at the microphone stand with one fist raised, haze, euphoric",
+    "students": "close-up of a crowd of real people, students and parents, on their feet clapping and cheering in a school auditorium, faces lit by warm golden stage light, smiling, some wiping tears, packed rows",
+    "signing": "close-up of a man's hand signing the inside cover of a hardcover book with a black marker at a table after a show, a line of smiling people waiting softly out of focus, warm golden light"
+  },
+  "open": {
+    "shot": "dark",
+    "impact": "LIGHTS OUT",
+    "cy": 0.5,
+    "zoom": [
+      1.0,
+      1.14
+    ],
+    "dur": 2.4
+  },
+  "scenes": [
+    {
+      "shot": "barracks",
+      "cy": 0.45,
+      "zoom": [
+        1.04,
+        1.16
+      ],
+      "dur": 1.3
+    },
+    {
+      "shot": "court",
+      "cy": 0.5,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.3
+    },
+    {
+      "shot": "pages",
+      "cy": 0.5,
+      "zoom": [
+        1.02,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "One night. Three acts.",
+        "tag": "LIVE",
+        "rows": [
+          [
+            "ACT I  Stories",
+            "from the books + the life"
+          ],
+          [
+            "ACT II  The Build",
+            "the apps, live on stage"
+          ],
+          [
+            "ACT III  The Stage",
+            "original songs performed live"
+          ]
+        ]
+      },
+      "bg": "phone",
+      "dur": 1.8
+    }
+  ],
+  "slams": [
+    {
+      "word": "BRING",
+      "shot": "crowd",
+      "cy": 0.5,
+      "dur": 1.1
+    },
+    {
+      "word": "IT",
+      "shot": "mic",
+      "cy": 0.45,
+      "dur": 1.0
+    },
+    {
+      "word": "LIVE",
+      "shot": "packed",
+      "cy": 0.5,
+      "dur": 1.2
+    }
+  ],
+  "callback": {
+    "shot": "packed",
+    "impact": "SOLD OUT",
+    "cy": 0.5,
+    "zoom": [
+      1.12,
+      1.0
+    ]
+  },
+  "payoff": [
+    {
+      "shot": "students",
+      "warm": true,
+      "cy": 0.45
+    },
+    {
+      "shot": "signing",
+      "warm": true,
+      "cy": 0.5
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "HSW365",
+      "LIVE"
+    ],
+    "tagline": "Stories. Apps. Songs. One night.",
+    "cta": "SCAN TO BOOK",
+    "lines": [
+      "Schools · Colleges · Veteran orgs · Churches · Corporate",
+      "book@hoodstar365.com"
+    ],
+    "fine": "Elvin Torres Sr. · U.S. Army veteran · author · recording artist",
+    "link": "https://hsw365.github.io/iRUN/live/#book"
+  },
+  "vo_lines": [
+    [
+      0.3,
+      "He was told his story didn't matter."
+    ],
+    [
+      4.2,
+      "A soldier. A ballplayer. An author."
+    ],
+    [
+      8.2,
+      "Now he brings all of it to your stage."
+    ],
+    [
+      11.6,
+      "The stories. The build. The music."
+    ],
+    [
+      15.4,
+      "HSW365 Live. Scan to book the night."
+    ]
+  ],
+  "vo_captions": true,
+  "duck": 0.6,
+  "caption": "One night. Three acts. Real stories from my books and my life, the apps I built from nothing, and my songs performed live. HSW365 LIVE is booking now for schools, colleges, veteran organizations, churches, conferences and corporate events. Scan the QR in the video or hit the link in bio to book. Turn negative into positive.",
+  "hashtags": [
+    "motivationalspeaker",
+    "keynotespeaker",
+    "livemusic",
+    "veteran",
+    "author",
+    "schoolassembly",
+    "youthempowerment",
+    "eventplanning",
+    "bookaspeaker",
+    "newjersey",
+    "hsw365",
+    "turnnegativeintopositive"
+  ]
+}

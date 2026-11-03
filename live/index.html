@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HSW365 LIVE — Book Elvin Torres Sr.</title>
+<meta name="description" content="HSW365 LIVE: one night, three acts. Real stories from the books and the life, the apps built from nothing, and original songs performed live. Book Elvin Torres Sr. for schools, colleges, veteran organizations, churches and corporate events.">
+<meta property="og:title" content="HSW365 LIVE — Book the night">
+<meta property="og:description" content="Stories. Apps. Songs. One night. Book Elvin Torres Sr. — U.S. Army veteran, author, recording artist, founder.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0a0f">
+<style>
+@font-face{font-family:"Barlow Condensed";src:url("../assets/hsw/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Barlow Condensed";src:url("../assets/hsw/fonts/barlow-condensed-latin-800-normal.woff2") format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Barlow Condensed";src:url("../assets/hsw/fonts/barlow-condensed-latin-900-normal.woff2") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Inter";src:url("../assets/hsw/fonts/inter-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Space Mono";src:url("../assets/hsw/fonts/space-mono-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Space Mono";src:url("../assets/hsw/fonts/space-mono-latin-700-normal.woff2") format("woff2");font-weight:700;font-display:swap}
+:root{--bg:#0a0a0f;--raise:#101018;--card:#14141d;--line:#24242f;--line2:#383846;--text:#f4f4f7;--text2:#c4c4cf;--mut:#8f8f9f;--acc:#fbbf24;--acc2:#f59e0b;--red:#ef4444;
+--disp:"Barlow Condensed","Arial Narrow",Impact,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Space Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.acc{color:var(--acc)}
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(10,10,15,.86);backdrop-filter:blur(14px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--disp);font-weight:900;font-size:24px;letter-spacing:.04em}
+.logo b{color:var(--acc);font-weight:900}
+.navlinks{display:flex;gap:28px;align-items:center}
+.navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2)}
+.navlinks a:hover{color:var(--text)}
+.navlinks a.btn,.navlinks a.btn:hover{color:#0a0a0f;font-family:var(--disp);font-size:15px;letter-spacing:.08em}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:18px;letter-spacing:.08em;text-transform:uppercase;padding:14px 26px;border-radius:2px;background:var(--acc);color:#0a0a0f;border:0;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 40px -10px rgba(251,191,36,.6)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line2)}
+.btn.ghost:hover{border-color:var(--text);box-shadow:none}
+.btn.sm{font-size:15px;padding:10px 18px}
+@media(max-width:760px){.navlinks a:not(.btn){display:none}}
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-10%;z-index:-3;background:
+ radial-gradient(ellipse 38% 70% at 50% -5%,rgba(255,236,190,.55),rgba(251,191,36,.18) 40%,transparent 70%),
+ radial-gradient(ellipse 80% 40% at 50% 105%,rgba(239,68,68,.16),transparent 70%),var(--bg)}
+.beam{position:absolute;z-index:-2;top:-20%;left:50%;width:46vw;height:130%;transform:translateX(-50%);background:linear-gradient(180deg,rgba(255,240,205,.22),rgba(251,191,36,.05) 60%,transparent);clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);filter:blur(6px);animation:sway 9s ease-in-out infinite alternate}
+@keyframes sway{from{transform:translateX(-52%) rotate(-1.5deg)}to{transform:translateX(-48%) rotate(1.5deg)}}
+.dust{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.grain{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.hero .wrap{width:100%;padding-bottom:9vh;padding-top:120px}
+.kicker{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px}
+.kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(239,68,68,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.01em;font-size:clamp(84px,17vw,240px)}
+h1 .out{color:transparent;-webkit-text-stroke:2px var(--acc);text-shadow:0 0 60px rgba(251,191,36,.35)}
+.sub{margin-top:26px;max-width:620px;font-size:clamp(18px,2.1vw,22px);color:var(--text2)}
+.sub strong{color:var(--text);font-weight:600}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+.hero-meta div{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.hero-meta b{display:block;font-family:var(--disp);font-size:30px;letter-spacing:.02em;color:var(--text);font-weight:800}
+/* marquee */
+.marquee{border-block:1px solid var(--line);background:var(--raise);overflow:hidden;white-space:nowrap}
+.marquee .track{display:inline-block;padding:18px 0;animation:mq 38s linear infinite}
+.marquee span{font-family:var(--disp);font-weight:800;font-size:28px;text-transform:uppercase;letter-spacing:.06em;margin:0 26px;color:var(--text2)}
+.marquee i{font-style:normal;color:var(--acc);margin:0 4px}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+section{padding:120px 0}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--acc)}
+h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.92;font-size:clamp(46px,7vw,92px);letter-spacing:-.005em}
+.lead{max-width:640px;color:var(--text2);margin-top:20px;font-size:19px}
+/* acts */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:64px}
+.act{background:var(--bg);padding:42px 34px 38px;position:relative;overflow:hidden;min-height:440px;display:flex;flex-direction:column;transition:background .3s}
+.act:hover{background:var(--raise)}
+.act .num{font-family:var(--disp);font-weight:900;font-size:150px;line-height:.8;color:transparent;-webkit-text-stroke:1px var(--line2);position:absolute;right:18px;top:20px;transition:-webkit-text-stroke-color .3s}
+.act:hover .num{-webkit-text-stroke-color:var(--acc)}
+.act h3{font-family:var(--disp);font-weight:900;font-size:46px;text-transform:uppercase;line-height:.95;margin:18px 0 16px;max-width:78%}
+.act p{color:var(--text2);font-size:16px}
+.act ul{list-style:none;margin-top:auto;padding-top:28px;display:grid;gap:9px}
+.act li{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);display:flex;gap:10px;align-items:baseline}
+.act li::before{content:"";width:6px;height:6px;background:var(--acc);flex:none;transform:translateY(-2px)}
+@media(max-width:920px){.acts{grid-template-columns:1fr}.act{min-height:0}}
+/* story */
+.story{display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:center}
+.portrait{position:relative;aspect-ratio:4/5;border:1px solid var(--line);background:
+ radial-gradient(ellipse 60% 50% at 50% 18%,rgba(251,191,36,.35),transparent 70%),
+ linear-gradient(180deg,#15151f,#0b0b10);overflow:hidden}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.portrait .tag{position:absolute;left:22px;bottom:22px;right:22px;display:flex;justify-content:space-between;align-items:flex-end}
+.portrait .tag b{font-family:var(--disp);font-weight:900;font-size:40px;text-transform:uppercase;line-height:.9}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
+.creds div{background:var(--bg);padding:22px 22px}
+.creds b{display:block;font-family:var(--disp);font-weight:800;font-size:26px;text-transform:uppercase;line-height:1}
+.creds span{font-size:14px;color:var(--mut)}
+.books{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.books span{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:17px;padding:8px 14px;border:1px solid var(--line2);color:var(--text2)}
+@media(max-width:920px){.story{grid-template-columns:1fr;gap:48px}.portrait{aspect-ratio:1/1}}
+/* rooms */
+.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.room{border:1px solid var(--line);padding:26px 24px;background:linear-gradient(180deg,var(--raise),var(--bg));transition:border-color .25s,transform .25s}
+.room:hover{border-color:var(--acc);transform:translateY(-3px)}
+.room b{font-family:var(--disp);font-weight:800;font-size:28px;text-transform:uppercase;display:block;line-height:1;margin-bottom:10px}
+.room span{font-size:15px;color:var(--text2)}
+@media(max-width:920px){.rooms{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.rooms{grid-template-columns:1fr}}
+/* run of show */
+.ros{margin-top:56px;border-top:1px solid var(--line)}
+.ros .row{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.ros .t{font-family:var(--mono);font-size:13px;color:var(--acc);letter-spacing:.1em}
+.ros h4{font-family:var(--disp);font-weight:800;font-size:30px;text-transform:uppercase;line-height:1}
+.ros p{color:var(--text2);font-size:16px}
+@media(max-width:760px){.ros .row{grid-template-columns:1fr;gap:6px}}
+/* packages */
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px}
+.p{border:1px solid var(--line);background:var(--raise);padding:36px 30px;display:flex;flex-direction:column;position:relative}
+.p.feat{border-color:var(--acc);background:linear-gradient(180deg,rgba(251,191,36,.08),var(--raise) 45%)}
+.p .badge{position:absolute;top:-12px;left:30px;background:var(--acc);color:#0a0a0f;font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.16em;padding:5px 10px}
+.p h3{font-family:var(--disp);font-weight:900;font-size:38px;text-transform:uppercase;line-height:1}
+.p .len{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--mut);text-transform:uppercase;margin-top:8px}
+.p .price{font-family:var(--disp);font-weight:800;font-size:44px;margin:26px 0 4px;line-height:1}
+.p .price small{font-family:var(--mono);font-size:12px;color:var(--mut);letter-spacing:.1em;display:block;margin-top:8px;font-weight:400}
+.p ul{list-style:none;margin:24px 0 32px;display:grid;gap:12px}
+.p li{font-size:15.5px;color:var(--text2);padding-left:22px;position:relative}
+.p li::before{content:"";position:absolute;left:0;top:10px;width:10px;height:2px;background:var(--acc)}
+.p .btn{margin-top:auto;justify-content:center}
+.spons{margin-top:18px;border:1px dashed var(--line2);padding:24px 30px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.spons b{font-family:var(--disp);font-weight:800;font-size:26px;text-transform:uppercase}
+.spons span{color:var(--text2);font-size:15px}
+@media(max-width:920px){.pk{grid-template-columns:1fr}}
+/* book */
+.book{background:radial-gradient(ellipse 60% 60% at 80% 0%,rgba(251,191,36,.10),transparent 70%),var(--raise);border-top:1px solid var(--line)}
+.bookgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:7px}
+.f.full{grid-column:1/-1}
+label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--line2);border-radius:2px;padding:14px 14px;outline:none;transition:border-color .2s;width:100%}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 20px) 52%,calc(100% - 15px) 52%;background-size:5px 5px;background-repeat:no-repeat}
+input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+textarea{min-height:120px;resize:vertical}
+.hp{position:absolute;left:-9999px}
+form .btn{grid-column:1/-1;justify-content:center;padding:18px;font-size:20px}
+.note{grid-column:1/-1;font-size:13px;color:var(--mut)}
+.done{display:none;border:1px solid var(--acc);padding:40px 34px;background:var(--bg)}
+.done h3{font-family:var(--disp);font-weight:900;font-size:44px;text-transform:uppercase;line-height:1;margin-bottom:12px}
+.done p{color:var(--text2)}
+.direct{margin-top:34px;display:grid;gap:14px}
+.direct a,.direct div{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:14px 0;font-size:16px}
+.direct span{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--mut);text-transform:uppercase}
+@media(max-width:920px){.bookgrid{grid-template-columns:1fr;gap:44px}}
+@media(max-width:560px){form{grid-template-columns:1fr}section{padding:88px 0}}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.beam,.marquee .track,.kicker .dot{animation:none}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#top">HSW365 <b>LIVE</b></a>
+  <div class="navlinks">
+    <a href="#show">The Show</a><a href="#story">The Story</a><a href="#packages">Packages</a>
+    <a class="btn sm" href="#book">Book the Night</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="beam" aria-hidden="true"></div>
+  <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker"><span class="dot"></span><span class="mono">Now booking · 2026 – 2027 season</span></div>
+    <h1>HSW365<br><span class="out">LIVE</span></h1>
+    <p class="sub"><strong>One night. Three acts.</strong> Elvin Torres Sr. walks on stage, tells the stories from his books and his life, shows the apps he built from nothing, then performs his songs live. Your audience leaves with more than a speech.</p>
+    <div class="cta-row">
+      <a class="btn" href="#book">Book the Night</a>
+      <a class="btn ghost" href="#show">See the Show</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>3 Acts</b>Stories · Build · Stage</div>
+      <div><b>4 Books</b>Published author</div>
+      <div><b>U.S. Army</b>Veteran, served honorably</div>
+      <div><b>Live</b>Original music performed</div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>Turn Negative Into Positive</span><i>/</i><span>Stories</span><i>/</i><span>Apps</span><i>/</i><span>Songs</span><i>/</i><span>One Night</span><i>/</i><span>Schools</span><i>/</i><span>Colleges</span><i>/</i><span>Veterans</span><i>/</i><span>Churches</span><i>/</i><span>Corporate</span><i>/</i>
+  <span>Turn Negative Into Positive</span><i>/</i><span>Stories</span><i>/</i><span>Apps</span><i>/</i><span>Songs</span><i>/</i><span>One Night</span><i>/</i><span>Schools</span><i>/</i><span>Colleges</span><i>/</i><span>Veterans</span><i>/</i><span>Churches</span><i>/</i><span>Corporate</span><i>/</i>
+</div></div>
+
+<section id="show"><div class="wrap">
+  <div class="eyebrow reveal"><span class="mono">The Show</span></div>
+  <h2 class="reveal">Not a keynote.<br><span class="acc">An experience.</span></h2>
+  <p class="lead reveal">Most speakers stand behind a podium and read slides. HSW365 LIVE moves like a concert: a story that pulls the room in, a live build that shows what is possible, and a set of original music that sends everyone home on their feet.</p>
+  <div class="acts">
+    <div class="act reveal"><span class="num">I</span><span class="mono acc">Act One</span><h3>The Stories</h3>
+      <p>From the Army barracks to the college court to the page. Real chapters from his books and the life behind them, told raw, with the lessons that got him through.</p>
+      <ul><li>Hoodlum Soldier</li><li>Ride Out · Better Days</li><li>God Who Am I?</li></ul></div>
+    <div class="act reveal"><span class="num">II</span><span class="mono acc">Act Two</span><h3>The Build</h3>
+      <p>A solo founder with no team and no investors, building real products. He shows the apps live on stage and how anyone in the room can start building theirs.</p>
+      <ul><li>AI tools &amp; iOS apps</li><li>Live on-stage demo</li><li>From idea to launch</li></ul></div>
+    <div class="act reveal"><span class="num">III</span><span class="mono acc">Act Three</span><h3>The Stage</h3>
+      <p>The night closes with original songs from the HOODSTAR365 catalog performed live. Every lyric is part of the same story your audience just heard.</p>
+      <ul><li>Original music</li><li>Live performance</li><li>Meet, greet &amp; signing</li></ul></div>
+  </div>
+</div></section>
+
+<section id="story" style="padding-top:40px"><div class="wrap story">
+  <div class="portrait reveal" aria-hidden="true">
+    <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="sp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3d1" stop-opacity=".5"/><stop offset="1" stop-color="#fbbf24" stop-opacity="0"/></linearGradient></defs>
+      <polygon points="175,0 225,0 330,500 70,500" fill="url(#sp)"/>
+      <rect x="196" y="250" width="8" height="190" fill="#0a0a0f"/>
+      <ellipse cx="200" cy="440" rx="40" ry="6" fill="#0a0a0f"/>
+      <rect x="191" y="226" width="18" height="30" rx="9" fill="#0a0a0f"/>
+      <ellipse cx="200" cy="470" rx="150" ry="16" fill="#fbbf24" opacity=".12"/>
+    </svg>
+    <div class="tag"><b>Elvin<br>Torres Sr.</b><span class="mono">Hoodstar365</span></div>
+  </div>
+  <div>
+    <div class="eyebrow reveal"><span class="mono">The Story</span></div>
+    <h2 class="reveal">Turn negative<br>into <span class="acc">positive.</span></h2>
+    <p class="lead reveal">Elvin Torres Sr. has lived the stories he tells. He served his country, played college basketball, put his life on paper in four books, built a record label and a stack of software products as a one-man company. He brings every piece of that to the stage, and he gives your audience a reason to believe their own story is worth building.</p>
+    <div class="creds reveal">
+      <div><b>U.S. Army</b><span>Veteran, served honorably</span></div>
+      <div><b>College Hoops</b><span>Played college basketball</span></div>
+      <div><b>Author</b><span>Four published books</span></div>
+      <div><b>Founder</b><span>HSW365 Media · HOODSTAR ENT</span></div>
+      <div><b>Recording Artist</b><span>HOODSTAR365 label</span></div>
+      <div><b>Podcast Host</b><span>Respect Da Game</span></div>
+    </div>
+    <div class="books reveal"><span>Hoodlum Soldier</span><span>Ride Out</span><span>Better Days</span><span>God Who Am I?</span></div>
+  </div>
+</div></section>
+
+<section style="padding-top:40px"><div class="wrap">
+  <div class="eyebrow reveal"><span class="mono">Built for your room</span></div>
+  <h2 class="reveal">Who books<br><span class="acc">HSW365 LIVE</span></h2>
+  <div class="rooms">
+    <div class="room reveal"><b>Schools</b><span>Assemblies, career day, anti-violence and resilience programs.</span></div>
+    <div class="room reveal"><b>Colleges</b><span>Orientation, student life, entrepreneurship and Black and Latino heritage events.</span></div>
+    <div class="room reveal"><b>Veteran Orgs</b><span>VFW, American Legion, county veteran services and transition programs.</span></div>
+    <div class="room reveal"><b>Churches</b><span>Youth nights, men's conferences, revivals and community outreach.</span></div>
+    <div class="room reveal"><b>Libraries</b><span>Author talks, book signings and teen programming.</span></div>
+    <div class="room reveal"><b>Youth Programs</b><span>Boys &amp; Girls Clubs, re-entry, mentoring and summer programs.</span></div>
+    <div class="room reveal"><b>Corporate</b><span>Kickoffs, ERG events, innovation days and AI-for-business sessions.</span></div>
+    <div class="room reveal"><b>Festivals</b><span>Main-stage or headline slots with a full live set.</span></div>
+  </div>
+</div></section>
+
+<section style="padding-top:40px"><div class="wrap">
+  <div class="eyebrow reveal"><span class="mono">Run of show · full experience</span></div>
+  <h2 class="reveal">How the<br>night <span class="acc">moves</span></h2>
+  <div class="ros">
+    <div class="row reveal"><span class="t">00:00</span><h4>Cold open</h4><p>Lights down. One spotlight. A story drops the room into silence before anyone knows who is talking.</p></div>
+    <div class="row reveal"><span class="t">00:05</span><h4>Act I · The Stories</h4><p>Chapters from Hoodlum Soldier and the life behind the books: the Army, the court, the setbacks, the comeback.</p></div>
+    <div class="row reveal"><span class="t">00:30</span><h4>Act II · The Build</h4><p>The apps, shown live. How one person with no team turned ideas into real products, and how your audience can start.</p></div>
+    <div class="row reveal"><span class="t">00:50</span><h4>Act III · The Stage</h4><p>Original songs performed live, tying every story together.</p></div>
+    <div class="row reveal"><span class="t">01:05</span><h4>Q&amp;A + signing</h4><p>Open floor, photos, and signed books for your audience.</p></div>
+  </div>
+</div></section>
+
+<section id="packages" style="padding-top:40px"><div class="wrap">
+  <div class="eyebrow reveal"><span class="mono">Packages</span></div>
+  <h2 class="reveal">Pick the<br><span class="acc">format</span></h2>
+  <p class="lead reveal">Every package is the same core experience, scaled to your schedule. Travel within 50 miles of Vineland, NJ is included; national dates are quoted per event.</p>
+  <div class="pk">
+    <div class="p reveal"><h3>Single Session</h3><div class="len">45 – 60 minutes</div>
+      <div class="price">$3,500 – $5,000<small>Per event</small></div>
+      <ul><li>Story-driven keynote</li><li>Short live app demo</li><li>One live song to close</li><li>Q&amp;A</li></ul>
+      <a class="btn ghost" href="#book" data-pkg="Single Session">Request this date</a></div>
+    <div class="p feat reveal"><span class="badge">MOST BOOKED</span><h3>Half-Day</h3><div class="len">Keynote + workshop</div>
+      <div class="price">$5,000 – $7,500<small>Per event</small></div>
+      <ul><li>Full three-act keynote</li><li>Breakout workshop: build your story or your first app</li><li>Live music set</li><li>Book signing</li></ul>
+      <a class="btn" href="#book" data-pkg="Half-Day">Request this date</a></div>
+    <div class="p reveal"><h3>Full Experience</h3><div class="len">The whole night</div>
+      <div class="price">$7,500 – $10,000<small>Per event</small></div>
+      <ul><li>Everything in Half-Day</li><li>Extended live performance</li><li>Meet &amp; greet, photos, signed books</li><li>Promo video and flyer for your event</li></ul>
+      <a class="btn ghost" href="#book" data-pkg="Full Experience">Request this date</a></div>
+  </div>
+  <div class="spons reveal"><div><b>Sponsor a show</b><br><span>Businesses can underwrite a school or community date and get named on stage. From $1,000.</span></div><a class="btn ghost sm" href="#book" data-pkg="Sponsorship">Sponsor a date</a></div>
+</div></section>
+
+<section class="book" id="book"><div class="wrap bookgrid">
+  <div>
+    <div class="eyebrow reveal"><span class="mono">Book the night</span></div>
+    <h2 class="reveal">Lock in<br><span class="acc">your date.</span></h2>
+    <p class="lead reveal">Tell us about your event. You will hear back within one business day with availability and a confirmed quote.</p>
+    <div class="direct reveal">
+      <a href="mailto:book@hoodstar365.com?subject=HSW365%20LIVE%20booking"><span>Email</span>book@hoodstar365.com</a>
+      <a href="mailto:hsw365media@gmail.com?subject=HSW365%20LIVE%20booking"><span>Alt</span>hsw365media@gmail.com</a>
+      <a href="https://instagram.com/hoodstar365" target="_blank" rel="noopener"><span>Instagram</span>@hoodstar365</a>
+      <div><span>Based in</span>South Jersey · travels nationwide</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <form id="form" novalidate>
+      <input type="hidden" name="_subject" value="New HSW365 LIVE booking request">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+      <div class="f"><label for="name">Your name</label><input id="name" name="name" required autocomplete="name"></div>
+      <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="f"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="f"><label for="org">Organization</label><input id="org" name="organization" required autocomplete="organization"></div>
+      <div class="f"><label for="type">Type of event</label><select id="type" name="event_type">
+        <option>School assembly</option><option>College / university</option><option>Veteran organization</option><option>Church / faith event</option><option>Library / author talk</option><option>Youth program</option><option>Corporate event</option><option>Festival / concert</option><option>Other</option></select></div>
+      <div class="f"><label for="pkg">Package</label><select id="pkg" name="package">
+        <option>Single Session</option><option selected>Half-Day</option><option>Full Experience</option><option>Sponsorship</option><option>Not sure yet</option></select></div>
+      <div class="f"><label for="date">Preferred date</label><input id="date" name="preferred_date" type="date"></div>
+      <div class="f"><label for="size">Audience size</label><select id="size" name="audience_size">
+        <option>Under 100</option><option>100 – 300</option><option>300 – 750</option><option>750 – 2,000</option><option>2,000+</option></select></div>
+      <div class="f full"><label for="loc">City / venue</label><input id="loc" name="location" placeholder="City, state or venue name"></div>
+      <div class="f full"><label for="msg">Tell us about the event</label><textarea id="msg" name="message" placeholder="Audience, goals, theme, budget range"></textarea></div>
+      <button class="btn" type="submit" id="send">Send booking request</button>
+      <p class="note" id="err">No spam. Your details only go to the HSW365 booking team.</p>
+    </form>
+    <div class="done" id="done"><span class="mono acc">Request received</span><h3 style="margin-top:14px">The date is on hold.</h3><p>Thank you. Your request is in. Expect a reply from book@hoodstar365.com within one business day with availability and your confirmed quote.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>HSW365 LIVE · HSW365 Media LLC · HOODSTAR ENT LLC</span><span>Turn Negative Into Positive</span></div></footer>
+
+<script>
+(function(){
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('solid',scrollY>40);onScroll();addEventListener('scroll',onScroll,{passive:true});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-pkg]').forEach(a=>a.addEventListener('click',()=>{document.getElementById('pkg').value=a.dataset.pkg}));
+  const q=new URLSearchParams(location.search);if(q.get('pkg'))document.getElementById('pkg').value=q.get('pkg');
+  // dust in the spotlight
+  const c=document.getElementById('dust'),x=c.getContext('2d');let w,h,ps=[];
+  const size=()=>{w=c.width=c.offsetWidth*devicePixelRatio;h=c.height=c.offsetHeight*devicePixelRatio;ps=Array.from({length:70},()=>({x:w/2+(Math.random()-.5)*w*.34,y:Math.random()*h,r:(Math.random()*1.6+.4)*devicePixelRatio,v:Math.random()*.25+.05,a:Math.random()*.6+.2}))};
+  size();addEventListener('resize',size);
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function tick(){x.clearRect(0,0,w,h);for(const p of ps){p.y-=p.v*devicePixelRatio;p.x+=Math.sin(p.y/90)*.15;if(p.y<0){p.y=h;}x.globalAlpha=p.a*(1-Math.abs(p.x-w/2)/(w*.3));x.fillStyle='#ffe7b0';x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()}if(!still)requestAnimationFrame(tick)})();
+  // booking form -> emailed to the booking inbox
+  const f=document.getElementById('form'),btn=document.getElementById('send'),err=document.getElementById('err');
+  f.addEventListener('submit',async e=>{
+    e.preventDefault();
+    for(const id of ['name','email','org']){const el=document.getElementById(id);if(!el.value.trim()||(id==='email'&&!/^\S+@\S+\.\S+$/.test(el.value))){el.focus();el.style.borderColor='#ef4444';err.textContent='Add your name, a valid email and your organization.';return}el.style.borderColor=''}
+    btn.disabled=true;btn.textContent='Sending...';
+    const data=Object.fromEntries(new FormData(f));data.source=(q.get('src')||document.referrer||'direct').slice(0,80);
+    try{
+      const r=await fetch('https://formsubmit.co/ajax/hsw365media@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
+      if(!r.ok)throw 0;
+      f.style.display='none';document.getElementById('done').style.display='block';
+    }catch(_){
+      const body=Object.entries(data).filter(([k])=>!k.startsWith('_')).map(([k,v])=>k.replace(/_/g,' ')+': '+v).join('\n');
+      location.href='mailto:book@hoodstar365.com?subject='+encodeURIComponent('HSW365 LIVE booking request')+'&body='+encodeURIComponent(body);
+      btn.disabled=false;btn.textContent='Send booking request';
+    }
+  });
+})();
+</script>
+</body>
+</html>
