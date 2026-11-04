@@ -1,0 +1,58 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "support",
+  "platform": "instagram",
+  "shots_dir": "content/shots/hsw365-support",
+  "accent": "#FFC83D",
+  "title": "HSW365",
+  "shot_prompts": {
+    "storm": "a lone man in a black hoodie standing in heavy rain on an empty city street at night, back to camera, facing a dark skyline, sodium streetlight halo, puddles reflecting gold light, epic and lonely",
+    "desk": "a man in a hoodie working alone at a small desk at 3am, face lit only by a laptop and phone screens, cold coffee mug, notebooks and code on screen, deep shadows, gritty and determined",
+    "face": "extreme close-up of a determined Black man's eyes and face lit by a warm gold screen glow, sweat on brow, shallow depth of field, intense",
+    "phone": "close-up of a hand holding a smartphone glowing with a payment notification, warm gold light spilling on fingers, dark room, shallow depth of field",
+    "hands": "many hands of different people stacked together in a circle in a dark room, warm golden backlight and haze, unity, cinematic",
+    "crowd": "a crowd of everyday people from behind, arms raised toward a massive golden light on a rooftop at night, city skyline, haze, confetti, euphoric",
+    "rise": "the same man in a black hoodie now standing on a rooftop at sunrise with fists raised, golden light breaking through clouds behind him, city below, triumphant"
+  },
+  "open": {"shot": "storm", "impact": "ALONE", "cy": 0.55},
+  "scenes": [
+    {"shot": "desk", "sub": "Built every app by himself. No investors. No team.", "cy": 0.45, "zoom": [1.06, 1.2]},
+    {"shot": "face", "sub": "Now he's opening the door.", "cy": 0.4, "zoom": [1.1, 1.26]},
+    {"card": {"title": "HSW365 · Ride With Us", "tag": "OPEN",
+              "rows": [["Affiliate Partners", "20% recurring"],
+                       ["Join the program", "free"],
+                       ["Support the movement", "$HSW365"]]},
+     "bg": "phone", "dur": 1.8}
+  ],
+  "slams": [
+    {"word": "SHARE", "shot": "phone", "cy": 0.55, "dur": 1.3},
+    {"word": "EARN", "shot": "hands", "dur": 1.55,
+     "panel": {"label": "HSW365 PARTNERS", "title": "Your link", "working": "Tracking referrals...",
+               "done": "20% every month", "steps": ["Share", "They subscribe", "You get paid"]}},
+    {"word": "RISE", "shot": "crowd", "cy": 0.45, "zoom": [1.06, 1.18], "dur": 1.4}
+  ],
+  "callback": {"shot": "storm", "impact": "TOGETHER", "cy": 0.55, "dur": 1.3},
+  "payoff": [
+    {"shot": "hands", "cy": 0.45, "dur": 1.2, "sub": "Build together. Earn together."},
+    {"shot": "rise", "cy": 0.38, "zoom": [1.04, 1.12], "warm": true, "dur": 1.8, "sub": "Turn negative into positive."}
+  ],
+  "vo_lines": [
+    [0.3, "He built it alone. Every app. Every line."],
+    [5.0, "Now the door is open."],
+    [8.6, "Share the apps. Earn twenty percent. Every month."],
+    [13.0, "Or back the movement. Money sign H S W three six five."],
+    [17.2, "HSW365. Scan to join free."]
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": ["HSW365", "PARTNERS"],
+    "tagline": "Share the apps. Earn every month.",
+    "cta": "SCAN TO JOIN · FREE",
+    "lines": ["20% RECURRING COMMISSION · FREE TO JOIN", "SUPPORT THE MOVEMENT · CASH APP $HSW365"],
+    "fine": "Earnings depend on your referrals and are not guaranteed. Donations are gifts, not investments, and are not tax-deductible.",
+    "link": "https://hsw365.co/pages/affiliates?src=ig-support#/apply"
+  },
+  "caption": "He built every HSW365 app alone. No investors, no team, just the grind. Now the door is open.\n\n🤝 Join the HSW365 Affiliate Partner Program free and earn 20% recurring on every app subscription you bring in. Scan the QR or comment PARTNER (link in bio).\n❤️ Want to back the movement? Support at Cash App $HSW365.\n\nBuild together. Earn together. Grow together. Turn Negative Into Positive. 💯\n\nDonations are gifts, not investments, and are not tax-deductible.",
+  "hashtags": ["hsw365", "affiliatemarketing", "recurringincome", "veteranowned", "supportsmallbusiness", "turnnegativeintopositive", "hoodstar365"]
+}
