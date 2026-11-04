@@ -1,18 +1,16 @@
-[0;93m2026-11-04 01:31:33.849340278 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[narrator] vo1.wav  November nineteenth. The whole world goes live.
-[narrator] vo2.wav  Eight hours. One moment that changes everything.
-[narrator] vo3.wav  Don't scrub the VOD. Paste the link.
-[narrator] vo4.wav  Klipit finds every moment worth posting.
-[narrator] vo5.wav  Launch night is coming. Scan and sign up now.
-[hoodstar365/instagram] posted 18423003175155886
-[shots] city: pollinations
-[shots] lockin: pollinations
-[shots] screen: pollinations
-[shots] chat: pollinations
-[shots] rage: pollinations
-[shots] timeline: pollinations
-[shots] laptop: pollinations
-[shots] phone: pollinations
-[shots] sunrise: pollinations
-[shots] crowd: pollinations
-{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-gta6-ad.mp4", "seconds": 19.799999999999997}
+[0;93m2026-11-04 03:00:10.557868602 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator] vo1.wav  They crossed a million light years.
+[narrator] vo2.wav  Searched every planet for something real. They found it here.
+[narrator] vo3.wav  Wear your story.
+[narrator] vo4.wav  The Survivor Collection. Hand-bleached. One of one.
+[narrator] vo5.wav  One-twenty. When it's gone, it's gone. Scan to shop.
+[hoodstar365/instagram] posted 17909641173329851
+[shots] landing: pollinations
+[shots] look: pollinations
+[shots] street: pollinations
+[shots] kid: pollinations
+[shots] squad: pollinations
+[shots] flag: pollinations
+[shots] beam: pollinations
+[shots] wave: pollinations
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/survivor-aliens-ad.mp4", "seconds": 20.449999999999996}
