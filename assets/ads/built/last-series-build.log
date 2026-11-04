@@ -1,0 +1,14 @@
+[0;93m2026-11-04 16:57:34.122653399 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator] vo1.wav  Every empire starts somewhere.
+[narrator] vo2.wav  His started on the block. Nothing but a vision and a notebook.
+[narrator] vo3.wav  Before the brand, there was a kid who refused to fold.
+[narrator] vo4.wav  He wore the uniform. United States Army. Served with honor.
+[narrator] vo5.wav  He ran the court. College ball. Discipline in every rep.
+[narrator] vo6.wav  He picked up the pen. Hoodlum Soldier. Ride Out. Better Days.
+[narrator] vo7.wav  He grabbed the mic. Hoodstar three sixty five. Respect Da Game.
+[narrator] vo8.wav  And everything he survived, he turned into something you can wear.
+[narrator] vo9.wav  This is Hoodstar World.
+[narrator] vo10.wav  The Survivor Collection. One of one. When it's gone, it's gone. Scan to shop.
+[hoodstar365/instagram] posted 18039939305844991
+[series] /home/runner/work/iRUN/iRUN/engine/../out/hoodstarworld-journey-ep01-ad.mp4  60.0s
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/hoodstarworld-journey-ep01-ad.mp4", "seconds": 60.0}
