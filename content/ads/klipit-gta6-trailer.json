@@ -1,0 +1,62 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-gta6",
+  "accent": "#22d3ee",
+  "title": "KLIPIT",
+  "presents": "NOVEMBER 19 · LAUNCH NIGHT",
+  "shot_prompts": {
+    "city": "aerial view of a neon tropical coastal city at midnight, palm-lined boulevards, pink and cyan neon reflecting on wet streets, a lone sports car streaking light trails across a causeway bridge, storm clouds lit from below, epic and ominous",
+    "lockin": "extreme close-up of a young Black streamer's eyes and headset in the dark, face lit only by a monitor glow in cyan and magenta, sweat on his brow, intense focus, 3am",
+    "screen": "over-the-shoulder shot of a gaming monitor showing a high-speed night car chase through neon city streets with police lights flashing, a controller gripped tight in the foreground, motion blur, no HUD, no logos",
+    "chat": "close-up of a side monitor with a live stream chat scrolling impossibly fast, glowing text blur, a hand slamming the desk in the foreground, cyan and red light, chaos",
+    "rage": "young Black streamer jumping out of his gaming chair screaming in disbelief, hands on his head, headset flying, RGB room lighting, frozen motion, film still",
+    "timeline": "dark editing screen showing an endless video timeline of eight hours of footage, tired reflection of a gamer in the glass, cold blue light, overwhelming",
+    "laptop": "hero shot of a laptop in a dark gaming room showing a sleek black web app with one glowing cyan link input and a button, volumetric light rays, premium tech commercial product photography",
+    "phone": "close-up of a hand holding a smartphone showing a vertical gaming highlight clip with view counter climbing, a wall of notifications glowing cyan, shallow depth of field, neon bokeh",
+    "sunrise": "the same young Black streamer sitting on the edge of his bed at sunrise staring at his phone in shock and joy, golden light through blinds, neon city skyline outside the window",
+    "crowd": "young Black streamer live on camera at his desk laughing with both fists raised, ring light on, confetti of light, cyan and gold glow, euphoric energy"
+  },
+  "open": {"shot": "city", "impact": "MIDNIGHT", "cy": 0.5, "zoom": [1.0, 1.16], "dur": 2.2},
+  "scenes": [
+    {"shot": "lockin", "cy": 0.45, "zoom": [1.04, 1.18], "dur": 1.1},
+    {"shot": "screen", "cy": 0.5, "zoom": [1.06, 1.2], "dur": 1.1},
+    {"shot": "rage", "cy": 0.42, "zoom": [1.02, 1.14], "dur": 1.1},
+    {"card": {"title": "Launch night VOD · 8 hrs live", "tag": "FOUND", "rows": [
+      ["02:14:07", "five-star escape"],
+      ["04:51:33", "chat lost its mind"],
+      ["06:08:12", "the clip of the year"]
+    ]}, "bg": "timeline", "dur": 1.8}
+  ],
+  "slams": [
+    {"word": "CLIP", "shot": "laptop", "cy": 0.5, "dur": 1.0},
+    {"word": "EVERY", "shot": "chat", "cy": 0.5, "dur": 1.0},
+    {"word": "MOMENT", "shot": "phone", "cy": 0.5, "dur": 1.2}
+  ],
+  "callback": {"shot": "city", "impact": "VIRAL", "cy": 0.5, "zoom": [1.14, 1.0]},
+  "payoff": [
+    {"shot": "sunrise", "warm": true, "cy": 0.45},
+    {"shot": "crowd", "warm": true, "cy": 0.45}
+  ],
+  "end": {
+    "wordmark": ["KLIP", "IT"],
+    "tagline": "Paste your stream. Get the clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": ["YouTube · Twitch · Kick  →  vertical clips for Reels & Shorts", "Plans from $20/mo · cancel anytime"],
+    "fine": "HSW365 Media · Not affiliated with Rockstar Games",
+    "link": "https://klipit.onrender.com/?signup=pro"
+  },
+  "vo_lines": [
+    [0.3, "November nineteenth. The whole world goes live."],
+    [3.8, "Eight hours. One moment that changes everything."],
+    [8.2, "Don't scrub the VOD. Paste the link."],
+    [11.4, "Klipit finds every moment worth posting."],
+    [15.4, "Launch night is coming. Scan and sign up now."]
+  ],
+  "vo_captions": true,
+  "duck": 0.6,
+  "caption": "November 19. Every streamer on earth goes live for the biggest game launch in a decade. The clip that blows you up is buried somewhere in hour six.\n\nKlipit: paste your YouTube, Twitch or Kick link and it pulls your best moments into vertical clips for Reels and Shorts. Up to 40 clips per stream, hook captions, no watermark on Pro and Elite. Plans from $20/month, cancel anytime.\n\nScan the QR or hit the link in bio to sign up before launch night: klipit.onrender.com/?signup",
+  "hashtags": ["gta6", "gtavi", "gta6launch", "streamer", "twitchstreamer", "kickstreamer", "gamingclips", "streamhighlights", "contentcreator", "klipit", "hsw365media", "turnnegativeintopositive"]
+}
