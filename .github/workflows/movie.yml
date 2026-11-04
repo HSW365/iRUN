@@ -52,7 +52,7 @@ jobs:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
           ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
-          IRUN_NARRATOR: ${{ vars.IRUN_NARRATOR }}
+          IRUN_NARRATOR: kokoro
           IRUN_SCORE: ${{ vars.IRUN_SCORE }}
         run: |
           python engine/movie.py "${{ needs.plan.outputs.series }}" --refs-only --work /tmp/work
@@ -99,7 +99,7 @@ jobs:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
           ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
-          IRUN_NARRATOR: ${{ vars.IRUN_NARRATOR }}
+          IRUN_NARRATOR: kokoro
           IRUN_SCORE: ${{ vars.IRUN_SCORE }}
         run: |
           S="${{ needs.plan.outputs.series }}"; N=$(printf "%02d" ${{ matrix.ep }})
