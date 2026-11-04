@@ -31,7 +31,7 @@ jobs:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
       ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
-      IRUN_NARRATOR: ${{ vars.IRUN_NARRATOR || 'elevenlabs' }}
+      IRUN_NARRATOR: kokoro
       IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
       IRUN_IMAGE_TRIES: "8"
     steps:
