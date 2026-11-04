@@ -9,14 +9,15 @@
   "title": "KLIPIT",
   "presents": "HOODSTAR365 \u00b7 TO THE GTA 6 COMMUNITY",
   "open": {
-    "shot": "city",
+    "shot": "strip",
     "impact": "LAUNCH NIGHT",
     "cy": 0.5,
     "zoom": [
       1.0,
       1.16
     ],
-    "dur": 2.2
+    "dur": 2.2,
+    "traffic": true
   },
   "scenes": [
     {
@@ -26,7 +27,8 @@
         1.02,
         1.12
       ],
-      "dur": 1.4
+      "dur": 1.4,
+      "traffic": true
     },
     {
       "shot": "screen",
@@ -44,7 +46,8 @@
         1.04,
         1.14
       ],
-      "dur": 1.3
+      "dur": 1.3,
+      "traffic": true
     },
     {
       "card": {
@@ -84,7 +87,8 @@
         1.08,
         1.2
       ],
-      "dur": 1.1
+      "dur": 1.1,
+      "traffic": true
     },
     {
       "word": "LINK",
@@ -98,7 +102,7 @@
     }
   ],
   "callback": {
-    "shot": "city",
+    "shot": "track",
     "impact": "GO LIVE",
     "cy": 0.5,
     "zoom": [
@@ -116,7 +120,8 @@
         1.12
       ],
       "warm": true,
-      "dur": 2.6
+      "dur": 2.6,
+      "traffic": true
     }
   ],
   "end_dur": 3.9,
@@ -168,5 +173,45 @@
     "kickstreamer",
     "klipit",
     "hsw365"
-  ]
+  ],
+  "shot_prompts": {
+    "strip": "street-level night shot down the middle of a neon tropical city boulevard like Vice City, palm trees, pink and cyan neon signs, wet asphalt reflecting lights, sports cars speeding past on both sides with long motion-blur light trails, empty center lane in the foreground, cinematic GTA vibe",
+    "track": "underground night street race on a neon-lit coastal causeway, two supercars launching side by side with tire smoke and headlights, crowd silhouettes along the barriers, empty asphalt in the foreground, magenta and cyan glow, GTA cinematic",
+    "bridge": "low angle night shot on an elevated highway above a neon tropical skyline, rain-slick road, streaks of red tail lights racing into the distance, palm trees, moody cyan and pink sky"
+  },
+  "composites": {
+    "me": {
+      "bg": "strip",
+      "fg": "assets/ads/people/elvin-cutout.png",
+      "h": 0.74,
+      "x": 0.5,
+      "bottom": 1.0
+    },
+    "memid": {
+      "bg": "track",
+      "fg": "assets/ads/people/elvin-cutout.png",
+      "crop": [
+        0,
+        0,
+        1,
+        0.72
+      ],
+      "h": 0.82,
+      "x": 0.5,
+      "bottom": 1.02
+    },
+    "meclose": {
+      "bg": "bridge",
+      "fg": "assets/ads/people/elvin-cutout.png",
+      "crop": [
+        0,
+        0,
+        1,
+        0.55
+      ],
+      "h": 0.86,
+      "x": 0.5,
+      "bottom": 1.02
+    }
+  }
 }

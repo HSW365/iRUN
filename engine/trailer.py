@@ -103,10 +103,13 @@ class Trailer:
         self.s = spec
         self.acc = hexrgb(spec.get("accent", "#ef4444"))
         self.bright = spec.get("look") == "bright"
+        self._masks = {}; self._mask = None
         d = os.path.join(ROOT, spec["shots_dir"])
         self.img = {}
         for f in os.listdir(d):
             n, e = os.path.splitext(f)
+            if n.endswith(".mask"):
+                continue
             if e.lower() in (".jpg", ".jpeg", ".png"):
                 a = cv2.cvtColor(cv2.imread(os.path.join(d, f)), cv2.COLOR_BGR2RGB)
                 if a.shape[:2] != (H, W):
@@ -316,6 +319,12 @@ class Trailer:
         z = z0 + (z1 - z0) * ease_io(p); ox, oy = cx * W, cy * H
         M = np.float32([[z, 0, W / 2 - z * ox + shake[0]], [0, z, H / 2 - z * oy + shake[1]]])
         a = cv2.warpAffine(self.img[name], M, (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+        mp = os.path.join(ROOT, self.s["shots_dir"], f"{name}.mask.png")
+        self._mask = None
+        if os.path.exists(mp):  # a composited person: effects like traffic pass behind them
+            if name not in self._masks:
+                self._masks[name] = cv2.resize(cv2.imread(mp, cv2.IMREAD_GRAYSCALE), (W, H)).astype(np.float32) / 255
+            self._mask = cv2.warpAffine(self._masks[name], M, (W, H), flags=cv2.INTER_LINEAR)[..., None]
         return self.grade(a, warm=0.85 if warm else 0.0, sat=sat, contrast=contrast)
 
     def comp(self, arr, lay, cx, cy, scale=1.0, alpha=1.0, rot=0.0):
@@ -359,6 +368,22 @@ class Trailer:
                 if a > 0 and 0 <= X < W and 0 <= Y < H:
                     cv2.circle(ov, (int(X), int(Y)), int(s), float(a), -1, cv2.LINE_AA)
             arr += (cv2.GaussianBlur(ov, (0, 0), 6) * 1.5 + ov)[..., None] * np.array(self.acc, np.float32) * 0.9
+
+    def traffic(self, arr, t):
+        """Cars racing past at night: head/tail-light streaks whipping across the lower frame, with a bloom."""
+        ov = np.zeros((H, W, 3), np.float32)
+        for k in range(6):
+            lane = 1430 + 95 * (k % 3); spd = 2600 + 900 * ((k * 37) % 5); per = 1.7 + 0.35 * k
+            ph = ((t + k * 0.53) % per) / per
+            x = -900 + (W + 1800) * ph if k % 2 == 0 else W + 900 - (W + 1800) * ph
+            col = (255, 46, 40) if k % 2 == 0 else (255, 244, 220)
+            ln = int(spd * 0.22)
+            for dy in (0, 26):
+                cv2.line(ov, (int(x), lane + dy), (int(x - ln if k % 2 == 0 else x + ln), lane + dy + 4), col, 7, cv2.LINE_AA)
+        ov = cv2.GaussianBlur(ov, (0, 0), 3) + cv2.GaussianBlur(ov, (0, 0), 22) * 1.6
+        if self._mask is not None:
+            ov = ov * (1 - self._mask)
+        arr += ov * 0.85
 
     @staticmethod
     def shake(t, t0, amp=26):
@@ -432,6 +457,8 @@ class Trailer:
             arr += glow * (0.8 + 0.2 * np.sin(t * 2))
             self.embers(arr, t, 0.6)
             self.comp(arr, self.end, W / 2, H / 2, 1.03 - 0.03 * ease((t - g["t0"]) / 0.5), clamp((t - g["t0"]) * 3))
+        if g.get("traffic"):
+            self.traffic(arr, t)
         if k not in ("end", "flash") and not (k == "slam" and g.get("panel")):
             for v in self.vo:
                 if v["layer"] is not None and v["at"] - 0.05 <= t < v["at"] + v["len"] + 0.15:
