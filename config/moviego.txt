@@ -1,3 +1,2 @@
-# iRun Movie: push a change here to render (drafts only, never posts)
-series=hoodlum-soldier
-episodes=1-2
+series=hoodstarworld-journey
+episodes=1

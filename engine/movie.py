@@ -186,8 +186,27 @@ def frame_prompt(shot, cast):
     p = f"Cinematic film still from the prestige drama {cast['film']}. {shot['v']}."
     if people:
         p += f" Characters: {people}. Keep each character's face exactly like their reference photo."
+    for line in wardrobe_lines(shot, cast):
+        p += " " + line
     p += f" {g}. {cast['look']}. Photorealistic, real actors, no text, no captions, no watermark, no logos."
     return p
+
+
+def wardrobe_lines(shot, cast):
+    """shot["w"] = {"cast_id" or "prop": wardrobe_id} -> exact garment from the product photo references."""
+    wd = cast.get("wardrobe", {})
+    out = []
+    for who, wid in shot.get("w", {}).items():
+        if wid not in wd:
+            continue
+        g = wd[wid]["desc"]
+        if who == "prop":
+            out.append(f"The t-shirt in the scene is the exact garment in its product reference photo ({g}):"
+                       " same base color, same hand-bleached pattern, same graphic, unchanged.")
+        else:
+            out.append(f"{who_desc(who, cast)} wears the exact t-shirt from its product reference photo ({g}):"
+                       " same color, same hand-bleached pattern and graphic, realistic fabric folds, unchanged design.")
+    return out
 
 
 def motion_prompt(shot, cast, talk):
@@ -240,7 +259,9 @@ def make_frame(shot, cast, refs, work, seed):
     prompt = frame_prompt(shot, cast)
     out = os.path.join(work, f"frame_{_h(prompt, IMAGE_MODEL, seed)}.jpg")
     params = {"model": IMAGE_MODEL, "width": 1080, "height": 1920, "aspectRatio": "9:16", "seed": seed}
-    imgs = [refs[c] for c in shot.get("c", []) if c in refs][:4]
+    wd = cast.get("wardrobe", {})
+    tees = [wd[w]["url"] for w in dict.fromkeys(shot.get("w", {}).values()) if w in wd]
+    imgs = (tees + [refs[c] for c in shot.get("c", []) if c in refs])[:int(cast.get("max_refs", 4))]
     if imgs:
         params["image"] = "|".join(imgs)
     try:
@@ -293,7 +314,7 @@ def make_score(ep, total, work):
     mood = {1: "dark tense urban", 6: "war tension, pounding", 9: "war tension, dread", 10: "tragic, war",
             11: "grief, solemn", 12: "lonely, cold", 14: "haunted, nightmares"}
     m = mood.get(ep["n"], "hopeful, rising, emotional" if ep["n"] >= 15 else "tense, determined, gritty")
-    prompt = (f"Cinematic orchestral film score for a prestige drama, {m}. Low strings, deep piano notes, subtle"
+    prompt = ep.get("score") or (f"Cinematic orchestral film score for a prestige drama, {m}. Low strings, deep piano notes, subtle"
               f" pulsing percussion, slow build, no vocals, no lyrics.")
     out = os.path.join(work, f"score_{ep['n']}_{int(total)}.mp3")
     if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("IRUN_SCORE") == "elevenlabs":
@@ -320,6 +341,27 @@ def make_score(ep, total, work):
 # ---------------------------------------------------------------- text overlays
 def F(name, size):
     return ImageFont.truetype(os.path.join(FONTS, name), size)
+
+
+def accent(cast):
+    h = cast.get("accent", "#d62027").lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def brand_png(path, cast, ep):
+    """Brand on screen every frame: two-tone wordmark top-left, episode bug top-right."""
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    a, b = cast["brand"]
+    f = F("BarlowCondensed-ExtraBold.ttf", 64)
+    d.text((60, 70), a, font=f, fill=(255, 255, 255, 245), stroke_width=3, stroke_fill=(0, 0, 0, 170))
+    d.text((60 + d.textlength(a, font=f) + 4, 70), b, font=f, fill=accent(cast) + (255,), stroke_width=3,
+           stroke_fill=(0, 0, 0, 170))
+    sm = F("SpaceMono-Bold.ttf", 26)
+    tag = f"{cast.get('series', '')}  EP.{ep['n']:02d}".strip()
+    d.text((W - 60 - d.textlength(tag, font=sm), 92), tag, font=sm, fill=(255, 255, 255, 220), stroke_width=2,
+           stroke_fill=(0, 0, 0, 170))
+    im.save(path)
 
 
 def overlay_png(path, sub=None, loc=None):
@@ -358,22 +400,26 @@ def wrap(text, font, maxw):
 def title_card(path, cast, ep):
     im = Image.new("RGB", (W, H), (6, 6, 9))
     glow = Image.new("RGB", (W, H), (0, 0, 0))
-    ImageDraw.Draw(glow).ellipse((-200, 640, W + 200, 1300), fill=(90, 8, 12))
+    ImageDraw.Draw(glow).ellipse((-200, 640, W + 200, 1300),
+                                 fill=tuple(int(c * 0.35) for c in accent(cast)) if cast.get("brand") else (90, 8, 12))
     im = Image.blend(im, glow.filter(ImageFilter.GaussianBlur(160)), 0.85)
     d = ImageDraw.Draw(im)
     big = F("BarlowCondensed-ExtraBold.ttf", 200)
     for i, word in enumerate(cast["film"].split()):
         tw = d.textlength(word, font=big)
-        d.text(((W - tw) / 2, 700 + i * 190), word, font=big, fill=(245, 246, 250), stroke_width=3,
-               stroke_fill=RED)
+        d.text(((W - tw) / 2, 700 + i * 190), word, font=big,
+               fill=accent(cast) if (cast.get("brand") and i == 1) else (245, 246, 250), stroke_width=3,
+               stroke_fill=accent(cast) if not cast.get("brand") else (0, 0, 0))
     small = F("SpaceMono-Bold.ttf", 36)
-    line = f"EPISODE {ep['n']}  /  {ep['title'].upper()}"
+    line = (f"{cast['series']}  /  " if cast.get("series") else "") + f"EPISODE {ep['n']}  /  {ep['title'].upper()}"
     tw = d.textlength(line, font=small)
     d.text(((W - tw) / 2, 1130), line, font=small, fill=(220, 220, 228))
     im.save(path)
 
 
 def end_card(path, cast, ep, follow, link):
+    if cast.get("shop"):
+        return shop_end_card(path, cast, ep)
     import qr
     im = Image.new("RGB", (W, H), (6, 6, 9))
     d = ImageDraw.Draw(im)
@@ -396,6 +442,47 @@ def end_card(path, cast, ep, follow, link):
         f = mid if y == 1340 else sm
         tw = d.textlength(txt, font=f)
         d.text(((W - tw) / 2, y), txt, font=f, fill=(230, 230, 236) if y != 1640 else (141, 140, 156))
+    im.save(path)
+
+
+def shop_end_card(path, cast, ep):
+    """Brand + product + price + QR straight to the shop + next episode."""
+    import qr
+    sh_ = cast["shop"]
+    acc = accent(cast)
+    im = Image.new("RGB", (W, H), (6, 6, 9))
+    glow = Image.new("RGB", (W, H), (0, 0, 0))
+    ImageDraw.Draw(glow).ellipse((-200, 120, W + 200, 760), fill=tuple(int(c * 0.35) for c in acc))
+    im = Image.blend(im, glow.filter(ImageFilter.GaussianBlur(170)), 0.9)
+    d = ImageDraw.Draw(im)
+    big = F("BarlowCondensed-ExtraBold.ttf", 148)
+    a, b = cast["brand"]
+    tw = d.textlength(a + b, font=big)
+    x = (W - tw) / 2
+    d.text((x, 230), a, font=big, fill=(245, 246, 250))
+    d.text((x + d.textlength(a, font=big), 230), b, font=big, fill=acc)
+    mid = F("BarlowCondensed-ExtraBold.ttf", 92)
+    sm = F("SpaceMono-Bold.ttf", 34)
+    for txt, f, y, col in ((sh_["product"], mid, 470, (245, 246, 250)),
+                           (f"{sh_['tag']}  ·  {sh_['price']}", sm, 590, acc)):
+        tw = d.textlength(txt, font=f)
+        d.text(((W - tw) / 2, y), txt, font=f, fill=col)
+    if sh_.get("photo") and os.path.exists(os.path.join(ROOT, sh_["photo"])):
+        ph = Image.open(os.path.join(ROOT, sh_["photo"])).convert("RGB")
+        ph.thumbnail((440, 440))
+        im.paste(ph, (W // 2 - ph.width - 20, 690))
+        card = qr.card(sh_["link"], size=400, label=sh_.get("cta", "SCAN TO SHOP"))
+        im.paste(card, (W // 2 + 20, 690), card)
+    else:
+        card = qr.card(sh_["link"], size=420, label=sh_.get("cta", "SCAN TO SHOP"))
+        im.paste(card, ((W - card.width) // 2, 690), card)
+    nm = F("BarlowCondensed-SemiBold.ttf", 64)
+    nxt = f"NEXT: EPISODE {ep['n'] + 1}  {ep['next'].upper()}" if ep.get("next") else ""
+    for txt, f, y, col in ((sh_.get("site", ""), mid, 1250, (245, 246, 250)), (nxt, nm, 1420, (230, 230, 236)),
+                           ("TURN NEGATIVE INTO POSITIVE", sm, 1530, (160, 160, 172)),
+                           ("FOLLOW @HOODSTAR365", sm, 1600, acc)):
+        tw = d.textlength(txt, font=f)
+        d.text(((W - tw) / 2, y), txt, font=f, fill=col)
     im.save(path)
 
 
@@ -502,6 +589,11 @@ def build(series, n, out, work):
         if clip and s["t"] == "talk":
             dur = max(dur, min(probe_dur(clip), 8.0))  # never cut a spoken line short
         ovs = []
+        if cast.get("brand"):
+            bp = os.path.join(work, "brand.png")
+            if not os.path.exists(bp):
+                brand_png(bp, cast, ep)
+            ovs.append((bp, -0.2, dur + 2))
         if s.get("loc"):
             ovs.append((os.path.join(work, f"loc_{i}.png"), 0.0, min(dur, 3.2)))
             overlay_png(ovs[-1][0], loc=s["loc"])

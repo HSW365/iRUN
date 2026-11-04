@@ -1,0 +1,39 @@
+{
+  "_note": "HOODSTARWORLD: THE JOURNEY cast bible. Live-action, realistic. Invented actors, not real people. Wardrobe = Elvin's real Survivor Collection tees (Shopify product photos passed as references so the exact designs show on screen).",
+  "film": "HOODSTAR WORLD",
+  "brand": ["HOODSTAR", "WORLD"],
+  "series": "THE JOURNEY",
+  "accent": "#f5b301",
+  "max_refs": 6,
+  "look": "shot on ARRI Alexa 35 with anamorphic lenses, 35mm film grain, shallow depth of field, motivated practical lighting, rich skin tones, premium streetwear campaign meets prestige drama, vertical 9:16 frame",
+  "grades": {
+    "street": "Newark night, warm sodium streetlights and gold practicals, wet asphalt reflections, deep blacks",
+    "roof": "rooftop at night under a single hanging work light, city lights glowing behind, bleach mist in the light",
+    "dawn": "rooftop at first light, warm gold sunrise breaking over the skyline, hopeful"
+  },
+  "cast": {
+    "hoodstar": "Hoodstar, a muscular Puerto Rican man around 30, light brown skin, short black fade and full trimmed beard, thin gold chain, calm confident stare, posture of an Army veteran",
+    "dre": "Dre, a tall Black man around 28, shoulder-length locs tied back, diamond stud earrings, easy grin, NYC streetwear swagger",
+    "tito": "Tito, a heavyset Puerto Rican man in his 40s, salt-and-pepper goatee, Yankees fitted cap, sitting on a stoop, skeptical smirk",
+    "marisol": "Marisol, a beautiful Puerto Rican woman around 26, sleek high bun, big gold hoop earrings, glossy lips, NYC fashion, confident",
+    "keisha": "Keisha, a beautiful Black woman around 27, long knotless braids, gold nameplate necklace, NYC fashion, bold and stylish",
+    "kid": "a young Black man around 20 in a puffer jacket, curious, hands in pockets"
+  },
+  "wardrobe": {
+    "crimson": {"url": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/IMG_8712.jpg?v=1782132977", "desc": "Survivor Collection Crimson Fracture tee"},
+    "gold_rush": {"url": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/1_9b43db3d-73a7-426e-9651-81f45c6a55b8.png?v=1782144842", "desc": "Survivor Collection Gold Rush tee"},
+    "midnight": {"url": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/hsw365_survivor_blue_purple.jpg?v=1782142926", "desc": "Survivor Collection Midnight Shrapnel tee"},
+    "blood_orbit": {"url": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/hsw365survivor_2_4438ef14-c60a-4c11-a916-98eaf5e5e4e0.jpg?v=1782140630", "desc": "Survivor Collection Blood Orbit tee"},
+    "starburst": {"url": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/1_f3eac908-2226-4941-b987-6a7a766f4720.png?v=1782151339", "desc": "Survivor Collection Gold Starburst tee"}
+  },
+  "shop": {
+    "product": "SURVIVOR COLLECTION",
+    "tag": "ONE OF ONE",
+    "price": "$120",
+    "cta": "SCAN TO SHOP",
+    "link": "https://hsw365.co/collections/survivor-collection",
+    "site": "HSW365.CO",
+    "photo": "assets/merch/survivor-1of1/starburst.jpg"
+  },
+  "same_person": {}
+}

@@ -1,0 +1,37 @@
+{
+  "_note": "HOODSTARWORLD: THE JOURNEY — live-action scenes, no narrator. t=talk lines are spoken on camera (lip-synced). w maps cast id (or 'prop') to a wardrobe id.",
+  "episodes": [
+    {
+      "n": 1,
+      "title": "The Beginning",
+      "next": "The Soldier",
+      "score": "Cinematic hip-hop film score, dark boom-bap drums under low strings and a soulful piano loop, building and triumphant, movie trailer energy, no vocals, no lyrics.",
+      "shots": [
+        {"t": "act", "g": "roof", "loc": "NEWARK, NEW JERSEY", "c": ["hoodstar"], "w": {"prop": "crimson"},
+         "v": "night rooftop over Newark, Hoodstar in a black hoodie and work gloves flicks bleach from a spray bottle across a t-shirt pinned flat on a plywood table, the bleach blooming into the fabric, mist hanging in the work light, slow push in", "d": 5},
+        {"t": "talk", "g": "roof", "c": ["dre", "hoodstar"],
+         "s": "dre: Bro, you been up here all night? | hoodstar: Every night. Till it's right.",
+         "v": "Dre steps out of the rooftop door holding two coffees, Hoodstar keeps working at the table without looking up, then glances at him", "d": 6},
+        {"t": "act", "g": "roof", "c": ["hoodstar"], "w": {"prop": "crimson"},
+         "v": "close up, Hoodstar's gloved hands lift the finished t-shirt up into the work light, fabric swinging, he turns it toward camera so the full design is seen", "d": 4},
+        {"t": "talk", "g": "roof", "c": ["marisol", "hoodstar"], "w": {"marisol": "gold_rush"},
+         "s": "marisol: Wait. This one is crazy. | hoodstar: Ain't no two alike. Just like us.",
+         "v": "Marisol walks up wearing the t-shirt, spins once to show it off, smiling at Hoodstar, he leans back against the table and smirks", "d": 8},
+        {"t": "act", "g": "dawn", "c": ["keisha", "dre"], "w": {"keisha": "midnight", "dre": "blood_orbit"},
+         "v": "sunrise on the rooftop, Keisha and Dre pull on their new t-shirts, Keisha fixes her braids over the collar, Dre laughs and pops his collar, gold light flaring", "d": 5},
+        {"t": "act", "g": "street", "c": ["hoodstar", "marisol", "dre", "keisha"],
+         "w": {"hoodstar": "crimson", "marisol": "gold_rush", "dre": "blood_orbit", "keisha": "midnight"},
+         "v": "slow motion, the four of them walk shoulder to shoulder down the middle of a Newark block at night toward camera, people on the corner turn their heads, low tracking shot", "d": 5},
+        {"t": "talk", "g": "street", "c": ["tito", "hoodstar"], "w": {"hoodstar": "crimson"},
+         "s": "tito: Bleach on a t-shirt? That's the plan? | hoodstar: Nah. That's the story.",
+         "v": "Tito laughs from his stoop as the crew passes, Hoodstar stops, turns to face him, calm and steady", "d": 8},
+        {"t": "talk", "g": "street", "c": ["kid", "dre"], "w": {"dre": "blood_orbit"},
+         "s": "kid: Yo, where I get one? | dre: You don't. One of one.",
+         "v": "a young man on the corner jogs up to Dre pointing at his shirt, Dre grins and keeps walking backwards to catch up with the crew", "d": 6},
+        {"t": "act", "g": "street", "c": ["hoodstar", "marisol", "keisha", "dre"],
+         "w": {"hoodstar": "crimson", "marisol": "gold_rush", "keisha": "midnight", "dre": "blood_orbit"},
+         "v": "hero shot, the crew stands under a single streetlight, camera slowly circles them from a low angle, Hoodstar looks straight into the lens, steam rising from a grate", "d": 5}
+      ]
+    }
+  ]
+}
