@@ -1,0 +1,172 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-elvin",
+  "accent": "#22d3ee",
+  "voice": "owner",
+  "title": "KLIPIT",
+  "presents": "HOODSTAR365 \u00b7 TO THE GTA 6 COMMUNITY",
+  "open": {
+    "shot": "city",
+    "impact": "LAUNCH NIGHT",
+    "cy": 0.5,
+    "zoom": [
+      1.0,
+      1.16
+    ],
+    "dur": 2.2
+  },
+  "scenes": [
+    {
+      "shot": "meclose",
+      "cy": 0.4,
+      "zoom": [
+        1.02,
+        1.12
+      ],
+      "dur": 1.4
+    },
+    {
+      "shot": "screen",
+      "cy": 0.5,
+      "zoom": [
+        1.06,
+        1.2
+      ],
+      "dur": 1.1
+    },
+    {
+      "shot": "memid",
+      "cy": 0.42,
+      "zoom": [
+        1.04,
+        1.14
+      ],
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "Launch night VOD \u00b7 8 hrs live",
+        "tag": "FOUND",
+        "rows": [
+          [
+            "02:14:07",
+            "five-star escape"
+          ],
+          [
+            "04:51:33",
+            "chat lost its mind"
+          ],
+          [
+            "06:08:12",
+            "the clip of the year"
+          ]
+        ]
+      },
+      "bg": "screen",
+      "dur": 1.6
+    }
+  ],
+  "slams": [
+    {
+      "word": "PASTE",
+      "shot": "chat",
+      "cy": 0.5,
+      "dur": 1.1
+    },
+    {
+      "word": "THE",
+      "shot": "meclose",
+      "cy": 0.38,
+      "zoom": [
+        1.08,
+        1.2
+      ],
+      "dur": 1.1
+    },
+    {
+      "word": "LINK",
+      "shot": "laptop",
+      "cy": 0.5,
+      "zoom": [
+        1.12,
+        1.26
+      ],
+      "dur": 1.2
+    }
+  ],
+  "callback": {
+    "shot": "city",
+    "impact": "GO LIVE",
+    "cy": 0.5,
+    "zoom": [
+      1.12,
+      1.2
+    ],
+    "dur": 1.2
+  },
+  "payoff": [
+    {
+      "shot": "me",
+      "cy": 0.42,
+      "zoom": [
+        1.03,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.6
+    }
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": [
+      "KLIP",
+      "IT"
+    ],
+    "tagline": "Paste your stream. Get the clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "YouTube \u00b7 Twitch \u00b7 Kick  \u2192  vertical clips for Reels & Shorts",
+      "Plans from $20/mo \u00b7 cancel anytime"
+    ],
+    "fine": "HSW365 Media \u00b7 Not affiliated with Rockstar Games",
+    "link": "https://klipit.onrender.com/?signup=pro"
+  },
+  "duck": 0.6,
+  "vo_captions": true,
+  "vo_lines": [
+    [
+      0.2,
+      "GTA six community. Listen up."
+    ],
+    [
+      3.7,
+      "You streaming eight hours on launch night? Don't scrub the VOD."
+    ],
+    [
+      9.3,
+      "Paste the link."
+    ],
+    [
+      12.9,
+      "Klipit finds every crazy moment and cuts the clips for you."
+    ],
+    [
+      16.9,
+      "Subscribe at klip it dot on render dot com. Scan the code."
+    ]
+  ],
+  "caption": "GTA 6 community, this one's for you. Streaming 8 hours on launch night? Don't scrub the VOD. Paste your link into Klipit and it finds every crazy moment and cuts vertical clips for Reels and Shorts. Subscribe at klipit.onrender.com or scan the QR. Not affiliated with Rockstar Games.",
+  "hashtags": [
+    "gta6",
+    "gtavi",
+    "gta6community",
+    "streamer",
+    "twitchstreamer",
+    "kickstreamer",
+    "klipit",
+    "hsw365"
+  ]
+}

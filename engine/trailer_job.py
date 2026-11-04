@@ -5,6 +5,7 @@
 The spec is a normal engine/trailer.py spec plus two optional build keys:
   "shot_prompts": {"<shot name>": "<cinematic still prompt>"}   any shot missing from shots_dir is generated (Pollinations)
   "shot_refs":    {"<shot name>": "<public image url>"}        product photo the shot must carry (image-to-image)
+  "voice":        "owner"                                       VO in Elvin's own cloned voice (engine/myvoice.py)
   "look":         "bright"                                      daylight/high-key grade instead of the dark one
   "vo_lines":     [[at_seconds, "narrator line"], ...]            recorded with engine/narrator.py (ElevenLabs when
                                                                  IRUN_NARRATOR=elevenlabs, else free Kokoro) and wired in
@@ -47,7 +48,8 @@ def voice(spec, slug):
     d = os.path.join(ROOT, "assets", "voice", slug)
     files = [os.path.join(d, f"vo{i}.wav") for i in range(1, len(lines) + 1)]
     if os.environ.get("IRUN_FRESH_VO") or not all(os.path.exists(f) for f in files):
-        subprocess.run([sys.executable, os.path.join(HERE, "narrator.py"), d, *[t for _, t in lines]], check=True)
+        who = "myvoice.py" if spec.get("voice") == "owner" else "narrator.py"  # owner = Elvin's own cloned voice
+        subprocess.run([sys.executable, os.path.join(HERE, who), d, *[t for _, t in lines]], check=True)
     spec["vo"] = [{"file": f"assets/voice/{slug}/vo{i}.wav", "at": at, "text": t}
                   for i, (at, t) in enumerate(lines, 1)]
     spec.setdefault("vo_captions", True)
