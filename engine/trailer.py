@@ -104,6 +104,7 @@ class Trailer:
         self.acc = hexrgb(spec.get("accent", "#ef4444"))
         self.bright = spec.get("look") == "bright"
         self._masks = {}; self._mask = None
+        self.mono = spec.get("look") == "mono"  # stark black-and-white, art-film minimal
         d = os.path.join(ROOT, spec["shots_dir"])
         self.img = {}
         for f in os.listdir(d):
@@ -300,6 +301,10 @@ class Trailer:
 
     # ---------- drawing ----------
     def grade(self, a, warm=0.0, sat=1.0, contrast=1.12):
+        if self.mono:  # silver black-and-white: deep blacks, soft whites, no colour cast
+            lum = a @ np.array([0.299, 0.587, 0.114], np.float32)
+            lum = (lum - 118) * 1.28 + 112
+            return np.repeat(np.clip(lum, 0, 255)[..., None], 3, axis=2) * np.array([1.0, 0.99, 0.96], np.float32)
         if self.bright:  # high-key: lift shadows, keep color punchy, no cool crush
             lum = a @ np.array([0.299, 0.587, 0.114], np.float32)
             a = lum[..., None] + (a - lum[..., None]) * sat * 1.12
@@ -350,6 +355,8 @@ class Trailer:
         self.comp(arr, sh, W / 2, 1503, alpha=a); return self.comp(arr, lay, W / 2, 1500, alpha=a)
 
     def embers(self, arr, t, amt):
+        if self.mono:
+            return
         e = self.emb; ov = np.zeros((H, W), np.float32)
         ys = (e["y0"] - e["v"] * t) % H; xs = e["x"] + 30 * np.sin(t * 1.3 + e["ph"]); fl = 0.5 + 0.5 * np.sin(t * 7 + e["ph"] * 3)
         for X, Y, s, f in zip(xs, ys, e["s"], fl):
@@ -358,6 +365,8 @@ class Trailer:
         arr += (cv2.GaussianBlur(ov, (0, 0), 3) * 1.8 + ov)[..., None] * hot * 0.6 * amt
 
     def burst(self, arr, t):
+        if self.mono:
+            return
         for b in self.bursts:
             dt = t - b["t0"]
             if dt < 0 or dt > 1.5:

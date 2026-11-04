@@ -1,0 +1,163 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-donda",
+  "look": "mono",
+  "accent": "#f4f4f0",
+  "voice": "owner",
+  "title": "KLIPIT",
+  "presents": "HSW365",
+  "shot_prompts": {
+    "highway": "vast empty eight-lane highway at night stretching to a distant city skyline, a single sports car far away with its headlights on, enormous empty sky, minimalist wide composition, black and white fine art photography",
+    "figure": "lone figure in an oversized hoodie seen from behind, standing small in the center of a huge empty concrete room, facing one giant glowing screen, brutalist architecture, minimal, black and white art film",
+    "controller": "a single game controller resting on a raw concrete floor under one hard overhead light, deep shadows, extreme minimalism, black and white still life",
+    "hands": "close-up of two hands gripping a game controller, knuckles tense, light from a screen, grainy black and white documentary photography",
+    "crowd": "thousands of silhouettes facing a huge white light in a dark stadium, arms raised, smoke, epic minimal composition, black and white",
+    "phone": "a hand holding a phone up in an empty dark room, the screen the only light, minimal composition, black and white",
+    "dawn": "empty city rooftop at dawn, soft fog over the skyline, a lone figure in a hoodie sitting on the edge seen from far away, quiet and vast, black and white fine art photography"
+  },
+  "open": {
+    "shot": "highway",
+    "impact": "LAUNCH NIGHT",
+    "cy": 0.5,
+    "zoom": [
+      1.0,
+      1.08
+    ],
+    "dur": 2.4
+  },
+  "scenes": [
+    {
+      "shot": "figure",
+      "cy": 0.5,
+      "zoom": [
+        1.0,
+        1.06
+      ],
+      "dur": 1.6
+    },
+    {
+      "shot": "hands",
+      "cy": 0.5,
+      "zoom": [
+        1.04,
+        1.1
+      ],
+      "dur": 1.4
+    },
+    {
+      "shot": "controller",
+      "cy": 0.55,
+      "zoom": [
+        1.0,
+        1.05
+      ],
+      "dur": 1.6
+    }
+  ],
+  "slams": [
+    {
+      "word": "PASTE",
+      "shot": "phone",
+      "cy": 0.5,
+      "zoom": [
+        1.02,
+        1.06
+      ],
+      "dur": 1.2
+    },
+    {
+      "word": "THE",
+      "shot": "figure",
+      "cy": 0.5,
+      "zoom": [
+        1.06,
+        1.1
+      ],
+      "dur": 1.1
+    },
+    {
+      "word": "LINK",
+      "shot": "crowd",
+      "cy": 0.5,
+      "zoom": [
+        1.04,
+        1.1
+      ],
+      "dur": 1.3
+    }
+  ],
+  "callback": {
+    "shot": "highway",
+    "impact": "GO LIVE",
+    "cy": 0.5,
+    "zoom": [
+      1.08,
+      1.12
+    ],
+    "dur": 1.2
+  },
+  "payoff": [
+    {
+      "shot": "dawn",
+      "cy": 0.5,
+      "zoom": [
+        1.0,
+        1.06
+      ],
+      "dur": 2.8
+    }
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": [
+      "KLIP",
+      "IT"
+    ],
+    "tagline": "Paste your stream. Get the clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "YouTube \u00b7 Twitch \u00b7 Kick  \u2192  vertical clips for Reels & Shorts",
+      "Plans from $20/mo \u00b7 cancel anytime"
+    ],
+    "fine": "HSW365 Media \u00b7 Not affiliated with Rockstar Games",
+    "link": "https://klipit.onrender.com/?signup=pro"
+  },
+  "duck": 0.6,
+  "vo_captions": true,
+  "vo_lines": [
+    [
+      0.2,
+      "GTA six community. Listen up."
+    ],
+    [
+      3.7,
+      "You streaming eight hours on launch night? Don't scrub the VOD."
+    ],
+    [
+      9.3,
+      "Paste the link."
+    ],
+    [
+      12.9,
+      "Klipit finds every crazy moment and cuts the clips for you."
+    ],
+    [
+      16.9,
+      "Subscribe at klip it dot on render dot com. Scan the code."
+    ]
+  ],
+  "caption": "GTA 6 community, this one's for you. Streaming 8 hours on launch night? Don't scrub the VOD. Paste your link into Klipit and it finds every crazy moment and cuts vertical clips for Reels and Shorts. Subscribe at klipit.onrender.com or scan the QR. Not affiliated with Rockstar Games.",
+  "hashtags": [
+    "gta6",
+    "gtavi",
+    "gta6community",
+    "streamer",
+    "twitchstreamer",
+    "kickstreamer",
+    "klipit",
+    "hsw365"
+  ]
+}
