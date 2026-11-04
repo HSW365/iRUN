@@ -1,0 +1,64 @@
+name: iRun episode
+
+# Build a 60-second series episode (engine/series.py) and post it to Instagram.
+# Commit config/episode.json  {"spec": "content/series/<slug>.json", "post": true, "account": "hoodstar365"}
+on:
+  push:
+    branches: [main]
+    paths: ["config/episode.json"]
+  workflow_dispatch:
+    inputs:
+      spec: {description: "spec path", required: true}
+      post: {description: "post to Instagram", type: boolean, default: true}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  series:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      IRUN_NARRATOR: kokoro
+      IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rubberband-cli
+          pip install -q -r requirements.txt kokoro-onnx soundfile segno numpy
+      - name: Narrator model
+        uses: actions/cache@v4
+        with: {path: assets/voice/models, key: kokoro-v1.0}
+      - name: Build and post
+        run: |
+          mkdir -p assets/voice/models && (cd assets/voice/models && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            SPEC="${{ inputs.spec }}"; POST="${{ inputs.post }}"; ACCOUNT=""
+          else
+            SPEC=$(jq -r .spec config/episode.json); POST=$(jq -r 'if .post == false then "false" else "true" end' config/episode.json)
+            ACCOUNT=$(jq -r '.account // ""' config/episode.json)
+          fi
+          ARGS=""; [ "$POST" = "true" ] && ARGS="--post"; [ -n "$ACCOUNT" ] && ARGS="$ARGS --account $ACCOUNT"
+          python engine/series_job.py "$SPEC" $ARGS 2>&1 | grep -v "\[series\] frame" | tee out-build.log; test ${PIPESTATUS[0]} -eq 0
+      - name: Keep the episode
+        if: always()
+        run: |
+          mkdir -p assets/ads/built
+          cp out/*-ad.mp4 assets/ads/built/ 2>/dev/null || true
+          cp out-build.log assets/ads/built/last-series-build.log 2>/dev/null || true
+          git config user.name "iRun"; git config user.email "hsw365media@gmail.com"
+          git add assets/ads/built assets/voice 2>/dev/null || true
+          git reset -q assets/voice/models 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "iRun series [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done

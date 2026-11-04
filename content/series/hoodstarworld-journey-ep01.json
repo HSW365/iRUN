@@ -1,0 +1,194 @@
+{
+  "kind": "series",
+  "account": "hoodstar365",
+  "series": "THE JOURNEY",
+  "episode": "01",
+  "title": "THE BEGINNING",
+  "wordmark": [
+    "HOODSTAR",
+    "WORLD"
+  ],
+  "accent": "#f5b301",
+  "vo_speed": 0.92,
+  "pages": {
+    "p1": "content/shots/hoodstarworld-journey/page1.jpg",
+    "p2": "content/shots/hoodstarworld-journey/page2.jpg",
+    "p3": "content/shots/hoodstarworld-journey/page3.jpg"
+  },
+  "ticker": "SURVIVOR COLLECTION  ·  1 OF 1  ·  $120  ·  HSW365.CO",
+  "beats": [
+    {
+      "src": "p3",
+      "box": [
+        0.0,
+        0.0,
+        0.62,
+        0.235
+      ],
+      "dur": 6.0,
+      "title": true,
+      "vo": "Every empire starts somewhere.",
+      "caption": ""
+    },
+    {
+      "src": "p1",
+      "box": [
+        0.0,
+        0.0,
+        0.6,
+        0.235
+      ],
+      "dur": 6.0,
+      "stamp": "CHAPTER ONE",
+      "vo": "His started on the block. Nothing but a vision and a notebook.",
+      "key": [
+        "BLOCK.",
+        "VISION"
+      ]
+    },
+    {
+      "src": "p1",
+      "box": [
+        0.0,
+        0.24,
+        0.67,
+        0.43
+      ],
+      "dur": 6.0,
+      "stamp": "NEVER FOLD",
+      "vo": "Before the brand, there was a kid who refused to fold.",
+      "key": [
+        "REFUSED",
+        "FOLD."
+      ]
+    },
+    {
+      "src": "p2",
+      "box": [
+        0.0,
+        0.5,
+        0.67,
+        0.71
+      ],
+      "dur": 6.0,
+      "stamp": "U.S. ARMY VETERAN",
+      "vo": "He wore the uniform. United States Army. Served with honor.",
+      "key": [
+        "ARMY.",
+        "HONOR."
+      ]
+    },
+    {
+      "src": "p3",
+      "box": [
+        0.33,
+        0.495,
+        1.0,
+        0.725
+      ],
+      "dur": 6.0,
+      "stamp": "COLLEGE HOOPER",
+      "vo": "He ran the court. College ball. Discipline in every rep.",
+      "key": [
+        "COURT.",
+        "DISCIPLINE"
+      ]
+    },
+    {
+      "src": "p2",
+      "box": [
+        0.48,
+        0.72,
+        1.0,
+        0.95
+      ],
+      "dur": 6.0,
+      "stamp": "PUBLISHED AUTHOR",
+      "vo": "He picked up the pen. Hoodlum Soldier. Ride Out. Better Days.",
+      "key": [
+        "PEN.",
+        "SOLDIER."
+      ]
+    },
+    {
+      "src": "p1",
+      "box": [
+        0.12,
+        0.62,
+        0.88,
+        0.8
+      ],
+      "dur": 6.0,
+      "stamp": "RECORDING ARTIST",
+      "vo": "He grabbed the mic. Hoodstar three sixty five. Respect Da Game.",
+      "caption": "He grabbed the mic. HOODSTAR365. Respect Da Game.",
+      "key": [
+        "MIC.",
+        "HOODSTAR365."
+      ]
+    },
+    {
+      "src": "p3",
+      "box": [
+        0.0,
+        0.245,
+        0.67,
+        0.49
+      ],
+      "dur": 6.0,
+      "stamp": "SURVIVOR",
+      "vo": "And everything he survived, he turned into something you can wear.",
+      "key": [
+        "SURVIVED,",
+        "WEAR."
+      ]
+    },
+    {
+      "src": "p2",
+      "box": [
+        0.36,
+        0.0,
+        1.0,
+        0.235
+      ],
+      "dur": 5.0,
+      "stamp": "TURN NEGATIVE INTO POSITIVE",
+      "vo": "This is Hoodstar World.",
+      "caption": "This is HOODSTARWORLD.",
+      "key": [
+        "HOODSTARWORLD."
+      ]
+    }
+  ],
+  "end": {
+    "src": "p3",
+    "box": [
+      0.0,
+      0.73,
+      1.0,
+      0.955
+    ],
+    "dur": 7.0,
+    "product": "SURVIVOR COLLECTION",
+    "tag": "ONE OF ONE",
+    "price": "$120",
+    "cta": "SCAN TO SHOP",
+    "link": "https://hsw365.co/collections/survivor-collection",
+    "site": "HSW365.CO",
+    "next": "EP.02  THE SOLDIER",
+    "vo": "The Survivor Collection. One of one. When it's gone, it's gone. Scan to shop.",
+    "photo": "assets/merch/survivor-1of1/starburst.jpg"
+  },
+  "caption": "HOODSTARWORLD: THE JOURNEY. Episode 1, The Beginning. Soldier. Hooper. Author. Artist. Founder. Everything I survived, I turned into something you can wear. The Survivor Collection is one-of-one at $120. When it's gone, it's gone. Scan the QR or tap the link in bio: hsw365.co",
+  "hashtags": [
+    "hoodstarworld",
+    "thejourney",
+    "survivorcollection",
+    "nycfashion",
+    "streetwear",
+    "oneofone",
+    "veteranowned",
+    "turnnegativeintopositive",
+    "hsw365"
+  ]
+}
