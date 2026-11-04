@@ -4,6 +4,8 @@
 
 The spec is a normal engine/trailer.py spec plus two optional build keys:
   "shot_prompts": {"<shot name>": "<cinematic still prompt>"}   any shot missing from shots_dir is generated (Pollinations)
+  "shot_refs":    {"<shot name>": "<public image url>"}        product photo the shot must carry (image-to-image)
+  "look":         "bright"                                      daylight/high-key grade instead of the dark one
   "vo_lines":     [[at_seconds, "narrator line"], ...]            recorded with engine/narrator.py (ElevenLabs when
                                                                  IRUN_NARRATOR=elevenlabs, else free Kokoro) and wired in
                                                                  as spec["vo"] with burned-in captions
@@ -20,17 +22,21 @@ ROOT = os.path.join(HERE, "..")
 sys.path.insert(0, HERE)
 LOOK = ("cinematic film still, anamorphic, high-contrast grade, shallow depth of field, film grain, photoreal, 35mm, "
         "vertical composition, no text, no logos, no watermark")
+BRIGHT = ("cinematic film still, bright high-key daylight, vivid saturated color, sunlit, clean airy exposure, "
+          "shallow depth of field, photoreal, 35mm, vertical composition, no text, no logos, no watermark")
 
 
 def shots(spec, seed):
     import visuals
     d = os.path.join(ROOT, spec["shots_dir"])
     os.makedirs(d, exist_ok=True)
+    look = BRIGHT if spec.get("look") == "bright" else LOOK
+    refs = spec.get("shot_refs", {})
     for i, (name, prompt) in enumerate(spec.get("shot_prompts", {}).items()):
         out = os.path.join(d, f"{name}.jpg")
         if os.path.exists(out) and not os.environ.get("IRUN_FRESH_SHOTS"):
             print(f"[shots] {name}: cached"); continue
-        _, src = visuals.scene_image(f"{prompt}, {LOOK}", "photoreal", seed + i * 7, out)
+        _, src = visuals.scene_image(f"{prompt}, {look}", "photoreal", seed + i * 7, out, ref=refs.get(name))
         print(f"[shots] {name}: {src}")
 
 

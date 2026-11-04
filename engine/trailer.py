@@ -102,6 +102,7 @@ class Trailer:
     def __init__(self, spec):
         self.s = spec
         self.acc = hexrgb(spec.get("accent", "#ef4444"))
+        self.bright = spec.get("look") == "bright"
         d = os.path.join(ROOT, spec["shots_dir"])
         self.img = {}
         for f in os.listdir(d):
@@ -152,6 +153,8 @@ class Trailer:
         yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
         self.yy, self.xx = yy, xx
         self.vig = np.clip(1.25 - 0.85 * (((xx - W / 2) / (W * 0.62)) ** 2 + ((yy - H / 2) / (H * 0.58)) ** 2), 0.18, 1)[..., None]
+        if self.bright:
+            self.vig = 0.82 + 0.18 * self.vig
         r = np.random.default_rng(7)
         self.grain = [r.normal(0, 7.5, (H // 2, W // 2, 1)).astype(np.float32).repeat(2, 0).repeat(2, 1) for _ in range(8)]
         hot = tuple(min(255, int(c * 0.6 + 255 * 0.4)) for c in self.acc)
@@ -294,6 +297,13 @@ class Trailer:
 
     # ---------- drawing ----------
     def grade(self, a, warm=0.0, sat=1.0, contrast=1.12):
+        if self.bright:  # high-key: lift shadows, keep color punchy, no cool crush
+            lum = a @ np.array([0.299, 0.587, 0.114], np.float32)
+            a = lum[..., None] + (a - lum[..., None]) * sat * 1.12
+            a = (a - 128) * min(contrast, 1.05) + 128
+            a = a * 0.9 + 30
+            hi = np.clip((lum - 120) / 135, 0, 1)[..., None]
+            return a + hi * np.array([10, 6, -4], np.float32) * (0.4 + warm)
         lum = a @ np.array([0.299, 0.587, 0.114], np.float32)
         a = lum[..., None] + (a - lum[..., None]) * sat
         a = (a - 128) * contrast + 128
@@ -377,7 +387,7 @@ class Trailer:
                 arr = arr * 0.4 + 255 * 0.6
         elif k == "title":
             src = self.segs[0]["shot"]
-            bg = cv2.GaussianBlur(self.shot(src, 0.5, 1.6, 1.6, cy=0.3, sat=0.0, contrast=0.9), (0, 0), 28) * 0.35
+            bg = cv2.GaussianBlur(self.shot(src, 0.5, 1.6, 1.6, cy=0.3, sat=0.0, contrast=0.9), (0, 0), 28) * (0.75 if self.bright else 0.35)
             arr = bg * (0.35 + 0.95 * np.array(self.acc, np.float32) / 255)
             self.embers(arr, t, 0.8)
             self.comp(arr, self.title, W / 2, H / 2, 1.14 - 0.14 * ease(p * 3), clamp(p * 6))
@@ -393,7 +403,7 @@ class Trailer:
                 self.subtitle(arr, g["sub"], self.fade(t, g))
         elif k == "card":
             bgname = g.get("bg") or next(iter(self.img))
-            arr = cv2.GaussianBlur(self.shot(bgname, 0.3, 1.3, 1.3, sat=0.4), (0, 0), 20) * 0.35
+            arr = cv2.GaussianBlur(self.shot(bgname, 0.3, 1.3, 1.3, sat=0.4), (0, 0), 20) * (0.7 if self.bright else 0.35)
             rows = len(g["card"].get("rows", [])); dur = g["t1"] - g["t0"]
             nflag = min(rows, int(max(0, t - g["t0"] - 0.35) / ((dur - 0.6) / max(1, rows))) + (1 if t - g["t0"] > 0.35 else 0))
             scan = clamp((t - g["t0"] - 0.05) / (dur - 0.25)) if t < g["t1"] - 0.15 else None

@@ -62,33 +62,41 @@ def _open(r):
     return img.convert("RGB")
 
 
-def _pollinations(prompt, seed):
+def _pollinations(prompt, seed, ref=None):
     q = urllib.parse.quote(prompt, safe="")
     token = os.environ.get("POLLINATIONS_TOKEN")
     if token:  # keyed endpoint: sharper models, no shared free-tier limit
         params = {"width": W, "height": H, "seed": seed}
         if os.environ.get("IRUN_IMAGE_MODEL"):
             params["model"] = os.environ["IRUN_IMAGE_MODEL"]
+        if ref:  # image-to-image: keep a real product (e.g. the exact tee) in the shot
+            params["image"] = ref
+            params["model"] = os.environ.get("IRUN_REF_MODEL", "kontext")
         return _open(requests.get(f"https://gen.pollinations.ai/image/{q}", params=params,
                                   headers={"Authorization": "Bearer " + token}, timeout=180))
     params = {"width": W, "height": H, "seed": seed, "nologo": "true", "private": "true",
               "model": os.environ.get("IRUN_IMAGE_MODEL", "flux")}
+    if ref:
+        params["image"] = ref
+        params["model"] = os.environ.get("IRUN_REF_MODEL", "kontext")
     return _open(requests.get(f"https://image.pollinations.ai/prompt/{q}", params=params, timeout=120))
 
 
 WAITS = [12, 25, 40]  # the free tier allows a short burst, then refuses (HTTP 402/429) until it refills
 
 
-def scene_image(visual, style_id, seed, out, tries=None):
-    """Make one scene image. Returns (path, source) where source is 'pollinations' or 'backdrop'."""
+def scene_image(visual, style_id, seed, out, tries=None, ref=None):
+    """Make one scene image. Returns (path, source) where source is 'pollinations' or 'backdrop'.
+    ref: optional public image URL (a product photo) the shot must carry; falls back to text-only if it fails."""
     tries = tries or int(os.environ.get("IRUN_IMAGE_TRIES", "4"))
     st = style(style_id)
     prompt = prompt_for(visual, st)
     err = None
     for k in range(tries):
         try:
-            _pollinations(prompt, seed + k).save(out, "JPEG", quality=92)
-            return out, "pollinations"
+            use = ref if (ref and k < max(1, tries - 2)) else None
+            _pollinations(prompt, seed + k, use).save(out, "JPEG", quality=92)
+            return out, "pollinations+ref" if use else "pollinations"
         except Exception as e:  # rate limit, timeout, bad image: wait and retry
             err = e
             if k < tries - 1:

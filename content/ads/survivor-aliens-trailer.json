@@ -1,0 +1,191 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "survivor",
+  "platform": "instagram",
+  "shots_dir": "content/shots/hsw365co-survivor-aliens",
+  "look": "bright",
+  "accent": "#22d3ee",
+  "title": "SURVIVOR COLLECTION",
+  "presents": "HOODSTARWORLD PRESENTS",
+  "shot_prompts": {
+    "landing": "a tall sleek humanoid alien with iridescent pearl-teal skin, large glossy black almond eyes and an elegant elongated head stepping down the ramp of a gleaming chrome spaceship that just landed on a sunlit city rooftop, wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, golden morning sun, blue sky, lens flare",
+    "look": "close-up portrait of a tall sleek humanoid alien with iridescent pearl-teal skin, large glossy black almond eyes and an elegant elongated head, looking down and touching the t-shirt on its chest in awe, wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, bright sunlight, blue sky behind",
+    "street": "a tall sleek humanoid alien with iridescent pearl-teal skin, large glossy black almond eyes and an elegant elongated head walking confidently down a bright sunny city street, people on the sidewalk turning to stare, wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, vivid daylight",
+    "kid": "a delighted young boy on a sunny sidewalk pointing up and smiling in amazement, bright daylight, vivid colors",
+    "squad": "three tall sleek humanoid aliens with iridescent pearl-teal skin and large black eyes posing together like a streetwear campaign on a sunlit rooftop, the center one wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, bright blue sky, chrome spaceship behind",
+    "flag": "a tall sleek humanoid alien with iridescent pearl-teal skin, large glossy black almond eyes and an elegant elongated head standing proud in bright sunlight on a city rooftop, wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, american flag waving behind, blue sky",
+    "beam": "a tall sleek humanoid alien with iridescent pearl-teal skin, large glossy black almond eyes and an elegant elongated head floating down inside a soft bright beam of light from a chrome spaceship onto a sunny city plaza, wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, crowd watching, daylight",
+    "wave": "a tall sleek humanoid alien with iridescent pearl-teal skin, large glossy black almond eyes and an elegant elongated head waving goodbye at the top of a chrome spaceship ramp on a sunlit rooftop, wearing this exact hand-bleached t-shirt from the reference image, same graphic and colors, with black cargo pants and white chunky sneakers, warm golden afternoon light"
+  },
+  "shot_refs": {
+    "landing": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/IMG_8712.jpg?v=1782132977",
+    "look": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/IMG_8712.jpg?v=1782132977",
+    "street": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/1_9b43db3d-73a7-426e-9651-81f45c6a55b8.png?v=1782144842",
+    "squad": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/1_cb0c0070-5898-40ec-b749-03ebaf597a37.png?v=1782150376",
+    "flag": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/hsw365survivor_7.jpg?v=1782140730",
+    "beam": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/1_9b43db3d-73a7-426e-9651-81f45c6a55b8.png?v=1782144842",
+    "wave": "https://cdn.shopify.com/s/files/1/0718/4351/2481/files/IMG_8712.jpg?v=1782132977"
+  },
+  "open": {
+    "shot": "landing",
+    "impact": "ARRIVAL",
+    "cy": 0.45,
+    "zoom": [
+      1.0,
+      1.12
+    ],
+    "dur": 2.4
+  },
+  "scenes": [
+    {
+      "shot": "street",
+      "cy": 0.42,
+      "zoom": [
+        1.04,
+        1.16
+      ],
+      "dur": 1.3
+    },
+    {
+      "shot": "kid",
+      "cy": 0.4,
+      "zoom": [
+        1.08,
+        1.2
+      ],
+      "dur": 1.2
+    },
+    {
+      "shot": "look",
+      "cy": 0.4,
+      "zoom": [
+        1.02,
+        1.14
+      ],
+      "warm": true,
+      "dur": 1.4
+    },
+    {
+      "card": {
+        "title": "Survivor Collection \u00b7 one of one",
+        "tag": "$120",
+        "rows": [
+          [
+            "#001 Crimson Fracture",
+            "hand-bleached \u00b7 signed"
+          ],
+          [
+            "#002 Gold Rush",
+            "hand-bleached \u00b7 signed"
+          ],
+          [
+            "#006 Blue Gold Fracture",
+            "hand-bleached \u00b7 signed"
+          ]
+        ]
+      },
+      "bg": "squad",
+      "dur": 1.6
+    }
+  ],
+  "slams": [
+    {
+      "word": "NOT",
+      "shot": "beam",
+      "cy": 0.45,
+      "dur": 1.1
+    },
+    {
+      "word": "FROM",
+      "shot": "flag",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "warm": true,
+      "dur": 1.1
+    },
+    {
+      "word": "HERE",
+      "shot": "squad",
+      "cy": 0.42,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.2
+    }
+  ],
+  "callback": {
+    "shot": "landing",
+    "impact": "1 OF 1",
+    "cy": 0.45,
+    "zoom": [
+      1.12,
+      1.2
+    ],
+    "dur": 1.2
+  },
+  "payoff": [
+    {
+      "shot": "wave",
+      "cy": 0.42,
+      "zoom": [
+        1.03,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.6
+    }
+  ],
+  "end_dur": 3.9,
+  "end": {
+    "wordmark": [
+      "SURVIVOR ",
+      "$120"
+    ],
+    "tagline": "Hand-bleached. Signed. Never restocked.",
+    "cta": "SCAN TO SHOP",
+    "lines": [
+      "WHEN ONE SELLS, IT'S GONE",
+      "hsw365.co"
+    ],
+    "fine": "Survivor Collection one-of-one tees $120",
+    "link": "https://hsw365.co/collections/survivor-collection"
+  },
+  "duck": 0.6,
+  "vo_lines": [
+    [
+      0.2,
+      "They crossed a million light years."
+    ],
+    [
+      3.75,
+      "Searched every planet for something real. They found it here."
+    ],
+    [
+      9.3,
+      "Wear your story."
+    ],
+    [
+      13.0,
+      "The Survivor Collection. Hand-bleached. One of one."
+    ],
+    [
+      17.0,
+      "One-twenty. When it's gone, it's gone. Scan to shop."
+    ]
+  ],
+  "caption": "They crossed a million light years for something real. The Survivor Collection: one-of-one tees, hand-bleached and signed by Hoodstar365. $120. When one sells, it's gone. Scan the QR or hit the link in bio to shop hsw365.co.",
+  "hashtags": [
+    "survivorcollection",
+    "streetwear",
+    "oneofone",
+    "alien",
+    "streetwearbrand",
+    "veteranowned",
+    "hsw365"
+  ]
+}
