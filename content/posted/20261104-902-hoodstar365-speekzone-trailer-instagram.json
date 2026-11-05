@@ -37,7 +37,7 @@
     },
     {
       "card": {
-        "title": "Your feed · what the algorithm showed",
+        "title": "Your feed \u00b7 what the algorithm showed",
         "tag": "BURIED",
         "rows": [
           [
@@ -82,7 +82,7 @@
       "cy": 0.45,
       "panel": {
         "label": "SPEEKZONE",
-        "title": "Following · in order",
+        "title": "Following \u00b7 in order",
         "working": "Loading your feed...",
         "done": "Every post. In order.",
         "steps": [
@@ -137,7 +137,7 @@
     "tagline": "No algorithm. Just your people.",
     "cta": "SCAN TO SIGN UP",
     "lines": [
-      "FREE FOR 90 DAYS  ·  THEN $9.99/MO",
+      "FREE FOR 90 DAYS  \u00b7  THEN $9.99/MO",
       "hsw365.github.io/SPEEKZONE"
     ],
     "link": "https://hsw365.github.io/SPEEKZONE/?signup"
@@ -149,5 +149,14 @@
     "socialmedia",
     "artistsoninstagram",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-05T23:38:04.064423Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18141814669621775"
+    }
   ]
 }
