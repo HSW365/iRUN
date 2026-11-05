@@ -7,14 +7,21 @@
       "keyword": "EARN",
       "link": "https://hsw365.co/pages/affiliates",
       "audience": "creators, indie artists, influencers, entrepreneurs and business owners with an audience who want recurring income",
-      "pitch": "The HSW365 Affiliate Partner Program is free to join. Partners earn 20% recurring commission on HSW365 app subscriptions like iRun, Friendy, Klipit and HSW365studio for as long as the customer stays subscribed, with a live dashboard, ready-made posts and monthly payouts by Zelle, Cash App or PayPal.",
+      "pitch": "The HSW365 Affiliate Partner Program is free to join. Earn 20% per subscriber for the full duration of each eligible referred subscription, subject to the HSW365 Affiliate Program Terms. Join at https://hsw365.co/pages/affiliates.",
       "angles": [
-        "turn your followers into recurring income",
-        "20% every month, not once",
-        "get paid to share tools you already use",
-        "your network is already worth something",
+        "earn 20% per subscriber for the full subscription duration",
+        "share HSW365 apps with your audience",
+        "join the HSW365 affiliate program free",
         "build together, earn together, grow together"
-      ]
+      ],
+      "cta": {
+        "spoken": "Join the HSW365 Affiliate Partner Program free and earn 20% per subscriber for the full duration of their subscription, subject to program terms.",
+        "screen": [
+          "JOIN HSW365 AFFILIATES",
+          "EARN 20% PER SUBSCRIBER"
+        ],
+        "caption": "Free to join. Earn 20% per subscriber for the full duration of their subscription, subject to program terms. Join: https://hsw365.co/pages/affiliates"
+      }
     },
     {
       "id": "operator",
