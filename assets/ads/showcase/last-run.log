@@ -1,75 +1,35 @@
-[fc#0 @ 0x5e1b422cae00] Stream specifier 'v' in filtergraph description [2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a] matches no streams.
-Error binding filtergraph inputs/outputs: Invalid argument
 [showcase] CallTwin: layout=phone
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 413, in <module>
-    build(a.app, a.out, a.layout)
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 400, in build
-    subprocess.run(cmd, check=True)
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-v', 'error', '-framerate', '30', '-i', '/tmp/showcase-calltwin-i8lo0s46/frames/f%05d.jpg', '-i', '/tmp/showcase-calltwin-i8lo0s46/score.wav', '-i', '/tmp/showcase-calltwin-i8lo0s46/vo.wav', '-filter_complex', "[2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', 'assets/ads/showcase/calltwin-20261105.mp4']' returned non-zero exit status 234.
+[showcase] wrote assets/ads/showcase/calltwin-20261105.mp4 (18.7s, narrator=yes)
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-[hoodstar365/instagram] publish failed: IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403833904204947'}
-[hoodstar365/instagram] failed IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403833904204947'}
-[fc#0 @ 0x5e361dcc9e00] Stream specifier 'v' in filtergraph description [2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a] matches no streams.
-Error binding filtergraph inputs/outputs: Invalid argument
+/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
+[hoodstar365/instagram] posted 18650803003001051
 [showcase] QUEENEE: layout=browser
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 413, in <module>
-    build(a.app, a.out, a.layout)
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 400, in build
-    subprocess.run(cmd, check=True)
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-v', 'error', '-framerate', '30', '-i', '/tmp/showcase-queenee-rkbll6pi/frames/f%05d.jpg', '-i', '/tmp/showcase-queenee-rkbll6pi/score.wav', '-i', '/tmp/showcase-queenee-rkbll6pi/vo.wav', '-filter_complex', "[2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', 'assets/ads/showcase/queenee-20261105.mp4']' returned non-zero exit status 234.
+[showcase] wrote assets/ads/showcase/queenee-20261105.mp4 (17.33s, narrator=yes)
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-[hoodstar365/instagram] publish failed: IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403834561204947'}
-[hoodstar365/instagram] failed IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403834561204947'}
-[fc#0 @ 0x5ff15ea8fe00] Stream specifier 'v' in filtergraph description [2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a] matches no streams.
-Error binding filtergraph inputs/outputs: Invalid argument
+/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
+[hoodstar365/instagram] posted 18141124768528040
 [showcase] iRun: layout=stack
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 413, in <module>
-    build(a.app, a.out, a.layout)
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 400, in build
-    subprocess.run(cmd, check=True)
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-v', 'error', '-framerate', '30', '-i', '/tmp/showcase-irun-p8_i43om/frames/f%05d.jpg', '-i', '/tmp/showcase-irun-p8_i43om/score.wav', '-i', '/tmp/showcase-irun-p8_i43om/vo.wav', '-filter_complex', "[2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', 'assets/ads/showcase/irun-20261105.mp4']' returned non-zero exit status 234.
+[showcase] wrote assets/ads/showcase/irun-20261105.mp4 (18.34s, narrator=yes)
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-[hoodstar365/instagram] publish failed: IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403834738204947'}
-[hoodstar365/instagram] failed IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403834738204947'}
-[fc#0 @ 0x5a4ece3fae00] Stream specifier 'v' in filtergraph description [2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a] matches no streams.
-Error binding filtergraph inputs/outputs: Invalid argument
+/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
+[hoodstar365/instagram] posted 18458787595122902
 [showcase] DISPUTE365: layout=split
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 413, in <module>
-    build(a.app, a.out, a.layout)
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 400, in build
-    subprocess.run(cmd, check=True)
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-v', 'error', '-framerate', '30', '-i', '/tmp/showcase-dispute365-ma8hjrqy/frames/f%05d.jpg', '-i', '/tmp/showcase-dispute365-ma8hjrqy/score.wav', '-i', '/tmp/showcase-dispute365-ma8hjrqy/vo.wav', '-filter_complex', "[2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', 'assets/ads/showcase/dispute365-20261105.mp4']' returned non-zero exit status 234.
+[showcase] wrote assets/ads/showcase/dispute365-20261105.mp4 (17.38s, narrator=yes)
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-[hoodstar365/instagram] publish failed: IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403834927204947'}
-[hoodstar365/instagram] failed IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403834927204947'}
-[fc#0 @ 0x57e7894cee00] Stream specifier 'v' in filtergraph description [2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a] matches no streams.
-Error binding filtergraph inputs/outputs: Invalid argument
+/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
+[hoodstar365/instagram] posted 18149221192573078
 [showcase] Klipit: layout=stat
-Traceback (most recent call last):
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 413, in <module>
-    build(a.app, a.out, a.layout)
-  File "/home/runner/work/iRUN/iRUN/engine/showcase.py", line 400, in build
-    subprocess.run(cmd, check=True)
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-v', 'error', '-framerate', '30', '-i', '/tmp/showcase-klipit-e_8lgord/frames/f%05d.jpg', '-i', '/tmp/showcase-klipit-e_8lgord/score.wav', '-i', '/tmp/showcase-klipit-e_8lgord/vo.wav', '-filter_complex', "[2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', 'assets/ads/showcase/klipit-20261105.mp4']' returned non-zero exit status 234.
+[showcase] wrote assets/ads/showcase/klipit-20261105.mp4 (16.83s, narrator=yes)
 /home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-[hoodstar365/instagram] publish failed: IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403835203204947'}
-[hoodstar365/instagram] failed IG processing failed: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18403835203204947'}
+/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
+[hoodstar365/instagram] posted 18646484203021568
