@@ -33,14 +33,14 @@ const APPS: App[] = [
     who: "service businesses", hook: "never miss another job call",
     pitch: "CallTwin is an AI receptionist that answers every call, text and website chat 24/7, takes the customer's name, number, address and the job, and sends it straight to your phone. Jobs go to whoever answers first, and CallTwin always answers.",
     offer: "$500 setup, 14 days free, then plans from $49/mo.", cta: "set {biz} up with a free 14-day trial", targets: ["trades"] },
-  { id: "queenee", name: "QUEENEE", link: "https://hsw365.github.io/queenee/", signup: "https://buy.stripe.com/aFafZhcdxeQS1822xt3VC0n",
+  { id: "queenee", name: "QUEENEE", link: "https://hsw365.github.io/queenee/",
     who: "local businesses", hook: "a website that brings you customers",
     pitch: "QUEENEE builds you a mobile-first website made to get calls and bookings, on your own domain, with hosting and updates included. No templates, built from your business.",
-    offer: "$299 setup + $20/mo.", cta: "send a free mockup of the new {biz} site", targets: ["shops", "food"] },
+    offer: "Website builds from $1,500, hosting and updates included.", cta: "send a free mockup of the new {biz} site", targets: ["shops", "food"] },
   { id: "ultimate", name: "HSW365 AI Front Office", link: "https://hsw365.co/pages/ai-front-office",
     who: "business owners", hook: "your whole front office on AI",
     pitch: "One package runs your front office: a QUEENEE website, CallTwin answering every call and text 24/7, and iRun posting your business on Instagram every day.",
-    offer: "Packages from $99 build-out + $49/mo.", cta: "send {biz} a free estimate", targets: ["trades", "shops", "food", "health"] },
+    offer: "Website + CallTwin from $2,500.", cta: "send {biz} a free estimate", targets: ["trades", "shops", "food", "health"] },
   { id: "operator", name: "iRun Operator", link: "https://hsw365.github.io/iRUN/start.html",
     who: "small business owners", hook: "your marketing on autopilot",
     pitch: "Give iRun Operator your website and it runs your marketing: posts videos every day, emails your prospects and sends you a report every night. No agency, no cut of your sales.",
@@ -91,7 +91,7 @@ const APPS: App[] = [
     offer: "Free to join.", cta: "send your {biz} affiliate link", targets: ["shops", "fitness", "beauty"] },
   { id: "investor", name: "HSW365 Investor Partners", link: "https://hsw365.co",
     who: "investors", hook: "4 partner spots, $25K each",
-    pitch: "I've built 15 live AI apps under HSW365, including iRun, CallTwin and QUEENEE, with paying customers. I'm bringing on 4 partners at $25,000 each for equity in the HSW365 app portfolio.",
+    pitch: "I've built 15 live AI apps under HSW365, including iRun, CallTwin and QUEENEE, with CallTwin already sold to a paying customer. I'm bringing on 4 partners at $25,000 each for equity in the HSW365 app portfolio.",
     offer: "4 spots at $25,000 each.", cta: "walk you through the deck in 15 minutes", targets: [] },
 ];
 
@@ -245,7 +245,7 @@ function draft(app: App, l: { business: string; trade?: string | null; city?: st
     : `<p>I'm Elvin Torres Sr., Army veteran and founder of HSW365 Media. ${seen}</p>`;
   const cta = app.cta.replace("{biz}", biz);
   const body = `<p>Hi ${esc(who)},</p>${intro}<p>${esc(app.pitch)}</p><p><b>${esc(app.offer)}</b> Details: <a href="${app.signup ?? app.link}">${esc(app.name)}</a></p>` +
-    `<p>Reply <b>"YES"</b> and I'll ${esc(cta)}.</p>`;
+    (app.id === "investor" ? `<p>Are you open to a 15-minute call this week? I'll send the deck ahead of time.</p>` : `<p>Reply <b>"YES"</b> and I'll ${esc(cta)}.</p>`);
   const subject = app.id === "investor" ? "Army veteran founder, 15 live AI apps, 4 partner spots" : `${biz}: ${app.hook}`;
   const followup = `<p>Hi ${esc(who)},</p><p>Bumping my note about ${esc(app.name)} for ${esc(biz)}: ${esc(app.hook)}. ${esc(app.offer)}</p>` +
     `<p><a href="${app.signup ?? app.link}">${esc(app.name)}</a></p><p>If it's a fit, reply "YES" and I'll ${esc(cta)}. If not, no problem.</p>`;
