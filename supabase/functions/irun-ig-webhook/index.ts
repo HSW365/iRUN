@@ -75,6 +75,47 @@ async function send(recipient: Record<string, string>, text: string): Promise<st
   return r.ok ? null : `${r.status} ${(await r.text()).slice(0, 400)}`;
 }
 
+// Public reply under a comment. Answering every comment in the first hour is what tells Instagram to push a
+// Reel to more people. On by default; set irun_settings.ai_comment_replies = off to stop.
+async function commentReplyText(text: string, username?: string): Promise<string | null> {
+  const key = Deno.env.get("ANTHROPIC_API_KEY");
+  if (!key || (await setting("ai_comment_replies")) === "off" || !text.trim()) return null;
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-haiku-4-5", max_tokens: 120,
+      system: "You are Hoodstar365 (Elvin Torres Sr.), U.S. Army veteran, author and artist whose message is Turn Negative Into Positive. " +
+        "Reply to an Instagram comment on your own post in 1 short sentence (max 20 words), real and warm, like a person, never salesy. " +
+        "If they ask a question, answer it or invite them to DM. No emojis, no hashtags, no links, no promises. " +
+        "If the comment is spam, hateful or a bot, reply with exactly SKIP.",
+      messages: [{ role: "user", content: `@${username ?? "someone"} commented: ${text.slice(0, 500)}` }],
+    }),
+  });
+  if (!r.ok) return null;
+  const j = await r.json();
+  const out = (j.content ?? []).filter((b: any) => b.type === "text").map((b: any) => b.text).join("").trim();
+  return !out || out === "SKIP" ? null : out.slice(0, 300);
+}
+
+async function repliedToday(uid: string, mediaId: string) {
+  const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString();
+  const { data } = await sb.from("irun_leads").select("id").eq("ig_user_id", uid).eq("source", "comment")
+    .eq("keyword", `reply:${mediaId}`).gte("created_at", since).limit(1);
+  return (data ?? []).length > 0;
+}
+
+async function publicReply(commentId: string, text: string): Promise<string | null> {
+  const tok = await igToken();
+  if (!tok) return "no instagram token stored";
+  const r = await fetch(`${GRAPH}/${commentId}/replies`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${tok}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ message: text }),
+  });
+  return r.ok ? null : `${r.status} ${(await r.text()).slice(0, 400)}`;
+}
+
 async function aiReply(text: string, list: Product[]): Promise<string | null> {
   const key = Deno.env.get("ANTHROPIC_API_KEY");
   if (!key || (await setting("ai_dm_replies")) !== "on" || !text.trim()) return null;
@@ -113,6 +154,17 @@ async function handle(body: any) {
         row.replied = !err; row.reply_error = err;
       }
       if (p) await sb.from("irun_leads").insert(row);
+      if (!p && !v.parent_id) {
+        const mediaId = String(v.media?.id ?? "");
+        if (mediaId && !(await repliedToday(uid, mediaId))) {
+          const reply = await commentReplyText(v.text ?? "", v.from?.username).catch(() => null);
+          if (reply) {
+            const err = await publicReply(String(v.id), reply);
+            await sb.from("irun_leads").insert({ source: "comment", ig_user_id: uid, username: v.from?.username,
+              message: v.text, keyword: `reply:${mediaId}`, replied: !err, reply_error: err });
+          }
+        }
+      }
     }
     for (const m of entry.messaging ?? []) {
       const uid = String(m.sender?.id ?? "");

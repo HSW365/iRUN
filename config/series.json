@@ -1,5 +1,5 @@
 {
-  "_note": "Faceless series: story-style videos with AI scenes, voiceover and word captions (no product pitch). One video per series account per day, cross-posted to that account's connected platforms at the 6pm ET slot. 'style' is an id from config/styles.json. Set enabled=false to pause a series. Only use facts that are true; no made-up stories about real people.",
+  "_note": "Faceless series: story-style videos with AI scenes, voiceover and word captions (no product pitch). One video per series account per day, cross-posted to that account's connected platforms at the 6pm ET slot. 'style' is an id from config/styles.json. Set enabled=false to pause a series. Only use facts that are true; no made-up stories about real people. Series are numbered (EP. N in caption, on screen and a 'next episode' first comment) unless numbered=false. 'collaborators': up to 3 Instagram usernames to send a Collab invite on every post (they must accept).",
   "series": [
     {
       "id": "hoodlum-soldier",
@@ -20,7 +20,8 @@
           "FOLLOW @HOODSTAR365"
         ],
         "caption": "Follow @hoodstar365 so you don't miss the next episode. Turn Negative Into Positive."
-      }
+      },
+      "collaborators": []
     },
     {
       "id": "tnip",
@@ -45,7 +46,8 @@
           "TURN NEGATIVE INTO POSITIVE"
         ],
         "caption": "Follow @hoodstar365 for more. Turn Negative Into Positive."
-      }
+      },
+      "collaborators": []
     },
     {
       "id": "founder",
@@ -70,7 +72,8 @@
           "BUILD EVERY DAY"
         ],
         "caption": "Follow @hoodstar365 for more."
-      }
+      },
+      "collaborators": []
     },
     {
       "id": "newark-tips",
@@ -96,7 +99,8 @@
           "NEW ARK. ANSWERED 24/7."
         ],
         "caption": "Call New Ark Plumbing, Heating & Air Conditioning: 908-454-4043. Answered 24/7. Phillipsburg, NJ."
-      }
+      },
+      "collaborators": []
     },
     {
       "id": "hsw365media-ecosystem",
@@ -119,7 +123,8 @@
           "EARN 20% PER SUBSCRIBER"
         ],
         "caption": "Explore the HSW365MEDIA ecosystem at Hsw365.co. Join the affiliate program to earn 20% per subscriber for the full duration of their subscription, subject to program terms."
-      }
+      },
+      "collaborators": []
     }
   ]
 }

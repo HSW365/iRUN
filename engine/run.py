@@ -105,6 +105,15 @@ def recent_hooks(account_id, product_id):
     return [r["hook"] for r in rows if r.get("hook")]
 
 
+def episode_no(account_id, series_id):
+    """Next episode number for a numbered series: posted episodes so far + 1."""
+    if not db.enabled():
+        return 1
+    rows = db.select("irun_posts", f"account=eq.{account_id}&product_id=eq.series:{series_id}"
+                                   "&status=eq.posted&platform=eq.instagram&select=id&limit=1000")
+    return len(rows) + 1
+
+
 def cta_for(acct, product, platform):
     """(spoken, (screen line 1, screen line 2), caption line)."""
     c = product.get("cta")
@@ -120,7 +129,7 @@ def cta_for(acct, product, platform):
     return ("Link in bio", ("LINK IN BIO", f"@{h.upper()}"), "Link in bio.")
 
 
-def publish(acct, platform, mode, video, video_url, caption, row, title=None, tags=()):
+def publish(acct, platform, mode, video, video_url, caption, row, title=None, tags=(), collab=(), first_comment=None):
     """Post one video to one platform in live mode. Fills row with the outcome. Returns True if it tried."""
     login = acct.get("youtube_account", acct["id"]) if platform == "youtube" else acct["id"]
     ok, why = accounts.connected(login, platform)
@@ -139,7 +148,8 @@ def publish(acct, platform, mode, video, video_url, caption, row, title=None, ta
             res = youtube.publish(video, title or row.get("hook") or acct["brand"], caption, tags, account=login)
         else:
             import instagram
-            res = instagram.publish(video_url, caption, account=acct["id"])
+            res = instagram.publish(video_url, caption, account=acct["id"], collaborators=collab,
+                                    first_comment=first_comment)
         row.update(status="posted", external_id=res.get("post_id") or res.get("publish_id"),
                    result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
     except Exception as e:
@@ -186,14 +196,21 @@ def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, st
         source = f"queue:{os.path.basename(qpath)}"
     else:
         idea = idea or random.choice(ser.get("angles") or [ser["topic"]])
+        ep = episode_no(acct["id"], ser["id"]) if ser.get("numbered", True) else None
         script = faceless.clean(writer.write_faceless(ser, idea, cta["spoken"],
                                                       recent_hooks(acct["id"], f"series:{ser['id']}"),
-                                                      voice=acct.get("voice")))
+                                                      voice=acct.get("voice"), episode=ep))
+        script["episode"] = ep
         source = "writer"
     style = style or script.get("style") or ser.get("style") or "cinematic"
     seo_item = {"id": ser.get("product") or ser["id"], "name": ser["name"], "seo": ser.get("seo")}
     seo_item = {k: v for k, v in seo_item.items() if v}
-    caption, _ = seo.caption(acct, seo_item, "tiktok", script["caption"], cta["caption"], script.get("hashtags", ()))
+    ep = script.get("episode")
+    body = f"{ser['name']} | EP. {ep}\n\n{script['caption']}" if ep else script["caption"]
+    caption, _ = seo.caption(acct, seo_item, "tiktok", body, cta["caption"], script.get("hashtags", ()))
+    handle = acct.get("handle") or acct["id"]
+    first_comment = (f"EP. {ep + 1} drops next. Follow @{handle} so you don't miss it." if ep
+                     else f"Follow @{handle} for more.")
     script["title"] = seo.youtube_title(acct, seo_item, script["title"]).replace(" #Shorts", "")
     script["hashtags"] = seo.youtube_tags(acct, seo_item, script.get("hashtags", ()))
 
@@ -203,7 +220,8 @@ def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, st
     work = tempfile.mkdtemp(prefix="irun-")
     video = os.path.join(outdir, f"{slug}.mp4")
     tag = "@" + acct["handle"] if acct.get("handle") else acct["brand"]  # clients without a handle show their name
-    res = faceless.build(script, style, work, video, tuple(cta["screen"]), tag, ser["name"])
+    res = faceless.build(script, style, work, video, tuple(cta["screen"]), tag,
+                         f"{ser['name']}  EP.{ep}" if ep else ser["name"])
     qr.stamp(video, ser.get("link") or qr.link_for(acct, ser.get("product")))
     says = [sc["say"] for sc in script["scenes"]]
     with open(os.path.join(outdir, f"{slug}.txt"), "w") as f:
@@ -217,7 +235,8 @@ def make_faceless(acct, ser, platforms, mode, outdir, queued=None, idea=None, st
                "format": "faceless", "angle": script["title"], "media": {"style": style, "scenes": res["media"]}}
         if video_url:
             row["video_url"] = video_url
-        attempted |= publish(acct, platform, mode, video, video_url, caption, row, script["title"], script["hashtags"])
+        attempted |= publish(acct, platform, mode, video, video_url, caption, row, script["title"], script["hashtags"],
+                             collab=ser.get("collaborators", ()), first_comment=first_comment)
         if db.enabled():
             db.insert("irun_posts", row)
         rows.append(row)

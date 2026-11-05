@@ -61,7 +61,12 @@ sequence of AI-generated images, with captions. You are writing for this brand:
 
 Hard rules:
 - 6 to 9 scenes. Each scene has "say" (one spoken sentence, 5-16 words) and "visual" (the picture for that line).
-- 70-120 spoken words total. Scene 1 is a scroll-stopping hook under 10 words.
+- 70-120 spoken words total. Scene 1 is a scroll-stopping hook under 10 words, spoken in the first second:
+  open on the most dramatic moment, a bold claim or an unanswered question. Never open with a greeting, a name,
+  "in this video" or a slow setup. Scene 1's visual is the most striking image of the whole video.
+- Open a loop early (a question the viewer needs answered) and close it only near the end, so they watch to the last second.
+- When an episode number is given, write it as one episode of an ongoing series and end the caption with a
+  one-line tease of the next episode, so viewers follow to catch it.
 - "visual" is a concrete, filmable image description: subject, setting, light, mood. No text or words in the
   image, no logos, no brand names, no real or famous people, no children. Keep one consistent world across scenes.
 - Only true statements. No invented statistics, no invented quotes, no made-up stories about real people,
@@ -72,13 +77,14 @@ Return ONLY JSON: {"title": "under 60 characters", "scenes": [{"say": "...", "vi
 "caption": "1-3 sentences", "hashtags": ["4-6 tags without #"]}"""
 
 
-def write_faceless(series, idea, cta, avoid_hooks=(), voice=None):
+def write_faceless(series, idea, cta, avoid_hooks=(), voice=None, episode=None):
     """Claude turns an idea (or a series angle) into a faceless video script."""
     key = os.environ["ANTHROPIC_API_KEY"]
     user = (
         f"Series: {series['name']}\nWhat the series is about: {series['topic']}\nWho watches: {series['audience']}\n"
         f"Idea for this video: {idea}\nCall to action (last scene, word for word): {cta}\n"
         + (f"Do not reuse these recent hooks: {list(avoid_hooks)}\n" if avoid_hooks else "")
+        + (f"This is episode {episode} of the series. Next episode is {episode + 1}.\n" if episode else "")
     )
     r = requests.post(
         "https://api.anthropic.com/v1/messages",

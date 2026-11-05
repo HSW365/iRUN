@@ -35,12 +35,18 @@ def user_id(tok, account=accounts.MAIN):
     return requests.get(f"{GRAPH}/me", params={"fields": "user_id,username", "access_token": tok}, timeout=30).json()["user_id"]
 
 
-def publish(video_url, caption, account=accounts.MAIN):
+def publish(video_url, caption, account=accounts.MAIN, collaborators=(), first_comment=None):
+    """Post a Reel. collaborators: up to 3 usernames who get a Collab invite (the post shows on both profiles once
+    they accept). first_comment: posted right after publishing, to start the comment thread."""
     tok = access_token(account)
     uid = user_id(tok, account)
-    c = requests.post(f"{GRAPH}/{uid}/media", timeout=60, data={
-        "media_type": "REELS", "video_url": video_url, "caption": caption[:2200],
-        "share_to_feed": "true", "access_token": tok}).json()
+    data = {"media_type": "REELS", "video_url": video_url, "caption": caption[:2200],
+            "share_to_feed": "true", "access_token": tok}
+    collab = [str(u).lstrip("@") for u in (collaborators or ()) if str(u).strip()][:3]
+    if collab:
+        import json as _json
+        data["collaborators"] = _json.dumps(collab)
+    c = requests.post(f"{GRAPH}/{uid}/media", timeout=60, data=data).json()
     if "id" not in c:
         raise RuntimeError(f"IG container failed: {c}")
     cid = c["id"]
@@ -57,4 +63,11 @@ def publish(video_url, caption, account=accounts.MAIN):
     p = requests.post(f"{GRAPH}/{uid}/media_publish", data={"creation_id": cid, "access_token": tok}, timeout=60).json()
     if "id" not in p:
         raise RuntimeError(f"IG publish failed: {p}")
-    return {"post_id": p["id"]}
+    out = {"post_id": p["id"]}
+    if first_comment:
+        cm = requests.post(f"{GRAPH}/{p['id']}/comments", data={"message": first_comment[:300], "access_token": tok},
+                           timeout=30).json()
+        out["first_comment"] = cm.get("id") or cm.get("error", {}).get("message")
+    if collab:
+        out["collaborators"] = collab
+    return out
