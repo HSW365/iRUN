@@ -201,7 +201,7 @@ def card_rows(p):
         m = re.split(r"\s(?:with|that|for|,)\s|,\s", b, maxsplit=1)
         label, rest = (m[0], m[1]) if len(m) > 1 else (" ".join(b.split()[:3]), " ".join(b.split()[3:]) or "included")
         rows.append([_trim(label, 24), _trim(rest, 28)])
-    return rows or [["Price", f"${p['price']:,.0f}"], ["Ships", "from hsw365.co"], ["Checkout", "scan the QR"]]
+    return rows or [["Price", f"${p['price']:,.0f}"], ["Ships", f"from {p['store']}"], ["Checkout", "scan the QR"]]
 
 
 # ---------- shots ----------
@@ -247,6 +247,28 @@ def make_shots(pb, p, shots_dir, seed):
 
 
 # ---------- spec ----------
+HOUSE = ("hsw365.co", "www.hsw365.co")
+
+
+def is_house(p):
+    return p["store"].lower() in HOUSE
+
+
+def brand(p):
+    """The store's own brand for a client ad: the product vendor, else the store domain's first word."""
+    if is_house(p):
+        return "HSW365"
+    v = (p.get("vendor") or "").strip()
+    if v and len(v) <= 24:
+        return v
+    return re.sub(r"^www\.", "", p["store"]).split(".")[0].replace("-", " ")
+
+
+def presents(p, pb):
+    return pb["presents"] if is_house(p) else f"{brand(p).upper()} PRESENTS"
+
+
+
 def overrides(handle):
     """config/shopify_ads.json: {"<handle>": {"playbook", "accent", "tagline", "rows", "vo": [[at, line]], "short"}}"""
     try:
@@ -259,6 +281,8 @@ def overrides(handle):
 def build_spec(p, kind, slug, account):
     ov = overrides(p["handle"])
     pb = dict(PLAYBOOKS[kind], **{k: v for k, v in ov.items() if k in ("accent", "tagline", "vo", "fine", "slams")})
+    if not is_house(p) and pb.get("tagline") == "Turn negative into positive.":
+        pb["tagline"] = "Wear what you stand for."  # the HSW365 motto stays on HSW365 ads
     short = ov.get("short") or short_name(p["title"])
     sc = pb["scenes"]
     scenes = [{"shot": sc[0], "sub": pb["subs"][0], "cy": 0.45, "zoom": [1.04, 1.16]},
@@ -276,7 +300,7 @@ def build_spec(p, kind, slug, account):
     spec = {
         "kind": "trailer", "account": account, "product": p["handle"], "platform": "instagram",
         "shots_dir": f"content/shots/{slug}", "accent": pb["accent"], "title": short.upper(),
-        "presents": pb["presents"], "end_dur": 4.2,
+        "presents": presents(p, pb), "end_dur": 4.2,
         "open": {"shot": pb["open"], "impact": pb["open_impact"], "cy": 0.42, "zoom": [1.0, 1.1], "dur": 2.0},
         "scenes": scenes, "slams": slams,
         "callback": {"shot": pb["callback"], "impact": pb["callback_impact"], "warm": True},
@@ -290,11 +314,55 @@ def build_spec(p, kind, slug, account):
     lines = [(at, t.format(short=short, title=p["title"], price=f"{p['price']:,.0f}")) for at, t in pb["vo"]]
     spec["vo"] = [{"file": f"assets/voice/{slug}/vo{i}.wav", "at": at, "text": t} for i, (at, t) in enumerate(lines, 1)]
     spec["vo_captions"] = True; spec["duck"] = 0.55
-    tags = [re.sub(r"[^a-z0-9]", "", t.lower()) for t in p["tags"]][:6]
-    spec["hashtags"] = [t for t in tags if t] + ["hsw365", "hsw365co", "shopnow"]
+    junk = ("bucket", "update", "push", "live", "allproducts", "sale", "new", "hidden", "akeneo", "activity", "filter")
+    tags = [re.sub(r"[^a-z0-9]", "", t.lower()) for t in p["tags"]]  # store tags are often internal codes: keep real words
+    tags = [t for t in dict.fromkeys(tags) if re.fullmatch(r"[a-z]{3,16}", t) and not any(j in t for j in junk)][:5]
+    ptype = re.sub(r"[^a-z0-9]", "", (p.get("type") or "").lower())
+    if 3 <= len(ptype) <= 16 and ptype not in tags:
+        tags.insert(0, ptype)
+    own = ["hsw365", "hsw365co"] if is_house(p) else [re.sub(r"[^a-z0-9]", "", brand(p).lower())]
+    spec["hashtags"] = [t for t in tags if t] + [t for t in own if t] + ["shopnow"]
     spec["caption"] = (f"{lines[0][1]} {lines[2][1]} {p['title']}, ${p['price']:,.0f}. Scan the QR in the video to go "
                        f"straight to checkout, or shop {p['url'].replace('https://', '')} (link in bio).")
     return spec, [spoken(t) for _, t in lines]
+
+
+def make(product, store="hsw365.co", account="hoodstar365", playbook=None, seed=3650, out=None, post=False,
+         spec_only=False, platform="instagram"):
+    """Build the trailer ad for one product (and post it). Returns {"video", "spec", "product", ...}."""
+    out = out or os.path.join(ROOT, "out")
+    store, handle = parse(product, store)
+    p = fetch(store, handle)
+    kind = playbook or overrides(p["handle"]).get("playbook") or pick_playbook(p)
+    tag = "" if is_house(p) else re.sub(r"[^a-z0-9]+", "-", store.lower().split(".")[0])[:16] + "-"
+    slug = f"shop-{tag}{re.sub(r'[^a-z0-9]+', '-', handle.lower())[:40].strip('-')}"
+    spec, vo_lines = build_spec(p, kind, slug, account)
+    spec_path = os.path.join(ROOT, "content", "ads", f"{slug}-trailer.json")
+    os.makedirs(os.path.dirname(spec_path), exist_ok=True)
+    with open(spec_path, "w") as f:
+        json.dump(spec, f, indent=2)
+    res = {"product": p["title"], "price": p["price"], "playbook": kind, "spec": spec_path, "qr": p["checkout"],
+           "caption": spec["caption"] + "\n\n" + " ".join("#" + t for t in spec["hashtags"])}
+    print(json.dumps(res, indent=2))
+    if spec_only:
+        return res
+
+    shots = make_shots(dict(PLAYBOOKS[kind]), p, os.path.join(ROOT, spec["shots_dir"]), seed)
+    print(json.dumps({"shots": shots}))
+    subprocess.run([sys.executable, os.path.join(HERE, "narrator.py"), os.path.join(ROOT, "assets", "voice", slug),
+                    *vo_lines], check=True)
+
+    import trailer
+    os.makedirs(out, exist_ok=True)
+    video = os.path.join(out, f"{slug}-ad.mp4")
+    res["seconds"] = trailer.build(spec, video)
+    res["video"] = video
+    print(json.dumps({"video": video, "seconds": res["seconds"]}))
+    if post:
+        subprocess.run([sys.executable, os.path.join(HERE, "run.py"), "--account", account, "--platform", platform,
+                        "--video", video, "--caption", res["caption"],
+                        "--mode", os.environ.get("IRUN_MODE", "live")], check=True)
+    return res
 
 
 def main():
@@ -308,34 +376,7 @@ def main():
     ap.add_argument("--post", action="store_true", help="post the finished ad to Instagram through iRun")
     ap.add_argument("--out", default=os.path.join(ROOT, "out"))
     a = ap.parse_args()
-
-    store, handle = parse(a.product, a.store)
-    p = fetch(store, handle)
-    kind = a.playbook or overrides(p["handle"]).get("playbook") or pick_playbook(p)
-    slug = f"shop-{re.sub(r'[^a-z0-9]+', '-', handle.lower())[:40].strip('-')}"
-    spec, vo_lines = build_spec(p, kind, slug, a.account)
-    spec_path = os.path.join(ROOT, "content", "ads", f"{slug}-trailer.json")
-    with open(spec_path, "w") as f:
-        json.dump(spec, f, indent=2)
-    print(json.dumps({"product": p["title"], "price": p["price"], "playbook": kind, "spec": spec_path,
-                      "qr": p["checkout"]}, indent=2))
-    if a.spec_only:
-        return
-
-    shots = make_shots(dict(PLAYBOOKS[kind]), p, os.path.join(ROOT, spec["shots_dir"]), a.seed)
-    print(json.dumps({"shots": shots}))
-    subprocess.run([sys.executable, os.path.join(HERE, "narrator.py"), os.path.join(ROOT, "assets", "voice", slug),
-                    *vo_lines], check=True)
-
-    import trailer
-    os.makedirs(a.out, exist_ok=True)
-    video = os.path.join(a.out, f"{slug}-ad.mp4")
-    secs = trailer.build(spec, video)
-    print(json.dumps({"video": video, "seconds": secs}))
-    if a.post:
-        subprocess.run([sys.executable, os.path.join(HERE, "run.py"), "--account", a.account, "--platform", "instagram",
-                        "--video", video, "--caption", spec["caption"] + "\n\n" + " ".join("#" + t for t in spec["hashtags"]),
-                        "--mode", os.environ.get("IRUN_MODE", "live")], check=True)
+    make(a.product, a.store, a.account, a.playbook, a.seed, a.out, a.post, a.spec_only)
 
 
 if __name__ == "__main__":

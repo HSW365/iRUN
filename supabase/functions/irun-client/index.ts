@@ -9,6 +9,7 @@
 //   POST {a:"settings", c, k, outreach_enabled?, approve_site?, rebuild_site?}
 //   POST {a:"zelle_signup", plan, name, email, url, handles, notes}  -> company + Zelle payment instructions
 //   POST {a:"zelle_pay", c, k, kind:"plan"|"credits", qty?}  -> Zelle payment instructions (renewal or credit pack)
+//   POST {a:"shop_check", url}                             -> Shopify store preview (Shop Team page)
 //   POST {a:"zelle_sent", c, k, id, note?}                 -> customer says the Zelle payment is sent; owner confirms it
 //   POST with stripe-signature                              -> Stripe webhook
 // JWT verification is off: Stripe calls this directly; customer actions check the company's client key.
@@ -237,6 +238,24 @@ Deno.serve(async (req) => {
         open: (await setting("billing_live")) === "on" && (!!STRIPE || !!z), card: !!STRIPE, zelle: z });
     }
 
+    // Shop Team: preview a Shopify store's first products (public /products.json, read server-side: no CORS on it).
+    if (b.a === "shop_check") {
+      const d = String(b.url ?? "").trim().toLowerCase().replace(/^https?:\/\//, "").split(/[\/?#]/)[0].replace(/\.+$/, "");
+      if (!/^[a-z0-9.-]+\.[a-z]{2,}$/.test(d)) return json({ shopify: false, error: "Enter your store link, like yourstore.com" });
+      try {
+        const r = await fetch(`https://${d}/products.json?limit=24`, { headers: { "User-Agent": "iRunShopTeam/1.0" },
+          signal: AbortSignal.timeout(9000) });
+        const j = r.ok ? await r.json().catch(() => null) : null;
+        const rows = (j?.products ?? []).filter((x: any) => x.images?.length).slice(0, 6).map((x: any) => {
+          const v = (x.variants ?? []).find((y: any) => y.available !== false) ?? x.variants?.[0] ?? {};
+          return { title: String(x.title).slice(0, 80), price: Number(v.price ?? 0), image: x.images[0].src, vendor: x.vendor ?? "" };
+        });
+        return json({ shopify: !!j?.products, store: d, count: j?.products?.length ?? 0, products: rows });
+      } catch (_) {
+        return json({ shopify: false, store: d });
+      }
+    }
+
     if (b.a === "zelle_signup") {
       const z = await zelle();
       if ((await setting("billing_live")) !== "on" || !z) return json({ error: "Sign-up opens soon." }, 403);
@@ -263,7 +282,7 @@ Deno.serve(async (req) => {
         "subscription_data[metadata][app]": "irun", "subscription_data[metadata][company_id]": id,
         "subscription_data[trial_period_days]": "3",
         success_url: `${SITE}client.html?c=${id}&s={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${SITE}start.html?plan=${b.plan}`,
+        cancel_url: b.plan === "shopify" ? `${SITE}shopteam.html#start` : `${SITE}start.html?plan=${b.plan}`,
         "line_items[0][quantity]": "1",
         "line_items[0][price_data][currency]": "usd",
         "line_items[0][price_data][unit_amount]": String(plan.cents),

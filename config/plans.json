@@ -66,6 +66,28 @@
         "YouTube Shorts on the faceless videos",
         "60 credits a month"
       ]
+    },
+    "shopify": {
+      "name": "Shop Team",
+      "cents": 2700,
+      "credits": 30,
+      "hours": [],
+      "shop_ads": true,
+      "shop_hour": 16,
+      "site": false,
+      "faceless": false,
+      "outreach": false,
+      "outreach_daily_cap": 0,
+      "features": [
+        "An AI marketing team for your Shopify store, about 90 cents a day",
+        "A new cinematic trailer ad every day, one product at a time",
+        "Built from your own product pages and photos, in your brand",
+        "QR on every ad goes straight to checkout for that product",
+        "Posted to your Instagram (and TikTok) with caption and hashtags",
+        "New products jump the line, sold-out ones are skipped",
+        "Nightly AI review of what posted",
+        "30 credits a month, no cut of your sales"
+      ]
     }
   }
 }

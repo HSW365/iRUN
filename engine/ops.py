@@ -73,7 +73,7 @@ def onboard_pending(only=None):
         try:
             onboard.onboard(c)
             c = companies.get(c["id"])
-            if c["site_status"] == "none":
+            if c["site_status"] == "none" and companies.plan_of(c).get("site", True):
                 website.build(c)
         except Exception as e:
             traceback.print_exc()
@@ -89,7 +89,7 @@ def sites(only=None):
         try:
             if c["site_status"] == "approved":
                 website.publish(c)
-            elif c["site_status"] == "none" and c.get("profile"):
+            elif c["site_status"] == "none" and c.get("profile") and companies.plan_of(c).get("site", True):
                 website.build(c)
         except Exception as e:
             traceback.print_exc()

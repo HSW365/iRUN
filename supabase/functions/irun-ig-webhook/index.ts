@@ -287,7 +287,7 @@ async function ownerAction(b: any) {
     if (typeof b.outreach_enabled === "boolean") up.outreach_enabled = b.outreach_enabled;
     if (b.approve_site && c.site_status === "draft") up.site_status = "approved";
     if (b.rebuild_site) up.site_status = "none";
-    if (b.plan && ["comp", "starter", "pro", "elite"].includes(b.plan)) up.plan = b.plan;
+    if (b.plan && ["comp", "starter", "pro", "elite", "shopify"].includes(b.plan)) up.plan = b.plan;
     await sb.from("irun_companies").update(up).eq("id", c.id);
     await log(c.id, `owner update: ${Object.keys(up).filter((k) => k !== "updated_at").join(", ")}`);
     return json({ ok: true });
