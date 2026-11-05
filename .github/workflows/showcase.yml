@@ -1,0 +1,68 @@
+name: iRun showcase ads
+
+# Larven-style product ads (engine/showcase.py), a different layout per app. Edit "run" in config/showcase.json and push:
+# iRun captures each app's live screen, builds the Reel (narrator + score + QR to sign-up), saves it and posts it.
+on:
+  push:
+    branches: [main]
+    paths: ["config/showcase.json"]
+  workflow_dispatch:
+    inputs:
+      apps:
+        description: "App ids, space separated (blank = the run list in config/showcase.json)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  showcase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt playwright
+          python -m playwright install --with-deps chromium
+      - name: Build and post
+        env:
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+        run: |
+          mkdir -p assets/ads/showcase out
+          APPS="${{ github.event.inputs.apps }}"
+          [ -z "$APPS" ] && APPS=$(jq -r '.run | join(" ")' config/showcase.json)
+          POST=$(jq -r 'if .post == false then "false" else "true" end' config/showcase.json)
+          ACCOUNT=$(jq -r '.account // "hoodstar365"' config/showcase.json)
+          for APP in $APPS; do
+            OUT="assets/ads/showcase/${APP}-$(date -u +%Y%m%d).mp4"
+            python engine/showcase.py "$APP" "$OUT" 2>&1 | tee -a out/showcase.log || { echo "build failed: $APP"; continue; }
+            [ "$POST" = "true" ] || continue
+            CAPTION=$(jq -r --arg a "$APP" '.apps[$a] | "\(.h1) \(.h2)\n\n\(.sub)\n\n\(.cta): scan the QR in the video.\n\n#hsw365 #hsw365media #\(.name | ascii_downcase | gsub("[^a-z0-9]";"")) #ai #smallbusiness #entrepreneur #turnnegativeintopositive"' config/showcase.json)
+            python engine/run.py --account "$ACCOUNT" --platform instagram --video "$OUT" --caption "$CAPTION" 2>&1 | tee -a out/showcase.log || echo "post failed: $APP"
+            sleep 20
+          done
+      - name: Keep the ads
+        if: always()
+        run: |
+          cp out/showcase.log assets/ads/showcase/last-run.log 2>/dev/null || true
+          git config user.name "iRun"; git config user.email "hsw365media@gmail.com"
+          git add assets/ads/showcase config/showcase_state.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -qm "iRun: showcase ads [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
