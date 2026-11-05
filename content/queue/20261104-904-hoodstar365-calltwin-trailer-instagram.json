@@ -1,0 +1,145 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "calltwin",
+  "platform": "instagram",
+  "shots_dir": "content/shots/calltwin-2am",
+  "accent": "#ef4444",
+  "title": "CALLTWIN",
+  "presents": "HSW365 MEDIA PRESENTS",
+  "open": {
+    "shot": "phone",
+    "impact": "VOICEMAIL",
+    "cy": 0.6,
+    "zoom": [
+      1.0,
+      1.14
+    ]
+  },
+  "scenes": [
+    {
+      "shot": "flood",
+      "sub": "Pick up. Please, pick up.",
+      "cy": 0.3,
+      "zoom": [
+        1.08,
+        1.24
+      ]
+    },
+    {
+      "shot": "sleep",
+      "sub": "Phone on silent. Long day.",
+      "cy": 0.35,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    },
+    {
+      "card": {
+        "title": "Missed calls · last night",
+        "tag": "LOST",
+        "rows": [
+          [
+            "Burst pipe · 2:47 AM",
+            "voicemail"
+          ],
+          [
+            "Water heater · 5:10 AM",
+            "voicemail"
+          ],
+          [
+            "Same caller · 5:31 AM",
+            "called someone else"
+          ]
+        ]
+      },
+      "bg": "night"
+    },
+    {
+      "shot": "street",
+      "sub": "Fine. I'll call somebody else.",
+      "cy": 0.5,
+      "zoom": [
+        1.04,
+        1.14
+      ],
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "WAKE",
+      "shot": "night",
+      "cy": 0.5,
+      "zoom": [
+        1.0,
+        1.12
+      ]
+    },
+    {
+      "word": "UP",
+      "shot": "night",
+      "panel": {
+        "label": "CALLTWIN AI",
+        "title": "Incoming call · 2:47 AM",
+        "working": "Answering...",
+        "done": "Job texted to owner",
+        "steps": [
+          "Answer",
+          "Get details",
+          "Text owner"
+        ]
+      }
+    },
+    {
+      "word": "BOOKED",
+      "shot": "morning",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.16
+      ],
+      "warm": true
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "ANSWERED",
+    "cy": 0.6
+  },
+  "payoff": [
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.35,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "CALL",
+      "TWIN"
+    ],
+    "tagline": "Your AI receptionist. Day and night.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "ANSWERS 24/7  ·  14 DAYS FREE",
+      "hsw365.github.io/calltwin"
+    ],
+    "fine": "$500 one-time setup, then $99/mo after 14 days. Cancel the monthly anytime.",
+    "link": "https://hsw365.github.io/calltwin/signup.html"
+  },
+  "caption": "2:47 AM, a pipe bursts, and her call goes to voicemail while you sleep. By sunrise she's hired someone else. CallTwin is the AI receptionist that answers and follows up on the calls you miss, day and night. Scan the QR to sign up, or go to hsw365.github.io/calltwin (link in bio).",
+  "hashtags": [
+    "calltwin",
+    "aireceptionist",
+    "smallbusiness",
+    "contractor",
+    "hsw365media"
+  ]
+}

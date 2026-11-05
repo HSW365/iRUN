@@ -1,0 +1,153 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "speekzone",
+  "platform": "instagram",
+  "shots_dir": "content/shots/speekzone-hidden",
+  "accent": "#22d3ee",
+  "title": "SPEEKZONE",
+  "presents": "HSW365 MEDIA PRESENTS",
+  "open": {
+    "shot": "glass",
+    "impact": "HIDDEN",
+    "cy": 0.45,
+    "zoom": [
+      1.0,
+      1.14
+    ]
+  },
+  "scenes": [
+    {
+      "shot": "studio",
+      "sub": "Three weeks on this piece. Posted.",
+      "cy": 0.35,
+      "zoom": [
+        1.04,
+        1.16
+      ]
+    },
+    {
+      "shot": "stare",
+      "sub": "Twelve views. My own people?",
+      "cy": 0.32,
+      "zoom": [
+        1.1,
+        1.24
+      ]
+    },
+    {
+      "card": {
+        "title": "Your feed · what the algorithm showed",
+        "tag": "BURIED",
+        "rows": [
+          [
+            "Your best friend's post",
+            "hidden"
+          ],
+          [
+            "Sponsored ad",
+            "boosted"
+          ],
+          [
+            "Stranger's video",
+            "pushed to the top"
+          ]
+        ]
+      },
+      "bg": "phone"
+    },
+    {
+      "shot": "friend",
+      "sub": "Wait, you posted? I never saw it.",
+      "cy": 0.3,
+      "zoom": [
+        1.08,
+        1.2
+      ]
+    }
+  ],
+  "slams": [
+    {
+      "word": "SEE",
+      "shot": "phone",
+      "cy": 0.45,
+      "zoom": [
+        1.0,
+        1.12
+      ]
+    },
+    {
+      "word": "EVERY",
+      "shot": "phone",
+      "cy": 0.45,
+      "panel": {
+        "label": "SPEEKZONE",
+        "title": "Following · in order",
+        "working": "Loading your feed...",
+        "done": "Every post. In order.",
+        "steps": [
+          "No algorithm",
+          "No boosts",
+          "Nothing hidden"
+        ]
+      }
+    },
+    {
+      "word": "POST",
+      "shot": "stare",
+      "cy": 0.32,
+      "zoom": [
+        1.2,
+        1.32
+      ],
+      "sat": 0.6
+    }
+  ],
+  "callback": {
+    "shot": "glass",
+    "impact": "SEEN",
+    "cy": 0.45
+  },
+  "payoff": [
+    {
+      "shot": "gallery",
+      "cy": 0.4,
+      "warm": true,
+      "zoom": [
+        1.02,
+        1.12
+      ]
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.33,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "SPEEK",
+      "ZONE"
+    ],
+    "tagline": "No algorithm. Just your people.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "FREE FOR 90 DAYS  ·  THEN $9.99/MO",
+      "hsw365.github.io/SPEEKZONE"
+    ],
+    "link": "https://hsw365.github.io/SPEEKZONE/?signup"
+  },
+  "caption": "Three weeks on one painting, and the algorithm buried it under ads and strangers. SpeekZone is a social network with no algorithm: every post from everyone you follow, in the order it was posted. Free for 90 days, then $9.99 a month with a verified check. Scan the QR to sign up, or go to hsw365.github.io/SPEEKZONE (link in bio).",
+  "hashtags": [
+    "speekzone",
+    "noalgorithm",
+    "socialmedia",
+    "artistsoninstagram",
+    "hsw365media"
+  ]
+}

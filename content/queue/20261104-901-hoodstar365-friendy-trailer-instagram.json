@@ -1,0 +1,155 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "friendy",
+  "platform": "instagram",
+  "shots_dir": "content/shots/friendy-3am",
+  "accent": "#a855f7",
+  "title": "FRIENDY",
+  "presents": "HSW365 MEDIA PRESENTS",
+  "open": {
+    "shot": "phone",
+    "impact": "3:12 AM",
+    "cy": 0.6,
+    "zoom": [
+      1.0,
+      1.14
+    ]
+  },
+  "scenes": [
+    {
+      "shot": "bed",
+      "sub": "Everybody's asleep. Who do I call?",
+      "cy": 0.35,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    },
+    {
+      "shot": "kitchen",
+      "sub": "I can't put this on my family.",
+      "cy": 0.3,
+      "zoom": [
+        1.1,
+        1.24
+      ]
+    },
+    {
+      "card": {
+        "title": "Messages · 3:12 AM",
+        "tag": "NO REPLY",
+        "rows": [
+          [
+            "Mom",
+            "asleep"
+          ],
+          [
+            "Big bro",
+            "asleep"
+          ],
+          [
+            "Group chat",
+            "seen 11:48 PM"
+          ]
+        ]
+      },
+      "bg": "window"
+    },
+    {
+      "shot": "window",
+      "sub": "I just need to say it out loud.",
+      "cy": 0.3,
+      "zoom": [
+        1.12,
+        1.26
+      ],
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "TALK",
+      "shot": "typing",
+      "cy": 0.35,
+      "zoom": [
+        1.0,
+        1.12
+      ]
+    },
+    {
+      "word": "IT",
+      "shot": "typing",
+      "cy": 0.35,
+      "panel": {
+        "label": "FRIENDY",
+        "title": "Dre · online",
+        "working": "Listening...",
+        "done": "Talked it through",
+        "steps": [
+          "Vent",
+          "Keep it real",
+          "Next step"
+        ]
+      }
+    },
+    {
+      "word": "OUT",
+      "shot": "walk",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "warm": true
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "HEARD",
+    "cy": 0.6
+  },
+  "payoff": [
+    {
+      "shot": "walk",
+      "cy": 0.4,
+      "warm": true,
+      "zoom": [
+        1.0,
+        1.08
+      ]
+    },
+    {
+      "shot": "dawn",
+      "sub": "Turn negative into positive.",
+      "cy": 0.35,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "FRIEND",
+      "Y"
+    ],
+    "tagline": "Someone to talk to. Any hour.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "3 DAYS FREE  ·  THEN FROM $8/MO",
+      "hsw365.github.io/FRIENDY"
+    ],
+    "fine": "AI companion app for adults 18+. Not therapy.",
+    "link": "https://hsw365.github.io/FRIENDY/?signup"
+  },
+  "caption": "3:12 AM, everybody's asleep, and he can't put it on his family. Friendy is someone to talk to any hour: five friends who listen, keep it real and help you turn negative into positive. 3 days free, then from $8 a month. Scan the QR to sign up, or go to hsw365.github.io/FRIENDY (link in bio).",
+  "hashtags": [
+    "friendy",
+    "someonetotalkto",
+    "nightowl",
+    "turnnegativeintopositive",
+    "hsw365media"
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "queenee",
+  "platform": "instagram",
+  "shots_dir": "content/shots/queenee-notfound",
+  "accent": "#22d3ee",
+  "title": "QUEENEE",
+  "presents": "HSW365 MEDIA PRESENTS",
+  "open": {
+    "shot": "grill",
+    "impact": "NOT FOUND",
+    "cy": 0.45,
+    "zoom": [
+      1.0,
+      1.14
+    ]
+  },
+  "scenes": [
+    {
+      "shot": "truck",
+      "sub": "Best oxtail in the city. Nobody knows.",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.16
+      ]
+    },
+    {
+      "shot": "customer",
+      "sub": "No website? Is this place even legit?",
+      "cy": 0.32,
+      "zoom": [
+        1.08,
+        1.2
+      ]
+    },
+    {
+      "card": {
+        "title": "Search · food near me",
+        "tag": "MISSING",
+        "rows": [
+          [
+            "Your truck",
+            "no website"
+          ],
+          [
+            "Chain across the street",
+            "menu · hours · site"
+          ],
+          [
+            "Your Instagram",
+            "not a website"
+          ]
+        ]
+      },
+      "bg": "customer"
+    },
+    {
+      "shot": "her",
+      "sub": "I'm done being invisible.",
+      "cy": 0.3,
+      "zoom": [
+        1.12,
+        1.26
+      ],
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "OPEN",
+      "shot": "laptop",
+      "cy": 0.5,
+      "zoom": [
+        1.0,
+        1.12
+      ]
+    },
+    {
+      "word": "FOR",
+      "shot": "laptop",
+      "cy": 0.5,
+      "panel": {
+        "label": "QUEENEE",
+        "title": "Building your website",
+        "working": "Building...",
+        "done": "Your site is ready",
+        "steps": [
+          "Menu",
+          "Hours",
+          "Contact"
+        ]
+      }
+    },
+    {
+      "word": "BUSINESS",
+      "shot": "line",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.16
+      ],
+      "warm": true
+    }
+  ],
+  "callback": {
+    "shot": "grill",
+    "impact": "FOUND",
+    "cy": 0.45
+  },
+  "payoff": [
+    {
+      "shot": "line",
+      "cy": 0.45,
+      "warm": true,
+      "zoom": [
+        1.0,
+        1.08
+      ]
+    },
+    {
+      "shot": "hero",
+      "sub": "Turn negative into positive.",
+      "cy": 0.33,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "QUEEN",
+      "EE"
+    ],
+    "tagline": "A professional website for your business.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "CALLTWIN AVAILABLE AS AN ADD-ON",
+      "hsw365.github.io/queenee"
+    ],
+    "link": "https://hsw365.github.io/queenee/#signup"
+  },
+  "caption": "Best food on the block, and nobody could find her online. QUEENEE builds a professional website for your business, with CallTwin available as an add-on. Your Instagram is not a website. Scan the QR to sign up, or go to hsw365.github.io/queenee (link in bio).",
+  "hashtags": [
+    "queenee",
+    "smallbusiness",
+    "websitedesign",
+    "foodtruck",
+    "hsw365media"
+  ]
+}
