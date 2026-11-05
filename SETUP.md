@@ -146,3 +146,11 @@ Edit `config/shopifyad.json` with the product handle (or full product URL) and c
 It reads the product from the store's public feed, picks a micro-drama playbook (beauty, wellness, apparel, tech/default),
 makes the shots, records the narrator (ElevenLabs), renders the trailer, and the end-card QR goes straight to checkout.
 Fine-tune any product's card rows, narrator lines, accent or tagline in `config/shopify_ads.json`.
+
+## Sales Agent (`sales.html`)
+"Get me customers": pick one of the 16 offers (every HSW365 app, the AI Front Office package, affiliates, investors), type who to
+target and where. The page searches OpenStreetMap in your browser, the `irun-sales` edge function pulls each business's email off
+its own website, and every lead gets its own personal draft. Read or edit any draft, then **Approve & send**: up to 30 go out
+right away through the CallTwin mail relay (daily cap `irun_settings.agent_daily_cap`, default 150), the rest on the next hourly
+Sales Autopilot run. Follow-ups go out automatically after 4 days, replies are answered (or flagged "Needs you") by `engine/sales.py`.
+"Add your own list" drafts emails to people you already have (investors, partners). Unlock it with the owner key.

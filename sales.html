@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0f">
+<title>iRun Sales Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--panel:#12121a;--panel2:#171722;--line:#25253a;--text:#f2f2f7;--muted:#8a8aa0;--cyan:#22d3ee;--violet:#a855f7;--red:#ef4444;--yellow:#fbbf24;--green:#34d399}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+body{background:radial-gradient(900px 500px at 85% -10%,rgba(168,85,247,.14),transparent 60%),radial-gradient(700px 400px at -10% 10%,rgba(34,211,238,.08),transparent 60%),var(--bg);min-height:100vh}
+a{color:var(--cyan)}
+.wrap{max-width:1100px;margin:0 auto;padding:16px 16px 120px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0 14px}
+.logo{font:800 30px 'Barlow Condensed',sans-serif;letter-spacing:1px}.logo b{color:var(--cyan)}
+.mono{font:700 11px 'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;gap:6px;overflow-x:auto;margin-bottom:18px}
+nav a{flex:0 0 auto;background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:9px 14px;border-radius:999px;font:600 14px Inter,sans-serif;text-decoration:none}
+nav a.on{color:var(--text);border-color:var(--violet)}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:18px}
+h1{font:800 clamp(30px,5vw,46px)/1.02 'Barlow Condensed',sans-serif;letter-spacing:.5px;margin:4px 0 6px}
+h1 span{background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 16px}
+.ask{display:grid;grid-template-columns:1fr;gap:10px}
+.prompt{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:6px 6px 6px 14px;box-shadow:0 0 0 1px rgba(168,85,247,.15),0 10px 40px -20px rgba(168,85,247,.6)}
+.prompt:focus-within{border-color:var(--violet)}
+.prompt input{flex:1;min-width:0;background:none;border:0;color:var(--text);font:500 16px Inter,sans-serif;padding:10px 0;outline:none}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.field{flex:1 1 180px;display:flex;flex-direction:column;gap:5px}
+label{font:700 10px 'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 12px;font:500 15px Inter,sans-serif;outline:none;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--violet)}
+textarea{min-height:120px;resize:vertical;font:13px/1.5 'Space Mono',monospace}
+.btn{border:0;border-radius:11px;padding:11px 18px;font:700 15px Inter,sans-serif;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--violet),#6366f1);white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.go{background:linear-gradient(135deg,#10b981,#059669)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--text)}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:9px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:7px 12px;font:600 13px Inter,sans-serif;cursor:pointer}
+.chip.on{color:var(--text);border-color:var(--violet);background:rgba(168,85,247,.12)}
+.log{margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.log div{display:flex;gap:8px;align-items:flex-start;color:var(--muted)}
+.log div.ok{color:var(--text)}.log div.err{color:var(--red)}
+.log i{font-style:normal;width:18px;flex:0 0 18px;text-align:center}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--cyan);border-radius:50%;animation:s 0.8s linear infinite;margin-top:4px}
+@keyframes s{to{transform:rotate(360deg)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer}
+.stat.on{border-color:var(--violet)}
+.stat b{display:block;font:800 28px 'Barlow Condensed',sans-serif}
+.stat span{font:700 10px 'Space Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.pipe-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 10px}
+.pipe-head h2{font:800 28px 'Barlow Condensed',sans-serif;margin:0}.pipe-head h2 b{color:#4ade80}
+.bulk{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tbl{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
+.tr{display:grid;grid-template-columns:34px minmax(0,1.6fr) minmax(0,1.5fr) minmax(0,1fr) 110px 104px;gap:10px;align-items:center;padding:11px 14px;border-top:1px solid var(--line);cursor:pointer}
+.tr:first-child{border-top:0}
+.tr.h{cursor:default;background:var(--panel2);font:700 10px 'Space Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.tr:not(.h):hover{background:rgba(255,255,255,.025)}
+.biz{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.biz small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+.em{color:var(--cyan);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dim{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{display:inline-block;border-radius:999px;padding:3px 9px;font:700 11px Inter,sans-serif;border:1px solid var(--line);white-space:nowrap}
+.st-draft{color:var(--yellow);border-color:rgba(251,191,36,.35)}.st-approved{color:#a78bfa;border-color:rgba(167,139,250,.4)}
+.st-sent,.st-followed_up{color:var(--cyan);border-color:rgba(34,211,238,.35)}.st-hot{color:#4ade80;border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.08)}
+.st-needs_owner{color:#fb923c;border-color:rgba(251,146,60,.45)}.st-skipped,.st-bounced,.st-unsubscribed,.st-new{color:var(--muted)}
+input[type=checkbox]{width:17px;height:17px;accent-color:var(--violet);cursor:pointer}
+.drawer{grid-column:1/-1;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:4px 0 6px;cursor:default}
+.mail{background:#fff;color:#111;border-radius:10px;padding:16px 18px;font:15px/1.55 Helvetica,Arial,sans-serif;outline:none;min-height:120px}
+.mail:focus{box-shadow:0 0 0 2px var(--violet)}
+.mail a{color:#2563eb}
+.dact{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;justify-content:flex-end}
+.empty{padding:34px;text-align:center;color:var(--muted)}
+details.card{margin-top:16px}details.card summary{cursor:pointer;font:800 20px 'Barlow Condensed',sans-serif;list-style:none}
+details.card summary::after{content:"+";float:right;color:var(--muted)}details[open].card summary::after{content:"–"}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;border:1px solid var(--line);color:var(--text);padding:12px 18px;border-radius:12px;font-weight:600;box-shadow:0 20px 50px -10px #000;z-index:9;max-width:92vw}
+.gate{max-width:460px;margin:60px auto}
+[hidden]{display:none!important}
+@media (max-width:760px){
+  .tr{grid-template-columns:28px minmax(0,1fr) 96px}
+  .tr .em,.tr .dim,.tr .appc{display:none}
+  .tr.h .c3,.tr.h .c4,.tr.h .c5{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="logo">iRUN <b>SALES AGENT</b></div><span class="mono" id="cap">HSW365 Media</span></header>
+  <nav>
+    <a href="app.html">Studio</a>
+    <a href="sales.html" class="on">Sales Agent</a>
+    <a href="adstudio.html">Ad Studio</a>
+    <a href="team.html">AI Team</a>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+
+  <div class="card gate" id="gate" hidden>
+    <h1>Owner <span>key</span></h1>
+    <p class="sub">Paste your iRun owner key once. It stays on this device.</p>
+    <div class="row"><input id="keyIn" placeholder="Owner key" autocomplete="off"><button class="btn" id="keySave">Unlock</button></div>
+  </div>
+
+  <main id="main" hidden>
+    <section class="card">
+      <h1>Get me <span>customers.</span></h1>
+      <p class="sub">Pick the app, say who to target and where. iRun finds the businesses, pulls their emails, writes a personal message to every one of them and waits for your approval. Follow-ups go out automatically.</p>
+      <div class="ask">
+        <div class="chips" id="apps"></div>
+        <div class="prompt">
+          <span style="font-size:18px">✦</span>
+          <input id="who" placeholder="Who to target, e.g. barbershops, churches, plumbers, gyms">
+          <button class="btn" id="find">Find customers</button>
+        </div>
+        <div class="row">
+          <div class="field"><label>Where</label><input id="where" value="Vineland, NJ"></div>
+          <div class="field" style="flex:0 1 140px"><label>How many</label><select id="limit"><option>10</option><option selected>25</option><option>40</option><option>60</option></select></div>
+        </div>
+      </div>
+      <div class="log" id="log"></div>
+    </section>
+
+    <details class="card" id="ownBox">
+      <summary>Add your own list (investors, partners, contacts)</summary>
+      <p class="sub" style="margin-top:10px">One per line: <code>email, contact name, company, note</code>. Only email is required. Pick the app above first; for investors choose <b>HSW365 Investor Partners</b>.</p>
+      <textarea id="own" placeholder="swaters@jumpstartnj.org, , JumpStart NJ Angel Network&#10;team@veteran.fund, , The Veteran Fund"></textarea>
+      <div class="dact"><button class="btn" id="ownAdd">Write drafts</button></div>
+    </details>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="pipe-head">
+      <h2>Outreach <b>Pipeline</b></h2>
+      <div class="bulk">
+        <select id="camp" style="width:auto;max-width:260px"><option value="">All campaigns</option></select>
+        <button class="btn ghost sm" id="selAll">Select all</button>
+        <button class="btn ghost sm" id="skipSel">Skip</button>
+        <button class="btn go sm" id="appSel">Approve &amp; send</button>
+      </div>
+    </div>
+    <div class="tbl" id="tbl"></div>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-sales";
+const $ = (id) => document.getElementById(id);
+const ls = { get(k, d = "") { try { return localStorage.getItem(k) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+let OWNER = ls.get("irun_owner");
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const toast = (t) => { const el = $("toast"); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (el.hidden = true), 4500); };
+async function api(a, body = {}) {
+  const r = await fetch(API, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ a, owner: OWNER, ...body }) });
+  const j = await r.json().catch(() => ({ error: "Bad response" }));
+  if (r.status === 401) { $("gate").hidden = false; $("main").hidden = true; }
+  if (j.error) throw new Error(j.error);
+  return j;
+}
+
+// ------------------------------------------------ targeting (OpenStreetMap)
+const GROUPS = {
+  trades: [["craft", "plumber|hvac|roofer|electrician|carpenter|painter|builder|tiler|floorer|glaziery|locksmith|cleaning|insulation|handyman|landscaper|gardener"], ["office", "construction_company|contractor"]],
+  shops: [["shop", "hairdresser|beauty|clothes|boutique|florist|bakery|jewelry|shoes|cosmetics|tattoo|gift"]],
+  food: [["amenity", "restaurant|cafe|fast_food|bar|ice_cream"]],
+  health: [["amenity", "dentist|clinic|doctors|veterinary"], ["healthcare", "chiropractor|physiotherapist|dentist"]],
+  fitness: [["leisure", "fitness_centre|sports_centre"], ["sport", "yoga|pilates|fitness|martial_arts|boxing"]],
+  beauty: [["shop", "hairdresser|beauty|massage|cosmetics|tattoo"], ["leisure", "spa"]],
+  auto: [["shop", "car|car_repair|tyres|motorcycle"]],
+  realestate: [["office", "estate_agent|property_management|mortgage"]],
+  gaming: [["shop", "games|video_games|computer"], ["amenity", "internet_cafe"], ["leisure", "amusement_arcade"]],
+  music: [["amenity", "studio|music_school"], ["shop", "music|musical_instrument"]],
+  worship: [["amenity", "place_of_worship"]],
+  venues: [["amenity", "events_venue|theatre|nightclub|conference_centre"]],
+  schools: [["amenity", "school|college|university"]],
+  sports: [["leisure", "sports_centre|stadium"]],
+  community: [["amenity", "community_centre|social_centre|social_facility"], ["office", "ngo|association|charity"]],
+};
+const TARGETS = { calltwin: ["trades"], queenee: ["shops", "food"], ultimate: ["trades", "shops", "food", "health"], operator: ["food", "shops", "fitness"],
+  irun: ["shops", "fitness", "beauty"], dispute365: ["auto", "realestate"], flipit: ["realestate"], klipit: ["gaming"], studio: ["music"],
+  stream: ["worship", "venues"], nil: ["schools", "sports"], captureitlive: ["fitness"], speekzone: ["community"], friendy: ["community"],
+  affiliate: ["shops", "fitness", "beauty"], investor: [] };
+const EXAMPLES = { calltwin: "plumbers, HVAC, roofers", queenee: "barbershops, salons, restaurants", ultimate: "contractors, dentists", operator: "restaurants, boutiques",
+  irun: "gyms, boutiques", dispute365: "car dealers, realtors", flipit: "real estate agents", klipit: "gaming lounges", studio: "music studios",
+  stream: "churches", nil: "high schools", captureitlive: "yoga studios", speekzone: "community centers", friendy: "senior centers",
+  affiliate: "boutiques, gyms", investor: "use “Add your own list” below" };
+const WORDS = [
+  [/barber|hair/i, [["shop", "hairdresser"]]], [/nail|salon|beauty|lash|brow/i, [["shop", "beauty|hairdresser"]]],
+  [/spa|massage/i, [["leisure", "spa"], ["shop", "massage"]]], [/tattoo/i, [["shop", "tattoo"]]],
+  [/restaurant|food|diner|pizza|grill/i, [["amenity", "restaurant|fast_food"]]], [/cafe|coffee/i, [["amenity", "cafe"]]],
+  [/\bbars?\b|lounge|pub/i, [["amenity", "bar|pub"]]], [/baker/i, [["shop", "bakery|pastry"]]],
+  [/gym|fitness|crossfit/i, [["leisure", "fitness_centre"], ["sport", "fitness"]]], [/yoga|pilates/i, [["sport", "yoga|pilates"]]],
+  [/boxing|martial|karate|jiu/i, [["sport", "boxing|martial_arts|karate"]]],
+  [/plumb/i, [["craft", "plumber"]]], [/hvac|heating|air cond/i, [["craft", "hvac"]]], [/roof/i, [["craft", "roofer"]]],
+  [/electric/i, [["craft", "electrician"]]], [/contractor|construction|builder|remodel/i, [["office", "construction_company|contractor"], ["craft", "builder|carpenter"]]],
+  [/landscap|lawn|garden/i, [["craft", "landscaper|gardener"]]], [/clean/i, [["craft", "cleaning"]]], [/paint/i, [["craft", "painter"]]],
+  [/locksmith/i, [["craft", "locksmith"]]], [/auto|mechanic|car repair|body shop/i, [["shop", "car_repair|tyres"]]],
+  [/dealer/i, [["shop", "car|motorcycle"]]], [/dentist|dental/i, [["amenity", "dentist"]]], [/chiro/i, [["healthcare", "chiropractor"]]],
+  [/doctor|clinic|medical/i, [["amenity", "clinic|doctors"]]], [/\bvets?\b|veterinar|\bpets?\b/i, [["amenity", "veterinary"], ["shop", "pet|pet_grooming"]]],
+  [/lawyer|attorney|law firm/i, [["office", "lawyer"]]], [/accountant|tax|cpa/i, [["office", "accountant|tax_advisor"]]],
+  [/insurance/i, [["office", "insurance"]]], [/real estate|realtor|realty|broker/i, [["office", "estate_agent"]]],
+  [/mortgage|lender/i, [["office", "mortgage|financial"]]], [/church|ministr|worship|mosque|temple/i, [["amenity", "place_of_worship"]]],
+  [/high school|school|academy/i, [["amenity", "school"]]], [/college|universit/i, [["amenity", "college|university"]]],
+  [/studio|music|record/i, [["amenity", "studio|music_school"], ["shop", "music|musical_instrument"]]],
+  [/boutique|clothing|apparel|streetwear|fashion/i, [["shop", "clothes|boutique|shoes"]]], [/florist|flower/i, [["shop", "florist"]]],
+  [/photograph/i, [["craft", "photographer"], ["shop", "photo"]]], [/daycare|child ?care|preschool/i, [["amenity", "childcare|kindergarten"]]],
+  [/hotel|motel|\binns?\b/i, [["tourism", "hotel|motel|guest_house"]]], [/venue|event|banquet/i, [["amenity", "events_venue|conference_centre"]]],
+  [/gaming|esport|arcade|video game/i, GROUPS.gaming], [/nonprofit|non-profit|charity|community|senior/i, GROUPS.community],
+  [/jewel/i, [["shop", "jewelry"]]], [/funeral/i, [["shop", "funeral_directors"]]], [/storage/i, [["shop", "storage_rental"]]],
+];
+const EMAIL = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const JUNK = /(example\.|sentry|wixpress|noreply|no-reply|donotreply|privacy|abuse|postmaster|webmaster)/i;
+const filtersFor = (app, who) => { const h = WORDS.filter(([re]) => re.test(who)).flatMap(([, f]) => f); return h.length ? h : (TARGETS[app] ?? []).flatMap((g) => GROUPS[g]); };
+
+async function geocode(where) {
+  const j = await fetch(`https://photon.komoot.io/api/?limit=5&q=${encodeURIComponent(where)}`).then((r) => r.json());
+  const f = (j.features ?? []).find((x) => x.properties?.countrycode === "US") ?? j.features?.[0];
+  if (!f) throw new Error(`Couldn't find "${where}". Try "City, ST".`);
+  const [lon, lat] = f.geometry.coordinates;
+  let [w, n, e, s] = (f.properties.extent ?? [lon - .05, lat + .05, lon + .05, lat - .05]).map(Number);
+  if (n - s < 0.3) { s -= .3; n += .3; w -= .3; e += .3; } // a town: widen to about 25 miles around
+  return { bbox: [s, w, n, e].map((x) => x.toFixed(4)).join(","), label: [f.properties.name, f.properties.state].filter(Boolean).join(", ") };
+}
+async function overpass(q) {
+  for (const url of ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]) {
+    try {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 70000);
+      const r = await fetch(url, { method: "POST", body: "data=" + encodeURIComponent(q), headers: { "Content-Type": "application/x-www-form-urlencoded" }, signal: ctl.signal });
+      clearTimeout(t);
+      if (r.ok) return (await r.json()).elements ?? [];
+    } catch {}
+  }
+  throw new Error("The map service is busy. Try again in a minute.");
+}
+
+// ------------------------------------------------ UI state
+let APPS = [], APP = ls.get("sa_app", "calltwin"), FILTER = ls.get("sa_filter", "draft"), ROWS = [], SEL = new Set(), OPEN = null, CAMP = "";
+const STATUS = { draft: "Drafts", approved: "Approved", sent: "Sent", followed_up: "Followed up", hot: "Replied", needs_owner: "Needs you", all: "All" };
+const label = (s) => ({ draft: "Draft", approved: "Approved", sent: "Sent", followed_up: "Followed up", hot: "Replied", needs_owner: "Needs you", skipped: "Skipped", bounced: "Bounced", unsubscribed: "Unsubscribed", new: "Queued" }[s] ?? s);
+const appName = (id) => (APPS.find((a) => a.id === id)?.name ?? id ?? "CallTwin");
+
+function log(text, cls = "") { const d = document.createElement("div"); d.className = cls; d.innerHTML = `<i>${cls === "run" ? '<span class="spin"></span>' : cls === "err" ? "✕" : "✓"}</i><span>${text}</span>`; $("log").appendChild(d); return d; }
+function done(d, text, cls = "ok") { d.className = cls; d.innerHTML = `<i>${cls === "err" ? "✕" : "✓"}</i><span>${text}</span>`; }
+
+function renderApps() {
+  $("apps").innerHTML = APPS.map((a) => `<button class="chip${a.id === APP ? " on" : ""}" data-id="${a.id}" title="${esc(a.hook)}">${esc(a.name)}</button>`).join("");
+  $("apps").querySelectorAll(".chip").forEach((b) => (b.onclick = () => { APP = b.dataset.id; ls.set("sa_app", APP); renderApps(); }));
+  $("who").placeholder = `Who to target for ${appName(APP)}, e.g. ${EXAMPLES[APP] ?? "barbershops"}`;
+}
+
+async function find() {
+  const who = $("who").value.trim(), where = $("where").value.trim() || "Vineland, NJ", limit = +$("limit").value;
+  if (APP === "investor") { $("ownBox").open = true; return toast("Investors aren't on the map. Paste their emails in “Add your own list”."); }
+  const filters = filtersFor(APP, who);
+  if (!filters.length) return toast("Say who to target, e.g. barbershops.");
+  $("find").disabled = true; $("log").innerHTML = "";
+  try {
+    let step = log(`Finding ${esc(who || appName(APP) + " prospects")} around ${esc(where)}…`, "run");
+    const { bbox, label: place } = await geocode(where);
+    const els = await overpass(`[out:json][timeout:60];(${filters.map(([k, re]) => `nwr["${k}"~"^(${re})$"]["name"](${bbox});`).join("")});out tags 2000;`);
+    const known = new Set(ROWS.map((r) => r.email));
+    const leads = [], sites = [], seen = new Set();
+    const mk = (t, email) => ({ email, business: t.name, website: t.website || t["contact:website"] || "", city: t["addr:city"] || "", state: t["addr:state"] || "",
+      trade: (t.craft || t.shop || t.amenity || t.office || t.leisure || t.sport || t.healthcare || t.tourism || "local business").replace(/_/g, " ") });
+    for (const el of els) {
+      const t = el.tags || {}; const e = (t.email || t["contact:email"] || "").split(";")[0].trim().toLowerCase();
+      if (e && EMAIL.test(e) && !JUNK.test(e)) { if (!seen.has(e) && !known.has(e)) { seen.add(e); leads.push(mk(t, e)); } }
+      else if (t.website || t["contact:website"]) sites.push(t);
+    }
+    done(step, `Found <b>${els.length}</b> businesses in ${esc(place)}. ${leads.length} list an email, ${sites.length} have a website.`);
+    if (leads.length < limit && sites.length) {
+      step = log(`Reading their websites for contact emails…`, "run");
+      let found = 0;
+      for (let i = 0; i < sites.length && leads.length < limit; i += 20) {
+        const chunk = sites.slice(i, i + 20);
+        const { emails } = await api("scrape", { sites: chunk.map((t) => t.website || t["contact:website"]) });
+        for (const t of chunk) { const e = emails[t.website || t["contact:website"]]; if (e && !seen.has(e) && !known.has(e)) { seen.add(e); leads.push(mk(t, e)); found++; } }
+        step.querySelector("span").innerHTML = `Reading their websites for contact emails… ${Math.min(i + 20, sites.length)}/${sites.length} checked, ${found} found`;
+      }
+      done(step, `Pulled <b>${found}</b> more emails from their websites.`);
+    }
+    if (!leads.length) { log("No new businesses with an email there. Try a bigger area or another niche.", "err"); return; }
+    step = log(`Writing a personal message for each of the ${Math.min(leads.length, limit)} businesses…`, "run");
+    const campaign = `${APP}:${who || appName(APP)}:${place}`.slice(0, 120);
+    const r = await api("add", { app: APP, source: "agent", campaign, rows: leads.slice(0, limit) });
+    done(step, `<b>${r.added}</b> drafts ready below. Read them, then hit <b>Approve &amp; send</b>.`);
+    FILTER = "draft"; CAMP = campaign; SEL = new Set(r.leads.map((l) => l.email)); await load();
+  } catch (e) { log(esc(e.message), "err"); } finally { $("find").disabled = false; }
+}
+
+async function addOwn() {
+  const rows = $("own").value.split("\n").map((l) => l.split(",").map((x) => x.trim())).filter((p) => p[0])
+    .map(([email, contact, business, ...note]) => ({ email, contact, business, note: note.join(", ") }));
+  if (!rows.length) return toast("Paste at least one email.");
+  $("ownAdd").disabled = true;
+  try {
+    const campaign = `${APP}:own list:${new Date().toISOString().slice(0, 10)}`;
+    const r = await api("add", { app: APP, campaign, rows });
+    toast(`${r.added} drafts written for ${appName(APP)}.`); $("own").value = "";
+    FILTER = "draft"; CAMP = campaign; SEL = new Set(r.leads.map((l) => l.email)); await load();
+  } catch (e) { toast(e.message); } finally { $("ownAdd").disabled = false; }
+}
+
+async function load() {
+  const st = FILTER === "all" ? "" : FILTER === "sent" ? "sent" : FILTER;
+  const j = await api("list", { status: st, campaign: CAMP || undefined });
+  ROWS = j.rows;
+  $("cap").textContent = `${j.sent_today}/${j.cap} sent today`;
+  const c = j.counts;
+  $("stats").innerHTML = Object.entries(STATUS).map(([k, v]) => `<div class="stat${k === FILTER ? " on" : ""}" data-k="${k}"><b>${k === "all" ? Object.values(c).reduce((a, b) => a + b, 0) : c[k] ?? 0}</b><span>${v}</span></div>`).join("");
+  $("stats").querySelectorAll(".stat").forEach((s) => (s.onclick = () => { FILTER = s.dataset.k; ls.set("sa_filter", FILTER); SEL.clear(); load(); }));
+  const camps = Object.entries(j.campaigns).sort();
+  $("camp").innerHTML = `<option value="">All campaigns</option>` + camps.map(([k, n]) => `<option value="${esc(k)}"${k === CAMP ? " selected" : ""}>${esc(k.split(":").slice(1).join(" · ") || k)} (${appName(k.split(":")[0])}) · ${n}</option>`).join("");
+  render();
+}
+
+function render() {
+  const can = FILTER === "draft" || FILTER === "approved";
+  $("appSel").hidden = $("skipSel").hidden = $("selAll").hidden = !can;
+  if (!ROWS.length) { $("tbl").innerHTML = `<div class="empty">${FILTER === "draft" ? "No drafts waiting. Tell iRun who to go find above." : "Nothing here yet."}</div>`; return; }
+  $("tbl").innerHTML = `<div class="tr h"><span></span><span>Business</span><span class="c3">Email</span><span class="c4">Type · City</span><span class="c5">App</span><span>Status</span></div>` +
+    ROWS.map((r) => `<div class="tr" data-e="${esc(r.email)}">
+      <span>${can ? `<input type="checkbox" ${SEL.has(r.email) ? "checked" : ""}>` : ""}</span>
+      <span class="biz">${esc(r.business)}<small>${esc(r.subject || r.last_subject || "")}</small></span>
+      <span class="em">${esc(r.email)}</span>
+      <span class="dim">${esc([r.trade, r.city].filter(Boolean).join(" · "))}</span>
+      <span class="dim appc">${esc(appName(r.product))}</span>
+      <span><span class="tag st-${r.status}">${label(r.status)}</span></span>
+    </div>${OPEN === r.email ? drawer(r) : ""}`).join("");
+  $("tbl").querySelectorAll(".tr[data-e]").forEach((row) => {
+    const e = row.dataset.e, cb = row.querySelector("input");
+    if (cb) cb.onclick = (ev) => { ev.stopPropagation(); cb.checked ? SEL.add(e) : SEL.delete(e); };
+    row.onclick = () => { OPEN = OPEN === e ? null : e; render(); };
+  });
+  const d = $("tbl").querySelector(".drawer");
+  if (d) {
+    const r = ROWS.find((x) => x.email === OPEN);
+    d.onclick = (ev) => ev.stopPropagation();
+    d.querySelector("[data-a=save]")?.addEventListener("click", async () => { await saveDraft(r, d); toast("Saved."); });
+    d.querySelector("[data-a=approve]")?.addEventListener("click", async () => { await saveDraft(r, d); await approve([r.email]); });
+    d.querySelector("[data-a=skip]")?.addEventListener("click", () => skip([r.email]));
+  }
+}
+function drawer(r) {
+  const edit = r.status === "draft" || r.status === "approved";
+  return `<div class="drawer">
+    <div class="row" style="margin-bottom:10px"><div class="field"><label>To</label><input value="${esc(r.email)}" disabled></div>
+      <div class="field" style="flex:2 1 300px"><label>Subject</label><input data-f="subject" value="${esc(r.subject || r.last_subject || "")}" ${edit ? "" : "disabled"}></div></div>
+    <label>Message</label>
+    <div class="mail" data-f="body" ${edit ? 'contenteditable="true"' : ""}>${r.body || "<p><i>Sent by the classic Sales Autopilot.</i></p>"}<p style="color:#555">Elvin Torres Sr.<br>Founder, HSW365 Media LLC · Veteran-owned<br>hsw365.co</p></div>
+    ${r.last_reply ? `<label style="display:block;margin-top:12px">Their reply</label><div class="mail" style="background:#f0fdf4">${esc(r.last_reply)}</div>` : ""}
+    ${r.website ? `<p class="dim" style="margin:10px 0 0">Website: <a href="${esc(/^https?:/.test(r.website) ? r.website : "https://" + r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a></p>` : ""}
+    ${edit ? `<div class="dact"><button class="btn ghost sm" data-a="skip">Skip</button><button class="btn ghost sm" data-a="save">Save</button><button class="btn go sm" data-a="approve">Approve &amp; send</button></div>` : ""}
+  </div>`;
+}
+async function saveDraft(r, d) {
+  const body = d.querySelector("[data-f=body]").cloneNode(true);
+  body.lastElementChild?.remove(); // the signature preview is added at send time
+  const subject = d.querySelector("[data-f=subject]").value.trim();
+  await api("edit", { email: r.email, subject, body: body.innerHTML });
+  r.subject = subject; r.body = body.innerHTML;
+}
+async function approve(emails) {
+  if (!emails.length) return toast("Select at least one lead.");
+  $("appSel").disabled = true; toast(`Sending ${emails.length}…`);
+  try {
+    const r = await api("approve", { emails });
+    toast(`${r.sent} sent${r.queued ? `, ${r.queued} queued for the next hourly run` : ""}${r.bounced ? `, ${r.bounced} bounced` : ""}. Follow-ups go out automatically in 4 days.`);
+    SEL.clear(); OPEN = null; await load();
+  } catch (e) { toast(e.message); } finally { $("appSel").disabled = false; }
+}
+async function skip(emails) {
+  if (!emails.length) return toast("Select at least one lead.");
+  const r = await api("reject", { emails }); toast(`${r.rejected} skipped.`); SEL.clear(); OPEN = null; await load();
+}
+
+$("find").onclick = find;
+$("who").addEventListener("keydown", (e) => { if (e.key === "Enter") find(); });
+$("ownAdd").onclick = addOwn;
+$("appSel").onclick = () => approve([...SEL]);
+$("skipSel").onclick = () => skip([...SEL]);
+$("selAll").onclick = () => { const all = ROWS.every((r) => SEL.has(r.email)); ROWS.forEach((r) => (all ? SEL.delete(r.email) : SEL.add(r.email))); render(); };
+$("camp").onchange = () => { CAMP = $("camp").value; SEL.clear(); load(); };
+$("keySave").onclick = () => { OWNER = $("keyIn").value.trim(); ls.set("irun_owner", OWNER); boot(); };
+
+async function boot() {
+  if (!OWNER) { $("gate").hidden = false; return; }
+  try {
+    const j = await api("apps");
+    APPS = j.apps; $("gate").hidden = true; $("main").hidden = false;
+    if (!APPS.find((a) => a.id === APP)) APP = "calltwin";
+    renderApps(); await load();
+  } catch (e) { toast(e.message); }
+}
+boot();
+</script>
+</body>
+</html>

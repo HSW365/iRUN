@@ -279,6 +279,8 @@ def first_email(l):
 
 
 def followup_email(l):
+    if l.get("followup_body"):
+        return "Re: " + (l.get("last_subject") or l.get("subject") or l["business"]), wrap(l["followup_body"])
     inner = (f"<p>Hi {html.escape((l.get('contact') or '').strip() or l['business'] + ' team')},</p>"
              "<p>Following up on my note about answering every call and getting a website that books jobs. "
              "Both brochures with full pricing:</p>"
@@ -326,14 +328,17 @@ def outreach():
     room = DAILY_CAP - sent_today()
     if room <= 0:
         return 0
-    stock_leads(room)
-    batch = db.select("irun_sales_leads", f"status=eq.new&select=*&order=created_at.asc&limit={room}")
+    # Sales Agent leads the owner approved in sales.html go first, with their own personal draft.
+    batch = db.select("irun_sales_leads", f"status=eq.approved&select=*&order=approved_at.asc&limit={room}")
+    if len(batch) < room:
+        stock_leads(room - len(batch))
+        batch += db.select("irun_sales_leads", f"status=eq.new&select=*&order=created_at.asc&limit={room - len(batch)}")
     sent = 0
     for l in batch:
         if suppressed(l["email"]):
             save(l["email"], status="unsubscribed")
             continue
-        subject, body = first_email(l)
+        subject, body = (l["subject"], wrap(l["body"])) if l.get("body") and l.get("subject") else first_email(l)
         if MODE != "live":
             log("draft", l["email"], subject)
             continue
@@ -412,6 +417,22 @@ def fresh_text(t):
     return "\n".join(lines).strip()[:3000]
 
 
+def product_facts(pid):
+    """Facts for a Sales Agent product, from config/products.json (plus the investor offer)."""
+    if pid == "investor":
+        return ("HSW365 Investor Partners: Elvin is bringing on 4 partners at $25,000 each for equity in the HSW365 app portfolio "
+                "(15 live AI apps incl. iRun, CallTwin, QUEENEE). Never state a percentage, valuation, returns or terms: "
+                "intent=owner for any of those or for a meeting time.")
+    try:
+        with open(os.path.join(os.path.dirname(__file__), "..", "config", "products.json")) as f:
+            for p in json.load(f)["products"]:
+                if p["id"] == pid or (pid == "studio" and p["id"] == "studio"):
+                    return f"{p['name']}: {p['pitch']} Link: {p['link']}"
+    except Exception:
+        pass
+    return f"Product {pid}: answer only general questions; anything specific is intent=owner."
+
+
 def groq_answer(l, text):
     key = os.environ.get("GROQ_API_KEY")
     if not key:
@@ -425,6 +446,9 @@ def groq_answer(l, text):
               "right pay or signup link, and ask for business name, domain if they have one, and best callback number.\n"
               "For question: answer it in 2-5 short sentences, then invite a YES.\n"
               "reply_html: simple <p> paragraphs, no signature, no unsubscribe line, no emojis, no exclamation marks.")
+    if l.get("product") and l["product"] not in ("calltwin", "queenee", "ultimate"):
+        system += ("\n\nThis lead was emailed about a different HSW365 product. Its facts (answer about this product first):\n"
+                   + product_facts(l["product"]))
     user = f"Business: {l.get('business')} ({l.get('trade')}, {l.get('city') or ''} {l.get('state') or ''})\nTheir reply:\n{text}"
     try:
         r = requests.post("https://api.groq.com/openai/v1/chat/completions",
@@ -475,6 +499,12 @@ def handle_reply(l, subject, mid, text):
         return
     if AUTO_RE.search(subject + " " + text[:300]):
         log("auto_reply", addr, subject)
+        return
+    # Investors and non-CallTwin products never get the CallTwin template answers: Elvin answers those himself.
+    if l.get("product") == "investor" or (l.get("product") and l["product"] not in ("calltwin", "queenee", "ultimate")
+                                          and not os.environ.get("GROQ_API_KEY")):
+        save(addr, status="needs_owner")
+        log("needs_owner", addr, f"[{l.get('product')}] {text[:300]}")
         return
     ai = groq_answer(l, text)
     if ai and ai["intent"] == "owner":
