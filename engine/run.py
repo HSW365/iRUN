@@ -141,7 +141,7 @@ def cta_for(acct, product, platform):
             spoken += "."
         spoken += " Join the HSW365 Affiliate Partner Program to earn 20% per subscriber for the full duration of their subscription, subject to program terms."
         screen = (screen[0], "EARN 20% PER SUBSCRIBER")
-        caption = caption.rstrip() + "\\n\\nJoin the HSW365 Affiliate Partner Program and earn 20% per subscriber for the full duration of their subscription, subject to program terms: https://hsw365.co/pages/affiliates"
+        caption = caption.rstrip() + "\n\nJoin the HSW365 Affiliate Partner Program and earn 20% per subscriber for the full duration of their subscription, subject to program terms: https://hsw365.co/pages/affiliates"
 
     return spoken, screen, caption
 
