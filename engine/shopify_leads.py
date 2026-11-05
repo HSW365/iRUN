@@ -181,13 +181,12 @@ def draft(s):
             "<p><b>iRun Shop Team</b> makes a new cinematic video ad for one of your products every day, built from your "
             "own product photos and pages, and posts it to your Instagram. Every ad ends on a QR that opens checkout with "
             "that product already in the cart.</p>"
-            "<p>Your first 3 days are free, then it's $27 a month, about 90 cents a day. No app to install, no login to share, no cut of your sales, "
-            "cancel any time.</p>"
+            "<p>It's free. No card, no app to install, no login to share, no cut of your sales, stop any time.</p>"
             f'<p>See your first week of ads here (it loads your real products): <a href="{link}">{PAGE.split("//")[1]}</a></p>'
             "<p>Or just reply <b>\"YES\"</b> and I'll set your store up myself.</p>")
     follow = (f"<p>Hi {name} team,</p>"
               f"<p>Quick follow-up. Your Day 1 ad for <b>{a}</b> is still waiting. The team makes one every day for "
-              "$27 a month and posts it for you, with a QR straight to checkout.</p>"
+              "free and posts it for you, with a QR straight to checkout.</p>"
               f'<p>Preview your week: <a href="{link}">see your ads</a>. Reply "YES" and I\'ll set it up. '
               "If it's not a fit, no problem.</p>")
     return subject, body, follow

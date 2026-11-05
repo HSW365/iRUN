@@ -69,7 +69,7 @@
     },
     "shopify": {
       "name": "Shop Team",
-      "cents": 2700,
+      "cents": 0,
       "credits": 30,
       "hours": [],
       "shop_ads": true,
@@ -79,14 +79,14 @@
       "outreach": false,
       "outreach_daily_cap": 0,
       "features": [
-        "An AI marketing team for your Shopify store, about 90 cents a day",
+        "Free: an AI marketing team for your Shopify store",
         "A new cinematic trailer ad every day, one product at a time",
         "Built from your own product pages and photos, in your brand",
         "QR on every ad goes straight to checkout for that product",
         "Posted to your Instagram (and TikTok) with caption and hashtags",
         "New products jump the line, sold-out ones are skipped",
         "Nightly AI review of what posted",
-        "30 credits a month, no cut of your sales"
+        "30 ads a month, no cut of your sales"
       ]
     }
   }

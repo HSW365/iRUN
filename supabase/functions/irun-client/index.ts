@@ -266,6 +266,19 @@ Deno.serve(async (req) => {
       return json({ c: nc.id, k: nc.client_key, payment: pay, zelle: z });
     }
 
+    if (b.a === "checkout" && pl.plans[b.plan]?.cents === 0) {
+      // Free plan (Shop Team): no payment. The company starts onboarding within the hour.
+      let nc;
+      try { nc = await newCompany(b, pl, "free"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      if (!nc.owner) {
+        await db.from("irun_companies").update({ status: "pending", credits: nc.plan.credits, paid_until: days(3650),
+          updated_at: new Date().toISOString() }).eq("id", nc.id);
+        await db.from("irun_credit_ledger").insert({ company_id: nc.id, delta: nc.plan.credits, reason: `${nc.plan.name}: free plan`, ref: `free-${nc.id}` });
+        await log(nc.id, "billing", `${nc.plan.name} is free: ${nc.plan.credits} ads loaded. Onboarding starts within the hour.`);
+      }
+      return json({ c: nc.id, k: nc.client_key });
+    }
+
     if (b.a === "checkout") {
       const owner = b.owner_key && b.owner_key === (await setting("owner_key"));
       if ((await setting("billing_live")) !== "on" && !owner) return json({ error: "Sign-up opens soon." }, 403);

@@ -17,44 +17,157 @@
     "packing": "the same young Black woman store owner in the morning packing a shipping box at a sunny workbench, golden window light, confident small smile, warm tones",
     "street": "a young man on a city sidewalk at dusk holding up his phone to scan something, neon green glow on his face, bokeh city lights behind, cinematic"
   },
-  "open": {"shot": "empty", "impact": "UNSEEN", "cy": 0.5, "dur": 2.0},
+  "open": {
+    "shot": "empty",
+    "impact": "UNSEEN",
+    "cy": 0.5,
+    "dur": 2.0
+  },
   "scenes": [
-    {"shot": "screen", "cy": 0.42, "zoom": [1.1, 1.26]},
-    {"shot": "boxes", "cy": 0.45, "zoom": [1.06, 1.18]},
-    {"card": {"title": "iRun Shop Team · your new hires", "tag": "HIRED",
-              "rows": [["Catalog + Director", "reads your store"],
-                       ["Studio", "a new ad daily"],
-                       ["Closer + Poster", "QR to checkout"]]},
-     "bg": "team", "dur": 1.9}
+    {
+      "shot": "screen",
+      "cy": 0.42,
+      "zoom": [
+        1.1,
+        1.26
+      ]
+    },
+    {
+      "shot": "boxes",
+      "cy": 0.45,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    },
+    {
+      "card": {
+        "title": "iRun Shop Team \u00b7 your new hires",
+        "tag": "HIRED",
+        "rows": [
+          [
+            "Catalog + Director",
+            "reads your store"
+          ],
+          [
+            "Studio",
+            "a new ad daily"
+          ],
+          [
+            "Closer + Poster",
+            "QR to checkout"
+          ]
+        ]
+      },
+      "bg": "team",
+      "dur": 1.9
+    }
   ],
   "slams": [
-    {"word": "FILM", "shot": "film", "cy": 0.5, "dur": 1.3},
-    {"word": "POST", "shot": "phone", "dur": 1.55,
-     "panel": {"label": "iRUN SHOP TEAM", "title": "Today's ad", "working": "Reading your catalog...",
-               "done": "Posted · QR to checkout", "steps": ["Pick product", "Make the ad", "Post it"]}},
-    {"word": "SELL", "shot": "street", "cy": 0.45, "zoom": [1.06, 1.18], "dur": 1.4}
+    {
+      "word": "FILM",
+      "shot": "film",
+      "cy": 0.5,
+      "dur": 1.3
+    },
+    {
+      "word": "POST",
+      "shot": "phone",
+      "dur": 1.55,
+      "panel": {
+        "label": "iRUN SHOP TEAM",
+        "title": "Today's ad",
+        "working": "Reading your catalog...",
+        "done": "Posted \u00b7 QR to checkout",
+        "steps": [
+          "Pick product",
+          "Make the ad",
+          "Post it"
+        ]
+      }
+    },
+    {
+      "word": "SELL",
+      "shot": "street",
+      "cy": 0.45,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.4
+    }
   ],
-  "callback": {"shot": "empty", "impact": "SEEN", "warm": true, "cy": 0.5, "dur": 1.3},
+  "callback": {
+    "shot": "empty",
+    "impact": "SEEN",
+    "warm": true,
+    "cy": 0.5,
+    "dur": 1.3
+  },
   "payoff": [
-    {"shot": "team", "cy": 0.45, "dur": 1.2},
-    {"shot": "packing", "cy": 0.4, "zoom": [1.04, 1.12], "warm": true, "dur": 1.8}
+    {
+      "shot": "team",
+      "cy": 0.45,
+      "dur": 1.2
+    },
+    {
+      "shot": "packing",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "warm": true,
+      "dur": 1.8
+    }
   ],
   "vo_lines": [
-    [0.3, "Shopify isn't hard. Marketing it is."],
-    [4.6, "So she hired a whole team. For ninety cents a day."],
-    [8.6, "A new ad for her store. Every single day."],
-    [12.4, "One scan, and it's in the cart."],
-    [16.6, "i Run Shop Team. Scan to hire yours."]
+    [
+      0.3,
+      "Shopify isn't hard. Marketing it is."
+    ],
+    [
+      4.6,
+      "So she hired a whole team. For free."
+    ],
+    [
+      8.6,
+      "A new ad for her store. Every single day."
+    ],
+    [
+      12.4,
+      "One scan, and it's in the cart."
+    ],
+    [
+      16.6,
+      "i Run Shop Team. Scan to hire yours."
+    ]
   ],
   "end_dur": 4.0,
   "end": {
-    "wordmark": ["iRUN ", "SHOP TEAM"],
+    "wordmark": [
+      "iRUN ",
+      "SHOP TEAM"
+    ],
     "tagline": "Your Shopify store's AI marketing team.",
-    "cta": "SCAN TO HIRE YOUR TEAM",
-    "lines": ["$27 A MONTH · ABOUT 90¢ A DAY", "A NEW AD EVERY DAY · NO CUT OF SALES"],
+    "cta": "SCAN TO GET YOUR FREE TEAM",
+    "lines": [
+      "FREE \u00b7 NO CARD NEEDED",
+      "A NEW AD EVERY DAY \u00b7 NO CUT OF SALES"
+    ],
     "fine": "HSW365 Media LLC. Cancel any time.",
     "link": "https://hsw365.github.io/iRUN/shopteam.html?src=ig-trailer#start"
   },
-  "caption": "Shopify isn't hard. Marketing your store is. 🛍️\n\nSo hire a team. iRun Shop Team reads your store and makes a brand-new cinematic ad for one of your products every day, posts it to your Instagram, and the QR drops shoppers straight into checkout.\n\n$27 a month. About 90¢ a day. No cut of your sales. Scan the QR or comment SHOP (link in bio).\n\nTurn Negative Into Positive. 💯",
-  "hashtags": ["shopify", "shopifystore", "ecommerce", "smallbusiness", "aimarketing", "shopifytips", "onlinestore", "hsw365", "irun"]
+  "caption": "Shopify isn't hard. Marketing your store is. \ud83d\udecd\ufe0f\n\nSo hire a team. iRun Shop Team reads your store and makes a brand-new cinematic ad for one of your products every day, posts it to your Instagram, and the QR drops shoppers straight into checkout.\n\nFree. No card. No cut of your sales. Scan the QR or comment SHOP (link in bio).\n\nTurn Negative Into Positive. \ud83d\udcaf",
+  "hashtags": [
+    "shopify",
+    "shopifystore",
+    "ecommerce",
+    "smallbusiness",
+    "aimarketing",
+    "shopifytips",
+    "onlinestore",
+    "hsw365",
+    "irun"
+  ]
 }
