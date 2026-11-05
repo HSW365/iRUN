@@ -504,6 +504,12 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
     });
   });
 
+  /* links from outreach emails: ?store=theirstore.com runs their preview on arrival */
+  try {
+    var qs = new URLSearchParams(location.search).get("store");
+    if (qs) { $("d-url").value = cleanStore(qs); setTimeout(function () { $("drop").requestSubmit ? $("drop").requestSubmit() : $("d-go").click(); }, 150); }
+  } catch (_) {}
+
   /* sign-up: same Operator backend, Shop Team plan */
   var form = $("f");
   var method = function () { var r = form.querySelector("input[name=pay]:checked"); return r ? r.value : "card"; };

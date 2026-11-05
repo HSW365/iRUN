@@ -23,7 +23,7 @@ concurrency:
 jobs:
   sell:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 80
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -45,4 +45,8 @@ jobs:
           SALES_MODE: ${{ vars.SALES_MODE }}
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Add the SUPABASE_SERVICE_KEY repo secret to switch the sales autopilot on."; exit 0; fi
+          # Shop Team: top up Shopify store leads before the 14:xx UTC outreach (and on a manual/push run)
+          if [ "$(date -u +%H)" = "13" ] || [ "${{ github.event_name }}" != "schedule" ]; then
+            python engine/shopify_leads.py --minutes 25 || echo "shop team lead finder failed, outreach continues"
+          fi
           python engine/sales.py --task "${{ github.event_name == 'push' && 'all' || github.event.inputs.task || 'auto' }}"
