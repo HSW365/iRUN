@@ -165,7 +165,7 @@ def draft(s):
             "<p><b>iRun Shop Team</b> makes a new cinematic video ad for one of your products every day, built from your "
             "own product photos and pages, and posts it to your Instagram. Every ad ends on a QR that opens checkout with "
             "that product already in the cart.</p>"
-            "<p>It's $27 a month, about 90 cents a day. No app to install, no login to share, no cut of your sales, "
+            "<p>Your first 3 days are free, then it's $27 a month, about 90 cents a day. No app to install, no login to share, no cut of your sales, "
             "cancel any time.</p>"
             f'<p>See your first week of ads here (it loads your real products): <a href="{link}">{PAGE.split("//")[1]}</a></p>'
             "<p>Or just reply <b>\"YES\"</b> and I'll set your store up myself.</p>")

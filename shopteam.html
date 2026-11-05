@@ -237,7 +237,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
           <button class="btn btn-go" type="submit" id="d-go">See my first ads</button>
         </form>
         <p class="err" id="d-err" role="alert"></p>
-        <p class="fine"><b>$27 a month.</b> No cut of your sales. Cancel from your page any time.</p>
+        <p class="fine"><b>3 days free, then $27 a month.</b> No cut of your sales. Cancel from your page any time.</p>
       </div>
       <div class="stage" aria-label="Sample iRun product ad on a phone">
         <div class="ring" aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div>
@@ -331,7 +331,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
       <span class="tag">SHOP TEAM</span>
       <h3>iRun Shop Team</h3>
       <div class="amt"><b>$27</b><span>a month<br>per store</span></div>
-      <p class="perday">ABOUT $0.90 A DAY · CANCEL ANY TIME</p>
+      <p class="perday">3 DAYS FREE · THEN ABOUT $0.90 A DAY · CANCEL ANY TIME</p>
       <ul class="checks" id="price-feats">
         <li>A new cinematic trailer ad every day, one product at a time</li>
         <li>Built from your own product pages and photos, in your brand</li>
@@ -340,7 +340,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
         <li>New products jump the line, sold-out ones are skipped</li>
         <li>Live page with every ad and every move</li>
       </ul>
-      <a class="btn btn-go" href="#start" style="width:100%;margin-top:28px">Hire my team for $27</a>
+      <a class="btn btn-go" href="#start" style="width:100%;margin-top:28px">Start 3 days free</a>
     </div>
     <div>
       <p class="lede" style="margin-top:0">What daily product content costs the other ways:</p>
@@ -377,7 +377,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
     <ul class="checks">
       <li>Your store link: yourstore.com or yourstore.myshopify.com</li>
       <li>Instagram Business or Creator account to post to</li>
-      <li>$27 a month by card, or Zelle month to month</li>
+      <li>3 days free by card, then $27 a month (or Zelle month to month)</li>
       <li>Every ad and every move shows on your live page</li>
     </ul>
   </div>
@@ -397,7 +397,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
       <div class="field"><label for="f-notes">Anything the team should know <small>(optional)</small></label><textarea id="f-notes" maxlength="2000" placeholder="Best sellers to push first, words to never use, who buys from you."></textarea></div>
       <p class="msg" id="msg" role="alert"></p>
       <button class="btn btn-go" type="submit" id="go" style="width:100%;margin-top:18px">Continue to payment</button>
-      <p class="pfoot" id="pay-foot">Secure checkout by Stripe. Cancel any time from your live page.</p>
+      <p class="pfoot" id="pay-foot">3 days free, then $27 a month. Secure checkout by Stripe. Cancel any time.</p>
     </form>
     <div class="closed" id="closed" hidden>Sign-up opens shortly. Email <a href="mailto:hsw365media@gmail.com?subject=iRun%20Shop%20Team">hsw365media@gmail.com</a> with your store link to get the first spot.</div>
   </div>
@@ -406,7 +406,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
 <section class="band"><div class="wrap">
   <p class="kick">TURN NEGATIVE INTO POSITIVE</p>
   <h2>A store nobody sees becomes a store that <span class="grad">posts every day.</span></h2>
-  <a class="btn btn-go" href="#start">Hire my team for $27</a>
+  <a class="btn btn-go" href="#start">Start 3 days free</a>
 </div></section>
 </main>
 
@@ -516,7 +516,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
   var payFoot = function () {
     var z = method() === "zelle";
     $("pay-foot").textContent = z ? "Next you get the Zelle details and a memo code. Your team starts once the payment is confirmed."
-                                  : "Secure checkout by Stripe. Cancel any time from your live page.";
+                                  : "3 days free, then $27 a month. Secure checkout by Stripe. Cancel any time.";
     $("go").textContent = z ? "Continue to Zelle" : "Continue to payment";
   };
   form.addEventListener("change", function (e) { if (e.target.name === "pay") payFoot(); });
