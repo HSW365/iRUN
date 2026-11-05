@@ -37,7 +37,7 @@
     },
     {
       "card": {
-        "title": "Messages · 3:12 AM",
+        "title": "Messages \u00b7 3:12 AM",
         "tag": "NO REPLY",
         "rows": [
           [
@@ -83,7 +83,7 @@
       "cy": 0.35,
       "panel": {
         "label": "FRIENDY",
-        "title": "Dre · online",
+        "title": "Dre \u00b7 online",
         "working": "Listening...",
         "done": "Talked it through",
         "steps": [
@@ -138,7 +138,7 @@
     "tagline": "Someone to talk to. Any hour.",
     "cta": "SCAN TO SIGN UP",
     "lines": [
-      "3 DAYS FREE  ·  THEN FROM $8/MO",
+      "3 DAYS FREE  \u00b7  THEN FROM $8/MO",
       "hsw365.github.io/FRIENDY"
     ],
     "fine": "AI companion app for adults 18+. Not therapy.",
@@ -151,5 +151,14 @@
     "nightowl",
     "turnnegativeintopositive",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-05T22:13:20.093831Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18119096638998379"
+    }
   ]
 }
