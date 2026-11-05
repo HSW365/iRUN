@@ -41,12 +41,12 @@ jobs:
           IMAP_HOST: ${{ vars.IMAP_HOST }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           OUTREACH_ADDRESS: ${{ vars.OUTREACH_ADDRESS }}
-          SALES_DAILY_CAP: ${{ vars.SALES_DAILY_CAP }}
+          SALES_DAILY_CAP: "150"  # Gmail sends up to 500/day; 150 keeps the mailbox healthy
           SALES_MODE: ${{ vars.SALES_MODE }}
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Add the SUPABASE_SERVICE_KEY repo secret to switch the sales autopilot on."; exit 0; fi
           # Shop Team: top up Shopify store leads before the 14:xx UTC outreach (and on a manual/push run)
           if [ "$(date -u +%H)" = "13" ] || [ "${{ github.event_name }}" != "schedule" ]; then
-            python engine/shopify_leads.py --minutes 25 || echo "shop team lead finder failed, outreach continues"
+            python engine/shopify_leads.py --need 100 --minutes 45 || echo "shop team lead finder failed, outreach continues"
           fi
           python engine/sales.py --task "${{ github.event_name == 'push' && 'all' || github.event.inputs.task || 'auto' }}"
