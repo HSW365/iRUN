@@ -56,8 +56,16 @@ def get(url, **kw):
 
 # ---------------------------------------------------------------- discover
 def crawl_indexes():
-    r = get("https://index.commoncrawl.org/collinfo.json", timeout=30)
-    return [c["cdx-api"] for c in r.json()] if r is not None and r.ok else []
+    for _ in range(3):
+        r = get("https://index.commoncrawl.org/collinfo.json", timeout=40)
+        if r is not None and r.ok:
+            try:
+                return [c["cdx-api"] for c in r.json()]
+            except Exception:
+                pass
+        print(f"crawl index list: {getattr(r, 'status_code', 'no response')}")
+        time.sleep(10)
+    return []
 
 
 def discover(want, seen):
@@ -65,16 +73,24 @@ def discover(want, seen):
     out = []
     for api in crawl_indexes()[:3]:
         base = f"{api}?url=*.myshopify.com&output=json&fl=url&filter=status:200"
-        r = get(base + "&showNumPages=true", timeout=60)
-        try:
-            pages = int(r.json()["pages"]) if r is not None and r.ok else 0
-        except Exception:
-            pages = 0
+        pages = 0
+        for _ in range(3):
+            r = get(base + "&showNumPages=true", timeout=90)
+            try:
+                pages = int(r.json()["pages"]) if r is not None and r.ok else 0
+            except Exception:
+                pages = 0
+            if pages:
+                break
+            print(f"{api}: page count {getattr(r, 'status_code', 'no response')} {(getattr(r, 'text', '') or '')[:120]}")
+            time.sleep(15)
         for _ in range(4):
             if not pages or len(out) >= want:
                 break
-            r = get(f"{base}&page={random.randrange(pages)}", timeout=90)
+            r = get(f"{base}&page={random.randrange(pages)}", timeout=120)
             if r is None or not r.ok:
+                print(f"{api}: page fetch {getattr(r, 'status_code', 'no response')}")
+                time.sleep(10)
                 continue
             for line in r.text.splitlines():
                 try:
