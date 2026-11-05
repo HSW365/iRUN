@@ -1,88 +1,295 @@
 {
   "_note": "Showcase ads (engine/showcase.py): Larven-style product ads, a different layout for every app. Edit 'run' and push to build + post them to Instagram through iRun (.github/workflows/showcase.yml). layout = browser | phone | split | stat | stack (leave it out and iRun picks one the last ads didn't use).",
-  "run": ["calltwin", "queenee", "irun", "dispute365", "klipit"],
+  "run": [
+    "calltwin",
+    "queenee",
+    "irun",
+    "dispute365",
+    "klipit"
+  ],
   "post": true,
   "account": "hoodstar365",
   "apps": {
     "calltwin": {
-      "name": "CallTwin", "accent": ["#22d3ee", "#3b82f6"], "layout": "phone",
-      "url": "https://hsw365.github.io/calltwin/", "signup": "https://hsw365.github.io/calltwin/signup.html",
-      "h1": "Never miss", "h2": "another job call.",
+      "name": "CallTwin",
+      "accent": [
+        "#22d3ee",
+        "#3b82f6"
+      ],
+      "layout": "phone",
+      "url": "https://hsw365.github.io/calltwin/",
+      "signup": "https://hsw365.github.io/calltwin/signup.html",
+      "h1": "Never miss",
+      "h2": "another job call.",
       "sub": "Your AI receptionist answers every call, text and chat, 24/7.",
-      "stat": "24/7", "statLabel": "Every call answered",
-      "features": [["Answers instantly", "Calls, texts and site chat"], ["Captures the job", "Name, number, address, service"], ["Alerts your phone", "The lead lands in seconds"]],
+      "stat": "24/7",
+      "statLabel": "Every call answered",
+      "features": [
+        [
+          "Answers instantly",
+          "Calls, texts and site chat"
+        ],
+        [
+          "Captures the job",
+          "Name, number, address, service"
+        ],
+        [
+          "Alerts your phone",
+          "The lead lands in seconds"
+        ]
+      ],
       "cta": "Start your 14-day trial",
-      "vo": ["Every missed call is a job going to your competitor.", "CallTwin answers every call, text and chat, twenty four seven, and sends the job straight to your phone.", "Scan the code and never miss another job."]
+      "vo": [
+        "Every missed call is a job going to your competitor.",
+        "CallTwin answers every call, text and chat, twenty four seven, and sends the job straight to your phone.",
+        "Scan the code and never miss another job."
+      ]
     },
     "queenee": {
-      "name": "QUEENEE", "accent": ["#a855f7", "#ec4899"], "layout": "browser",
-      "url": "https://hsw365.github.io/queenee/", "signup": "https://hsw365.github.io/queenee/",
-      "h1": "Drop your business.", "h2": "Get a site that books.",
+      "name": "QUEENEE",
+      "accent": [
+        "#a855f7",
+        "#ec4899"
+      ],
+      "layout": "browser",
+      "url": "https://hsw365.github.io/queenee/",
+      "signup": "https://hsw365.github.io/queenee/",
+      "h1": "Drop your business.",
+      "h2": "Get a site that books.",
       "sub": "QUEENEE builds a mobile-first website made to get you calls and bookings.",
-      "stat": "1 link", "statLabel": "Your whole business online",
-      "features": [["Built from your business", "No templates"], ["Made to book", "Calls, forms, bookings"], ["Hosting included", "Updates handled for you"]],
+      "stat": "1 link",
+      "statLabel": "Your whole business online",
+      "features": [
+        [
+          "Built from your business",
+          "No templates"
+        ],
+        [
+          "Made to book",
+          "Calls, forms, bookings"
+        ],
+        [
+          "Hosting included",
+          "Updates handled for you"
+        ]
+      ],
       "cta": "Get your website",
-      "vo": ["Your Instagram is not a website.", "QUEENEE builds your business a real website, made to get calls and bookings, hosting included.", "Scan the code and get yours."]
+      "vo": [
+        "Your Instagram is not a website.",
+        "QUEENEE builds your business a real website, made to get calls and bookings, hosting included.",
+        "Scan the code and get yours."
+      ]
     },
     "irun": {
-      "name": "iRun", "accent": ["#a855f7", "#22d3ee"], "layout": "stack",
-      "url": "https://hsw365.github.io/iRUN/", "signup": "https://hsw365.github.io/iRUN/start.html",
-      "h1": "One link in.", "h2": "Daily content out.",
+      "name": "iRun",
+      "accent": [
+        "#a855f7",
+        "#22d3ee"
+      ],
+      "layout": "stack",
+      "url": "https://hsw365.github.io/iRUN/",
+      "signup": "https://hsw365.github.io/iRUN/start.html",
+      "h1": "One link in.",
+      "h2": "Daily content out.",
       "sub": "iRun writes, voices, edits and posts your videos every day.",
-      "stat": "$15", "statLabel": "A month, not $3,000",
-      "features": [["Writes the script", "In your brand voice"], ["Makes the video", "Voice, captions, music"], ["Posts and sells", "Turns DMs into leads"]],
+      "stat": "$15",
+      "statLabel": "A month, not $3,000",
+      "features": [
+        [
+          "Writes the script",
+          "In your brand voice"
+        ],
+        [
+          "Makes the video",
+          "Voice, captions, music"
+        ],
+        [
+          "Posts and sells",
+          "Turns DMs into leads"
+        ]
+      ],
       "cta": "Start for $15/mo",
-      "vo": ["Posting every day is a full time job.", "iRun writes, voices, edits and posts your videos daily, then turns your DMs into leads.", "Scan the code and let iRun run it."]
+      "vo": [
+        "Posting every day is a full time job.",
+        "iRun writes, voices, edits and posts your videos daily, then turns your DMs into leads.",
+        "Scan the code and let iRun run it."
+      ]
     },
     "dispute365": {
-      "name": "DISPUTE365", "accent": ["#34d399", "#22d3ee"], "layout": "split",
-      "url": "https://hsw365.github.io/DISPUTE365/", "signup": "https://hsw365.github.io/DISPUTE365/",
-      "h1": "Errors on your report?", "h2": "Fight them back.",
+      "name": "DISPUTE365",
+      "accent": [
+        "#34d399",
+        "#22d3ee"
+      ],
+      "layout": "split",
+      "url": "https://hsw365.github.io/DISPUTE365/",
+      "signup": "https://hsw365.github.io/DISPUTE365/",
+      "h1": "Errors on your report?",
+      "h2": "Fight them back.",
       "sub": "Upload your credit reports. DISPUTE365 finds the errors and writes your dispute letters.",
-      "stat": "3", "statLabel": "Bureaus, one app",
-      "features": [["Finds the errors", "Line by line"], ["Writes the letters", "Ready to send"], ["Tracks every round", "Until it's fixed"]],
+      "stat": "3",
+      "statLabel": "Bureaus, one app",
+      "features": [
+        [
+          "Finds the errors",
+          "Line by line"
+        ],
+        [
+          "Writes the letters",
+          "Ready to send"
+        ],
+        [
+          "Tracks every round",
+          "Until it's fixed"
+        ]
+      ],
       "cta": "Start your disputes",
-      "vo": ["One wrong line on your credit report can cost you thousands.", "DISPUTE365 finds the errors and writes your dispute letters for you.", "Scan the code and fight it back."]
+      "vo": [
+        "One wrong line on your credit report can cost you thousands.",
+        "DISPUTE365 finds the errors and writes your dispute letters for you.",
+        "Scan the code and fight it back."
+      ]
     },
     "klipit": {
-      "name": "Klipit", "accent": ["#fbbf24", "#ef4444"], "layout": "stat",
-      "url": "https://klipit.onrender.com", "signup": "https://klipit.onrender.com",
-      "h1": "6-hour stream.", "h2": "Clips in minutes.",
+      "name": "Klipit",
+      "accent": [
+        "#fbbf24",
+        "#ef4444"
+      ],
+      "layout": "stat",
+      "url": "https://klipit.onrender.com",
+      "signup": "https://klipit.onrender.com",
+      "h1": "6-hour stream.",
+      "h2": "Clips in minutes.",
       "sub": "Paste a stream or VOD link. Klipit cuts your best moments into ready-to-post clips.",
-      "stat": "1 link", "statLabel": "Every highlight, clipped",
-      "features": [["Finds the moments", "Hype, laughs, clutch plays"], ["Cuts vertical + wide", "TikTok, Reels, Shorts"], ["Ready to post", "Captions included"]],
+      "stat": "1 link",
+      "statLabel": "Every highlight, clipped",
+      "features": [
+        [
+          "Finds the moments",
+          "Hype, laughs, clutch plays"
+        ],
+        [
+          "Cuts vertical + wide",
+          "TikTok, Reels, Shorts"
+        ],
+        [
+          "Ready to post",
+          "Captions included"
+        ]
+      ],
       "cta": "Clip your next stream",
-      "vo": ["Nobody is scrubbing a six hour VOD.", "Paste your stream link and Klipit cuts your best moments into ready to post clips.", "Scan the code and clip your next stream."]
+      "vo": [
+        "Nobody is scrubbing a six hour VOD.",
+        "Paste your stream link and Klipit cuts your best moments into ready to post clips.",
+        "Scan the code and clip your next stream."
+      ]
     },
     "flipit": {
-      "name": "FLIPIT", "accent": ["#f97316", "#fbbf24"], "layout": "browser",
-      "url": "https://flipit-m5ig.onrender.com", "signup": "https://flipit-m5ig.onrender.com",
-      "h1": "Run the numbers.", "h2": "Close the deal.",
+      "name": "FLIPIT",
+      "accent": [
+        "#f97316",
+        "#fbbf24"
+      ],
+      "layout": "browser",
+      "url": "https://flipit-m5ig.onrender.com",
+      "signup": "https://flipit-m5ig.onrender.com",
+      "h1": "Run the numbers.",
+      "h2": "Close the deal.",
       "sub": "Max offer, risk check, cash buyers and paperwork in one deal workspace.",
-      "stat": "MAO", "statLabel": "In seconds",
-      "features": [["Max offer", "Built-in calculator"], ["Cash buyers", "Matched to the deal"], ["Paperwork", "Drafted for you"]],
+      "stat": "MAO",
+      "statLabel": "In seconds",
+      "features": [
+        [
+          "Max offer",
+          "Built-in calculator"
+        ],
+        [
+          "Cash buyers",
+          "Matched to the deal"
+        ],
+        [
+          "Paperwork",
+          "Drafted for you"
+        ]
+      ],
       "cta": "Start free",
-      "vo": ["Guessing your offer is how flips go bad.", "FLIPIT runs your max offer, checks the risks and matches cash buyers in one place.", "Scan the code and run your next deal."]
+      "vo": [
+        "Guessing your offer is how flips go bad.",
+        "FLIPIT runs your max offer, checks the risks and matches cash buyers in one place.",
+        "Scan the code and run your next deal."
+      ]
     },
     "studio": {
-      "name": "HSW365studio", "accent": ["#ec4899", "#a855f7"], "layout": "phone",
-      "url": "https://hsw365.github.io/STUDIO365/", "signup": "https://hsw365.github.io/STUDIO365/",
-      "h1": "No studio?", "h2": "Record anyway.",
+      "name": "HSW365studio",
+      "accent": [
+        "#ec4899",
+        "#a855f7"
+      ],
+      "layout": "phone",
+      "url": "https://hsw365.github.io/STUDIO365/",
+      "signup": "https://hsw365.github.io/STUDIO365/",
+      "h1": "No studio?",
+      "h2": "Record anyway.",
       "sub": "Record, mix and master your music right in the browser.",
-      "stat": "0", "statLabel": "Gear required",
-      "features": [["Record", "Any mic, any laptop"], ["Mix", "Tracks, effects, levels"], ["Master", "Release-ready sound"]],
+      "stat": "0",
+      "statLabel": "Gear required",
+      "features": [
+        [
+          "Record",
+          "Any mic, any laptop"
+        ],
+        [
+          "Mix",
+          "Tracks, effects, levels"
+        ],
+        [
+          "Master",
+          "Release-ready sound"
+        ]
+      ],
       "cta": "Try it free",
-      "vo": ["Studio time costs money you don't have yet.", "HSW365studio lets you record, mix and master right in your browser.", "Scan the code and drop your next song."]
+      "vo": [
+        "Studio time costs money you don't have yet.",
+        "HSW365studio lets you record, mix and master right in your browser.",
+        "Scan the code and drop your next song."
+      ]
     },
     "friendy": {
-      "name": "Friendy", "accent": ["#22d3ee", "#a855f7"], "layout": "stat",
-      "url": "https://hsw365.github.io/FRIENDY/", "signup": "https://hsw365.github.io/FRIENDY/",
-      "h1": "3 AM thoughts?", "h2": "Friendy's up.",
+      "name": "Friendy",
+      "accent": [
+        "#22d3ee",
+        "#a855f7"
+      ],
+      "layout": "stat",
+      "url": "https://hsw365.github.io/FRIENDY/",
+      "signup": "https://hsw365.github.io/FRIENDY/",
+      "h1": "3 AM thoughts?",
+      "h2": "Friendy's up.",
       "sub": "An AI friend that talks with you anytime, in any language.",
-      "stat": "3 AM", "statLabel": "Still there for you",
-      "features": [["Talk anytime", "Day or night"], ["Any language", "It speaks yours"], ["Real friends too", "Meet people worldwide"]],
+      "stat": "3 AM",
+      "statLabel": "Still there for you",
+      "features": [
+        [
+          "Talk anytime",
+          "Day or night"
+        ],
+        [
+          "Any language",
+          "It speaks yours"
+        ],
+        [
+          "Real friends too",
+          "Meet people worldwide"
+        ]
+      ],
       "cta": "Say hi to Friendy",
-      "vo": ["Three in the morning and nobody to talk to.", "Friendy is always there, in any language, any time.", "Scan the code and say hi."]
+      "vo": [
+        "Three in the morning and nobody to talk to.",
+        "Friendy is always there, in any language, any time.",
+        "Scan the code and say hi."
+      ]
     }
-  }
+  },
+  "build": 2
 }

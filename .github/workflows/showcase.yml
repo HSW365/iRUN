@@ -51,7 +51,8 @@ jobs:
           ACCOUNT=$(jq -r '.account // "hoodstar365"' config/showcase.json)
           for APP in $APPS; do
             OUT="assets/ads/showcase/${APP}-$(date -u +%Y%m%d).mp4"
-            python engine/showcase.py "$APP" "$OUT" 2>&1 | tee -a out/showcase.log || { echo "build failed: $APP"; continue; }
+            python engine/showcase.py "$APP" "$OUT" 2>&1 | tee -a out/showcase.log
+            if [ "${PIPESTATUS[0]}" -ne 0 ] || [ ! -s "$OUT" ]; then echo "build failed: $APP" | tee -a out/showcase.log; continue; fi
             [ "$POST" = "true" ] || continue
             CAPTION=$(jq -r --arg a "$APP" '.apps[$a] | "\(.h1) \(.h2)\n\n\(.sub)\n\n\(.cta): scan the QR in the video.\n\n#hsw365 #hsw365media #\(.name | ascii_downcase | gsub("[^a-z0-9]";"")) #ai #smallbusiness #entrepreneur #turnnegativeintopositive"' config/showcase.json)
             python engine/run.py --account "$ACCOUNT" --platform instagram --video "$OUT" --caption "$CAPTION" 2>&1 | tee -a out/showcase.log || echo "post failed: $APP"

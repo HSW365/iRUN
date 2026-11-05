@@ -390,8 +390,8 @@ def build(app_id, out_path, layout=None):
     cmd = ["ffmpeg", "-y", "-v", "error", "-framerate", str(FPS), "-i", os.path.join(frames, "f%05d.jpg"), "-i", bed]
     if vo:
         cmd += ["-i", vo, "-filter_complex",
-                "[2:a]adelay=500|500,apad[v];[1:a][v]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];"
-                "[b][v]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", "-map", "0:v", "-map", "[a]"]
+                "[2:a]adelay=500|500,apad,asplit=2[v1][v2];[1:a][v1]sidechaincompress=threshold=0.04:ratio=6:attack=20:release=300[b];"
+                "[b][v2]amix=inputs=2:duration=first:weights='0.8 1.4'[a]", "-map", "0:v", "-map", "[a]"]
     else:
         cmd += ["-map", "0:v", "-map", "1:a"]
     os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
