@@ -275,11 +275,12 @@ async function find() {
     if (leads.length < limit && sites.length) {
       step = log(`Reading their websites for contact emails…`, "run");
       let found = 0;
-      for (let i = 0; i < sites.length && leads.length < limit; i += 20) {
-        const chunk = sites.slice(i, i + 20);
-        const { emails } = await api("scrape", { sites: chunk.map((t) => t.website || t["contact:website"]) });
+      for (let i = 0; i < sites.length && leads.length < limit; i += 10) {
+        const chunk = sites.slice(i, i + 10);
+        let emails = {};
+        try { emails = (await api("scrape", { sites: chunk.map((t) => t.website || t["contact:website"]) })).emails || {}; } catch {} // a slow batch is skipped, not fatal
         for (const t of chunk) { const e = emails[t.website || t["contact:website"]]; if (e && !seen.has(e) && !known.has(e)) { seen.add(e); leads.push(mk(t, e)); found++; } }
-        step.querySelector("span").innerHTML = `Reading their websites for contact emails… ${Math.min(i + 20, sites.length)}/${sites.length} checked, ${found} found`;
+        step.querySelector("span").innerHTML = `Reading their websites for contact emails… ${Math.min(i + 10, sites.length)}/${sites.length} checked, ${found} found`;
       }
       done(step, `Pulled <b>${found}</b> more emails from their websites.`);
     }
