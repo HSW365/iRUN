@@ -78,7 +78,7 @@ OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.sy
 EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
 SKIP_LOCAL = re.compile(r"^(no-?reply|donotreply|postmaster|abuse|webmaster|privacy|legal)", re.I)
 
-UNSUB_RE = re.compile(r"\b(unsubscribe|remove me|take me off|stop emailing|do not (contact|email)|don'?t (contact|email)|opt out)\b", re.I)
+UNSUB_RE = re.compile(r"(\b(unsubscribe|remove|take me off|take us off|stop emailing|stop sending|do not (contact|email|send)|don'?t (contact|email|send)|opt[- ]?out|spam|f+u+c+k|go away|leave (me|us) alone)\b|^\W*(stop|no|nope)\W*$)", re.I)
 NO_RE = re.compile(r"\b(not interested|no thanks|no thank you|we'?re (all )?set|we are (all )?set|not at this time|pass on this)\b", re.I)
 YES_RE = re.compile(r"^\W*(yes|yeah|yep|sure|interested|i'?m interested|sounds good|let'?s do it|send (it|me|the))\b", re.I)
 AUTO_RE = re.compile(r"(out of (the )?office|auto(matic)?[- ]?reply|autoreply|on vacation|away from (the )?office)", re.I)
