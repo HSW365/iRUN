@@ -1,10 +1,8 @@
 name: iRun Operator
 
 on:
-  schedule:
-    # Hourly: onboard new companies, build and publish websites. 14:xx UTC also runs outreach (10am ET);
-    # 03:xx UTC also runs the nightly CEO review (11pm ET). See engine/ops.py.
-    - cron: "37 * * * *"
+  # Scheduled website publishing and outreach are paused while customer-facing changes are prohibited.
+  # Manual workflow_dispatch remains available for explicitly approved tasks.
   workflow_dispatch:
     inputs:
       task:
