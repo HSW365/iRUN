@@ -37,7 +37,7 @@
     },
     {
       "card": {
-        "title": "Search · food near me",
+        "title": "Search \u00b7 food near me",
         "tag": "MISSING",
         "rows": [
           [
@@ -46,7 +46,7 @@
           ],
           [
             "Chain across the street",
-            "menu · hours · site"
+            "menu \u00b7 hours \u00b7 site"
           ],
           [
             "Your Instagram",
@@ -150,5 +150,14 @@
     "websitedesign",
     "foodtruck",
     "hsw365media"
+  ],
+  "attempts": [
+    {
+      "at": "2026-11-06T02:20:00.704770Z",
+      "platform": "instagram",
+      "status": "posted",
+      "error": null,
+      "external_id": "18319989109304771"
+    }
   ]
 }
