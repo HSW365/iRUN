@@ -1,12 +1,8 @@
 name: iRun Shop Team
 
-# The AI marketing team for Shopify stores (engine/shopteam.py): one trailer ad a day per Shop Team store,
-# built from its own catalog, posted to its Instagram/TikTok. 16:xx UTC = noon ET; the 19:xx run catches stragglers
-# (each store posts at most once a day). Run by hand from the Actions tab for one store, now.
+# The AI marketing team can still be run manually after explicit approval.
+# Scheduled Instagram/TikTok publishing is paused while public posts are prohibited.
 on:
-  schedule:
-    - cron: "41 16 * * *"
-    - cron: "41 19 * * *"
   workflow_dispatch:
     inputs:
       company: {description: "only this company id (blank = every Shop Team store)", default: ""}
