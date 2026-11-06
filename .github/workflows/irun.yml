@@ -1,16 +1,8 @@
 name: iRun autopilot
 
 on:
-  schedule:
-    # UTC. 4 TikTok + 2 Instagram per day = 8am, 11am, 2pm, 6pm ET (EDT). Slot->platform map lives in engine/run.py
-    # The 6pm ET slot is also the daily faceless video (TikTok + Reels + YouTube Shorts) for accounts with a series.
-    - cron: "7 12 * * *"
-    - cron: "7 15 * * *"
-    - cron: "7 18 * * *"
-    - cron: "7 22 * * *"
-  push:
-    branches: [main]
-    paths: ["config/golive.txt"]  # edit this file to fire a live run right away
+  # Automatic posting triggers are paused while the owner has requested no public posts.
+  # Manual workflow_dispatch remains available for an explicitly approved run.
   workflow_dispatch:
     inputs:
       platform:
@@ -85,11 +77,9 @@ jobs:
           IRUN_KIND: ${{ github.event.inputs.kind }}
           IRUN_VIDEO: ${{ github.event.inputs.video }}
           IRUN_CAPTION: ${{ github.event.inputs.caption }}
-          # Live by default (owner approved going live Oct 17 2026). Set repo variable IRUN_MODE=draft to pause posting.
           IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'live' }}
         run: |
           ARGS=""
-          if [ "${{ github.event_name }}" = "push" ]; then ARGS="$ARGS --platform all"; fi
           if [ -n "${{ github.event.inputs.platform }}" ]; then ARGS="$ARGS --platform ${{ github.event.inputs.platform }}"; fi
           if [ -n "${{ github.event.inputs.account }}" ]; then ARGS="$ARGS --account ${{ github.event.inputs.account }}"; fi
           if [ -n "${{ github.event.inputs.product }}" ]; then ARGS="$ARGS --product ${{ github.event.inputs.product }} --count ${{ github.event.inputs.count || 1 }}"; fi
