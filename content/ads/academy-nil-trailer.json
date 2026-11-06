@@ -1,0 +1,219 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "captureitlive-academy",
+  "platform": "instagram",
+  "shots_dir": "content/shots/academy-nil",
+  "accent": "#C6F135",
+  "voice": "owner",
+  "vo_speed": 1.15,
+  "vo_exag": 0.8,
+  "title": "THE ACADEMY",
+  "presents": "HOODSTAR365 \u00b7 CAPTUREITLIVE",
+  "open": {
+    "shot": "court",
+    "impact": "FILM YOUR REP",
+    "cy": 0.5,
+    "zoom": [
+      1.0,
+      1.16
+    ],
+    "dur": 2.0,
+    "traffic": true
+  },
+  "scenes": [
+    {
+      "shot": "meclose",
+      "cy": 0.4,
+      "zoom": [
+        1.02,
+        1.12
+      ],
+      "dur": 1.2,
+      "traffic": true
+    },
+    {
+      "shot": "track",
+      "cy": 0.5,
+      "zoom": [
+        1.06,
+        1.2
+      ],
+      "dur": 1.1
+    },
+    {
+      "shot": "boxing",
+      "cy": 0.45,
+      "zoom": [
+        1.04,
+        1.16
+      ],
+      "dur": 1.1,
+      "traffic": true
+    },
+    {
+      "card": {
+        "title": "Your report card",
+        "tag": "GRADED",
+        "rows": [
+          [
+            "Basketball",
+            "A"
+          ],
+          [
+            "Boxing",
+            "A-"
+          ],
+          [
+            "Track",
+            "B+"
+          ]
+        ]
+      },
+      "bg": "court",
+      "dur": 1.5
+    }
+  ],
+  "slams": [
+    {
+      "word": "GET",
+      "shot": "stadium",
+      "cy": 0.5,
+      "dur": 1.0
+    },
+    {
+      "word": "SEEN",
+      "shot": "meclose",
+      "cy": 0.38,
+      "zoom": [
+        1.08,
+        1.2
+      ],
+      "dur": 1.0,
+      "traffic": true
+    },
+    {
+      "word": "PAID",
+      "shot": "deal",
+      "cy": 0.5,
+      "zoom": [
+        1.12,
+        1.26
+      ],
+      "dur": 1.2
+    }
+  ],
+  "callback": {
+    "shot": "court",
+    "impact": "LEVEL UP",
+    "cy": 0.5,
+    "zoom": [
+      1.12,
+      1.2
+    ],
+    "dur": 1.1
+  },
+  "payoff": [
+    {
+      "shot": "me",
+      "cy": 0.42,
+      "zoom": [
+        1.03,
+        1.12
+      ],
+      "warm": true,
+      "dur": 2.4,
+      "traffic": true
+    }
+  ],
+  "end_dur": 3.6,
+  "end": {
+    "wordmark": [
+      "CAPTURE",
+      "ITLIVE"
+    ],
+    "tagline": "Train. Get graded. Get seen. Get paid.",
+    "cta": "SCAN TO SUBSCRIBE",
+    "lines": [
+      "9 sports \u00b7 81 graded lessons \u00b7 NIL365 college & brand offers",
+      "Only $8/mo \u00b7 cancel anytime"
+    ],
+    "fine": "HSW365 Media",
+    "link": "https://hsw365.github.io/captureitlive/#/start"
+  },
+  "duck": 0.6,
+  "vo_captions": true,
+  "vo_lines": [
+    [
+      0.2,
+      "Athletes. Listen up."
+    ],
+    [
+      3.0,
+      "Basketball. Boxing. Track. Golf. Film every rep and get graded."
+    ],
+    [
+      8.3,
+      "Get seen. Get paid."
+    ],
+    [
+      11.3,
+      "Colleges and brands send you offers right to your inbox."
+    ],
+    [
+      15.3,
+      "Subscribe now. Scan the code. Level up!"
+    ]
+  ],
+  "caption": "Athletes, this one is for you. CaptureItLive Academy: 9 sports, 81 graded lessons, and NIL365 where colleges and brands see your clips and send you offers. Film it. Get graded. Get seen. Get paid. Subscribe for $8 a month, scan the QR or tap the link in bio.",
+  "hashtags": [
+    "athlete",
+    "nil",
+    "nilathlete",
+    "collegerecruiting",
+    "highschoolsports",
+    "basketball",
+    "boxing",
+    "trackandfield",
+    "training",
+    "hsw365"
+  ],
+  "shot_prompts": {
+    "court": "low angle empty indoor basketball court at night, spotlight on polished hardwood, orange glow, dramatic haze, empty center foreground, cinematic sports film",
+    "track": "sprinter exploding out of starting blocks on a stadium track at dusk, motion blur, stadium lights flaring, dramatic cinematic",
+    "boxing": "boxer throwing a jab in a dark gym, sweat flying, hard rim light, chain-link and heavy bags, cinematic",
+    "stadium": "packed college stadium at night from the tunnel, bright lights and cheering crowd, golden glow, empty tunnel foreground, cinematic",
+    "deal": "close up of a brand contract being signed on a desk beside a basketball and a phone, warm light, shallow depth of field, cinematic",
+    "bridge": "low angle athlete silhouette on a rooftop court at sunset, neon green and orange sky, cinematic"
+  },
+  "composites": {
+    "me": {
+      "bg": "stadium",
+      "fg": "assets/ads/people/elvin-cutout.png",
+      "h": 0.74,
+      "x": 0.5,
+      "bottom": 1.0,
+      "rim": [
+        "#C6F135",
+        "#ff7a1a"
+      ]
+    },
+    "meclose": {
+      "bg": "bridge",
+      "fg": "assets/ads/people/elvin-cutout.png",
+      "crop": [
+        0,
+        0,
+        1,
+        0.55
+      ],
+      "h": 0.86,
+      "x": 0.5,
+      "bottom": 1.02,
+      "rim": [
+        "#C6F135",
+        "#ff7a1a"
+      ]
+    }
+  }
+}

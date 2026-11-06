@@ -39,7 +39,7 @@ def main(outdir, lines, takes=2):
         best = None
         for k in range(takes):
             tmp = os.path.join(outdir, f".take{i}_{k}.wav")
-            wav = tts.generate(text, audio_prompt_path=REF, exaggeration=0.55, cfg_weight=0.45, temperature=0.75)
+            wav = tts.generate(text, audio_prompt_path=REF, exaggeration=float(os.environ.get("IRUN_VO_EXAG", "0.55")), cfg_weight=float(os.environ.get("IRUN_VO_CFG", "0.45")), temperature=0.75)
             ta.save(tmp, wav, tts.sr)
             sc = _score(tmp, text, stt)
             if not best or sc > best[0]:
@@ -48,7 +48,7 @@ def main(outdir, lines, takes=2):
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", best[1], "-af",
                         "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,"
                         "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.08,areverse,"
-                        "highpass=f=60,loudnorm=I=-16:TP=-1.5", "-ar", "44100", "-ac", "1", out], check=True)
+                        "highpass=f=60,atempo=" + os.environ.get("IRUN_VO_SPEED", "1.0") + ",loudnorm=I=-16:TP=-1.5", "-ar", "44100", "-ac", "1", out], check=True)
         for f in os.listdir(outdir):
             if f.startswith(f".take{i}_"):
                 os.remove(os.path.join(outdir, f))
