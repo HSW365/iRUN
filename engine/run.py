@@ -118,15 +118,32 @@ def cta_for(acct, product, platform):
     """(spoken, (screen line 1, screen line 2), caption line)."""
     c = product.get("cta")
     if c:
-        return c["spoken"], tuple(c["screen"]), c["caption"]
-    kw, h = product["keyword"].upper(), acct["handle"]
-    if acct.get("lead_bot"):
-        if platform == "instagram":
-            return (f"Comment {kw} and I'll DM you the link", (f"COMMENT \"{kw}\"", f"OR DM \"{kw}\" TO @{h.upper()}"),
-                    f"Comment {kw} and the link lands in your DMs.")
-        return (f"DM {kw} to @{h} on Instagram for the link", (f"DM \"{kw}\"", f"TO @{h.upper()} ON INSTAGRAM"),
-                f"DM {kw} to @{h} on Instagram and the link comes straight to you. Link in bio too.")
-    return ("Link in bio", ("LINK IN BIO", f"@{h.upper()}"), "Link in bio.")
+        spoken, screen, caption = c["spoken"], tuple(c["screen"]), c["caption"]
+    else:
+        kw, h = product["keyword"].upper(), acct["handle"]
+        if acct.get("lead_bot"):
+            if platform == "instagram":
+                spoken = f"Comment {kw} and I'll DM you the link"
+                screen = (f"COMMENT \"{kw}\"", f"OR DM \"{kw}\" TO @{h.upper()}")
+                caption = f"Comment {kw} and the link lands in your DMs."
+            else:
+                spoken = f"DM {kw} to @{h} on Instagram for the link"
+                screen = (f"DM \"{kw}\"", f"TO @{h.upper()} ON INSTAGRAM")
+                caption = f"DM {kw} to @{h} on Instagram and the link comes straight to you. Link in bio too."
+        else:
+            spoken, screen, caption = "Link in bio", ("LINK IN BIO", f"@{h.upper()}"), "Link in bio."
+
+    # Every HSW365MEDIA app promo also invites viewers into the affiliate program.
+    # This is copy only: it does not send DMs or publish anything by itself.
+    if acct.get("id") == "hsw365media" and product.get("id") != "affiliate":
+        spoken = spoken.rstrip()
+        if spoken and not spoken.endswith((".", "!", "?")):
+            spoken += "."
+        spoken += " Join the HSW365 Affiliate Partner Program to earn 20% per subscriber for the full duration of their subscription, subject to program terms."
+        screen = (screen[0], "EARN 20% PER SUBSCRIBER")
+        caption = caption.rstrip() + "\n\nJoin the HSW365 Affiliate Partner Program and earn 20% per subscriber for the full duration of their subscription, subject to program terms: https://hsw365.co/pages/affiliates"
+
+    return spoken, screen, caption
 
 
 def publish(acct, platform, mode, video, video_url, caption, row, title=None, tags=(), collab=(), first_comment=None):
