@@ -22,7 +22,7 @@ concurrency:
 jobs:
   face:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 240
     env:
       SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
       SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}

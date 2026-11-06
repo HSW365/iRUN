@@ -14,7 +14,8 @@ Spec:
     "caption": "...", "hashtags": ["irun", "aiads"], "account": "hoodstar365"
   }
 
-Engine: SadTalker (Apache-2.0) does the lip-sync + natural head motion from one photo; GFPGAN cleans up the face.
+Engine: SadTalker (Apache-2.0) does the lip-sync + natural head motion from one photo. IRUN_FACE_ENHANCE=1 adds a
+GFPGAN face clean-up pass (sharper, but ~3x slower on a free CPU runner).
 Set SADTALKER_DIR to its checkout (the workflow installs it). Real people's faces, celebrities included, are refused
 unless the photo is in assets/faces/ (yours, or a person who gave permission).
 """
@@ -67,7 +68,7 @@ def make_face(spec, work, seed):
 
 
 def square(path):
-    """Square crop that keeps the head (upper part of a portrait), 1024px, so the framed face never stretches."""
+    """Square crop that keeps the head (upper part of a portrait), 768px, so the framed face never stretches."""
     from PIL import Image
     im = Image.open(path).convert("RGB")
     w, h = im.size
@@ -77,7 +78,7 @@ def square(path):
     elif w > h:
         left = (w - h) // 2
         im = im.crop((left, 0, left + h, h))
-    im.resize((1024, 1024), Image.LANCZOS).save(path, "JPEG", quality=95)
+    im.resize((768, 768), Image.LANCZOS).save(path, "JPEG", quality=95)
     return path
 
 
@@ -108,7 +109,7 @@ def lipsync(face, audio, work):
     cmd = [os.environ.get("SADTALKER_PY", sys.executable), "inference.py", "--driven_audio", audio,
            "--source_image", face, "--result_dir", res, "--preprocess", "full", "--still", "--size", "256",
            "--expression_scale", "1.1"]
-    if os.environ.get("IRUN_FACE_ENHANCE", "1") == "1":
+    if os.environ.get("IRUN_FACE_ENHANCE", "0") == "1":
         cmd += ["--enhancer", "gfpgan"]
     if os.environ.get("IRUN_GPU") != "1":
         cmd.append("--cpu")
