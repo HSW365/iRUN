@@ -1,0 +1,36 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "nil",
+  "platform": "instagram",
+  "shots_dir": "content/shots/nil365-unpaid",
+  "accent": "#fbbf24",
+  "title": "NIL365",
+  "open": {"shot": "ball", "impact": "UNPAID", "cy": 0.45},
+  "scenes": [
+    {"shot": "court", "sub": "Sold-out arena. Zero dollars.", "cy": 0.35, "zoom": [1.04, 1.14]},
+    {"shot": "locker", "sub": "They sell my jersey. Not my name.", "cy": 0.38},
+    {"card": {"title": "My NIL deals · this season", "tag": "UNPAID", "rows": [["Brand offers", "0"], ["Sponsors who know my name", "none"], ["Posts that paid me", "0"]]}, "bg": "night"},
+    {"shot": "locker", "sub": "I'm done waiting on them.", "cy": 0.32, "zoom": [1.38, 1.52], "sat": 0.6, "tense": true}
+  ],
+  "slams": [
+    {"word": "YOUR", "shot": "night", "cy": 0.4},
+    {"word": "NAME", "shot": "night", "panel": {"label": "NIL365", "title": "Profile live", "working": "Applying to brand deals...", "done": "Agreement ready to sign", "steps": ["Profile", "Apply", "Sign"]}},
+    {"word": "PAYS", "shot": "sign", "cy": 0.5, "zoom": [1.06, 1.18]}
+  ],
+  "callback": {"shot": "ball", "impact": "SIGNED"},
+  "payoff": [
+    {"shot": "court", "cy": 0.3, "warm": true, "zoom": [1.0, 1.06]},
+    {"shot": "hero", "sub": "Turn negative into positive.", "cy": 0.3, "zoom": [1.04, 1.12]}
+  ],
+  "end": {
+    "wordmark": ["NIL", "365"],
+    "tagline": "Your name. Your deals. Signed online.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": ["TALENT $9/MO  ·  BRANDS $49/MO", "nil365.onrender.com"],
+    "fine": "Deals depend on brands. Follow your school and state NIL rules. A parent or guardian signs for anyone under 18.",
+    "link": "https://nil365.onrender.com/#/signup"
+  },
+  "caption": "Sold-out arena, her jersey everywhere, and not one dollar with her name on it. So she built a profile, applied to deals and signed online. NIL365 connects student athletes, students and creators with brands for paid NIL deals, with parents signing right in the app for anyone under 18. Scan the QR to sign up, or go to nil365.onrender.com (link in bio).",
+  "hashtags": ["nil", "studentathlete", "nildeals", "womenshoops", "nil365", "hsw365media"]
+}
