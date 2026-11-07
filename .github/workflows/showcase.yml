@@ -3,9 +3,6 @@ name: iRun showcase ads
 # Larven-style product ads (engine/showcase.py), a different layout per app. Edit "run" in config/showcase.json and push:
 # iRun captures each app's live screen, builds the Reel (narrator + score + QR to sign-up), saves it and posts it.
 on:
-  push:
-    branches: [main]
-    paths: ["config/showcase.json"]
   workflow_dispatch:
     inputs:
       apps:
