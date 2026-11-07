@@ -7,7 +7,7 @@ on:
     inputs:
       task:
         description: "auto, outreach, replies, followups, summary or all"
-        default: "auto"
+        default: "summary"
 
 permissions:
   contents: read
@@ -41,4 +41,4 @@ jobs:
           SALES_MODE: ${{ vars.SALES_MODE }}
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Sales Autopilot idle: SUPABASE_SERVICE_KEY secret missing"; exit 0; fi
-          python engine/sales.py --task "${{ github.event.inputs.task || 'auto' }}"
+          python engine/sales.py --task "${{ github.event.inputs.task || 'summary' }}"
