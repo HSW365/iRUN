@@ -3,13 +3,10 @@ name: iRun trailer
 # Build any trailer spec (shots + narrator + render) and post it to Instagram.
 # Commit config/trailer.json  {"spec": "content/ads/<slug>-trailer.json", "post": true, "account": "hoodstar365"}
 on:
-  push:
-    branches: [main]
-    paths: ["config/trailer.json"]
   workflow_dispatch:
     inputs:
       spec: {description: "spec path", required: true}
-      post: {description: "post to Instagram", type: boolean, default: true}
+      post: {description: "post to Instagram", type: boolean, default: false}
 
 permissions:
   contents: write
