@@ -3,9 +3,7 @@ name: iRun post now
 # Direct posting hook: commit config/postnow.json and iRun posts that finished video right away.
 # {"video": "assets/ads/x.mp4", "caption": "...", "account": "hoodstar365", "platform": "instagram"}
 on:
-  push:
-    branches: [main]
-    paths: ["config/postnow.json"]
+  workflow_dispatch:
 
 permissions:
   contents: write
