@@ -7,6 +7,11 @@ on:
     inputs:
       company: {description: "only this company id (blank = every Shop Team store)", default: ""}
       now: {description: "post now, ignoring the daily hour", type: boolean, default: false}
+      mode:
+        description: "draft (render only) or live (publish)"
+        type: choice
+        options: [draft, live]
+        default: draft
 
 permissions:
   contents: write
@@ -26,7 +31,7 @@ jobs:
       TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
       TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
       IRUN_NARRATOR: kokoro
-      IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+      IRUN_MODE: ${{ github.event.inputs.mode || 'draft' }}
       IRUN_IMAGE_TRIES: "8"
     steps:
       - uses: actions/checkout@v4
