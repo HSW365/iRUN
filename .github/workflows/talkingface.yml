@@ -4,13 +4,10 @@ name: iRun Talking Face
 # Free and open-source: SadTalker (Apache-2.0) lip-sync on the runner CPU, Kokoro narrator, Pollinations face.
 # Commit config/talkingface.json  {"spec": "content/faces/<slug>.json", "post": true, "account": "hoodstar365"}
 on:
-  push:
-    branches: [main]
-    paths: ["config/talkingface.json"]
   workflow_dispatch:
     inputs:
       spec: {description: "spec path (content/faces/<slug>.json)", required: true}
-      post: {description: "post to Instagram", type: boolean, default: true}
+      post: {description: "post to Instagram", type: boolean, default: false}
 
 permissions:
   contents: write
