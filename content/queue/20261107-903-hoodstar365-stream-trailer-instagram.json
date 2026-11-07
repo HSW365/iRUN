@@ -1,0 +1,33 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "stream",
+  "platform": "instagram",
+  "shots_dir": "content/shots/stream-buried",
+  "accent": "#22d3ee",
+  "title": "HSW365 STREAM",
+  "open": {"shot": "lens", "impact": "BURIED", "cy": 0.45},
+  "scenes": [
+    {"shot": "setup", "sub": "Eight hours live. Nobody saw it.", "cy": 0.42, "zoom": [1.04, 1.14]},
+    {"card": {"title": "Live now · my channel", "tag": "BURIED", "rows": [["Hours live tonight", "8"], ["Viewers", "0"], ["New followers", "0"]]}, "bg": "city"},
+    {"shot": "setup", "sub": "I'm not streaming to a wall again.", "cy": 0.38, "cx": 0.62, "zoom": [1.4, 1.55], "sat": 0.6, "tense": true}
+  ],
+  "slams": [
+    {"word": "OWN", "shot": "city", "cy": 0.3},
+    {"word": "YOUR", "shot": "city", "panel": {"label": "HSW365 STREAM", "title": "Channel created", "working": "Going live...", "done": "You're live", "steps": ["Camera", "Screen", "Chat"]}},
+    {"word": "STAGE", "shot": "hype", "cy": 0.35, "zoom": [1.06, 1.16]}
+  ],
+  "callback": {"shot": "lens", "impact": "LIVE"},
+  "payoff": [
+    {"shot": "hype", "sub": "Turn negative into positive.", "cy": 0.32, "warm": true, "zoom": [1.0, 1.1]}
+  ],
+  "end": {
+    "wordmark": ["HSW365", "STREAM"],
+    "tagline": "Go live. Upload. Chat with your viewers.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": ["WATCHING IS FREE  ·  CREATORS: 7 DAYS FREE, THEN $7/MO", "hsw365stream.com"],
+    "link": "https://hsw365stream.com/#/signup"
+  },
+  "caption": "Eight hours live and nobody saw it. So he took his stream somewhere new and claimed his channel before everyone else. HSW365 Stream is an independent live streaming and video platform: go live from your camera or screen, upload videos and chat with viewers. Scan the QR to sign up, or go to hsw365stream.com (link in bio).",
+  "hashtags": ["streamer", "livestream", "twitchstreamer", "contentcreator", "hsw365stream", "hsw365media"]
+}
