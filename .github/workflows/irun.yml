@@ -16,7 +16,7 @@ on:
         default: ""
       mode:
         description: "draft (render + save only) or live (actually post)"
-        default: "live"
+        default: "draft"
       kind:
         description: "promo, faceless (next queued faceless script), or auto"
         default: "promo"
@@ -77,7 +77,7 @@ jobs:
           IRUN_KIND: ${{ github.event.inputs.kind }}
           IRUN_VIDEO: ${{ github.event.inputs.video }}
           IRUN_CAPTION: ${{ github.event.inputs.caption }}
-          IRUN_MODE: ${{ github.event.inputs.mode || vars.IRUN_MODE || 'live' }}
+          IRUN_MODE: ${{ github.event.inputs.mode || 'draft' }}
         run: |
           ARGS=""
           if [ -n "${{ github.event.inputs.platform }}" ]; then ARGS="$ARGS --platform ${{ github.event.inputs.platform }}"; fi
