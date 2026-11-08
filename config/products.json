@@ -7,14 +7,21 @@
       "keyword": "EARN",
       "link": "https://hsw365.co/pages/affiliates",
       "audience": "creators, indie artists, influencers, entrepreneurs and business owners with an audience who want recurring income",
-      "pitch": "The HSW365 Affiliate Partner Program is free to join. Partners earn 20% recurring commission on HSW365 app subscriptions like iRun, Friendy, Klipit and HSW365studio for as long as the customer stays subscribed, with a live dashboard, ready-made posts and monthly payouts by Zelle, Cash App or PayPal.",
+      "pitch": "The HSW365 Affiliate Partner Program is free to join. Earn 20% per subscriber for the full duration of each eligible referred subscription, subject to the HSW365 Affiliate Program Terms. Join at https://hsw365.co/pages/affiliates.",
       "angles": [
-        "turn your followers into recurring income",
-        "20% every month, not once",
-        "get paid to share tools you already use",
-        "your network is already worth something",
+        "earn 20% per subscriber for the full subscription duration",
+        "share HSW365 apps with your audience",
+        "join the HSW365 affiliate program free",
         "build together, earn together, grow together"
-      ]
+      ],
+      "cta": {
+        "spoken": "Join the HSW365 Affiliate Partner Program free and earn 20% per subscriber for the full duration of their subscription, subject to program terms.",
+        "screen": [
+          "JOIN HSW365 AFFILIATES",
+          "EARN 20% PER SUBSCRIBER"
+        ],
+        "caption": "Free to join. Earn 20% per subscriber for the full duration of their subscription, subject to program terms. Join: https://hsw365.co/pages/affiliates"
+      }
     },
     {
       "id": "shopteam",
@@ -204,7 +211,7 @@
       "keyword": "ZONE",
       "link": "https://hsw365.github.io/SPEEKZONE/",
       "audience": "people fed up with algorithm feeds, shadowbans and boosted strangers",
-      "pitch": "SpeekZone is a social network with no algorithm: every post from everyone you follow, in the order it was posted. Free for 90 days, then $9.99 a month with a verified check.",
+      "pitch": "SpeekZone is free to use, with an optional Verified membership at $9.99/month. Verified members get a badge, creator analytics, priority placement in Discover, a custom profile banner and eligibility for gift revenue share. Subscription is purchased through Apple in-app purchase.",
       "angles": [
         "no algorithm, just people",
         "your feed in order, nothing hidden",
