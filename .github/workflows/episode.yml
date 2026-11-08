@@ -1,15 +1,12 @@
 name: iRun episode
 
-# Build a 60-second series episode (engine/series.py) and post it to Instagram.
-# Commit config/episode.json  {"spec": "content/series/<slug>.json", "post": true, "account": "hoodstar365"}
+# Build a 60-second series episode (engine/series.py). Posting requires an explicit manual approval.
+# Commit config/episode.json  {"spec": "content/series/<slug>.json", "post": false, "account": "hoodstar365"}
 on:
-  push:
-    branches: [main]
-    paths: ["config/episode.json"]
   workflow_dispatch:
     inputs:
       spec: {description: "spec path", required: true}
-      post: {description: "post to Instagram", type: boolean, default: true}
+      post: {description: "post to Instagram (requires explicit approval)", type: boolean, default: false}
 
 permissions:
   contents: write
@@ -28,7 +25,7 @@ jobs:
       IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
       IG_USER_ID: ${{ secrets.IG_USER_ID }}
       IRUN_NARRATOR: kokoro
-      IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+      IRUN_MODE: ${{ vars.IRUN_MODE || 'draft' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
