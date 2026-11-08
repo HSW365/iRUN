@@ -23,6 +23,7 @@ import os
 import re
 import subprocess
 import sys
+from urllib.parse import urlencode, urlparse, urlunparse, parse_qsl
 
 import requests
 from PIL import Image, ImageDraw, ImageFilter
@@ -278,7 +279,16 @@ def overrides(handle):
         return {}
 
 
-def build_spec(p, kind, slug, account):
+def tracked_url(url, campaign_id):
+    if not campaign_id:
+        return url
+    parts = urlparse(url)
+    query = dict(parse_qsl(parts.query, keep_blank_values=True))
+    query.update({"utm_source": "irun", "utm_medium": "social", "utm_campaign": campaign_id})
+    return urlunparse(parts._replace(query=urlencode(query)))
+
+
+def build_spec(p, kind, slug, account, campaign_id=None):
     ov = overrides(p["handle"])
     pb = dict(PLAYBOOKS[kind], **{k: v for k, v in ov.items() if k in ("accent", "tagline", "vo", "fine", "slams")})
     if not is_house(p) and pb.get("tagline") == "Turn negative into positive.":
@@ -307,7 +317,7 @@ def build_spec(p, kind, slug, account):
         "payoff": payoff,
         "end": {"wordmark": wordmark, "tagline": pb["tagline"], "cta": "SCAN TO SHOP",
                 "lines": [f"${p['price']:,.0f}  ·  STRAIGHT TO CHECKOUT", p["store"].upper()],
-                "fine": pb["fine"], "link": p["checkout"]},
+                "fine": pb["fine"], "link": tracked_url(p["checkout"], campaign_id)},
         "caption": "",
         "hashtags": [],
     }
@@ -323,12 +333,12 @@ def build_spec(p, kind, slug, account):
     own = ["hsw365", "hsw365co"] if is_house(p) else [re.sub(r"[^a-z0-9]", "", brand(p).lower())]
     spec["hashtags"] = [t for t in tags if t] + [t for t in own if t] + ["shopnow"]
     spec["caption"] = (f"{lines[0][1]} {lines[2][1]} {p['title']}, ${p['price']:,.0f}. Scan the QR in the video to go "
-                       f"straight to checkout, or shop {p['url'].replace('https://', '')} (link in bio).")
+                       f"straight to checkout, or shop {tracked_url(p['url'], campaign_id).replace('https://', '')} (link in bio).")
     return spec, [spoken(t) for _, t in lines]
 
 
 def make(product, store="hsw365.co", account="hoodstar365", playbook=None, seed=3650, out=None, post=False,
-         spec_only=False, platform="instagram"):
+         spec_only=False, platform="instagram", campaign_id=None):
     """Build the trailer ad for one product (and post it). Returns {"video", "spec", "product", ...}."""
     out = out or os.path.join(ROOT, "out")
     store, handle = parse(product, store)
@@ -336,7 +346,7 @@ def make(product, store="hsw365.co", account="hoodstar365", playbook=None, seed=
     kind = playbook or overrides(p["handle"]).get("playbook") or pick_playbook(p)
     tag = "" if is_house(p) else re.sub(r"[^a-z0-9]+", "-", store.lower().split(".")[0])[:16] + "-"
     slug = f"shop-{tag}{re.sub(r'[^a-z0-9]+', '-', handle.lower())[:40].strip('-')}"
-    spec, vo_lines = build_spec(p, kind, slug, account)
+    spec, vo_lines = build_spec(p, kind, slug, account, campaign_id)
     spec_path = os.path.join(ROOT, "content", "ads", f"{slug}-trailer.json")
     os.makedirs(os.path.dirname(spec_path), exist_ok=True)
     with open(spec_path, "w") as f:
