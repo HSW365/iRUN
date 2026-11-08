@@ -1,9 +1,6 @@
 name: HSW365MEDIA launch video (iRun)
 
 on:
-  push:
-    branches: [main]
-    paths: ["content/queue/hsw365media-launch.json"]
   workflow_dispatch:
 
 permissions:
