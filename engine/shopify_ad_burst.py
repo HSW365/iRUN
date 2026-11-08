@@ -93,7 +93,7 @@ def main():
         try:
             result = shopify_ad.make(
                 product["handle"], store=store, account=a.account,
-                seed=3650 + index * 97, post=False, spec_only=not a.render
+                seed=3650 + index * 97, post=False, spec_only=not a.render, campaign_id=campaign_id
             )
             with open(result["spec"], "r", encoding="utf-8") as f:
                 spec = json.load(f)
