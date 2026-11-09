@@ -1,0 +1,99 @@
+name: iRun Shopify Ad Burst
+
+on:
+  workflow_dispatch:
+    inputs:
+      store:
+        description: "Shopify storefront domain (defaults to HSW365.co)"
+        required: true
+        default: "hsw365.co"
+        type: string
+      limit:
+        description: "Maximum products/ads (1–12)"
+        required: true
+        default: "12"
+        type: choice
+        options: ["3", "6", "9", "12"]
+      render:
+        description: "Render full MP4 videos (slower and uses AI/media credits)"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: irun-shopify-ad-burst
+  cancel-in-progress: false
+
+jobs:
+  burst:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+      ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
+      IRUN_NARRATOR: kokoro
+      IRUN_MODE: draft
+      IRUN_IMAGE_TRIES: "8"
+      SHOPIFY_STORE: ${{ inputs.store }}
+      AD_LIMIT: ${{ inputs.limit }}
+      RENDER_VIDEOS: ${{ inputs.render }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install system dependencies
+        if: env.RENDER_VIDEOS == 'true'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg rubberband-cli fonts-inter
+      - name: Install Python dependencies
+        run: |
+          pip install -q -r requirements.txt
+          if [ "$RENDER_VIDEOS" = "true" ]; then
+            pip install -q kokoro-onnx soundfile
+            pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+            pip install -q chatterbox-tts faster-whisper
+          fi
+      - name: Cache narrator model
+        if: env.RENDER_VIDEOS == 'true'
+        uses: actions/cache@v4
+        with:
+          path: assets/voice/models
+          key: kokoro-v1.0
+      - name: Build ad batch
+        run: |
+          if [ "$RENDER_VIDEOS" = "true" ]; then
+            mkdir -p assets/voice/models
+            cd assets/voice/models
+            for f in kokoro-v1.0.onnx voices-v1.0.bin; do
+              [ -s "$f" ] || curl -fsSL -o "$f" "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f"
+            done
+            cd "$GITHUB_WORKSPACE"
+          fi
+          ARGS=(--store "$SHOPIFY_STORE" --limit "$AD_LIMIT")
+          if [ "$RENDER_VIDEOS" = "true" ]; then ARGS+=(--render); fi
+          python engine/shopify_ad_burst.py "${ARGS[@]}" 2>&1 | tee ad-burst.log
+          test ${PIPESTATUS[0]} -eq 0
+      - name: Upload ad drafts, videos and manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: irun-shopify-ad-burst
+          path: |
+            out/ad-burst/
+            content/ads/
+            content/shots/
+            assets/voice/shop-*/
+            ad-burst.log
+          if-no-files-found: warn
+          retention-days: 30
