@@ -37,7 +37,7 @@ const APPS: App[] = [
     who: "local businesses", hook: "a website that brings you customers",
     pitch: "QUEENEE builds you a mobile-first website made to get calls and bookings, on your own domain, with hosting and updates included. No templates, built from your business.",
     offer: "Website builds from $1,500, hosting and updates included.", cta: "send a free mockup of the new {biz} site", targets: ["shops", "food"] },
-  { id: "ultimate", name: "HSW365 AI Front Office", link: "https://hsw365.co/pages/ai-front-office",
+  { id: "ultimate", name: "HSW365 AI Front Office", link: "https://hsw365.net/pages/ai-front-office",
     who: "business owners", hook: "your whole front office on AI",
     pitch: "One package runs your front office: a QUEENEE website, CallTwin answering every call and text 24/7, and iRun posting your business on Instagram every day.",
     offer: "Website + CallTwin from $2,500.", cta: "send {biz} a free estimate", targets: ["trades", "shops", "food", "health"] },
@@ -85,11 +85,11 @@ const APPS: App[] = [
     who: "community and senior centers", hook: "a friend that's always there",
     pitch: "Friendy is an AI companion app that keeps people company, checks in daily and helps with reminders. A gentle tool for members who live alone.",
     offer: "Free to try.", cta: "give {biz} members free access", targets: ["community"] },
-  { id: "affiliate", name: "HSW365 Affiliates", link: "https://hsw365.co/pages/affiliates",
+  { id: "affiliate", name: "HSW365 Affiliates", link: "https://hsw365.net/pages/affiliates",
     who: "creators and business owners", hook: "20% recurring on every referral",
     pitch: "The HSW365 Affiliate Partner Program is free to join: earn 20% recurring commission on every subscriber you send to HSW365 apps like iRun, CallTwin and QUEENEE, paid monthly.",
     offer: "Free to join.", cta: "send your {biz} affiliate link", targets: ["shops", "fitness", "beauty"] },
-  { id: "investor", name: "HSW365 Investor Partners", link: "https://hsw365.co",
+  { id: "investor", name: "HSW365 Investor Partners", link: "https://hsw365.net",
     who: "investors", hook: "4 partner spots, $25K each",
     pitch: "I've built 15 live AI apps under HSW365, including iRun, CallTwin and QUEENEE, with CallTwin already sold to a paying customer. I'm bringing on 4 partners at $25,000 each for equity in the HSW365 app portfolio.",
     offer: "4 spots at $25,000 each.", cta: "walk you through the deck in 15 minutes", targets: [] },
@@ -268,7 +268,7 @@ async function polish(app: App, l: { business: string; trade?: string | null; ci
 
 // ---------------------------------------------------------------- sending
 const wrap = (inner: string) => `<div style="font-family:Helvetica,Arial,sans-serif;max-width:600px;color:#111;font-size:15px;line-height:1.55">${inner}` +
-  `<p>Elvin Torres Sr.<br>Founder, HSW365 Media LLC &middot; Veteran-owned<br><a href="https://hsw365.co">hsw365.co</a></p>` +
+  `<p>Elvin Torres Sr.<br>Founder, HSW365 Media LLC &middot; Veteran-owned<br><a href="https://hsw365.net">hsw365.net</a></p>` +
   `<p style="font-size:12px;color:#888;border-top:1px solid #eee;padding-top:10px">${ADDRESS}. Not interested? Reply "unsubscribe" and you won't hear from me again.</p></div>`;
 const text = (h: string) => h.replace(/<br\s*\/?>/g, "\n").replace(/<\/p>/g, "\n\n").replace(/<a href="([^"]+)"[^>]*>[^<]*<\/a>/g, "$1").replace(/<[^>]+>/g, "")
   .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&middot;/g, "·").trim();

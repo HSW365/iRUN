@@ -229,7 +229,7 @@ def frame(i):
             c = rrect((pw, 84), 42, (*CARD, 255), (*(ACC if n == 0 else LINE), 255), 3)
             ctext(ImageDraw.Draw(c), 22, p_, I("Inter-SemiBold.otf", 34), WHITE, 0, pw)
             lay.alpha_composite(c, (gx + n * (pw + 15), 1100))
-        ctext(ld, 1260, "hsw365.co", M(48), WHITE)
+        ctext(ld, 1260, "hsw365.net", M(48), WHITE)
         ctext(ld, 1330, "Free mockup before you pay a dime", I("Inter-Medium.otf", 34), MUT)
         ctext(ld, 1720, "HSW365 Media  ·  Turn Negative Into Positive", I("Inter-Medium.otf", 30), (120, 120, 140))
         paste(base, lay, k, (0, 20 * (1 - k)))

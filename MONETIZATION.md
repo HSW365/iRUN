@@ -19,7 +19,7 @@ Visitor -> Product demo/value proposition -> Signup -> Checkout -> Account activ
 ## HSW365 portfolio CTA
 Primary brand: HSW365 / HSW365Media
 Website: https://hsw365media.com
-Shop: https://hsw365.co
+Shop: https://hsw365.net
 Business email: book@hoodstar365.com
 Business sales: hsw365media@gmail.com
 

@@ -45,7 +45,7 @@
     <h2>Brand kit</h2>
     <p class="note">Your colors, font, logo and call to action. Every ad and showcase video uses the active kit so it stays on brand. Save as many kits as you have brands or clients.</p>
     <div class="row"><div><label>Kit</label><select id="kSel"></select></div><div><label>Brand name</label><input id="kName" placeholder="HSW365 Media"></div></div>
-    <div class="row"><div><label>Handle</label><input id="kHandle" placeholder="hsw365media"></div><div><label>Website</label><input id="kSite" placeholder="hsw365.co"></div></div>
+    <div class="row"><div><label>Handle</label><input id="kHandle" placeholder="hsw365media"></div><div><label>Website</label><input id="kSite" placeholder="hsw365.net"></div></div>
     <div class="kitrow">
       <div><label>Background</label><input id="kBg" type="color" value="#0a0a0f"></div>
       <div><label>Main color</label><input id="kMain" type="color" value="#22d3ee"></div>
@@ -144,7 +144,7 @@
   }
 
   /* ---------- brand kits ---------- */
-  function defaultKit() { const S = window.IRUN_SUB; return {id: "k" + Date.now(), name: S ? (S.name || "My brand") : "HSW365 Media", handle: handle(), site: S ? "" : "hsw365.co", bg: "#0a0a0f", main: "#22d3ee", acc: "#a855f7", font: "Barlow Condensed", logo: ""}; }
+  function defaultKit() { const S = window.IRUN_SUB; return {id: "k" + Date.now(), name: S ? (S.name || "My brand") : "HSW365 Media", handle: handle(), site: S ? "" : "hsw365.net", bg: "#0a0a0f", main: "#22d3ee", acc: "#a855f7", font: "Barlow Condensed", logo: ""}; }
   let kits = J(KITS_KEY, null); if (!Array.isArray(kits) || !kits.length) kits = [defaultKit()];
   let activeId = store.get(ACTIVE_KEY) || kits[0].id; if (!kits.find(k => k.id === activeId)) activeId = kits[0].id;
   const kit = () => kits.find(k => k.id === activeId) || kits[0];

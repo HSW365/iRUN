@@ -30,7 +30,7 @@ Trailer ads use a deep cinematic narrator voice made with open-source Kokoro (`e
 | SITE | QUEENEE | hsw365.github.io/queenee/ |
 | FLIP | FLIPIT | flipit-m5ig.onrender.com |
 | AUTO | iRun | hsw365.github.io/iRUN/ |
-| BUILD | Build Series | hsw365.co |
+| BUILD | Build Series | hsw365.net |
 | RUN | iRun Operator | hsw365.github.io/iRUN/start.html |
 
 To change these, edit `config/products.json`. The next run syncs them to the bot.

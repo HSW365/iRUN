@@ -352,7 +352,7 @@ function drawer(r) {
     <div class="row" style="margin-bottom:10px"><div class="field"><label>To</label><input value="${esc(r.email)}" disabled></div>
       <div class="field" style="flex:2 1 300px"><label>Subject</label><input data-f="subject" value="${esc(r.subject || r.last_subject || "")}" ${edit ? "" : "disabled"}></div></div>
     <label>Message</label>
-    <div class="mail" data-f="body" ${edit ? 'contenteditable="true"' : ""}>${r.body || "<p><i>Sent by the classic Sales Autopilot.</i></p>"}<p style="color:#555">Elvin Torres Sr.<br>Founder, HSW365 Media LLC · Veteran-owned<br>hsw365.co</p></div>
+    <div class="mail" data-f="body" ${edit ? 'contenteditable="true"' : ""}>${r.body || "<p><i>Sent by the classic Sales Autopilot.</i></p>"}<p style="color:#555">Elvin Torres Sr.<br>Founder, HSW365 Media LLC · Veteran-owned<br>hsw365.net</p></div>
     ${r.last_reply ? `<label style="display:block;margin-top:12px">Their reply</label><div class="mail" style="background:#f0fdf4">${esc(r.last_reply)}</div>` : ""}
     ${r.website ? `<p class="dim" style="margin:10px 0 0">Website: <a href="${esc(/^https?:/.test(r.website) ? r.website : "https://" + r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a></p>` : ""}
     ${edit ? `<div class="dact"><button class="btn ghost sm" data-a="skip">Skip</button><button class="btn ghost sm" data-a="save">Save</button><button class="btn go sm" data-a="approve">Approve &amp; send</button></div>` : ""}

@@ -45,7 +45,7 @@ LINKS = {
     "calltwin_signup": "https://hsw365.github.io/calltwin/signup.html",
     "queenee": "https://hsw365.github.io/queenee/",
     "queenee_pay": "https://buy.stripe.com/aFafZhcdxeQS1822xt3VC0n",
-    "store": "https://hsw365.co",
+    "store": "https://hsw365.net",
 }
 PRICES = [
     ("New website or full upgrade", "Mobile-first, built to book jobs, hosting and updates included", "$299 setup + $20/mo"),
@@ -230,7 +230,7 @@ def price_table():
 def wrap(inner):
     return ('<div style="font-family:Helvetica,Arial,sans-serif;max-width:600px;color:#111;font-size:15px;line-height:1.55">'
             f'{inner}<p>Elvin Torres Sr.<br>Founder, HSW365 Media LLC &middot; Veteran-owned<br>'
-            f'<a href="{LINKS["store"]}">hsw365.co</a></p>'
+            f'<a href="{LINKS["store"]}">hsw365.net</a></p>'
             f'<p style="font-size:12px;color:#888;border-top:1px solid #eee;padding-top:10px">HSW365 Media LLC, {html.escape(ADDRESS)}. '
             'Not interested? Reply "unsubscribe" and you won\'t hear from me again.</p></div>')
 

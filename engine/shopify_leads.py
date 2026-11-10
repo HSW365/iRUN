@@ -38,7 +38,7 @@ SKIP_LOCAL = re.compile(r"^(no-?reply|donotreply|postmaster|abuse|webmaster|priv
                         r"email|your|sentry|support@shopify)", re.I)
 SKIP_DOMAIN = re.compile(r"(shopify\.com|myshopify\.com|example\.|sentry|wixpress|domain\.com|email\.com|godaddy|"
                          r"\.(png|jpe?g|gif|webp|svg|css|js)$)", re.I)
-HOUSE = {"hsw365.co", "www.hsw365.co"}
+HOUSE = {"hsw365.net", "www.hsw365.net", "hsw365.co", "www.hsw365.co"}
 try:
     with open(os.path.join(HERE, "..", "config", "owners.json")) as _f:
         OWNERS = {e.lower() for e in json.load(_f)["emails"]} | {"hswmerch@gmail.com"}

@@ -1,13 +1,13 @@
 name: iRun Shopify ad
 
 # Make a trailer ad for any Shopify product and post it to Instagram.
-# Commit config/shopifyad.json  {"product": "<handle or product URL>", "store": "hsw365.co", "account": "hoodstar365", "post": true}
+# Commit config/shopifyad.json  {"product": "<handle or product URL>", "store": "hsw365.net", "account": "hoodstar365", "post": true}
 # or run it from the Actions tab with a product handle.
 on:
   workflow_dispatch:
     inputs:
       product: {description: "product handle or URL", required: true}
-      store: {description: "store domain", default: "hsw365.co"}
+      store: {description: "store domain", default: "hsw365.net"}
       account: {description: "iRun account", default: "hoodstar365"}
       post: {description: "post to Instagram", type: boolean, default: false}
 
@@ -52,7 +52,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             PRODUCT="${{ inputs.product }}"; STORE="${{ inputs.store }}"; ACCOUNT="${{ inputs.account }}"; POST="${{ inputs.post }}"
           else
-            PRODUCT=$(jq -r .product config/shopifyad.json); STORE=$(jq -r '.store // "hsw365.co"' config/shopifyad.json)
+            PRODUCT=$(jq -r .product config/shopifyad.json); STORE=$(jq -r '.store // "hsw365.net"' config/shopifyad.json)
             ACCOUNT=$(jq -r '.account // "hoodstar365"' config/shopifyad.json); POST=$(jq -r 'if .post == false then "false" else "true" end' config/shopifyad.json)
           fi
           ARGS="--store $STORE --account $ACCOUNT"; [ "$POST" = "true" ] && ARGS="$ARGS --post"

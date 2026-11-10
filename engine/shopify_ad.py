@@ -1,7 +1,7 @@
 """iRun Shopify ads: point iRun at any product on a Shopify store and it builds the house trailer ad for it and posts it.
 
   python engine/shopify_ad.py hsw365-glow-led-red-light-therapy-mask                     build spec + shots + VO + video
-  python engine/shopify_ad.py https://hsw365.co/products/<handle> --post                  ...and post to @hoodstar365 IG
+  python engine/shopify_ad.py https://hsw365.net/products/<handle> --post                  ...and post to @hoodstar365 IG
   python engine/shopify_ad.py <handle> --store client-store.com --account <client id> --post
 
 What it does (free route, no paid API):
@@ -247,7 +247,7 @@ def make_shots(pb, p, shots_dir, seed):
 
 
 # ---------- spec ----------
-HOUSE = ("hsw365.co", "www.hsw365.co")
+HOUSE = ("hsw365.net", "www.hsw365.net", "hsw365.co", "www.hsw365.co")
 
 
 def is_house(p):
@@ -327,7 +327,7 @@ def build_spec(p, kind, slug, account):
     return spec, [spoken(t) for _, t in lines]
 
 
-def make(product, store="hsw365.co", account="hoodstar365", playbook=None, seed=3650, out=None, post=False,
+def make(product, store="hsw365.net", account="hoodstar365", playbook=None, seed=3650, out=None, post=False,
          spec_only=False, platform="instagram"):
     """Build the trailer ad for one product (and post it). Returns {"video", "spec", "product", ...}."""
     out = out or os.path.join(ROOT, "out")
@@ -368,7 +368,7 @@ def make(product, store="hsw365.co", account="hoodstar365", playbook=None, seed=
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("product", help="product handle or full product URL")
-    ap.add_argument("--store", default="hsw365.co")
+    ap.add_argument("--store", default="hsw365.net")
     ap.add_argument("--account", default="hoodstar365")
     ap.add_argument("--playbook", choices=list(PLAYBOOKS), help="force a playbook (default: picked from the product)")
     ap.add_argument("--seed", type=int, default=3650)

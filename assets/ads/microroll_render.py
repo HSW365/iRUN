@@ -2,7 +2,7 @@
 7:42 AM. Dre knocks a full glass of orange juice across the counter. He grabs for the paper towels:
 empty tube. Third pack this month. His homie Mook texts "stop buying paper towels" and slides the
 HSW365 roll across the counter. One rip, one wipe, spill gone. Cloth goes in the wash, back on the roll.
-"Bro... I been throwing money in the trash." End card: $10.99, QR to subscribe, hsw365.co.
+"Bro... I been throwing money in the trash." End card: $10.99, QR to subscribe, hsw365.net.
 """
 import os, sys, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +14,7 @@ N = int(FPS * DUR)
 TEAL = (20, 184, 166); OJ = (251, 146, 36); OJ_D = (214, 104, 14)
 ACC = TEAL
 Q.RED = TEAL  # "my" chat bubbles
-URL = "https://hsw365.co/products/hsw365-tear-off-microfiber-cleaning-roll-30-sheets?src=ig-microdrama"
+URL = "https://hsw365.net/products/hsw365-tear-off-microfiber-cleaning-roll-30-sheets?src=ig-microdrama"
 MORNING = vgrad((24, 20, 18), (44, 34, 28))
 NIGHT2 = vgrad((6, 8, 12), (12, 18, 22))
 TEALGLOW = np.exp(-(((xx - W * 0.5) / (W * 0.6)) ** 2 + ((yy - H * 0.42) / (H * 0.3)) ** 2))[..., None].astype(np.float32)
@@ -274,7 +274,7 @@ def frame(i):
         ctext(ld, 372, "$10.99", B(150), GOLD)
         lay.alpha_composite(QR2, ((W - QR2.width) // 2, 580))
         ctext(ld, 1030, "SCAN TO SUBSCRIBE", B(84), CYAN)
-        ctext(ld, 1140, "hsw365.co", M(52), WHITE)
+        ctext(ld, 1140, "hsw365.net", M(52), WHITE)
         ctext(ld, 1214, "Kitchen  ·  Car  ·  Glass  ·  Garage", I("Inter-Medium.otf", 36), MUT)
         ctext(ld, 1720, "HSW365  ·  Turn Negative Into Positive", I("Inter-Medium.otf", 30), (120, 120, 140))
         paste(base, lay, k, (0, 20 * (1 - k)))
