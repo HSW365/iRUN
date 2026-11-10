@@ -1,15 +1,10 @@
-[0;93m2026-11-10 17:43:44.141010466 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[narrator:kokoro] vo1.wav  Every foreclosure sign you drive past... is somebody's deal.
-[narrator:kokoro] vo2.wav  Tax liens. Auctions. Foreclosures. All public records.
-[narrator:kokoro] vo3.wav  FLIPIT finds the deal.
-[narrator:kokoro] vo4.wav  Then fills your letter of intent, cash purchase agreement and assignment.
-[narrator:kokoro] vo5.wav  Scan the code. Find your first flip.
-[shots] sign: pollinations
-[shots] driver: pollinations
-[shots] docs: pollinations
-[shots] phone: pollinations
-[shots] night: pollinations
-[shots] sign2: pollinations
-[shots] keys: pollinations
-[shots] hero: pollinations
+[hoodstar365/instagram] posted 18121070447075146
+[shots] sign: cached
+[shots] driver: cached
+[shots] docs: cached
+[shots] phone: cached
+[shots] night: cached
+[shots] sign2: cached
+[shots] keys: cached
+[shots] hero: cached
 {"video": "/home/runner/work/iRUN/iRUN/engine/../out/flipit-foreclosure-ad.mp4", "seconds": 20.55}
