@@ -1,35 +1,35 @@
 [showcase] CallTwin: layout=phone
-[showcase] wrote assets/ads/showcase/calltwin-20261105.mp4 (18.7s, narrator=yes)
-/home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+[showcase] wrote assets/ads/showcase/calltwin-20261110.mp4 (18.7s, narrator=yes)
+/home/runner/work/iRUN/iRUN/engine/run.py:375: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+/home/runner/work/iRUN/iRUN/engine/run.py:171: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18650803003001051
+[hoodstar365/instagram] posted 18645071797010885
 [showcase] QUEENEE: layout=browser
-[showcase] wrote assets/ads/showcase/queenee-20261105.mp4 (17.33s, narrator=yes)
-/home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+[showcase] wrote assets/ads/showcase/queenee-20261110.mp4 (17.33s, narrator=yes)
+/home/runner/work/iRUN/iRUN/engine/run.py:375: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+/home/runner/work/iRUN/iRUN/engine/run.py:171: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18141124768528040
+[hoodstar365/instagram] posted 18076778306732802
 [showcase] iRun: layout=stack
-[showcase] wrote assets/ads/showcase/irun-20261105.mp4 (18.34s, narrator=yes)
-/home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+[showcase] wrote assets/ads/showcase/irun-20261110.mp4 (18.34s, narrator=yes)
+/home/runner/work/iRUN/iRUN/engine/run.py:375: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+/home/runner/work/iRUN/iRUN/engine/run.py:171: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18458787595122902
+[hoodstar365/instagram] posted 17957725323330943
 [showcase] DISPUTE365: layout=split
-[showcase] wrote assets/ads/showcase/dispute365-20261105.mp4 (17.38s, narrator=yes)
-/home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+[showcase] wrote assets/ads/showcase/dispute365-20261110.mp4 (17.38s, narrator=yes)
+/home/runner/work/iRUN/iRUN/engine/run.py:375: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+/home/runner/work/iRUN/iRUN/engine/run.py:171: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18149221192573078
+[hoodstar365/instagram] posted 18237666298321643
 [showcase] Klipit: layout=stat
-[showcase] wrote assets/ads/showcase/klipit-20261105.mp4 (16.83s, narrator=yes)
-/home/runner/work/iRUN/iRUN/engine/run.py:339: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+[showcase] wrote assets/ads/showcase/klipit-20261110.mp4 (16.83s, narrator=yes)
+/home/runner/work/iRUN/iRUN/engine/run.py:375: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-/home/runner/work/iRUN/iRUN/engine/run.py:144: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+/home/runner/work/iRUN/iRUN/engine/run.py:171: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   result=res, posted_at=dt.datetime.utcnow().isoformat() + "Z")
-[hoodstar365/instagram] posted 18646484203021568
+[hoodstar365/instagram] posted 18080598422422515
