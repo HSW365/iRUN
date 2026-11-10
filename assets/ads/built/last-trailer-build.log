@@ -1,10 +1,16 @@
-[hoodstar365/instagram] posted 18107015300571502
-[shots] phone: cached
-[shots] asleep: cached
-[shots] stream: cached
-[shots] shock: cached
-[shots] night: cached
-[shots] link: cached
-[shots] win: cached
-[shots] hero: cached
-{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-6am-ad.mp4", "seconds": 20.45}
+[0;93m2026-11-10 20:25:22.012676134 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator:kokoro] vo1.wav  Eleven viewers. One impossible clutch.
+[narrator:kokoro] vo2.wav  Nobody clipped it.
+[narrator:kokoro] vo3.wav  Until Klip it found it.
+[narrator:kokoro] vo4.wav  Paste one link. Klip it finds every highlight.
+[narrator:kokoro] vo5.wav  Vertical clips. Ready to post.
+[narrator:kokoro] vo6.wav  Scan the code. Start clipping.
+[shots] clutch: pollinations
+[shots] empty: pollinations
+[shots] friend: pollinations
+[shots] link: pollinations
+[shots] stream: pollinations
+[shots] night: pollinations
+[shots] viral: pollinations
+[shots] hero: pollinations
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-clutch-ad.mp4", "seconds": 20.0}
