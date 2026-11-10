@@ -1,16 +1,15 @@
-[0;93m2026-11-10 20:25:22.012676134 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[narrator:kokoro] vo1.wav  Eleven viewers. One impossible clutch.
-[narrator:kokoro] vo2.wav  Nobody clipped it.
-[narrator:kokoro] vo3.wav  Until Klip it found it.
-[narrator:kokoro] vo4.wav  Paste one link. Klip it finds every highlight.
-[narrator:kokoro] vo5.wav  Vertical clips. Ready to post.
-[narrator:kokoro] vo6.wav  Scan the code. Start clipping.
-[shots] clutch: pollinations
-[shots] empty: pollinations
-[shots] friend: pollinations
-[shots] link: pollinations
-[shots] stream: pollinations
-[shots] night: pollinations
-[shots] viral: pollinations
+[0;93m2026-11-10 20:40:28.309965578 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator:kokoro] vo1.wav  Her work is flawless.
+[narrator:kokoro] vo2.wav  Online, she doesn't exist.
+[narrator:kokoro] vo3.wav  Not anymore.
+[narrator:kokoro] vo4.wav  Queenie builds your website. Crown your brand.
+[narrator:kokoro] vo5.wav  Found. Booked. Remembered.
+[narrator:kokoro] vo6.wav  Queenie. Scan to get your site.
+[shots] search: pollinations
+[shots] client: pollinations
+[shots] owner: pollinations
+[shots] crown: pollinations
+[shots] build: pollinations
+[shots] booked: pollinations
 [shots] hero: pollinations
-{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-clutch-ad.mp4", "seconds": 20.0}
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/queenee-crown-ad.mp4", "seconds": 20.0}
