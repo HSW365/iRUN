@@ -1,0 +1,167 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "queenee",
+  "platform": "instagram",
+  "shots_dir": "content/shots/queenee-nosite",
+  "accent": "#EC4899",
+  "title": "QUEENEE",
+  "shot_prompts": {
+    "search": "close-up of a smartphone screen showing a blank search result with no website, dark barbershop at night, hot pink neon glow, moody",
+    "owner": "Black woman salon owner in her 30s alone in her salon after closing, tired, looking at her phone, pink neon sign glow, realistic",
+    "chair": "empty salon chair in a dark salon, pink neon light reflecting on the mirror, quiet cinematic",
+    "laptop": "laptop on a salon counter showing a glowing website being built, pink light on the keyboard, close-up, night",
+    "night": "city street at night with a closed small business storefront, pink neon reflections on wet pavement, moody",
+    "launch": "laptop screen with a finished beautiful business website glowing pink, close-up, soft depth of field",
+    "booked": "smiling Black woman salon owner showing a booking notification on her phone, bright salon, warm light, success",
+    "hero": "confident Black woman salon owner smiling in her bright busy salon, customers in the background, golden light, success"
+  },
+  "open": {
+    "shot": "search",
+    "impact": "NO RESULTS",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "owner",
+      "cy": 0.4,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "Google \u00b7 \"best salon near me\"",
+        "tag": "MISSED",
+        "rows": [
+          [
+            "Your salon",
+            "not found"
+          ],
+          [
+            "Competitor A",
+            "12 new bookings"
+          ],
+          [
+            "Competitor B",
+            "9 new bookings"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    },
+    {
+      "shot": "chair",
+      "cy": 0.5,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.5
+    }
+  ],
+  "slams": [
+    {
+      "word": "BUILT",
+      "shot": "laptop",
+      "cy": 0.5,
+      "dur": 1.4
+    },
+    {
+      "word": "IN",
+      "shot": "night",
+      "dur": 1.5,
+      "panel": {
+        "label": "QUEENEE",
+        "title": "Your business",
+        "working": "Building your website...",
+        "done": "Website live",
+        "steps": [
+          "HOME",
+          "SERVICES",
+          "BOOK NOW"
+        ]
+      }
+    },
+    {
+      "word": "MINUTES",
+      "shot": "launch",
+      "cy": 0.5,
+      "dur": 1.55
+    }
+  ],
+  "callback": {
+    "shot": "search",
+    "impact": "FOUND",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "booked",
+      "cy": 0.42,
+      "warm": true,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end_dur": 3.9,
+  "vo_captions": true,
+  "duck": 0.62,
+  "vo_lines": [
+    [
+      0.25,
+      "If customers can't find you online... they book the next shop."
+    ],
+    [
+      5.0,
+      "No website. No bookings."
+    ],
+    [
+      7.6,
+      "QUEENEE builds your business website."
+    ],
+    [
+      11.4,
+      "Services. Photos. A button to book. Live in minutes."
+    ],
+    [
+      16.35,
+      "Scan the code. Get found."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "QUEEN",
+      "EE"
+    ],
+    "tagline": "Your business. Online. Today.",
+    "cta": "SCAN TO GET YOUR SITE",
+    "lines": [
+      "WEBSITES FOR LOCAL BUSINESSES",
+      "hsw365.github.io/queenee"
+    ],
+    "fine": "CallTwin AI receptionist available as an add-on.",
+    "link": "https://hsw365.github.io/queenee/?src=ig"
+  },
+  "caption": "If customers can't find you online, they book the next shop. QUEENEE builds your business a real website: services, photos and a book-now button, live in minutes. Scan the QR to get yours, or go to hsw365.github.io/queenee (link in bio).",
+  "hashtags": [
+    "smallbusiness",
+    "websitedesign",
+    "salonowner",
+    "barbershop",
+    "localbusiness",
+    "queenee"
+  ]
+}

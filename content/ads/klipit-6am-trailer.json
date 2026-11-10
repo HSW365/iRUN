@@ -1,0 +1,165 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-6am",
+  "accent": "#84CC16",
+  "title": "KLIPIT",
+  "shot_prompts": {
+    "phone": "close-up of a smartphone on a dark gaming desk at 6 AM, screen glowing with a huge notification, lime green light spilling across a mechanical keyboard, a hand reaching for it",
+    "asleep": "young Black streamer asleep with his head on his gaming keyboard, headset around his neck, dark bedroom, lime green rim light from monitors, realistic",
+    "stream": "gaming monitor showing an empty streaming setup, six hour stream still live, dark room, lime glow, empty energy drink cans, moody",
+    "shock": "close-up of a young Black streamer's face lit by phone light, eyes wide with disbelief and excitement, dark bedroom, lime green glow",
+    "night": "dark city skyline at dawn through a bedroom window, lime neon reflections on glass, moody cinematic",
+    "link": "over-the-shoulder view of a laptop with a video link being pasted, lime green glow on a dark desk, hands on keyboard",
+    "win": "young Black streamer jumping up with fists raised in a dark gaming room, phone screen glowing in his hand, lime light, triumphant",
+    "hero": "confident young Black streamer smiling at camera in a gaming room at golden sunrise, monitors glowing behind him, success"
+  },
+  "open": {
+    "shot": "phone",
+    "impact": "2.1M VIEWS",
+    "cy": 0.55
+  },
+  "scenes": [
+    {
+      "shot": "asleep",
+      "cy": 0.42,
+      "zoom": [
+        1.06,
+        1.2
+      ],
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "KLIPIT \u00b7 Stream 6h 12m",
+        "tag": "FOUND",
+        "rows": [
+          [
+            "Hour 4:02",
+            "insane clutch \u00b7 94 score"
+          ],
+          [
+            "Hour 5:11",
+            "chat goes wild \u00b7 91 score"
+          ],
+          [
+            "Hour 1:38",
+            "funniest fail \u00b7 88 score"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    },
+    {
+      "shot": "shock",
+      "cy": 0.4,
+      "zoom": [
+        1.1,
+        1.26
+      ],
+      "dur": 1.5
+    }
+  ],
+  "slams": [
+    {
+      "word": "PASTE",
+      "shot": "link",
+      "cy": 0.5,
+      "dur": 1.4
+    },
+    {
+      "word": "THE",
+      "shot": "stream",
+      "dur": 1.5,
+      "panel": {
+        "label": "KLIPIT",
+        "title": "1 link",
+        "working": "Finding your best moments...",
+        "done": "40 clips ready",
+        "steps": [
+          "CLIP 1",
+          "CLIP 2",
+          "CLIP 3"
+        ]
+      }
+    },
+    {
+      "word": "LINK",
+      "shot": "night",
+      "cy": 0.5,
+      "dur": 1.5
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "GOING VIRAL",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "win",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "dur": 1.8
+    }
+  ],
+  "end_dur": 3.9,
+  "vo_captions": true,
+  "duck": 0.62,
+  "vo_lines": [
+    [
+      0.25,
+      "Six hours live... and the best play happened at hour four."
+    ],
+    [
+      5.0,
+      "Nobody saw it. You were asleep."
+    ],
+    [
+      7.6,
+      "Klipit finds your best moments. From one link."
+    ],
+    [
+      12.1,
+      "Forty clips. Cut for Reels, TikTok and Shorts."
+    ],
+    [
+      16.35,
+      "Scan the code. Start clipping."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "KLIP",
+      "IT"
+    ],
+    "tagline": "Paste your stream. Get your best clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "YOUTUBE \u00b7 TWITCH \u00b7 KICK",
+      "klipit.onrender.com"
+    ],
+    "fine": "Plans from $20/month. Cancel anytime.",
+    "link": "https://klipit.onrender.com/?signup=pro&src=ig"
+  },
+  "caption": "Six hours live, and your best play happened at hour four. Klipit finds it for you: paste your YouTube, Twitch or Kick link and get up to 40 vertical clips for Reels, TikTok and Shorts. Scan the QR to sign up, or go to klipit.onrender.com (link in bio).",
+  "hashtags": [
+    "streamer",
+    "twitch",
+    "kick",
+    "contentcreator",
+    "clips",
+    "klipit"
+  ]
+}

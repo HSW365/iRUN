@@ -1,0 +1,169 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "calltwin",
+  "platform": "instagram",
+  "shots_dir": "content/shots/calltwin-nightshift",
+  "accent": "#22D3EE",
+  "title": "CALLTWIN",
+  "shot_prompts": {
+    "phone": "close-up of a smartphone ringing on a dark nightstand at 2 AM, cyan light glowing across the dark room, incoming call, moody",
+    "owner": "Black HVAC business owner in his 40s asleep in bed, phone glowing on the nightstand, cyan light, realistic dark bedroom",
+    "freeze": "frozen homeowner in a winter coat inside a cold living room at night breath visible, phone in hand, cyan blue light, worried",
+    "van": "work van parked in a snowy driveway at night, cyan streetlight glow, quiet cinematic",
+    "core": "glowing cyan holographic sound wave rising above a phone in a dark room, cinematic sci-fi",
+    "night": "snowy suburban street at night with warm lit windows, cyan blue tones, moody cinematic",
+    "relieved": "homeowner smiling with relief on the phone in a warm lit living room, golden light, heat restored, realistic",
+    "owner2": "Black HVAC business owner in his 40s smiling reading a job notification on his phone over coffee at sunrise, warm golden light, success"
+  },
+  "open": {
+    "shot": "phone",
+    "impact": "2:07 AM",
+    "cy": 0.55
+  },
+  "scenes": [
+    {
+      "shot": "freeze",
+      "cy": 0.4,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "Incoming \u00b7 No heat \u00b7 2:07 AM",
+        "tag": "AUTO",
+        "rows": [
+          [
+            "Caller",
+            "answered in 1 ring"
+          ],
+          [
+            "Job",
+            "no heat \u00b7 address taken"
+          ],
+          [
+            "Sent to you",
+            "text + summary"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    },
+    {
+      "shot": "owner",
+      "cy": 0.45,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.5
+    }
+  ],
+  "slams": [
+    {
+      "word": "ALWAYS",
+      "shot": "night",
+      "cy": 0.5,
+      "dur": 1.4
+    },
+    {
+      "word": "ANSWERS",
+      "shot": "core",
+      "dur": 1.5,
+      "panel": {
+        "label": "CALLTWIN",
+        "title": "Live call",
+        "working": "Taking the job...",
+        "done": "Job sent to you",
+        "steps": [
+          "NAME",
+          "ADDRESS",
+          "PROBLEM"
+        ]
+      }
+    },
+    {
+      "word": "EVERY",
+      "shot": "van",
+      "cy": 0.5,
+      "dur": 1.5
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "BOOKED",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "relieved",
+      "cy": 0.4,
+      "warm": true,
+      "dur": 1.3,
+      "sub": "Somebody picked up."
+    },
+    {
+      "shot": "owner2",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "warm": true,
+      "dur": 1.8,
+      "sub": "The job was waiting at sunrise."
+    }
+  ],
+  "end_dur": 3.9,
+  "vo_captions": true,
+  "duck": 0.62,
+  "vo_lines": [
+    [
+      0.25,
+      "It's two in the morning. Their heat just died."
+    ],
+    [
+      4.4,
+      "You're asleep. And they're calling the next company."
+    ],
+    [
+      8.3,
+      "CallTwin answers every call. Day and night."
+    ],
+    [
+      11.9,
+      "Takes the job. Sends it straight to your phone."
+    ],
+    [
+      15.8,
+      "Scan the code. Hear your own AI receptionist. Free."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "CALL",
+      "TWIN"
+    ],
+    "tagline": "Hear your AI receptionist. Free.",
+    "cta": "SCAN \u00b7 GET YOUR AI CALL FREE",
+    "lines": [
+      "BUILT FOR HVAC \u00b7 PLUMBING \u00b7 HOME SERVICES",
+      "SEE IT WORK: ark-hvac.com"
+    ],
+    "fine": "AI demo call to the number you enter. Reply STOP anytime.",
+    "link": "https://hsw365.github.io/calltwin/call.html?src=ig"
+  },
+  "caption": "Two in the morning, their heat just died, and you're asleep. CallTwin answers every call, takes the job and sends it straight to your phone. Scan the QR, drop in your website, and our AI calls you in about 30 seconds as YOUR receptionist. Free. Link in bio.",
+  "hashtags": [
+    "hvac",
+    "plumbing",
+    "homeservices",
+    "smallbusiness",
+    "aireceptionist",
+    "calltwin"
+  ]
+}

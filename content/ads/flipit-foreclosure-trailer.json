@@ -1,0 +1,165 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "flipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/flipit-foreclosure",
+  "accent": "#FF5A1F",
+  "title": "FLIPIT",
+  "shot_prompts": {
+    "sign": "close-up of a weathered FOR SALE foreclosure sign planted in an overgrown lawn in front of a run-down house at dusk, orange sunset glow, moody",
+    "driver": "Black man in his 30s driving at dusk looking at a run-down house through the car window, orange light on his face, thoughtful, realistic",
+    "docs": "stack of legal paperwork and a pen on a dark desk under a warm orange lamp, extreme close-up, shallow depth of field",
+    "phone": "smartphone on a dark desk showing a glowing map with orange pins, night, orange light, close-up",
+    "night": "quiet suburban street at night with one run-down house, orange street lamp glow, moody cinematic",
+    "sign2": "hand pressing a SOLD sticker onto a real estate sign, warm orange golden hour light, close-up",
+    "keys": "hand holding a set of house keys against a renovated front door at golden hour, warm orange light, success",
+    "hero": "confident Black real estate investor in his 30s smiling in front of a renovated house, golden hour, success"
+  },
+  "open": {
+    "shot": "sign",
+    "impact": "FORECLOSURE",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "driver",
+      "cy": 0.4,
+      "zoom": [
+        1.1,
+        1.24
+      ],
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "FLIPIT \u00b7 Deal alerts \u00b7 NJ / PA / DE",
+        "tag": "NEW",
+        "rows": [
+          [
+            "Vineland, NJ",
+            "tax sale 12/04 \u00b7 $14,880 owed"
+          ],
+          [
+            "Camden, NJ",
+            "foreclosure \u00b7 auction 11/21"
+          ],
+          [
+            "Chester, PA",
+            "tax lien \u00b7 sale 12/09"
+          ]
+        ]
+      },
+      "bg": "night",
+      "dur": 1.7
+    },
+    {
+      "shot": "phone",
+      "cy": 0.45,
+      "zoom": [
+        1.1,
+        1.28
+      ],
+      "dur": 1.5
+    }
+  ],
+  "slams": [
+    {
+      "word": "FIND",
+      "shot": "night",
+      "cy": 0.5,
+      "dur": 1.4
+    },
+    {
+      "word": "FILL",
+      "shot": "docs",
+      "dur": 1.55,
+      "panel": {
+        "label": "FLIPIT DEAL DESK",
+        "title": "1 entry",
+        "working": "Filling your forms...",
+        "done": "3 forms ready to sign",
+        "steps": [
+          "LOI",
+          "Purchase",
+          "Assign"
+        ]
+      }
+    },
+    {
+      "word": "FLIP",
+      "shot": "sign2",
+      "cy": 0.5,
+      "dur": 1.55
+    }
+  ],
+  "callback": {
+    "shot": "sign",
+    "impact": "SOLD",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "keys",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "dur": 1.8
+    }
+  ],
+  "end_dur": 3.9,
+  "vo_captions": true,
+  "duck": 0.62,
+  "vo_lines": [
+    [
+      0.25,
+      "Every foreclosure sign you drive past... is somebody's deal."
+    ],
+    [
+      4.95,
+      "Tax liens. Auctions. Foreclosures. All public records."
+    ],
+    [
+      8.0,
+      "FLIPIT finds the deal."
+    ],
+    [
+      10.6,
+      "Then fills your letter of intent, cash purchase agreement and assignment."
+    ],
+    [
+      16.35,
+      "Scan the code. Find your first flip."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "FLIP",
+      "IT"
+    ],
+    "tagline": "Find the deal. Fill the forms. Flip it.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "TAX LIENS \u00b7 FORECLOSURES \u00b7 WHOLESALE",
+      "flipit-m5ig.onrender.com"
+    ],
+    "fine": "Not a broker, lender or law firm. Have an attorney review contracts.",
+    "link": "https://flipit-m5ig.onrender.com/?src=ig#signup"
+  },
+  "caption": "Every foreclosure sign you drive past is somebody's deal. FLIPIT finds tax-lien and foreclosure deals from public records, then fills your letter of intent, cash purchase agreement and assignment from one entry. Scan the QR to sign up, or go to flipit-m5ig.onrender.com (link in bio).",
+  "hashtags": [
+    "realestateinvesting",
+    "foreclosure",
+    "taxliens",
+    "wholesalerealestate",
+    "houseflipping",
+    "flipit"
+  ]
+}
