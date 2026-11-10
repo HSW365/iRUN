@@ -140,7 +140,7 @@ def cta_for(acct, product, platform):
         if spoken and not spoken.endswith((".", "!", "?")):
             spoken += "."
         spoken += " Join the HSW365 Affiliate Partner Program to earn 20% per subscriber for the full duration of their subscription, subject to program terms."
-        screen = (screen[0], "EARN 20% PER SUBSCRIBER")
+        screen = ("JOIN HSW365 AFFILIATES", "20% PER SUBSCRIBER • FULL TERM")
         caption = caption.rstrip() + "\n\nJoin the HSW365 Affiliate Partner Program and earn 20% per subscriber for the full duration of their subscription, subject to program terms: https://hsw365.co/pages/affiliates"
 
     return spoken, screen, caption
