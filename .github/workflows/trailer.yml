@@ -69,4 +69,4 @@ jobs:
           git add assets/ads/built content/shots assets/voice 2>/dev/null || true
           git reset -q assets/voice/models 2>/dev/null || true
           git diff --cached --quiet || git commit -m "iRun trailer [skip ci]"
-          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep $((RANDOM % 20 + 5)); done
