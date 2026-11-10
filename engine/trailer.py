@@ -30,6 +30,17 @@ Spec (queue item with "kind": "trailer"):
           "fine": "...", "link": "https://...#signup"},
   "caption": "...", "hashtags": ["..."]
 }
+Style (all optional; defaults give the original look). Every ad should pick its own so no two share a template:
+  "look": "dark" | "bright" | "mono"                 grade
+  "title_style": "smoke" | "clean" | "photo" | "wipe"  title card: smoke / black art-film card / over the opening shot / flat accent colour block
+  "slam_style": "neon" | "block" | "ghost" | "stamp"   outlined neon / solid filled letters / hairline ghost letters / rubber stamp
+  "cut_style": "flash" | "glitch" | "dip" | "whip"   what happens on every cut
+  "end_style": "center" | "poster"                   end card layout
+  "bug": {"text": "KLIPIT", "pos": "tl"|"tr"|"bl"}   small brand mark burned into every frame before the end card
+  "score": {"shift": 3, "tempo": 1.2}                semitones to transpose the synthesized score, beat-rate multiplier
+  "presents": "A KLIPIT FILM"                        line above the title
+  "narrator": {"blend": {"bm_george": .65, "bm_daniel": .35}, "tone": "deep"|"bright", "speed": .92, "exag": .5}
+                                                     this ad's own narrator voice (see engine/narrator.py)
 Shot options: "cy"/"cx" focus point (0-1), "zoom" [from, to], "warm" true for golden scenes, "sat" saturation.
 Panel: {"label": "APP", "title": "3 ERRORS FOUND", "working": "WRITING...", "done": "3 LETTERS READY", "steps": ["LETTER 1", ...]}
 
@@ -105,6 +116,8 @@ class Trailer:
         self.bright = spec.get("look") == "bright"
         self._masks = {}; self._mask = None
         self.mono = spec.get("look") == "mono"  # stark black-and-white, art-film minimal
+        sc = spec.get("score") or {}
+        self.kshift = 2 ** (float(sc.get("shift", 0)) / 12); self.tempo = float(sc.get("tempo", 1.0))
         d = os.path.join(ROOT, spec["shots_dir"])
         self.img = {}
         for f in os.listdir(d):
@@ -166,14 +179,36 @@ class Trailer:
         self.slam = {}
         for sl in self.s["slams"]:
             w = sl["word"].upper()
-            self.slam[w] = (self.text(w, f_slam, stroke=7, stroke_fill=hot + (255,), glow=22, spacing=18),
-                            self.text(w, f_slam, stroke=3, stroke_fill=(255, 238, 238, 255), spacing=18))
+            ss = self.s.get("slam_style", "neon")
+            if ss == "block":    # solid accent letters, thick black keyline, hot glow
+                self.slam[w] = (self.text(w, f_slam, fill=(0, 0, 0, 255), stroke=16, stroke_fill=(0, 0, 0, 255), glow=30, spacing=14),
+                                self.text(w, f_slam, fill=self.acc + (255,), stroke=0, spacing=14))
+            elif ss == "stamp":  # distressed rubber stamp, tilted
+                self.slam[w] = (self.stamp_word(w, 330), Image.new("RGBA", (2, 2), (0, 0, 0, 0)))
+            elif ss == "ghost":  # hairline white outline, faint fill, soft accent bloom
+                self.slam[w] = (self.text(w, f_slam, fill=self.acc + (40,), stroke=3, stroke_fill=(255, 255, 255, 255), glow=34, spacing=30),
+                                self.text(w, f_slam, fill=(255, 255, 255, 30), spacing=30))
+            else:
+                self.slam[w] = (self.text(w, f_slam, stroke=7, stroke_fill=hot + (255,), glow=22, spacing=18),
+                                self.text(w, f_slam, stroke=3, stroke_fill=(255, 238, 238, 255), spacing=18))
         f_title = FB(XB, 205)
         title = self.s["title"].upper()
         while f_title.size > 90 and f_title.getlength(title) > W * 0.86:
             f_title = FB(XB, f_title.size - 10)
         self.title = self.text(title, f_title, fill=WHITE + (255,), glow=26, spacing=4)
         self.presents = self.text(self.s.get("presents", "HSW365 MEDIA PRESENTS"), FB(MONO, 30), fill=(200, 200, 210, 255), spacing=8)
+        self.title_dark = self.text(title, f_title, fill=(10, 10, 15, 255), spacing=4)
+        self.presents_dark = self.text(self.s.get("presents", "HSW365 MEDIA PRESENTS"), FB(MONO, 30), fill=(10, 10, 15, 255), spacing=8)
+        f_tc = FB(XB, 150)
+        while f_tc.size > 70 and f_tc.getlength(title) + 40 * len(title) > W * 0.9:
+            f_tc = FB(XB, f_tc.size - 8)
+        self.title_clean = self.text(title, f_tc, fill=WHITE + (255,), spacing=40)
+        bug = self.s.get("bug")
+        self.bug = None
+        if bug:
+            self.bug = self.text(bug["text"].upper(), FB(XB, 56), fill=WHITE + (255,), glow=0, spacing=12)
+            dot = Image.new("RGBA", (30, 30), (0, 0, 0, 0)); ImageDraw.Draw(dot).ellipse((2, 2, 28, 28), fill=self.acc + (255,))
+            self.bug_dot = dot
         self.impact = {g["impact"]: self.stamp_word(g["impact"]) for g in self.segs if g.get("impact")}
         self.f_sub = FI("Inter-SemiBold.otf", 52)
         self.end = self.end_layer()
@@ -214,11 +249,11 @@ class Trailer:
             gl.alpha_composite(lay); lay = gl
         return lay
 
-    def stamp_word(self, word):
-        f = FB(XB, 200); word = word.upper(); tw = int(f.getlength(word)) + 120; th = 300
+    def stamp_word(self, word, size=200):
+        k = size / 200; f = FB(XB, size); word = word.upper(); tw = int(f.getlength(word) + 120 * k); th = int(300 * k)
         lay = Image.new("RGBA", (tw, th), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
-        d.rounded_rectangle((10, 10, tw - 10, th - 10), radius=18, outline=self.acc + (255,), width=16)
-        d.text((60, 18), word, font=f, fill=self.acc + (255,))
+        d.rounded_rectangle((10, 10, tw - 10, th - 10), radius=int(18 * k), outline=self.acc + (255,), width=int(16 * k))
+        d.text((int(60 * k), int(18 * k)), word, font=f, fill=self.acc + (255,))
         a = np.asarray(lay).copy()
         noise = cv2.GaussianBlur(np.random.default_rng(len(word)).random((th, tw)).astype(np.float32), (0, 0), 1.6)
         a[..., 3] = (a[..., 3] * np.clip((noise - 0.30) * 3.2, 0.15, 1)).astype(np.uint8)
@@ -271,6 +306,8 @@ class Trailer:
         import segno
         e = self.s["end"]; lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
         wm = e.get("wordmark") or [self.s["title"].upper(), ""]
+        if self.s.get("end_style") == "poster":
+            return self._end_poster(e, lay, d, wm)
         f_end = FB(XB, 168)
         while f_end.size > 80 and f_end.getlength("".join(wm)) > W * 0.88:
             f_end = FB(XB, f_end.size - 8)
@@ -297,6 +334,40 @@ class Trailer:
         for k, line in enumerate(_wrap(e.get("fine", ""), f_tiny, W * 0.86)[:2]):
             d.text(((W - f_tiny.getlength(line)) / 2, 1690 + k * 34), line, font=f_tiny, fill=(110, 110, 124, 255))
         t = "HSW365 MEDIA"; d.text(((W - f_small.getlength(t)) / 2, 1770), t, font=f_small, fill=(150, 150, 162, 255))
+        return lay
+
+    def _end_poster(self, e, lay, d, wm):
+        """Left-aligned one-sheet: huge wordmark, accent rule, tagline, QR bottom-left with the call to action beside it."""
+        import segno
+        f_end = FB(XB, 250); mx = 80
+        while f_end.size > 90 and f_end.getlength("".join(wm)) > W - 2 * mx:
+            f_end = FB(XB, f_end.size - 8)
+        w1 = f_end.getlength(wm[0])
+        d.text((mx, 170), wm[0], font=f_end, fill=WHITE + (255,))
+        if len(wm) > 1:
+            d.text((mx + w1, 170), wm[1], font=f_end, fill=self.acc + (255,))
+        d.rectangle((mx, 170 + f_end.size + 30, mx + 190, 170 + f_end.size + 40), fill=self.acc + (255,))
+        f_tagl = FB(SB, 66); ty = 170 + f_end.size + 80
+        for k, line in enumerate(_wrap(e.get("tagline", ""), f_tagl, W - 2 * mx)[:3]):
+            d.text((mx, ty + k * 76), line, font=f_tagl, fill=(226, 226, 232, 255))
+        buf = io.BytesIO(); size, pad = 500, 32; qy = 960
+        segno.make(e["link"], error="h").save(buf, kind="png", scale=20, border=0, dark="#0a0a0f", light="#ffffff")
+        code = Image.open(buf).convert("RGBA").resize((size - 2 * pad, size - 2 * pad), Image.NEAREST)
+        q = Image.new("RGBA", (size, size), (0, 0, 0, 0)); qd = ImageDraw.Draw(q)
+        qd.rounded_rectangle((0, 0, size - 1, size - 1), radius=30, fill=(255, 255, 255, 255)); q.alpha_composite(code, (pad, pad))
+        lay.alpha_composite(q, (mx, qy))
+        f_cta = FB(XB, 70); cx0 = mx + size + 44
+        for k, line in enumerate(_wrap(e.get("cta", "SCAN TO SIGN UP").upper(), f_cta, W - cx0 - 50)[:4]):
+            d.text((cx0, qy + 40 + k * 80), line, font=f_cta, fill=self.acc + (255,))
+        f_small = FB(MONO, 28); f_tiny = FI("Inter-Medium.otf", 26)
+        for k, t in enumerate(e.get("lines", [])[:3]):
+            fs = f_small
+            while fs.size > 18 and fs.getlength(t) > W - 2 * mx:
+                fs = FB(MONO, fs.size - 2)
+            d.text((mx, qy + size + 50 + k * 52), t, font=fs, fill=(WHITE if k == 0 else MUTED) + (255,))
+        for k, line in enumerate(_wrap(e.get("fine", ""), f_tiny, W - 2 * mx)[:2]):
+            d.text((mx, 1690 + k * 34), line, font=f_tiny, fill=(110, 110, 124, 255))
+        d.text((mx, 1770), "HSW365 MEDIA", font=f_small, fill=(150, 150, 162, 255))
         return lay
 
     # ---------- drawing ----------
@@ -420,12 +491,34 @@ class Trailer:
             if hit <= t < hit + 0.07:
                 arr = arr * 0.4 + 255 * 0.6
         elif k == "title":
-            src = self.segs[0]["shot"]
-            bg = cv2.GaussianBlur(self.shot(src, 0.5, 1.6, 1.6, cy=0.3, sat=0.0, contrast=0.9), (0, 0), 28) * (0.75 if self.bright else 0.35)
-            arr = bg * (0.35 + 0.95 * np.array(self.acc, np.float32) / 255)
-            self.embers(arr, t, 0.8)
-            self.comp(arr, self.title, W / 2, H / 2, 1.14 - 0.14 * ease(p * 3), clamp(p * 6))
-            self.comp(arr, self.presents, W / 2, H / 2 - 190, 1.0, clamp((p - 0.15) * 4))
+            src = self.segs[0]["shot"]; ts = self.s.get("title_style", "smoke")
+            if ts == "clean":    # black art-film card: tracked wordmark between two hairlines that draw outward
+                arr = np.ones((H, W, 3), np.float32) * np.array(BASE, np.float32) * 0.55
+                arr += np.exp(-(((self.xx - W / 2) / 700) ** 2 + ((self.yy - H / 2) / 420) ** 2))[..., None] * np.array(self.acc, np.float32) * 0.14
+                q = ease(p * 2.2); half = int(W * 0.40 * q)
+                for yy_ in (H // 2 - 150, H // 2 + 150):
+                    cv2.line(arr, (W // 2 - half, yy_), (W // 2 + half, yy_), tuple(float(c) for c in self.acc), 3, cv2.LINE_AA)
+                self.comp(arr, self.title_clean, W / 2, H / 2, 1.06 - 0.06 * ease(p * 2), clamp((p - 0.1) * 4))
+                self.comp(arr, self.presents, W / 2, H / 2 - 250, 1.0, clamp((p - 0.2) * 4))
+            elif ts == "wipe":   # flat accent block wipes in, ink-black title, diagonal rule texture
+                q = ease(p * 4.5); edge = int(W * q)
+                arr = np.ones((H, W, 3), np.float32) * np.array(BASE, np.float32)
+                col = np.array(self.acc, np.float32)
+                tex = (1 - 0.07 * (((self.xx + self.yy) // 46) % 2))[..., None]
+                arr[:, :edge] = (col * tex)[:, :edge] * (0.92 + 0.08 * (1 - self.yy[:, :edge, None] / H))
+                self.comp(arr, self.title_dark, W / 2, H / 2, 1.12 - 0.12 * ease(p * 3), clamp((p - 0.12) * 6))
+                self.comp(arr, self.presents_dark, W / 2, H / 2 - 190, 1.0, clamp((p - 0.25) * 4))
+            elif ts == "photo":  # title over the opening shot, pulled back and darkened
+                arr = self.shot(src, p, 1.10, 1.02, cy=0.45, contrast=1.1) * (0.5 if not self.bright else 0.62)
+                self.comp(arr, self.title, W / 2, H / 2, 1.1 - 0.1 * ease(p * 3), clamp(p * 6))
+                self.comp(arr, self.presents, W / 2, H / 2 - 190, 1.0, clamp((p - 0.15) * 4))
+                cv2.line(arr, (W // 2 - int(260 * ease(p * 2)), H // 2 + 150), (W // 2 + int(260 * ease(p * 2)), H // 2 + 150), tuple(float(c) for c in self.acc), 8, cv2.LINE_AA)
+            else:
+                bg = cv2.GaussianBlur(self.shot(src, 0.5, 1.6, 1.6, cy=0.3, sat=0.0, contrast=0.9), (0, 0), 28) * (0.75 if self.bright else 0.35)
+                arr = bg * (0.35 + 0.95 * np.array(self.acc, np.float32) / 255)
+                self.embers(arr, t, 0.8)
+                self.comp(arr, self.title, W / 2, H / 2, 1.14 - 0.14 * ease(p * 3), clamp(p * 6))
+                self.comp(arr, self.presents, W / 2, H / 2 - 190, 1.0, clamp((p - 0.15) * 4))
             if t < g["t0"] + 0.06:
                 arr = arr * 0.3 + 255 * 0.7
         elif k == "scene":
@@ -452,7 +545,8 @@ class Trailer:
                 arr = self.shot(g["shot"], p, z[0], z[1], g.get("cx", 0.5), g.get("cy", 0.42), self.shake(t, g["t0"], 18), warm=g.get("warm", False))
             q = (t - g["t0"]) / 0.14; outer, core = self.slam[w]
             sc = (1.28 - 0.28 * ease(q)) * min(1.0, W * 0.9 / outer.width)
-            self.comp(arr, outer, W / 2, H / 2 - 30, sc, clamp(q * 1.4)); self.comp(arr, core, W / 2, H / 2 - 30, sc, clamp(q * 1.4) * 0.9)
+            rot = -5 if self.s.get("slam_style") == "stamp" else 0
+            self.comp(arr, outer, W / 2, H / 2 - 30, sc, clamp(q * 1.4), rot=rot); self.comp(arr, core, W / 2, H / 2 - 30, sc, clamp(q * 1.4) * 0.9, rot=rot)
         elif k == "payoff":
             z = zoom or [1.06, 1.14]
             arr = self.shot(g["shot"], p, z[0], z[1], g.get("cx", 0.5), g.get("cy", 0.42), warm=g.get("warm", True), contrast=1.06)
@@ -473,8 +567,26 @@ class Trailer:
                 if v["layer"] is not None and v["at"] - 0.05 <= t < v["at"] + v["len"] + 0.15:
                     a = clamp((t - v["at"] + 0.05) * 8) * clamp((v["at"] + v["len"] + 0.15 - t) * 8)
                     self.comp(arr, v["layer"], W / 2, v.get("y", 1580), 1.0, a)
+        if self.bug is not None and k not in ("end", "flash", "title"):
+            pos = (self.s["bug"].get("pos") or "tl"); bw = self.bug.width + 44
+            bx = 70 + bw / 2 if pos in ("tl", "bl") else W - 70 - bw / 2; by = 110 if pos in ("tl", "tr") else H - 110
+            self.comp(arr, self.bug_dot, bx - self.bug.width / 2 - 8, by, 1.0, 0.95)
+            self.comp(arr, self.bug, bx + 18, by, 1.0, 0.92)
+        cs = self.s.get("cut_style", "flash")
         for c in self.cuts:
-            if 0 <= t - c < 2 / FPS:
+            d_ = t - c
+            if cs == "glitch" and 0 <= d_ < 4 / FPS:
+                rr = np.random.default_rng(int(c * 100) + i); dx = int(rr.integers(14, 40)) * (1 if i % 2 else -1)
+                arr = np.stack([np.roll(arr[..., 0], dx, 1), arr[..., 1], np.roll(arr[..., 2], -dx, 1)], -1)
+                for _ in range(5):
+                    y0 = int(rr.integers(0, H - 120)); hh = int(rr.integers(20, 110))
+                    arr[y0:y0 + hh] = np.roll(arr[y0:y0 + hh], int(rr.integers(-90, 90)), 1)
+                arr = arr * 1.1 + 6
+            elif cs == "dip" and -2 / FPS <= d_ < 2 / FPS:
+                arr = arr * 0.18
+            elif cs == "whip" and 0 <= d_ < 3 / FPS:
+                kx = 121 - 30 * int(d_ * FPS); arr = cv2.blur(arr, (kx | 1, 1)) * 1.08
+            elif cs == "flash" and 0 <= d_ < 2 / FPS:
                 arr = arr * 1.18 + 8
         arr = arr * self.vig + self.grain[i % 8]
         if t > self.dur - 0.5:
@@ -487,7 +599,7 @@ class Trailer:
         def seg(t0, d):
             i0 = int(t0 * SR); m = max(0, min(n - i0, int(d * SR))); return i0, m, np.arange(m) / SR
         def boom(t0, amp=1.0):
-            i0, m, x = seg(t0, 2.2); f = 38 + 110 * np.exp(-x * 9)
+            i0, m, x = seg(t0, 2.2); f = (38 + 110 * np.exp(-x * 9)) * self.kshift
             s = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-x * 1.8)
             nz = np.convolve(r.normal(0, 1, m), np.ones(18) / 18, "same") * np.exp(-x * 14)
             a[i0:i0 + m] += amp * (0.95 * s + 0.55 * nz)
@@ -495,7 +607,7 @@ class Trailer:
             i0, m, x = seg(t0, d); s = np.zeros(m)
             for mult in (1, 1.5, 2, 2.997, 4):
                 for det in (-0.6, 0, 0.7):
-                    ph = 2 * np.pi * (root * mult + det) * x
+                    ph = 2 * np.pi * ((root * self.kshift) * mult + det) * x
                     s += sum(np.sin(k * ph) / k for k in range(1, 7)) / mult
             a[i0:i0 + m] += amp * np.tanh(s * 0.25) * np.clip(x / 0.04, 0, 1) * np.exp(-x * 1.1)
         def riser(t0, t1, amp=0.25):
@@ -507,10 +619,10 @@ class Trailer:
         def tick(t0, amp=0.18):
             i0, m, x = seg(t0, 0.05); a[i0:i0 + m] += amp * np.sin(2 * np.pi * 2600 * x) * np.exp(-x * 120)
         def thump(t0, amp=0.5):
-            i0, m, x = seg(t0, 0.4); a[i0:i0 + m] += amp * np.sin(2 * np.pi * np.cumsum(50 + 60 * np.exp(-x * 30)) / SR) * np.exp(-x * 9)
+            i0, m, x = seg(t0, 0.4); a[i0:i0 + m] += amp * np.sin(2 * np.pi * np.cumsum((50 + 60 * np.exp(-x * 30)) * self.kshift) / SR) * np.exp(-x * 9)
         def drone(t0, t1, freqs, amp):
             i0, m, x = seg(t0, t1 - t0)
-            s = sum(np.sin(2 * np.pi * f * x + 0.3 * np.sin(2 * np.pi * 0.2 * x + k)) for k, f in enumerate(freqs)) / len(freqs)
+            s = sum(np.sin(2 * np.pi * f * self.kshift * x + 0.3 * np.sin(2 * np.pi * 0.2 * x + k)) for k, f in enumerate(freqs)) / len(freqs)
             a[i0:i0 + m] += amp * s * np.clip(x / 0.5, 0, 1) * np.clip(((t1 - t0) - x) / 0.4, 0, 1)
         def blip(t0, f, amp=0.12, d=0.12):
             i0, m, x = seg(t0, d); a[i0:i0 + m] += amp * np.sin(2 * np.pi * f * x) * np.exp(-x * 30)
@@ -526,8 +638,8 @@ class Trailer:
         if mids:
             m0, m1 = mids[0]["t0"], mids[-1]["t1"]
             drone(m0, m1, (55, 82.4, 103.8, 164.8), 0.10)
-            for k, tb in enumerate(np.arange(m0, m1, 0.5)):
-                thump(tb, 0.42 if k % 2 == 0 else 0.22); tick(tb + 0.25)
+            for k, tb in enumerate(np.arange(m0, m1, 0.5 / self.tempo)):
+                thump(tb, 0.42 if k % 2 == 0 else 0.22); tick(tb + 0.25 / self.tempo)
             for g in mids:
                 boom(g["t0"], 0.35)
                 if g["kind"] == "card":
@@ -544,8 +656,8 @@ class Trailer:
         boom(cb.get("hit", cb["t0"] + 0.35), 1.0); clang(cb.get("hit", cb["t0"] + 0.35), 0.3)
         p0, p1 = S["payoff"][0]["t0"], S["payoff"][-1]["t1"]
         drone(p0, p1, (130.8, 164.8, 196, 261.6), 0.13)
-        for tb in np.arange(p0, p1, 0.43):
-            thump(tb, 0.35); tick(tb + 0.215, 0.08)
+        for tb in np.arange(p0, p1, 0.43 / self.tempo):
+            thump(tb, 0.35); tick(tb + 0.215 / self.tempo, 0.08)
         riser(p1 - 1.0, p1, 0.3)
         fl = S["flash"][0]["t0"]; boom(fl, 1.1); braam(fl, 65.4, 0.45, 2.6)
         drone(fl + 0.3, D, (65.4, 98, 130.8, 196), 0.10)

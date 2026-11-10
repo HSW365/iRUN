@@ -9,7 +9,7 @@ The spec is a normal engine/trailer.py spec plus two optional build keys:
   "vo_speed":     1.15  (faster owner read)  "vo_exag": 0.8 (more energy)
   "voice":        "owner"                                       VO in Elvin's own cloned voice (engine/myvoice.py)
   "look":         "bright"                                      daylight/high-key grade instead of the dark one
-  "vo_lines":     [[at_seconds, "narrator line"], ...]            recorded with engine/narrator.py (ElevenLabs when
+  "vo_lines":     [[at_seconds, "narrator line", "optional caption spelling"], ...]            recorded with engine/narrator.py (ElevenLabs when
                                                                  IRUN_NARRATOR=elevenlabs, else free Kokoro) and wired in
                                                                  as spec["vo"] with burned-in captions
 Shots and voice files are cached, so re-running only re-renders. IRUN_FRESH_SHOTS=1 / IRUN_FRESH_VO=1 rebuild them.
@@ -102,10 +102,18 @@ def voice(spec, slug):
         if spec.get("vo_speed"): os.environ["IRUN_VO_SPEED"] = str(spec["vo_speed"])  # faster read, pitch kept
         if spec.get("vo_exag"): os.environ["IRUN_VO_EXAG"] = str(spec["vo_exag"])      # more energy
         if spec.get("vo_exag"): os.environ["IRUN_VO_CFG"] = "0.3"
+        nv = spec.get("narrator") or {}
+        if nv:  # this ad's own narrator voice: a Kokoro blend becomes its reference, so every ad sounds different
+            os.environ["IRUN_NARRATOR_REF"] = os.path.join(d, "ref.wav")
+            if nv.get("blend"): os.environ["IRUN_NARRATOR_BLEND"] = ",".join(f"{k}:{v}" for k, v in nv["blend"].items())
+            if nv.get("tone"): os.environ["IRUN_NARRATOR_TONE"] = nv["tone"]
+            if nv.get("speed"): os.environ["IRUN_NARRATOR_SPEED"] = str(nv["speed"])
+            if nv.get("exag") and not spec.get("vo_exag"): os.environ["IRUN_VO_EXAG"] = str(nv["exag"])
         who = "myvoice.py" if spec.get("voice") == "owner" else "narrator.py"  # owner = Elvin's own cloned voice
-        subprocess.run([sys.executable, os.path.join(HERE, who), d, *[t for _, t in lines]], check=True)
-    spec["vo"] = [{"file": f"assets/voice/{slug}/vo{i}.wav", "at": at, "text": t}
-                  for i, (at, t) in enumerate(lines, 1)]
+        subprocess.run([sys.executable, os.path.join(HERE, who), d, *[ln[1] for ln in lines]], check=True)
+    # a line is [at, spoken] or [at, spoken, caption]: spoken is spelled how it's said ("Klip it"), caption how the brand is written ("KLIPIT")
+    spec["vo"] = [{"file": f"assets/voice/{slug}/vo{i}.wav", "at": ln[0], "text": ln[2] if len(ln) > 2 else ln[1]}
+                  for i, ln in enumerate(lines, 1)]
     spec.setdefault("vo_captions", True)
 
 

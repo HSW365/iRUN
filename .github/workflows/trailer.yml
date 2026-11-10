@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: irun
+  group: irun-trailer-${{ inputs.spec }}
   cancel-in-progress: false
 
 jobs:

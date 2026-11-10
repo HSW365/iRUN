@@ -1,0 +1,202 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "operator",
+  "platform": "instagram",
+  "shots_dir": "content/shots/irun-barber",
+  "accent": "#EF4444",
+  "title": "iRUN",
+  "presents": "AN iRUN STORY",
+  "look": "bright",
+  "title_style": "photo",
+  "slam_style": "neon",
+  "cut_style": "whip",
+  "end_style": "center",
+  "bug": {
+    "text": "iRUN",
+    "pos": "tr"
+  },
+  "score": {
+    "shift": 0,
+    "tempo": 1.0
+  },
+  "narrator": {
+    "blend": {
+      "af_nova": 0.6,
+      "af_kore": 0.4
+    },
+    "tone": "bright",
+    "speed": 0.97,
+    "exag": 0.62
+  },
+  "shot_prompts": {
+    "shop": "empty barbershop with a single leather barber chair in warm morning sunlight through the window, nobody inside, quiet and still, photoreal",
+    "owner": "a Black barber in his 40s standing alone in his empty barbershop staring at his phone with a worried expression, soft daylight, shallow depth of field, photoreal",
+    "bed": "a barber asleep in bed at night at home, his phone glowing on the nightstand with stacked notifications, soft blue light, calm, shallow depth of field",
+    "phone": "close-up of a smartphone screen full of Instagram notifications and new messages, morning sunlight, shallow depth of field, photoreal",
+    "dash": "over-the-shoulder shot of a barber looking at a laptop in his shop in daylight, screen glowing, mug of coffee beside it, shallow depth of field, photoreal",
+    "booked": "barbershop appointment book and phone on a counter filled with bookings, warm morning sunlight, shallow depth of field, photoreal",
+    "line": "a line of smiling customers waiting outside a barbershop door in bright morning sunlight, photoreal",
+    "hero": "a confident Black barber in his 40s smiling with his arms crossed in his busy sunlit barbershop, customers in chairs behind him, photoreal"
+  },
+  "open": {
+    "shot": "shop",
+    "impact": "SLOW DAY",
+    "cy": 0.5,
+    "dur": 2.0
+  },
+  "scenes": [
+    {
+      "shot": "owner",
+      "cy": 0.42,
+      "zoom": [
+        1.06,
+        1.2
+      ],
+      "dur": 1.2
+    },
+    {
+      "card": {
+        "title": "iRUN · THIS WEEK",
+        "tag": "POSTED",
+        "rows": [
+          [
+            "MON 9:00 AM",
+            "NEW TRAILER AD"
+          ],
+          [
+            "TUE 9:00 AM",
+            "BEFORE & AFTER REEL"
+          ],
+          [
+            "WED 9:00 AM",
+            "CUSTOMER REVIEW"
+          ]
+        ]
+      },
+      "bg": "dash",
+      "dur": 1.6
+    },
+    {
+      "shot": "bed",
+      "cy": 0.5,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.3
+    }
+  ],
+  "slams": [
+    {
+      "word": "FIRE",
+      "shot": "dash",
+      "cy": 0.5,
+      "dur": 1.35
+    },
+    {
+      "word": "YOUR",
+      "shot": "phone",
+      "panel": {
+        "label": "IRUN OPERATOR",
+        "title": "YOUR WEBSITE",
+        "working": "Learning your business...",
+        "done": "MARKETING RUNNING",
+        "steps": [
+          "POSTS",
+          "EMAILS",
+          "REPORT"
+        ]
+      },
+      "dur": 1.35
+    },
+    {
+      "word": "AGENCY",
+      "shot": "booked",
+      "cy": 0.5,
+      "dur": 1.35
+    }
+  ],
+  "callback": {
+    "shot": "shop",
+    "impact": "BOOKED",
+    "cy": 0.5,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "line",
+      "cy": 0.5,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "cy": 0.42,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "dur": 1.9
+    }
+  ],
+  "vo_lines": [
+    [
+      0.3,
+      "Seven P M. The chair is empty."
+    ],
+    [
+      3.4,
+      "He's too busy to post."
+    ],
+    [
+      5.6,
+      "So i Run does it.",
+      "So iRun does it."
+    ],
+    [
+      7.5,
+      "Fire your agency. Give i Run your website.",
+      "Fire your agency. Give iRun your website."
+    ],
+    [
+      12.7,
+      "Posts. Emails. Reports. Every day."
+    ],
+    [
+      16.4,
+      "i Run Operator. Scan to start.",
+      "iRun Operator. Scan to start."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "iRUN ",
+      "OPERATOR"
+    ],
+    "tagline": "Give it your website. It runs your marketing.",
+    "cta": "SCAN TO START",
+    "lines": [
+      "POSTS · EMAILS · NIGHTLY REPORT",
+      "PLANS FROM $15/MONTH"
+    ],
+    "fine": "No cut of your sales. Cancel any time.",
+    "link": "https://hsw365.github.io/iRUN/start.html?src=ig-barber&plan=pro#start"
+  },
+  "caption": "Seven P.M. The chair is empty, and he's too busy to post.\n\niRun Operator runs your marketing: give it your website and it posts, emails your prospects and sends you a report every night. Plans from $15/month, no cut of your sales.\n\nFire your agency. Scan the QR to start, or go to hsw365.github.io/iRUN (link in bio).",
+  "hashtags": [
+    "smallbusiness",
+    "barbershop",
+    "marketing",
+    "ai",
+    "entrepreneur",
+    "irun"
+  ],
+  "title_dur": 1.2,
+  "end_dur": 4.0,
+  "vo_captions": true,
+  "duck": 0.62
+}

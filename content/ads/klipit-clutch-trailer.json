@@ -1,0 +1,201 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-clutch",
+  "accent": "#A3E635",
+  "title": "KLIPIT",
+  "presents": "A KLIPIT FILM",
+  "look": "dark",
+  "title_style": "wipe",
+  "slam_style": "block",
+  "cut_style": "glitch",
+  "end_style": "center",
+  "bug": {
+    "text": "KLIPIT",
+    "pos": "tl"
+  },
+  "score": {
+    "shift": 2,
+    "tempo": 1.3
+  },
+  "narrator": {
+    "blend": {
+      "am_liam": 0.6,
+      "am_puck": 0.4
+    },
+    "tone": "bright",
+    "speed": 1.0,
+    "exag": 0.78
+  },
+  "shot_prompts": {
+    "clutch": "extreme close-up of a 20-year-old streamer with a fade haircut and black headset screaming in disbelief at his monitor, blue-white screen light on his face, sweat on his forehead, lime green rim light from behind, dark bedroom, cinematic",
+    "empty": "wide shot of a dark streamer bedroom at night, a single glowing monitor, empty gaming chair, tangled cables, energy drink cans, lime green LED strip on the wall, moody cinematic",
+    "friend": "close-up of a hand holding a smartphone in a dark room, the screen glowing with stacked chat message bubbles, lime green light on the fingers, shallow depth of field, cinematic",
+    "link": "over-the-shoulder shot of a gamer pasting a link into a laptop at a dark desk, lime green glow on his hands and the keyboard, shallow depth of field, cinematic",
+    "stream": "gaming desk with three monitors showing blurred game footage in a dark room, lime green backlight, motion blur, cinematic",
+    "night": "close-up of a phone screen showing a grid of vertical video clips, lime green neon reflections on the glass, dark room, cinematic",
+    "viral": "young streamer in a dark room staring at his phone with his mouth open in joyful disbelief, lime green notification light on his face, cinematic close-up",
+    "hero": "confident young streamer with a fade haircut smiling at the camera in his gaming room at golden hour, monitors glowing behind him, headset around his neck, triumphant, shallow depth of field"
+  },
+  "open": {
+    "shot": "clutch",
+    "impact": "1 V 5",
+    "cy": 0.45,
+    "dur": 2.0
+  },
+  "scenes": [
+    {
+      "shot": "empty",
+      "cy": 0.5,
+      "zoom": [
+        1.05,
+        1.2
+      ],
+      "dur": 1.2
+    },
+    {
+      "card": {
+        "title": "KLIPIT · STREAM SCAN",
+        "tag": "FOUND",
+        "rows": [
+          [
+            "04:12:07",
+            "1V5 CLUTCH · SCORE 97"
+          ],
+          [
+            "05:03:41",
+            "CHAT EXPLODES · SCORE 93"
+          ],
+          [
+            "01:38:20",
+            "BIGGEST FAIL · SCORE 88"
+          ]
+        ]
+      },
+      "bg": "empty",
+      "dur": 1.6
+    },
+    {
+      "shot": "friend",
+      "cy": 0.5,
+      "zoom": [
+        1.08,
+        1.24
+      ],
+      "dur": 1.3
+    }
+  ],
+  "slams": [
+    {
+      "word": "CLIP",
+      "shot": "link",
+      "cy": 0.5,
+      "dur": 1.35
+    },
+    {
+      "word": "IT",
+      "shot": "stream",
+      "panel": {
+        "label": "KLIPIT",
+        "title": "1 LINK",
+        "working": "Finding your best moments...",
+        "done": "CLIPS READY",
+        "steps": [
+          "CLIP 1",
+          "CLIP 2",
+          "CLIP 3"
+        ]
+      },
+      "dur": 1.35
+    },
+    {
+      "word": "NOW",
+      "shot": "night",
+      "cy": 0.5,
+      "dur": 1.35
+    }
+  ],
+  "callback": {
+    "shot": "clutch",
+    "impact": "CLIPPED",
+    "cy": 0.45,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "viral",
+      "cy": 0.45,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "dur": 1.9
+    }
+  ],
+  "vo_lines": [
+    [
+      0.3,
+      "Eleven viewers. One impossible clutch."
+    ],
+    [
+      3.4,
+      "Nobody clipped it."
+    ],
+    [
+      5.6,
+      "Until Klip it found it.",
+      "Until KLIPIT found it."
+    ],
+    [
+      7.5,
+      "Paste one link. Klip it finds every highlight.",
+      "Paste one link. KLIPIT finds every highlight."
+    ],
+    [
+      12.7,
+      "Vertical clips. Ready to post."
+    ],
+    [
+      16.4,
+      "Scan the code. Start clipping."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "KLIP",
+      "IT"
+    ],
+    "tagline": "Paste your stream. Get your best clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "YOUTUBE · TWITCH · KICK",
+      "PLANS FROM $20/MONTH"
+    ],
+    "fine": "Vertical and wide clips. Cancel anytime.",
+    "link": "https://klipit.onrender.com/?signup=pro&src=ig-clutch"
+  },
+  "caption": "Eleven viewers. One impossible clutch. Nobody clipped it.\n\nKLIPIT finds your best moments for you: paste a YouTube, Twitch or Kick link and get vertical and wide clips ready to post. Plans from $20/month, cancel anytime.\n\nScan the QR to sign up, or go to klipit.onrender.com (link in bio).",
+  "hashtags": [
+    "streamer",
+    "twitch",
+    "kick",
+    "gamingclips",
+    "contentcreator",
+    "klipit"
+  ],
+  "title_dur": 1.2,
+  "end_dur": 4.0,
+  "vo_captions": true,
+  "duck": 0.62
+}

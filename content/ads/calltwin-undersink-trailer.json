@@ -1,0 +1,202 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "calltwin",
+  "platform": "instagram",
+  "shots_dir": "content/shots/calltwin-undersink",
+  "accent": "#06B6D4",
+  "title": "CALLTWIN",
+  "presents": "A CALLTWIN STORY",
+  "look": "bright",
+  "title_style": "smoke",
+  "slam_style": "stamp",
+  "cut_style": "flash",
+  "end_style": "poster",
+  "bug": {
+    "text": "CALLTWIN",
+    "pos": "tl"
+  },
+  "score": {
+    "shift": -3,
+    "tempo": 0.85
+  },
+  "narrator": {
+    "blend": {
+      "bm_george": 0.65,
+      "bm_daniel": 0.35
+    },
+    "tone": "deep",
+    "speed": 0.92,
+    "exag": 0.5
+  },
+  "shot_prompts": {
+    "sink": "extreme close-up of a plumber's hand gripping a wrench under a kitchen sink, copper pipes, cluttered cabinet, bright daylight, shallow depth of field, photoreal",
+    "phone": "a smartphone lying on a kitchen floor next to an open toolbox with an incoming call lighting the screen, bright daylight, shallow depth of field, photoreal",
+    "homeowner": "a worried woman in her kitchen holding a phone to her ear with water pooling on the floor, bright daylight, shallow depth of field, photoreal",
+    "van": "a white plumber's work van parked in a sunny suburban driveway, bright daylight, photoreal",
+    "desk": "close-up of a smartphone on a kitchen counter next to a coffee mug showing a new job notification, bright daylight, shallow depth of field, photoreal",
+    "relief": "a Black plumber in his 40s standing up from under a sink wiping his hands and reading his phone with a relieved smile, bright daylight, photoreal",
+    "handshake": "a plumber shaking hands with a grateful homeowner at her front door, sunny day, warm, photoreal",
+    "hero": "a confident Black plumber in his 40s smiling beside his work van holding a wrench in golden hour light, photoreal"
+  },
+  "open": {
+    "shot": "sink",
+    "impact": "RINGING",
+    "cy": 0.5,
+    "dur": 2.0
+  },
+  "scenes": [
+    {
+      "shot": "phone",
+      "cy": 0.5,
+      "zoom": [
+        1.05,
+        1.2
+      ],
+      "dur": 1.2
+    },
+    {
+      "card": {
+        "title": "CALLTWIN · MISSED CALL",
+        "tag": "SENT",
+        "rows": [
+          [
+            "JOB CAUGHT",
+            "DANA R. · 14 MAPLE ST"
+          ],
+          [
+            "CALL BACK",
+            "856-555-0142"
+          ],
+          [
+            "NEEDS",
+            "LEAKING PIPE UNDER SINK"
+          ]
+        ]
+      },
+      "bg": "desk",
+      "dur": 1.6
+    },
+    {
+      "shot": "homeowner",
+      "cy": 0.42,
+      "zoom": [
+        1.06,
+        1.2
+      ],
+      "dur": 1.3
+    }
+  ],
+  "slams": [
+    {
+      "word": "EVERY",
+      "shot": "van",
+      "cy": 0.5,
+      "dur": 1.35
+    },
+    {
+      "word": "CALL",
+      "shot": "desk",
+      "panel": {
+        "label": "CALLTWIN",
+        "title": "MISSED CALL",
+        "working": "Catching the message...",
+        "done": "JOB SENT TO YOU",
+        "steps": [
+          "NAME",
+          "NUMBER",
+          "ADDRESS"
+        ]
+      },
+      "dur": 1.35
+    },
+    {
+      "word": "CAUGHT",
+      "shot": "relief",
+      "cy": 0.42,
+      "dur": 1.35
+    }
+  ],
+  "callback": {
+    "shot": "sink",
+    "impact": "BOOKED",
+    "cy": 0.5,
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "handshake",
+      "cy": 0.45,
+      "zoom": [
+        1.06,
+        1.18
+      ],
+      "dur": 1.2
+    },
+    {
+      "shot": "hero",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "dur": 1.9
+    }
+  ],
+  "vo_lines": [
+    [
+      0.3,
+      "Under the sink. The phone rings."
+    ],
+    [
+      3.4,
+      "He couldn't answer."
+    ],
+    [
+      5.6,
+      "Call Twin caught it.",
+      "CallTwin caught it."
+    ],
+    [
+      7.5,
+      "Name, number, address. Sent straight to you.",
+      "Name, number, address. Sent straight to you."
+    ],
+    [
+      12.7,
+      "Back to work. The job is already waiting."
+    ],
+    [
+      16.4,
+      "Call Twin. Scan to start.",
+      "CallTwin. Scan to start."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "CALL",
+      "TWIN"
+    ],
+    "tagline": "Never lose a job to a missed call.",
+    "cta": "SCAN TO GET STARTED",
+    "lines": [
+      "NAME · NUMBER · ADDRESS · THE JOB",
+      "hsw365.github.io/calltwin"
+    ],
+    "fine": "Built for plumbers, HVAC and local pros.",
+    "link": "https://hsw365.github.io/calltwin/?src=ig-undersink"
+  },
+  "caption": "He was under the sink when the phone rang. He couldn't answer.\n\nCallTwin catches the call you can't take and sends you the job: name, number, address and what they need. Back to work, with the next job already waiting.\n\nScan the QR to get started, or go to hsw365.github.io/calltwin (link in bio).",
+  "hashtags": [
+    "plumber",
+    "hvac",
+    "contractor",
+    "smallbusiness",
+    "missedcalls",
+    "calltwin"
+  ],
+  "title_dur": 1.2,
+  "end_dur": 4.0,
+  "vo_captions": true,
+  "duck": 0.62
+}
