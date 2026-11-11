@@ -1,0 +1,136 @@
+{
+  "kind": "trailer",
+  "account": "hsw365media",
+  "product": "affiliate",
+  "platform": "instagram",
+  "shots_dir": "content/shots/affiliate-partner",
+  "accent": "#a855f7",
+  "title": "HSW365 AFFILIATES",
+  "title_style": "wipe",
+  "slam_style": "ghost",
+  "cut_style": "flash",
+  "open": {
+    "shot": "ring",
+    "impact": "FOR FREE",
+    "cy": 0.45
+  },
+  "scenes": [
+    {
+      "shot": "creator",
+      "sub": "I recommend apps every single day.",
+      "cy": 0.35,
+      "zoom": [
+        1.04,
+        1.14
+      ]
+    },
+    {
+      "card": {
+        "title": "My recommendations",
+        "tag": "UNPAID",
+        "rows": [
+          [
+            "Apps I shared",
+            "every week"
+          ],
+          [
+            "Partner program",
+            "none"
+          ],
+          [
+            "Paid for it",
+            "never"
+          ]
+        ]
+      },
+      "bg": "city"
+    },
+    {
+      "shot": "face",
+      "sub": "Why am I doing this for nothing?",
+      "cy": 0.3
+    },
+    {
+      "shot": "face",
+      "sub": "Not anymore.",
+      "cy": 0.3,
+      "zoom": [
+        1.38,
+        1.52
+      ],
+      "sat": 0.6,
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "GROW",
+      "shot": "city",
+      "cy": 0.4
+    },
+    {
+      "word": "WITH",
+      "shot": "city",
+      "panel": {
+        "label": "HSW365 AFFILIATES",
+        "title": "Partner account",
+        "working": "Joining free...",
+        "done": "20% per subscriber",
+        "steps": [
+          "Join free",
+          "Share",
+          "Earn 20%"
+        ]
+      }
+    },
+    {
+      "word": "US",
+      "shot": "crew",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.16
+      ]
+    }
+  ],
+  "callback": {
+    "shot": "ring",
+    "impact": "PARTNER",
+    "cy": 0.45
+  },
+  "payoff": [
+    {
+      "shot": "rooftop",
+      "sub": "Turn negative into positive.",
+      "cy": 0.33,
+      "warm": true,
+      "zoom": [
+        1.02,
+        1.12
+      ]
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "HSW365 ",
+      "AFFILIATES"
+    ],
+    "tagline": "Build together. Earn together. Grow together.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "FREE TO JOIN  ·  20% PER SUBSCRIBER",
+      "hsw365.net/pages/affiliates"
+    ],
+    "fine": "20% for the full duration of each eligible referred subscription, subject to the HSW365 Affiliate Program Terms.",
+    "link": "https://hsw365.net/pages/affiliates"
+  },
+  "caption": "She recommended apps to her audience every week and never got a thing for it. The HSW365 Affiliate Partner Program is free to join, and partners earn 20% per subscriber for the full duration of each eligible referred subscription, subject to the program terms. Scan the QR to sign up, or go to hsw365.net/pages/affiliates (link in bio).",
+  "hashtags": [
+    "affiliatemarketing",
+    "creators",
+    "contentcreator",
+    "recurringincome",
+    "hsw365affiliates",
+    "hsw365media"
+  ]
+}

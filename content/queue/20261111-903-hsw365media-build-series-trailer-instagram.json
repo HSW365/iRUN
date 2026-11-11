@@ -1,0 +1,144 @@
+{
+  "kind": "trailer",
+  "account": "hsw365media",
+  "product": "build-series",
+  "platform": "instagram",
+  "shots_dir": "content/shots/build-alone",
+  "accent": "#fbbf24",
+  "title": "THE BUILD SERIES",
+  "presents": "HSW365 MEDIA PRESENTS",
+  "title_style": "smoke",
+  "slam_style": "stamp",
+  "cut_style": "dip",
+  "open": {
+    "shot": "match",
+    "impact": "ALONE",
+    "cy": 0.85,
+    "zoom": [
+      1.3,
+      1.4
+    ]
+  },
+  "scenes": [
+    {
+      "shot": "kitchen",
+      "sub": "No team. No investors. Just me.",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.14
+      ]
+    },
+    {
+      "card": {
+        "title": "The plan · 3:00 AM",
+        "tag": "STUCK",
+        "rows": [
+          [
+            "Ideas",
+            "too many"
+          ],
+          [
+            "Products shipped",
+            "0"
+          ],
+          [
+            "Team",
+            "just me"
+          ]
+        ]
+      },
+      "bg": "kitchen"
+    },
+    {
+      "shot": "face",
+      "sub": "Nobody's coming to build it.",
+      "cy": 0.3
+    },
+    {
+      "shot": "face",
+      "sub": "Stop planning. Ship it.",
+      "cy": 0.3,
+      "zoom": [
+        1.38,
+        1.52
+      ],
+      "sat": 0.6,
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "BUILD",
+      "shot": "tags",
+      "cy": 0.55
+    },
+    {
+      "word": "IT",
+      "shot": "city",
+      "panel": {
+        "label": "BUILD SERIES",
+        "title": "Ebooks + a course",
+        "working": "Learning the build...",
+        "done": "Ready to ship",
+        "steps": [
+          "Read",
+          "Build",
+          "Ship"
+        ]
+      }
+    },
+    {
+      "word": "ANYWAY",
+      "shot": "city",
+      "cy": 0.4,
+      "zoom": [
+        1.06,
+        1.16
+      ]
+    }
+  ],
+  "callback": {
+    "shot": "match",
+    "impact": "SHIPPED",
+    "cy": 0.85,
+    "zoom": [
+      1.35,
+      1.3
+    ]
+  },
+  "payoff": [
+    {
+      "shot": "rooftop",
+      "sub": "Turn negative into positive.",
+      "cy": 0.33,
+      "warm": true,
+      "zoom": [
+        1.02,
+        1.12
+      ]
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "BUILD ",
+      "SERIES"
+    ],
+    "tagline": "Ship real products. Even alone.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "EBOOKS + A COURSE FROM A SOLO FOUNDER AND ARMY VETERAN",
+      "hsw365.net"
+    ],
+    "link": "https://hsw365.net"
+  },
+  "caption": "Three in the morning, a kitchen table, and nobody coming to build it for him. The HSW365 Media Build Series is ebooks and a course from a solo founder and Army veteran on shipping real products alone. Stop planning and ship it. Scan the QR to sign up, or go to hsw365.net (link in bio).",
+  "hashtags": [
+    "solofounder",
+    "entrepreneur",
+    "startup",
+    "veteranowned",
+    "buildinpublic",
+    "hsw365media"
+  ]
+}

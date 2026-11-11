@@ -1,0 +1,136 @@
+{
+  "kind": "trailer",
+  "account": "hsw365media",
+  "product": "irun",
+  "platform": "instagram",
+  "shots_dir": "content/shots/irun-ghost",
+  "accent": "#22d3ee",
+  "title": "iRUN",
+  "title_style": "clean",
+  "slam_style": "neon",
+  "cut_style": "glitch",
+  "open": {
+    "shot": "phone",
+    "impact": "GHOST",
+    "cy": 0.55
+  },
+  "scenes": [
+    {
+      "shot": "roastery",
+      "sub": "Haven't posted in weeks.",
+      "cy": 0.38,
+      "zoom": [
+        1.04,
+        1.14
+      ]
+    },
+    {
+      "shot": "face",
+      "sub": "I roast coffee. I don't make videos.",
+      "cy": 0.3
+    },
+    {
+      "card": {
+        "title": "My account · last 30 days",
+        "tag": "GHOST",
+        "rows": [
+          [
+            "Videos posted",
+            "0"
+          ],
+          [
+            "Reels",
+            "0"
+          ],
+          [
+            "New DMs",
+            "0"
+          ]
+        ]
+      },
+      "bg": "roastery"
+    },
+    {
+      "shot": "face",
+      "sub": "They forgot we exist.",
+      "cy": 0.3,
+      "zoom": [
+        1.38,
+        1.52
+      ],
+      "sat": 0.6,
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "NEVER",
+      "shot": "camera",
+      "cy": 0.45
+    },
+    {
+      "word": "GO",
+      "shot": "camera",
+      "panel": {
+        "label": "iRUN",
+        "title": "Today's video",
+        "working": "Writing the script...",
+        "done": "Posted · comments to DMs",
+        "steps": [
+          "Write",
+          "Voice",
+          "Render",
+          "Post"
+        ]
+      }
+    },
+    {
+      "word": "DARK",
+      "shot": "line",
+      "cy": 0.42,
+      "zoom": [
+        1.06,
+        1.16
+      ]
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "POSTED",
+    "cy": 0.55
+  },
+  "payoff": [
+    {
+      "shot": "morning",
+      "sub": "Turn negative into positive.",
+      "cy": 0.35,
+      "warm": true,
+      "zoom": [
+        1.02,
+        1.12
+      ]
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "i",
+      "RUN"
+    ],
+    "tagline": "Short videos, written, voiced and posted for you.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "NO CHARGE TO APPLY  ·  SEE YOUR DRAFTS FIRST",
+      "hsw365.github.io/iRUN"
+    ],
+    "link": "https://hsw365.github.io/iRUN/#apply"
+  },
+  "caption": "His roastery went quiet online for weeks because nobody had time to make videos. iRun writes, voices, renders and posts short videos for your brand on autopilot and turns comments into DM leads, and you see your first drafts before anything posts. Applying is free. Scan the QR to sign up, or go to hsw365.github.io/iRUN (link in bio).",
+  "hashtags": [
+    "smallbusiness",
+    "contentmarketing",
+    "socialmediamarketing",
+    "aivideo",
+    "irun",
+    "hsw365media"
+  ]
+}

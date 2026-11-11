@@ -1,0 +1,139 @@
+{
+  "kind": "trailer",
+  "account": "hsw365media",
+  "product": "shopteam",
+  "platform": "instagram",
+  "shots_dir": "content/shots/shopteam-unseen",
+  "accent": "#34d399",
+  "title": "SHOP TEAM",
+  "presents": "iRUN PRESENTS",
+  "title_style": "photo",
+  "slam_style": "block",
+  "cut_style": "whip",
+  "end_style": "center",
+  "open": {
+    "shot": "box",
+    "impact": "UNSEEN",
+    "cy": 0.6
+  },
+  "scenes": [
+    {
+      "shot": "studio",
+      "sub": "Great products. Nobody sees them.",
+      "cy": 0.4,
+      "zoom": [
+        1.04,
+        1.14
+      ]
+    },
+    {
+      "shot": "face",
+      "sub": "I can't make ads and ship orders.",
+      "cy": 0.32
+    },
+    {
+      "card": {
+        "title": "My store · this week",
+        "tag": "UNSEEN",
+        "rows": [
+          [
+            "New ads posted",
+            "0"
+          ],
+          [
+            "Products promoted",
+            "none"
+          ],
+          [
+            "Time left to market",
+            "none"
+          ]
+        ]
+      },
+      "bg": "studio"
+    },
+    {
+      "shot": "face",
+      "sub": "Not one more silent week.",
+      "cy": 0.3,
+      "zoom": [
+        1.38,
+        1.52
+      ],
+      "sat": 0.6,
+      "tense": true
+    }
+  ],
+  "slams": [
+    {
+      "word": "FILM",
+      "shot": "film",
+      "cy": 0.45
+    },
+    {
+      "word": "POST",
+      "shot": "phone",
+      "panel": {
+        "label": "iRUN SHOP TEAM",
+        "title": "Today's ad",
+        "working": "Reading your catalog...",
+        "done": "Posted · QR to checkout",
+        "steps": [
+          "Pick product",
+          "Make the ad",
+          "Post it"
+        ]
+      }
+    },
+    {
+      "word": "SELL",
+      "shot": "street",
+      "cy": 0.38,
+      "zoom": [
+        1.06,
+        1.18
+      ]
+    }
+  ],
+  "callback": {
+    "shot": "box",
+    "impact": "SEEN",
+    "warm": true,
+    "cy": 0.6
+  },
+  "payoff": [
+    {
+      "shot": "packing",
+      "sub": "Turn negative into positive.",
+      "cy": 0.38,
+      "warm": true,
+      "zoom": [
+        1.02,
+        1.12
+      ]
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "SHOP ",
+      "TEAM"
+    ],
+    "tagline": "Your Shopify store's AI marketing team.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "3 DAYS FREE  ·  THEN $27/MO",
+      "A NEW AD EVERY DAY  ·  NO CUT OF SALES"
+    ],
+    "fine": "HSW365 Media LLC. Cancel any time.",
+    "link": "https://hsw365.github.io/iRUN/shopteam.html#start"
+  },
+  "caption": "Great products, a full shelf, and nobody seeing any of it. So she put a marketing team on her store: iRun Shop Team makes a new cinematic ad for one of her products every day, posts it to Instagram, and the QR drops shoppers into checkout. 3 days free, then $27 a month, no cut of sales. Scan the QR to sign up, or go to hsw365.github.io/iRUN/shopteam.html (link in bio).",
+  "hashtags": [
+    "shopify",
+    "shopifystore",
+    "ecommerce",
+    "smallbusiness",
+    "irun",
+    "hsw365media"
+  ]
+}
