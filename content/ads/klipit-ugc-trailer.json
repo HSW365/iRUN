@@ -1,0 +1,94 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-ugc",
+  "accent": "#FF4FA3",
+  "title": "KLIPIT",
+  "presents": "1 LINK  vs  6 HOURS",
+  "look": "bright",
+  "title_style": "photo",
+  "slam_style": "block",
+  "cut_style": "whip",
+  "end_style": "poster",
+  "bug": {"text": "KLIPIT", "pos": "tr"},
+  "score": {"shift": -2, "tempo": 1.15},
+  "narrator": {
+    "blend": {"af_nova": 0.6, "af_jessica": 0.4},
+    "tone": "bright",
+    "speed": 1.04,
+    "exag": 0.74
+  },
+  "shot_prompts": {
+    "scream": "candid vertical iPhone video still of a 22-year-old woman streamer with a messy bun and oversized hoodie screaming in disbelief at her gaming PC, hands on her head, real cluttered bedroom, soft overcast window daylight, slight motion blur, handheld, imperfect framing, raw unedited UGC look, shot on iPhone",
+    "scrub": "candid vertical iPhone photo of the same young woman slumped in a gaming chair staring blankly at a laptop showing a very long video timeline, cold coffee mug and snack wrappers on the desk, natural daylight from a window, real lived-in room, slightly crooked framing, raw UGC look, shot on iPhone",
+    "friend": "candid vertical iPhone selfie-style still of a young man in a backwards cap leaning into frame from behind her chair, pointing at her laptop and grinning, both laughing, real bedroom with posters and string lights, natural daylight, handheld, raw UGC look, shot on iPhone",
+    "paste": "over-the-shoulder candid vertical iPhone still of hands pasting a link into a laptop on a messy real desk, bright natural window light, mug and headset in frame, handheld, slightly out of focus edges, raw UGC look, shot on iPhone",
+    "stream": "candid vertical iPhone still of a real gaming desk with a monitor showing blurred colorful game footage, headset hanging off the chair, sunlight through blinds, real room clutter, handheld, raw UGC look, shot on iPhone",
+    "post": "candid vertical iPhone still of a young woman holding her phone up toward the camera with a big surprised smile, the phone screen showing a grid of vertical video clips, real bedroom, natural daylight, handheld, raw UGC look, shot on iPhone",
+    "viral": "candid vertical iPhone still of two friends on a couch both staring at a phone and screaming with joy, notification light on their faces, real living room, daylight, handheld motion blur, raw UGC look, shot on iPhone",
+    "hero": "candid vertical iPhone still of a young woman streamer and her friend laughing and high-fiving in a real bedroom setup with a PC and headset, warm afternoon sun, genuine happiness, handheld, raw UGC look, shot on iPhone"
+  },
+  "open": {"shot": "scream", "impact": "WAIT. WHAT?!", "cy": 0.45, "dur": 2.0},
+  "scenes": [
+    {"shot": "scrub", "cy": 0.5, "zoom": [1.05, 1.2], "dur": 1.2},
+    {
+      "card": {
+        "title": "KLIPIT · SCANNED 6:02:14",
+        "tag": "FOUND",
+        "rows": [
+          ["04:12:07", "1V5 CLUTCH · SCORE 97"],
+          ["05:03:41", "CHAT LOSES IT · SCORE 93"],
+          ["01:38:20", "BIGGEST FAIL · SCORE 88"]
+        ]
+      },
+      "bg": "scrub",
+      "dur": 1.6
+    },
+    {"shot": "friend", "cy": 0.5, "zoom": [1.08, 1.24], "dur": 1.3}
+  ],
+  "slams": [
+    {"word": "PASTE", "shot": "paste", "cy": 0.5, "dur": 1.35},
+    {
+      "word": "CLIP",
+      "shot": "stream",
+      "panel": {
+        "label": "KLIPIT",
+        "title": "1 LINK",
+        "working": "Finding your best moments...",
+        "done": "CLIPS READY",
+        "steps": ["CLIP 1", "CLIP 2", "CLIP 3"]
+      },
+      "dur": 1.35
+    },
+    {"word": "POST", "shot": "post", "cy": 0.5, "dur": 1.35}
+  ],
+  "callback": {"shot": "scream", "impact": "CLIPPED", "cy": 0.45, "dur": 1.3},
+  "payoff": [
+    {"shot": "viral", "cy": 0.45, "zoom": [1.08, 1.22], "dur": 1.2},
+    {"shot": "hero", "cy": 0.4, "zoom": [1.04, 1.12], "dur": 1.9, "sub": "Paste the stream. Post the clips."}
+  ],
+  "vo_lines": [
+    [0.3, "Hour four. Best play of my life."],
+    [3.4, "Six hours of footage."],
+    [5.6, "Then my cousin says, just paste the link.", "Then my cousin says, just paste the link."],
+    [7.5, "Klip it finds every highlight. Cut, vertical, ready to post.", "KLIPIT finds every highlight. Cut, vertical, ready to post."],
+    [12.7, "Six hours. One link. Done."],
+    [16.4, "Scan the code. Start clipping."]
+  ],
+  "end": {
+    "wordmark": ["KLIP", "IT"],
+    "tagline": "Paste the stream. Post the clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": ["YOUTUBE · TWITCH · KICK", "PLANS FROM $20/MONTH"],
+    "fine": "Vertical and wide clips. Cancel anytime.",
+    "link": "https://klipit.onrender.com/?signup=pro&src=ig-ugc"
+  },
+  "caption": "Six hours live. The best play of her life at hour four. Nobody clipped it.\n\nKLIPIT: paste a YouTube, Twitch or Kick link and get vertical and wide clips ready to post. Plans from $20/month, cancel anytime.\n\nScan the QR to sign up, or go to klipit.onrender.com (link in bio).",
+  "hashtags": ["streamer", "twitch", "kick", "gamingclips", "contentcreator", "klipit"],
+  "title_dur": 1.2,
+  "end_dur": 4.0,
+  "vo_captions": true,
+  "duck": 0.62
+}
