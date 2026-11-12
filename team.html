@@ -146,6 +146,7 @@ textarea{min-height:84px;resize:vertical}
     <button data-v="chat">Chat</button>
     <button data-v="brain">Brain</button>
     <button data-v="library">Library</button>
+    <a href="creator.html">Creator Hub</a>
     <a href="app.html">Studio</a>
   </nav>
 
@@ -154,7 +155,7 @@ textarea{min-height:84px;resize:vertical}
     <div class="hero">
       <div class="card">
         <span class="mono">Your AI staff for <b id="heroBiz" style="color:var(--text)"></b></span>
-        <h1>Twelve employees. <em>One brain.</em> Zero days off.</h1>
+        <h1><span id="heroN">27</span> employees. <em>One brain.</em> Zero days off.</h1>
         <p class="lead">Tell the team what you need. iRun hands it to the right employee, who already knows your business from the Brain and saves every finished piece to your Library.</p>
         <div class="delegate">
           <textarea id="dTask" placeholder="e.g. Write 5 TikTok hooks for my new tee drop"></textarea>
@@ -173,7 +174,7 @@ textarea{min-height:84px;resize:vertical}
         <p class="note" id="keyNote" style="margin:12px 0 0"></p>
       </div>
     </div>
-    <div class="grid" id="teamGrid"></div>
+    <div id="teamGrid" style="display:grid;gap:12px"></div>
   </section>
 
   <!-- CHAT -->
@@ -260,6 +261,7 @@ textarea{min-height:84px;resize:vertical}
 
 <div class="modal" id="modal" hidden><div class="box" id="mBox"></div></div>
 
+<script src="creator-agents.js"></script>
 <script>
 /* ================= config ================= */
 const MODELS = ["claude-sonnet-5-5", "claude-sonnet-5"];
@@ -326,6 +328,7 @@ const TEAM = [
    job:"You are customer support. You write replies to customers (email, DM, reviews), FAQs, help-center articles, return/refund responses, and canned replies. Be warm, fast and clear. Only state policies that are in the Brain; if a policy is unknown, write the reply with a clearly marked [placeholder] and say what to fill in.",
    pups:["Reply to an upset customer","Write my FAQ","Respond to a bad review","Refund policy","Canned replies pack"]}
 ];
+TEAM.push(...CREATOR_SQUAD);
 const emp = id => TEAM.find(e => e.id === id) || TEAM[0];
 
 /* ================= state ================= */
@@ -452,7 +455,7 @@ How you work:
 - If a task belongs to a teammate (${others}), still do your best version, then name who to hand it to.
 
 BRAIN
-${brainText(p)}`;
+${brainText(p)}${e.squad ? "\n" + creatorContext() + "\n" : ""}`;
 }
 /* Free, keyless writer used when no Anthropic key is set or the key fails. */
 async function freeClaude({system, messages, onText, signal}) {
@@ -533,12 +536,15 @@ $("profNew").onclick = () => {
 /* ================= team ================= */
 function renderTeam() {
   const p = P();
-  $("heroBiz").textContent = p.name;
+  $("heroBiz").textContent = p.name; $("heroN").textContent = TEAM.length;
   $("kLib").textContent = p.library.length; $("kFacts").textContent = p.facts.length; $("kDocs").textContent = p.docs.length;
   $("kMsgs").textContent = Object.values(p.chats).reduce((a, c) => a + c.length, 0);
   $("keyNote").innerHTML = anthKey() ? `Team is on. ${ownerKey() ? "Memory syncs across your devices." : "Memory is saved in this browser. Add your owner key in <a href=\"app.html\">Studio Settings</a> to sync devices."}` : `Team is on (free writer). Add your Anthropic key in <a href="app.html">Studio &gt; Settings</a> for Claude-quality work.`;
-  $("teamGrid").innerHTML = TEAM.map(e => { const n = (p.chats[e.id] || []).length;
-    return `<button class="emp" style="--hue:${e.hue}" data-e="${e.id}">${n ? `<span class="cnt">${n} MSG</span>` : ""}<div class="hd">${avatar(e)}<div><div class="nm">${esc(e.name)}</div><div class="rl">${esc(e.role)}</div></div></div><p>${esc(e.blurb)}</p></button>`; }).join("");
+  const card = e => { const n = (p.chats[e.id] || []).length;
+    return `<button class="emp" style="--hue:${e.hue}" data-e="${e.id}">${n ? `<span class="cnt">${n} MSG</span>` : ""}<div class="hd">${avatar(e)}<div><div class="nm">${esc(e.name)}</div><div class="rl">${esc(e.role)}</div></div></div><p>${esc(e.blurb)}</p></button>`; };
+  $("teamGrid").innerHTML = `<div class="grid" style="grid-column:1/-1">${TEAM.filter(e => !e.squad).map(card).join("")}</div>` +
+    `<div style="grid-column:1/-1;margin:18px 0 8px;display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap"><div><span class="mono">Creator Squad</span><h2 style="margin:2px 0 0">15 agents that find you gigs, write the pitch, script the video, read the contract and chase the payout</h2></div><a class="btn cy sm" href="creator.html">Open Creator Hub</a></div>` +
+    `<div class="grid" style="grid-column:1/-1">${TEAM.filter(e => e.squad).map(card).join("")}</div>`;
   document.querySelectorAll(".emp").forEach(b => b.onclick = () => { CUR = b.dataset.e; go("chat"); });
 }
 $("dGo").onclick = async () => {
@@ -547,7 +553,7 @@ $("dGo").onclick = async () => {
   let pick = null;
   try {
     const out = await claude({models: FAST, max: 60, system: `Route the task to exactly one employee. Reply with only the id.\n${TEAM.map(e => `${e.id}: ${e.role} - ${e.blurb}`).join("\n")}`, messages: [{role: "user", content: task}]});
-    pick = TEAM.find(e => out.toLowerCase().includes(e.id));
+    const o = out.trim().toLowerCase().replace(/[^a-z]/g, ""); pick = TEAM.find(e => e.id === o) || TEAM.find(e => new RegExp("\\b" + e.id + "\\b").test(out.toLowerCase()));
   } catch (e) { setStatus("dStatus", e.message, "err"); $("dGo").disabled = false; return; }
   pick = pick || emp("boss");
   setStatus("dStatus", ""); $("dGo").disabled = false; $("dTask").value = "";
@@ -692,6 +698,7 @@ function renderAll() { renderProfiles(); if (VIEW === "team") renderTeam(); if (
   if (q.get("e") && TEAM.some(e => e.id === q.get("e"))) { CUR = q.get("e"); }
   renderAll(); await loadCatalog();
   if (q.get("v")) go(q.get("v"));
+  if (q.get("task") && TEAM.some(e => e.id === q.get("e"))) { go("chat"); setTimeout(() => send(q.get("task")), 300); history.replaceState(null, "", "team.html"); }
   pullCloud();
 })();
 window.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !busy) pullCloud(); else if (document.visibilityState === "hidden" && ownerKey()) { clearTimeout(syncTimer); pushCloud(); } });

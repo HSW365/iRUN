@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0f">
+<title>iRun Creator Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--panel:#111119;--panel2:#16161f;--panel3:#1c1c28;--line:#24243a;--line2:#30304a;--text:#f2f2f7;--muted:#8a8aa0;--dim:#5c5c74;--cyan:#22d3ee;--violet:#a855f7;--red:#ef4444;--yellow:#fbbf24;--green:#34d399}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(1200px 600px at 85% -10%,rgba(168,85,247,.10),transparent 60%),radial-gradient(900px 500px at -10% 10%,rgba(34,211,238,.07),transparent 60%),var(--bg);min-height:100vh}
+a{color:var(--cyan)}button{font-family:inherit}[hidden]{display:none!important}
+.mono{font:700 11px 'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+@media(max-width:860px){.shell{grid-template-columns:1fr}}
+aside{border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;overflow:auto;background:rgba(10,10,15,.7)}
+@media(max-width:860px){aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px}aside nav{display:flex;overflow-x:auto;gap:6px}aside .brand{margin-bottom:8px}}
+.brand{font:800 28px 'Barlow Condensed',sans-serif;letter-spacing:1px;text-decoration:none;color:var(--text);display:block;padding:0 8px 14px}.brand b{color:var(--cyan)}
+aside nav button,aside nav a{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:0;color:var(--muted);padding:10px 12px;border-radius:10px;font:600 14px Inter;cursor:pointer;text-align:left;text-decoration:none;white-space:nowrap}
+@media(max-width:860px){aside nav button,aside nav a{width:auto;flex:0 0 auto;border:1px solid var(--line);border-radius:999px;padding:8px 14px}}
+aside nav button:hover,aside nav a:hover{color:var(--text);background:var(--panel3)}
+aside nav button.on{color:var(--text);background:linear-gradient(90deg,rgba(34,211,238,.18),rgba(34,211,238,.04));box-shadow:inset 3px 0 0 var(--cyan)}
+aside nav i{font-style:normal;min-width:18px;text-align:center}
+aside .badge{margin-left:auto;background:var(--red);color:#fff;border-radius:999px;font:700 11px Inter;padding:1px 7px}
+main{padding:18px 20px 100px;max-width:1100px;width:100%}
+@media(max-width:860px){main{padding:14px 12px 100px}}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+h1,h2,h3{margin:0}h1{font:800 40px/1 'Barlow Condensed',sans-serif}h2{font:800 26px 'Barlow Condensed',sans-serif;margin:0 0 6px}h3{font:800 19px 'Barlow Condensed',sans-serif}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);margin:0 0 12px;font-size:14px}.note{font-size:13px;color:var(--muted)}.note b{color:var(--text)}
+label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px;font-weight:600}
+input,select,textarea{width:100%;background:#0c0c13;border:1px solid var(--line);color:var(--text);padding:11px 12px;border-radius:10px;font:15px Inter,sans-serif;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan)}textarea{min-height:90px;resize:vertical}
+input[type=checkbox]{width:auto}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.row,.row3{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--violet);color:#fff;border:0;padding:11px 16px;border-radius:10px;font:700 14px Inter,sans-serif;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.cy{background:var(--cyan);color:#06222a}.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--text)}.btn.red{background:transparent;border:1px solid rgba(239,68,68,.5);color:var(--red)}.btn.sm{padding:7px 11px;font-size:13px;border-radius:8px}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.status{margin-top:10px;font-size:13px;color:var(--muted);min-height:18px}.status.err{color:var(--red)}.status.ok{color:var(--green)}
+.earn{background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(168,85,247,.12)),var(--panel);border:1px solid var(--line2)}
+.earn .big{font:800 64px/1 'Barlow Condensed',sans-serif;letter-spacing:.5px}
+.bar{height:10px;background:#0c0c13;border-radius:99px;overflow:hidden;margin:10px 0 4px;border:1px solid var(--line)}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--violet));border-radius:99px;transition:width .4s}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--panel3);border:1px solid var(--line);border-radius:12px;padding:12px}.kpi .n{font:800 30px/1.1 'Barlow Condensed',sans-serif;color:var(--cyan)}
+.plan{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.task{display:flex;gap:12px;align-items:center;background:var(--panel3);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}
+.task.done{opacity:.55}.task.done b{text-decoration:line-through}
+.task .ck{flex:0 0 22px;height:22px;border-radius:7px;border:2px solid var(--line2);display:grid;place-items:center;font-size:14px;color:#06222a}.task.done .ck{background:var(--green);border-color:var(--green)}
+.task .go{margin-left:auto}.task small{display:block;color:var(--muted);font-size:12.5px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:8px;background:var(--panel3);border:1px solid var(--line);color:var(--text);padding:7px 12px 7px 7px;border-radius:999px;font:600 13px Inter;cursor:pointer;text-decoration:none}
+.chip:hover{border-color:var(--hue)}
+.av{flex:0 0 auto;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font:800 15px 'Barlow Condensed',sans-serif;color:#0a0a0f;background:linear-gradient(135deg,var(--hue),color-mix(in srgb,var(--hue) 55%,#fff))}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}.filters input{flex:1;min-width:200px}.filters select{width:auto}
+.pill{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:9px 14px;border-radius:999px;font:600 13px Inter;cursor:pointer}.pill.on{color:var(--text);border-color:var(--cyan);background:rgba(34,211,238,.1)}
+.gigs{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.gig{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;position:relative}
+.gig:hover{border-color:var(--line2)}
+.gig .top{display:flex;align-items:center;gap:10px;padding-right:30px}.gig .logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font:800 18px 'Barlow Condensed';color:#0a0a0f;background:linear-gradient(135deg,var(--cyan),var(--violet))}
+.gig .t{font-weight:700;font-size:15px;line-height:1.3}.gig .b{font-size:12.5px;color:var(--muted)}
+.gig .pay{font:800 22px 'Barlow Condensed',sans-serif;color:var(--green)}
+.tag{display:inline-block;font:700 10px 'Space Mono',monospace;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:var(--panel3);border:1px solid var(--line);color:var(--muted);margin-right:4px}
+.tag.v{color:var(--cyan);border-color:rgba(34,211,238,.4)}.tag.w{color:var(--yellow);border-color:rgba(251,191,36,.4)}
+.gig .desc{font-size:13px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.gig .acts{margin-top:auto;display:flex;gap:8px;padding-top:6px}.save{position:absolute;top:12px;right:12px;background:transparent;border:0;color:var(--dim);font-size:20px;cursor:pointer}.save.on{color:var(--yellow)}
+.col{display:flex;flex-direction:column;gap:12px}
+.camp{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px}
+.camp .hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.camp .hd h3{flex:1;min-width:160px}
+.stages{display:flex;gap:4px;margin:12px 0}.stages i{flex:1;height:6px;border-radius:9px;background:var(--line)}.stages i.on{background:var(--cyan)}
+.dl{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.dl.done span{text-decoration:line-through;color:var(--muted)}.dl span{flex:1}.dl small{color:var(--dim)}
+.x{background:transparent;border:0;color:var(--dim);cursor:pointer;font:700 16px Inter;padding:0 4px}.x:hover{color:var(--red)}
+.thread{display:grid;grid-template-columns:260px minmax(0,1fr);gap:12px}@media(max-width:760px){.thread{grid-template-columns:1fr}}
+.tl{display:flex;flex-direction:column;gap:6px}.tl button{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--text);cursor:pointer}.tl button.on{border-color:var(--cyan)}.tl small{display:block;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl .u{float:right;width:9px;height:9px;border-radius:50%;background:var(--cyan);margin-top:6px}
+.chat{background:var(--panel);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-height:420px}.chat .ms{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:60vh}
+.bub{max-width:82%;padding:10px 13px;border-radius:14px;font-size:14.5px;white-space:pre-wrap;overflow-wrap:anywhere}.bub.me{align-self:flex-end;background:rgba(34,211,238,.14);border:1px solid rgba(34,211,238,.3)}.bub.br{align-self:flex-start;background:var(--panel3);border:1px solid var(--line)}
+.bub small{display:block;color:var(--dim);font-size:11px;margin-top:4px}
+.comp{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}.comp textarea{min-height:46px;height:46px}
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.mod{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer}.mod:hover{border-color:var(--cyan)}.mod .n{font:700 11px 'Space Mono';color:var(--dim);letter-spacing:1px}.mod p{color:var(--muted);font-size:13.5px;margin:6px 0 0}
+.mod.done{border-color:rgba(52,211,153,.5)}.done-tag{color:var(--green);font:700 11px 'Space Mono'}
+.lesson h4{margin:14px 0 4px;font:800 18px 'Barlow Condensed'}.lesson p,.lesson li{color:#d6d6e4;font-size:14.5px}.lesson ul{padding-left:20px}
+.port{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.pi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}.pi .t{font-weight:700}
+.modal{position:fixed;inset:0;background:rgba(5,5,10,.78);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;z-index:50}
+.modal .box{width:min(760px,100%);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line2);border-radius:18px;padding:20px}
+.out{white-space:pre-wrap;background:#0c0c13;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;max-height:50vh;overflow:auto;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--panel3);border:1px solid var(--line2);padding:10px 16px;border-radius:12px;font-size:14px;z-index:60}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:8px;text-align:left;font-size:14px}th{color:var(--muted);font:700 11px 'Space Mono';letter-spacing:1px;text-transform:uppercase}
+.empty{text-align:center;color:var(--muted);padding:30px 10px}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <a class="brand" href="app.html">iRUN <b>CREATOR</b></a>
+  <nav id="nav">
+    <button data-v="home" class="on"><i>&#8962;</i>Home</button>
+    <button data-v="explore"><i>&#9906;</i>Explore</button>
+    <button data-v="campaigns"><i>&#9776;</i>My Campaigns<span class="badge" id="bCamp" hidden></span></button>
+    <button data-v="training"><i>&#9998;</i>Training</button>
+    <button data-v="messages"><i>&#9993;</i>Messages<span class="badge" id="bMsg" hidden></span></button>
+    <button data-v="affiliates"><i>&#9733;</i>Affiliates</button>
+    <button data-v="portfolio"><i>&#9632;</i>Portfolio</button>
+    <button data-v="profile"><i>&#9679;</i>Profile</button>
+    <button data-v="account"><i>&#9881;</i>Account</button>
+    <a href="team.html"><i>&#9670;</i>All 27 agents</a>
+    <a href="app.html"><i>&#9654;</i>Studio</a>
+  </nav>
+</aside>
+<main>
+
+<!-- HOME -->
+<section id="v-home">
+  <div class="card earn">
+    <span class="mono">What you've earned</span>
+    <div class="big" id="eTotal">$0.00</div>
+    <div class="bar"><i id="eBar" style="width:0"></i></div>
+    <div class="note" id="eNote"></div>
+    <div class="btns"><button class="btn cy sm" id="logPay">Log a payout</button><button class="btn ghost sm" id="setGoal">Set monthly goal</button></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="mono">This month</div><div class="n" id="kMonth">$0</div></div>
+    <div class="kpi"><div class="mono">Active campaigns</div><div class="n" id="kAct">0</div></div>
+    <div class="kpi"><div class="mono">Applied</div><div class="n" id="kApp">0</div></div>
+    <div class="kpi"><div class="mono">Posts today</div><div class="n" id="kPost">0</div></div>
+  </div>
+  <div class="card">
+    <h2>Here's your plan today</h2>
+    <p class="lead">Built from your real campaigns, messages and goals.</p>
+    <div class="plan" id="plan"></div>
+    <div class="btns"><button class="btn ghost sm" id="planAgent">Ask Plan to schedule my day</button></div>
+  </div>
+  <div class="card">
+    <h3>Your 15 agents</h3><p class="lead">Tap one to give it work. Each reads your profile, campaigns and earnings first.</p>
+    <div class="chips" id="agentChips" style="flex-wrap:wrap;overflow:visible"></div>
+    <div style="display:flex;gap:8px;margin-top:12px"><textarea id="dTask" style="min-height:48px;height:48px" placeholder="Tell the squad what you need, e.g. Find me 5 brand types for a fitness app and pitch the first"></textarea><button class="btn" id="dGo">Delegate</button></div>
+  </div>
+</section>
+
+<!-- EXPLORE -->
+<section id="v-explore" hidden>
+  <div class="filters">
+    <input id="gQ" placeholder="Search gigs, brands, niches">
+    <button class="pill" id="gSaved">Saved</button>
+    <button class="pill" id="gVer">Verified brands</button>
+    <select id="gType"><option value="">All types</option></select>
+    <select id="gSort"><option value="new">Newest</option><option value="pay">Highest pay</option></select>
+    <button class="btn sm" id="gAdd">Add a gig</button>
+  </div>
+  <p class="note" id="gNote"></p>
+  <div class="gigs" id="gigs"></div>
+</section>
+
+<!-- CAMPAIGNS -->
+<section id="v-campaigns" hidden>
+  <div class="card"><h2>My Campaigns</h2><p class="lead">Every gig you applied to, from application to payout. Contracts, deliverables and deadlines in one place.</p>
+    <div class="btns" style="margin-top:0"><button class="pill on" data-f="all">All</button><button class="pill" data-f="applied">Applied</button><button class="pill" data-f="active">Active</button><button class="pill" data-f="delivered">Delivered</button><button class="pill" data-f="paid">Paid</button></div></div>
+  <div class="col" id="camps"></div>
+</section>
+
+<!-- TRAINING -->
+<section id="v-training" hidden>
+  <div class="card"><h2>Training</h2><p class="lead" id="tProg"></p>
+    <div class="btns" style="margin-top:0"><input id="tCustom" placeholder="Ask Learn for a custom lesson, e.g. lighting with one window" style="flex:1;min-width:220px"><button class="btn sm" id="tGen">Build lesson</button></div></div>
+  <div class="mods" id="mods"></div>
+</section>
+
+<!-- MESSAGES -->
+<section id="v-messages" hidden>
+  <div class="thread">
+    <div class="tl" id="tl"></div>
+    <div class="chat" id="chatBox"></div>
+  </div>
+</section>
+
+<!-- AFFILIATES -->
+<section id="v-affiliates" hidden>
+  <div class="card"><h2>Affiliates</h2><p class="lead">Earn recurring income by recommending tools and apps you actually use. Always disclose the relationship (#ad or "affiliate link").</p>
+    <div class="row"><div><label>Your referral code or handle for HSW365</label><input id="aCode" placeholder="e.g. your handle"></div><div><label>HSW365 Affiliate Partner Program</label><a class="btn cy" href="https://hsw365.net/pages/affiliates" target="_blank" rel="noopener">Join free, 20% per subscriber</a></div></div>
+    <p class="note">20% per subscriber for the full duration of each eligible referred subscription, subject to the program terms.</p>
+    <div class="btns"><button class="btn sm" id="aPosts">Ref: write 5 promo posts</button><button class="btn ghost sm" id="aRecruit">Ref: recruit creators DM</button></div></div>
+  <div class="card"><h3>Programs to join (verify terms on each site)</h3><div id="progs"></div></div>
+  <div class="card"><h3>Referral tracker</h3><div class="row3"><div><label>Program</label><input id="rProg"></div><div><label>Referrals</label><input id="rN" type="number" min="0"></div><div><label>Commission earned $</label><input id="rAmt" type="number" min="0" step="0.01"></div></div><div class="btns"><button class="btn sm" id="rAdd">Add and log to earnings</button></div><div id="refs" style="margin-top:10px"></div></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="v-portfolio" hidden>
+  <div class="card"><h2>Portfolio</h2><p class="lead">Your proof. Add samples and download a standalone page to send brands.</p>
+    <div class="btns" style="margin-top:0"><button class="btn sm" id="pAdd">Add sample</button><button class="btn cy sm" id="pPage">Download portfolio page</button><button class="btn ghost sm" id="pIntro">Folio: write my intro</button></div></div>
+  <div class="port" id="port"></div>
+</section>
+
+<!-- PROFILE -->
+<section id="v-profile" hidden>
+  <div class="card"><h2>Profile</h2>
+    <div class="row"><div><label>Name</label><input id="pName"></div><div><label>Handle</label><input id="pHandle" placeholder="@hoodstar365"></div></div>
+    <div class="row"><div><label>Niches</label><input id="pNiches" placeholder="streetwear, music, motivation, tech"></div><div><label>Platforms</label><input id="pPlat" placeholder="Instagram, YouTube"></div></div>
+    <div class="row"><div><label>Base rate per video</label><input id="pRate" placeholder="e.g. $150"></div><div><label>Location</label><input id="pLoc"></div></div>
+    <label>Bio</label><textarea id="pBio"></textarea>
+    <div class="btns"><button class="btn" id="pSave">Save profile</button><button class="btn ghost" id="pBioAI">Bio: write it for me</button><button class="btn ghost" id="pRate2">Rate: build my rate card</button></div><div class="status" id="pStatus"></div></div>
+</section>
+
+<!-- ACCOUNT -->
+<section id="v-account" hidden>
+  <div class="card"><h2>Account</h2>
+    <label>How brands should pay you (Zelle, PayPal handle, invoice terms). Never type bank or card numbers here.</label><textarea id="acPay" style="min-height:70px"></textarea>
+    <div class="row"><div><label>Posts per day goal</label><input id="acPosts" type="number" min="1" max="30"></div><div><label>Monthly earnings goal ($)</label><input id="acGoal" type="number" min="0"></div></div>
+    <div class="btns"><button class="btn" id="acSave">Save</button></div><div class="status" id="acStatus"></div></div>
+  <div class="card"><h3>AI key</h3><p class="note" id="keyNote"></p></div>
+  <div class="card"><h3>Backup</h3><div class="btns" style="margin-top:0"><button class="btn ghost sm" id="exp">Export backup</button><label class="btn ghost sm" style="margin:0;color:var(--text)">Import backup<input type="file" id="imp" accept=".json" hidden></label><button class="btn red sm" id="wipe">Reset Creator Hub</button></div></div>
+  <div class="card"><h3>Earnings ledger</h3><div id="ledger"></div></div>
+</section>
+</main>
+</div>
+<div class="modal" id="modal" hidden><div class="box" id="mBox"></div></div>
+<script src="creator-agents.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const today = () => new Date().toISOString().slice(0, 10);
+const money = n => "$" + (+n || 0).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const ls = {get(k, d = "") { try { return localStorage.getItem(k) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } }};
+const agent = id => CREATOR_SQUAD.find(a => a.id === id);
+let toastT; function toast(m) { let t = document.querySelector(".toast"); if (!t) { t = document.createElement("div"); t.className = "toast"; document.body.appendChild(t); } t.textContent = m; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2600); }
+function openModal(h) { $("mBox").innerHTML = h; $("modal").hidden = false; } function closeModal() { $("modal").hidden = true; $("mBox").innerHTML = ""; }
+$("modal").onclick = e => { if (e.target === $("modal")) closeModal(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+/* ---------- gig board seeds: real platforms, programs and leads found via web research Nov 12 2026. Verify terms on each site. ---------- */
+const SEED = [
+ {id:"s-sideshift", brand:"SideShift", title:"Creator marketplace: apply to UGC campaigns", type:"Marketplace", pay:"Set per campaign", verified:true, url:"https://sideshift.app", desc:"Job-board style UGC marketplace. Create a profile, apply to campaigns, sign contracts and get paid in the app.", tags:["ugc","marketplace"]},
+ {id:"s-joinbrands", brand:"JoinBrands", title:"UGC marketplace: pay-per-video jobs", type:"Marketplace", pay:"Set per job", verified:true, url:"https://joinbrands.com", desc:"Brands post UGC jobs and you apply. Large creator pool, fast turnarounds, platform fee applies.", tags:["ugc","marketplace"]},
+ {id:"s-billo", brand:"Billo", title:"Testimonial-style UGC video ads", type:"Marketplace", pay:"Set per task", verified:true, url:"https://billo.app", desc:"Brands post specific tasks, you apply, they ship product if chosen. Strong for testimonial and product videos.", tags:["ugc","testimonial"]},
+ {id:"s-insense", brand:"Insense", title:"UGC + whitelisting campaigns", type:"Marketplace", pay:"Set per campaign", verified:true, url:"https://insense.pro", desc:"Managed UGC and influencer campaigns with clear briefs. Good for paid-social usage rights.", tags:["ugc","whitelisting"]},
+ {id:"s-collabstr", brand:"Collabstr", title:"Get booked directly by brands", type:"Marketplace", pay:"You set your price", verified:true, url:"https://collabstr.com", desc:"Brands browse your profile and book you. You set packages and rates; payment is held until approval.", tags:["ugc","influencer"]},
+ {id:"s-tiktokshop", brand:"TikTok Shop Affiliate", title:"Commission on products you tag", type:"Affiliate", pay:"10-30% per sale (varies)", verified:true, url:"https://affiliate.tiktokshop.com", desc:"Open at roughly 1,000 followers (full access ~5,000). Works for any product category. Only if you post on TikTok.", tags:["affiliate","commerce"]},
+ {id:"s-hsw-aff", brand:"HSW365 Affiliates", title:"Promote HSW365 apps, earn 20% per subscriber", type:"Affiliate", pay:"20% recurring", verified:true, url:"https://hsw365.net/pages/affiliates", desc:"Free to join. 20% per subscriber for the full duration of each eligible referred subscription, subject to program terms.", tags:["affiliate","hsw365"]},
+ {id:"s-submagic", brand:"Submagic", title:"AI captions tool affiliate", type:"Affiliate", pay:"~30% recurring (per listing)", verified:false, url:"https://www.submagic.co", desc:"AI short-form video editor popular with creators. Commission per their public listing; confirm on their affiliate page.", tags:["affiliate","video tools"]},
+ {id:"s-veed", brand:"VEED", title:"Video editor affiliate", type:"Affiliate", pay:"Per listing, confirm", verified:false, url:"https://www.veed.io", desc:"No-code video editor aimed at creators. Check the current affiliate terms before promoting.", tags:["affiliate","video tools"]},
+ {id:"s-descript", brand:"Descript", title:"Audio/video editing affiliate", type:"Affiliate", pay:"Per listing, confirm", verified:false, url:"https://www.descript.com", desc:"Editing and transcription tool. Third-party lists cite recurring commission; confirm with Descript.", tags:["affiliate","video tools"]},
+ {id:"s-murf", brand:"Murf AI", title:"AI voiceover affiliate", type:"Affiliate", pay:"~20% recurring (per listing)", verified:false, url:"https://murf.ai", desc:"AI voice tool for narration. Listed commission is from third-party roundups; confirm on their site.", tags:["affiliate","ai voice"]},
+ {id:"s-synthesia", brand:"Synthesia", title:"AI video avatars affiliate", type:"Affiliate", pay:"~25% recurring (per listing)", verified:false, url:"https://www.synthesia.io", desc:"AI avatar video platform. Commission per third-party listing; confirm before promoting.", tags:["affiliate","ai video"]},
+ {id:"l-roboapply", brand:"RoboApply (lead)", title:"AI product demo UGC, monthly retainer", type:"UGC", pay:"$750-$2,000 / month", verified:false, url:"https://ugcjobs.beehiiv.com/p/creator-related-jobs-129", desc:"Posted in a UGC jobs newsletter: daily product-demo videos on retainer with coaching. Lead from a third-party newsletter; may be filled.", tags:["ugc","ai tool","retainer"]},
+ {id:"l-matchgame", brand:"Match-3 puzzle game (lead)", title:"Paid UGC collaboration for a mobile game", type:"UGC", pay:"$100 / video", verified:false, url:"https://ugcjobs.beehiiv.com/p/creator-related-jobs-105", desc:"Lead from a UGC jobs newsletter. Verify the brand and contract before filming.", tags:["ugc","gaming"]},
+ {id:"l-fitapp", brand:"Fitness & nutrition app (lead)", title:"TikTok-style videos, long-term potential", type:"UGC", pay:"$50 / video + commissions", verified:false, url:"https://ugcjobs.beehiiv.com/p/creator-related-jobs-105", desc:"Lead from a UGC jobs newsletter. Pay per video plus commissions. Verify first.", tags:["ugc","fitness","app"]},
+ {id:"l-aitool", brand:"AI tool campaign (lead)", title:"Casting call: AI tool promo videos", type:"UGC", pay:"$150-$200 / video", verified:false, url:"https://projectcasting.com/?p=1944170", desc:"Casting listing on Project Casting for paid AI tool promo content. Lead; may be closed.", tags:["ugc","ai tool"]},
+ {id:"l-newsletter", brand:"UGC Opportunity newsletter", title:"Weekly list of live paid UGC jobs", type:"Job board", pay:"$100 shoots up to $3,500/mo roles", verified:false, url:"https://ugcopps.beehiiv.com", desc:"Free newsletter listing fresh paid UGC roles each week across wellness, beauty, apps, tech and more.", tags:["board","ugc"]},
+ {id:"l-projectcasting", brand:"Project Casting", title:"Casting calls for UGC creators", type:"Job board", pay:"Varies", verified:false, url:"https://projectcasting.com", desc:"Job board with paid UGC casting calls. Free to browse.", tags:["board","ugc"]},
+];
+const TYPES = ["UGC", "Marketplace", "Affiliate", "Job board", "Ambassador", "Freelance", "Retainer"];
+const PROGRAMS = [
+ ["HSW365 Affiliate Partner Program", "20% per subscriber for the full duration, per program terms", "https://hsw365.net/pages/affiliates"],
+ ["Submagic", "~30% recurring per their public listing, 30-day cookie", "https://www.submagic.co"],
+ ["TikTok Shop Affiliate", "10-30% per sale, 1,000+ followers to start", "https://affiliate.tiktokshop.com"],
+ ["Descript / Murf / Synthesia / VEED", "Recurring commissions per third-party roundups, confirm each", ""],
+];
+
+/* ---------- training content ---------- */
+const COURSES = [
+ {id:"c1", t:"UGC basics: what brands really buy", m:"10 min", body:"<h4>The idea</h4><p>Brands buy content that looks like a real person recommending a product, because it converts better as ads than polished studio video. You are selling raw footage, a script that follows the brief, and usage rights.</p><h4>What you deliver</h4><ul><li>A vertical video 15-45 seconds, hook in the first 3 seconds</li><li>2-3 alternate hooks of the same video</li><li>Clean audio and steady framing</li></ul><h4>Drill</h4><p>Pick any product in your house. Film a 20 second honest review with 3 different openings.</p>"},
+ {id:"c2", t:"Hooks that hold the first 3 seconds", m:"12 min", body:"<h4>Formulas</h4><ul><li>Problem call-out: \"If your ___ keeps ___, watch this.\"</li><li>Result first: show the outcome, then how.</li><li>Pattern interrupt: unexpected action or sound.</li><li>Micro-drama: open mid-scene with stakes, no logo, no talking.</li></ul><h4>Drill</h4><p>Write 10 hooks for one product. Film the best 3. Ask Script to rewrite the weakest.</p>"},
+ {id:"c3", t:"Filming with a phone: light, sound, framing", m:"12 min", body:"<h4>Light</h4><p>Face a window. Never film with the window behind you.</p><h4>Sound</h4><p>Quiet room, phone 6 to 8 inches from your mouth or a cheap lav mic. Audio matters more than resolution.</p><h4>Framing</h4><p>Vertical 9:16, eyes one third from the top, leave room for captions at the bottom.</p><h4>Drill</h4><p>Shoot the same 15 second clip near a window and under a ceiling light. Compare.</p>"},
+ {id:"c4", t:"Pricing your content and usage rights", m:"15 min", body:"<h4>Three prices</h4><ul><li>Production fee for the video</li><li>Usage rights (how long the brand may run it as ads)</li><li>Extras: whitelisting, exclusivity, rush, extra hooks, raw footage</li></ul><h4>Rule</h4><p>Posting on your own page and brand running it as a paid ad are different jobs. Price them separately.</p><h4>Drill</h4><p>Ask Rate to build your rate card, then edit every number so it feels fair to you.</p>"},
+ {id:"c5", t:"Pitching brands that reply", m:"12 min", body:"<h4>Structure</h4><ul><li>One specific line about their product or recent campaign</li><li>One line of proof (a sample)</li><li>One clear offer and price</li><li>One easy next step</li></ul><h4>Rules</h4><p>Under 120 words. Follow up twice, 3 days apart. Never lie about results.</p><h4>Drill</h4><p>Send 5 pitches today with Pitch. Log each as a campaign in My Campaigns.</p>"},
+ {id:"c6", t:"Contracts: what to check before you sign", m:"15 min", body:"<h4>Check</h4><ul><li>Deliverables and deadline</li><li>Payment amount, due date, method</li><li>Usage rights length and platforms</li><li>Exclusivity and who owns the footage</li><li>Revision rounds</li></ul><p>This is education, not legal advice. For large deals use an attorney. Paste any contract to Deal for a plain-English read.</p>"},
+ {id:"c7", t:"Micro-drama ads: the trailer method", m:"15 min", body:"<h4>Structure of a 17-20 second cut</h4><ul><li>0-2s: cold-open spectacle, no logo, no talking</li><li>2-3s: title slam</li><li>Close-up reaction cuts on the beat</li><li>Three giant words slammed one per beat</li><li>Payoff callback to the opening shot</li><li>End card: one CTA and a QR code</li></ul><h4>Drill</h4><p>Storyboard one with Reel for any of your products.</p>"},
+ {id:"c8", t:"Getting paid and setting money aside", m:"10 min", body:"<h4>Habits</h4><ul><li>Invoice the day you deliver</li><li>Net 15 is a fair ask; ask for 50% up front on bigger jobs</li><li>Set aside a share of every payout for taxes (ask a tax professional what share)</li></ul><p>Use Pay for invoices and polite-to-firm chasers. Log every payout in Home so Pulse can read your numbers.</p>"},
+];
+
+/* ---------- state ---------- */
+const KEY = CREATOR_KEY;
+let D = load();
+function blank() { return {v: 1, profile: {name: "Elvin Torres Sr.", handle: "@hoodstar365", niches: "streetwear, music, motivation, tech, AI apps", platforms: "Instagram, YouTube", rate: "", location: "NJ", bio: "U.S. Army veteran, author, recording artist and founder of HSW365 Media. Turn Negative Into Positive."}, gigs: [], apps: [], messages: [{id: uid(), brand: "iRun Creator Hub", unread: true, thread: [{from: "br", text: "Welcome. Explore gigs, apply with Pitch, track everything in My Campaigns and let your 15 agents handle the rest.", at: Date.now()}]}], training: {}, portfolio: [], earnings: [], refs: [], goals: {postsPerDay: 4, monthly: 0}, posts: [], plan: {}, account: {pay: ""}}; }
+function load() { try { const d = JSON.parse(ls.get(KEY, "")); if (d && d.v) return d; } catch {} return blank(); }
+function save() { if (!ls.set(KEY, JSON.stringify(D))) toast("Browser storage full. Export a backup."); }
+const allGigs = () => [...D.gigs, ...SEED.filter(s => !D.gigs.some(g => g.id === s.id))];
+const gigOf = id => allGigs().find(g => g.id === id) || {};
+/* saved flags for seed gigs live in D.saved */
+D.saved = D.saved || [];
+
+/* ---------- AI ---------- */
+const anthKey = () => ls.get("irun_anth");
+const MODELS = ["claude-sonnet-5-5", "claude-sonnet-5"];
+async function ai(system, user) {
+  const key = anthKey();
+  if (key) {
+    for (const model of MODELS) {
+      const r = await fetch("https://api.anthropic.com/v1/messages", {method: "POST", headers: {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "anthropic-dangerous-direct-browser-access": "true"}, body: JSON.stringify({model, max_tokens: 3500, system, messages: [{role: "user", content: user}]})});
+      if (r.ok) return ((await r.json()).content || []).filter(b => b.type === "text").map(b => b.text).join("");
+      if (r.status === 401) break;
+    }
+  }
+  let last;
+  for (let i = 0; i < 2; i++) {
+    try {
+      const r = await fetch("https://text.pollinations.ai/openai", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({model: "openai", private: true, seed: Math.floor(Math.random() * 1e6), messages: [{role: "system", content: system}, {role: "user", content: user}]})});
+      if (!r.ok) throw new Error("Free writer busy (" + r.status + ")");
+      const t = (await r.json()).choices?.[0]?.message?.content || "";
+      if (t.trim()) return t;
+    } catch (e) { last = e; }
+  }
+  throw new Error((last?.message || "AI unavailable") + ". Try again in a moment.");
+}
+function sys(a) {
+  return `You are ${a.name}, the ${a.role} on the iRun Creator Squad. ${a.job}\nDeliver finished, usable work. No preamble. No emojis. Never invent brands, clients, results, rates presented as fact, or statistics.\n\n${creatorContext()}`;
+}
+/* run an agent and show the result in a modal with copy + open-in-team */
+async function runAgent(id, prompt, title, after) {
+  const a = agent(id);
+  openModal(`<div style="display:flex;align-items:center;gap:10px"><div class="av" style="--hue:${a.hue}">${esc(a.name[0])}</div><div><b>${esc(a.name)}</b><div class="note">${esc(title || a.role)}</div></div></div><div class="out" id="aOut">Working...</div><div class="btns"><button class="btn sm" id="aCopy" disabled>Copy</button>${after ? '<button class="btn cy sm" id="aUse" disabled>Use this</button>' : ""}<a class="btn ghost sm" href="team.html?e=${id}&task=${encodeURIComponent(prompt.slice(0, 1500))}">Continue in chat</a><button class="btn ghost sm" onclick="closeModal()">Close</button></div>`);
+  try {
+    const out = await ai(sys(a), prompt);
+    $("aOut").textContent = out; $("aCopy").disabled = false;
+    $("aCopy").onclick = async () => { await navigator.clipboard.writeText(out).catch(() => {}); toast("Copied"); };
+    if (after) { $("aUse").disabled = false; $("aUse").onclick = () => { after(out); closeModal(); }; }
+    return out;
+  } catch (e) { $("aOut").textContent = e.message; }
+}
+
+/* ---------- nav ---------- */
+let VIEW = "home", CF = "all", MSGID = null, GF = {saved: false, ver: false};
+function go(v) {
+  VIEW = v; document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+  ["home", "explore", "campaigns", "training", "messages", "affiliates", "portfolio", "profile", "account"].forEach(x => $("v-" + x).hidden = x !== v);
+  render(); window.scrollTo({top: 0});
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => go(b.dataset.v));
+function render() { badges(); ({home: rHome, explore: rExplore, campaigns: rCamps, training: rTrain, messages: rMsgs, affiliates: rAff, portfolio: rPort, profile: rProf, account: rAcct})[VIEW](); }
+function badges() {
+  const act = D.apps.filter(a => ["applied", "contract", "active"].includes(a.status)).length, un = D.messages.filter(m => m.unread).length;
+  $("bCamp").hidden = !act; $("bCamp").textContent = act; $("bMsg").hidden = !un; $("bMsg").textContent = un;
+}
+
+/* ---------- home ---------- */
+const total = () => D.earnings.reduce((a, e) => a + (+e.amount || 0), 0);
+function rHome() {
+  const tot = total(), month = today().slice(0, 7), mt = D.earnings.filter(e => (e.date || "").startsWith(month)).reduce((a, e) => a + (+e.amount || 0), 0), goal = +D.goals.monthly || 0;
+  $("eTotal").textContent = money(tot); $("kMonth").textContent = "$" + Math.round(mt).toLocaleString();
+  $("eBar").style.width = goal ? Math.min(100, mt / goal * 100) + "%" : "0";
+  $("eNote").textContent = goal ? `${money(mt)} of ${money(goal)} monthly goal (${Math.round(Math.min(100, mt / goal * 100))}%)` : "Set a monthly goal to track progress.";
+  const posts = D.posts.filter(p => p.date === today()).length;
+  $("kAct").textContent = D.apps.filter(a => ["contract", "active"].includes(a.status)).length; $("kApp").textContent = D.apps.filter(a => a.status === "applied").length; $("kPost").textContent = posts;
+  const act = D.apps.filter(a => ["contract", "active"].includes(a.status)).length, un = D.messages.filter(m => m.unread).length, pg = +D.goals.postsPerDay || 4;
+  const dueSoon = D.apps.flatMap(a => (a.deliverables || []).filter(x => !x.done && x.due && x.due <= today()).map(x => x.t));
+  const tasks = [
+    {k: "contracts", t: `Review contracts`, s: act ? `${act} active campaign${act > 1 ? "s" : ""}${dueSoon.length ? `, ${dueSoon.length} due now` : ""}` : "No active campaigns. Apply to a gig.", go: act ? "campaigns" : "explore"},
+    {k: "messages", t: `Respond to ${un} message${un === 1 ? "" : "s"}`, s: un ? "Unread brand messages" : "Inbox clear", go: "messages"},
+    {k: "metrics", t: "Check your metrics", s: "Ask Pulse for this week's read", act: () => runAgent("pulse", "Weekly metrics review: what's working, what's stalling, 3 moves this week.", "Weekly metrics")},
+    {k: "posts", t: `Create ${pg} posts today`, s: `${posts} / ${pg} logged`, act: () => { D.posts.push({id: uid(), date: today()}); save(); render(); toast("Post logged"); }, auto: posts >= pg},
+  ];
+  const dn = D.plan[today()] = D.plan[today()] || {};
+  $("plan").innerHTML = tasks.map((t, i) => `<div class="task ${(dn[t.k] || t.auto) ? "done" : ""}" data-i="${i}"><span class="ck">${(dn[t.k] || t.auto) ? "&#10003;" : ""}</span><div><b>${esc(t.t)}</b><small>${esc(t.s)}</small></div>${t.k === "posts" ? '<button class="btn sm cy go">+1 post</button>' : '<button class="btn sm ghost go">Open</button>'}</div>`).join("");
+  document.querySelectorAll("#plan .task").forEach(el => { const t = tasks[+el.dataset.i];
+    el.onclick = e => { if (e.target.classList.contains("go")) { t.act ? t.act() : go(t.go); return; } dn[t.k] = !dn[t.k]; save(); rHome(); }; });
+  $("agentChips").innerHTML = CREATOR_SQUAD.map(a => `<a class="chip" style="--hue:${a.hue}" href="team.html?e=${a.id}"><span class="av" style="--hue:${a.hue}">${esc(a.name[0])}</span>${esc(a.name)} <span class="note">${esc(a.role)}</span></a>`).join("");
+}
+$("planAgent").onclick = () => runAgent("plan", "Build my plan for today with time blocks, then a 7-day content batch plan.", "Today's plan");
+$("dGo").onclick = async () => {
+  const task = $("dTask").value.trim(); if (!task) return; $("dGo").disabled = true;
+  let pick = "scout";
+  try { const out = (await ai("Route the task to exactly one agent. Reply with only the id.\n" + CREATOR_SQUAD.map(a => `${a.id}: ${a.role} - ${a.blurb}`).join("\n"), task)).trim().toLowerCase().replace(/[^a-z]/g, ""); if (agent(out)) pick = out; } catch {}
+  $("dGo").disabled = false; $("dTask").value = ""; location.href = `team.html?e=${pick}&task=${encodeURIComponent(task)}`;
+};
+$("logPay").onclick = () => payModal();
+$("setGoal").onclick = () => { const v = prompt("Monthly earnings goal in dollars", D.goals.monthly || ""); if (v === null) return; D.goals.monthly = Math.max(0, +v || 0); save(); render(); };
+function payModal(brand = "", appId = "") {
+  openModal(`<h2>Log a payout</h2><div class="row"><div><label>Amount $</label><input id="pyA" type="number" min="0" step="0.01"></div><div><label>Date</label><input id="pyD" type="date" value="${today()}"></div></div><label>Brand or source</label><input id="pyB" value="${esc(brand)}"><label>Note</label><input id="pyN"><div class="btns"><button class="btn" id="pyGo">Save</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+  $("pyGo").onclick = () => { const a = +$("pyA").value; if (!(a > 0)) return $("pyA").focus(); D.earnings.push({id: uid(), amount: a, date: $("pyD").value || today(), brand: $("pyB").value.trim() || "Other", note: $("pyN").value.trim(), appId});
+    const ap = D.apps.find(x => x.id === appId); if (ap) ap.status = "paid"; save(); closeModal(); render(); toast("Payout logged"); };
+}
+
+/* ---------- explore ---------- */
+function rExplore() {
+  const types = [...new Set([...TYPES, ...allGigs().map(g => g.type)])];
+  if ($("gType").options.length < 2) $("gType").innerHTML = '<option value="">All types</option>' + types.map(t => `<option>${esc(t)}</option>`).join("");
+  $("gSaved").classList.toggle("on", GF.saved); $("gVer").classList.toggle("on", GF.ver);
+  const q = $("gQ").value.trim().toLowerCase(), ty = $("gType").value;
+  let list = allGigs().filter(g => (!GF.saved || D.saved.includes(g.id)) && (!GF.ver || g.verified) && (!ty || g.type === ty) && (!q || (g.brand + " " + g.title + " " + g.desc + " " + (g.tags || []).join(" ")).toLowerCase().includes(q)));
+  const num = g => { const m = String(g.pay).replace(/,/g, "").match(/\d+/g); return m ? Math.max(...m.map(Number)) : 0; };
+  if ($("gSort").value === "pay") list.sort((a, b) => num(b) - num(a));
+  $("gNote").innerHTML = `${list.length} opportunities. Rows marked LEAD come from third-party job boards and may be filled: verify the brand and read the contract before filming. Pay shown is as listed, not guaranteed.`;
+  $("gigs").innerHTML = list.length ? list.map(g => { const applied = D.apps.some(a => a.gigId === g.id); return `<div class="gig" data-id="${esc(g.id)}"><button class="save ${D.saved.includes(g.id) ? "on" : ""}" data-s="${esc(g.id)}" aria-label="Save">&#9733;</button>
+    <div class="top"><div class="logo">${esc((g.brand || "?")[0])}</div><div><div class="t">${esc(g.title)}</div><div class="b">${esc(g.brand)}</div></div></div>
+    <div class="pay">${esc(g.pay || "")}</div><div><span class="tag">${esc(g.type)}</span>${g.verified ? '<span class="tag v">Verified platform</span>' : '<span class="tag w">Lead / verify</span>'}</div>
+    <div class="desc">${esc(g.desc || "")}</div><div class="acts"><button class="btn sm" data-d="${esc(g.id)}">${applied ? "Applied" : "Apply now"}</button><button class="btn ghost sm" data-i="${esc(g.id)}">Details</button></div></div>`; }).join("") : '<div class="card empty" style="grid-column:1/-1">Nothing matches. Add a gig you found.</div>';
+  document.querySelectorAll("#gigs [data-s]").forEach(b => b.onclick = () => { const id = b.dataset.s; D.saved = D.saved.includes(id) ? D.saved.filter(x => x !== id) : [...D.saved, id]; save(); rExplore(); });
+  document.querySelectorAll("#gigs [data-d]").forEach(b => b.onclick = () => applyModal(b.dataset.d));
+  document.querySelectorAll("#gigs [data-i]").forEach(b => b.onclick = () => gigModal(b.dataset.i));
+}
+["gQ", "gType", "gSort"].forEach(id => $(id).addEventListener("input", () => rExplore()));
+$("gSaved").onclick = () => { GF.saved = !GF.saved; rExplore(); }; $("gVer").onclick = () => { GF.ver = !GF.ver; rExplore(); };
+function gigModal(id) {
+  const g = gigOf(id);
+  openModal(`<h2>${esc(g.title)}</h2><p class="note"><b>${esc(g.brand)}</b> · ${esc(g.type)} · ${esc(g.pay || "")}</p><h3 style="margin-top:12px">What you'd be doing</h3><p>${esc(g.desc || "")}</p>${g.url ? `<p><a href="${esc(g.url)}" target="_blank" rel="noopener">Open the listing</a></p>` : ""}
+   <div class="btns"><button class="btn" id="gA">Apply now</button><button class="btn ghost" id="gB">Brief: what to ask them</button><button class="btn ghost" onclick="closeModal()">Close</button></div>`);
+  $("gA").onclick = () => applyModal(id);
+  $("gB").onclick = () => runAgent("brief", `Brand opportunity: ${g.brand} - ${g.title}. Listed pay: ${g.pay}. Details: ${g.desc}. Give the questions to ask before I commit, the deliverables I should expect and a timeline.`, "Questions before you apply");
+}
+function applyModal(id) {
+  const g = gigOf(id); if (D.apps.some(a => a.gigId === id)) { go("campaigns"); return; }
+  openModal(`<h2>Apply: ${esc(g.title)}</h2><p class="note">${esc(g.brand)} · ${esc(g.pay || "")}</p>
+   <label>Your pitch</label><textarea id="apT" style="min-height:160px" placeholder="Write it yourself or let Pitch do it"></textarea>
+   <div class="row"><div><label>Your rate for this</label><input id="apR" value="${esc(D.profile.rate || "")}"></div><div><label>Listing link</label><input id="apU" value="${esc(g.url || "")}"></div></div>
+   <div class="btns"><button class="btn cy" id="apW">Pitch: write it</button><button class="btn" id="apS">Save to My Campaigns</button>${g.url ? `<a class="btn ghost" id="apO" href="${esc(g.url)}" target="_blank" rel="noopener">Open listing to apply</a>` : ""}<button class="btn ghost" onclick="closeModal()">Cancel</button></div><div class="status" id="apSt"></div>
+   <p class="note">iRun tracks your application here. Brands receive it only when you submit on their site or send it yourself.</p>`);
+  $("apW").onclick = async () => { $("apSt").textContent = "Pitch is writing..."; try { $("apT").value = await ai(sys(agent("pitch")), `Write my application for this opportunity. Brand: ${g.brand}. Title: ${g.title}. Listed pay: ${g.pay}. Details: ${g.desc}. Give ONE version only, under 120 words, ready to paste.`); $("apSt").textContent = ""; } catch (e) { $("apSt").textContent = e.message; $("apSt").className = "status err"; } };
+  $("apS").onclick = () => { D.apps.push({id: uid(), gigId: id, brand: g.brand, title: g.title, status: "applied", pitch: $("apT").value.trim(), rate: $("apR").value.trim(), url: $("apU").value.trim(), pay: g.pay, appliedAt: Date.now(), deliverables: [], contract: ""}); save(); closeModal(); go("campaigns"); toast("Saved to My Campaigns"); };
+}
+$("gAdd").onclick = () => {
+  openModal(`<h2>Add a gig</h2><p class="lead">From a brand that contacted you, a job board or a brand using Post a gig.</p><div class="row"><div><label>Brand</label><input id="gaB"></div><div><label>Title</label><input id="gaT"></div></div><div class="row3"><div><label>Pay</label><input id="gaP" placeholder="$300 / video"></div><div><label>Type</label><select id="gaY">${TYPES.map(t => `<option>${t}</option>`).join("")}</select></div><div><label>Link</label><input id="gaU"></div></div><label>Description</label><textarea id="gaD"></textarea><label class="note" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="gaV"> I verified this brand is real</label><div class="btns"><button class="btn" id="gaS">Add</button><a class="btn ghost" href="mailto:hsw365media@gmail.com?subject=Post%20a%20gig%20for%20iRun%20creators&body=Brand%3A%0AWhat%20you%20need%3A%0ABudget%3A%0ADeadline%3A">Brands: post a gig</a><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+  $("gaS").onclick = () => { const b = $("gaB").value.trim(), t = $("gaT").value.trim(); if (!b || !t) return; D.gigs.unshift({id: uid(), brand: b, title: t, pay: $("gaP").value.trim(), type: $("gaY").value, url: $("gaU").value.trim(), desc: $("gaD").value.trim(), verified: $("gaV").checked, tags: []}); save(); closeModal(); rExplore(); toast("Gig added"); };
+};
+
+/* ---------- campaigns ---------- */
+const STAGES = ["applied", "contract", "active", "delivered", "paid"];
+function rCamps() {
+  document.querySelectorAll("#v-campaigns [data-f]").forEach(b => { b.classList.toggle("on", b.dataset.f === CF); b.onclick = () => { CF = b.dataset.f; rCamps(); }; });
+  const list = D.apps.filter(a => CF === "all" || a.status === CF || (CF === "active" && a.status === "contract")).sort((a, b) => b.appliedAt - a.appliedAt);
+  $("camps").innerHTML = list.length ? list.map(a => { const g = gigOf(a.gigId), si = STAGES.indexOf(a.status), dl = a.deliverables || [];
+    return `<div class="camp" data-id="${a.id}"><div class="hd"><h3>${esc(g.title || a.title)}</h3><span class="tag ${a.status === "paid" ? "v" : ""}">${esc(a.status)}</span><span class="note">${esc(g.brand || a.brand)} · ${esc(a.pay || g.pay || "")}</span></div>
+    <div class="stages">${STAGES.map((s, i) => `<i class="${i <= si ? "on" : ""}" title="${s}"></i>`).join("")}</div>
+    ${dl.length ? dl.map((d, i) => `<div class="dl ${d.done ? "done" : ""}"><input type="checkbox" data-k="${i}" ${d.done ? "checked" : ""}><span>${esc(d.t)}</span><small>${esc(d.due || "")}</small><button class="x" data-r="${i}">&times;</button></div>`).join("") : '<p class="note">No deliverables yet. Add them or let Brief extract them.</p>'}
+    <div class="btns"><button class="btn sm ghost" data-a="add">Add deliverable</button><button class="btn sm ghost" data-a="brief">Brief: decode brief</button><button class="btn sm ghost" data-a="script">Script</button><button class="btn sm ghost" data-a="deal">Deal: read contract</button><button class="btn sm ghost" data-a="msg">Message brand</button>${si < 4 ? `<button class="btn sm cy" data-a="next">Mark ${STAGES[si + 1]}</button>` : ""}${a.status === "delivered" ? '<button class="btn sm" data-a="pay">Log payout</button><button class="btn sm ghost" data-a="inv">Pay: invoice</button>' : ""}<button class="btn sm red" data-a="del">Remove</button></div>${a.pitch ? `<details style="margin-top:8px"><summary class="note">Your application</summary><div class="out">${esc(a.pitch)}</div></details>` : ""}</div>`; }).join("") : '<div class="card empty">No campaigns here. Find one in Explore and hit Apply now.</div>';
+  document.querySelectorAll("#camps .camp").forEach(el => { const a = D.apps.find(x => x.id === el.dataset.id), g = gigOf(a.gigId);
+    el.querySelectorAll("[data-k]").forEach(c => c.onchange = () => { a.deliverables[+c.dataset.k].done = c.checked; save(); rCamps(); });
+    el.querySelectorAll("[data-r]").forEach(c => c.onclick = () => { a.deliverables.splice(+c.dataset.r, 1); save(); rCamps(); });
+    el.querySelectorAll("[data-a]").forEach(b => b.onclick = () => {
+      const k = b.dataset.a, ctx = `Campaign: ${g.brand || a.brand} - ${g.title || a.title}. Pay: ${a.pay || g.pay}. Status: ${a.status}. Details: ${g.desc || ""}`;
+      if (k === "add") { const t = prompt("Deliverable (e.g. 1 vertical video, 20s)"); if (!t) return; const due = prompt("Due date YYYY-MM-DD (optional)") || ""; (a.deliverables = a.deliverables || []).push({t, due, done: false}); save(); rCamps(); }
+      if (k === "next") { a.status = STAGES[STAGES.indexOf(a.status) + 1]; save(); render(); }
+      if (k === "del") { if (confirm("Remove this campaign?")) { D.apps = D.apps.filter(x => x !== a); save(); render(); } }
+      if (k === "pay") payModal(g.brand || a.brand, a.id);
+      if (k === "brief") runAgent("brief", `${ctx}\nPaste of the brief or notes: ${a.contract || "(none, work from the listing)"}\nExtract deliverables, questions to ask and a day-by-day plan. End with a list titled DELIVERABLES, one per line.`, "Brief decoded", out => { const m = out.split(/DELIVERABLES/i).pop() || ""; const lines = m.split("\n").map(l => l.replace(/^[\s\-*\d.)]+/, "").trim()).filter(l => l.length > 3 && l.length < 140).slice(0, 8); lines.forEach(t => (a.deliverables = a.deliverables || []).push({t, due: "", done: false})); save(); rCamps(); });
+      if (k === "script") runAgent("script", `${ctx}\nWrite the UGC script package for this campaign.`, "Script package");
+      if (k === "deal") { openModal(`<h2>Paste the contract or terms</h2><textarea id="dlT" style="min-height:240px"></textarea><div class="btns"><button class="btn" id="dlG">Read it</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`); $("dlG").onclick = () => { const t = $("dlT").value.trim(); if (!t) return; a.contract = t.slice(0, 20000); save(); runAgent("deal", `${ctx}\nContract text:\n${a.contract}\nSummarise in plain English, list red flags and redlines.`, "Contract read"); }; }
+      if (k === "msg") { go("messages"); startThread(g.brand || a.brand); }
+      if (k === "inv") runAgent("pay", `${ctx}\nWrite the invoice text for this campaign. Use payment instructions from my Account: ${D.account.pay || "[add payment instructions]"}.`, "Invoice");
+    }); });
+}
+
+/* ---------- training ---------- */
+function rTrain() {
+  const all = [...COURSES, ...(D.training.custom || [])], done = all.filter(c => D.training[c.id]).length;
+  $("tProg").textContent = `${done} of ${all.length} lessons complete`;
+  $("mods").innerHTML = all.map((c, i) => `<div class="mod ${D.training[c.id] ? "done" : ""}" data-id="${c.id}"><span class="n">LESSON ${i + 1} · ${esc(c.m || "10 min")}</span> ${D.training[c.id] ? '<span class="done-tag">DONE</span>' : ""}<h3 style="margin-top:4px">${esc(c.t)}</h3></div>`).join("");
+  document.querySelectorAll("#mods .mod").forEach(el => el.onclick = () => { const c = all.find(x => x.id === el.dataset.id);
+    openModal(`<h2>${esc(c.t)}</h2><div class="lesson">${c.html || c.body}</div><div class="btns"><button class="btn cy" id="lD">${D.training[c.id] ? "Mark not done" : "Mark complete"}</button><button class="btn ghost" id="lQ">Learn: quiz me</button><button class="btn ghost" onclick="closeModal()">Close</button></div>`);
+    $("lD").onclick = () => { D.training[c.id] = !D.training[c.id]; save(); closeModal(); rTrain(); };
+    $("lQ").onclick = () => runAgent("learn", `Quiz me with 5 questions (answers at the end) on this lesson: ${c.t}. Lesson text: ${(c.body || "").replace(/<[^>]+>/g, " ").slice(0, 1800)}`, "Quiz"); });
+}
+$("tGen").onclick = async () => { const t = $("tCustom").value.trim(); if (!t) return; await runAgent("learn", `Build a short lesson on: ${t}. Include the idea, an example, a 15 minute drill, and a 3 question quiz with answers.`, "Custom lesson", out => { (D.training.custom = D.training.custom || []).push({id: "x" + uid(), t: t.slice(0, 70), m: "custom", html: `<div class="out" style="max-height:none">${esc(out)}</div>`}); save(); rTrain(); }); $("tCustom").value = ""; };
+
+/* ---------- messages ---------- */
+function startThread(brand) { let t = D.messages.find(m => m.brand === brand); if (!t) { t = {id: uid(), brand, unread: false, thread: []}; D.messages.unshift(t); save(); } MSGID = t.id; rMsgs(); }
+function rMsgs() {
+  if (!MSGID || !D.messages.some(m => m.id === MSGID)) MSGID = D.messages[0]?.id;
+  $("tl").innerHTML = `<button class="btn sm" id="nt" style="margin-bottom:4px">New conversation</button>` + D.messages.map(m => `<button data-id="${m.id}" class="${m.id === MSGID ? "on" : ""}">${m.unread ? '<span class="u"></span>' : ""}<b>${esc(m.brand)}</b><small>${esc(m.thread.at(-1)?.text || "No messages")}</small></button>`).join("");
+  $("nt").onclick = () => { const b = prompt("Brand or person"); if (b) startThread(b.trim()); };
+  document.querySelectorAll("#tl [data-id]").forEach(b => b.onclick = () => { MSGID = b.dataset.id; rMsgs(); });
+  const t = D.messages.find(m => m.id === MSGID);
+  if (!t) { $("chatBox").innerHTML = '<div class="empty">No conversations yet.</div>'; return; }
+  if (t.unread) { t.unread = false; save(); badges(); }
+  $("chatBox").innerHTML = `<div class="ms" id="ms">${t.thread.map(m => `<div class="bub ${m.from === "me" ? "me" : "br"}">${esc(m.text)}<small>${new Date(m.at).toLocaleString()}</small></div>`).join("") || '<div class="empty">Paste what the brand said, or write your first message.</div>'}</div>
+   <div class="comp"><textarea id="mIn" placeholder="Write a message, or paste what ${esc(t.brand)} sent"></textarea><div style="display:flex;flex-direction:column;gap:6px"><button class="btn sm" id="mSend">Send as me</button><button class="btn sm ghost" id="mRecv">Log as theirs</button><button class="btn sm cy" id="mAI">Msg: draft reply</button></div></div>`;
+  const ms = $("ms"); ms.scrollTop = ms.scrollHeight;
+  const add = from => { const v = $("mIn").value.trim(); if (!v) return; t.thread.push({from, text: v, at: Date.now()}); save(); rMsgs(); };
+  $("mSend").onclick = () => add("me"); $("mRecv").onclick = () => add("br");
+  $("mAI").onclick = () => runAgent("msg", `Conversation with ${t.brand}:\n${t.thread.slice(-10).map(m => (m.from === "me" ? "Me: " : "Them: ") + m.text).join("\n")}\n\nMy notes for the reply: ${$("mIn").value.trim() || "(none)"}\nDraft my reply.`, "Draft reply", out => { $("mIn").value = out; });
+}
+
+/* ---------- affiliates ---------- */
+function rAff() {
+  $("aCode").value = D.aff?.code || ""; $("aCode").onchange = () => { D.aff = D.aff || {}; D.aff.code = $("aCode").value.trim(); save(); };
+  $("progs").innerHTML = `<table><tr><th>Program</th><th>Terms (per listing)</th><th></th></tr>${PROGRAMS.map(p => `<tr><td>${esc(p[0])}</td><td>${esc(p[1])}</td><td>${p[2] ? `<a href="${esc(p[2])}" target="_blank" rel="noopener">Open</a>` : ""}</td></tr>`).join("")}</table>`;
+  $("refs").innerHTML = D.refs.length ? `<table><tr><th>Program</th><th>Referrals</th><th>Earned</th></tr>${D.refs.map(r => `<tr><td>${esc(r.prog)}</td><td>${r.n}</td><td>${money(r.amt)}</td></tr>`).join("")}</table>` : '<p class="note">Nothing tracked yet.</p>';
+}
+$("aPosts").onclick = () => runAgent("ref", `Write 5 affiliate promo posts for the HSW365 Affiliate Partner Program (20% per subscriber for the full duration of each eligible referred subscription, subject to program terms, free to join, https://hsw365.net/pages/affiliates). My code or handle: ${D.aff?.code || D.profile.handle}. Include disclosure.`, "Affiliate promo posts");
+$("aRecruit").onclick = () => runAgent("ref", "Write a short DM to recruit other creators into the HSW365 Affiliate Partner Program. 20% per subscriber for the duration of each eligible subscription, subject to program terms. Give 3 versions.", "Recruiting DMs");
+$("rAdd").onclick = () => { const p = $("rProg").value.trim(), n = +$("rN").value || 0, a = +$("rAmt").value || 0; if (!p) return; D.refs.push({id: uid(), prog: p, n, amt: a}); if (a > 0) D.earnings.push({id: uid(), amount: a, date: today(), brand: p, note: "Affiliate commission"}); save(); ["rProg", "rN", "rAmt"].forEach(i => $(i).value = ""); rAff(); toast("Tracked"); };
+
+/* ---------- portfolio ---------- */
+function rPort() {
+  $("port").innerHTML = D.portfolio.length ? D.portfolio.map(p => `<div class="pi"><span class="tag">${esc(p.kind)}</span><div class="t">${esc(p.title)}</div><div class="note">${esc(p.brand || "")}</div><div class="note">${esc(p.notes || "")}</div><div class="btns" style="margin-top:4px">${p.url ? `<a class="btn sm ghost" href="${esc(p.url)}" target="_blank" rel="noopener">Open</a>` : ""}<button class="btn sm red" data-r="${p.id}">Remove</button></div></div>`).join("") : '<div class="card empty" style="grid-column:1/-1">Add your first sample. Link to a post, reel or video.</div>';
+  document.querySelectorAll("#port [data-r]").forEach(b => b.onclick = () => { D.portfolio = D.portfolio.filter(x => x.id !== b.dataset.r); save(); rPort(); });
+}
+$("pAdd").onclick = () => { openModal(`<h2>Add sample</h2><div class="row"><div><label>Title</label><input id="ptT"></div><div><label>Type</label><select id="ptK"><option>UGC ad</option><option>Micro-drama</option><option>Demo</option><option>Testimonial</option><option>Music</option><option>Other</option></select></div></div><div class="row"><div><label>Brand or product</label><input id="ptB"></div><div><label>Link</label><input id="ptU" placeholder="https://"></div></div><label>Notes (result only if real)</label><textarea id="ptN" style="min-height:60px"></textarea><div class="btns"><button class="btn" id="ptS">Add</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+  $("ptS").onclick = () => { const t = $("ptT").value.trim(); if (!t) return; D.portfolio.push({id: uid(), title: t, kind: $("ptK").value, brand: $("ptB").value.trim(), url: $("ptU").value.trim(), notes: $("ptN").value.trim()}); save(); closeModal(); rPort(); }; };
+$("pIntro").onclick = () => runAgent("folio", "Write my portfolio intro (60-90 words) and suggest the order of my samples.", "Portfolio intro", out => { D.portfolio_intro = out; save(); toast("Saved as portfolio intro"); });
+$("pPage").onclick = () => {
+  const p = D.profile, items = D.portfolio.map(x => `<div class="i"><span>${esc(x.kind)}</span><h3>${esc(x.title)}</h3><p>${esc(x.brand || "")}</p><p>${esc(x.notes || "")}</p>${x.url ? `<a href="${esc(x.url)}">View</a>` : ""}</div>`).join("");
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(p.name)} | Creator Portfolio</title><style>body{margin:0;background:#0a0a0f;color:#f2f2f7;font:16px/1.6 system-ui,sans-serif}main{max-width:900px;margin:0 auto;padding:40px 18px}h1{font:800 56px/1 Impact,sans-serif;margin:0}p.b{color:#a9a9c0;max-width:640px}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:24px}.i{background:#16161f;border:1px solid #24243a;border-radius:14px;padding:16px}.i span{font:700 11px monospace;letter-spacing:2px;color:#22d3ee;text-transform:uppercase}.i h3{margin:6px 0}.i p{margin:2px 0;color:#a9a9c0;font-size:14px}a{color:#22d3ee}</style></head><body><main><h1>${esc(p.name)}</h1><p class="b">${esc(p.handle)} · ${esc(p.niches)} · ${esc(p.platforms)}</p><p class="b">${esc(D.portfolio_intro || p.bio)}</p><div class="g">${items || "<p>Samples coming soon.</p>"}</div><p class="b" style="margin-top:30px">Rates and availability: contact me directly.</p></main></body></html>`;
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([html], {type: "text/html"})); a.download = "portfolio.html"; a.click(); toast("Portfolio page downloaded");
+};
+
+/* ---------- profile / account ---------- */
+const PF = {pName: "name", pHandle: "handle", pNiches: "niches", pPlat: "platforms", pRate: "rate", pLoc: "location", pBio: "bio"};
+function rProf() { for (const [i, k] of Object.entries(PF)) $(i).value = D.profile[k] || ""; }
+$("pSave").onclick = () => { for (const [i, k] of Object.entries(PF)) D.profile[k] = $(i).value.trim(); save(); $("pStatus").textContent = "Saved. Every agent now reads this."; $("pStatus").className = "status ok"; };
+$("pBioAI").onclick = () => { $("pSave").click(); runAgent("bio", "Write my creator profile: headline, short bio (under 40 words), long bio, content pillars.", "Creator profile", out => { $("pBio").value = out.slice(0, 1200); $("pSave").click(); }); };
+$("pRate2").onclick = () => { $("pSave").click(); runAgent("rate", "Build my rate card: per video, retainer, usage rights, whitelisting, exclusivity, rush. Show the formula and give ranges I can adjust.", "Rate card"); };
+function rAcct() {
+  $("acPay").value = D.account.pay || ""; $("acPosts").value = D.goals.postsPerDay || 4; $("acGoal").value = D.goals.monthly || "";
+  $("keyNote").innerHTML = anthKey() ? "Claude key found. Agents run on Claude." : 'No Claude key saved, so agents use the free writer. Add your key in <a href="app.html">Studio &gt; Settings</a> for the best quality.';
+  $("ledger").innerHTML = D.earnings.length ? `<table><tr><th>Date</th><th>Source</th><th>Amount</th><th></th></tr>${D.earnings.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "")).map(e => `<tr><td>${esc(e.date)}</td><td>${esc(e.brand)}${e.note ? ` <span class="note">${esc(e.note)}</span>` : ""}</td><td>${money(e.amount)}</td><td><button class="x" data-e="${e.id}">&times;</button></td></tr>`).join("")}</table>` : '<p class="note">No payouts logged.</p>';
+  document.querySelectorAll("#ledger [data-e]").forEach(b => b.onclick = () => { D.earnings = D.earnings.filter(e => e.id !== b.dataset.e); save(); rAcct(); });
+}
+$("acSave").onclick = () => { D.account.pay = $("acPay").value.trim(); D.goals.postsPerDay = Math.max(1, +$("acPosts").value || 4); D.goals.monthly = Math.max(0, +$("acGoal").value || 0); save(); $("acStatus").textContent = "Saved."; $("acStatus").className = "status ok"; };
+$("exp").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(D, null, 1)], {type: "application/json"})); a.download = `irun-creator-backup-${today()}.json`; a.click(); };
+$("imp").onchange = async e => { const f = e.target.files[0]; e.target.value = ""; if (!f) return; try { const d = JSON.parse(await f.text()); if (!d.v) throw 0; if (!confirm("Replace Creator Hub data on this device?")) return; D = d; save(); render(); toast("Restored"); } catch { toast("Not a Creator Hub backup."); } };
+$("wipe").onclick = () => { if (confirm("Erase all Creator Hub data on this device?")) { D = blank(); D.saved = []; save(); render(); } };
+
+save(); render();
+</script>
+</body>
+</html>
