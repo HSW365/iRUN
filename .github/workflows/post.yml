@@ -43,7 +43,7 @@ jobs:
           ELEVENLABS_NARRATOR_VOICE_ID: ${{ secrets.ELEVENLABS_NARRATOR_VOICE_ID }}
           IRUN_NARRATOR: kokoro
           IRUN_SCORE: ${{ vars.IRUN_SCORE }}
-          IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
+          IRUN_MODE: ${{ vars.IRUN_MODE || 'draft' }}
         run: |
           # "spec" = build the ad with iRun's own engine first (images + free voice), then post it
           mkdir -p out
