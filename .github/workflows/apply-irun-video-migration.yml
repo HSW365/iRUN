@@ -1,0 +1,42 @@
+name: Apply iRun video database migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type APPLY to run the reviewed iRun video schema migration against production Supabase"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    if: ${{ github.event.inputs.confirm == 'APPLY' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate database connection secret
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::error::Add the Supabase PostgreSQL connection string as the repository Actions secret SUPABASE_DB_URL. Do not use the service-role API key here."
+            exit 1
+          fi
+          if ! command -v psql >/dev/null 2>&1; then
+            echo "::error::psql is unavailable on this runner; install the PostgreSQL client in a reviewed follow-up."
+            exit 1
+          fi
+      - name: Apply the existing reviewed migration
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f supabase/migrations/20261029_irun_video_jobs.sql
+      - name: Verify table exists
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -Atc "select to_regclass('public.irun_video_jobs');" | grep -qx 'irun_video_jobs'
