@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>iRun Fundraise | Your raise</title>
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3Ei%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>
+:root{--acc:#ef4444;--acc-ink:#0a0a0f;--hot:#ff8a5c}
+.top{border-bottom:1px solid var(--line);background:#050508}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;flex-wrap:wrap;padding-block:12px}
+.head{padding:clamp(34px,5vw,60px) 0 6px}
+.head h1{font-size:clamp(44px,6vw,84px)}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--card);border:1px solid var(--line2);border-radius:6px;margin-top:26px}
+.kpis>div{padding:18px 20px}.kpis>div+div{border-left:1px solid var(--line)}
+.kpis b{display:block;font-family:var(--disp);font-size:clamp(32px,3vw,44px);font-weight:900;line-height:.9;color:#fff}
+.kpis span{display:block;font-size:13px;color:var(--mut);margin-top:6px}
+.nav2{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 0;border-bottom:1px solid var(--line2);position:sticky;top:0;background:var(--bg);z-index:5;padding-top:8px}
+.nav2 button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);font:700 14px var(--body);padding:12px 16px;cursor:pointer;letter-spacing:.01em}
+.nav2 button:hover{color:#fff}
+.nav2 button.on{color:#fff;border-bottom-color:var(--acc)}
+.nav2 button i{font-style:normal;font-family:var(--mono);font-size:11px;background:var(--acc);color:var(--acc-ink);border-radius:9px;padding:1px 7px;margin-left:7px}
+.pane{display:none;padding:26px 0 80px}.pane.on{display:block}
+.card{background:var(--card);border:1px solid var(--line2);border-radius:6px;padding:22px}
+.card h2{font-family:var(--body);font-size:19px;font-weight:800;letter-spacing:-.01em;line-height:1.25;color:#fff}
+.card h2 small{font-family:var(--mono);font-size:11.5px;color:var(--mut);font-weight:400;margin-left:8px;letter-spacing:.06em}
+.card+.card{margin-top:20px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.field input,.field select,.field textarea{width:100%;height:48px;background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:0 12px;color:#fff}
+.field textarea{height:auto;min-height:130px;padding:10px 12px;font-family:var(--mono);font-size:13px;line-height:1.5}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.muted{color:var(--mut);font-size:14px;margin-top:8px;line-height:1.5}
+.msg{min-height:20px;font-size:14px;margin-top:10px;color:var(--text2)}.msg.err{color:#fca5a5}.msg.ok{color:#86efac}
+.toggle{display:flex;align-items:flex-start;gap:12px;font-weight:600;color:#fff;cursor:pointer;line-height:1.4}
+.toggle input{width:20px;height:20px;accent-color:var(--acc);flex:none;margin-top:2px}
+.toggle small{display:block;font-weight:400;color:var(--mut);font-size:13.5px;margin-top:2px}
+/* deck report */
+.score{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.ring{--p:0;width:112px;height:112px;border-radius:50%;background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line2) 0);display:grid;place-items:center;flex:none}
+.ring div{width:92px;height:92px;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center}
+.ring b{font-family:var(--disp);font-size:42px;font-weight:900;line-height:.9;color:#fff}.ring span{display:block;font:11px var(--mono);color:var(--mut);margin-top:-8px}
+.verdict{flex:1;min-width:220px;color:var(--text2);font-size:16px;line-height:1.5}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}
+.cols h3{font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.cols ul{list-style:none}.cols li{padding:9px 0 9px 20px;border-bottom:1px solid var(--line);position:relative;color:#fff;font-size:15px;line-height:1.45}
+.cols li::before{content:"";position:absolute;left:2px;top:16px;width:8px;height:8px;border-radius:50%}
+.cols .good li::before{background:#34d399}.cols .bad li::before{background:var(--acc)}
+.slide{border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin-top:10px;background:var(--bg)}
+.slide header{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.slide header b{color:#fff;font-size:15.5px}.slide header span{font:700 12px var(--mono);color:var(--acc)}
+.slide p{color:var(--text2);font-size:14.5px;margin-top:6px;line-height:1.5}
+.slide pre{white-space:pre-wrap;font:13px/1.55 var(--mono);color:#e5e5ea;margin-top:8px;padding:10px 12px;border-left:2px solid var(--acc);background:rgba(239,68,68,.05)}
+.copy{background:none;border:1px solid var(--line2);color:var(--text2);border-radius:3px;font-size:12px;padding:4px 9px;cursor:pointer}
+.copy:hover{color:#fff;border-color:var(--text2)}
+/* matches */
+.chips2{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.chips2 button{background:var(--bg);border:1px solid var(--line2);color:var(--text2);border-radius:20px;font:600 13px var(--body);padding:7px 14px;cursor:pointer}
+.chips2 button.on{border-color:var(--acc);color:#fff;box-shadow:0 0 0 1px var(--acc)}
+.chips2 button em{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--mut);margin-left:6px}
+.m{border:1px solid var(--line2);border-radius:5px;background:var(--card);margin-top:10px;overflow:hidden}
+.m summary{list-style:none;display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 16px;cursor:pointer}
+.m summary::-webkit-details-marker{display:none}
+.m[open] summary{border-bottom:1px solid var(--line)}
+.sc{font-family:var(--disp);font-weight:900;font-size:38px;line-height:1;text-align:center;color:#fff}
+.sc small{display:block;font:10px var(--mono);color:var(--mut);letter-spacing:.08em;margin-top:2px}
+.sc.hi{color:#34d399}.sc.mid{color:#fbbf24}.sc.lo{color:var(--mut)}
+.who b{display:block;color:#fff;font-size:16.5px}.who span{display:block;color:var(--mut);font-size:13.5px;margin-top:2px}
+.why{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.why i{font-style:normal;font-size:12px;border:1px solid var(--line2);border-radius:12px;padding:2px 9px;color:var(--text2)}
+.st{font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line2);border-radius:3px;padding:5px 9px;color:var(--text2);white-space:nowrap}
+.st.drafted{border-color:#fbbf24;color:#fbbf24}.st.approved{border-color:#34d399;color:#34d399}
+.st.sent,.st.followed_up{border-color:#60a5fa;color:#60a5fa}.st.replied,.st.meeting{border-color:var(--acc);color:#fff;background:var(--acc)}
+.m .body{padding:16px}
+.m .body .field input{height:44px}.m .body .field textarea{min-height:190px;font-family:var(--body);font-size:15px;line-height:1.55}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13.5px;margin-bottom:12px;color:var(--text2)}
+.facts dt{font:11.5px var(--mono);color:var(--mut);padding-top:2px}.facts dd{overflow-wrap:anywhere}
+.feed{margin-top:12px;max-height:560px;overflow:auto;font-size:14.5px}
+.feed div{display:grid;grid-template-columns:88px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.feed time{font:12px var(--mono);color:var(--mut);padding-top:2px}.feed span{color:#fff;line-height:1.45;overflow-wrap:anywhere}
+.empty{border:1px dashed var(--line2);border-radius:5px;padding:26px;color:var(--text2);text-align:center;font-size:15px}
+.gate{max-width:520px;margin:14vh auto;padding:0 16px}
+.banner{border:1px solid var(--acc);border-radius:5px;padding:14px 16px;color:#fff;margin-top:18px;font-size:15px}
+.banner a{color:#fff;text-decoration:underline}
+@media (max-width:980px){.grid2,.cols{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.kpis>div:nth-child(odd){border-left:0}.kpis>div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:640px){.nav2{position:static;overflow-x:auto;flex-wrap:nowrap}.nav2 button{white-space:nowrap}.btn{max-width:100%;white-space:normal}.row2{grid-template-columns:1fr}.m summary{grid-template-columns:52px minmax(0,1fr)}.m summary .st{grid-column:2;justify-self:start}.sc{font-size:32px}.feed div{grid-template-columns:62px minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><a class="logo" href="fundraise.html"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Fundraise</small></span></a><div class="row" style="margin:0"><span class="small" id="sync"></span><a class="btn btn-line btn-sm" id="to-co" href="#">Billing and credits</a></div></div></div>
+
+<div class="gate" id="gate" hidden><h2>Open your raise</h2><p class="lede" id="gate-msg" style="margin-top:14px">Use the link from your welcome page. New here? <a class="tlink" href="fundraise.html#start">Start your fundraise</a>.</p></div>
+
+<main class="wrap" id="app" hidden>
+  <section class="head">
+    <p class="status" id="state"><i></i><span></span></p>
+    <h1 id="name">Your raise</h1>
+    <div class="banner" id="pay-banner" hidden>Your plan is waiting on payment. <a id="pay-link" href="#">Finish payment</a> and your raise starts working within the hour.</div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <div class="nav2" role="tablist" id="tabs">
+    <button class="on" data-p="matches" role="tab">Investors<i id="n-appr" hidden></i></button>
+    <button data-p="deck" role="tab">Deck doctor</button>
+    <button data-p="raise" role="tab">Your raise</button>
+    <button data-p="list" role="tab">Investor list</button>
+    <button data-p="feed" role="tab">Live feed</button>
+  </div>
+
+  <!-- INVESTORS -->
+  <section class="pane on" id="p-matches">
+    <div class="card" id="send-card">
+      <label class="toggle"><input type="checkbox" id="send-on"><span>Send the emails I approve<small>Nothing leaves until you approve that investor. Each approved investor gets a first email and one follow-up after 4 days if they do not reply. Sent from your iRun sending address with an unsubscribe link. 10 emails = 1 credit, up to 15 a day.</small></span></label>
+      <div class="row"><button class="btn btn-acc btn-sm" id="appr-all" hidden>Approve every drafted email scoring 70+</button><span class="msg" id="appr-msg" style="margin:0"></span></div>
+    </div>
+    <div style="height:18px"></div>
+    <div class="chips2" id="chips"></div>
+    <div id="matches"></div>
+  </section>
+
+  <!-- DECK -->
+  <section class="pane" id="p-deck">
+    <div class="grid2">
+      <div class="card">
+        <h2>Your deck <small>PDF OR TEXT</small></h2>
+        <p class="muted" style="margin-top:6px">Upload the PDF or paste the text of every slide. It is read in your browser and only the text is saved.</p>
+        <div class="field"><label for="deck-file">Upload a PDF or text file</label><input id="deck-file" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" style="height:auto;padding:10px"></div>
+        <div class="field"><label for="deck-text">Or paste the slide text</label><textarea id="deck-text" placeholder="Slide 1: ...&#10;Slide 2: Problem ..." style="min-height:240px"></textarea></div>
+        <div class="row"><button class="btn btn-acc" id="deck-go">Review my deck (1 credit)</button><span class="small" id="deck-count"></span></div>
+        <p class="msg" id="deck-msg"></p>
+      </div>
+      <div class="card" id="deck-out"><div class="empty">Your readiness score, slide-by-slide fixes and a rewritten pitch show up here. Runs within the hour.</div></div>
+    </div>
+  </section>
+
+  <!-- RAISE -->
+  <section class="pane" id="p-raise">
+    <div class="card" style="max-width:820px">
+      <h2>Your raise <small>DRIVES THE MATCHING</small></h2>
+      <p class="muted" style="margin-top:6px">Stage, check size, sectors and region decide every investor's score. Change them and everything is re-scored.</p>
+      <div class="row2"><div class="field"><label for="r-startup">Startup name</label><input id="r-startup" maxlength="120"></div>
+        <div class="field"><label for="r-stage">Stage</label><select id="r-stage"><option value="">Choose</option><option value="pre-seed">Pre-seed</option><option value="seed">Seed</option><option value="series-a">Series A</option><option value="series-b">Series B</option><option value="growth">Growth</option></select></div></div>
+      <div class="field"><label for="r-one">One-liner <small>(what you do, for whom)</small></label><input id="r-one" maxlength="300" placeholder="Leave blank and the deck doctor writes one"></div>
+      <div class="row2"><div class="field"><label for="r-raise">Raising (USD)</label><input id="r-raise" inputmode="numeric" placeholder="1500000"></div>
+        <div class="field"><label for="r-check">Check size you want from each investor (USD)</label><input id="r-check" inputmode="numeric" placeholder="250000"></div></div>
+      <div class="row2"><div class="field"><label for="r-sectors">Sectors <small>(comma separated)</small></label><input id="r-sectors" placeholder="saas, ai, fintech"></div>
+        <div class="field"><label for="r-geo">Where you raise</label><input id="r-geo" placeholder="United States, New Jersey"></div></div>
+      <div class="field"><label for="r-trac">Traction and facts <small>(only what is true: emails use nothing else)</small></label><textarea id="r-trac" placeholder="Launched March 2026. 14 paying customers. $3.2K MRR."></textarea></div>
+      <div class="field"><label for="r-book">Booking link <small>(optional: Calendly, Cal.com, Google Calendar, must start with https://)</small></label><input id="r-book" inputmode="url" autocapitalize="none" placeholder="https://cal.com/you/15min"></div>
+      <div class="row"><button class="btn btn-acc" id="r-save">Save your raise</button></div><p class="msg" id="r-msg"></p>
+    </div>
+  </section>
+
+  <!-- LIST -->
+  <section class="pane" id="p-list">
+    <div class="grid2">
+      <div class="card">
+        <h2>Add investors <small id="inv-count"></small></h2>
+        <p class="muted" style="margin-top:6px">Bring the investors you want worked: from your own research, an accelerator list, a purchased list or an export. One per line, or upload a CSV. Only people you are allowed to contact. iRun scores them, drafts the emails and tracks the replies.</p>
+        <div class="field"><label for="i-file">Upload a CSV</label><input id="i-file" type="file" accept=".csv,text/csv,text/plain" style="height:auto;padding:10px"></div>
+        <div class="field"><label for="i-rows">Or paste lines</label><textarea id="i-rows" placeholder="name, firm, role, email, location, stages, sectors, check_min, check_max, note&#10;Jane Park, Northgate Ventures, Partner, jane@northgate.vc, New York, seed;pre-seed, saas;ai, 100000, 500000, met at demo day"></textarea></div>
+        <div class="row"><button class="btn btn-acc btn-sm" id="i-add">Add to my list</button></div><p class="msg" id="i-msg"></p>
+      </div>
+      <div class="card">
+        <h2>Column guide</h2>
+        <dl class="facts" style="margin-top:12px">
+          <dt>name</dt><dd>required</dd><dt>firm, role</dt><dd>used to personalize the email</dd><dt>email</dt><dd>needed to send; without it the investor is still matched so you can reach them another way</dd>
+          <dt>location</dt><dd>city or region, or Global</dd><dt>stages</dt><dd>pre-seed, seed, series-a, series-b, growth (separate several with ; )</dd>
+          <dt>sectors</dt><dd>separate with ; (blank or generalist counts as open)</dd><dt>check_min / max</dt><dd>their typical check in USD</dd><dt>note</dt><dd>anything true you know about them; the email may use it</dd>
+        </dl>
+        <p class="muted">A header row is optional. If you have none, columns are read in the order above.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEED -->
+  <section class="pane" id="p-feed"><div class="card"><h2>Live feed <small>FUNDRAISE</small></h2><div class="feed" id="feed"></div></div></section>
+</main>
+
+<script>
+(function () {
+  var API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-client";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+  var q = new URLSearchParams(location.search);
+  var C = q.get("c"), K = q.get("k"), S = q.get("s");
+  var store = { get: function () { try { return localStorage.getItem("irun_k_" + C); } catch (e) { return null; } },
+                set: function (v) { try { localStorage.setItem("irun_k_" + C, v); } catch (e) {} } };
+  if (!K && C) K = store.get();
+  var D = null, filter = "all", openIds = {}, deckHydrated = false, formHydrated = false, timer = null;
+
+  function call(body) {
+    body.c = C; body.k = K;
+    return fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || "Request failed"); return d; }); });
+  }
+  function msg(id, t, kind) { var m = $(id); m.className = "msg" + (kind ? " " + kind : ""); m.textContent = t || ""; }
+  function when(s) { if (!s) return ""; var d = new Date(s); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
+  function money(n) { n = Number(n); if (!n) return ""; return n >= 1e6 ? "$" + (n / 1e6).toFixed(n % 1e6 ? 1 : 0) + "M" : n >= 1e3 ? "$" + Math.round(n / 1e3) + "K" : "$" + n; }
+  function gate(m) { $("gate").hidden = false; $("app").hidden = true; if (m) $("gate-msg").textContent = m; }
+
+  // ---------- load ----------
+  function start() {
+    if (!C) return gate();
+    if (S && !K) {
+      $("gate").hidden = false; $("gate-msg").textContent = "Confirming your payment...";
+      fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ a: "claim", c: C, s: S }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (!d.k) throw new Error(d.error || "Payment not found yet."); K = d.k; store.set(K); history.replaceState(null, "", "raise.html?c=" + encodeURIComponent(C)); load(); })
+        .catch(function (e) { gate(e.message + " Refresh in a minute."); });
+      return;
+    }
+    if (!K) return gate("Use the link from your welcome page.");
+    store.set(K); load(); timer = setInterval(load, 30000);
+  }
+  function load() {
+    Promise.all([call({ a: "view" }), call({ a: "fund_view" })]).then(function (r) { render(r[0], r[1]); })
+      .catch(function (e) { if (!D) gate(/not part of this plan/.test(e.message) ? "Fundraise is not part of this plan. See plans at fundraise.html." : /valid/.test(e.message) ? "This link is not valid." : e.message); else $("sync").textContent = "offline"; });
+  }
+
+  var LABEL = { matched: "Matched", drafted: "Needs your OK", approved: "Approved", sent: "Sent", followed_up: "Follow-up sent", replied: "Replied", meeting: "Meeting", passed: "Passed", bounced: "Bounced", unsubscribed: "Unsubscribed" };
+  var FILTERS = [["all", "All"], ["drafted", "Needs your OK"], ["approved", "Approved"], ["sent", "Sent"], ["replied", "Replied"], ["meeting", "Meetings"], ["passed", "Passed"]];
+
+  function render(v, f) {
+    D = { v: v, f: f };
+    $("gate").hidden = true; $("app").hidden = false;
+    $("sync").textContent = "synced " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    var c = v.company, camp = f.campaign || {};
+    document.title = (camp.startup || c.name) + " | iRun Fundraise";
+    $("name").textContent = camp.startup || c.name;
+    $("to-co").href = "client.html?c=" + encodeURIComponent(C) + "&k=" + encodeURIComponent(K);
+    $("state").className = "status";
+    $("state").querySelector("span").textContent = c.status === "active" ? "Working every hour." : c.status === "awaiting_payment" ? "Waiting on payment." : c.status === "pending" ? "Getting set up: starts within the hour." : "Status: " + c.status;
+    $("pay-banner").hidden = c.status !== "awaiting_payment"; $("pay-link").href = $("to-co").href;
+    var n = f.counts || {}, sent = (n.sent || 0) + (n.followed_up || 0) + (n.replied || 0) + (n.meeting || 0);
+    var hot = (f.matches || []).filter(function (m) { return m.score >= 70; }).length;
+    $("kpis").innerHTML = [[f.investors, "investors on your list"], [hot, "strong matches (70+)"], [sent, "emailed"], [(n.replied || 0) + (n.meeting || 0), "replies"], [n.meeting || 0, "meetings"]]
+      .map(function (k) { return "<div><b>" + k[0] + "</b><span>" + k[1] + "</span></div>"; }).join("");
+    var need = n.drafted || 0;
+    $("n-appr").hidden = !need; $("n-appr").textContent = need;
+    var cr = (c.credits || 0) + (c.bonus_credits || 0);
+    $("sync").textContent += " · " + cr + " credits";
+
+    $("send-on").checked = !!camp.send_enabled;
+    $("appr-all").hidden = !need;
+    $("appr-all").textContent = "Approve every drafted email scoring 70+";
+    hydrate(camp); renderDeck(camp); renderMatches(f.matches || [], n); renderFeed(v.activity || []);
+    $("inv-count").textContent = f.investors ? f.investors + " ON FILE" : "";
+  }
+
+  function hydrate(camp) {
+    if (formHydrated || document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+    formHydrated = true;
+    $("r-startup").value = camp.startup || ""; $("r-stage").value = camp.stage || ""; $("r-one").value = camp.one_liner || "";
+    $("r-raise").value = camp.raise_usd || ""; $("r-check").value = camp.check_usd || ""; $("r-sectors").value = (camp.sectors || []).join(", ");
+    $("r-geo").value = camp.geo || ""; $("r-trac").value = camp.traction || ""; $("r-book").value = camp.booking_url || "";
+  }
+
+  // ---------- deck ----------
+  function copyBtn(t) { return '<button class="copy" data-copy="' + esc(t) + '">Copy</button>'; }
+  function renderDeck(camp) {
+    var st = camp.review_status, rv = camp.review;
+    $("deck-count").textContent = camp.deck_chars ? camp.deck_chars.toLocaleString() + " characters saved" : "";
+    var b = $("deck-go"); b.disabled = st === "requested"; b.textContent = st === "requested" ? "Review queued: runs within the hour" : (rv ? "Review again (1 credit)" : "Review my deck (1 credit)");
+    if (st === "failed" && camp.review_error) msg("deck-msg", camp.review_error, "err");
+    if (!rv) { return; }
+    var h = '<h2>Readiness <small>' + esc(when(camp.review_at)) + '</small></h2><div class="score" style="margin-top:14px"><div class="ring" style="--p:' + rv.readiness_score + '"><div><div><b>' + rv.readiness_score + '</b><span>OF 100</span></div></div></div><p class="verdict">' + esc(rv.verdict) + '</p></div>';
+    h += '<div class="cols"><div class="good"><h3>Strengths</h3><ul>' + (rv.strengths || []).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul></div><div class="bad"><h3>Fix first</h3><ul>' + (rv.gaps || []).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul></div></div>';
+    if (rv.one_liner) h += '<div class="slide"><header><b>Rewritten one-liner</b>' + copyBtn(rv.one_liner) + '</header><pre>' + esc(rv.one_liner) + '</pre><div class="row" style="margin-top:8px"><button class="btn btn-line btn-sm" id="use-one">Use it as my one-liner</button></div></div>';
+    if (rv.narrative) h += '<div class="slide"><header><b>Rewritten pitch</b>' + copyBtn(rv.narrative) + '</header><pre>' + esc(rv.narrative) + '</pre></div>';
+    if ((rv.missing || []).length) h += '<div class="slide"><header><b>Add before you send</b></header><p>' + (rv.missing || []).map(esc).join("<br>") + '</p></div>';
+    h += '<h3 style="margin:22px 0 4px;font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Slide by slide</h3>';
+    h += (rv.slides || []).map(function (s) { return '<div class="slide"><header><b>' + esc(s.slide) + '</b><span>' + esc(s.score) + '/10</span></header><p>' + esc(s.feedback) + '</p>' + (s.rewrite ? '<pre>' + esc(s.rewrite) + '</pre>' : "") + '</div>'; }).join("");
+    if ((rv.investor_questions || []).length) h += '<div class="slide"><header><b>Questions investors will ask</b></header><p>' + (rv.investor_questions || []).map(function (x) { return "&bull; " + esc(x); }).join("<br>") + '</p></div>';
+    $("deck-out").innerHTML = h;
+  }
+
+  // ---------- matches ----------
+  function renderMatches(ms, n) {
+    $("chips").innerHTML = FILTERS.map(function (f) {
+      var cnt = f[0] === "all" ? ms.length : (n[f[0]] || 0) + (f[0] === "sent" ? (n.followed_up || 0) : 0);
+      return '<button data-f="' + f[0] + '" class="' + (filter === f[0] ? "on" : "") + '">' + f[1] + "<em>" + cnt + "</em></button>";
+    }).join("");
+    var rows = ms.filter(function (m) { return filter === "all" ? m.status !== "passed" : filter === "sent" ? (m.status === "sent" || m.status === "followed_up") : m.status === filter; });
+    if (!ms.length) { $("matches").innerHTML = '<div class="empty">No investors yet. Add your list on the <b>Investor list</b> tab, set your raise, and iRun scores and drafts within the hour.</div>'; return; }
+    if (!rows.length) { $("matches").innerHTML = '<div class="empty">Nothing here yet.</div>'; return; }
+    $("matches").innerHTML = rows.map(function (m) {
+      var i = m.irun_investors || {}, cls = m.score >= 70 ? "hi" : m.score >= 50 ? "mid" : "lo";
+      var sub = [i.role, i.firm].filter(Boolean).join(", ") || i.type;
+      var h = '<details class="m" data-id="' + m.id + '"' + (openIds[m.id] ? " open" : "") + '><summary><div class="sc ' + cls + '">' + m.score + '<small>MATCH</small></div><div class="who"><b>' + esc(i.name) + '</b><span>' + esc(sub) + (i.location ? " · " + esc(i.location) : "") + '</span><div class="why">' + (m.reasons || []).map(function (r) { return "<i>" + esc(r) + "</i>"; }).join("") + '</div></div><span class="st ' + m.status + '">' + LABEL[m.status] + '</span></summary><div class="body">';
+      h += '<dl class="facts">' + (i.email ? "<dt>email</dt><dd>" + esc(i.email) + "</dd>" : "<dt>email</dt><dd>none on file: reach them another way or add it on the list</dd>") +
+        ((i.stages || []).length ? "<dt>stages</dt><dd>" + esc(i.stages.join(", ")) + "</dd>" : "") + ((i.sectors || []).length ? "<dt>sectors</dt><dd>" + esc(i.sectors.join(", ")) + "</dd>" : "") +
+        ((i.check_min || i.check_max) ? "<dt>checks</dt><dd>" + money(i.check_min) + (i.check_max ? " to " + money(i.check_max) : "+") + "</dd>" : "") + (i.note ? "<dt>note</dt><dd>" + esc(i.note) + "</dd>" : "") +
+        (m.last_sent_at ? "<dt>last email</dt><dd>" + esc(when(m.last_sent_at)) + (m.sends > 1 ? " (follow-up)" : "") + "</dd>" : "") + (m.replied_at ? "<dt>replied</dt><dd>" + esc(when(m.replied_at)) + "</dd>" : "") +
+        (m.meeting_at ? "<dt>meeting</dt><dd>" + esc(when(m.meeting_at)) + (m.meeting_note ? " · " + esc(m.meeting_note) : "") + "</dd>" : "") + (m.error ? "<dt>error</dt><dd>" + esc(m.error) + "</dd>" : "") + "</dl>";
+      var editable = m.status === "drafted" || m.status === "approved";
+      if (m.subject) {
+        h += editable ? '<div class="field"><label>Subject</label><input data-s value="' + esc(m.subject) + '" maxlength="120"></div><div class="field"><label>Email</label><textarea data-b>' + esc(m.body) + '</textarea></div>'
+          : '<div class="slide" style="margin-top:0"><header><b>' + esc(m.subject) + '</b></header><pre style="font-family:var(--body);font-size:14.5px">' + esc(m.body) + '</pre></div>';
+      } else if (m.status === "matched") h += '<p class="muted" style="margin:0 0 10px">' + (m.score < 60 ? "Scores under 60 are not drafted automatically." : i.email ? "Draft is coming in the next run." : "No email on file, so no draft.") + '</p>';
+      h += '<div class="row" style="margin-top:6px">';
+      if (m.status === "drafted") h += '<button class="btn btn-acc btn-sm" data-op="approve">Approve</button><button class="btn btn-line btn-sm" data-op="edit">Save edits</button>';
+      if (m.status === "approved") h += '<button class="btn btn-line btn-sm" data-op="unapprove">Take back approval</button><button class="btn btn-line btn-sm" data-op="edit">Save edits</button>';
+      if (["sent", "followed_up", "replied"].indexOf(m.status) >= 0) h += '<input type="datetime-local" data-when style="height:40px;background:var(--bg);border:1px solid var(--line2);color:#fff;border-radius:3px;padding:0 10px"><button class="btn btn-acc btn-sm" data-op="meeting">Meeting booked</button>';
+      if (m.status === "meeting") h += '<button class="btn btn-line btn-sm" data-op="meeting">Update meeting</button><input type="datetime-local" data-when style="height:40px;background:var(--bg);border:1px solid var(--line2);color:#fff;border-radius:3px;padding:0 10px">';
+      if (["sent", "followed_up", "bounced", "unsubscribed"].indexOf(m.status) < 0 && m.status !== "passed") h += '<button class="btn btn-line btn-sm" data-op="pass">Pass</button>';
+      if (m.status === "passed") h += '<button class="btn btn-line btn-sm" data-op="restore">Put back</button>';
+      h += '<span class="msg" style="margin:0"></span></div></div></details>';
+      return h;
+    }).join("");
+  }
+
+  function renderFeed(acts) {
+    var a = acts.filter(function (x) { return x.agent === "fundraise"; });
+    $("feed").innerHTML = a.length ? a.map(function (x) { return "<div><time>" + esc(when(x.created_at)) + "</time><span>" + esc(x.action) + "</span></div>"; }).join("") : '<div><time></time><span>Nothing yet. Save your raise and add investors to start.</span></div>';
+  }
+
+  // ---------- CSV ----------
+  function parseCSV(t) {
+    var rows = [], row = [], cur = "", q = false, i, ch;
+    t = String(t).replace(/^﻿/, "");
+    for (i = 0; i < t.length; i++) {
+      ch = t[i];
+      if (q) { if (ch === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cur); cur = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && t[i + 1] === "\n") i++; row.push(cur); if (row.some(function (c) { return c.trim(); })) rows.push(row); row = []; cur = ""; }
+      else cur += ch;
+    }
+    row.push(cur); if (row.some(function (c) { return c.trim(); })) rows.push(row);
+    return rows;
+  }
+  var COLS = ["name", "firm", "role", "email", "location", "stages", "sectors", "check_min", "check_max", "note"];
+  var ALIAS = { investor: "name", "full name": "name", fund: "firm", company: "firm", organization: "firm", title: "role", position: "role", "e-mail": "email", mail: "email", city: "location", region: "location", geography: "location", stage: "stages", "investment stage": "stages", sector: "sectors", industry: "sectors", industries: "sectors", focus: "sectors", "check size min": "check_min", "min check": "check_min", "check size max": "check_max", "max check": "check_max", notes: "note", website: "website", url: "website", type: "type" };
+  function toInvestors(text) {
+    var rows = parseCSV(text); if (!rows.length) return [];
+    var head = rows[0].map(function (h) { h = h.trim().toLowerCase(); return ALIAS[h] || h; });
+    var hasHead = head.indexOf("name") >= 0 || head.indexOf("email") >= 0;
+    var keys = hasHead ? head : COLS; if (hasHead) rows = rows.slice(1);
+    return rows.map(function (r) { var o = {}; keys.forEach(function (k, i) { if (r[i] != null && r[i].trim()) o[k] = r[i].trim(); }); return o; })
+      .map(function (o) { ["stages", "sectors"].forEach(function (k) { if (o[k]) o[k] = o[k].split(/[;|\/]/); }); return o; })
+      .filter(function (o) { return o.name || o.email; }).map(function (o) { if (!o.name) o.name = o.email.split("@")[0]; return o; });
+  }
+
+  // ---------- PDF ----------
+  function loadPdfJs() {
+    return new Promise(function (ok, no) {
+      if (window.pdfjsLib) return ok(window.pdfjsLib);
+      var s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+      s.onload = function () { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; ok(window.pdfjsLib); };
+      s.onerror = function () { no(new Error("Could not load the PDF reader. Paste the slide text instead.")); }; document.head.appendChild(s);
+    });
+  }
+  function readPdf(file) {
+    return Promise.all([loadPdfJs(), file.arrayBuffer()]).then(function (r) {
+      return r[0].getDocument({ data: r[1] }).promise.then(function (pdf) {
+        var jobs = []; for (var p = 1; p <= Math.min(pdf.numPages, 60); p++) jobs.push(pdf.getPage(p).then(function (pg) { return pg.getTextContent().then(function (tc) { return tc.items.map(function (i) { return i.str; }).join(" ").replace(/\s+/g, " ").trim(); }); }));
+        return Promise.all(jobs).then(function (pages) { return pages.map(function (t, i) { return "Slide " + (i + 1) + ": " + t; }).join("\n\n"); });
+      });
+    });
+  }
+
+  // ---------- events ----------
+  $("tabs").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-p]"); if (!b) return;
+    [].forEach.call(document.querySelectorAll("#tabs button"), function (x) { x.classList.toggle("on", x === b); });
+    [].forEach.call(document.querySelectorAll(".pane"), function (p) { p.classList.toggle("on", p.id === "p-" + b.dataset.p); });
+  });
+  $("chips").addEventListener("click", function (e) { var b = e.target.closest("button[data-f]"); if (!b) return; filter = b.dataset.f; renderMatches(D.f.matches || [], D.f.counts || {}); });
+  $("matches").addEventListener("toggle", function (e) { var d = e.target; if (d.dataset && d.dataset.id) openIds[d.dataset.id] = d.open; }, true);
+  $("matches").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-op]"); if (!b) return;
+    var box = b.closest(".m"), id = Number(box.dataset.id), out = box.querySelector(".msg"), op = b.dataset.op;
+    var cur = (D.f.matches.filter(function (m) { return m.id === id; })[0]) || {};
+    var si = box.querySelector("[data-s]"), bi = box.querySelector("[data-b]");
+    var changed = si && bi && (si.value !== cur.subject || bi.value !== cur.body);
+    var steps = [];
+    if ((op === "edit" || (op === "approve" && changed)) && si && bi) steps.push({ a: "fund_match", id: id, op: "edit", subject: si.value, body: bi.value });
+    if (op !== "edit") { var st = { a: "fund_match", id: id, op: op }; if (op === "meeting") { var w = box.querySelector("[data-when]"); st.meeting_at = w && w.value || null; } steps.push(st); }
+    b.disabled = true; out.className = "msg"; out.textContent = "";
+    steps.reduce(function (p, st) { return p.then(function () { return call(st); }); }, Promise.resolve())
+      .then(function () { if (op === "edit") { out.className = "msg ok"; out.textContent = "Saved."; b.disabled = false; } else openIds[id] = false; return load(); })
+      .catch(function (x) { out.className = "msg err"; out.textContent = x.message; b.disabled = false; });
+  });
+  $("appr-all").addEventListener("click", function () {
+    var b = this; b.disabled = true;
+    call({ a: "fund_match", op: "approve_all", min: 70, id: 0 }).then(function (d) { msg("appr-msg", d.approved + " approved.", "ok"); b.disabled = false; load(); }).catch(function (x) { msg("appr-msg", x.message, "err"); b.disabled = false; });
+  });
+  $("send-on").addEventListener("change", function () {
+    var on = this.checked, el = this;
+    call({ a: "fund_save", send_enabled: on }).then(function () { msg("appr-msg", on ? "Sending is on for approved investors." : "Sending is off.", "ok"); }).catch(function (x) { el.checked = !on; msg("appr-msg", x.message, "err"); });
+  });
+  $("r-save").addEventListener("click", function () {
+    var b = this; b.disabled = true; msg("r-msg", "Saving...");
+    call({ a: "fund_save", startup: $("r-startup").value, stage: $("r-stage").value, one_liner: $("r-one").value, raise_usd: $("r-raise").value, check_usd: $("r-check").value,
+      sectors: $("r-sectors").value, geo: $("r-geo").value, traction: $("r-trac").value, booking_url: $("r-book").value })
+      .then(function () { msg("r-msg", "Saved. Every investor is re-scored within the hour.", "ok"); b.disabled = false; load(); }).catch(function (x) { msg("r-msg", x.message, "err"); b.disabled = false; });
+  });
+  $("deck-file").addEventListener("change", function () {
+    var f = this.files[0]; if (!f) return; msg("deck-msg", "Reading " + f.name + "...");
+    (/pdf$/i.test(f.name) || f.type === "application/pdf" ? readPdf(f) : f.text()).then(function (t) { $("deck-text").value = t; msg("deck-msg", t.length.toLocaleString() + " characters read. Check them, then review.", "ok"); })
+      .catch(function (x) { msg("deck-msg", x.message, "err"); });
+  });
+  $("deck-go").addEventListener("click", function () {
+    var t = $("deck-text").value.trim(), b = this;
+    if (t.length < 200 && !(D && D.f.campaign && D.f.campaign.deck_chars >= 200)) return msg("deck-msg", "Upload your deck or paste at least a few slides of text first.", "err");
+    b.disabled = true; msg("deck-msg", "Queuing...");
+    var body = { a: "fund_save", review: true }; if (t.length >= 200) body.deck_text = t;
+    call(body).then(function () { msg("deck-msg", "Queued. The review appears here within the hour.", "ok"); $("deck-text").value = ""; load(); })
+      .catch(function (x) { msg("deck-msg", x.message, "err"); b.disabled = false; });
+  });
+  $("deck-out").addEventListener("click", function (e) {
+    var c = e.target.closest("[data-copy]"); if (c) { navigator.clipboard && navigator.clipboard.writeText(c.dataset.copy); c.textContent = "Copied"; return; }
+    if (e.target.id === "use-one") { var t = (D.f.campaign.review || {}).one_liner; $("r-one").value = t; call({ a: "fund_save", one_liner: t }).then(function () { e.target.textContent = "Saved as your one-liner"; }); }
+  });
+  function addInvestors(text) {
+    var rows = toInvestors(text); if (!rows.length) return msg("i-msg", "No investors found. Each line needs a name or an email.", "err");
+    msg("i-msg", "Adding " + rows.length + "...");
+    call({ a: "fund_import", rows: rows }).then(function (d) { msg("i-msg", d.added + " investors added. Scoring runs within the hour.", "ok"); $("i-rows").value = ""; load(); }).catch(function (x) { msg("i-msg", x.message, "err"); });
+  }
+  $("i-add").addEventListener("click", function () { addInvestors($("i-rows").value); });
+  $("i-file").addEventListener("change", function () { var f = this.files[0]; if (f) f.text().then(addInvestors); this.value = ""; });
+  start();
+})();
+</script>
+<script src="assets/hsw/hsw.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "_note": "iRun Operator plans. One subscription = one company run on autopilot. Credits pay for the work: 1 credit = 1 video, or 10 outreach emails, or 1 website build. Plan credits refill every billing month; purchased credits never expire. Extra credits cost credit_price_cents each. No revenue share, ever. Synced to irun_settings.plans on every Operator run; the irun-client function reads it from there.",
+  "_note": "iRun Operator plans. One subscription = one company run on autopilot. Credits pay for the work: 1 credit = 1 video, or 1 deck review, or 10 outreach emails, or 1 website build. Plan credits refill every billing month; purchased credits never expire. Extra credits cost credit_price_cents each. No revenue share, ever. Synced to irun_settings.plans on every Operator run; the irun-client function reads it from there.",
   "credit_price_cents": 50,
   "credit_pack_min": 5,
   "credit_pack_max": 1000,
@@ -87,6 +87,27 @@
         "New products jump the line, sold-out ones are skipped",
         "Nightly AI review of what posted",
         "30 credits a month, no cut of your sales"
+      ]
+    },
+    "fundraise": {
+      "name": "Fundraise",
+      "cents": 1700,
+      "credits": 30,
+      "hours": [],
+      "site": false,
+      "faceless": false,
+      "outreach": false,
+      "outreach_daily_cap": 0,
+      "fundraise": true,
+      "fundraise_daily_cap": 15,
+      "features": [
+        "AI deck review: readiness score, slide-by-slide fixes, rewritten pitch",
+        "Investor matching with a score and the reasons for every match",
+        "Personal first email for each strong match, approved by you",
+        "Sent from your own address with an automatic follow-up",
+        "Replies tracked, meetings booked in one pipeline",
+        "Up to 15 investor emails a day",
+        "30 credits a month, no cut of your raise"
       ]
     }
   }

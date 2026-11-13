@@ -121,7 +121,7 @@
 </main>
 <footer><div class="wrap"><div class="foot">
   <div><a class="logo" href="#top"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Operator</small></span></a><p>An AI operator for small businesses: website, daily video, outreach and a nightly review.</p></div>
-  <div><h4>iRun</h4><ul><li><a href="#plans">Plans</a></li><li><a href="#credits">Credits</a></li><li><a href="index.html">iRun video</a></li><li><a href="shopteam.html">Shop Team for Shopify</a></li></ul></div>
+  <div><h4>iRun</h4><ul><li><a href="#plans">Plans</a></li><li><a href="#credits">Credits</a></li><li><a href="index.html">iRun video</a></li><li><a href="shopteam.html">Shop Team for Shopify</a></li><li><a href="fundraise.html">Fundraise for founders</a></li></ul></div>
   <div><h4>More from HSW365</h4><ul><li><a href="https://hsw365.github.io/calltwin/">CallTwin</a></li><li><a href="https://hsw365.github.io/queenee/">QUEENEE</a></li><li><a href="https://klipit.onrender.com/">Klipit</a></li></ul></div>
   <div><h4>Contact</h4><ul><li><a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a></li><li><a href="https://hsw365.net">hsw365.net</a></li></ul></div>
 </div><div class="legal"><p>Outreach goes only to contacts you upload, with an unsubscribe link in every email.</p><p>&copy; 2026 HSW365 Media LLC. Turn negative into positive.</p></div></div></footer>
@@ -140,7 +140,7 @@
   var open = false, picked = new URLSearchParams(location.search).get("plan") || "pro";
 
   function draw() {
-    var ids = Object.keys(PLANS).filter(function (id) { return id !== "shopify"; });
+    var ids = Object.keys(PLANS).filter(function (id) { return id !== "shopify" && id !== "fundraise"; });
     $("plan-grid").innerHTML = ids.map(function (id) {
       var p = PLANS[id];
       return '<div class="plan' + (id === "pro" ? " main" : "") + (id === picked ? " picked" : "") + '"><h3>' + esc(p.name) +
