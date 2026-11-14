@@ -86,7 +86,16 @@ details.card summary::after{content:"+";float:right;color:var(--muted)}details[o
   .tr .em,.tr .dim,.tr .appc{display:none}
   .tr.h .c3,.tr.h .c4,.tr.h .c5{display:none}
 }
+.mapcard h1{margin-bottom:4px}
+#map{height:340px;border-radius:14px;border:1px solid var(--line);margin-top:14px;background:#0c0c14}
+.found{display:flex;align-items:baseline;gap:12px;margin-top:14px}.found b{font:800 54px/1 'Barlow Condensed',sans-serif;background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.found span{font:600 16px Inter,sans-serif}.found small{display:block;color:var(--muted);font:500 13px Inter,sans-serif}
+.why{display:inline-block;margin:3px 0 0;font:700 10px 'Space Mono',monospace;letter-spacing:1.2px;text-transform:uppercase;color:var(--cyan)}
+.whyline{display:block;color:var(--muted);font:500 12px Inter,sans-serif;white-space:normal}
+.leaflet-container{font-family:Inter,sans-serif}
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -106,7 +115,25 @@ details.card summary::after{content:"+";float:right;color:var(--muted)}details[o
   </div>
 
   <main id="main" hidden>
-    <section class="card">
+    <section class="card mapcard">
+      <h1>Paste your site. <span>Map your buyers.</span></h1>
+      <p class="sub">Drop in a website. iRun reads it, works out who would buy, finds them on the map around you, gives every one a reason to write now, and drafts a personal email. Nothing is sent until you approve it.</p>
+      <div class="prompt">
+        <span style="font-size:18px">⌖</span>
+        <input id="siteUrl" placeholder="yourbusiness.com" autocomplete="off" inputmode="url">
+        <button class="btn" id="mapGo">Map my buyers →</button>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="field"><label>Around</label><input id="mapWhere" value="Vineland, NJ"></div>
+        <div class="field" style="flex:0 1 140px"><label>Radius</label><select id="radius"><option value="10">10 miles</option><option value="25" selected>25 miles</option><option value="50">50 miles</option></select></div>
+        <div class="field" style="flex:0 1 140px"><label>Drafts</label><select id="mapLimit"><option>10</option><option selected>25</option><option>40</option></select></div>
+      </div>
+      <div class="chips" id="buyers" style="margin-top:12px"></div>
+      <div class="found" id="found" hidden></div>
+      <div id="map" hidden></div>
+      <div class="log" id="mapLog"></div>
+    </section>
+    <section class="card" style="margin-top:16px">
       <h1>Get me <span>customers.</span></h1>
       <p class="sub">Pick the app, say who to target and where. iRun finds the businesses, pulls their emails, writes a personal message to every one of them and waits for your approval. Follow-ups go out automatically.</p>
       <div class="ask">
@@ -223,7 +250,7 @@ async function geocode(where) {
   const [lon, lat] = f.geometry.coordinates;
   let [w, n, e, s] = (f.properties.extent ?? [lon - .05, lat + .05, lon + .05, lat - .05]).map(Number);
   if (n - s < 0.3) { s -= .3; n += .3; w -= .3; e += .3; } // a town: widen to about 25 miles around
-  return { bbox: [s, w, n, e].map((x) => x.toFixed(4)).join(","), label: [f.properties.name, f.properties.state].filter(Boolean).join(", ") };
+  return { lat, lon, bbox: [s, w, n, e].map((x) => x.toFixed(4)).join(","), label: [f.properties.name, f.properties.state].filter(Boolean).join(", ") };
 }
 async function overpass(q) {
   for (const url of ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]) {
@@ -326,9 +353,9 @@ function render() {
   $("tbl").innerHTML = `<div class="tr h"><span></span><span>Business</span><span class="c3">Email</span><span class="c4">Type · City</span><span class="c5">App</span><span>Status</span></div>` +
     ROWS.map((r) => `<div class="tr" data-e="${esc(r.email)}">
       <span>${can ? `<input type="checkbox" ${SEL.has(r.email) ? "checked" : ""}>` : ""}</span>
-      <span class="biz">${esc(r.business)}<small>${esc(r.subject || r.last_subject || "")}</small></span>
+      <span class="biz">${esc(r.business)}${r.why_now ? `<span class="why">why now</span><span class="whyline">${esc(r.why_now)}</span>` : `<small>${esc(r.subject || r.last_subject || "")}</small>`}</span>
       <span class="em">${esc(r.email)}</span>
-      <span class="dim">${esc([r.trade, r.city].filter(Boolean).join(" · "))}</span>
+      <span class="dim">${esc([r.trade, r.city, r.distance_mi != null ? r.distance_mi + " mi" : ""].filter(Boolean).join(" · "))}</span>
       <span class="dim appc">${esc(appName(r.product))}</span>
       <span><span class="tag st-${r.status}">${label(r.status)}</span></span>
     </div>${OPEN === r.email ? drawer(r) : ""}`).join("");
@@ -351,6 +378,7 @@ function drawer(r) {
   return `<div class="drawer">
     <div class="row" style="margin-bottom:10px"><div class="field"><label>To</label><input value="${esc(r.email)}" disabled></div>
       <div class="field" style="flex:2 1 300px"><label>Subject</label><input data-f="subject" value="${esc(r.subject || r.last_subject || "")}" ${edit ? "" : "disabled"}></div></div>
+    ${r.why_now ? `<p class="dim" style="margin:0 0 10px"><span class="why">why now</span> ${esc(r.why_now)}</p>` : ""}
     <label>Message</label>
     <div class="mail" data-f="body" ${edit ? 'contenteditable="true"' : ""}>${r.body || "<p><i>Sent by the classic Sales Autopilot.</i></p>"}<p style="color:#555">Elvin Torres Sr.<br>Founder, HSW365 Media LLC · Veteran-owned<br>hsw365.net</p></div>
     ${r.last_reply ? `<label style="display:block;margin-top:12px">Their reply</label><div class="mail" style="background:#f0fdf4">${esc(r.last_reply)}</div>` : ""}
@@ -378,6 +406,87 @@ async function skip(emails) {
   if (!emails.length) return toast("Select at least one lead.");
   const r = await api("reject", { emails }); toast(`${r.rejected} skipped.`); SEL.clear(); OPEN = null; await load();
 }
+
+
+// ------------------------------------------------ paste a site -> map the buyers -> why now -> drafts
+let SITE = null, BUYER = 0, MAP = null, LAYER = null;
+const miles = (a, b, c, d) => { const R = 3958.8, r = Math.PI / 180, dl = (c - a) * r, dn = (d - b) * r; const x = Math.sin(dl / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin(dn / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
+const mlog = (t, c = "") => { const d = document.createElement("div"); d.className = c; d.innerHTML = `<i>${c === "run" ? '<span class="spin"></span>' : c === "err" ? "✕" : "✓"}</i><span>${t}</span>`; $("mapLog").appendChild(d); return d; };
+const mdone = (d, t, c = "ok") => { d.className = c; d.innerHTML = `<i>${c === "err" ? "✕" : "✓"}</i><span>${t}</span>`; };
+function drawMap(lat, lon, radius, pts) {
+  $("map").hidden = false;
+  if (!MAP) { MAP = L.map("map", { scrollWheelZoom: false }); L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap" }).addTo(MAP); }
+  if (LAYER) LAYER.remove();
+  LAYER = L.layerGroup().addTo(MAP);
+  const c = L.circle([lat, lon], { radius: radius * 1609.34, color: "#a855f7", weight: 2, fillColor: "#a855f7", fillOpacity: .07, dashArray: "6 6" }).addTo(LAYER);
+  pts.forEach((p) => L.circleMarker([p.lat, p.lon], { radius: p.email ? 7 : 5, color: "#fff", weight: 1.5, fillColor: p.email ? "#22d3ee" : "#8a8aa0", fillOpacity: .95 })
+    .bindPopup(`<b>${esc(p.business)}</b><br>${esc(p.trade)} · ${p.distance_mi} mi${p.why ? `<br><i>${esc(p.why)}</i>` : ""}`).addTo(LAYER));
+  MAP.fitBounds(c.getBounds(), { padding: [10, 10] }); setTimeout(() => MAP.invalidateSize(), 50);
+}
+function renderBuyers() {
+  $("buyers").innerHTML = (SITE?.buyers ?? []).map((b, i) => `<button class="chip${i === BUYER ? " on" : ""}" data-i="${i}">${esc(b.label)}</button>`).join("");
+  $("buyers").querySelectorAll(".chip").forEach((b) => (b.onclick = () => { BUYER = +b.dataset.i; renderBuyers(); mapBuyers(true); }));
+}
+async function mapBuyers(keep) {
+  const url = $("siteUrl").value.trim(), where = $("mapWhere").value.trim() || "Vineland, NJ", radius = +$("radius").value, limit = +$("mapLimit").value;
+  if (!url) return toast("Paste a website first.");
+  $("mapGo").disabled = true; $("mapLog").innerHTML = ""; $("found").hidden = true;
+  try {
+    if (!keep || !SITE || SITE.url !== url) {
+      const st = mlog(`Reading ${esc(url)}…`, "run");
+      SITE = { ...(await api("site", { url })), url }; BUYER = 0; renderBuyers();
+      mdone(st, `<b>${esc(SITE.profile.name)}</b>: ${esc(SITE.profile.summary || "site read")}`);
+    }
+    const seller = { name: SITE.profile.name, pitch: SITE.profile.pitch, offer: SITE.profile.offer, link: SITE.profile.link, hook: SITE.profile.hook };
+    const buyer = SITE.buyers[BUYER];
+    const who = buyer?.label || $("who").value.trim();
+    const filters = buyer?.filters?.length ? buyer.filters : filtersFor("custom", who);
+    if (!filters.length) { mlog("Couldn't tell who buys this. Type the kind of business in “Who to target” below, then hit Map again.", "err"); $("who").focus(); return; }
+    let step = mlog(`Mapping ${esc(who)} within ${radius} miles of ${esc(where)}…`, "run");
+    const g = await geocode(where);
+    const els = await overpass(`[out:json][timeout:60];(${filters.map(([k, re]) => `nwr["${k}"~"^(${re})$"]["name"](around:${Math.round(radius * 1609.34)},${g.lat},${g.lon});`).join("")});out tags center 2000;`);
+    const pts = els.map((el) => { const t = el.tags || {}, la = el.lat ?? el.center?.lat, lo = el.lon ?? el.center?.lon; if (la == null) return null;
+      const e = (t.email || t["contact:email"] || "").split(";")[0].trim().toLowerCase();
+      return { business: t.name, lat: +la.toFixed(5), lon: +lo.toFixed(5), distance_mi: +miles(g.lat, g.lon, la, lo).toFixed(1), website: t.website || t["contact:website"] || "",
+        email: e && EMAIL.test(e) && !JUNK.test(e) ? e : "", city: t["addr:city"] || "", state: t["addr:state"] || "",
+        trade: (t.craft || t.shop || t.amenity || t.office || t.leisure || t.sport || t.healthcare || t.tourism || "local business").replace(/_/g, " ") }; }).filter(Boolean);
+    pts.sort((a, b) => a.distance_mi - b.distance_mi);
+    mdone(step, `Found <b>${pts.length}</b> ${esc(who)} within ${radius} miles.`);
+    $("found").hidden = false; $("found").innerHTML = `<b>${pts.length}</b><span>${esc(who)}<small>within ${radius} miles of ${esc(g.label)}</small></span>`;
+    drawMap(g.lat, g.lon, radius, pts);
+    if (!pts.length) return mlog("Nothing mapped there. Try a bigger radius or another buyer type.", "err");
+    // contact emails: published tag first, then the business's own website
+    const known = new Set(ROWS.map((r) => r.email)), seen = new Set(), leads = [];
+    for (const p of pts) if (p.email && !seen.has(p.email) && !known.has(p.email)) { seen.add(p.email); leads.push(p); }
+    const needSite = pts.filter((p) => !p.email && p.website);
+    step = mlog(`Reading their websites for contact emails…`, "run");
+    for (let i = 0; i < needSite.length && leads.length < limit; i += 10) {
+      const chunk = needSite.slice(i, i + 10); let emails = {};
+      try { emails = (await api("scrape", { sites: chunk.map((p) => p.website) })).emails || {}; } catch {}
+      for (const p of chunk) { const e = emails[p.website]; if (e && !seen.has(e) && !known.has(e)) { seen.add(e); p.email = e; leads.push(p); } }
+    }
+    leads.sort((a, b) => a.distance_mi - b.distance_mi); leads.length = Math.min(leads.length, limit);
+    mdone(step, `<b>${leads.length}</b> have a contact email.`);
+    drawMap(g.lat, g.lon, radius, pts);
+    if (!leads.length) return mlog("No new prospects with an email there. Try a bigger radius.", "err");
+    step = mlog(`Finding a reason to write now for each one…`, "run");
+    let n = 0;
+    for (let i = 0; i < leads.length; i += 8) {
+      const chunk = leads.slice(i, i + 8);
+      try { const w = (await api("enrich", { seller, leads: chunk })).why || {}; chunk.forEach((l) => { l.why = w[l.email] || ""; if (l.why) n++; }); } catch {}
+      step.querySelector("span").innerHTML = `Finding a reason to write now for each one… ${Math.min(i + 8, leads.length)}/${leads.length}`;
+    }
+    mdone(step, `<b>${n}</b> of ${leads.length} have a specific reason to write now. The rest get a plain intro, nothing made up.`);
+    step = mlog(`Drafting ${leads.length} personal emails…`, "run");
+    const campaign = `custom:${SITE.profile.name}:${who}:${g.label}`.slice(0, 120);
+    const r = await api("add", { app: "custom", seller, campaign, source: "agent", rows: leads });
+    mdone(step, `<b>${r.added}</b> drafts ready below. Draft only, <b>nothing is sent</b> until you approve.`);
+    FILTER = "draft"; CAMP = campaign; SEL = new Set(r.leads.map((l) => l.email)); await load();
+    $("stats").scrollIntoView({ behavior: "smooth" });
+  } catch (e) { mlog(esc(e.message), "err"); } finally { $("mapGo").disabled = false; }
+}
+$("mapGo").onclick = () => mapBuyers(false);
+$("siteUrl").addEventListener("keydown", (e) => { if (e.key === "Enter") mapBuyers(false); });
 
 $("find").onclick = find;
 $("who").addEventListener("keydown", (e) => { if (e.key === "Enter") find(); });

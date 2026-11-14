@@ -4,6 +4,9 @@
 //   POST {a:"find", owner, app, ask?, where, limit?}                  -> finds leads, saves them as drafts, returns them
 //   POST {a:"add", owner, app, campaign?, rows:[{email,business,contact?,city?,note?}]}  -> your own list, drafted
 //   POST {a:"scrape", owner, sites:[url...]}                          -> {url: email|null} from each site
+//   POST {a:"site", owner, url}                                       -> reads a pasted website, returns {profile, buyers:[{label, filters}]} (who would buy from it)
+//   POST {a:"enrich", owner, seller?, leads:[{email,business,website,trade,city}]} -> {why:{email: "why now" line}} from each prospect's own site
+//   (add/find also accept app:"custom" + seller:{name,pitch,offer,link,cta} for a pasted site, and rows with why/lat/lon/distance_mi)
 //   POST {a:"list", owner, status?, campaign?}                        -> pipeline rows + counts
 //   POST {a:"edit", owner, email, subject?, body?, followup_body?}
 //   POST {a:"approve", owner, emails:[...]}                           -> sends now (daily cap), rest go out on the next hourly run
@@ -234,17 +237,86 @@ async function findLeads(app: App, ask: string, where: string, limit: number) {
   return { leads: out.filter((l) => !known.has(l.email)).slice(0, limit), label, scanned: els.length };
 }
 
+// ---------------------------------------------------------------- pasted site + "why now"
+const SAFE_KEYS = new Set(["craft", "shop", "amenity", "office", "leisure", "sport", "healthcare", "tourism", "club"]);
+const SAFE_RE = /^[a-z_|]{2,120}$/;
+function customApp(s: Record<string, string>): App {
+  const name = String(s.name || "this business").slice(0, 80), link = /^https?:\/\//.test(s.link ?? "") ? s.link : "https://hsw365.net";
+  return { id: "custom", name, link, who: "local businesses", hook: String(s.hook || `how ${name} can help`).slice(0, 100),
+    pitch: String(s.pitch || `${name} helps local businesses.`).slice(0, 500), offer: String(s.offer || "").slice(0, 200),
+    cta: String(s.cta || "send you the details for {biz}").slice(0, 160), targets: [] };
+}
+async function pageText(site: string, max = 3500): Promise<{ text: string; title: string; desc: string } | null> {
+  let u: URL;
+  try { u = new URL(site.startsWith("http") ? site : "https://" + site); } catch { return null; }
+  if (!/^https?:$/.test(u.protocol) || /^(localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(u.hostname)) return null; // no internal hosts
+  try {
+    const r = await fetch(u.toString(), { headers: { "User-Agent": "Mozilla/5.0 (compatible; HSW365-iRun)" }, redirect: "follow", signal: AbortSignal.timeout(7000) });
+    if (!r.ok) return null;
+    const html = (await r.text()).slice(0, 500_000);
+    const title = html.match(/<title[^>]*>([^<]*)/i)?.[1]?.trim() ?? "";
+    const desc = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)/i)?.[1]?.trim() ?? "";
+    const text = html.replace(/<(script|style|noscript|svg)[\s\S]*?<\/\1>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ").trim().slice(0, max);
+    return { text, title, desc };
+  } catch { return null; }
+}
+async function llmJson(system: string, user: string): Promise<any | null> {
+  if (!GROQ) return null;
+  try {
+    const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST", headers: { Authorization: "Bearer " + GROQ, "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "llama-3.3-70b-versatile", temperature: 0.3, response_format: { type: "json_object" },
+        messages: [{ role: "system", content: system }, { role: "user", content: user }] }),
+      signal: AbortSignal.timeout(25000),
+    });
+    return JSON.parse((await r.json()).choices[0].message.content);
+  } catch { return null; }
+}
+async function readSite(url: string) {
+  const pg = await pageText(url, 4000);
+  if (!pg) throw new Error("Couldn't open that site. Check the address.");
+  const o = await llmJson(
+    `You read a business website and work out who would buy from it. Return JSON: {"name": business name, "summary": one plain sentence on what they sell, "pitch": 2 sentences for a cold email, only facts on the page, "offer": price or offer only if the page states one else "", "hook": 6-10 word benefit, "buyers": up to 4 objects {"label": short plural name of a type of local business that would buy this e.g. "hospice care providers", "osm": array of [key,regex] pairs for OpenStreetMap tags that find them, key one of craft|shop|amenity|office|leisure|sport|healthcare|tourism, regex like "hospice|nursing_home"}}. Never invent facts.`,
+    `Title: ${pg.title}\nDescription: ${pg.desc}\nPage text: ${pg.text}`);
+  const buyers = (o?.buyers ?? []).slice(0, 4).map((x: any) => ({
+    label: String(x.label ?? "").slice(0, 60),
+    filters: (x.osm ?? []).filter((f: any) => Array.isArray(f) && SAFE_KEYS.has(f[0]) && SAFE_RE.test(String(f[1]))).slice(0, 6),
+  })).filter((x: any) => x.label);
+  return {
+    profile: { name: String(o?.name || pg.title.split(/[|\-–·]/)[0].trim() || new URL(url.startsWith("http") ? url : "https://" + url).hostname).slice(0, 80),
+      summary: String(o?.summary || pg.desc).slice(0, 240), pitch: String(o?.pitch || pg.desc).slice(0, 500), offer: String(o?.offer ?? "").slice(0, 200),
+      hook: String(o?.hook || "").slice(0, 100), link: url.startsWith("http") ? url : "https://" + url },
+    buyers, ai: !!o,
+  };
+}
+// A real "why now" for one prospect, taken only from the text of their own site. No signal on the page -> empty string (never made up).
+async function whyNow(seller: Record<string, string> | null, leads: Record<string, string>[]) {
+  const pages = await Promise.all(leads.map(async (l) => ({ l, pg: l.website ? await pageText(l.website, 2500) : null })));
+  const out: Record<string, string> = {};
+  const usable = pages.filter((x) => x.pg?.text);
+  const o = usable.length ? await llmJson(
+    `For each prospect, find ONE specific, recent-looking reason to reach out now, using ONLY the text of that prospect's own website (new location, expansion, hiring, new service, event, season, growth, a stated need). Write it as a short factual phrase under 22 words, no flattery. If the text has no real signal, return an empty string for that email. Never invent anything. Seller: ${seller?.name ?? "HSW365"} - ${seller?.pitch ?? ""}. Return JSON {"why": {"<email>": "<phrase>"}}.`,
+    usable.map((x) => `EMAIL ${x.l.email}\nBUSINESS ${x.l.business}\nSITE TEXT ${x.pg!.text}`).join("\n\n---\n\n")) : null;
+  for (const l of leads) {
+    const w = String(o?.why?.[l.email] ?? "").trim().replace(/\s+/g, " ");
+    out[l.email] = w.length >= 12 ? w.slice(0, 200) : "";
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------- drafts
 const domain = (w: string | null) => { try { return w ? new URL(w.startsWith("http") ? w : "https://" + w).hostname.replace(/^www\./, "") : ""; } catch { return ""; } };
-function draft(app: App, l: { business: string; trade?: string | null; city?: string | null; website?: string | null; contact?: string | null; note?: string | null }) {
+function draft(app: App, l: { business: string; trade?: string | null; city?: string | null; website?: string | null; contact?: string | null; note?: string | null; why?: string | null }) {
   const biz = l.business, who = (l.contact ?? "").trim() || `${biz} team`;
   const seen = l.website ? `I came across ${esc(biz)}${l.city ? " in " + esc(l.city) : ""} and checked out ${esc(domain(l.website))}.`
     : `I came across ${esc(biz)}${l.city ? " in " + esc(l.city) : ""}.`;
   const intro = app.id === "investor"
     ? `<p>I'm Elvin Torres Sr., U.S. Army veteran and solo founder of HSW365 Media LLC in South Jersey.${l.note ? " " + esc(l.note) : ""}</p>`
-    : `<p>I'm Elvin Torres Sr., Army veteran and founder of HSW365 Media. ${seen}</p>`;
+    : `<p>I'm Elvin Torres Sr., Army veteran and founder of HSW365 Media${app.id === "custom" ? `, and I'm reaching out on behalf of ${esc(app.name)}` : ""}. ${seen}</p>` +
+      (l.why ? `<p>${esc(l.why.replace(/[.\s]+$/, ""))}, so I thought this was worth a note.</p>` : "");
   const cta = app.cta.replace("{biz}", biz);
-  const body = `<p>Hi ${esc(who)},</p>${intro}<p>${esc(app.pitch)}</p><p><b>${esc(app.offer)}</b> Details: <a href="${app.signup ?? app.link}">${esc(app.name)}</a></p>` +
+  const body = `<p>Hi ${esc(who)},</p>${intro}<p>${esc(app.pitch)}</p><p>${app.offer ? `<b>${esc(app.offer)}</b> ` : ""}Details: <a href="${app.signup ?? app.link}">${esc(app.name)}</a></p>` +
     (app.id === "investor" ? `<p>Are you open to a 15-minute call this week? I'll send the deck ahead of time.</p>` : `<p>Reply <b>"YES"</b> and I'll ${esc(cta)}.</p>`);
   const subject = app.id === "investor" ? "Army veteran founder, 15 live AI apps, 4 partner spots" : `${biz}: ${app.hook}`;
   const followup = `<p>Hi ${esc(who)},</p><p>Bumping my note about ${esc(app.name)} for ${esc(biz)}: ${esc(app.hook)}. ${esc(app.offer)}</p>` +
@@ -257,7 +329,7 @@ async function polish(app: App, l: { business: string; trade?: string | null; ci
     const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST", headers: { Authorization: "Bearer " + GROQ, "Content-Type": "application/json" },
       body: JSON.stringify({ model: "llama-3.3-70b-versatile", temperature: 0.5, response_format: { type: "json_object" }, messages: [
-        { role: "system", content: "Rewrite this cold email so it reads like Elvin wrote it personally to this one business. Keep every fact, price, link and the YES call to action exactly. Max 110 words, no emojis, no exclamation marks, no new claims. Return JSON {subject, body_html} with simple <p> paragraphs." },
+        { role: "system", content: "Rewrite this cold email so it reads like Elvin wrote it personally to this one business. Keep every fact, price, link and the YES call to action exactly. Max 110 words, no emojis, no exclamation marks, no new claims. Keep the sentence that explains why I'm writing now, if there is one. Return JSON {subject, body_html} with simple <p> paragraphs." },
         { role: "user", content: `Business: ${l.business} (${l.trade}, ${l.city ?? ""}). Website: ${l.website ?? "none"}\nSubject: ${d.subject}\n${d.body}` }] }),
       signal: AbortSignal.timeout(15000),
     });
@@ -311,7 +383,7 @@ Deno.serve(async (req) => {
   let b: Record<string, any>;
   try { b = await req.json(); } catch { return json({ error: "Send JSON." }, 400); }
   if (!b.owner || b.owner !== (await setting("owner_key"))) return json({ error: "Owner key needed. Add it in iRun > Studio > Settings." }, 401);
-  const app = APPS.find((x) => x.id === b.app);
+  const app = b.app === "custom" && b.seller ? customApp(b.seller) : APPS.find((x) => x.id === b.app);
   try {
     switch (b.a) {
       case "apps":
@@ -331,6 +403,15 @@ Deno.serve(async (req) => {
         if (rows.length) await db.from("irun_sales_leads").upsert(rows, { onConflict: "email", ignoreDuplicates: true });
         return json({ campaign, label, scanned, leads: rows });
       }
+      case "site": {
+        const url = String(b.url ?? "").trim();
+        if (!url) return json({ error: "Paste a website address." }, 400);
+        return json(await readSite(url));
+      }
+      case "enrich": {
+        const leads = (b.leads ?? []).slice(0, 10).map((l: Record<string, string>) => ({ email: String(l.email ?? "").toLowerCase(), business: String(l.business ?? "").slice(0, 120), website: String(l.website ?? "") }));
+        return json({ why: await whyNow(b.seller ?? null, leads) });
+      }
       case "scrape": {
         // The page finds businesses on the map in the browser, then asks us for the emails on their websites.
         const sites: string[] = (b.sites ?? []).slice(0, 40);
@@ -347,8 +428,10 @@ Deno.serve(async (req) => {
         const rows = (b.rows ?? []).map((r: Record<string, string>) => ({ ...r, email: String(r.email ?? "").trim().toLowerCase() }))
           .filter((r: Record<string, string>) => EMAIL.test(r.email)).slice(0, 500)
           .map((r: Record<string, string>) => {
-            const l = { business: (r.business || r.contact || r.email.split("@")[1].split(".")[0]).slice(0, 120), contact: r.contact || null, city: r.city || null, note: r.note || null, website: r.website || null };
-            return { email: r.email, ...l, trade: r.trade || app.who, state: r.state || null, source: b.source === "agent" ? "agent" : "own list", status: "draft", product: app.id, campaign, ...draft(app, l) };
+            const l = { business: (r.business || r.contact || r.email.split("@")[1].split(".")[0]).slice(0, 120), contact: r.contact || null, city: r.city || null, note: r.note || null, website: r.website || null, why: r.why ? String(r.why).slice(0, 200) : null };
+            const geo = { why_now: l.why, lat: Number.isFinite(+r.lat) && r.lat !== "" ? +r.lat : null, lon: Number.isFinite(+r.lon) && r.lon !== "" ? +r.lon : null, distance_mi: Number.isFinite(+r.distance_mi) && r.distance_mi !== "" ? +r.distance_mi : null };
+            const { why: _w, ...lead } = l;
+            return { email: r.email, ...lead, ...geo, trade: r.trade || app.who, state: r.state || null, source: b.source === "agent" ? "agent" : "own list", status: "draft", product: app.id, campaign, ...draft(app, l) };
           });
         const sup = new Set(rows.length ? ((await db.from("irun_suppress").select("email").in("email", rows.map((r: any) => r.email))).data ?? []).map((r) => r.email) : []);
         for (let i = rows.length - 1; i >= 0; i--) if (sup.has(rows[i].email)) rows.splice(i, 1);
@@ -357,7 +440,7 @@ Deno.serve(async (req) => {
         return json({ campaign, added: rows.length, leads: rows });
       }
       case "list": {
-        let q = db.from("irun_sales_leads").select("email,business,contact,trade,city,state,website,status,product,campaign,subject,body,followup_body,sends,last_sent_at,replied_at,last_reply,created_at").order("created_at", { ascending: false }).limit(500);
+        let q = db.from("irun_sales_leads").select("email,business,contact,trade,city,state,website,why_now,lat,lon,distance_mi,status,product,campaign,subject,body,followup_body,sends,last_sent_at,replied_at,last_reply,created_at").order("created_at", { ascending: false }).limit(500);
         if (b.status) q = q.in("status", String(b.status).split(","));
         if (b.campaign) q = q.eq("campaign", b.campaign);
         const { data, error } = await q;
