@@ -247,7 +247,7 @@ def make_shots(pb, p, shots_dir, seed):
 
 
 # ---------- spec ----------
-HOUSE = ("hsw365.net", "www.hsw365.net", "hsw365.co", "www.hsw365.co")
+HOUSE = ("hsw365.net", "www.hsw365.net")
 
 
 def is_house(p):
