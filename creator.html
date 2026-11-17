@@ -310,9 +310,11 @@ async function ai(system, user) {
     }
   }
   let last;
-  for (let i = 0; i < 2; i++) {
+  const FM = ["openai","openai-fast","mistral","llama"];
+  for (let i = 0; i < 6; i++) {
+    if (i) await new Promise(res => setTimeout(res, 700 * i));
     try {
-      const r = await fetch("https://text.pollinations.ai/openai", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({model: "openai", private: true, seed: Math.floor(Math.random() * 1e6), messages: [{role: "system", content: system}, {role: "user", content: user}]})});
+      const r = await fetch("https://text.pollinations.ai/openai", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({model: FM[i % FM.length], private: true, seed: Math.floor(Math.random() * 1e6), messages: [{role: "system", content: system}, {role: "user", content: user}]})});
       if (!r.ok) throw new Error("Free writer busy (" + r.status + ")");
       const t = (await r.json()).choices?.[0]?.message?.content || "";
       if (t.trim()) return t;
