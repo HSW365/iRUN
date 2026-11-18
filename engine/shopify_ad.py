@@ -361,7 +361,7 @@ def make(product, store="hsw365.net", account="hoodstar365", playbook=None, seed
     if post:
         subprocess.run([sys.executable, os.path.join(HERE, "run.py"), "--account", account, "--platform", platform,
                         "--video", video, "--caption", res["caption"],
-                        "--mode", os.environ.get("IRUN_MODE", "live")], check=True)
+                        "--mode", os.environ.get("IRUN_MODE", "draft")], check=True)
     return res
 
 
