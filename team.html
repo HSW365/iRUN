@@ -704,5 +704,6 @@ function renderAll() { renderProfiles(); if (VIEW === "team") renderTeam(); if (
 })();
 window.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !busy) pullCloud(); else if (document.visibilityState === "hidden" && ownerKey()) { clearTimeout(syncTimer); pushCloud(); } });
 </script>
+<script src="owner-login.js" defer></script>
 </body>
 </html>
