@@ -1,17 +1,18 @@
-[0;93m2026-11-12 18:57:10.627803551 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[narrator:kokoro] vo1.wav  Hour four. Best play of my life.
-[narrator:kokoro] vo2.wav  Six hours of footage.
-[narrator:kokoro] vo3.wav  Then my cousin says, just paste the link.
-[narrator:kokoro] vo4.wav  Klip it finds every highlight. Cut, vertical, ready to post.
-[narrator:kokoro] vo5.wav  Six hours. One link. Done.
-[narrator:kokoro] vo6.wav  Scan the code. Start clipping.
-[hoodstar365/instagram] posted 17913748365585684
-[shots] scream: cached
-[shots] scrub: cached
-[shots] friend: cached
-[shots] paste: cached
-[shots] stream: cached
-[shots] post: cached
-[shots] viral: cached
-[shots] hero: cached
-{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-ugc-ad.mp4", "seconds": 20.0}
+[0;93m2026-11-18 14:14:58.708325941 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator:kokoro] vo1.wav  November nineteenth. Everyone goes live.
+[narrator:kokoro] vo2.wav  Your best moment just happened. Nobody clipped it.
+[narrator:kokoro] vo3.wav  Stop scrubbing. Paste the link.
+[narrator:kokoro] vo4.wav  Klipit cuts every highlight. Vertical. Ready.
+[narrator:kokoro] vo5.wav  Scan. Sign up. Clip the chaos.
+[hoodstar365/instagram] posted 17967654723226436
+[shots] livingroom: pollinations
+[shots] gasp: pollinations
+[shots] chaos: pollinations
+[shots] slump: pollinations
+[shots] timeline: pollinations
+[shots] friend: pollinations
+[shots] paste: pollinations
+[shots] stream: pollinations
+[shots] phone: pollinations
+[shots] win: pollinations
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-gta6-live-ad.mp4", "seconds": 19.9}
