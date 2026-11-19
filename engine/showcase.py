@@ -237,7 +237,7 @@ def page(layout, app, shots, qr, dur):
     a1, a2 = app.get("accent", ["#22d3ee", "#a855f7"])
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>{head_css(a1, a2, dur)}</style></head><body>
 <div class="stage"><div class="bg"></div><div class="dots"></div>
-<div class="brand"><i>H</i>HSW365 <span>{esc(app["name"]).upper()}</span></div><div class="tag">HSW365.CO</div>
+<div class="brand"><i>H</i>HSW365 <span>{esc(app["name"]).upper()}</span></div><div class="tag">HSW365.NET</div>
 {body(layout, app, shots, dur)}</div>
 <div class="end"><div class="logo">HSW365 <span>MEDIA</span></div><div class="app">{esc(app["name"])}</div>
 <div class="qr"><img src="{qr}"></div><div class="btn">{esc(app["cta"])}</div><div class="scan">SCAN TO SIGN UP</div></div>
@@ -369,9 +369,10 @@ def pick_layout(app_id, app, forced=None):
     return layout
 
 
-def build(app_id, out_path, layout=None):
-    cfg = json.load(open(CFG))
-    app = cfg["apps"][app_id]
+def build(app_id, out_path, layout=None, app=None):
+    """app: an app spec built on the fly (engine/daily.py); otherwise it's read from config/showcase.json."""
+    if app is None:
+        app = json.load(open(CFG))["apps"][app_id]
     layout = pick_layout(app_id, app, layout)
     work = tempfile.mkdtemp(prefix=f"showcase-{app_id}-")
     print(f"[showcase] {app['name']}: layout={layout}")
