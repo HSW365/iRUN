@@ -3,252 +3,1113 @@
   "apps": {
     "calltwin": {
       "name": "CallTwin",
-      "accent": ["#22d3ee", "#3b82f6"],
+      "accent": [
+        "#22d3ee",
+        "#3b82f6"
+      ],
       "layout": "phone",
       "url": "https://hsw365.github.io/calltwin/",
       "signup": "https://hsw365.github.io/calltwin/signup.html",
       "cta": "Start your 14-day trial",
       "cta_vo": "Scan the code and never miss another job.",
-      "tags": ["aireceptionist", "missedcalls", "contractor", "plumber", "hvac", "smallbusiness"],
+      "tags": [
+        "aireceptionist",
+        "missedcalls",
+        "contractor",
+        "plumber",
+        "hvac",
+        "smallbusiness"
+      ],
       "caps": [
-        {"id": "answers", "h1": "Never miss", "h2": "another job call.", "sub": "Your AI receptionist answers every call, text and chat, 24/7.", "stat": "24/7", "statLabel": "Every call answered", "feature": ["Answers instantly", "Calls, texts and site chat"], "hook": "Every missed call is a job going to your competitor.", "vo": "CallTwin answers every call, text and chat, twenty four seven."},
-        {"id": "captures", "h1": "Name. Number.", "h2": "Address. Job.", "sub": "CallTwin captures the details of every lead so you can quote it fast.", "stat": "1 text", "statLabel": "The whole lead, in your pocket", "feature": ["Captures the job", "Name, number, address, service"], "hook": "Your hands are full and the phone is ringing.", "vo": "CallTwin gets the name, the number, the address and the service, so the lead is ready when you are."},
-        {"id": "alerts", "h1": "The lead lands", "h2": "in seconds.", "sub": "Every new job alerts your phone the moment it comes in.", "stat": "Seconds", "statLabel": "From ring to your phone", "feature": ["Alerts your phone", "The lead lands in seconds"], "hook": "The first contractor to call back usually wins the job.", "vo": "CallTwin sends every job straight to your phone the moment it comes in."},
-        {"id": "followup", "h1": "Missed a call?", "h2": "It follows up.", "sub": "An AI receptionist that answers and follows up so voicemail stops costing you customers.", "stat": "0", "statLabel": "Customers lost to voicemail", "feature": ["Follows up", "So voicemail stops costing you"], "hook": "Most people won't leave a voicemail. They call the next guy.", "vo": "CallTwin picks up, follows up and keeps the customer talking to you."}
+        {
+          "id": "answers",
+          "h1": "Never miss",
+          "h2": "another job call.",
+          "sub": "Your AI receptionist answers every call, text and chat, 24/7.",
+          "stat": "24/7",
+          "statLabel": "Every call answered",
+          "feature": [
+            "Answers instantly",
+            "Calls, texts and site chat"
+          ],
+          "hook": "Every missed call is a job going to your competitor.",
+          "vo": "CallTwin answers every call, text and chat, twenty four seven."
+        },
+        {
+          "id": "captures",
+          "h1": "Name. Number.",
+          "h2": "Address. Job.",
+          "sub": "CallTwin captures the details of every lead so you can quote it fast.",
+          "stat": "1 text",
+          "statLabel": "The whole lead, in your pocket",
+          "feature": [
+            "Captures the job",
+            "Name, number, address, service"
+          ],
+          "hook": "Your hands are full and the phone is ringing.",
+          "vo": "CallTwin gets the name, the number, the address and the service, so the lead is ready when you are."
+        },
+        {
+          "id": "alerts",
+          "h1": "The lead lands",
+          "h2": "in seconds.",
+          "sub": "Every new job alerts your phone the moment it comes in.",
+          "stat": "Seconds",
+          "statLabel": "From ring to your phone",
+          "feature": [
+            "Alerts your phone",
+            "The lead lands in seconds"
+          ],
+          "hook": "The first contractor to call back usually wins the job.",
+          "vo": "CallTwin sends every job straight to your phone the moment it comes in."
+        },
+        {
+          "id": "followup",
+          "h1": "Missed a call?",
+          "h2": "It follows up.",
+          "sub": "An AI receptionist that answers and follows up so voicemail stops costing you customers.",
+          "stat": "0",
+          "statLabel": "Customers lost to voicemail",
+          "feature": [
+            "Follows up",
+            "So voicemail stops costing you"
+          ],
+          "hook": "Most people won't leave a voicemail. They call the next guy.",
+          "vo": "CallTwin picks up, follows up and keeps the customer talking to you."
+        }
       ]
     },
     "queenee": {
       "name": "QUEENEE",
-      "accent": ["#a855f7", "#ec4899"],
+      "accent": [
+        "#a855f7",
+        "#ec4899"
+      ],
       "layout": "browser",
       "url": "https://hsw365.github.io/queenee/",
       "signup": "https://hsw365.github.io/queenee/",
       "cta": "Get your website",
       "cta_vo": "Scan the code and get yours.",
-      "tags": ["websitedesign", "smallbusinesswebsite", "getonline", "webdesign", "entrepreneur"],
+      "tags": [
+        "websitedesign",
+        "smallbusinesswebsite",
+        "getonline",
+        "webdesign",
+        "entrepreneur"
+      ],
       "caps": [
-        {"id": "built", "h1": "Drop your business.", "h2": "Get a site that books.", "sub": "QUEENEE builds a mobile-first website made to get you calls and bookings.", "stat": "1 link", "statLabel": "Your whole business online", "feature": ["Built from your business", "No templates"], "hook": "Your Instagram is not a website.", "vo": "QUEENEE builds your business a real website from your business, not a template."},
-        {"id": "books", "h1": "A website that", "h2": "gets you booked.", "sub": "Calls, forms and bookings, built in from day one.", "stat": "3", "statLabel": "Ways customers reach you", "feature": ["Made to book", "Calls, forms, bookings"], "hook": "Customers who can't find you can't hire you.", "vo": "Every QUEENEE site is made to get you calls, forms and bookings."},
-        {"id": "hosting", "h1": "Hosting included.", "h2": "Updates handled.", "sub": "No hosting bills to chase, no developer to wait on.", "stat": "0", "statLabel": "Servers for you to manage", "feature": ["Hosting included", "Updates handled for you"], "hook": "Most small business sites die the day the developer disappears.", "vo": "With QUEENEE, hosting is included and updates are handled for you."},
-        {"id": "mobile", "h1": "Built for the", "h2": "phone in their hand.", "sub": "Mobile-first design, because that is where your customers are looking.", "stat": "Mobile", "statLabel": "First, not an afterthought", "feature": ["Mobile-first", "Looks right on every phone"], "hook": "Your next customer is searching on their phone right now.", "vo": "QUEENEE sites are built mobile first, so they look right where your customers are."}
+        {
+          "id": "built",
+          "h1": "Drop your business.",
+          "h2": "Get a site that books.",
+          "sub": "QUEENEE builds a mobile-first website made to get you calls and bookings.",
+          "stat": "1 link",
+          "statLabel": "Your whole business online",
+          "feature": [
+            "Built from your business",
+            "No templates"
+          ],
+          "hook": "Your Instagram is not a website.",
+          "vo": "QUEENEE builds your business a real website from your business, not a template."
+        },
+        {
+          "id": "books",
+          "h1": "A website that",
+          "h2": "gets you booked.",
+          "sub": "Calls, forms and bookings, built in from day one.",
+          "stat": "3",
+          "statLabel": "Ways customers reach you",
+          "feature": [
+            "Made to book",
+            "Calls, forms, bookings"
+          ],
+          "hook": "Customers who can't find you can't hire you.",
+          "vo": "Every QUEENEE site is made to get you calls, forms and bookings."
+        },
+        {
+          "id": "hosting",
+          "h1": "Hosting included.",
+          "h2": "Updates handled.",
+          "sub": "No hosting bills to chase, no developer to wait on.",
+          "stat": "0",
+          "statLabel": "Servers for you to manage",
+          "feature": [
+            "Hosting included",
+            "Updates handled for you"
+          ],
+          "hook": "Most small business sites die the day the developer disappears.",
+          "vo": "With QUEENEE, hosting is included and updates are handled for you."
+        },
+        {
+          "id": "mobile",
+          "h1": "Built for the",
+          "h2": "phone in their hand.",
+          "sub": "Mobile-first design, because that is where your customers are looking.",
+          "stat": "Mobile",
+          "statLabel": "First, not an afterthought",
+          "feature": [
+            "Mobile-first",
+            "Looks right on every phone"
+          ],
+          "hook": "Your next customer is searching on their phone right now.",
+          "vo": "QUEENEE sites are built mobile first, so they look right where your customers are."
+        }
       ]
     },
     "irun": {
       "name": "iRun",
-      "accent": ["#a855f7", "#22d3ee"],
+      "accent": [
+        "#a855f7",
+        "#22d3ee"
+      ],
       "layout": "stack",
       "url": "https://hsw365.github.io/iRUN/",
       "signup": "https://hsw365.github.io/iRUN/start.html",
       "cta": "Start with iRun",
       "cta_vo": "Scan the code and let iRun run it.",
-      "tags": ["aicontent", "socialmediaautomation", "contentcreator", "autopilot", "smallbusiness"],
+      "tags": [
+        "aicontent",
+        "socialmediaautomation",
+        "contentcreator",
+        "autopilot",
+        "smallbusiness"
+      ],
       "caps": [
-        {"id": "daily", "h1": "One link in.", "h2": "Daily content out.", "sub": "iRun writes, voices, edits and posts your videos every day.", "stat": "Daily", "statLabel": "Posts without you", "feature": ["Posts every day", "Without you touching it"], "hook": "Posting every day is a full time job.", "vo": "iRun writes, voices, edits and posts your videos every single day."},
-        {"id": "script", "h1": "Sounds like you.", "h2": "Written for you.", "sub": "iRun writes every script in your brand voice.", "stat": "Your voice", "statLabel": "Not generic AI", "feature": ["Writes the script", "In your brand voice"], "hook": "Most AI content sounds like nobody.", "vo": "iRun writes every script in your own brand voice."},
-        {"id": "video", "h1": "Voice. Captions.", "h2": "Music. Done.", "sub": "iRun makes the whole video, not just the idea.", "stat": "1 tap", "statLabel": "Idea to finished video", "feature": ["Makes the video", "Voice, captions, music"], "hook": "Ideas are cheap. Finished videos are what grow your page.", "vo": "iRun voices it, captions it, scores it and renders the finished video."},
-        {"id": "leads", "h1": "Comments become", "h2": "customers.", "sub": "When someone comments a keyword or DMs you, iRun sends the link and logs the lead.", "stat": "DM", "statLabel": "Comment in, link out", "feature": ["Turns DMs into leads", "Keyword in, link back"], "hook": "Views don't pay the bills. Leads do.", "vo": "iRun answers comments and DMs with your link and logs every lead."}
+        {
+          "id": "daily",
+          "h1": "One link in.",
+          "h2": "Daily content out.",
+          "sub": "iRun writes, voices, edits and posts your videos every day.",
+          "stat": "Daily",
+          "statLabel": "Posts without you",
+          "feature": [
+            "Posts every day",
+            "Without you touching it"
+          ],
+          "hook": "Posting every day is a full time job.",
+          "vo": "iRun writes, voices, edits and posts your videos every single day."
+        },
+        {
+          "id": "script",
+          "h1": "Sounds like you.",
+          "h2": "Written for you.",
+          "sub": "iRun writes every script in your brand voice.",
+          "stat": "Your voice",
+          "statLabel": "Not generic AI",
+          "feature": [
+            "Writes the script",
+            "In your brand voice"
+          ],
+          "hook": "Most AI content sounds like nobody.",
+          "vo": "iRun writes every script in your own brand voice."
+        },
+        {
+          "id": "video",
+          "h1": "Voice. Captions.",
+          "h2": "Music. Done.",
+          "sub": "iRun makes the whole video, not just the idea.",
+          "stat": "1 tap",
+          "statLabel": "Idea to finished video",
+          "feature": [
+            "Makes the video",
+            "Voice, captions, music"
+          ],
+          "hook": "Ideas are cheap. Finished videos are what grow your page.",
+          "vo": "iRun voices it, captions it, scores it and renders the finished video."
+        },
+        {
+          "id": "leads",
+          "h1": "Comments become",
+          "h2": "customers.",
+          "sub": "When someone comments a keyword or DMs you, iRun sends the link and logs the lead.",
+          "stat": "DM",
+          "statLabel": "Comment in, link out",
+          "feature": [
+            "Turns DMs into leads",
+            "Keyword in, link back"
+          ],
+          "hook": "Views don't pay the bills. Leads do.",
+          "vo": "iRun answers comments and DMs with your link and logs every lead."
+        },
+        {
+          "id": "appgrowth",
+          "h1": "You made the app.",
+          "h2": "Get the downloads.",
+          "sub": "iRun writes the scripts, makes the videos and builds the ads that get your app downloaded.",
+          "stat": "Daily",
+          "statLabel": "Scripts, videos and ads",
+          "feature": [
+            "Scripts, videos, ads",
+            "From your App Store listing"
+          ],
+          "hook": "You made the app. Now nobody has seen it.",
+          "vo": "iRun reads your App Store listing, writes the scripts, makes the videos and ads, and posts them every day with a QR to your download page."
+        }
       ]
     },
     "dispute365": {
       "name": "DISPUTE365",
-      "accent": ["#34d399", "#22d3ee"],
+      "accent": [
+        "#34d399",
+        "#22d3ee"
+      ],
       "layout": "split",
       "url": "https://hsw365.github.io/DISPUTE365/",
       "signup": "https://hsw365.github.io/DISPUTE365/",
       "cta": "Start your disputes",
       "cta_vo": "Scan the code and fight it back.",
-      "tags": ["creditrepair", "disputecreditreport", "creditscore", "diycreditrepair", "financialfreedom"],
+      "tags": [
+        "creditrepair",
+        "disputecreditreport",
+        "creditscore",
+        "diycreditrepair",
+        "financialfreedom"
+      ],
       "disclaimer": "DISPUTE365 is a self-help tool, not a credit repair organization or legal advice.",
       "caps": [
-        {"id": "errors", "h1": "Errors on your report?", "h2": "Fight them back.", "sub": "Upload your credit reports. DISPUTE365 finds the errors and writes your dispute letters.", "stat": "3", "statLabel": "Bureaus, one app", "feature": ["Finds the errors", "Line by line"], "hook": "One wrong line on your credit report can cost you thousands.", "vo": "DISPUTE365 reads your report line by line and finds the errors."},
-        {"id": "letters", "h1": "Dispute letters.", "h2": "Written for you.", "sub": "Ready-to-send letters for every error it finds.", "stat": "0", "statLabel": "Letters you write yourself", "feature": ["Writes the letters", "Ready to send"], "hook": "Most people never dispute because they don't know what to write.", "vo": "DISPUTE365 writes your dispute letters, ready to send."},
-        {"id": "track", "h1": "Every round.", "h2": "Tracked.", "sub": "Follow each dispute until the error is fixed.", "stat": "1 place", "statLabel": "Every dispute, every bureau", "feature": ["Tracks every round", "Until it's fixed"], "hook": "Disputes fall through the cracks when you lose track of them.", "vo": "DISPUTE365 tracks every round with every bureau until it's fixed."}
+        {
+          "id": "errors",
+          "h1": "Errors on your report?",
+          "h2": "Fight them back.",
+          "sub": "Upload your credit reports. DISPUTE365 finds the errors and writes your dispute letters.",
+          "stat": "3",
+          "statLabel": "Bureaus, one app",
+          "feature": [
+            "Finds the errors",
+            "Line by line"
+          ],
+          "hook": "One wrong line on your credit report can cost you thousands.",
+          "vo": "DISPUTE365 reads your report line by line and finds the errors."
+        },
+        {
+          "id": "letters",
+          "h1": "Dispute letters.",
+          "h2": "Written for you.",
+          "sub": "Ready-to-send letters for every error it finds.",
+          "stat": "0",
+          "statLabel": "Letters you write yourself",
+          "feature": [
+            "Writes the letters",
+            "Ready to send"
+          ],
+          "hook": "Most people never dispute because they don't know what to write.",
+          "vo": "DISPUTE365 writes your dispute letters, ready to send."
+        },
+        {
+          "id": "track",
+          "h1": "Every round.",
+          "h2": "Tracked.",
+          "sub": "Follow each dispute until the error is fixed.",
+          "stat": "1 place",
+          "statLabel": "Every dispute, every bureau",
+          "feature": [
+            "Tracks every round",
+            "Until it's fixed"
+          ],
+          "hook": "Disputes fall through the cracks when you lose track of them.",
+          "vo": "DISPUTE365 tracks every round with every bureau until it's fixed."
+        }
       ]
     },
     "klipit": {
       "name": "Klipit",
-      "accent": ["#fbbf24", "#ef4444"],
+      "accent": [
+        "#fbbf24",
+        "#ef4444"
+      ],
       "layout": "stat",
       "url": "https://klipit.onrender.com",
       "signup": "https://klipit.onrender.com",
       "cta": "Clip your next stream",
       "cta_vo": "Scan the code and clip your next stream.",
-      "tags": ["streamerclips", "twitch", "gta6", "contentcreator", "videoclips"],
+      "tags": [
+        "streamerclips",
+        "twitch",
+        "gta6",
+        "contentcreator",
+        "videoclips"
+      ],
       "caps": [
-        {"id": "vod", "h1": "6-hour stream.", "h2": "Clips in minutes.", "sub": "Paste a stream or VOD link. Klipit cuts your best moments into ready-to-post clips.", "stat": "1 link", "statLabel": "Every highlight, clipped", "feature": ["Finds the moments", "Hype, laughs, clutch plays"], "hook": "Nobody is scrubbing a six hour VOD.", "vo": "Paste your stream link and Klipit cuts your best moments into ready to post clips."},
-        {"id": "formats", "h1": "Vertical. Wide.", "h2": "Ready to post.", "sub": "Klipit cuts both formats for TikTok, Reels and Shorts.", "stat": "2", "statLabel": "Formats from every clip", "feature": ["Cuts vertical + wide", "TikTok, Reels, Shorts"], "hook": "Your stream is already full of clips. They just aren't cut yet.", "vo": "Klipit cuts every moment vertical and wide for TikTok, Reels and Shorts."},
-        {"id": "captions", "h1": "Captions", "h2": "included.", "sub": "Clips come out ready to post, captions and all.", "stat": "0", "statLabel": "Editing software needed", "feature": ["Ready to post", "Captions included"], "hook": "Editing clips eats the hours you should spend streaming.", "vo": "Klipit hands you finished clips with captions already on."}
+        {
+          "id": "vod",
+          "h1": "6-hour stream.",
+          "h2": "Clips in minutes.",
+          "sub": "Paste a stream or VOD link. Klipit cuts your best moments into ready-to-post clips.",
+          "stat": "1 link",
+          "statLabel": "Every highlight, clipped",
+          "feature": [
+            "Finds the moments",
+            "Hype, laughs, clutch plays"
+          ],
+          "hook": "Nobody is scrubbing a six hour VOD.",
+          "vo": "Paste your stream link and Klipit cuts your best moments into ready to post clips."
+        },
+        {
+          "id": "formats",
+          "h1": "Vertical. Wide.",
+          "h2": "Ready to post.",
+          "sub": "Klipit cuts both formats for TikTok, Reels and Shorts.",
+          "stat": "2",
+          "statLabel": "Formats from every clip",
+          "feature": [
+            "Cuts vertical + wide",
+            "TikTok, Reels, Shorts"
+          ],
+          "hook": "Your stream is already full of clips. They just aren't cut yet.",
+          "vo": "Klipit cuts every moment vertical and wide for TikTok, Reels and Shorts."
+        },
+        {
+          "id": "captions",
+          "h1": "Captions",
+          "h2": "included.",
+          "sub": "Clips come out ready to post, captions and all.",
+          "stat": "0",
+          "statLabel": "Editing software needed",
+          "feature": [
+            "Ready to post",
+            "Captions included"
+          ],
+          "hook": "Editing clips eats the hours you should spend streaming.",
+          "vo": "Klipit hands you finished clips with captions already on."
+        }
       ]
     },
     "flipit": {
       "name": "FLIPIT",
-      "accent": ["#f97316", "#fbbf24"],
+      "accent": [
+        "#f97316",
+        "#fbbf24"
+      ],
       "layout": "browser",
       "url": "https://flipit-m5ig.onrender.com",
       "signup": "https://flipit-m5ig.onrender.com",
       "cta": "Start with FLIPIT",
       "cta_vo": "Scan the code and run your next deal.",
-      "tags": ["realestateinvesting", "househacking", "wholesaling", "fixandflip", "propertypreservation"],
+      "tags": [
+        "realestateinvesting",
+        "househacking",
+        "wholesaling",
+        "fixandflip",
+        "propertypreservation"
+      ],
       "caps": [
-        {"id": "mao", "h1": "Run the numbers.", "h2": "Close the deal.", "sub": "Max offer, risk check, cash buyers and paperwork in one deal workspace.", "stat": "MAO", "statLabel": "In seconds", "feature": ["Max offer", "Built-in calculator"], "hook": "Guessing your offer is how flips go bad.", "vo": "FLIPIT runs your max offer in seconds."},
-        {"id": "risk", "h1": "Know the risk", "h2": "before you offer.", "sub": "Check the deal's risks before your money is on the line.", "stat": "Risk", "statLabel": "Checked before you commit", "feature": ["Risk check", "Before you make the offer"], "hook": "The deal that looks great on paper can sink you.", "vo": "FLIPIT checks the risks before you put an offer in."},
-        {"id": "buyers", "h1": "Match the deal.", "h2": "Find the buyer.", "sub": "Match your deal to cash buyers and draft the paperwork in one place.", "stat": "Cash", "statLabel": "Buyers matched to the deal", "feature": ["Cash buyers", "Matched to the deal"], "hook": "A wholesale deal is only as good as the buyer you can find for it.", "vo": "FLIPIT matches your deal to cash buyers and drafts the paperwork."},
-        {"id": "preservation", "h1": "Get paid to", "h2": "secure homes.", "sub": "The Preservation tab runs inspections, lock changes, trash-outs and winterization with work orders and invoices.", "stat": "Work orders", "statLabel": "Photos, reports, invoices", "feature": ["Property preservation", "Work orders, photo checklists, invoices"], "hook": "Banks pay people to secure and maintain foreclosed homes.", "vo": "FLIPIT's Preservation tab handles work orders, photo checklists, inspection reports and invoices."}
+        {
+          "id": "mao",
+          "h1": "Run the numbers.",
+          "h2": "Close the deal.",
+          "sub": "Max offer, risk check, cash buyers and paperwork in one deal workspace.",
+          "stat": "MAO",
+          "statLabel": "In seconds",
+          "feature": [
+            "Max offer",
+            "Built-in calculator"
+          ],
+          "hook": "Guessing your offer is how flips go bad.",
+          "vo": "FLIPIT runs your max offer in seconds."
+        },
+        {
+          "id": "risk",
+          "h1": "Know the risk",
+          "h2": "before you offer.",
+          "sub": "Check the deal's risks before your money is on the line.",
+          "stat": "Risk",
+          "statLabel": "Checked before you commit",
+          "feature": [
+            "Risk check",
+            "Before you make the offer"
+          ],
+          "hook": "The deal that looks great on paper can sink you.",
+          "vo": "FLIPIT checks the risks before you put an offer in."
+        },
+        {
+          "id": "buyers",
+          "h1": "Match the deal.",
+          "h2": "Find the buyer.",
+          "sub": "Match your deal to cash buyers and draft the paperwork in one place.",
+          "stat": "Cash",
+          "statLabel": "Buyers matched to the deal",
+          "feature": [
+            "Cash buyers",
+            "Matched to the deal"
+          ],
+          "hook": "A wholesale deal is only as good as the buyer you can find for it.",
+          "vo": "FLIPIT matches your deal to cash buyers and drafts the paperwork."
+        },
+        {
+          "id": "preservation",
+          "h1": "Get paid to",
+          "h2": "secure homes.",
+          "sub": "The Preservation tab runs inspections, lock changes, trash-outs and winterization with work orders and invoices.",
+          "stat": "Work orders",
+          "statLabel": "Photos, reports, invoices",
+          "feature": [
+            "Property preservation",
+            "Work orders, photo checklists, invoices"
+          ],
+          "hook": "Banks pay people to secure and maintain foreclosed homes.",
+          "vo": "FLIPIT's Preservation tab handles work orders, photo checklists, inspection reports and invoices."
+        }
       ]
     },
     "studio": {
       "name": "HSW365studio",
-      "accent": ["#ec4899", "#a855f7"],
+      "accent": [
+        "#ec4899",
+        "#a855f7"
+      ],
       "layout": "phone",
       "url": "https://hsw365.github.io/STUDIO365/",
       "signup": "https://hsw365.github.io/STUDIO365/",
       "cta": "First 3 songs free",
       "cta_vo": "Scan the code. Your first three songs are free.",
-      "tags": ["recordingstudio", "homestudio", "independentartist", "rapper", "musicproducer"],
+      "tags": [
+        "recordingstudio",
+        "homestudio",
+        "independentartist",
+        "rapper",
+        "musicproducer"
+      ],
       "caps": [
-        {"id": "record", "h1": "No studio?", "h2": "Record anyway.", "sub": "Record over your beat right in the browser. No download.", "stat": "0", "statLabel": "Gear required", "feature": ["Record", "Over your beat, in a browser tab"], "hook": "Studio time costs money you don't have yet.", "vo": "HSW365studio lets you record over your beat right in your browser."},
-        {"id": "tune", "h1": "In key.", "h2": "Without the engineer.", "sub": "Tune your vocal to the key of the beat.", "stat": "In key", "statLabel": "Every take", "feature": ["Tunes the vocal", "To the key of your beat"], "hook": "A great verse falls flat when it's out of key.", "vo": "HSW365studio tunes your vocal to the key of the beat."},
-        {"id": "master", "h1": "Mixed. Mastered.", "h2": "Release-ready.", "sub": "Mix on a real console, master to streaming loudness and export a WAV.", "stat": "WAV", "statLabel": "Finished master, exported", "feature": ["Mix and master", "Streaming loudness, WAV export"], "hook": "Record it tonight. Release it tonight.", "vo": "Mix on a real console, master to streaming loudness and export your WAV."}
+        {
+          "id": "record",
+          "h1": "No studio?",
+          "h2": "Record anyway.",
+          "sub": "Record over your beat right in the browser. No download.",
+          "stat": "0",
+          "statLabel": "Gear required",
+          "feature": [
+            "Record",
+            "Over your beat, in a browser tab"
+          ],
+          "hook": "Studio time costs money you don't have yet.",
+          "vo": "HSW365studio lets you record over your beat right in your browser."
+        },
+        {
+          "id": "tune",
+          "h1": "In key.",
+          "h2": "Without the engineer.",
+          "sub": "Tune your vocal to the key of the beat.",
+          "stat": "In key",
+          "statLabel": "Every take",
+          "feature": [
+            "Tunes the vocal",
+            "To the key of your beat"
+          ],
+          "hook": "A great verse falls flat when it's out of key.",
+          "vo": "HSW365studio tunes your vocal to the key of the beat."
+        },
+        {
+          "id": "master",
+          "h1": "Mixed. Mastered.",
+          "h2": "Release-ready.",
+          "sub": "Mix on a real console, master to streaming loudness and export a WAV.",
+          "stat": "WAV",
+          "statLabel": "Finished master, exported",
+          "feature": [
+            "Mix and master",
+            "Streaming loudness, WAV export"
+          ],
+          "hook": "Record it tonight. Release it tonight.",
+          "vo": "Mix on a real console, master to streaming loudness and export your WAV."
+        }
       ]
     },
     "friendy": {
       "name": "Friendy",
-      "accent": ["#22d3ee", "#a855f7"],
+      "accent": [
+        "#22d3ee",
+        "#a855f7"
+      ],
       "layout": "stat",
       "url": "https://hsw365.github.io/FRIENDY/",
       "signup": "https://hsw365.github.io/FRIENDY/",
       "cta": "3 days free",
       "cta_vo": "Scan the code. Three days free.",
-      "tags": ["aicompanion", "mentalwellness", "someonetotalkto", "nightowl", "turnnegativeintopositive"],
+      "tags": [
+        "aicompanion",
+        "mentalwellness",
+        "someonetotalkto",
+        "nightowl",
+        "turnnegativeintopositive"
+      ],
       "disclaimer": "Friendy is an AI companion app for adults 18 and older. It is not therapy.",
       "caps": [
-        {"id": "anytime", "h1": "3 AM thoughts?", "h2": "Friendy's up.", "sub": "Someone to talk to, any hour.", "stat": "3 AM", "statLabel": "Still there for you", "feature": ["Talk anytime", "Day or night"], "hook": "Three in the morning and nobody to talk to.", "vo": "Friendy is always there, any hour of the day."},
-        {"id": "five", "h1": "Five friends.", "h2": "One app.", "sub": "Maya, Dre, Sage, Kai and Nova each listen in their own way.", "stat": "5", "statLabel": "Friends to choose from", "feature": ["Meet Maya, Dre, Sage, Kai, Nova", "Pick who you talk to"], "hook": "Different days need different friends.", "vo": "Pick from five friends, Maya, Dre, Sage, Kai and Nova."},
-        {"id": "remember", "h1": "Remembers how", "h2": "your day went.", "sub": "Vent first, fix it later, and turn negative into positive.", "stat": "Memory", "statLabel": "It remembers your day", "feature": ["Remembers your day", "Vent first, fix it later"], "hook": "Talking is easier when someone remembers the last time.", "vo": "Friendy remembers how your day went and helps you turn negative into positive."}
+        {
+          "id": "anytime",
+          "h1": "3 AM thoughts?",
+          "h2": "Friendy's up.",
+          "sub": "Someone to talk to, any hour.",
+          "stat": "3 AM",
+          "statLabel": "Still there for you",
+          "feature": [
+            "Talk anytime",
+            "Day or night"
+          ],
+          "hook": "Three in the morning and nobody to talk to.",
+          "vo": "Friendy is always there, any hour of the day."
+        },
+        {
+          "id": "five",
+          "h1": "Five friends.",
+          "h2": "One app.",
+          "sub": "Maya, Dre, Sage, Kai and Nova each listen in their own way.",
+          "stat": "5",
+          "statLabel": "Friends to choose from",
+          "feature": [
+            "Meet Maya, Dre, Sage, Kai, Nova",
+            "Pick who you talk to"
+          ],
+          "hook": "Different days need different friends.",
+          "vo": "Pick from five friends, Maya, Dre, Sage, Kai and Nova."
+        },
+        {
+          "id": "remember",
+          "h1": "Remembers how",
+          "h2": "your day went.",
+          "sub": "Vent first, fix it later, and turn negative into positive.",
+          "stat": "Memory",
+          "statLabel": "It remembers your day",
+          "feature": [
+            "Remembers your day",
+            "Vent first, fix it later"
+          ],
+          "hook": "Talking is easier when someone remembers the last time.",
+          "vo": "Friendy remembers how your day went and helps you turn negative into positive."
+        }
       ]
     },
     "shopteam": {
       "name": "iRun Shop Team",
-      "accent": ["#34d399", "#fbbf24"],
+      "accent": [
+        "#34d399",
+        "#fbbf24"
+      ],
       "layout": "split",
       "url": "https://hsw365.github.io/iRUN/shopteam.html",
       "signup": "https://hsw365.github.io/iRUN/shopteam.html",
       "cta": "Try it 3 days free",
       "cta_vo": "Scan the code and start your three free days.",
-      "tags": ["shopify", "shopifystore", "ecommerce", "dtc", "shopifymarketing"],
+      "tags": [
+        "shopify",
+        "shopifystore",
+        "ecommerce",
+        "dtc",
+        "shopifymarketing"
+      ],
       "caps": [
-        {"id": "daily-ad", "h1": "A new ad for your", "h2": "products. Daily.", "sub": "iRun Shop Team makes a new cinematic ad for one of your products every day.", "stat": "Daily", "statLabel": "A new product ad", "feature": ["A new ad every day", "One product at a time"], "hook": "Shopify isn't hard. Marketing your store is.", "vo": "iRun Shop Team makes a new ad for one of your products every single day."},
-        {"id": "brand", "h1": "Your products.", "h2": "Your brand.", "sub": "It reads your public catalog and builds every ad in your store's own look.", "stat": "Your look", "statLabel": "Not a template", "feature": ["Reads your catalog", "Ads in your brand"], "hook": "Generic ads make your store look like everyone else's.", "vo": "It reads your public catalog and builds every ad in your own brand."},
-        {"id": "checkout", "h1": "Scan.", "h2": "Straight to checkout.", "sub": "Every ad ends on a QR that opens checkout with that product already in the cart.", "stat": "1 scan", "statLabel": "Ad to cart", "feature": ["QR to checkout", "Product already in the cart"], "hook": "Every extra click between the ad and the cart costs you a sale.", "vo": "Every ad ends on a code that opens checkout with the product in the cart."},
-        {"id": "no-install", "h1": "No app to install.", "h2": "No cut of sales.", "sub": "No login shared, cancel any time.", "stat": "0%", "statLabel": "Of your sales", "feature": ["No app to install", "Cancel any time"], "hook": "Most marketing tools want your logins and a slice of your sales.", "vo": "No app to install, no login shared and no cut of your sales."}
+        {
+          "id": "daily-ad",
+          "h1": "A new ad for your",
+          "h2": "products. Daily.",
+          "sub": "iRun Shop Team makes a new cinematic ad for one of your products every day.",
+          "stat": "Daily",
+          "statLabel": "A new product ad",
+          "feature": [
+            "A new ad every day",
+            "One product at a time"
+          ],
+          "hook": "Shopify isn't hard. Marketing your store is.",
+          "vo": "iRun Shop Team makes a new ad for one of your products every single day."
+        },
+        {
+          "id": "brand",
+          "h1": "Your products.",
+          "h2": "Your brand.",
+          "sub": "It reads your public catalog and builds every ad in your store's own look.",
+          "stat": "Your look",
+          "statLabel": "Not a template",
+          "feature": [
+            "Reads your catalog",
+            "Ads in your brand"
+          ],
+          "hook": "Generic ads make your store look like everyone else's.",
+          "vo": "It reads your public catalog and builds every ad in your own brand."
+        },
+        {
+          "id": "checkout",
+          "h1": "Scan.",
+          "h2": "Straight to checkout.",
+          "sub": "Every ad ends on a QR that opens checkout with that product already in the cart.",
+          "stat": "1 scan",
+          "statLabel": "Ad to cart",
+          "feature": [
+            "QR to checkout",
+            "Product already in the cart"
+          ],
+          "hook": "Every extra click between the ad and the cart costs you a sale.",
+          "vo": "Every ad ends on a code that opens checkout with the product in the cart."
+        },
+        {
+          "id": "no-install",
+          "h1": "No app to install.",
+          "h2": "No cut of sales.",
+          "sub": "No login shared, cancel any time.",
+          "stat": "0%",
+          "statLabel": "Of your sales",
+          "feature": [
+            "No app to install",
+            "Cancel any time"
+          ],
+          "hook": "Most marketing tools want your logins and a slice of your sales.",
+          "vo": "No app to install, no login shared and no cut of your sales."
+        }
       ]
     },
     "operator": {
       "name": "iRun Operator",
-      "accent": ["#f43f5e", "#a855f7"],
+      "accent": [
+        "#f43f5e",
+        "#a855f7"
+      ],
       "layout": "stack",
       "url": "https://hsw365.github.io/iRUN/start.html",
       "signup": "https://hsw365.github.io/iRUN/start.html",
       "cta": "Start with iRun Operator",
       "cta_vo": "Scan the code and put your marketing on autopilot.",
-      "tags": ["smallbusinessmarketing", "marketingautomation", "aimarketing", "solofounder", "autopilot"],
+      "tags": [
+        "smallbusinessmarketing",
+        "marketingautomation",
+        "aimarketing",
+        "solofounder",
+        "autopilot"
+      ],
       "caps": [
-        {"id": "website-in", "h1": "Your website in.", "h2": "A marketing team out.", "sub": "Give iRun Operator your website and it runs your marketing.", "stat": "1 link", "statLabel": "Is all it needs", "feature": ["Starts from your website", "One link in"], "hook": "Fire your marketing agency.", "vo": "Give iRun Operator your website and it runs your marketing."},
-        {"id": "posts", "h1": "Videos posted.", "h2": "Every day.", "sub": "A new video every day on your page, without you.", "stat": "Daily", "statLabel": "Videos on your page", "feature": ["Posts videos every day", "On your page"], "hook": "Your business should run while you sleep.", "vo": "iRun Operator posts videos for your business every single day."},
-        {"id": "report", "h1": "Wake up to the", "h2": "nightly report.", "sub": "It reviews everything every night and tells you what happened.", "stat": "Nightly", "statLabel": "A report, not a surprise", "feature": ["Nightly review", "Know what happened"], "hook": "Agencies send invoices. iRun Operator sends results.", "vo": "Every night it reviews everything and gives you the report."}
+        {
+          "id": "website-in",
+          "h1": "Your website in.",
+          "h2": "A marketing team out.",
+          "sub": "Give iRun Operator your website and it runs your marketing.",
+          "stat": "1 link",
+          "statLabel": "Is all it needs",
+          "feature": [
+            "Starts from your website",
+            "One link in"
+          ],
+          "hook": "Fire your marketing agency.",
+          "vo": "Give iRun Operator your website and it runs your marketing."
+        },
+        {
+          "id": "posts",
+          "h1": "Videos posted.",
+          "h2": "Every day.",
+          "sub": "A new video every day on your page, without you.",
+          "stat": "Daily",
+          "statLabel": "Videos on your page",
+          "feature": [
+            "Posts videos every day",
+            "On your page"
+          ],
+          "hook": "Your business should run while you sleep.",
+          "vo": "iRun Operator posts videos for your business every single day."
+        },
+        {
+          "id": "report",
+          "h1": "Wake up to the",
+          "h2": "nightly report.",
+          "sub": "It reviews everything every night and tells you what happened.",
+          "stat": "Nightly",
+          "statLabel": "A report, not a surprise",
+          "feature": [
+            "Nightly review",
+            "Know what happened"
+          ],
+          "hook": "Agencies send invoices. iRun Operator sends results.",
+          "vo": "Every night it reviews everything and gives you the report."
+        }
       ]
     },
     "stream": {
       "name": "HSW365 Stream",
-      "accent": ["#ef4444", "#f97316"],
+      "accent": [
+        "#ef4444",
+        "#f97316"
+      ],
       "layout": "browser",
       "url": "https://hsw365stream.com",
       "signup": "https://hsw365stream.com",
       "cta": "Go live free for 7 days",
       "cta_vo": "Scan the code and go live free for seven days.",
-      "tags": ["livestreaming", "streamer", "contentcreator", "podcast", "newplatform"],
+      "tags": [
+        "livestreaming",
+        "streamer",
+        "contentcreator",
+        "podcast",
+        "newplatform"
+      ],
       "caps": [
-        {"id": "golive", "h1": "Go live.", "h2": "Keep your audience.", "sub": "Stream from your camera or screen on an independent platform.", "stat": "Live", "statLabel": "Camera or screen", "feature": ["Go live", "Camera or screen"], "hook": "Algorithms bury streams. Platforms take the payouts.", "vo": "HSW365 Stream lets you go live from your camera or your screen."},
-        {"id": "upload", "h1": "Live and", "h2": "on demand.", "sub": "Upload videos too, and chat with your viewers.", "stat": "Videos", "statLabel": "Upload and chat", "feature": ["Upload videos", "Chat with viewers"], "hook": "Your best stream should work for you after you go offline.", "vo": "Upload your videos and chat with your viewers, all in one place."},
-        {"id": "first", "h1": "Be first on a", "h2": "brand new platform.", "sub": "Watching is free. Creators get 7 days free to try it.", "stat": "Free", "statLabel": "For viewers", "feature": ["Watching is free", "Creators try it 7 days free"], "hook": "The creators who show up first on a new platform grow fastest.", "vo": "Watching is free and creators get seven days free."}
+        {
+          "id": "golive",
+          "h1": "Go live.",
+          "h2": "Keep your audience.",
+          "sub": "Stream from your camera or screen on an independent platform.",
+          "stat": "Live",
+          "statLabel": "Camera or screen",
+          "feature": [
+            "Go live",
+            "Camera or screen"
+          ],
+          "hook": "Algorithms bury streams. Platforms take the payouts.",
+          "vo": "HSW365 Stream lets you go live from your camera or your screen."
+        },
+        {
+          "id": "upload",
+          "h1": "Live and",
+          "h2": "on demand.",
+          "sub": "Upload videos too, and chat with your viewers.",
+          "stat": "Videos",
+          "statLabel": "Upload and chat",
+          "feature": [
+            "Upload videos",
+            "Chat with viewers"
+          ],
+          "hook": "Your best stream should work for you after you go offline.",
+          "vo": "Upload your videos and chat with your viewers, all in one place."
+        },
+        {
+          "id": "first",
+          "h1": "Be first on a",
+          "h2": "brand new platform.",
+          "sub": "Watching is free. Creators get 7 days free to try it.",
+          "stat": "Free",
+          "statLabel": "For viewers",
+          "feature": [
+            "Watching is free",
+            "Creators try it 7 days free"
+          ],
+          "hook": "The creators who show up first on a new platform grow fastest.",
+          "vo": "Watching is free and creators get seven days free."
+        }
       ]
     },
     "nil": {
       "name": "NIL365",
-      "accent": ["#3b82f6", "#fbbf24"],
+      "accent": [
+        "#3b82f6",
+        "#fbbf24"
+      ],
       "layout": "phone",
       "url": "https://nil365.onrender.com",
       "signup": "https://nil365.onrender.com",
       "cta": "Build your NIL profile",
       "cta_vo": "Scan the code and build your profile.",
-      "tags": ["nil", "studentathlete", "nildeals", "collegeathlete", "highschoolathlete"],
+      "tags": [
+        "nil",
+        "studentathlete",
+        "nildeals",
+        "collegeathlete",
+        "highschoolathlete"
+      ],
       "disclaimer": "NIL rules vary by state and school. Check your own rules before signing any deal.",
       "caps": [
-        {"id": "profile", "h1": "Your name", "h2": "is worth money.", "sub": "Build a profile brands can find.", "stat": "NIL", "statLabel": "Name, image, likeness", "feature": ["Build your profile", "Where brands look"], "hook": "Student athletes are getting paid for posts they already make.", "vo": "NIL365 lets you build a profile that brands can find."},
-        {"id": "apply", "h1": "Apply to deals.", "h2": "Sign online.", "sub": "Apply to paid NIL deals and sign agreements right in the app.", "stat": "Deals", "statLabel": "Apply and sign in-app", "feature": ["Apply to deals", "Sign agreements online"], "hook": "A deal is only real when the paperwork is signed.", "vo": "Apply to paid deals and sign the agreement right in the app."},
-        {"id": "parents", "h1": "Parents sign", "h2": "right in the app.", "sub": "Parent or guardian signing for anyone under 18.", "stat": "18-", "statLabel": "Guardian signs in-app", "feature": ["Parent or guardian signing", "For anyone under 18"], "hook": "If you're under eighteen, your parents have to sign.", "vo": "Parents or guardians sign right in the app for anyone under eighteen."},
-        {"id": "brands", "h1": "Local brands want", "h2": "local athletes.", "sub": "Brands find and sponsor student athletes and creators.", "stat": "Brands", "statLabel": "Sponsoring local talent", "feature": ["Brands sponsor talent", "Athletes, students, creators"], "hook": "Local businesses want athletes their town already cheers for.", "vo": "Brands use NIL365 to find and sponsor student athletes and creators."}
+        {
+          "id": "profile",
+          "h1": "Your name",
+          "h2": "is worth money.",
+          "sub": "Build a profile brands can find.",
+          "stat": "NIL",
+          "statLabel": "Name, image, likeness",
+          "feature": [
+            "Build your profile",
+            "Where brands look"
+          ],
+          "hook": "Student athletes are getting paid for posts they already make.",
+          "vo": "NIL365 lets you build a profile that brands can find."
+        },
+        {
+          "id": "apply",
+          "h1": "Apply to deals.",
+          "h2": "Sign online.",
+          "sub": "Apply to paid NIL deals and sign agreements right in the app.",
+          "stat": "Deals",
+          "statLabel": "Apply and sign in-app",
+          "feature": [
+            "Apply to deals",
+            "Sign agreements online"
+          ],
+          "hook": "A deal is only real when the paperwork is signed.",
+          "vo": "Apply to paid deals and sign the agreement right in the app."
+        },
+        {
+          "id": "parents",
+          "h1": "Parents sign",
+          "h2": "right in the app.",
+          "sub": "Parent or guardian signing for anyone under 18.",
+          "stat": "18-",
+          "statLabel": "Guardian signs in-app",
+          "feature": [
+            "Parent or guardian signing",
+            "For anyone under 18"
+          ],
+          "hook": "If you're under eighteen, your parents have to sign.",
+          "vo": "Parents or guardians sign right in the app for anyone under eighteen."
+        },
+        {
+          "id": "brands",
+          "h1": "Local brands want",
+          "h2": "local athletes.",
+          "sub": "Brands find and sponsor student athletes and creators.",
+          "stat": "Brands",
+          "statLabel": "Sponsoring local talent",
+          "feature": [
+            "Brands sponsor talent",
+            "Athletes, students, creators"
+          ],
+          "hook": "Local businesses want athletes their town already cheers for.",
+          "vo": "Brands use NIL365 to find and sponsor student athletes and creators."
+        }
       ]
     },
     "speekzone": {
       "name": "SpeekZone",
-      "accent": ["#8b5cf6", "#22d3ee"],
+      "accent": [
+        "#8b5cf6",
+        "#22d3ee"
+      ],
       "layout": "stat",
       "url": "https://hsw365.github.io/SPEEKZONE/",
       "signup": "https://hsw365.github.io/SPEEKZONE/",
       "cta": "Join SpeekZone free",
       "cta_vo": "Scan the code and join SpeekZone free.",
-      "tags": ["socialmedia", "noalgorithm", "noshadowban", "newapp", "creators"],
+      "tags": [
+        "socialmedia",
+        "noalgorithm",
+        "noshadowban",
+        "newapp",
+        "creators"
+      ],
       "caps": [
-        {"id": "no-algo", "h1": "No algorithm.", "h2": "Just people.", "sub": "Your feed in order, nothing hidden.", "stat": "0", "statLabel": "Algorithms deciding for you", "feature": ["Your feed in order", "Nothing hidden"], "hook": "You follow your friends and still never see their posts.", "vo": "SpeekZone shows you everything your friends post, in order."},
-        {"id": "no-shadow", "h1": "No shadowbans.", "h2": "No boosted strangers.", "sub": "SpeekZone is free to use.", "stat": "Free", "statLabel": "To use", "feature": ["No shadowbans", "Free to use"], "hook": "Fed up with feeds that decide who gets seen?", "vo": "No shadowbans and no strangers pushed into your feed."},
-        {"id": "verified", "h1": "Get Verified.", "h2": "Get seen.", "sub": "Optional Verified membership: badge, creator analytics and priority placement in Discover.", "stat": "Badge", "statLabel": "Analytics and Discover", "feature": ["Optional Verified", "Badge, analytics, Discover"], "hook": "Creators want to know who is actually watching.", "vo": "Verified members get a badge, creator analytics and priority placement in Discover."}
+        {
+          "id": "no-algo",
+          "h1": "No algorithm.",
+          "h2": "Just people.",
+          "sub": "Your feed in order, nothing hidden.",
+          "stat": "0",
+          "statLabel": "Algorithms deciding for you",
+          "feature": [
+            "Your feed in order",
+            "Nothing hidden"
+          ],
+          "hook": "You follow your friends and still never see their posts.",
+          "vo": "SpeekZone shows you everything your friends post, in order."
+        },
+        {
+          "id": "no-shadow",
+          "h1": "No shadowbans.",
+          "h2": "No boosted strangers.",
+          "sub": "SpeekZone is free to use.",
+          "stat": "Free",
+          "statLabel": "To use",
+          "feature": [
+            "No shadowbans",
+            "Free to use"
+          ],
+          "hook": "Fed up with feeds that decide who gets seen?",
+          "vo": "No shadowbans and no strangers pushed into your feed."
+        },
+        {
+          "id": "verified",
+          "h1": "Get Verified.",
+          "h2": "Get seen.",
+          "sub": "Optional Verified membership: badge, creator analytics and priority placement in Discover.",
+          "stat": "Badge",
+          "statLabel": "Analytics and Discover",
+          "feature": [
+            "Optional Verified",
+            "Badge, analytics, Discover"
+          ],
+          "hook": "Creators want to know who is actually watching.",
+          "vo": "Verified members get a badge, creator analytics and priority placement in Discover."
+        }
       ]
     },
     "captureitlive": {
       "name": "CaptureItLive",
-      "accent": ["#10b981", "#a3e635"],
+      "accent": [
+        "#10b981",
+        "#a3e635"
+      ],
       "layout": "split",
       "url": "https://hsw365.github.io/captureitlive/",
       "signup": "https://hsw365.github.io/captureitlive/",
       "cta": "Find your next class",
       "cta_vo": "Scan the code and find your next class.",
-      "tags": ["yoga", "yogainstructor", "yogaclass", "yogacommunity", "yogateacher"],
+      "tags": [
+        "yoga",
+        "yogainstructor",
+        "yogaclass",
+        "yogacommunity",
+        "yogateacher"
+      ],
       "caps": [
-        {"id": "fill", "h1": "Fill your classes", "h2": "without a studio.", "sub": "List your classes and let students RSVP.", "stat": "RSVP", "statLabel": "Classes, listed and filled", "feature": ["List and fill classes", "Students RSVP"], "hook": "Great instructors shouldn't need a studio to find students.", "vo": "CaptureItLive lets instructors list classes and fill them."},
-        {"id": "keep", "h1": "Instructors keep", "h2": "every dollar.", "sub": "One $8 a month membership. Instructors keep 100% of class pay.", "stat": "100%", "statLabel": "Of class pay is yours", "feature": ["Keep 100% of class pay", "One flat membership"], "hook": "Most platforms take a cut of every class you teach.", "vo": "Instructors on CaptureItLive keep one hundred percent of their class pay."},
-        {"id": "community", "h1": "Yoga is better", "h2": "with people in it.", "sub": "Find an instructor who fits you, message them and keep practicing together.", "stat": "Together", "statLabel": "Message, RSVP, practice", "feature": ["Find your instructor", "Message and keep practicing"], "hook": "Your practice sticks when you have people to practice with.", "vo": "Find an instructor who fits you, message them and keep practicing together."}
+        {
+          "id": "fill",
+          "h1": "Fill your classes",
+          "h2": "without a studio.",
+          "sub": "List your classes and let students RSVP.",
+          "stat": "RSVP",
+          "statLabel": "Classes, listed and filled",
+          "feature": [
+            "List and fill classes",
+            "Students RSVP"
+          ],
+          "hook": "Great instructors shouldn't need a studio to find students.",
+          "vo": "CaptureItLive lets instructors list classes and fill them."
+        },
+        {
+          "id": "keep",
+          "h1": "Instructors keep",
+          "h2": "every dollar.",
+          "sub": "One $8 a month membership. Instructors keep 100% of class pay.",
+          "stat": "100%",
+          "statLabel": "Of class pay is yours",
+          "feature": [
+            "Keep 100% of class pay",
+            "One flat membership"
+          ],
+          "hook": "Most platforms take a cut of every class you teach.",
+          "vo": "Instructors on CaptureItLive keep one hundred percent of their class pay."
+        },
+        {
+          "id": "community",
+          "h1": "Yoga is better",
+          "h2": "with people in it.",
+          "sub": "Find an instructor who fits you, message them and keep practicing together.",
+          "stat": "Together",
+          "statLabel": "Message, RSVP, practice",
+          "feature": [
+            "Find your instructor",
+            "Message and keep practicing"
+          ],
+          "hook": "Your practice sticks when you have people to practice with.",
+          "vo": "Find an instructor who fits you, message them and keep practicing together."
+        }
       ]
     },
     "estimate": {
       "name": "HSW365 AI Estimate",
-      "accent": ["#0ea5e9", "#22c55e"],
+      "accent": [
+        "#0ea5e9",
+        "#22c55e"
+      ],
       "layout": "browser",
       "url": "https://hsw365-ai-estimate.onrender.com",
       "signup": "https://hsw365-ai-estimate.onrender.com",
       "cta": "Draft your first estimate",
       "cta_vo": "Scan the code and draft your first estimate.",
-      "tags": ["contractor", "estimating", "constructionestimate", "plumber", "tradesbusiness"],
+      "tags": [
+        "contractor",
+        "estimating",
+        "constructionestimate",
+        "plumber",
+        "tradesbusiness"
+      ],
       "caps": [
-        {"id": "photos", "h1": "Photos in.", "h2": "Estimate out.", "sub": "Upload job photos and get a draft estimate.", "stat": "Photos", "statLabel": "To a draft estimate", "feature": ["Photo to estimate", "Upload the job"], "hook": "Quoting jobs at night is the part of contracting nobody gets paid for.", "vo": "Upload your job photos and HSW365 AI Estimate drafts the estimate."},
-        {"id": "plans", "h1": "Upload the plans.", "h2": "Get the number.", "sub": "Plans as PDF or pictures turn into a draft estimate.", "stat": "Plans", "statLabel": "PDF or pictures", "feature": ["Reads plans", "PDF or pictures"], "hook": "Big jobs mean big plan sets and long nights.", "vo": "Upload plans as a PDF or pictures and it reads them into a draft estimate."},
-        {"id": "proposal", "h1": "A proposal that", "h2": "looks like you.", "sub": "Proposals go out as a PDF, ready for you to send.", "stat": "PDF", "statLabel": "Proposal, ready to send", "feature": ["Proposal PDF", "Ready to send"], "hook": "The contractor with the sharper proposal usually gets the job.", "vo": "Every estimate becomes a clean proposal PDF you can send yourself."}
+        {
+          "id": "photos",
+          "h1": "Photos in.",
+          "h2": "Estimate out.",
+          "sub": "Upload job photos and get a draft estimate.",
+          "stat": "Photos",
+          "statLabel": "To a draft estimate",
+          "feature": [
+            "Photo to estimate",
+            "Upload the job"
+          ],
+          "hook": "Quoting jobs at night is the part of contracting nobody gets paid for.",
+          "vo": "Upload your job photos and HSW365 AI Estimate drafts the estimate."
+        },
+        {
+          "id": "plans",
+          "h1": "Upload the plans.",
+          "h2": "Get the number.",
+          "sub": "Plans as PDF or pictures turn into a draft estimate.",
+          "stat": "Plans",
+          "statLabel": "PDF or pictures",
+          "feature": [
+            "Reads plans",
+            "PDF or pictures"
+          ],
+          "hook": "Big jobs mean big plan sets and long nights.",
+          "vo": "Upload plans as a PDF or pictures and it reads them into a draft estimate."
+        },
+        {
+          "id": "proposal",
+          "h1": "A proposal that",
+          "h2": "looks like you.",
+          "sub": "Proposals go out as a PDF, ready for you to send.",
+          "stat": "PDF",
+          "statLabel": "Proposal, ready to send",
+          "feature": [
+            "Proposal PDF",
+            "Ready to send"
+          ],
+          "hook": "The contractor with the sharper proposal usually gets the job.",
+          "vo": "Every estimate becomes a clean proposal PDF you can send yourself."
+        }
       ]
     },
     "affiliate": {
       "name": "HSW365 Affiliates",
-      "accent": ["#fbbf24", "#22c55e"],
+      "accent": [
+        "#fbbf24",
+        "#22c55e"
+      ],
       "layout": "stack",
       "url": "https://hsw365.net/pages/affiliates",
       "signup": "https://hsw365.net/pages/affiliates",
       "cta": "Join free",
       "cta_vo": "Scan the code and join free.",
-      "tags": ["affiliatemarketing", "passiveincome", "sidehustle", "creatoreconomy", "referralprogram"],
+      "tags": [
+        "affiliatemarketing",
+        "passiveincome",
+        "sidehustle",
+        "creatoreconomy",
+        "referralprogram"
+      ],
       "disclaimer": "Earn 20% per subscriber for the full duration of each eligible referred subscription, subject to the HSW365 Affiliate Program Terms.",
       "caps": [
-        {"id": "twenty", "h1": "Earn 20%.", "h2": "Per subscriber.", "sub": "Free to join. Earn for the full duration of each eligible subscription.", "stat": "20%", "statLabel": "Per subscriber, subject to terms", "feature": ["20% per subscriber", "Full duration of the subscription"], "hook": "You already share things your audience likes. Get paid for it.", "vo": "Join the HSW365 Affiliate Partner Program free and earn twenty percent per subscriber, subject to program terms."},
-        {"id": "apps", "h1": "Share the apps.", "h2": "Earn together.", "sub": "Promote HSW365 apps to your audience.", "stat": "Apps", "statLabel": "To share with your audience", "feature": ["Share HSW365 apps", "Build together, earn together"], "hook": "Creators, artists and business owners all have an audience that needs tools.", "vo": "Share HSW365 apps with your audience and build together."},
-        {"id": "free", "h1": "Free to join.", "h2": "Start today.", "sub": "No cost to join the HSW365 Affiliate Partner Program.", "stat": "$0", "statLabel": "To join", "feature": ["Free to join", "Recurring income"], "hook": "The best side income costs nothing to start.", "vo": "The HSW365 Affiliate Partner Program is free to join."}
+        {
+          "id": "twenty",
+          "h1": "Earn 20%.",
+          "h2": "Per subscriber.",
+          "sub": "Free to join. Earn for the full duration of each eligible subscription.",
+          "stat": "20%",
+          "statLabel": "Per subscriber, subject to terms",
+          "feature": [
+            "20% per subscriber",
+            "Full duration of the subscription"
+          ],
+          "hook": "You already share things your audience likes. Get paid for it.",
+          "vo": "Join the HSW365 Affiliate Partner Program free and earn twenty percent per subscriber, subject to program terms."
+        },
+        {
+          "id": "apps",
+          "h1": "Share the apps.",
+          "h2": "Earn together.",
+          "sub": "Promote HSW365 apps to your audience.",
+          "stat": "Apps",
+          "statLabel": "To share with your audience",
+          "feature": [
+            "Share HSW365 apps",
+            "Build together, earn together"
+          ],
+          "hook": "Creators, artists and business owners all have an audience that needs tools.",
+          "vo": "Share HSW365 apps with your audience and build together."
+        },
+        {
+          "id": "free",
+          "h1": "Free to join.",
+          "h2": "Start today.",
+          "sub": "No cost to join the HSW365 Affiliate Partner Program.",
+          "stat": "$0",
+          "statLabel": "To join",
+          "feature": [
+            "Free to join",
+            "Recurring income"
+          ],
+          "hook": "The best side income costs nothing to start.",
+          "vo": "The HSW365 Affiliate Partner Program is free to join."
+        }
       ]
     }
   }

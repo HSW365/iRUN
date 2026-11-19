@@ -10,6 +10,7 @@
 //   POST {a:"zelle_signup", plan, name, email, url, handles, notes}  -> company + Zelle payment instructions
 //   POST {a:"zelle_pay", c, k, kind:"plan"|"credits", qty?}  -> Zelle payment instructions (renewal or credit pack)
 //   POST {a:"shop_check", url}                             -> Shopify store preview (Shop Team page)
+//   POST {a:"app_check", q}                                -> App Store listing preview (App Growth page)
 //   POST {a:"zelle_sent", c, k, id, note?}                 -> customer says the Zelle payment is sent; owner confirms it
 //   POST with stripe-signature                              -> Stripe webhook
 // JWT verification is off: Stripe calls this directly; customer actions check the company's client key.
@@ -256,6 +257,25 @@ Deno.serve(async (req) => {
       }
     }
 
+    // App Growth: preview an app from its public App Store listing (iTunes lookup, no key).
+    if (b.a === "app_check") {
+      const q = String(b.q ?? "").trim().slice(0, 200);
+      if (q.length < 2) return json({ found: false, error: "Enter your App Store link or the app's name" });
+      try {
+        const id = q.match(/\/id(\d{6,})/)?.[1] ?? (/^\d{6,}$/.test(q) ? q : null);
+        const u = id ? `https://itunes.apple.com/lookup?id=${id}`
+          : `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&entity=software&limit=1`;
+        const r = await fetch(u, { signal: AbortSignal.timeout(9000) });
+        const a = (await r.json().catch(() => null))?.results?.[0];
+        if (!a) return json({ found: false });
+        return json({ found: true, id: String(a.trackId), name: String(a.trackName ?? "").split(" - ")[0].slice(0, 60),
+          genre: a.primaryGenreName, price: a.formattedPrice, rating: a.averageUserRating ?? null, ratings: a.userRatingCount ?? 0,
+          icon: a.artworkUrl512, url: String(a.trackViewUrl ?? "").split("?")[0], shots: (a.screenshotUrls ?? []).slice(0, 5) });
+      } catch (_) {
+        return json({ found: false });
+      }
+    }
+
     if (b.a === "zelle_signup") {
       const z = await zelle();
       if ((await setting("billing_live")) !== "on" || !z) return json({ error: "Sign-up opens soon." }, 403);
@@ -295,7 +315,7 @@ Deno.serve(async (req) => {
         "subscription_data[metadata][app]": "irun", "subscription_data[metadata][company_id]": id,
         "subscription_data[trial_period_days]": "3",
         success_url: `${SITE}client.html?c=${id}&s={CHECKOUT_SESSION_ID}`,
-        cancel_url: b.plan === "shopify" ? `${SITE}shopteam.html#start` : `${SITE}start.html?plan=${b.plan}`,
+        cancel_url: b.plan === "shopify" ? `${SITE}shopteam.html#start` : b.plan === "appgrowth" ? `${SITE}appgrowth.html#start` : `${SITE}start.html?plan=${b.plan}`,
         "line_items[0][quantity]": "1",
         "line_items[0][price_data][currency]": "usd",
         "line_items[0][price_data][unit_amount]": String(plan.cents),
