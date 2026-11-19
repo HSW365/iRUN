@@ -1,0 +1,77 @@
+name: iRun daily app promo
+
+# One ad per slot, three slots a day (9am, 1pm and 6pm Eastern in winter; shift the hours an hour earlier UTC when daylight saving starts).
+# Each ad promotes ONE real capability of ONE HSW365 app (config/capabilities.json), rotating through config/daily.json.
+# Own layout, own narrator voice, QR straight to that app's sign-up, posted to Instagram @hoodstar365. Engine: engine/daily.py.
+on:
+  schedule:
+    - cron: "0 14 * * *"
+    - cron: "0 18 * * *"
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "ads to make this run"
+        default: "1"
+      app:
+        description: "force an app id from config/capabilities.json (blank = next in rotation)"
+        default: ""
+      cap:
+        description: "force one capability id of that app"
+        default: ""
+      mode:
+        description: "live (post to Instagram) or draft (render only)"
+        default: "live"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements.txt playwright
+          python -m playwright install --with-deps chromium
+      - name: Make and post
+        env:
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IRUN_MODE: ${{ github.event.inputs.mode || 'live' }}
+        run: |
+          mkdir -p out/daily
+          ARGS="--count ${{ github.event.inputs.count || 1 }}"
+          [ -n "${{ github.event.inputs.app }}" ] && ARGS="$ARGS --app ${{ github.event.inputs.app }}"
+          [ -n "${{ github.event.inputs.cap }}" ] && ARGS="$ARGS --cap ${{ github.event.inputs.cap }}"
+          [ "$IRUN_MODE" = "live" ] || ARGS="$ARGS --no-post"
+          python engine/daily.py $ARGS 2>&1 | tee out/daily/run.log
+          exit ${PIPESTATUS[0]}
+      - name: Save rotation progress
+        if: always()
+        run: |
+          git config user.name "iRun"
+          git config user.email "hsw365media@gmail.com"
+          git add config/daily_state.json config/showcase_state.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -qm "iRun: daily rotation [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
+      - name: Keep the ads
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: irun-daily-${{ github.run_id }}
+          path: out/daily/
+          retention-days: 14

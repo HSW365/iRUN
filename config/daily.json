@@ -1,0 +1,9 @@
+{
+  "_note": "iRun daily app promo (engine/daily.py, .github/workflows/daily.yml). per_day = ads per run-day split across the schedule slots in the workflow (one ad per slot). apps = rotation order; every app's capabilities live in config/capabilities.json. Instagram only, through @hoodstar365.",
+  "account": "hoodstar365",
+  "per_day": 3,
+  "apps": [
+    "calltwin", "klipit", "queenee", "shopteam", "irun", "flipit", "studio", "estimate",
+    "operator", "nil", "friendy", "affiliate", "stream", "dispute365", "speekzone", "captureitlive"
+  ]
+}
