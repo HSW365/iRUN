@@ -140,6 +140,10 @@ html,body{{width:{W}px;height:{H}px;overflow:hidden;background:#06060c;color:#f4
 .end .qr{{width:430px;height:430px;padding:26px;background:#fff;border-radius:34px;box-shadow:0 0 0 6px color-mix(in srgb,var(--a1) 70%,white),0 0 120px var(--a1)}}
 .end .qr img{{width:100%;height:100%}}
 .end .scan{{font:700 30px Mono;letter-spacing:6px;color:#c7c7d6}}
+.end .affiliate-cta{{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:920px;margin:0 64px;padding:18px 28px;border:1px solid rgba(255,255,255,.2);border-radius:22px;background:rgba(255,255,255,.08);text-align:center}}
+.end .affiliate-cta strong{{font:800 28px Barlow;letter-spacing:1px;color:#fff}}
+.end .affiliate-cta span{{font:700 20px Inter;color:var(--a1)}}
+.end .affiliate-cta small{{font:500 17px Inter;color:#c7c7d6}}
 """
 
 
@@ -235,12 +239,22 @@ def body(layout, app, shots, dur):
 
 def page(layout, app, shots, qr, dur):
     a1, a2 = app.get("accent", ["#22d3ee", "#a855f7"])
+    affiliate = app.get("affiliate_cta") or {}
+    affiliate_html = ""
+    if affiliate:
+        affiliate_html = (
+            '<div class="affiliate-cta">'
+            f'<strong>{esc(affiliate.get("heading", "JOIN HSW365 AFFILIATES"))}</strong>'
+            f'<span>{esc(affiliate.get("offer", "EARN 20% PER SUBSCRIBER FOR THE FULL DURATION OF THEIR SUBSCRIPTION"))}</span>'
+            f'<small>{esc(affiliate.get("terms", "SUBJECT TO PROGRAM TERMS · hsw365.net/pages/affiliates"))}</small>'
+            '</div>'
+        )
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>{head_css(a1, a2, dur)}</style></head><body>
 <div class="stage"><div class="bg"></div><div class="dots"></div>
 <div class="brand"><i>H</i>HSW365 <span>{esc(app["name"]).upper()}</span></div><div class="tag">HSW365.NET</div>
 {body(layout, app, shots, dur)}</div>
 <div class="end"><div class="logo">HSW365 <span>MEDIA</span></div><div class="app">{esc(app["name"])}</div>
-<div class="qr"><img src="{qr}"></div><div class="btn">{esc(app["cta"])}</div><div class="scan">SCAN TO SIGN UP</div></div>
+<div class="qr"><img src="{qr}"></div><div class="btn">{esc(app["cta"])}</div><div class="scan">SCAN TO SIGN UP</div>{affiliate_html}</div>
 <script>/* every headline line stays on ONE line: shrink it until it fits its column */
 document.fonts.ready.then(() => document.querySelectorAll(".h1,.h2").forEach(el => {{
   el.style.whiteSpace = "nowrap"; el.style.display = "inline-block";
