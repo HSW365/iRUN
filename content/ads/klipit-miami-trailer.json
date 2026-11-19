@@ -1,0 +1,194 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "klipit",
+  "platform": "instagram",
+  "shots_dir": "content/shots/klipit-miami",
+  "accent": "#FF2D95",
+  "title": "KLIPIT",
+  "presents": "KLIPIT \u00b7 NEW LOOK \u00b7 MIAMI NIGHTS",
+  "title_style": "smoke",
+  "slam_style": "neon",
+  "cut_style": "whip",
+  "end_style": "poster",
+  "bug": {
+    "text": "KLIPIT",
+    "pos": "bl"
+  },
+  "score": {
+    "shift": 2,
+    "tempo": 1.1
+  },
+  "narrator": {
+    "blend": {
+      "am_onyx": 0.6,
+      "am_liam": 0.4
+    },
+    "tone": "warm",
+    "speed": 1.0,
+    "exag": 0.5
+  },
+  "shot_prompts": {
+    "livingroom": "candid vertical iPhone video still of a dark apartment living room at midnight, a big pink and teal neon glowing hot pink and teal neon across the faces of four friends in hoodies on a couch with energy drinks and pizza boxes, controllers in hands, everyone leaning forward, real cluttered room, handheld, slight motion blur, raw unedited UGC look, shot on iPhone, no logos, no text",
+    "gasp": "candid vertical iPhone close-up of a young man in a headset mouth wide open in shock, pink and teal neon glow on his face, friends blurred behind him exploding out of the couch, dark room, handheld shaky framing, raw UGC look, shot on iPhone",
+    "chaos": "candid vertical iPhone still of a streamer at a messy gaming desk with ring light, both hands on his head, second monitor full of fast scrolling live chat, night, real bedroom with posters, handheld, raw UGC look, shot on iPhone, no logos",
+    "slump": "candid vertical iPhone still of the same young man slumped in a gaming chair at 4am staring at a laptop with an endless video timeline, empty energy drink cans on the desk, pink and teal neon light, exhausted, real room, handheld, raw UGC look, shot on iPhone",
+    "timeline": "candid vertical iPhone still over a streamer's shoulder of a laptop screen showing a very long video editing timeline, cold light, messy desk, handheld, raw UGC look, shot on iPhone",
+    "friend": "candid vertical iPhone selfie-style still of a girl in a beanie leaning into frame pointing at his laptop and grinning, dark room with pink and teal neon glow, handheld, raw UGC look, shot on iPhone",
+    "paste": "over-the-shoulder candid vertical iPhone still of hands pasting a link into a laptop on a messy night desk, pink and teal neon glow in the background, energy drink in frame, handheld, raw UGC look, shot on iPhone",
+    "stream": "candid vertical iPhone still of a dark gaming desk with a monitor showing blurred colorful action footage and a headset on the chair, pink and teal neon bounce light, real room clutter, handheld, raw UGC look, shot on iPhone, no logos",
+    "phone": "candid vertical iPhone still of a hand holding a phone up to camera showing a grid of vertical gaming clips with notifications piling up, dark room, pink and teal neon glow bokeh, handheld, raw UGC look, shot on iPhone",
+    "win": "candid vertical iPhone still of the group of friends crowded around one phone at sunrise screaming and laughing with joy, golden light through blinds, pizza boxes on the floor, handheld motion blur, raw UGC look, shot on iPhone"
+  },
+  "open": {
+    "shot": "livingroom",
+    "impact": "3 AM",
+    "cy": 0.5,
+    "zoom": [
+      1.0,
+      1.14
+    ],
+    "dur": 2.2
+  },
+  "scenes": [
+    {
+      "shot": "gasp",
+      "cy": 0.45,
+      "zoom": [
+        1.04,
+        1.18
+      ],
+      "dur": 1.1
+    },
+    {
+      "shot": "chaos",
+      "cy": 0.45,
+      "zoom": [
+        1.05,
+        1.2
+      ],
+      "dur": 1.1
+    },
+    {
+      "shot": "slump",
+      "cy": 0.5,
+      "zoom": [
+        1.02,
+        1.14
+      ],
+      "dur": 1.1
+    },
+    {
+      "card": {
+        "title": "KLIPIT \u00b7 SCANNED 3:02:41",
+        "tag": "FOUND",
+        "rows": [
+          [
+            "01:14:07",
+            "CLUTCH PLAY \u00b7 97"
+          ],
+          [
+            "02:51:33",
+            "CHAT LOSES IT \u00b7 94"
+          ],
+          [
+            "03:08:12",
+            "CLIP OF THE NIGHT \u00b7 91"
+          ]
+        ]
+      },
+      "bg": "timeline",
+      "dur": 1.8
+    }
+  ],
+  "slams": [
+    {
+      "word": "PASTE",
+      "shot": "paste",
+      "cy": 0.5,
+      "dur": 1.0
+    },
+    {
+      "word": "THE",
+      "shot": "stream",
+      "cy": 0.5,
+      "dur": 1.0
+    },
+    {
+      "word": "LINK",
+      "shot": "phone",
+      "cy": 0.5,
+      "dur": 1.2
+    }
+  ],
+  "callback": {
+    "shot": "livingroom",
+    "impact": "POSTED",
+    "cy": 0.5,
+    "zoom": [
+      1.14,
+      1.0
+    ]
+  },
+  "payoff": [
+    {
+      "shot": "friend",
+      "cy": 0.45,
+      "dur": 1.2
+    },
+    {
+      "shot": "win",
+      "warm": true,
+      "cy": 0.45,
+      "sub": "Paste the stream. Post the clips."
+    }
+  ],
+  "end": {
+    "wordmark": [
+      "KLIP",
+      "IT"
+    ],
+    "tagline": "The stream clipper. Paste the link. Get the clips.",
+    "cta": "SCAN TO SIGN UP",
+    "lines": [
+      "YOUTUBE \u00b7 TWITCH \u2192 VERTICAL CLIPS",
+      "PLANS FROM $20/MONTH"
+    ],
+    "fine": "HSW365 Media",
+    "link": "https://klipit.onrender.com/?signup=pro&src=ig-miami"
+  },
+  "vo_lines": [
+    [
+      0.3,
+      "Three a.m. Your stream just had its best moment."
+    ],
+    [
+      4.2,
+      "And it's buried in hour three."
+    ],
+    [
+      8.0,
+      "Stop scrubbing. Paste the link."
+    ],
+    [
+      11.2,
+      "Klipit finds every highlight. Vertical. Ready to post."
+    ],
+    [
+      15.2,
+      "Scan. Sign up. Clip the night."
+    ]
+  ],
+  "vo_captions": true,
+  "duck": 0.6,
+  "caption": "Your best stream moment is buried somewhere in hour three. Klipit finds it for you.\n\nPaste a YouTube or Twitch link, get vertical clips for Reels, Shorts and TikTok. Plans from $20/month, cancel anytime.\n\nScan the QR or use the link in bio: klipit.onrender.com\n\nMiami-night Klipit merch is dropping at hsw365.net.",
+  "hashtags": [
+    "streamerclips",
+    "gamingclips",
+    "contentcreator",
+    "twitchstreamer",
+    "clipping",
+    "klipit",
+    "hsw365media"
+  ]
+}
