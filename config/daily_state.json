@@ -1,1 +1,20 @@
-{"cursor": 0, "used": {}, "voices": [], "log": []}
+{
+  "cursor": 1,
+  "used": {
+    "calltwin": [
+      "answers"
+    ]
+  },
+  "voices": [
+    "en-GB-SoniaNeural"
+  ],
+  "log": [
+    {
+      "at": "2026-11-19T01:43Z",
+      "app": "calltwin",
+      "cap": "answers",
+      "voice": "en-GB-SoniaNeural",
+      "posted": true
+    }
+  ]
+}
