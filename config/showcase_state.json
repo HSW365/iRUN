@@ -1,11 +1,11 @@
 {
   "recent": [
-    "split",
     "stat",
     "phone",
     "stat",
     "browser",
-    "split"
+    "split",
+    "stack"
   ],
   "by_app": {
     "calltwin": "phone",

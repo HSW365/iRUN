@@ -1,5 +1,5 @@
 {
-  "cursor": 4,
+  "cursor": 5,
   "used": {
     "calltwin": [
       "answers"
@@ -12,13 +12,17 @@
     ],
     "shopteam": [
       "daily-ad"
+    ],
+    "irun": [
+      "daily"
     ]
   },
   "voices": [
     "en-GB-SoniaNeural",
     "en-GB-RyanNeural",
     "en-US-AndrewMultilingualNeural",
-    "en-US-EricNeural"
+    "en-US-EricNeural",
+    "en-US-ChristopherNeural"
   ],
   "log": [
     {
@@ -47,6 +51,13 @@
       "app": "shopteam",
       "cap": "daily-ad",
       "voice": "en-US-EricNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-20T22:03Z",
+      "app": "irun",
+      "cap": "daily",
+      "voice": "en-US-ChristopherNeural",
       "posted": true
     }
   ]
