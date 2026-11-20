@@ -90,7 +90,16 @@ def compose(app_id, app, cap):
         "name": app["name"], "accent": app["accent"], "layout": app.get("layout"), "url": app["url"],
         "signup": app.get("signup") or app["url"], "h1": cap["h1"], "h2": cap["h2"], "sub": cap["sub"],
         "stat": cap.get("stat", app["name"]), "statLabel": cap.get("statLabel", ""), "features": feats,
-        "cta": app["cta"], "vo": [cap["hook"], cap["vo"], app["cta_vo"]],
+        "cta": app["cta"],
+        "affiliate_cta": {
+            "heading": "JOIN HSW365 AFFILIATES",
+            "offer": "EARN 20% PER SUBSCRIBER FOR THE FULL DURATION OF THEIR SUBSCRIPTION",
+            "terms": "SUBJECT TO PROGRAM TERMS · hsw365.net/pages/affiliates",
+        },
+        "vo": [
+            cap["hook"], cap["vo"], app["cta_vo"],
+            "Join HSW365 Affiliates and earn 20% per subscriber for the full duration of that subscriber's subscription, subject to program terms. Apply at hsw365.net/pages/affiliates.",
+        ],
     }
     return spec
 
@@ -105,6 +114,11 @@ def caption(app, cap):
     lines = [f"{cap['h1']} {cap['h2']}", "", cap["sub"], "", f"{app['cta']}: scan the QR in the video.", f"{app['name']} by HSW365 Media."]
     if app.get("disclaimer"):
         lines += ["", app["disclaimer"]]
+    lines += [
+        "",
+        "Join HSW365 Affiliates and earn 20% per subscriber for the full duration of that subscriber's subscription, subject to program terms.",
+        "Apply: https://hsw365.net/pages/affiliates",
+    ]
     lines += ["", " ".join(out)]
     return "\n".join(lines)
 
@@ -168,7 +182,7 @@ def main():
                 continue
             if not a.no_post:
                 r = subprocess.run([sys.executable, os.path.join(ROOT, "engine", "run.py"), "--account", account,
-                                    "--platform", "instagram", "--mode", os.environ.get("IRUN_MODE", "live"),
+                                    "--platform", "instagram", "--mode", os.environ.get("IRUN_MODE", "draft"),
                                     "--video", out, "--caption", cap_text])
                 if r.returncode != 0:
                     print(f"[daily] post failed for {app_id}/{cap['id']}")

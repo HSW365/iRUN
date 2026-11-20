@@ -2,7 +2,7 @@ name: iRun daily app promo
 
 # One ad per slot, three slots a day (9am, 1pm and 6pm Eastern in winter; shift the hours an hour earlier UTC when daylight saving starts).
 # Each ad promotes ONE real capability of ONE HSW365 app (config/capabilities.json), rotating through config/daily.json.
-# Own layout, own narrator voice, QR straight to that app's sign-up, posted to Instagram @hoodstar365. Engine: engine/daily.py.
+# Own layout and narrator voice; app QR plus a visible HSW365 affiliate invitation. Scheduled runs render drafts; explicit live mode is required to publish. Engine: engine/daily.py.
 on:
   schedule:
     - cron: "0 14 * * *"
@@ -21,7 +21,7 @@ on:
         default: ""
       mode:
         description: "live (post to Instagram) or draft (render only)"
-        default: "live"
+        default: "draft"
 
 permissions:
   contents: write
@@ -50,7 +50,7 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          IRUN_MODE: ${{ github.event.inputs.mode || 'live' }}
+          IRUN_MODE: ${{ github.event.inputs.mode || 'draft' }}
         run: |
           mkdir -p out/daily
           ARGS="--count ${{ github.event.inputs.count || 1 }}"
