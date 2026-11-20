@@ -1,11 +1,11 @@
 {
   "recent": [
-    "stat",
     "phone",
     "stat",
     "browser",
     "split",
-    "stack"
+    "stack",
+    "browser"
   ],
   "by_app": {
     "calltwin": "phone",
@@ -13,6 +13,7 @@
     "irun": "stack",
     "dispute365": "split",
     "klipit": "stat",
-    "shopteam": "split"
+    "shopteam": "split",
+    "flipit": "browser"
   }
 }

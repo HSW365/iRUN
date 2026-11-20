@@ -1,5 +1,5 @@
 {
-  "cursor": 5,
+  "cursor": 6,
   "used": {
     "calltwin": [
       "answers"
@@ -15,6 +15,9 @@
     ],
     "irun": [
       "daily"
+    ],
+    "flipit": [
+      "mao"
     ]
   },
   "voices": [
@@ -22,7 +25,8 @@
     "en-GB-RyanNeural",
     "en-US-AndrewMultilingualNeural",
     "en-US-EricNeural",
-    "en-US-ChristopherNeural"
+    "en-US-ChristopherNeural",
+    "en-GB-SoniaNeural"
   ],
   "log": [
     {
@@ -58,6 +62,13 @@
       "app": "irun",
       "cap": "daily",
       "voice": "en-US-ChristopherNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-20T23:58Z",
+      "app": "flipit",
+      "cap": "mao",
+      "voice": "en-GB-SoniaNeural",
       "posted": true
     }
   ]
