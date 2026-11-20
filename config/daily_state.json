@@ -1,16 +1,20 @@
 {
-  "cursor": 2,
+  "cursor": 3,
   "used": {
     "calltwin": [
       "answers"
     ],
     "klipit": [
       "vod"
+    ],
+    "queenee": [
+      "built"
     ]
   },
   "voices": [
     "en-GB-SoniaNeural",
-    "en-GB-RyanNeural"
+    "en-GB-RyanNeural",
+    "en-US-AndrewMultilingualNeural"
   ],
   "log": [
     {
@@ -25,6 +29,13 @@
       "app": "klipit",
       "cap": "vod",
       "voice": "en-GB-RyanNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-20T00:35Z",
+      "app": "queenee",
+      "cap": "built",
+      "voice": "en-US-AndrewMultilingualNeural",
       "posted": true
     }
   ]
