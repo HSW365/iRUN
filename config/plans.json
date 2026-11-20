@@ -88,6 +88,27 @@
         "Nightly AI review of what posted",
         "30 credits a month, no cut of your sales"
       ]
+    },
+    "appgrowth": {
+      "name": "App Growth",
+      "cents": 4700,
+      "credits": 30,
+      "hours": [],
+      "app_ads": true,
+      "app_hour": 16,
+      "site": false,
+      "faceless": false,
+      "outreach": false,
+      "outreach_daily_cap": 0,
+      "features": [
+        "You made the app. We get it downloaded: scripts, videos and ads, every day",
+        "3 fresh short-form scripts a day, each a tiny acted scene written from your App Store listing",
+        "A new narrated ad every day with a QR straight to your download page",
+        "Posted to your Instagram with a search-first caption and tight hashtags",
+        "Every script, caption and video saved for you to use anywhere",
+        "Nightly AI review of what posted and what to try tomorrow",
+        "30 credits a month, no cut of your downloads or revenue"
+      ]
     }
   }
 }

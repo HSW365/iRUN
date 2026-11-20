@@ -6,6 +6,7 @@ Built by HSW365 Media LLC (Elvin Torres Sr., Hoodstar365).
 
 ## Pages
 - https://hsw365.github.io/iRUN/adstudio.html
+- https://hsw365.github.io/iRUN/appgrowth.html
 - https://hsw365.github.io/iRUN/data-deletion.html
 - https://hsw365.github.io/iRUN/
 - https://hsw365.github.io/iRUN/instagram.html
