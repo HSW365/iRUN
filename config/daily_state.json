@@ -1,5 +1,5 @@
 {
-  "cursor": 3,
+  "cursor": 4,
   "used": {
     "calltwin": [
       "answers"
@@ -9,12 +9,16 @@
     ],
     "queenee": [
       "built"
+    ],
+    "shopteam": [
+      "daily-ad"
     ]
   },
   "voices": [
     "en-GB-SoniaNeural",
     "en-GB-RyanNeural",
-    "en-US-AndrewMultilingualNeural"
+    "en-US-AndrewMultilingualNeural",
+    "en-US-EricNeural"
   ],
   "log": [
     {
@@ -36,6 +40,13 @@
       "app": "queenee",
       "cap": "built",
       "voice": "en-US-AndrewMultilingualNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-20T04:00Z",
+      "app": "shopteam",
+      "cap": "daily-ad",
+      "voice": "en-US-EricNeural",
       "posted": true
     }
   ]
