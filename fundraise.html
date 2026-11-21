@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>iRun Fundraise | AI that runs your fundraising</title>
+<meta name="description" content="Perfect your deck, match with investors, send personal emails you approve, and book the meetings. iRun runs the fundraise every hour. $17 a month, no cut of your raise.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="canonical" href="https://hsw365.github.io/iRUN/fundraise.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iRun Fundraise | AI that runs your fundraising">
+<meta property="og:description" content="Deck review, matched investors with scores, personal outreach you approve, and a meetings pipeline. $17 a month.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3Ei%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="assets/hsw/fonts/barlow-condensed-latin-900-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/hsw/fonts/inter-latin-wght-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>
+:root{--acc:#ef4444;--acc-ink:#0a0a0f;--ember:#ff8a5c}
+.fx{background:radial-gradient(900px 480px at 78% -10%,rgba(239,68,68,.22),transparent 60%),radial-gradient(700px 400px at 5% 20%,rgba(255,138,92,.10),transparent 60%)}
+.h1x{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.88;letter-spacing:-.005em;font-size:clamp(58px,9.4vw,138px);color:#fff}
+.h1x em{font-style:normal;background:linear-gradient(92deg,#ff8a5c 0%,#ef4444 55%,#ff3d71 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero2{padding:clamp(44px,7vw,96px) 0 clamp(64px,8vw,112px)}
+.hero2 .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,4vw,64px);align-items:center}
+.hero2 .lede{margin-top:22px;max-width:560px}
+.trust{display:flex;gap:10px;align-items:center;margin-bottom:22px;font:600 13px var(--mono);letter-spacing:.06em;color:var(--mut);text-transform:uppercase}
+.trust i{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 4px rgba(52,211,153,.18)}
+/* match board mock */
+.board{background:linear-gradient(180deg,#14141c,#0c0c12);border:1px solid var(--line2);border-radius:14px;padding:16px;box-shadow:0 40px 90px -30px rgba(239,68,68,.35),0 0 0 1px rgba(255,255,255,.03) inset;position:relative}
+.board::before{content:"";position:absolute;inset:-1px;border-radius:14px;padding:1px;background:linear-gradient(140deg,rgba(255,138,92,.6),transparent 35%,transparent 65%,rgba(239,68,68,.5));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.board-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.board-top b{font-size:15px;color:#fff}.board-top span{font:700 10.5px var(--mono);letter-spacing:.1em;color:var(--mut);border:1px solid var(--line2);border-radius:3px;padding:4px 8px}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.pills i{font-style:normal;font-size:12px;color:var(--text2);border:1px solid var(--line2);border-radius:12px;padding:3px 10px;background:rgba(255,255,255,.02)}
+.mrow{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 12px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.02);margin-top:9px}
+.mrow:first-of-type{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.06)}
+.mrow .s{font-family:var(--disp);font-weight:900;font-size:36px;line-height:1;color:#34d399;text-align:center}.mrow .s.m2{color:#fbbf24}
+.mrow .s small{display:block;font:9px var(--mono);color:var(--mut);letter-spacing:.1em;margin-top:2px}
+.mrow b{display:block;color:#fff;font-size:15px}.mrow span.t{display:block;color:var(--mut);font-size:12.5px;margin-top:2px}
+.mrow .why{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.mrow .why i{font-style:normal;font-size:11px;color:var(--text2);border:1px solid var(--line2);border-radius:10px;padding:1px 8px}
+.mrow .go{font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line2);border-radius:3px;padding:6px 10px;color:var(--text2);white-space:nowrap}
+.mrow .go.y{background:var(--acc);border-color:var(--acc);color:#fff}.mrow .go.g{border-color:#34d399;color:#34d399}.mrow .go.b{border-color:#60a5fa;color:#60a5fa}
+.mdraft{margin-top:12px;border-left:2px solid var(--acc);padding:10px 14px;background:rgba(255,255,255,.025);font-size:13px;line-height:1.55;color:#d9d9e2;border-radius:0 6px 6px 0}
+.mdraft b{display:block;font:700 10.5px var(--mono);letter-spacing:.1em;color:var(--mut);margin-bottom:5px;text-transform:uppercase}
+/* stages */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line2);border-radius:8px;overflow:hidden;background:var(--card)}
+.flow>div{padding:26px 22px;position:relative}.flow>div+div{border-left:1px solid var(--line)}
+.flow b{display:block;font-family:var(--disp);font-weight:900;font-size:64px;line-height:.8;color:var(--acc);opacity:.95}
+.flow strong{display:block;color:#fff;font-size:18px;margin-top:16px}
+.flow span{display:block;color:var(--mut);font-size:14.5px;margin-top:6px;line-height:1.5}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cmp>div{border:1px solid var(--line2);border-radius:8px;padding:24px;background:var(--card)}
+.cmp h3{font:800 19px var(--body);color:#fff;letter-spacing:-.01em;line-height:1.25}
+.cmp p{color:var(--text2);font-size:15px;margin-top:10px;line-height:1.55}
+.cmp .tag{font:700 11px var(--mono);letter-spacing:.1em;color:var(--acc);text-transform:uppercase;margin-bottom:12px;display:block}
+.deal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);align-items:start}
+.price{border:1px solid var(--acc);border-radius:10px;padding:28px;background:linear-gradient(180deg,rgba(239,68,68,.07),transparent);box-shadow:0 0 0 1px rgba(239,68,68,.2)}
+.price .amt{font-family:var(--disp);font-weight:900;font-size:clamp(72px,8vw,110px);line-height:.85;color:#fff}.price .amt small{font:600 18px var(--body);color:var(--mut);margin-left:8px}
+.price ul{list-style:none;margin-top:18px}.price li{padding:9px 0 9px 26px;border-top:1px solid var(--line);position:relative;color:#fff;font-size:15.5px}
+.price li::before{content:"";position:absolute;left:3px;top:17px;width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line2);border-radius:3px;padding:12px 14px;cursor:pointer;background:var(--bg)}
+.pay label:has(input:checked){border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pay input{width:18px;height:18px;margin-top:3px;accent-color:var(--acc);flex:none}
+.pay b{display:block;color:#fff;font-size:15.5px}.pay small{display:block;color:var(--mut);font-size:13px}
+.field input,.field select,.field textarea{width:100%;height:52px;background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:0 14px;color:#fff}
+.field textarea{height:auto;padding:10px 14px;min-height:96px}
+.msg{min-height:20px;font-size:14px;margin-top:10px;color:var(--text2)}.msg.err{color:#fca5a5}
+.closed{border:1px dashed var(--line2);border-radius:4px;padding:14px 16px;color:var(--text2);font-size:15px;margin-top:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:980px){.hero2 .grid,.deal{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow>div+div{border-left:0;border-top:1px solid var(--line)}.flow b{font-size:48px}.cmp{grid-template-columns:1fr}}
+@media (max-width:640px){.row2{grid-template-columns:1fr}.mrow{grid-template-columns:48px minmax(0,1fr)}.mrow .go{grid-column:2;justify-self:start}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="util"><div class="wrap"><span class="util-l">iRun Fundraise is a product of HSW365 Media LLC.</span><span class="util-r"><a href="start.html">iRun Operator</a></span></div></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="iRun Fundraise home"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Fundraise: AI that runs your raise</small></span></a>
+    <nav class="nav-links" aria-label="Page"><a href="#how">How it works</a><a href="#honest">What it never does</a><a href="#price">Price</a><a href="#start">Start</a></nav>
+    <div class="nav-cta"><a class="btn btn-acc btn-sm" href="#start">Start your fundraise</a><button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span></button></div>
+  </div>
+  <nav class="mnav" aria-label="Menu"><a href="#how">How it works</a><a href="#honest">What it never does</a><a href="#price">Price</a><a class="btn btn-acc" href="#start">Start your fundraise</a></nav>
+</header>
+
+<main id="main">
+<section class="hero2 fx" id="top"><div class="wrap grid">
+  <div>
+    <p class="trust"><i></i>Working every hour on your raise</p>
+    <h1 class="h1x">AI that<br><em>runs</em> your<br>fundraising</h1>
+    <p class="lede">Perfect your deck. Get matched to investors with a score and the reasons. Send personal emails you approve. Book the meetings. One place, working every hour.</p>
+    <div class="hero-ctas" style="margin-top:28px"><a class="btn btn-acc" href="#start">Start your fundraise</a><a class="btn btn-line" href="#how">See how it works</a></div>
+    <p class="hero-fine">$17 a month. No cut of what you raise. You approve every email.</p>
+  </div>
+  <div class="board" aria-label="Example of the investor match board">
+    <div class="board-top"><b>Seed raise: investor matches</b><span>EXAMPLE DATA</span></div>
+    <div class="pills"><i>Seed</i><i>United States</i><i>$1M to $3M</i><i>AI, SaaS</i></div>
+    <div class="mrow"><div class="s">96<small>MATCH</small></div><div><b>Partner, Northgate Ventures</b><span class="t">New York</span><div class="why"><i>invests at seed</i><i>check size fits</i><i>backs ai, saas</i></div></div><span class="go y">Needs your OK</span></div>
+    <div class="mrow"><div class="s">88<small>MATCH</small></div><div><b>Angel, Harbor Angels</b><span class="t">Philadelphia</span><div class="why"><i>invests at seed</i><i>check size is close</i><i>location fits</i></div></div><span class="go g">Approved</span></div>
+    <div class="mrow"><div class="s m2">71<small>MATCH</small></div><div><b>Principal, Quarry Capital</b><span class="t">Boston</span><div class="why"><i>invests one stage away</i><i>backs saas</i></div></div><span class="go b">Follow-up sent</span></div>
+    <div class="mdraft"><b>Draft for Northgate Ventures</b>Hi Jane, you back early AI and SaaS teams out of New York, which is where we are raising our seed. We build ... I would value 15 minutes this week. Here is my calendar if easier.</div>
+  </div>
+</div></section>
+
+<div class="plate"><div class="wrap"><div><b>0-100</b><strong>Deck readiness score</strong><span>Slide-by-slide fixes and a rewritten pitch</span></div><div><b>Scored</b><strong>Every investor, with reasons</strong><span>Stage, check size, sector and region</span></div><div><b>You OK</b><strong>Every email before it sends</strong><span>First email plus one follow-up</span></div><div><b>$17</b><strong>A month</strong><span>No cut of what you raise</span></div></div></div>
+
+<section class="block" id="how"><div class="wrap"><div class="sec-head"><h2>Five jobs. One loop.</h2><p class="lede">A fundraise is a pipeline, not a pile of tabs. iRun works it every hour and shows you what moved.</p></div>
+<div class="flow">
+  <div><b>01</b><strong>Perfect the deck</strong><span>Upload the PDF. Get a readiness score, what an investor will doubt, a fix for every slide and a rewritten one-liner and pitch.</span></div>
+  <div><b>02</b><strong>Match investors</strong><span>Bring your list. Each investor is scored 0 to 100 against your stage, check size, sector and region, with the reasons next to the score.</span></div>
+  <div><b>03</b><strong>Draft the email</strong><span>A short personal first email for every strong match, written only from your deck, your traction and what you know about them.</span></div>
+  <div><b>04</b><strong>Send what you approve</strong><span>Read it, edit it, approve it. It goes from your sending address with an unsubscribe link, plus one follow-up after four days.</span></div>
+  <div><b>05</b><strong>Book the meeting</strong><span>Replies are caught, follow-ups stop, and every investor moves across one pipeline from matched to meeting.</span></div>
+</div></div></section>
+
+<section class="block tint" id="honest"><div class="wrap"><div class="sec-head"><h2>Built so it cannot embarrass you.</h2><p class="lede">One bad email to an investor costs more than a month of the tool. So the rules are hard.</p></div>
+<div class="cmp">
+  <div><span class="tag">Facts</span><h3>It never invents traction</h3><p>Emails and rewrites use only your deck, your notes and what the investor row says. No made-up revenue, customers, logos or deadlines. If a fact is missing it tells you to add it.</p></div>
+  <div><span class="tag">Control</span><h3>Nothing sends without your OK</h3><p>Every email waits for you. Approve one, approve all 70+, edit the wording or pass. Sending is off until you switch it on, and capped at 15 a day.</p></div>
+  <div><span class="tag">Compliance</span><h3>Clean outreach only</h3><p>Every email carries an unsubscribe link and a postal address. Unsubscribes and bounces are never emailed again. You bring the list, so you only contact people you are allowed to.</p></div>
+</div></div></section>
+
+<section class="block" id="price"><div class="wrap"><div class="deal">
+  <div><h2>One plan. The whole fundraise.</h2><p class="lede" style="margin-top:14px">Deck doctor, matching, drafting, outreach, reply tracking and the meetings pipeline. Credits cover the work: a deck review is 1 credit, 10 investor emails are 1 credit, and extra credits are 50 cents.</p>
+  <p class="muted" style="margin-top:16px;color:var(--mut)">Compared with the other AI fundraising tools, this costs a few dollars less and takes nothing from your round.</p></div>
+  <div class="price"><div class="amt" id="amt">$17<small>a month</small></div><ul id="feat"></ul></div>
+</div></div></section>
+
+<section class="block tint" id="start"><div class="wrap"><div class="deal">
+  <div><h2>Start your fundraise.</h2><p class="lede" style="margin-top:14px">Tell it who you are. You land in your raise, add your deck and your investor list, and it starts working within the hour.</p>
+  <ul class="checks" style="margin-top:18px"><li>No deck yet? Start with the one-liner and traction, the deck doctor works with whatever you have</li><li>Your investor list stays yours: upload a CSV or paste lines</li><li>Cancel any time from your page</li><li>Questions: <a class="tlink" href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a></li></ul></div>
+  <div class="panel"><form id="f" novalidate>
+    <div class="field" style="margin-top:0"><label for="f-name">Startup name</label><input id="f-name" maxlength="80" autocomplete="organization" required></div>
+    <div class="row2"><div class="field"><label for="f-email">Your email</label><input id="f-email" type="email" inputmode="email" autocomplete="email" maxlength="254" required></div><div class="field"><label for="f-url">Website <small>(optional)</small></label><input id="f-url" type="url" placeholder="https://" autocapitalize="none" maxlength="300"></div></div>
+    <div class="field" id="pay-row" hidden><span id="pay-label">Pay with</span><div class="pay" role="radiogroup" aria-labelledby="pay-label">
+      <label id="pay-card-l"><input type="radio" name="pay" value="card" checked><span><b>Card</b><small>Stripe, renews monthly</small></span></label>
+      <label id="pay-zelle-l"><input type="radio" name="pay" value="zelle"><span><b>Zelle</b><small>Send it from your bank app</small></span></label></div></div>
+    <div class="field"><label for="f-notes">What you are building <small>(two lines is plenty)</small></label><textarea id="f-notes" maxlength="2000" placeholder="What it does, who it is for, what stage you are at."></textarea></div>
+    <p class="msg" id="msg" role="alert"></p>
+    <button class="btn btn-acc" type="submit" id="go" style="width:100%;margin-top:8px">Continue</button>
+    <p class="panel-foot" id="pay-foot">Secure checkout by Stripe. Cancel any time.</p>
+  </form><div class="closed" id="closed" hidden>Sign-up opens soon. Email <a class="tlink" href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a> to get a spot first.</div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><div class="foot">
+  <div><h4>iRun</h4><ul><li><a href="start.html">Operator: your business on autopilot</a></li><li><a href="shopteam.html">Shop Team for Shopify</a></li><li><a href="index.html">iRun video</a></li></ul></div>
+  <div><h4>Contact</h4><ul><li><a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a></li><li><a href="https://hsw365.net">hsw365.net</a></li></ul></div>
+</div><div class="legal"><p>iRun Fundraise does not guarantee meetings, funding or any outcome. Outreach goes only to investors you add, with an unsubscribe link in every email.</p><p>&copy; 2026 HSW365 Media LLC. Turn negative into positive.</p></div></div></footer>
+<script src="assets/hsw/hsw.js"></script>
+<script>
+(function () {
+  var API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-client";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+  var FEAT = ["AI deck review: readiness score, slide-by-slide fixes, rewritten pitch", "Investor matching with a score and the reasons for every match", "Personal first email for each strong match, approved by you", "Sent from your own address with an automatic follow-up", "Replies tracked, meetings booked in one pipeline", "Up to 15 investor emails a day", "30 credits a month, no cut of your raise"];
+  function draw(p) {
+    $("amt").innerHTML = "$" + Math.round(p.cents / 100) + "<small>a month</small>";
+    $("feat").innerHTML = (p.features || FEAT).map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("");
+  }
+  draw({ cents: 1700, features: FEAT });
+  var form = $("f");
+  function method() { var r = form.querySelector("input[name=pay]:checked"); return r ? r.value : "card"; }
+  function payFoot() {
+    var z = method() === "zelle";
+    $("pay-foot").textContent = z ? "Next you get the Zelle details and a memo code. Your raise starts as soon as the payment is confirmed." : "Secure checkout by Stripe. Cancel any time.";
+    $("go").textContent = z ? "Continue to Zelle" : "Continue to payment";
+  }
+  form.addEventListener("change", function (e) { if (e.target.name === "pay") payFoot(); });
+  payFoot();
+  fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ a: "plans" }) })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.plans && d.plans.fundraise) draw(d.plans.fundraise);
+      var open = !!d.open; form.hidden = !open; $("closed").hidden = open;
+      var card = !!d.card, z = !!d.zelle;
+      $("pay-row").hidden = !(card && z); $("pay-card-l").hidden = !card; $("pay-zelle-l").hidden = !z;
+      if (!card && z) form.querySelector("input[value=zelle]").checked = true;
+      payFoot();
+    }).catch(function () { form.hidden = true; $("closed").hidden = false; });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var m = $("msg"); m.className = "msg"; m.textContent = "";
+    var v = function (id) { return $(id).value.trim(); };
+    var body = { a: method() === "zelle" ? "zelle_signup" : "checkout", plan: "fundraise", name: v("f-name"), email: v("f-email"), url: v("f-url"), notes: v("f-notes"), handles: {} };
+    var fail = function (t, id) { m.className = "msg err"; m.textContent = t; if (id) $(id).focus(); };
+    if (body.name.length < 2) return fail("Add your startup name.", "f-name");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(body.email)) return fail("Enter an email we can send your reports to.", "f-email");
+    if (!body.url && !body.notes) return fail("Add your website, or say what you are building.", "f-notes");
+    var btn = $("go"); btn.disabled = true; btn.textContent = "One moment";
+    fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.url) location.href = d.url;
+        else if (d.c && d.k) location.href = "raise.html?c=" + encodeURIComponent(d.c) + "&k=" + encodeURIComponent(d.k);
+        else throw new Error(d.error || "Something went wrong.");
+      }).catch(function (x) { fail(x.message); btn.disabled = false; payFoot(); });
+  });
+})();
+</script>
+</body>
+</html>

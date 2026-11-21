@@ -11,6 +11,10 @@
 //   POST {a:"zelle_pay", c, k, kind:"plan"|"credits", qty?}  -> Zelle payment instructions (renewal or credit pack)
 //   POST {a:"shop_check", url}                             -> Shopify store preview (Shop Team page)
 //   POST {a:"zelle_sent", c, k, id, note?}                 -> customer says the Zelle payment is sent; owner confirms it
+//   POST {a:"fund_view", c, k}                              -> Fundraise: campaign, deck review, investor matches
+//   POST {a:"fund_save", c, k, ...campaign fields, review?}  -> Fundraise: save the raise (+ request a deck review)
+//   POST {a:"fund_import", c, k, rows:[investor...]}          -> Fundraise: add investors to match
+//   POST {a:"fund_match", c, k, id, op, ...}                  -> Fundraise: approve | pass | restore | edit | meeting
 //   POST with stripe-signature                              -> Stripe webhook
 // JWT verification is off: Stripe calls this directly; customer actions check the company's client key.
 // Plans live in irun_settings.plans (synced from config/plans.json). Sign-up opens when irun_settings.billing_live = on.
@@ -216,7 +220,7 @@ async function view(c: any) {
       site_status: c.site_status, site_url: c.site_url, site_draft_url: c.site_draft_url,
       outreach_enabled: c.outreach_enabled, outreach_available: !!pl.plans?.[c.plan]?.outreach || c.plan === "comp",
       last_report: c.last_report, last_review_at: c.last_review_at, error: c.status === "error" ? c.error : null,
-      handles: c.handles,
+      handles: c.handles, fundraise: !!pl.plans?.[c.plan]?.fundraise || c.plan === "comp",
     },
     activity: acts.data ?? [], posts: posts.data ?? [], ledger: ledger.data ?? [], prospects: counts,
     credit_price_cents: pl.credit_price_cents, pack: [pl.credit_pack_min, pl.credit_pack_max],
@@ -294,8 +298,8 @@ Deno.serve(async (req) => {
         "metadata[app]": "irun", "metadata[kind]": "plan", "metadata[plan]": b.plan, "metadata[company_id]": id,
         "subscription_data[metadata][app]": "irun", "subscription_data[metadata][company_id]": id,
         "subscription_data[trial_period_days]": "3",
-        success_url: `${SITE}client.html?c=${id}&s={CHECKOUT_SESSION_ID}`,
-        cancel_url: b.plan === "shopify" ? `${SITE}shopteam.html#start` : `${SITE}start.html?plan=${b.plan}`,
+        success_url: b.plan === "fundraise" ? `${SITE}raise.html?c=${id}&s={CHECKOUT_SESSION_ID}` : `${SITE}client.html?c=${id}&s={CHECKOUT_SESSION_ID}`,
+        cancel_url: b.plan === "shopify" ? `${SITE}shopteam.html#start` : b.plan === "fundraise" ? `${SITE}fundraise.html#start` : `${SITE}start.html?plan=${b.plan}`,
         "line_items[0][quantity]": "1",
         "line_items[0][price_data][currency]": "usd",
         "line_items[0][price_data][unit_amount]": String(plan.cents),
@@ -392,6 +396,116 @@ Deno.serve(async (req) => {
       if ("outreach_enabled" in up) await log(c.id, "outreach", `outreach switched ${b.outreach_enabled ? "on" : "off"}`);
       return json({ ok: true });
     }
+    // ---------- Fundraise ----------
+    if (b.a?.startsWith("fund_")) {
+      const hasFund = !!pl.plans?.[c.plan]?.fundraise || c.plan === "comp";
+      if (!hasFund) return json({ error: "Fundraise is not part of this plan." }, 403);
+      const arr = (v: unknown, max = 12) => (Array.isArray(v) ? v : String(v ?? "").split(/[,;|]/)).map((x) => String(x).trim().toLowerCase().slice(0, 40)).filter(Boolean).slice(0, max);
+      const num = (v: unknown) => { const n = Math.round(Number(String(v ?? "").replace(/[^0-9.]/g, ""))); return Number.isFinite(n) && n > 0 ? n : null; };
+      const STAGES = ["pre-seed", "seed", "series-a", "series-b", "growth"];
+      const stageOf = (v: unknown) => { const t = String(v ?? "").toLowerCase().replace(/[^a-z]+/g, "-").replace(/^-|-$/g, ""); return STAGES.includes(t) ? t : t.replace("-", "") === "preseed" ? "pre-seed" : t.replace("-", "") === "seriesa" ? "series-a" : t.replace("-", "") === "seriesb" ? "series-b" : null; };
+
+      if (b.a === "fund_view") {
+        const [camp, inv, ms] = await Promise.all([
+          db.from("irun_fund_campaigns").select("*").eq("company_id", c.id).maybeSingle(),
+          db.from("irun_investors").select("id", { count: "exact", head: true }).eq("company_id", c.id),
+          db.from("irun_fund_matches").select("id,score,reasons,status,subject,body,sends,last_sent_at,replied_at,meeting_at,meeting_note,error,irun_investors(name,firm,role,type,email,location,stages,sectors,check_min,check_max,website,note)")
+            .eq("company_id", c.id).order("score", { ascending: false }).limit(600),
+        ]);
+        const counts: Record<string, number> = {};
+        for (const m of ms.data ?? []) counts[m.status] = (counts[m.status] ?? 0) + 1;
+        const camp0 = camp.data ? { ...camp.data, deck_text: undefined, deck_chars: (camp.data.deck_text ?? "").length } : null;
+        return json({ campaign: camp0, investors: inv.count ?? 0, matches: ms.data ?? [], counts, smtp_note: "Sending needs the engine switched to live.",
+          company: { id: c.id, name: c.name, status: c.status, plan: c.plan, credits: c.credits, bonus_credits: c.bonus_credits } });
+      }
+
+      if (b.a === "fund_save") {
+        const up: Record<string, unknown> = { company_id: c.id, updated_at: new Date().toISOString() };
+        const t = (k: string, n: number) => { if (k in b) up[k] = String(b[k] ?? "").trim().slice(0, n) || null; };
+        t("startup", 120); t("one_liner", 300); t("geo", 120); t("traction", 2000);
+        if ("booking_url" in b) {
+          const u = String(b.booking_url ?? "").trim().slice(0, 300);
+          if (u && !/^https:\/\/[^\s]+$/i.test(u)) return json({ error: "Booking link must start with https://" }, 400);
+          up.booking_url = u || null;
+        }
+        if ("stage" in b) up.stage = stageOf(b.stage);
+        if ("raise_usd" in b) up.raise_usd = num(b.raise_usd);
+        if ("check_usd" in b) up.check_usd = num(b.check_usd);
+        if ("sectors" in b) up.sectors = arr(b.sectors);
+        if ("deck_text" in b) up.deck_text = String(b.deck_text ?? "").slice(0, 80000) || null;
+        if (typeof b.send_enabled === "boolean") up.send_enabled = b.send_enabled;
+        if (b.review) {
+          const { data: cur } = await db.from("irun_fund_campaigns").select("deck_text").eq("company_id", c.id).maybeSingle();
+          const deck = String(up.deck_text ?? cur?.deck_text ?? "");
+          if (deck.trim().length < 200) return json({ error: "Paste or upload your deck first (at least a few slides of text)." }, 400);
+          up.review_status = "requested"; up.review_error = null;
+        }
+        const { error } = await db.from("irun_fund_campaigns").upsert(up, { onConflict: "company_id" });
+        if (error) return json({ error: error.message }, 500);
+        if (b.review) await log(c.id, "fundraise", "deck review requested: it runs within the hour (1 credit)");
+        if (typeof b.send_enabled === "boolean") await log(c.id, "fundraise", `investor outreach switched ${b.send_enabled ? "on" : "off"}`);
+        return json({ ok: true });
+      }
+
+      if (b.a === "fund_import") {
+        const rows = (Array.isArray(b.rows) ? b.rows : []).slice(0, 2000).map((r: any) => {
+          const email = String(r.email ?? "").trim().toLowerCase();
+          const type = ["vc", "angel", "family_office", "accelerator", "corporate"].includes(String(r.type ?? "").toLowerCase().replace(/\s+/g, "_")) ? String(r.type).toLowerCase().replace(/\s+/g, "_") : "vc";
+          return {
+            company_id: c.id, name: String(r.name ?? "").trim().slice(0, 120), firm: String(r.firm ?? "").trim().slice(0, 160) || null,
+            role: String(r.role ?? "").trim().slice(0, 120) || null, type, email: email && emailOk(email) ? email : null,
+            location: String(r.location ?? "").trim().slice(0, 120) || null,
+            stages: arr(r.stages).map((x) => stageOf(x)).filter(Boolean) as string[], sectors: arr(r.sectors),
+            check_min: num(r.check_min), check_max: num(r.check_max), website: String(r.website ?? "").trim().slice(0, 200) || null,
+            note: String(r.note ?? "").trim().slice(0, 500) || null,
+          };
+        }).filter((r: any) => r.name.length >= 2);
+        if (!rows.length) return json({ error: "No investors found. Each line needs at least a name." }, 400);
+        const withEmail = rows.filter((r: any) => r.email), noEmail = rows.filter((r: any) => !r.email);
+        if (withEmail.length) {
+          const { error } = await db.from("irun_investors").upsert(withEmail, { onConflict: "company_id,email", ignoreDuplicates: true });
+          if (error) return json({ error: error.message }, 500);
+        }
+        if (noEmail.length) await db.from("irun_investors").insert(noEmail);
+        await log(c.id, "fundraise", `${rows.length} investors added: matching runs within the hour`);
+        return json({ added: rows.length });
+      }
+
+      if (b.a === "fund_match") {
+        const id = Number(b.id);
+        const { data: m } = await db.from("irun_fund_matches").select("id,status,subject,body").eq("id", id).eq("company_id", c.id).maybeSingle();
+        const up: Record<string, unknown> = { updated_at: new Date().toISOString() };
+        if (!m && b.op !== "approve_all") return json({ error: "Match not found." }, 404);
+        if (b.op === "approve_all") {
+          const min = Math.max(0, Math.min(100, Number(b.min ?? 70)));
+          const { data: ds } = await db.from("irun_fund_matches").select("id").eq("company_id", c.id).eq("status", "drafted").gte("score", min);
+          const ids = (ds ?? []).map((x: any) => x.id);
+          if (ids.length) await db.from("irun_fund_matches").update({ status: "approved", updated_at: up.updated_at }).in("id", ids);
+          await log(c.id, "fundraise", `${ids.length} investor emails approved (score ${min}+)`);
+          return json({ approved: ids.length });
+        }
+        if (b.op === "approve") { if (m!.status !== "drafted") return json({ error: "Only drafted emails can be approved." }, 400); up.status = "approved"; }
+        else if (b.op === "unapprove") { if (m!.status !== "approved") return json({ error: "Already sent or not approved." }, 400); up.status = "drafted"; }
+        else if (b.op === "pass") { if (["sent", "followed_up"].includes(m!.status)) return json({ error: "Already emailed." }, 400); up.status = "passed"; }
+        else if (b.op === "restore") { if (m!.status !== "passed") return json({ error: "Not passed." }, 400); up.status = m!.subject ? "drafted" : "matched"; }
+        else if (b.op === "edit") {
+          if (!["drafted", "approved"].includes(m!.status)) return json({ error: "Only unsent drafts can be edited." }, 400);
+          const subject = String(b.subject ?? "").trim().slice(0, 120), body = String(b.body ?? "").trim().slice(0, 4000);
+          if (subject.length < 3 || body.length < 20) return json({ error: "Add a subject and a message." }, 400);
+          up.subject = subject; up.body = body; up.status = "drafted";
+        } else if (b.op === "meeting") {
+          if (!["sent", "followed_up", "replied", "meeting"].includes(m!.status)) return json({ error: "Email them first." }, 400);
+          up.status = "meeting"; up.meeting_note = String(b.note ?? "").trim().slice(0, 500) || null;
+          const when = b.meeting_at ? new Date(String(b.meeting_at)) : null;
+          up.meeting_at = when && !isNaN(+when) ? when.toISOString() : null;
+        } else return json({ error: "Unknown action." }, 400);
+        await db.from("irun_fund_matches").update(up).eq("id", id);
+        if (b.op === "meeting") await log(c.id, "fundraise", "investor meeting booked");
+        return json({ ok: true });
+      }
+      return json({ error: "Unknown action." }, 400);
+    }
+
     return json({ error: "Unknown action." }, 400);
   } catch (e) {
     return json({ error: String(e instanceof Error ? e.message : e) }, 500);

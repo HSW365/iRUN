@@ -1,0 +1,58 @@
+name: iRun Fundraise
+
+# Deck reviews, investor matching, email drafts and reply tracking run every hour. They are private to each founder.
+# Emails only go out when the engine is in live mode (repo variable FUNDRAISE_MODE=live or a manual run with mode=live),
+# the founder has switched sending on, and the founder approved that investor.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "all, deck, match, draft, send or replies"
+        default: "all"
+      company:
+        description: "only this company id (blank = every Fundraise company)"
+        default: ""
+      mode:
+        description: "draft (never sends) or live (sends approved emails)"
+        type: choice
+        options: [draft, live]
+        default: draft
+
+permissions:
+  contents: read
+
+concurrency:
+  group: irun-fundraise
+  cancel-in-progress: false
+
+jobs:
+  fundraise:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      SMTP_HOST: ${{ vars.SMTP_HOST }}
+      SMTP_PORT: ${{ vars.SMTP_PORT }}
+      IMAP_HOST: ${{ vars.IMAP_HOST }}
+      OUTREACH_ADDRESS: ${{ vars.OUTREACH_ADDRESS }}
+      IRUN_MODE: ${{ github.event.inputs.mode || vars.FUNDRAISE_MODE || 'draft' }}
+      TASK: ${{ github.event.inputs.task || 'all' }}
+      COMPANY: ${{ github.event.inputs.company }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Install
+        run: pip install -q -r requirements.txt
+      - name: Work the raises
+        run: |
+          if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Fundraise idle: SUPABASE_SERVICE_KEY secret missing"; exit 0; fi
+          ARGS="--task $TASK"
+          [ -n "$COMPANY" ] && ARGS="$ARGS --company $COMPANY"
+          python engine/fundraise.py $ARGS
