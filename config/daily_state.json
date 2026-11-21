@@ -1,5 +1,5 @@
 {
-  "cursor": 6,
+  "cursor": 7,
   "used": {
     "calltwin": [
       "answers"
@@ -18,6 +18,9 @@
     ],
     "flipit": [
       "mao"
+    ],
+    "studio": [
+      "record"
     ]
   },
   "voices": [
@@ -26,7 +29,8 @@
     "en-US-AndrewMultilingualNeural",
     "en-US-EricNeural",
     "en-US-ChristopherNeural",
-    "en-GB-SoniaNeural"
+    "en-GB-SoniaNeural",
+    "en-US-JennyNeural"
   ],
   "log": [
     {
@@ -69,6 +73,13 @@
       "app": "flipit",
       "cap": "mao",
       "voice": "en-GB-SoniaNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-21T03:57Z",
+      "app": "studio",
+      "cap": "record",
+      "voice": "en-US-JennyNeural",
       "posted": true
     }
   ]
