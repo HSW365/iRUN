@@ -1,5 +1,5 @@
 {
-  "cursor": 8,
+  "cursor": 9,
   "used": {
     "calltwin": [
       "answers"
@@ -24,17 +24,20 @@
     ],
     "estimate": [
       "photos"
+    ],
+    "operator": [
+      "website-in"
     ]
   },
   "voices": [
-    "en-GB-SoniaNeural",
     "en-GB-RyanNeural",
     "en-US-AndrewMultilingualNeural",
     "en-US-EricNeural",
     "en-US-ChristopherNeural",
     "en-GB-SoniaNeural",
     "en-US-JennyNeural",
-    "en-US-AriaNeural"
+    "en-US-AriaNeural",
+    "en-US-EricNeural"
   ],
   "log": [
     {
@@ -91,6 +94,13 @@
       "app": "estimate",
       "cap": "photos",
       "voice": "en-US-AriaNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-21T23:03Z",
+      "app": "operator",
+      "cap": "website-in",
+      "voice": "en-US-EricNeural",
       "posted": true
     }
   ]
