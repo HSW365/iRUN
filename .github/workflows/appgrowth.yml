@@ -1,0 +1,56 @@
+name: iRun App Growth
+
+# The App Growth team can still be run manually after explicit approval.
+# Scheduled Instagram/TikTok publishing is paused while public posts are prohibited.
+on:
+  workflow_dispatch:
+    inputs:
+      company: {description: "only this company id (blank = every App Growth app)", default: ""}
+      now: {description: "post now, ignoring the daily hour", type: boolean, default: false}
+      mode:
+        description: "draft (render only) or live (publish)"
+        type: choice
+        options: [draft, live]
+        default: draft
+
+permissions:
+  contents: write
+
+concurrency:
+  group: irun
+  cancel-in-progress: false
+
+jobs:
+  growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+      TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+      TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+      IRUN_NARRATOR: kokoro
+      IRUN_MODE: ${{ github.event.inputs.mode || 'draft' }}
+      IRUN_IMAGE_TRIES: "8"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rubberband-cli fonts-inter
+          pip install -q -r requirements.txt kokoro-onnx soundfile
+          pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q chatterbox-tts faster-whisper
+      - name: Narrator model
+        uses: actions/cache@v4
+        with: {path: assets/voice/models, key: kokoro-v1.0}
+      - name: Work the apps
+        run: |
+          if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "App Growth idle: SUPABASE_SERVICE_KEY secret missing"; exit 0; fi
+          mkdir -p assets/voice/models && (cd assets/voice/models && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s $f ] || curl -sSL -o $f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done)
+          ARGS=""
+          [ -n "${{ inputs.company }}" ] && ARGS="$ARGS --company ${{ inputs.company }}"
+          [ "${{ inputs.now }}" = "true" ] && ARGS="$ARGS --now"
+          python engine/appgrowth.py $ARGS
