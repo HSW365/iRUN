@@ -32,7 +32,7 @@
     },
     {
       "card": {
-        "title": "HSW365 Affiliate · how it pays",
+        "title": "HSW365 Affiliate · how it works",
         "tag": "20%",
         "rows": [
           [
@@ -41,11 +41,11 @@
           ],
           [
             "Commission",
-            "20% recurring"
+            "20% per subscriber"
           ],
           [
-            "Payouts",
-            "monthly"
+            "Duration",
+            "full subscription duration"
           ]
         ]
       },
@@ -66,13 +66,13 @@
       "dur": 1.55,
       "panel": {
         "label": "HSW365 AFFILIATES",
-        "title": "Your dashboard",
-        "working": "Tracking your referrals...",
-        "done": "20% every month they stay",
+        "title": "Affiliate program",
+        "working": "Share the HSW365 apps",
+        "done": "20% for the full subscription duration",
         "steps": [
-          "Share",
-          "Subscribe",
-          "Get paid"
+          "Join free",
+          "Share your link",
+          "Eligible subscriber pays"
         ]
       }
     },
@@ -89,7 +89,7 @@
   ],
   "callback": {
     "shot": "phone",
-    "impact": "MONTHLY",
+    "impact": "FULL TERM",
     "cy": 0.6,
     "dur": 1.3
   },
@@ -116,16 +116,16 @@
       "HSW365",
       "PARTNERS"
     ],
-    "tagline": "Share the apps. Earn every month.",
-    "cta": "SCAN TO APPLY · FREE",
+    "tagline": "Share the apps. Earn for the full term.",
+    "cta": "JOIN HSW365 AFFILIATES · SCAN TO APPLY",
     "lines": [
-      "FREE TO JOIN · 20% RECURRING COMMISSION",
+      "20% PER SUBSCRIBER · FULL TERM",
       "hsw365.net/pages/affiliates"
     ],
-    "fine": "Earnings depend on your referrals and are not guaranteed.",
-    "link": "https://hsw365.net/pages/affiliates#/apply"
+    "fine": "Earn 20% per subscriber for the full duration of that subscriber's subscription, subject to program terms. Earnings depend on eligible referrals and are not guaranteed.",
+    "link": "https://hsw365.net/pages/affiliates"
   },
-  "caption": "He was done getting paid once for a post. The HSW365 Affiliate Partner Program is free to join and pays 20% recurring commission on HSW365 app subscriptions like iRun, Friendy, Klipit and HSW365studio for as long as the customer stays subscribed. Live dashboard, ready-made posts, monthly payouts by Zelle, Cash App or PayPal. Scan the QR to sign up, or go to hsw365.net/pages/affiliates (link in bio).",
+  "caption": "Join HSW365 Affiliates free. Earn 20% per subscriber for the full duration of that subscriber's subscription, subject to program terms. Earnings depend on eligible referrals and are not guaranteed. Apply: https://hsw365.net/pages/affiliates.",
   "hashtags": [
     "affiliatemarketing",
     "creators",
