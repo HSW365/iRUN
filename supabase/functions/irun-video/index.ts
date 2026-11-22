@@ -50,7 +50,7 @@ async function membership(app: string, user: { id: string; email?: string }) {
 
 async function quota(app: string, user: { id: string; email?: string }) {
   const m = await membership(app, user);
-  const { count } = await admin.from("irun_video_jobs").select("id", { count: "exact", head: true)
+  const { count } = await admin.from("irun_video_jobs").select("id", { count: "exact", head: true })
     .eq("user_id", user.id).neq("status", "failed").gte("created_at", new Date(Date.now() - PLAN_DAYS * DAY).toISOString());
   const limit = m.owner ? null : (m.active && m.plan ? LIMITS[app]?.[m.plan] ?? 0 : 0);
   const used = count || 0;
