@@ -9,7 +9,13 @@ const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE
 const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type, authorization, apikey, x-client-info", "Access-Control-Allow-Methods": "POST, OPTIONS" };
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...cors, "Content-Type": "application/json" } });
 
-const OWNERS = ["hsw365media@gmail.com", "hoodstarent365@gmail.com"];
+// Keep this list aligned with config/owners.json: every HSW365 owner login receives full access.
+const OWNERS = [
+  "hsw365media@gmail.com",
+  "hoodstarent365@gmail.com",
+  "book@hoodstar365.com",
+  "elvintorressr@gmail.com",
+];
 const DAY = 864e5;
 // Videos per 30 days that come with each plan. Owners have no limit.
 const LIMITS: Record<string, Record<string, number>> = { studio365: { starter: 1, plus: 3, pro: 5 } };
@@ -20,14 +26,14 @@ const EXT: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "
 const STYLES = ["cinematic", "street", "neon", "luxury", "dark", "dreamy", "vintage", "anime", "performance"];
 
 async function who(req: Request) {
-  const t = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
+  const t = (req.headers.get("authorization") || "").replace(/^Bearer\\s+/i, "");
   if (!t) return null;
   const { data } = await admin.auth.getUser(t);
   return data.user || null;
 }
 
 async function membership(app: string, user: { id: string; email?: string }) {
-  const email = (user.email || "").toLowerCase();
+  const email = (user.email || "").trim().toLowerCase();
   if (OWNERS.includes(email)) return { email, active: true, owner: true, plan: "pro" };
   const { data: rows } = await admin.from("hsw_payments").select("plan,status,created_at,decided_at,grace_until")
     .eq("app", app).eq("account_ref", user.id).order("created_at", { ascending: true });
@@ -44,7 +50,7 @@ async function membership(app: string, user: { id: string; email?: string }) {
 
 async function quota(app: string, user: { id: string; email?: string }) {
   const m = await membership(app, user);
-  const { count } = await admin.from("irun_video_jobs").select("id", { count: "exact", head: true })
+  const { count } = await admin.from("irun_video_jobs").select("id", { count: "exact", head: true)
     .eq("user_id", user.id).neq("status", "failed").gte("created_at", new Date(Date.now() - PLAN_DAYS * DAY).toISOString());
   const limit = m.owner ? null : (m.active && m.plan ? LIMITS[app]?.[m.plan] ?? 0 : 0);
   const used = count || 0;
@@ -61,7 +67,7 @@ async function dispatch(id: string) {
   return !!r && r.ok;
 }
 
-const clean = (s: unknown, n: number) => String(s ?? "").replace(/[\u0000-\u001f]/g, " ").trim().slice(0, n);
+const clean = (s: unknown, n: number) => String(s ?? "").replace(/[\\u0000-\\u001f]/g, " ").trim().slice(0, n);
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
