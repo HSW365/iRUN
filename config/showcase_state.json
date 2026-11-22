@@ -1,11 +1,11 @@
 {
   "recent": [
-    "browser",
     "phone",
     "browser",
     "stack",
     "phone",
-    "stat"
+    "stat",
+    "stack"
   ],
   "by_app": {
     "calltwin": "phone",
@@ -19,6 +19,7 @@
     "estimate": "browser",
     "operator": "stack",
     "nil": "phone",
-    "friendy": "stat"
+    "friendy": "stat",
+    "affiliate": "stack"
   }
 }
