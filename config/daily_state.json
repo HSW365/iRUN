@@ -1,5 +1,5 @@
 {
-  "cursor": 10,
+  "cursor": 11,
   "used": {
     "calltwin": [
       "answers"
@@ -30,17 +30,20 @@
     ],
     "nil": [
       "profile"
+    ],
+    "friendy": [
+      "anytime"
     ]
   },
   "voices": [
-    "en-US-AndrewMultilingualNeural",
     "en-US-EricNeural",
     "en-US-ChristopherNeural",
     "en-GB-SoniaNeural",
     "en-US-JennyNeural",
     "en-US-AriaNeural",
     "en-US-EricNeural",
-    "en-IE-ConnorNeural"
+    "en-IE-ConnorNeural",
+    "en-GB-SoniaNeural"
   ],
   "log": [
     {
@@ -111,6 +114,13 @@
       "app": "nil",
       "cap": "profile",
       "voice": "en-IE-ConnorNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-22T20:37Z",
+      "app": "friendy",
+      "cap": "anytime",
+      "voice": "en-GB-SoniaNeural",
       "posted": true
     }
   ]
