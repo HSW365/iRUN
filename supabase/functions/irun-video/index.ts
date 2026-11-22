@@ -26,7 +26,7 @@ const EXT: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "
 const STYLES = ["cinematic", "street", "neon", "luxury", "dark", "dreamy", "vintage", "anime", "performance"];
 
 async function who(req: Request) {
-  const t = (req.headers.get("authorization") || "").replace(/^Bearer\\s+/i, "");
+  const t = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
   if (!t) return null;
   const { data } = await admin.auth.getUser(t);
   return data.user || null;
@@ -67,7 +67,7 @@ async function dispatch(id: string) {
   return !!r && r.ok;
 }
 
-const clean = (s: unknown, n: number) => String(s ?? "").replace(/[\\u0000-\\u001f]/g, " ").trim().slice(0, n);
+const clean = (s: unknown, n: number) => String(s ?? "").replace(/[\u0000-\u001f]/g, " ").trim().slice(0, n);
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
