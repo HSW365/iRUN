@@ -1,8 +1,4 @@
-/*! HSW365 Owner Login — PIN only. Drop-in: <script src="owner-login.js" defer></script>
- *  Adds an "Owner login" tab. Owner enters PIN (no email). PIN is checked server-side.
- *  On success: html.hsw-owner, window.HSW_OWNER=true, localStorage hsw_owner, event "hsw-owner".
- *  Apps can: if (window.HSW_OWNER) unlock(); addEventListener("hsw-owner", unlock);
- */
+/*! HSW365 Creator / Owner Login — server-verified owner PIN; owner email is allowlisted in config/owners.json. */
 (function () {
   if (window.__hswOwnerLoaded) return; window.__hswOwnerLoaded = true;
   var API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/owner-pin";
@@ -25,8 +21,8 @@
 
   var css = document.createElement("style");
   css.textContent =
-    ".hswo-tab{position:fixed;top:12px;right:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(14,14,20,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font:700 13px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:.04em;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:.18s}" +
-    ".hswo-tab:hover{border-color:#e11d2e;background:#e11d2e}" +
+    ".hswo-tab{position:fixed;top:12px;right:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 17px;border:1px solid #ff6673;border-radius:5px;background:#e11d2e;color:#fff;font:800 12px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:.055em;cursor:pointer;box-shadow:0 8px 28px rgba(225,29,46,.35);transition:.18s}" +
+    ".hswo-tab:hover{border-color:#ff8791;background:#b91c2c;transform:translateY(-1px)}" +
     ".hswo-tab svg{width:15px;height:15px}" +
     "html.hsw-owner .hswo-tab{border-color:#22c55e;background:rgba(22,163,74,.9)}" +
     ".hswo-ov{position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(5,5,9,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}" +
@@ -61,8 +57,8 @@
   function setMode(m) {
     mode = m; msg.textContent = ""; pin.value = ""; code.value = "";
     code.style.display = m === "setup" ? "" : "none";
-    if (m === "setup") { h.textContent = "Create your PIN"; p.textContent = "One time. Enter your setup code and choose 6 to 10 digits."; go.textContent = "SAVE PIN"; lnk.style.display = "none"; }
-    else { h.textContent = "Owner login"; p.textContent = "Enter your PIN."; go.textContent = "ENTER"; lnk.textContent = "Forgot PIN"; lnk.style.display = ""; }
+    if (m === "setup") { h.textContent = "Create your PIN"; p.textContent = "Owner account: hsw365media@gmail.com. One time: enter your setup code and choose 6 to 10 digits."; go.textContent = "SAVE PIN"; lnk.style.display = "none"; }
+    else { h.textContent = "Creator / Owner login"; p.textContent = "hsw365media@gmail.com · Enter your owner PIN."; go.textContent = "ENTER OWNER STUDIO"; lnk.textContent = "Forgot PIN"; lnk.style.display = ""; }
   }
   function open() {
     if (window.HSW_OWNER) { if (confirm("Sign out of owner mode?")) setOwner(false); return; }
@@ -90,14 +86,14 @@
 
   // buttons: hook the app's own owner link if it has one, else add the floating tab
   var btns = [];
-  function refreshBtns() { btns.forEach(function (b) { if (b.dataset.hswoOwn) b.querySelector(".hswo-lbl") && (b.querySelector(".hswo-lbl").textContent = window.HSW_OWNER ? "Owner ✓" : "Owner login"); }); }
+  function refreshBtns() { btns.forEach(function (b) { if (b.dataset.hswoOwn) b.querySelector(".hswo-lbl") && (b.querySelector(".hswo-lbl").textContent = window.HSW_OWNER ? "CREATOR / OWNER ✓" : "CREATOR / OWNER LOGIN"); }); }
   var existing = document.querySelectorAll("[data-owner],a.owner-btn,.owner-login");
   if (existing.length) {
     Array.prototype.forEach.call(existing, function (el) { el.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); open(); }, true); });
   } else {
     var t = document.createElement("button");
     t.type = "button"; t.className = "hswo-tab"; t.dataset.hswoOwn = "1";
-    t.innerHTML = LOCK + '<span class="hswo-lbl">Owner login</span>';
+    t.innerHTML = LOCK + '<span class="hswo-lbl">CREATOR / OWNER LOGIN</span>';
     t.onclick = open; document.body.appendChild(t); btns.push(t);
   }
   window.HSW_OWNER_OPEN = open;
