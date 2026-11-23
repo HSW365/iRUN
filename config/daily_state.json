@@ -1,5 +1,5 @@
 {
-  "cursor": 12,
+  "cursor": 13,
   "used": {
     "calltwin": [
       "answers"
@@ -36,17 +36,20 @@
     ],
     "affiliate": [
       "twenty"
+    ],
+    "stream": [
+      "golive"
     ]
   },
   "voices": [
-    "en-US-ChristopherNeural",
     "en-GB-SoniaNeural",
     "en-US-JennyNeural",
     "en-US-AriaNeural",
     "en-US-EricNeural",
     "en-IE-ConnorNeural",
     "en-GB-SoniaNeural",
-    "en-US-JennyNeural"
+    "en-US-JennyNeural",
+    "en-US-AvaMultilingualNeural"
   ],
   "log": [
     {
@@ -131,6 +134,13 @@
       "app": "affiliate",
       "cap": "twenty",
       "voice": "en-US-JennyNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-23T03:44Z",
+      "app": "stream",
+      "cap": "golive",
+      "voice": "en-US-AvaMultilingualNeural",
       "posted": true
     }
   ]
