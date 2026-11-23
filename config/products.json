@@ -254,6 +254,29 @@
         "four trades, one contractor",
         "fire sprinklers done to code"
       ]
+    },
+    {
+      "id": "truth-be-told",
+      "name": "TRUTH BE TOLD — HOSTED BY JESUS",
+      "keyword": "TRUTH",
+      "link": "https://truth-be-told-q6na.onrender.com",
+      "audience": "people worldwide interested in faith, reflection, honest conversation and exploring new independent digital experiences",
+      "pitch": "TRUTH BE TOLD — Hosted by Jesus is an early-access HSW365 Media web app. Visit the live build, explore the experience and share feedback as features continue to be completed. This is an early-access product; do not promise finished avatar, voice, persistent memory or automatic subscription features.",
+      "angles": [
+        "a new digital space for faith and honest reflection",
+        "meet the early-access build and help shape what comes next",
+        "independent technology built by HSW365 Media",
+        "one conversation can start a new perspective"
+      ],
+      "cta": {
+        "spoken": "Visit Truth Be Told, hosted by Jesus. Explore the early access experience at the link in bio.",
+        "screen": [
+          "TRUTH BE TOLD",
+          "HOSTED BY JESUS",
+          "EARLY ACCESS — LINK IN BIO"
+        ],
+        "caption": "Meet TRUTH BE TOLD — Hosted by Jesus, an early-access experience from HSW365 Media. Visit the live build, explore it and share your feedback: https://truth-be-told-q6na.onrender.com"
+      }
     }
   ]
 }
