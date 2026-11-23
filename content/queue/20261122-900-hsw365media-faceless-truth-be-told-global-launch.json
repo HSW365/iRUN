@@ -1,0 +1,42 @@
+{
+  "kind": "faceless",
+  "account": "hsw365media",
+  "series": "truth-be-told",
+  "style": "photoreal",
+  "title": "TRUTH BE TOLD — A NEW CONVERSATION BEGINS",
+  "scenes": [
+    {
+      "say": "The world is loud. Everybody got something to say. But when was the last time you stopped and really listened?",
+      "visual": "bright natural sunrise over a diverse modern city, people walking with purpose, hopeful cinematic documentary photography, vibrant warm colors, no text"
+    },
+    {
+      "say": "HSW365 Media is building a new digital experience: Truth Be Told, hosted by Jesus.",
+      "visual": "premium clean smartphone in a real person's hand showing a simple elegant conversation app interface, warm daylight, polished commercial photography, no legible text"
+    },
+    {
+      "say": "A place to explore faith, reflection, and honest conversation.",
+      "visual": "quiet sunlit room, open journal and warm light through window, peaceful hopeful atmosphere, photorealistic, no text"
+    },
+    {
+      "say": "This is early access. The experience is still being developed, and your feedback helps shape what comes next.",
+      "visual": "independent creative founder working at a desk with laptop, colorful notes and bright natural light, authentic documentary style, no text"
+    },
+    {
+      "say": "Don't just watch somebody else build. Come see what we're creating.",
+      "visual": "close-up of a person tapping a phone and smiling with curiosity, authentic human expression, warm bright commercial photography, no text"
+    },
+    {
+      "say": "Visit Truth Be Told, hosted by Jesus. Powered by HSW365 Media. The conversation starts now.",
+      "visual": "uplifting sunrise horizon with vivid golden sunlight and open sky, optimistic cinematic final frame, clean negative space for title overlay, no text"
+    }
+  ],
+  "caption": "TRUTH BE TOLD — Hosted by Jesus. A new early-access digital experience from HSW365 Media focused on faith, reflection and honest conversation. Explore the live build and share your feedback: https://truth-be-told-q6na.onrender.com #TruthBeTold #HSW365Media #Faith #HonestConversation #DigitalInnovation",
+  "hashtags": [
+    "TruthBeTold",
+    "HSW365Media",
+    "Faith",
+    "HonestConversation",
+    "DigitalInnovation",
+    "EarlyAccess"
+  ]
+}
