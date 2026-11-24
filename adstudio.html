@@ -100,6 +100,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HSW365 Ad Studio | Micro-drama ads for your brand">
 <meta name="twitter:description" content="Short acted ads for your business, clothing line or music. Scripted, produced, QR-coded and posted to your Instagram by iRun. From $247.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <header class="nav"><div class="wrap">
@@ -180,11 +181,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div>
     <div class="sh" style="margin-bottom:20px"><h2>Book your ad</h2></div>
     <p class="lede" style="max-width:40ch">Tell us what you sell. You get the script for approval within 24 hours, then the finished ad.</p>
-    <div class="pay">
+    <div class="irun-vip-note" data-hsw-vip style="margin-top:22px"><b>VIP &middot; Owner.</b> Every package is free for you. No Cash App, no Zelle. Make ads yourself any time in the iRun Studio Ad Studio, or send an order below and it's made at no charge.
+      <div style="margin-top:12px"><a class="btn p sm" href="app.html#ads">Open Ad Studio in iRun</a></div></div>
+    <div class="pay" data-hsw-paywall>
       <div class="payrow"><div><p class="t">Cash App</p><p class="h">$hsw365</p></div><a class="btn p sm" href="https://cash.app/$hsw365" target="_blank" rel="noopener">Pay with Cash App</a></div>
       <div class="payrow"><div><p class="t">Zelle</p><p class="h">856-796-8081</p></div><span class="t">elvintorressr@gmail.com</span></div>
     </div>
-    <p class="note">Put your business name in the payment note. Work starts when payment lands. Questions: hsw365media@gmail.com</p>
+    <p class="note" data-hsw-paywall>Put your business name in the payment note. Work starts when payment lands. Questions: hsw365media@gmail.com</p>
   </div>
   <form id="f">
     <label>Package<select name="pkg" id="pkg">
@@ -195,7 +198,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <label>What are we promoting?<select name="kind"><option>Business or service</option><option>Clothing line</option><option>Music or artist</option><option>App or online product</option><option>Event</option><option>Other</option></select></label>
     <label>Instagram handle or website<input name="link" placeholder="@yourbrand or yourbrand.com"></label>
     <label>Anything we should know?<textarea name="notes" placeholder="Your product, your customer, the vibe you want"></textarea></label>
-    <button class="btn p" type="submit">Send my order</button>
+    <button class="btn p" type="submit"><span data-hsw-paywall>Send my order</span><span data-hsw-vip>Send my order &middot; free</span></button>
   </form>
 </div></section>
 </main>
@@ -208,10 +211,11 @@ document.querySelectorAll('.clip video').forEach(v=>{
   const io=new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?v.play().catch(()=>{}):v.pause()}),{threshold:.5});io.observe(v)});
 document.getElementById('f').addEventListener('submit',e=>{
   e.preventDefault();const d=Object.fromEntries(new FormData(e.target));
-  const body=`Package: ${d.pkg}\nName: ${d.name}\nEmail: ${d.email}\nBrand: ${d.biz}\nPromoting: ${d.kind}\nLink: ${d.link}\n\n${d.notes}`;
+  const vip=window.IRUN_OWNER&&IRUN_OWNER.isOwner();
+  const body=`${vip?'Owner order (VIP, no charge)\n':''}Package: ${d.pkg}\nName: ${d.name}\nEmail: ${d.email}\nBrand: ${d.biz}\nPromoting: ${d.kind}\nLink: ${d.link}\n\n${d.notes}`;
   location.href=`mailto:hsw365media@gmail.com?subject=${encodeURIComponent('Ad Studio order: '+d.biz+' / '+d.pkg)}&body=${encodeURIComponent(body)}`;
 });
 </script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

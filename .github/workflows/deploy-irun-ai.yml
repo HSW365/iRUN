@@ -3,6 +3,7 @@ name: Deploy iRun AI gateway
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - "supabase/functions/irun-ai/**"
       - ".github/workflows/deploy-irun-ai.yml"

@@ -171,6 +171,7 @@ section[role="tabpanel"]{padding-top:28px}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Run Your Instagram From One Place | iRun">
 <meta name="twitter:description" content="Plan, create and auto-post Instagram videos and carousels for your brand from one dashboard with iRun. Start free and post daily without the grind.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -318,8 +319,12 @@ section[role="tabpanel"]{padding-top:28px}
   function loginUrl() {
     const u = new URL(API); u.searchParams.set("a", "login");
     for (const k of ["account", "o", "c", "k"]) if (q.get(k)) u.searchParams.set(k, q.get(k));
+    // Connecting one of the owner's brand accounts: the owner PIN session stands in for the owner key (verified server side).
+    const t = window.IRUN_OWNER && IRUN_OWNER.token();
+    if (q.get("account") && !q.get("o") && t) u.searchParams.set("ot", t);
     return u.toString();
   }
+  $("connect").addEventListener("click", () => { $("connect").href = loginUrl(); });
   function showGate(msg) {
     $("ws").hidden = true; $("who").hidden = true; $("gate").hidden = false;
     $("connect").href = loginUrl();
@@ -559,6 +564,6 @@ section[role="tabpanel"]{padding-top:28px}
   else showGate(q.get("error") || "");
 })();
 </script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

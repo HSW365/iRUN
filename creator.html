@@ -94,11 +94,13 @@ table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--li
 .empty{text-align:center;color:var(--muted);padding:30px 10px}
 </style>
 <meta name="description" content="iRun private workspace.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <div class="shell">
 <aside>
   <a class="brand" href="app.html">iRUN <b>CREATOR</b></a>
+  <div data-hsw-vip style="padding:0 8px 14px"><span class="irun-vip">VIP &middot; Owner</span></div>
   <nav id="nav">
     <button data-v="home" class="on"><i>&#8962;</i>Home</button>
     <button data-v="explore"><i>&#9906;</i>Explore</button>
@@ -512,6 +514,6 @@ $("wipe").onclick = () => { if (confirm("Erase all Creator Hub data on this devi
 
 save(); render();
 </script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

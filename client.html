@@ -68,9 +68,10 @@ body{font-size:16px}
 @media (max-width:560px){.feed div{grid-template-columns:62px minmax(0,1fr)}.feed em{display:none}.frame{height:340px}}
 </style>
 <meta name="description" content="iRun private workspace.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
-<div class="top"><div class="wrap"><a class="logo" href="start.html"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Operator</small></span></a><div class="row" style="margin:0"><span class="small" id="sync"></span><button class="btn btn-line btn-sm" id="portal" hidden>Billing</button></div></div></div>
+<div class="top"><div class="wrap"><a class="logo" href="start.html"><span class="logo-mark" aria-hidden="true">i</span><span><b>iRun</b><small>Operator</small></span></a><div class="row" style="margin:0"><span class="irun-vip" id="vip" hidden>VIP &middot; Owner</span><span class="small" id="sync"></span><button class="btn btn-line btn-sm" id="portal" hidden>Billing</button></div></div></div>
 
 <div class="gate" id="gate" hidden><h2>Open your company</h2><p class="lede" id="gate-msg" style="margin-top:14px">Use the link from your welcome page or your nightly report email.</p></div>
 
@@ -94,7 +95,8 @@ body{font-size:16px}
       <div class="card"><h2>Ad Studio <small>INCLUDED</small></h2><p class="muted" style="margin-top:0">Make your own ads any time: static ad sets in every size and 33 languages, app and website showcase videos, promo videos from your clips, faceless videos and competitor ad tracking. Included with your plan.</p><div class="row"><a class="btn btn-acc btn-sm" id="studio" href="#">Open Ad Studio</a></div></div>
       <div class="card"><h2>Website</h2><div id="site"></div></div>
       <div class="card"><h2>Outreach</h2><div id="out"></div></div>
-      <div class="card"><h2>Credits</h2>
+      <div class="card" id="vip-card" hidden><h2>VIP &middot; Owner</h2><p class="muted" style="margin-top:0">You're signed in with your owner PIN. Everything here is free for you: unlimited credits, every feature, no billing.</p></div>
+      <div class="card" id="credits-card"><h2>Credits</h2>
         <p class="muted">50 cents a credit. 1 credit = 1 video, 10 emails or 1 website build. Bought credits never expire.</p>
         <div class="row"><div class="field" style="margin:0;flex:0 0 120px"><input id="qty" type="number" min="5" max="1000" step="1" value="25" aria-label="Credits to buy"></div><button class="btn btn-acc btn-sm" id="buy">Buy 25 credits for $12.50</button></div>
         <p class="msg" id="buy-msg"></p>
@@ -117,8 +119,11 @@ body{font-size:16px}
   if (!K && C) K = store.get();
   var timer = null, last = null, draftHtml = null;
 
+  // The owner PIN session goes with every call; irun-client verifies it again before it counts.
+  function ownerTok() { return window.IRUN_OWNER ? IRUN_OWNER.token() : null; }
   function call(body) {
     body.c = C; body.k = K;
+    var t = ownerTok(); if (t) body.owner_token = t;
     return fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || "Request failed"); return d; }); });
   }
@@ -140,10 +145,11 @@ body{font-size:16px}
         .catch(function (e) { gate(e.message + " Refresh in a minute, or email hsw365media@gmail.com."); });
       return;
     }
-    if (!K) return gate();
+    if (!K) return gate(); // no company key: only the owner (PIN session) can open it by id, see IRUN_OWNER.on below
     store.set(K);
     load();
   }
+  var ownerK = null; // the company key the server hands back to a verified owner (for the Studio link only)
 
   function load() {
     call({ a: "view" }).then(function (d) { last = d; render(d); $("sync").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); })
@@ -154,18 +160,20 @@ body{font-size:16px}
   var STATES = { awaiting_payment: "Waiting for your payment", pending: "Onboarding: reading your business", active: "Running on autopilot", paused: "Paused", error: "Needs attention" };
 
   function render(d) {
-    var c = d.company;
-    $("studio").href = "app.html?c=" + encodeURIComponent(C) + "&k=" + encodeURIComponent(K);
+    var c = d.company, vip = d.viewer_owner === true;
+    if (vip && d.k) ownerK = d.k;
+    $("studio").href = "app.html?c=" + encodeURIComponent(C) + "&k=" + encodeURIComponent(K || ownerK || "");
+    $("vip").hidden = !vip; $("vip-card").hidden = !vip; $("credits-card").hidden = vip;
     $("app").hidden = false; $("gate").hidden = true;
     $("state").className = "state " + c.status; $("state").querySelector("span").textContent = STATES[c.status] || c.status;
     $("name").textContent = c.name; document.title = "iRun Operator | " + c.name;
     $("summary").textContent = c.error ? "Onboarding stopped: " + c.error : (c.summary || "Your Operator is getting to know your business. This page updates on its own.");
     var posted = d.posts.filter(function (p) { return p.status === "posted"; }).length;
     var credits = (c.credits || 0) + (c.bonus_credits || 0);
-    $("kpis").innerHTML = [[c.plan_name, "Plan"], [c.plan === "comp" ? "Unlimited" : credits, "Credits left"], [posted, "Videos posted (recent)"],
+    $("kpis").innerHTML = [[vip ? "VIP · Owner" : c.plan_name, "Plan"], [c.plan === "comp" || vip ? "Unlimited" : credits, "Credits left"], [posted, "Videos posted (recent)"],
       [Object.values(d.prospects).reduce(function (a, b) { return a + b; }, 0), "Prospects on your list"]]
       .map(function (x) { return "<div><b>" + esc(x[0]) + "</b><span>" + esc(x[1]) + "</span></div>"; }).join("");
-    $("portal").hidden = c.plan === "comp";
+    $("portal").hidden = c.plan === "comp" || vip;
 
     $("feed").innerHTML = d.activity.length ? d.activity.map(function (a) {
       return "<div><time>" + esc(when(a.created_at)) + "</time><em>" + esc(a.agent) + "</em><span>" + esc(a.action) + "</span></div>";
@@ -186,13 +194,13 @@ body{font-size:16px}
       $("rep").innerHTML = "<p>" + esc(r.summary) + "</p>" + list("Decided", r.decisions) + list("Tomorrow", r.plan_tomorrow);
     }
 
-    var s = "";
+    var s = "", cost = c.plan === "comp" || vip ? "free" : "1 credit";
     if (c.site_status === "published") s += '<p class="muted">Live at <a class="tlink" href="' + esc(c.site_url) + '" target="_blank" rel="noopener">' + esc(c.site_url) + "</a></p>";
     if (c.site_status === "draft") s += '<p class="muted">A new version is ready. Look it over, then approve it to go live.</p><div class="frame"><iframe id="draft" sandbox title="Website draft"></iframe></div>' +
-      '<div class="row"><button class="btn btn-acc btn-sm" id="approve">Approve and publish</button><button class="btn btn-line btn-sm" id="rebuild">Make a new version (1 credit)</button></div>';
+      '<div class="row"><button class="btn btn-acc btn-sm" id="approve">Approve and publish</button><button class="btn btn-line btn-sm" id="rebuild">Make a new version (' + cost + ')</button></div>';
     else if (c.site_status === "approved") s += '<p class="muted">Approved. It goes live within the hour.</p>';
     else if (c.site_status === "none") s += '<p class="muted">Your website is being designed. The draft appears here for approval.</p>';
-    if (c.site_status === "published") s += '<div class="row"><button class="btn btn-line btn-sm" id="rebuild">Make a new version (1 credit)</button></div>';
+    if (c.site_status === "published") s += '<div class="row"><button class="btn btn-line btn-sm" id="rebuild">Make a new version (' + cost + ')</button></div>';
     $("site").innerHTML = s;
     if (c.site_status === "draft" && c.site_draft_url) {
       var show = function (h) { var f = $("draft"); if (f) f.srcdoc = h; };
@@ -222,7 +230,7 @@ body{font-size:16px}
         .catch(function (e) { m.className = "msg err"; m.textContent = e.message; });
     };
 
-    renderPay(d);
+    renderPay(d, vip);
     $("ledger").innerHTML = d.ledger.slice(0, 12).map(function (l) {
       return "<div><span>" + esc(l.reason) + " &middot; " + esc(when(l.created_at)) + "</span><b>" + (l.delta > 0 ? "+" : "") + esc(l.delta) + "</b></div>";
     }).join("");
@@ -239,9 +247,10 @@ body{font-size:16px}
       (p.status === "pending" ? '<div class="row"><button class="btn btn-acc btn-sm" data-sent="' + p.id + '">I sent it</button></div>'
         : '<p class="msg ok">Marked as sent. It is confirmed by hand, usually within a few hours, and this page updates on its own.</p>');
   }
-  function renderPay(d) {
+  function renderPay(d, vip) {
     var c = d.company, z = d.zelle, open = (d.payments || []).filter(function (p) { return p.status === "pending" || p.status === "sent"; });
     var html = "";
+    if (vip) { $("pay-card").hidden = true; $("pay").innerHTML = ""; return; }
     if (z && open.length) html = open.map(function (p) { return zbox(p, z); }).join('<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">');
     var soon = c.paid_until && new Date(c.paid_until).getTime() - Date.now() < 7 * 864e5;
     if (z && d.pay_method === "zelle" && c.plan !== "comp" && !open.some(function (p) { return p.kind === "plan"; }) && (soon || c.status === "paused"))
@@ -271,9 +280,13 @@ body{font-size:16px}
   });
   if (q.get("bought")) { $("buy-msg").className = "msg ok"; $("buy-msg").textContent = q.get("bought") + " credits are on the way. They show up here in a few seconds."; }
   start();
+  // Owner signs in or out while the page is open: show (or drop) the owner view.
+  if (window.IRUN_OWNER) IRUN_OWNER.on(function (o) {
+    if (o) { if (C) load(); }
+    else if (last && last.viewer_owner) { if (K) load(); else { clearTimeout(timer); last = null; ownerK = null; $("vip").hidden = true; gate(); } }
+  });
 })();
 </script>
-<script src="https://calltwin.onrender.com/owner-signin.js" defer></script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

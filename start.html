@@ -50,6 +50,7 @@
 <meta name="twitter:title" content="iRun Operator | AI Marketing That Runs Itself">
 <meta name="twitter:description" content="Give iRun your website and it runs your marketing while you sleep: short videos, posts and leads, all automatic. Start free and see your first batch.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "iRun Operator", "description": "An AI that runs your business marketing while you sleep.", "url": "https://hsw365.github.io/iRUN/start.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "HSW365 Media LLC", "url": "https://hsw365.net/"}}</script>
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -101,6 +102,7 @@
 <div class="ticket" aria-label="Example nightly report"><div class="ticket-head"><span>Example nightly report</span><b>GREEN</b></div><dl><dt>Summary</dt><dd>Eleven videos posted this week, none failed. Outreach sent 64 emails and got 3 replies.</dd><dt>Decided</dt><dd>Lead with emergency calls on weekday mornings. Retire the generic tips angle.</dd><dt>Tomorrow</dt><dd>Two TikToks on frozen pipes, a Reel on water heaters, outreach to the next 20 contacts.</dd><dt>Needs you</dt><dd>Approve the new website draft.</dd></dl></div></div></div></section>
 
 <section class="block" id="plans"><div class="wrap"><div class="sec-head"><h2>Three plans. One company each.</h2><p class="lede">Every plan comes with credits each month. Run out and the Operator waits; top up any time at 50 cents a credit.</p></div>
+<p class="irun-vip-note" data-hsw-vip style="margin:0 0 22px"><b>VIP &middot; Owner.</b> Every plan is free for you: no checkout, no billing. Companies you start here run on the owner plan with every Elite feature and unlimited credits.</p>
 <div class="plans" id="plan-grid" style="--n:3"></div>
 <p class="plan-note">Monthly, cancel any time from your page. Plan credits refill each month. Credits you buy never expire. We do not take a percentage of your revenue.</p></div></section>
 
@@ -141,7 +143,8 @@
     pro:{name:"Pro",cents:3500,features:["Everything in Starter","6 videos a day plus a daily faceless story video","Cold email outreach to your prospect list, 20 a day","30 credits a month"]},
     elite:{name:"Elite",cents:6000,features:["Everything in Pro","Outreach up to 50 emails a day","YouTube Shorts on the faceless videos","60 credits a month"]}};
   var FOR = {starter:"A site and a steady daily presence", pro:"Full marketing on autopilot", elite:"The most volume and outreach"};
-  var open = false, picked = new URLSearchParams(location.search).get("plan") || "pro";
+  var open = false, card = false, zel = false, picked = new URLSearchParams(location.search).get("plan") || "pro";
+  var owner = function () { return window.IRUN_OWNER && IRUN_OWNER.isOwner(); };
 
   function draw() {
     var ids = Object.keys(PLANS).filter(function (id) { return id !== "shopify"; });
@@ -168,19 +171,29 @@
     .then(function (r) { return r.json(); })
     .then(function (d) {
       if (d.plans && Object.keys(d.plans).length) { PLANS = d.plans; draw(); }
-      open = !!d.open;
-      $("f").hidden = !open; $("closed").hidden = open;
-      var card = !!d.card, z = !!d.zelle;
-      $("pay-row").hidden = !(card && z);
-      $("pay-card-l").hidden = !card; $("pay-zelle-l").hidden = !z;
-      if (!card && z) { form.querySelector("input[value=zelle]").checked = true; }
-      payFoot();
+      open = !!d.open; card = !!d.card; zel = !!d.zelle;
+      $("pay-card-l").hidden = !card; $("pay-zelle-l").hidden = !zel;
+      if (!card && zel) { form.querySelector("input[value=zelle]").checked = true; }
+      gateForm();
     })
-    .catch(function () { $("f").hidden = true; $("closed").hidden = false; });
+    .catch(function () { open = false; gateForm(); });
 
   var form = $("f");
   function method() { var r = form.querySelector("input[name=pay]:checked"); return r ? r.value : "card"; }
+  // The owner (PIN session) always gets the form, with no payment step; the server verifies the session again.
+  function gateForm() {
+    var o = owner();
+    $("f").hidden = !(open || o); $("closed").hidden = open || o;
+    $("pay-row").hidden = o || !(card && zel);
+    $("f-email").placeholder = o ? "hsw365media@gmail.com" : "";
+    payFoot();
+  }
   function payFoot() {
+    if (owner()) {
+      $("pay-foot").textContent = "Free for you (VIP · Owner). No checkout, no billing: onboarding starts within the hour.";
+      $("go").textContent = "Start my company free";
+      return;
+    }
     var z = method() === "zelle";
     $("pay-foot").textContent = z ? "Next you get the Zelle details and a memo code. Your autopilot starts as soon as the payment is confirmed."
                                   : "Secure checkout by Stripe. You can cancel any time from your live page.";
@@ -191,13 +204,15 @@
     e.preventDefault();
     var m = $("msg"); m.className = "msg"; m.textContent = "";
     var v = function (id) { return $(id).value.trim(); };
-    var body = { a: method() === "zelle" ? "zelle_signup" : "checkout", plan: $("f-plan").value, name: v("f-name"), email: v("f-email"), url: v("f-url"), notes: v("f-notes"),
+    var o = owner();
+    var body = { a: !o && method() === "zelle" ? "zelle_signup" : "checkout", plan: $("f-plan").value, name: v("f-name"), email: v("f-email"), url: v("f-url"), notes: v("f-notes"),
       handles: { instagram: v("f-ig"), tiktok: v("f-tt") } };
+    if (o) body.owner_token = IRUN_OWNER.token();
     var fail = function (t, id) { m.className = "msg err"; m.textContent = t; if (id) $(id).focus(); };
     if (body.name.length < 2) return fail("Add your business name.", "f-name");
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(body.email)) return fail("Enter an email we can send your reports to.", "f-email");
+    if (!(o && !body.email) && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(body.email)) return fail("Enter an email we can send your reports to.", "f-email");
     if (!body.url && !body.notes) return fail("Add your website, or tell it about your business.", "f-url");
-    var btn = $("go"); btn.disabled = true; btn.textContent = "Opening checkout";
+    var btn = $("go"); btn.disabled = true; btn.textContent = o ? "Starting your company" : "Opening checkout";
     fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
       .then(function (r) { return r.json(); })
       .then(function (d) {
@@ -207,9 +222,12 @@
       })
       .catch(function (x) { fail(x.message); btn.disabled = false; payFoot(); });
   });
+  if (window.IRUN_OWNER) IRUN_OWNER.on(function (o) {
+    if (o && !new URLSearchParams(location.search).get("plan")) { picked = "elite"; draw(); }
+    gateForm();
+  });
 })();
 </script>
-<script src="https://calltwin.onrender.com/owner-signin.js" defer></script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

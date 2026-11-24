@@ -11,7 +11,7 @@
 //   POST {a:"edit", owner, email, subject?, body?, followup_body?}
 //   POST {a:"approve", owner, emails:[...]}                           -> sends now (daily cap), rest go out on the next hourly run
 //   POST {a:"reject", owner, emails:[...]}
-// Every action needs the iRun owner key (irun_settings.owner_key). Leads come from OpenStreetMap (free) plus the email
+// Every action needs the owner: the owner PIN session (owner_token) or the iRun owner key (irun_settings.owner_key). Leads come from OpenStreetMap (free) plus the email
 // published on each business's own website. Mail goes through the CallTwin relay, same as the Sales Autopilot.
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
@@ -21,10 +21,30 @@ const UA = "HSW365-iRun-SalesAgent/1.0 (hsw365media@gmail.com)";
 const ADDRESS = "HSW365 Media LLC, Hammonton, NJ 08037";
 const cors = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-hsw-owner",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...cors, "Content-Type": "application/json" } });
+// HSW365 owner PIN session (owner-login.js). The browser sends the signed token as header X-HSW-Owner or body
+// field owner_token; it is re-checked with the owner-pin service and a positive answer is cached for 5 minutes.
+const OWNER_PIN_URL = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/owner-pin";
+const ownerSeen = new Map<string, number>();
+async function ownerPin(req: Request, b?: Record<string, unknown> | null): Promise<boolean> {
+  const t = String(req.headers.get("x-hsw-owner") || (b && b.owner_token) || "").trim();
+  if (!t || t.length > 512) return false;
+  const exp = ownerSeen.get(t);
+  if (exp && exp > Date.now()) return true;
+  try {
+    const r = await fetch(OWNER_PIN_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ a: "verify", token: t }), signal: AbortSignal.timeout(8000),
+    });
+    const j = await r.json().catch(() => null);
+    if (j?.ok === true) { ownerSeen.set(t, Date.now() + 300_000); return true; }
+  } catch (_) { /* owner-pin unreachable: not verified */ }
+  ownerSeen.delete(t);
+  return false;
+}
 const esc = (s: string) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]!));
 const EMAIL = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const JUNK = /(example\.|domain\.com|sentry|wixpress|godaddy|\.png|\.jpg|\.gif|\.webp|\.svg|@2x|noreply|no-reply|donotreply|privacy|abuse|postmaster|webmaster|legal@|yourname|email@|user@|name@|test@)/i;
@@ -382,7 +402,9 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   let b: Record<string, any>;
   try { b = await req.json(); } catch { return json({ error: "Send JSON." }, 400); }
-  if (!b.owner || b.owner !== (await setting("owner_key"))) return json({ error: "Owner key needed. Add it in iRun > Studio > Settings." }, 401);
+  // Owner only: the owner PIN session (owner_token, verified with owner-pin) or the older owner key.
+  const keyOk = !!b.owner && b.owner === (await setting("owner_key"));
+  if (!keyOk && !(await ownerPin(req, b))) return json({ error: "Owner sign-in needed. Tap Owner login and enter your PIN." }, 401);
   const app = b.app === "custom" && b.seller ? customApp(b.seller) : APPS.find((x) => x.id === b.app);
   try {
     switch (b.a) {

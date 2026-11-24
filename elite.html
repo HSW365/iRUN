@@ -56,6 +56,7 @@ form{padding:24px 28px 28px}
 .done p{color:var(--text2);max-width:460px;margin:12px auto 0}
 @media (max-width:760px){.steps{grid-template-columns:1fr}.steps div+div{border-left:0;border-top:1px solid var(--line)}.r2{grid-template-columns:1fr}.mh,form{padding-left:20px;padding-right:20px}}
 </style>
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <header class="top"><span class="brand">HSW<b>365</b> Media</span><span class="eyebrow">Elite Website Design</span></header>
@@ -69,7 +70,8 @@ form{padding:24px 28px 28px}
     <div><b>03</b><strong>You decide</b><span>Approve it, or tell us what to change. Unlimited back and forth until it's right.</span></div>
   </div>
   <div class="go"><button class="btn btn-acc" id="open" type="button">Open the intake form</button></div>
-  <p class="fine">HSW365 Elite Website Design is a $4,999 project: 50% deposit to start, balance due at launch. Questions: hsw365media@gmail.com</p>
+  <p class="fine" data-hsw-paywall>HSW365 Elite Website Design is a $4,999 project: 50% deposit to start, balance due at launch. Questions: hsw365media@gmail.com</p>
+  <p class="irun-vip-note" data-hsw-vip style="max-width:620px"><b>VIP &middot; Owner.</b> Your Elite build is free: no deposit, no balance, no order number needed.</p>
 </main>
 
 <div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="mt">
@@ -143,6 +145,7 @@ next.onclick=function(){var m=need();if(m){err.textContent=m;return}
  var d={a:"submit",website_hp:f.website_hp.value,name:f.name.value,email:f.email.value,phone:f.phone.value,order_ref:f.order_ref.value,business:f.business.value,
   domain_have:f.domain_have.value,domain_want:f.domain_want.value,about:f.about.value,services:f.services.value,area:f.area.value,style:f.style.value,links:f.links.value,notes:f.notes.value,
   socials:{instagram:f.instagram.value,facebook:f.facebook.value,tiktok:f.tiktok.value,youtube:f.youtube.value,x:f.x.value,linkedin:f.linkedin.value}};
+ var ot=window.IRUN_OWNER&&IRUN_OWNER.token();if(ot)d.owner_token=ot; /* owner build: the server verifies the PIN session and marks it no charge */
  fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)}).then(function(r){return r.json()}).then(function(j){
   if(!j.ok){throw new Error(j.error||"Could not send. Try again.")}
   document.getElementById("formwrap").hidden=true;document.getElementById("done").hidden=false;document.getElementById("em").textContent=f.email.value;
@@ -152,5 +155,6 @@ next.onclick=function(){var m=need();if(m){err.textContent=m;return}
 show(0);open();
 })();
 </script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

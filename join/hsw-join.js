@@ -10,7 +10,10 @@
      HSWJoin.require()      // true when the member is active, otherwise opens the join sheet and returns false
      HSWJoin.open("team")   // open the sheet with a plan picked
    </script>
-   ?signup or #signup in the URL opens the sheet a moment after the app shows. */
+   ?signup or #signup in the URL opens the sheet a moment after the app shows.
+   Owner: when the page also loads owner-login.js and the owner signs in with the PIN, state is
+   { active: true, owner: true, vip: true, plan: <top plan> } and the join sheet never opens. This is the browser view;
+   an app's own server must still verify window.HSW_OWNER_TOKEN with the owner-pin service. */
 (function () {
   const SB = "https://lsxdlmrjrcivxwgfkpop.supabase.co";
   const KEY = "sb_publishable_J5jD9bSIjoKEwyR5b5S4oQ_B4RQYo9T";
@@ -48,7 +51,19 @@
     return sess;
   }
   function emit() { listeners.forEach((f) => { try { f(state); } catch (e) { console.error(e); } }); paintBadge(); }
+  // Owner PIN session (owner-login.js): every plan, free, no join sheet.
+  const isOwner = () => window.HSW_OWNER === true && !!window.HSW_OWNER_TOKEN;
+  function topPlan() {
+    const list = plans.filter((x) => x.per !== "once");
+    const pick = (list.length ? list : plans).reduce((a, b) => (!a || Number(b.price) > Number(a.price) ? b : a), null);
+    return pick ? pick.id : "owner";
+  }
   async function refresh() {
+    if (isOwner()) {
+      close();
+      state = { active: true, signedIn: true, owner: true, vip: true, plan: topPlan(), email: (sess && sess.email) || "hsw365media@gmail.com" };
+      return emit(), state;
+    }
     if (!(await fresh())) { state = { active: false, signedIn: false }; return emit(), state; }
     try { state = { ...(await call({ a: "status" }, true)), signedIn: true }; }
     catch { state = { active: false, signedIn: true, email: sess.email }; }
@@ -146,7 +161,7 @@
   function open(p) {
     if (!root) return;
     if (p && plans.some((x) => x.id === p)) plan = p;
-    if (sess && state.active) return;
+    if (isOwner() || (sess && state.active)) return;
     root.querySelector("#hjEr").textContent = "";
     paint(); root.classList.add("on");
     setTimeout(() => { const i = root.querySelector(sess ? "#hjR" : "#hjE"); if (i) i.focus({ preventScroll: true }); }, 120);
@@ -194,6 +209,8 @@
     build();
     try { plans = (await call({ a: "plans" })).plans; } catch { plans = c.plans || []; }
     plan = plans.some((x) => x.id === c.defaultPlan) ? c.defaultPlan : (plans[1] || plans[0] || {}).id;
+    if (window.HSW_OWNER_READY && window.HSW_OWNER_READY.then) await window.HSW_OWNER_READY.catch(() => false);
+    window.addEventListener("hsw-owner", () => { refresh(); });
     await refresh();
     if (/[?&]signup/.test(location.search) || /^#(signup|join)$/.test(location.hash)) {
       history.replaceState(null, "", location.pathname);
@@ -205,6 +222,6 @@
   window.HSWJoin = {
     init, open, close, refresh, signOut,
     get state() { return state; },
-    require() { if (state.active) return true; open(); return false; },
+    require() { if (state.active || isOwner()) return true; open(); return false; },
   };
 })();

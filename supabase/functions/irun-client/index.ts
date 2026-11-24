@@ -13,6 +13,9 @@
 //   POST {a:"zelle_sent", c, k, id, note?}                 -> customer says the Zelle payment is sent; owner confirms it
 //   POST with stripe-signature                              -> Stripe webhook
 // JWT verification is off: Stripe calls this directly; customer actions check the company's client key.
+// Owner PIN session: any call may carry owner_token (or header X-HSW-Owner). Once owner-pin verifies it, sign-up is free
+// (comp plan, mapped to the owner emails), sign-up works even before billing opens, and the owner can open any company
+// without its client key (view and settings only; billing actions stay with the customer's own key).
 // Plans live in irun_settings.plans (synced from config/plans.json). Sign-up opens when irun_settings.billing_live = on.
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
@@ -22,10 +25,31 @@ const db = createClient(SB_URL, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { au
 const SITE = "https://hsw365.github.io/iRUN/";
 const cors = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-hsw-owner",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...cors, "Content-Type": "application/json" } });
+// HSW365 owner PIN session (owner-login.js). The browser sends the signed token as header X-HSW-Owner or body
+// field owner_token; it is re-checked with the owner-pin service and a positive answer is cached for 5 minutes.
+const OWNER_PIN_URL = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/owner-pin";
+const ownerSeen = new Map<string, number>();
+async function ownerPin(req: Request, b?: Record<string, unknown> | null): Promise<boolean> {
+  const t = String(req.headers.get("x-hsw-owner") || (b && b.owner_token) || "").trim();
+  if (!t || t.length > 512) return false;
+  const exp = ownerSeen.get(t);
+  if (exp && exp > Date.now()) return true;
+  try {
+    const r = await fetch(OWNER_PIN_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ a: "verify", token: t }), signal: AbortSignal.timeout(8000),
+    });
+    const j = await r.json().catch(() => null);
+    if (j?.ok === true) { ownerSeen.set(t, Date.now() + 300_000); return true; }
+  } catch (_) { /* owner-pin unreachable: not verified */ }
+  ownerSeen.delete(t);
+  return false;
+}
+const OWNER_EMAIL = "hsw365media@gmail.com"; // the account a verified owner PIN session maps to
 
 type Plan = { name: string; cents: number; credits: number; features: string[]; outreach: boolean; outreach_daily_cap: number };
 type Plans = { credit_price_cents: number; credit_pack_min: number; credit_pack_max: number; plans: Record<string, Plan> };
@@ -88,10 +112,10 @@ async function isOwner(email: string) {
   const list = JSON.parse((await setting("owner_emails")) ?? "[]") as string[];
   return list.map((e) => e.toLowerCase()).includes(email.trim().toLowerCase());
 }
-async function newCompany(b: any, pl: Plans, payMethod: string) {
+async function newCompany(b: any, pl: Plans, payMethod: string, pin = false) {
   const plan = pl.plans[b.plan];
   const name = String(b.name ?? "").trim().slice(0, 80);
-  const email = String(b.email ?? "").trim().toLowerCase();
+  const email = String(b.email ?? "").trim().toLowerCase() || (pin ? OWNER_EMAIL : "");
   const url = String(b.url ?? "").trim().slice(0, 300);
   if (!plan) throw new Error("Pick a plan.");
   if (name.length < 2) throw new Error("Enter your business name.");
@@ -108,7 +132,7 @@ async function newCompany(b: any, pl: Plans, payMethod: string) {
     if (!data && !["hsw365media", "hoodstar365", "hsw365co", "newark"].includes(id)) break;
     id = slug(name) + n;
   }
-  const owner = await isOwner(email);
+  const owner = pin || (await isOwner(email));
   const { data, error } = await db.from("irun_companies").insert({ id, name, email, source_url: url || null, handles,
     notes: String(b.notes ?? "").slice(0, 2000) || null, plan: owner ? "comp" : b.plan,
     status: owner ? "pending" : "awaiting_payment", pay_method: owner ? "comp" : payMethod })
@@ -118,10 +142,10 @@ async function newCompany(b: any, pl: Plans, payMethod: string) {
   return { ...data, plan, planId: b.plan as string, owner };
 }
 
-async function company(c: string, k: string) {
-  if (!c || !k) return null;
+async function company(c: string, k: string, pin = false) {
+  if (!c || (!k && !pin)) return null;
   const { data } = await db.from("irun_companies").select("*").eq("id", c).maybeSingle();
-  if (!data || data.client_key !== k) return null;
+  if (!data || (data.client_key !== k && !pin)) return null;
   return data;
 }
 async function log(company_id: string, agent: string, action: string, detail: unknown = null) {
@@ -231,6 +255,7 @@ Deno.serve(async (req) => {
     if (req.headers.get("stripe-signature")) return await webhook(req);
     const b = await req.json().catch(() => ({}));
     const pl = await plans();
+    const pin = await ownerPin(req, b); // verified owner PIN session
 
     if (b.a === "plans") {
       const z = await zelle();
@@ -258,9 +283,9 @@ Deno.serve(async (req) => {
 
     if (b.a === "zelle_signup") {
       const z = await zelle();
-      if ((await setting("billing_live")) !== "on" || !z) return json({ error: "Sign-up opens soon." }, 403);
+      if (!pin && ((await setting("billing_live")) !== "on" || !z)) return json({ error: "Sign-up opens soon." }, 403);
       let nc;
-      try { nc = await newCompany(b, pl, "zelle"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      try { nc = await newCompany(b, pl, "zelle", pin); } catch (e) { return json({ error: (e as Error).message }, 400); }
       if (nc.owner) return json({ c: nc.id, k: nc.client_key });
       const pay = await zellePayment(nc, "plan", nc.planId, null, nc.plan.cents);
       return json({ c: nc.id, k: nc.client_key, payment: pay, zelle: z });
@@ -269,7 +294,7 @@ Deno.serve(async (req) => {
     if (b.a === "checkout" && pl.plans[b.plan]?.cents === 0) {
       // Free plan (Shop Team): no payment. The company starts onboarding within the hour.
       let nc;
-      try { nc = await newCompany(b, pl, "free"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      try { nc = await newCompany(b, pl, "free", pin); } catch (e) { return json({ error: (e as Error).message }, 400); }
       if (!nc.owner) {
         await db.from("irun_companies").update({ status: "pending", credits: nc.plan.credits, paid_until: days(3650),
           updated_at: new Date().toISOString() }).eq("id", nc.id);
@@ -280,11 +305,11 @@ Deno.serve(async (req) => {
     }
 
     if (b.a === "checkout") {
-      const owner = b.owner_key && b.owner_key === (await setting("owner_key"));
+      const owner = pin || (b.owner_key && b.owner_key === (await setting("owner_key")));
       if ((await setting("billing_live")) !== "on" && !owner) return json({ error: "Sign-up opens soon." }, 403);
-      if (!STRIPE && !(await isOwner(String(b.email ?? "")))) return json({ error: "Payments are not configured yet." }, 503);
+      if (!STRIPE && !pin && !(await isOwner(String(b.email ?? "")))) return json({ error: "Payments are not configured yet." }, 503);
       let nc;
-      try { nc = await newCompany(b, pl, "card"); } catch (e) { return json({ error: (e as Error).message }, 400); }
+      try { nc = await newCompany(b, pl, "card", pin); } catch (e) { return json({ error: (e as Error).message }, 400); }
       if (nc.owner) return json({ c: nc.id, k: nc.client_key });
       const { id, plan } = nc;
       const email = String(b.email).trim().toLowerCase();
@@ -315,10 +340,13 @@ Deno.serve(async (req) => {
       return json({ k: data?.client_key });
     }
 
-    const c = await company(String(b.c ?? ""), String(b.k ?? ""));
+    const c = await company(String(b.c ?? ""), String(b.k ?? ""), pin);
     if (!c) return json({ error: "This link is not valid." }, 401);
+    // Opened by the owner PIN session without the company's key: the owner never pays, so billing stays closed.
+    if (pin && c.client_key !== String(b.k ?? "") && ["credits", "portal", "zelle_pay", "zelle_sent"].includes(b.a))
+      return json({ error: "Owner access is free. Billing is only for the customer's own link." }, 403);
 
-    if (b.a === "view") return json(await view(c));
+    if (b.a === "view") return json({ ...(await view(c)), viewer_owner: pin, k: pin ? c.client_key : undefined });
 
     if (b.a === "zelle_pay") {
       const z = await zelle();

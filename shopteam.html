@@ -215,6 +215,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reel .slam{opacity:1}}
 </style>
 <meta name="robots" content="noindex, nofollow">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <nav class="top" aria-label="Main"><div class="wrap">
@@ -383,6 +384,7 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
     </ul>
   </div>
   <div class="panel">
+    <p class="irun-vip-note" data-hsw-vip style="margin:0 0 16px"><b>VIP &middot; Owner.</b> Shop Team is free for you: no trial clock, no checkout, no billing. Your store gets the full team on the owner plan.</p>
     <form id="f" novalidate>
       <div class="field"><label for="f-url">Your Shopify store</label><input id="f-url" type="url" inputmode="url" autocapitalize="none" spellcheck="false" placeholder="yourstore.com" maxlength="300" required></div>
       <div class="field"><label for="f-name">Store or brand name</label><input id="f-name" maxlength="80" autocomplete="organization" required></div>
@@ -513,8 +515,23 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
 
   /* sign-up: same Operator backend, Shop Team plan */
   var form = $("f");
+  var open = false, card = false, zel = false;
+  var owner = function () { return window.IRUN_OWNER && IRUN_OWNER.isOwner(); };
   var method = function () { var r = form.querySelector("input[name=pay]:checked"); return r ? r.value : "card"; };
+  // The owner (PIN session) always gets the form, with no payment step; the server verifies the session again.
+  var gateForm = function () {
+    var o = owner();
+    form.hidden = !(open || o); $("closed").hidden = open || o;
+    $("pay-row").hidden = o || !(card && zel);
+    $("f-email").placeholder = o ? "hsw365media@gmail.com" : "";
+    payFoot();
+  };
   var payFoot = function () {
+    if (owner()) {
+      $("pay-foot").textContent = "Free for you (VIP · Owner). No trial, no checkout, no billing.";
+      $("go").textContent = "Start my Shop Team free";
+      return;
+    }
     var z = method() === "zelle";
     $("pay-foot").textContent = z ? "Next you get the Zelle details and a memo code. Your team starts once the payment is confirmed."
                                   : "3 days free, then $27 a month. Secure checkout by Stripe. Cancel any time.";
@@ -523,35 +540,37 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
   form.addEventListener("change", function (e) { if (e.target.name === "pay") payFoot(); });
   post({ a: "plans" }).then(function (d) {
     var p = d.plans && d.plans.shopify;
-    var open = !!d.open && !!p;
-    form.hidden = !open; $("closed").hidden = open;
+    open = !!d.open && !!p;
     if (p && p.features) $("price-feats").innerHTML = p.features.slice(1, 7).map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("");
-    var card = !!d.card, z = !!d.zelle;
-    $("pay-row").hidden = !(card && z);
-    $("pay-card-l").hidden = !card; $("pay-zelle-l").hidden = !z;
-    if (!card && z) form.querySelector("input[value=zelle]").checked = true;
-    payFoot();
-  }).catch(function () { form.hidden = true; $("closed").hidden = false; });
+    card = !!d.card; zel = !!d.zelle;
+    $("pay-card-l").hidden = !card; $("pay-zelle-l").hidden = !zel;
+    if (!card && zel) form.querySelector("input[value=zelle]").checked = true;
+    gateForm();
+  }).catch(function () { open = false; gateForm(); });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var m = $("msg"); m.className = "msg"; m.textContent = "";
     var v = function (id) { return $(id).value.trim(); };
     var store = cleanStore(v("f-url"));
-    var body = { a: method() === "zelle" ? "zelle_signup" : "checkout", plan: "shopify", name: v("f-name"), email: v("f-email"),
+    var o = owner();
+    var body = { a: !o && method() === "zelle" ? "zelle_signup" : "checkout", plan: "shopify", name: v("f-name"), email: v("f-email"),
       url: store ? "https://" + store : "", notes: ("Shop Team. Shopify store: " + store + ". " + v("f-notes")).trim(),
       handles: { instagram: v("f-ig"), tiktok: v("f-tt") } };
+    if (o) body.owner_token = IRUN_OWNER.token();
     var fail = function (t, id) { m.className = "msg err"; m.textContent = t; if (id) $(id).focus(); };
     if (!/^[a-z0-9.-]+\.[a-z]{2,}$/.test(store)) return fail("Add your store link, like yourstore.com.", "f-url");
     if (body.name.length < 2) return fail("Add your store or brand name.", "f-name");
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(body.email)) return fail("Enter an email for your reports.", "f-email");
-    var btn = $("go"); btn.disabled = true; btn.textContent = "Opening checkout";
+    if (!(o && !body.email) && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(body.email)) return fail("Enter an email for your reports.", "f-email");
+    var btn = $("go"); btn.disabled = true; btn.textContent = o ? "Starting your team" : "Opening checkout";
     post(body).then(function (d) {
       if (d.url) location.href = d.url;
       else if (d.c && d.k) location.href = "client.html?c=" + encodeURIComponent(d.c) + "&k=" + encodeURIComponent(d.k);
       else throw new Error(d.error || "Something went wrong. Try again.");
     }).catch(function (x) { fail(x.message); btn.disabled = false; payFoot(); });
   });
+
+  if (window.IRUN_OWNER) IRUN_OWNER.on(gateForm);
 
   /* sparks */
   var cv = $("sparks"), cx = cv.getContext("2d"), pts = [], still = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -569,6 +588,6 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}footer nav a{text-decoration:non
   })();
 })();
 </script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

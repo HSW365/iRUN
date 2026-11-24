@@ -97,10 +97,11 @@ details.card summary::after{content:"+";float:right;color:var(--muted)}details[o
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <meta name="description" content="iRun private workspace.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <header><div class="logo">iRUN <b>SALES AGENT</b></div><span class="mono" id="cap">HSW365 Media</span></header>
+  <header><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><div class="logo">iRUN <b>SALES AGENT</b></div><span class="irun-vip" data-hsw-vip>VIP &middot; Owner</span></div><span class="mono" id="cap">HSW365 Media</span></header>
   <nav>
     <a href="app.html">Studio</a>
     <a href="sales.html" class="on">Sales Agent</a>
@@ -110,8 +111,9 @@ details.card summary::after{content:"+";float:right;color:var(--muted)}details[o
   </nav>
 
   <div class="card gate" id="gate" hidden>
-    <h1>Owner <span>key</span></h1>
-    <p class="sub">Paste your iRun owner key once. It stays on this device.</p>
+    <h1>Owner <span>login</span></h1>
+    <p class="sub">Sign in with your owner PIN. Or paste your iRun owner key once; it stays on this device.</p>
+    <div class="row"><button class="btn" id="pinOpen" type="button" style="width:100%">Owner login with PIN</button></div>
     <div class="row"><input id="keyIn" placeholder="Owner key" autocomplete="off"><button class="btn" id="keySave">Unlock</button></div>
   </div>
 
@@ -183,7 +185,7 @@ let OWNER = ls.get("irun_owner");
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const toast = (t) => { const el = $("toast"); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (el.hidden = true), 4500); };
 async function api(a, body = {}) {
-  const r = await fetch(API, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ a, owner: OWNER, ...body }) });
+  const r = await fetch(API, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(IRUN_OWNER.body({ a, owner: OWNER || null, ...body })) });
   const j = await r.json().catch(() => ({ error: "Bad response" }));
   if (r.status === 401) { $("gate").hidden = false; $("main").hidden = true; }
   if (j.error) throw new Error(j.error);
@@ -497,9 +499,11 @@ $("skipSel").onclick = () => skip([...SEL]);
 $("selAll").onclick = () => { const all = ROWS.every((r) => SEL.has(r.email)); ROWS.forEach((r) => (all ? SEL.delete(r.email) : SEL.add(r.email))); render(); };
 $("camp").onchange = () => { CAMP = $("camp").value; SEL.clear(); load(); };
 $("keySave").onclick = () => { OWNER = $("keyIn").value.trim(); ls.set("irun_owner", OWNER); boot(); };
+$("pinOpen").onclick = () => IRUN_OWNER.open();
 
 async function boot() {
-  if (!OWNER) { $("gate").hidden = false; return; }
+  // Signed in = the owner PIN session (verified again by irun-sales) or the owner key.
+  if (!OWNER && !IRUN_OWNER.isOwner()) { $("gate").hidden = false; $("main").hidden = true; return; }
   try {
     const j = await api("apps");
     APPS = j.apps; $("gate").hidden = true; $("main").hidden = false;
@@ -507,8 +511,9 @@ async function boot() {
     renderApps(); await load();
   } catch (e) { toast(e.message); }
 }
-boot();
+if (OWNER) boot();
+IRUN_OWNER.on((o) => { if (o || !OWNER) boot(); });
 </script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

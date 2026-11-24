@@ -1,15 +1,20 @@
-/* Shared iRun AI client. All browser AI requests pass through the iRun gateway. */
+/* Shared iRun AI client. All browser AI requests pass through the iRun gateway.
+   Signed in = the owner PIN session (owner-login.js, verified again by the gateway) or the older owner key. */
 (() => {
   const ENDPOINT = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ai";
   window.IRUN_AI = async ({ system, messages, max = 3500, onText, signal }) => {
     let owner = "";
     try { owner = localStorage.getItem("irun_owner") || ""; } catch {}
-    if (!owner) throw new Error("Sign in to iRun first. Your owner session is missing.");
+    const token = window.HSW_OWNER === true && window.HSW_OWNER_TOKEN ? String(window.HSW_OWNER_TOKEN) : "";
+    if (!owner && !token) {
+      if (typeof window.HSW_OWNER_OPEN === "function") window.HSW_OWNER_OPEN();
+      throw new Error("Sign in to iRun first: tap Owner login and enter your PIN.");
+    }
     const response = await fetch(ENDPOINT, {
       method: "POST",
       signal,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ owner, system, messages, max_tokens: max })
+      body: JSON.stringify({ owner, ...(token ? { owner_token: token } : {}), system, messages, max_tokens: max })
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {

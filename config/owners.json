@@ -22,5 +22,10 @@
     "youtube": [
       "hoodstar365"
     ]
+  },
+  "pin_login": {
+    "_note": "Owner PIN login (owner-login.js on every iRun page): PIN only, no email. iRun's server functions verify the session token with verify_url and treat it as maps_to: comp plan, unlimited credits, every feature, no billing.",
+    "verify_url": "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/owner-pin",
+    "maps_to": "hsw365media@gmail.com"
   }
 }

@@ -4,6 +4,7 @@
 // - GET  ?view=data&key=OWNER_KEY -> JSON for the owner dashboard (dashboard.html)
 // - POST {owner:KEY, a:"add_company"|"company"|"prospects"|"credits"|"confirm_payment"|"reject_payment", ...} -> Operator controls (dashboard.html)
 // - POST {owner:KEY, a:"brain_get"|"brain_put", data} -> iRun Team memory sync (team.html)
+//   Owner calls also accept the owner PIN session instead of the key: header X-HSW-Owner (GET) or body owner_token.
 // - GET  ?view=unsub&c=..&e=..&t=..  -> one-click unsubscribe from Operator outreach email (also POST, RFC 8058)
 // - Optional AI replies: with secret ANTHROPIC_API_KEY set and irun_settings.ai_dm_replies = on, a DM without a
 //   keyword gets a short, factual answer built only from the product list, and is still logged for a human.
@@ -13,11 +14,31 @@ const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SE
 const GRAPH = "https://graph.instagram.com/v23.0";
 const cors = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "content-type",
+  "Access-Control-Allow-Headers": "content-type, x-hsw-owner",
   "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
 };
 const json = (b: unknown, s = 200) =>
   new Response(JSON.stringify(b), { status: s, headers: { ...cors, "Content-Type": "application/json" } });
+// HSW365 owner PIN session (owner-login.js). The browser sends the signed token as header X-HSW-Owner or body
+// field owner_token; it is re-checked with the owner-pin service and a positive answer is cached for 5 minutes.
+const OWNER_PIN_URL = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/owner-pin";
+const ownerSeen = new Map<string, number>();
+async function ownerPin(req: Request, b?: Record<string, unknown> | null): Promise<boolean> {
+  const t = String(req.headers.get("x-hsw-owner") || (b && b.owner_token) || "").trim();
+  if (!t || t.length > 512) return false;
+  const exp = ownerSeen.get(t);
+  if (exp && exp > Date.now()) return true;
+  try {
+    const r = await fetch(OWNER_PIN_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ a: "verify", token: t }), signal: AbortSignal.timeout(8000),
+    });
+    const j = await r.json().catch(() => null);
+    if (j?.ok === true) { ownerSeen.set(t, Date.now() + 300_000); return true; }
+  } catch (_) { /* owner-pin unreachable: not verified */ }
+  ownerSeen.delete(t);
+  return false;
+}
 
 async function setting(key: string): Promise<string | null> {
   const { data } = await sb.from("irun_settings").select("value").eq("key", key).maybeSingle();
@@ -188,9 +209,9 @@ async function handle(body: any) {
   }
 }
 
-async function ownerData(key: string | null) {
+async function ownerData(req: Request, key: string | null) {
   const owner = await setting("owner_key");
-  if (!owner || key !== owner) return json({ error: "unauthorized" }, 401);
+  if (!(owner && key === owner) && !(await ownerPin(req))) return json({ error: "unauthorized" }, 401);
   const [posts, leads, prods] = await Promise.all([
     sb.from("irun_posts").select("id,created_at,platform,product_id,hook,caption,video_url,status,error,posted_at,voice")
       .order("created_at", { ascending: false }).limit(60),
@@ -214,9 +235,9 @@ const slug = (s: string) => (s.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0,
 const emailOk = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
 const RESERVED = ["hsw365media", "hoodstar365", "hsw365co", "newark"];
 
-async function ownerAction(b: any) {
+async function ownerAction(req: Request, b: any) {
   const owner = await setting("owner_key");
-  if (!owner || b.owner !== owner) return json({ error: "unauthorized" }, 401);
+  if (!(owner && b.owner === owner) && !(await ownerPin(req, b))) return json({ error: "unauthorized" }, 401);
   const log = (company_id: string | null, action: string) => sb.from("irun_activity").insert({ company_id, agent: "owner", action });
   // iRun Team (team.html): one shared Brain, chats and Library for the owner across devices
   if (b.a === "brain_get") {
@@ -341,18 +362,18 @@ Deno.serve(async (req) => {
       const ok = url.searchParams.get("hub.verify_token") === (await setting("ig_verify_token"));
       return ok ? new Response(url.searchParams.get("hub.challenge") ?? "", { status: 200 }) : new Response("forbidden", { status: 403 });
     }
-    if (url.searchParams.get("view") === "data") return ownerData(url.searchParams.get("key"));
+    if (url.searchParams.get("view") === "data") return ownerData(req, url.searchParams.get("key"));
     if (url.searchParams.get("view") === "unsub") return unsubscribe(url);
     return json({ ok: true, service: "irun-ig-webhook" });
   }
   if (req.method === "POST") {
     if (url.searchParams.get("view") === "unsub") return unsubscribe(url); // List-Unsubscribe-Post one-click
     const raw = await req.text();
-    if (raw.startsWith("{") && raw.includes('"owner"')) {
+    if (raw.startsWith("{") && (raw.includes('"owner"') || raw.includes('"owner_token"'))) {
       let b: any = null;
       try { b = JSON.parse(raw); } catch { /* not JSON: fall through to Meta */ }
-      if (b?.owner) {
-        try { return await ownerAction(b); } catch (e) { return json({ error: String(e instanceof Error ? e.message : e) }, 500); }
+      if (b?.owner || b?.owner_token) {
+        try { return await ownerAction(req, b); } catch (e) { return json({ error: String(e instanceof Error ? e.message : e) }, 500); }
       }
     }
     if (!(await validSignature(req, raw))) return new Response("bad signature", { status: 401 });

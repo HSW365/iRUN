@@ -1,7 +1,7 @@
 // iRun Instagram Business Login + Instagram workspace API (instagram.html).
 //
 // Login (Instagram API with Instagram Login):
-//   GET  ?a=login[&account=<iRun account id>&o=<owner key>][&c=<company id>&k=<client key>]
+//   GET  ?a=login[&account=<iRun account id>&o=<owner key> | &ot=<owner PIN session token>][&c=<company id>&k=<client key>]
 //        -> 302 to instagram.com/oauth/authorize. Redirect URI is instagram.html, state is "ig.<signed>".
 //   POST {a:"exchange", code, state}   -> short-lived token -> long-lived token (60 days), stored server side.
 //        Returns {u, s, username}: the browser keeps the session key, never the Instagram token.
@@ -46,10 +46,30 @@ const SCOPES = [
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-hsw-owner",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 };
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...cors, "Content-Type": "application/json" } });
+// HSW365 owner PIN session (owner-login.js). The browser sends the signed token as header X-HSW-Owner or body
+// field owner_token; it is re-checked with the owner-pin service and a positive answer is cached for 5 minutes.
+const OWNER_PIN_URL = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/owner-pin";
+const ownerSeen = new Map<string, number>();
+async function ownerPin(req: Request, b?: Record<string, unknown> | null): Promise<boolean> {
+  const t = String(req.headers.get("x-hsw-owner") || (b && b.owner_token) || "").trim();
+  if (!t || t.length > 512) return false;
+  const exp = ownerSeen.get(t);
+  if (exp && exp > Date.now()) return true;
+  try {
+    const r = await fetch(OWNER_PIN_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ a: "verify", token: t }), signal: AbortSignal.timeout(8000),
+    });
+    const j = await r.json().catch(() => null);
+    if (j?.ok === true) { ownerSeen.set(t, Date.now() + 300_000); return true; }
+  } catch (_) { /* owner-pin unreachable: not verified */ }
+  ownerSeen.delete(t);
+  return false;
+}
 const page = (msg: string, s = 400) =>
   new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>iRun</title>` +
     `<body style="margin:0;background:#0a0a0f;color:#f4f4f7;font:16px system-ui;display:grid;place-items:center;min-height:100vh;padding:20px">` +
@@ -121,14 +141,15 @@ async function fresh(c: any) {
 }
 
 // ---------- login ----------
-async function login(url: URL) {
+async function login(url: URL, req: Request) {
   if (!APP_ID || !APP_SECRET) return page("Instagram login is not configured yet (IG_APP_ID / IG_APP_SECRET).", 503);
   const st: Record<string, unknown> = { n: crypto.randomUUID(), exp: Date.now() + 15 * 60_000 };
   const account = url.searchParams.get("account");
   const c = url.searchParams.get("c");
   if (account) {
     const o = url.searchParams.get("o");
-    if (!o || o !== (await setting("owner_key"))) return page("That owner link is not valid.", 401);
+    const keyOk = !!o && o === (await setting("owner_key"));
+    if (!keyOk && !(await ownerPin(req, { owner_token: url.searchParams.get("ot") }))) return page("That owner link is not valid. Sign in with your owner PIN and try again.", 401);
     st.acct = account;
   } else if (c) {
     const { data } = await db.from("irun_companies").select("id,client_key").eq("id", c).maybeSingle();
@@ -303,7 +324,7 @@ Deno.serve(async (req) => {
   const url = new URL(req.url);
   const a = url.searchParams.get("a");
   try {
-    if (req.method === "GET" && a === "login") return await login(url);
+    if (req.method === "GET" && a === "login") return await login(url, req);
     if (req.method === "GET" && a === "deletion") {
       const { data } = await db.from("irun_ig_deletions").select("code,status,created_at").eq("code", url.searchParams.get("code") ?? "").maybeSingle();
       return data ? json(data) : json({ error: "No deletion request with that code." }, 404);

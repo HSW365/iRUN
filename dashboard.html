@@ -46,17 +46,20 @@ textarea,select{width:100%;background:#0d0d14;border:1px solid var(--line);color
 @media(max-width:700px){.form2{grid-template-columns:1fr}.feed div{grid-template-columns:1fr}}
 </style>
 <meta name="description" content="iRun private workspace.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <div id="gate" class="gate" hidden>
   <h1>iRUN <b>COMMAND</b></h1>
   <p class="mono">Owner access</p>
+  <button class="btn" type="button" onclick="IRUN_OWNER.open()" style="width:100%;margin-top:14px">Owner login with PIN</button>
+  <p class="mono" style="margin:16px 0 0;text-align:center">or use the owner key</p>
   <input id="k" type="password" placeholder="Owner key" autocomplete="off">
   <button class="btn" onclick="login()">Open</button>
   <p id="gerr" class="err"></p>
 </div>
 <div id="app" class="wrap" hidden>
-  <div class="top"><h1>iRUN <b>COMMAND</b></h1><span class="mono">@hsw365media autopilot</span></div>
+  <div class="top"><h1>iRUN <b>COMMAND</b></h1><span class="mono">@hsw365media autopilot</span><span class="irun-vip" data-hsw-vip>VIP &middot; Owner</span></div>
   <div class="stats" id="stats"></div>
   <div class="tabs"><button class="on" data-t="leads">Leads</button><button data-t="posts">Posts</button><button data-t="ops">Operator</button><button data-t="live">Live</button><button data-t="conn">Connections</button></div>
   <section id="leads"></section><section id="posts" hidden></section><section id="ops" hidden></section><section id="live" hidden></section><section id="conn" hidden></section>
@@ -70,10 +73,11 @@ let key = (location.hash.match(/key=([a-f0-9]+)/) || [])[1] || sessionStorageGet
 function sessionStorageGet(){ try { return sessionStorage.getItem("irun_key"); } catch { return null; } }
 function login(){ key = document.getElementById("k").value.trim(); load(); }
 async function load(){
-  if(!key){ document.getElementById("gate").hidden=false; return; }
-  const r = await fetch(`${API}?view=data&key=${encodeURIComponent(key)}`);
-  if(!r.ok){ document.getElementById("gate").hidden=false; document.getElementById("gerr").textContent="Wrong key."; return; }
-  try { sessionStorage.setItem("irun_key", key); } catch {}
+  // Signed in = the owner PIN session (verified again by the server) or the owner key.
+  if(!key && !IRUN_OWNER.isOwner()){ clearTimeout(window._rt); document.getElementById("app").hidden=true; document.getElementById("gate").hidden=false; return; }
+  const r = await fetch(`${API}?view=data&key=${encodeURIComponent(key||"")}`, {headers: IRUN_OWNER.headers()});
+  if(!r.ok){ document.getElementById("app").hidden=true; document.getElementById("gate").hidden=false; document.getElementById("gerr").textContent=IRUN_OWNER.isOwner()?"Owner session not accepted. Sign in with your PIN again.":"Wrong key."; return; }
+  if(key) try { sessionStorage.setItem("irun_key", key); } catch {}
   history.replaceState(null,"",location.pathname);
   const d = await r.json();
   document.getElementById("gate").hidden=true; document.getElementById("app").hidden=false;
@@ -104,7 +108,7 @@ async function load(){
 }
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));TABS.forEach(id=>document.getElementById(id).hidden=id!==b.dataset.t);});
 async function act(body){
-  const r = await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({owner:key,...body})});
+  const r = await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(IRUN_OWNER.body({owner:key||null,...body}))});
   const d = await r.json().catch(()=>({}));
   if(!r.ok){ alert(d.error||"Failed"); return null; }
   load(); return d;
@@ -171,9 +175,9 @@ function renderLive(d, cos){
   const names=Object.fromEntries(cos.map(c=>[c.id,c.name]));
   document.getElementById("live").innerHTML = `<h2>Live <span class="mono">every agent, every company, newest first</span></h2><div class="feed">${(d.activity||[]).map(a=>`<div><span class="mono">${when(a.created_at)}</span><span>${esc(names[a.company_id]||a.company_id||"-")}</span><span class="a">${esc(a.agent)}</span><span>${esc(a.action)}</span></div>`).join("")||"<div>No activity yet.</div>"}</div>`;
 }
-load();
+if(key) load();
+IRUN_OWNER.on(o=>{ if(o || !key) load(); });
 </script>
-<script src="https://calltwin.onrender.com/owner-signin.js" defer></script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

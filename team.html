@@ -131,11 +131,12 @@ textarea{min-height:84px;resize:vertical}
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--panel3);border:1px solid var(--line2);padding:10px 16px;border-radius:12px;font-size:14px;z-index:60;box-shadow:0 20px 40px -20px #000}
 </style>
 <meta name="description" content="iRun private workspace.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="logo" href="app.html">iRUN <b>TEAM</b></a>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><a class="logo" href="app.html">iRUN <b>TEAM</b></a><span class="irun-vip" data-hsw-vip>VIP &middot; Owner</span></div>
     <div class="prof">
       <span class="sync" id="sync"><i></i><span>This device</span></span>
       <select id="profSel" aria-label="Business"></select>
@@ -278,6 +279,8 @@ const ls = {
   set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } }
 };
 const ownerKey = () => ls.get("irun_owner");
+// Cloud sync is owner-only: the owner PIN session (verified again by the server) or the owner key.
+const canSync = () => !!ownerKey() || IRUN_OWNER.isOwner();
 
 const TEAM = [
   {id:"vibe", name:"Vibe", role:"Social Media Manager", hue:"#22d3ee",
@@ -357,19 +360,19 @@ function save(skipSync) {
   S.updatedAt = Date.now();
   for (const p of S.profiles) for (const k in p.chats) if (p.chats[k].length > 300) p.chats[k] = p.chats[k].slice(-300);
   if (!ls.set(KEY, JSON.stringify(S))) toast("This browser is out of storage. Export a backup, then delete old chats.");
-  if (!skipSync && ownerKey()) { clearTimeout(syncTimer); syncTimer = setTimeout(() => pushCloud(), 2500); }
+  if (!skipSync && canSync()) { clearTimeout(syncTimer); syncTimer = setTimeout(() => pushCloud(), 2500); }
 }
 
 /* ================= cloud sync ================= */
 function syncBadge(state, label) { const el = $("sync"); el.className = "sync " + state; el.querySelector("span").textContent = label; }
 async function cloud(a, extra = {}) {
-  const r = await fetch(SYNC_API, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({owner: ownerKey(), a, ...extra})});
+  const r = await fetch(SYNC_API, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(IRUN_OWNER.body({owner: ownerKey() || null, a, ...extra}))});
   const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(r.status === 401 ? "Owner key not accepted" : (j.error || `Sync error ${r.status}`));
+  if (!r.ok) throw new Error(r.status === 401 ? (IRUN_OWNER.isOwner() ? "Owner session not accepted. Sign in with your PIN again." : "Owner key not accepted") : (j.error || `Sync error ${r.status}`));
   return j;
 }
 async function pullCloud(force) {
-  if (!ownerKey()) { syncBadge("", "This device"); return; }
+  if (!canSync()) { syncBadge("", "This device"); return; }
   try {
     const j = await cloud("brain_get");
     if (j.data && j.data.profiles && (force || (j.data.updatedAt || 0) > (S.updatedAt || 0))) { S = j.data; save(true); renderAll(); }
@@ -378,7 +381,7 @@ async function pullCloud(force) {
   } catch (e) { syncBadge("err", "Sync off"); setStatus("syncStatus", e.message, "err"); }
 }
 async function pushCloud() {
-  if (!ownerKey()) return;
+  if (!canSync()) return;
   try { await cloud("brain_put", {data: S}); syncBadge("on", "Synced"); }
   catch (e) { syncBadge("err", "Sync off"); setStatus("syncStatus", e.message, "err"); }
 }
@@ -497,7 +500,7 @@ function renderTeam() {
   $("heroBiz").textContent = p.name; $("heroN").textContent = TEAM.length;
   $("kLib").textContent = p.library.length; $("kFacts").textContent = p.facts.length; $("kDocs").textContent = p.docs.length;
   $("kMsgs").textContent = Object.values(p.chats).reduce((a, c) => a + c.length, 0);
-  $("keyNote").textContent = `All iRun Team agents use the secure iRun AI gateway. ${ownerKey() ? "Memory syncs across your devices." : "Memory is saved in this browser; add your iRun owner key in Studio Settings to sync devices."}`;
+  $("keyNote").textContent = `All iRun Team agents use the secure iRun AI gateway. ${canSync() ? "Memory syncs across your devices." : "Memory is saved in this browser; tap Owner login and enter your PIN to sync devices."}`;
   const card = e => { const n = (p.chats[e.id] || []).length;
     return `<button class="emp" style="--hue:${e.hue}" data-e="${e.id}">${n ? `<span class="cnt">${n} MSG</span>` : ""}<div class="hd">${avatar(e)}<div><div class="nm">${esc(e.name)}</div><div class="rl">${esc(e.role)}</div></div></div><p>${esc(e.blurb)}</p></button>`; };
   $("teamGrid").innerHTML = `<div class="grid" style="grid-column:1/-1">${TEAM.filter(e => !e.squad).map(card).join("")}</div>` +
@@ -602,7 +605,7 @@ function renderBrain() {
   document.querySelectorAll("#facts .x").forEach(b => b.onclick = () => { p.facts = p.facts.filter(f => f.id !== b.dataset.f); save(); renderBrain(); });
   $("docs").innerHTML = p.docs.length ? p.docs.map(d => `<div class="fact"><span><b>${esc(d.name)}</b><br><span class="note">${(d.text.length / 1000).toFixed(1)}k characters</span></span><button class="x" data-d="${d.id}" aria-label="Remove">&times;</button></div>`).join("") : `<p class="note">No documents yet.</p>`;
   document.querySelectorAll("#docs .x").forEach(b => b.onclick = () => { p.docs = p.docs.filter(d => d.id !== b.dataset.d); save(); renderBrain(); });
-  $("syncNote").innerHTML = ownerKey() ? "Your owner key is set, so the Brain, every chat and the Library sync to your iRun cloud. Phone and PC see the same team." : "Add your iRun owner key in <a href=\"app.html\">Studio &gt; Settings</a> to sync the Brain, chats and Library across your phone and PC. Until then everything stays in this browser, so export a backup now and then.";
+  $("syncNote").innerHTML = canSync() ? (IRUN_OWNER.isOwner() ? "You're signed in with your owner PIN (VIP &middot; Owner), so the Brain, every chat and the Library sync to your iRun cloud. Phone and PC see the same team." : "Your owner key is set, so the Brain, every chat and the Library sync to your iRun cloud. Phone and PC see the same team.") : "Tap Owner login and enter your PIN (or add your iRun owner key in <a href=\"app.html\">Studio &gt; Settings</a>) to sync the Brain, chats and Library across your phone and PC. Until then everything stays in this browser, so export a backup now and then.";
 }
 $("bSave").onclick = () => { const p = P(); for (const [id, k] of Object.entries(BF)) p[k] = $(id).value.trim(); p.name = p.name || "My business"; p.catalog = $("bCat").checked; save(); renderProfiles(); setStatus("bStatus", "Saved. Every employee uses this from their next reply.", "ok"); };
 $("bDel").onclick = () => { if (S.profiles.length < 2) return setStatus("bStatus", "You need at least one business.", "err");
@@ -620,7 +623,7 @@ $("imp").onchange = async ev => { const f = ev.target.files[0]; ev.target.value 
   try { const d = JSON.parse(await f.text()); if (!d.profiles?.length) throw 0;
     if (!confirm("Replace everything on this device with this backup?")) return; S = d; save(); renderAll(); toast("Backup restored"); }
   catch { toast("That file isn't an iRun Team backup."); } };
-$("syncNow").onclick = async () => { if (!ownerKey()) return setStatus("syncStatus", "Add your owner key in Studio > Settings first.", "err"); setStatus("syncStatus", "Syncing..."); await pullCloud(); if (!$("syncStatus").classList.contains("err")) setStatus("syncStatus", "Synced.", "ok"); };
+$("syncNow").onclick = async () => { if (!canSync()) return setStatus("syncStatus", "Tap Owner login and enter your PIN first.", "err"); setStatus("syncStatus", "Syncing..."); await pullCloud(); if (!$("syncStatus").classList.contains("err")) setStatus("syncStatus", "Synced.", "ok"); };
 
 /* ================= library ================= */
 function renderLib() {
@@ -659,8 +662,9 @@ function renderAll() { renderProfiles(); if (VIEW === "team") renderTeam(); if (
   if (q.get("task") && TEAM.some(e => e.id === q.get("e"))) { go("chat"); setTimeout(() => send(q.get("task")), 300); history.replaceState(null, "", "team.html"); }
   pullCloud();
 })();
-window.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !busy) pullCloud(); else if (document.visibilityState === "hidden" && ownerKey()) { clearTimeout(syncTimer); pushCloud(); } });
+window.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !busy) pullCloud(); else if (document.visibilityState === "hidden" && canSync()) { clearTimeout(syncTimer); pushCloud(); } });
+IRUN_OWNER.on(o => { renderAll(); if (o) pullCloud(); else if (!ownerKey()) syncBadge("", "This device"); });
 </script>
-<script src="owner-login.js" defer></script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>

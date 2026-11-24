@@ -56,10 +56,11 @@ canvas#stage{display:none}
 [hidden]{display:none!important}
 </style>
 <meta name="description" content="iRun private workspace.">
+<script src="assets/irun-owner.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <header><div class="logo">iRUN <b>STUDIO</b></div><span class="mono" id="hdrOwner">HSW365 Media</span></header>
+  <header><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><div class="logo">iRUN <b>STUDIO</b></div><span class="irun-vip" data-hsw-vip>VIP &middot; Owner</span></div><span class="mono" id="hdrOwner">HSW365 Media</span></header>
   <nav>
     <button data-v="make" class="on">Make</button>
     <button data-v="faceless">Faceless</button>
@@ -181,7 +182,7 @@ canvas#stage{display:none}
   <section id="v-leads" hidden>
     <div class="card">
       <h2>Leads</h2>
-      <p class="note">People who commented or DMed a keyword on Instagram. Needs your owner key in Settings.</p>
+      <p class="note">People who commented or DMed a keyword on Instagram. Needs Owner login (your PIN), or your owner key in Settings.</p>
       <div class="btns"><button class="btn ghost" id="btnLeads">Refresh</button></div>
       <div class="status" id="lStatus"></div>
     </div>
@@ -197,7 +198,8 @@ canvas#stage{display:none}
       <label>ElevenLabs API key (optional, adds voiceover)</label><input id="sEleven" type="password" autocomplete="off">
       <label>ElevenLabs voice ID (optional)</label><input id="sVoice" placeholder="pNInz6obpgDQGcFmaJgB">
       <label>Your handle</label><input id="sHandle" value="hsw365media">
-      <label>Owner key (for Leads)</label><input id="sOwner" type="password" autocomplete="off">
+      <p class="irun-vip-note" data-hsw-vip><b>VIP &middot; Owner.</b> You're signed in with your owner PIN: AI writing, Leads, the Sales Agent and AI Team sync all work with no key. Every feature is free for you.</p>
+      <label>Owner key (for Leads)<span data-hsw-vip> &middot; optional, your PIN covers it</span></label><input id="sOwner" type="password" autocomplete="off">
       <div class="btns"><button class="btn" id="btnSave">Save</button></div>
       <div class="status" id="sStatus"></div>
     </div>
@@ -919,11 +921,11 @@ $("pmStop").onclick = () => PSTOP = true;
 /* ---------- leads ---------- */
 async function loadLeads() {
   const key = store.get("owner");
-  if (!key) { setStatus("lStatus", "Add your owner key in Settings.", "err"); return; }
+  if (!key && !IRUN_OWNER.isOwner()) { setStatus("lStatus", "Tap Owner login and enter your PIN, or add your owner key in Settings.", "err"); return; }
   setStatus("lStatus", "Loading...");
   try {
-    const r = await fetch(`${LEADS_API}?view=data&key=${encodeURIComponent(key)}`);
-    if (!r.ok) throw new Error(r.status === 401 ? "Wrong owner key." : `Error ${r.status}`);
+    const r = await fetch(`${LEADS_API}?view=data&key=${encodeURIComponent(key)}`, {headers: IRUN_OWNER.headers()});
+    if (!r.ok) throw new Error(r.status === 401 ? (IRUN_OWNER.isOwner() ? "Owner session not accepted. Sign in with your PIN again." : "Wrong owner key.") : `Error ${r.status}`);
     const d = await r.json(), week = Date.now() - 7 * 864e5;
     const kw = d.leads.filter(l => l.keyword), wk = kw.filter(l => new Date(l.created_at) > week);
     $("lStats").innerHTML = [["Leads 7 days", wk.length], ["Links sent 7 days", wk.filter(l => l.replied).length], ["All leads", kw.length], ["Inbox msgs", d.leads.length]]
@@ -934,6 +936,7 @@ async function loadLeads() {
   } catch (e) { setStatus("lStatus", e.message, "err"); }
 }
 $("btnLeads").onclick = loadLeads;
+IRUN_OWNER.on(o => { if (o && !$("v-leads").hidden) loadLeads(); });
 
 /* ---------- subscriber mode: iRun Operator customers open Studio from their company page ---------- */
 const SUBQ = new URLSearchParams(location.search);
@@ -969,7 +972,7 @@ loadSettings(); (window.IRUN_SUB ? subscriberMode() : loadProducts().then(pmFill
 if (!window.MediaRecorder || !cv.captureStream) setStatus("wStatus", "This browser can't record video. Use Safari (iPhone) or Chrome.", "err");
 </script>
 <script src="ads.js"></script>
-<script src="https://calltwin.onrender.com/owner-signin.js" defer></script>
-<script src="owner-login.js" defer></script>
+<script>(() => { if (location.hash !== "#ads" || window.IRUN_SUB) return; const b = document.querySelector('nav [data-v="ads"]'); if (b) b.click(); })();</script>
+<script src="owner-login.js?v=3" defer></script>
 </body>
 </html>
