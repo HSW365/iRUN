@@ -1,0 +1,43 @@
+name: HSW365 Elite builds
+
+# Every 10 minutes: pick up new Elite intakes and revision requests, build the demo, email the customer the review link.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: elite-builds
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 1}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q requests
+      - name: Build demos
+        env:
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+        run: |
+          if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Elite builds idle: SUPABASE_SERVICE_KEY missing"; exit 0; fi
+          python engine/elite.py
+      - name: Save demos to the repo
+        run: |
+          git config user.name "iRun"; git config user.email "hsw365media@gmail.com"
+          git add sites/elite 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "iRun: Elite demo sites [skip ci]"
+          for i in 1 2 3 4 5; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep $((RANDOM % 15 + 3)); done

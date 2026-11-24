@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Review Your Elite Website Demo | HSW365 Media</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="assets/hsw/hsw.css">
+<style>
+:root{--acc:#f5b800;--acc-ink:#0a0a0f}
+html,body{height:100%}
+body{display:flex;flex-direction:column;overflow:hidden}
+.bar{flex:none;display:flex;align-items:center;gap:16px;padding:12px var(--gut);border-bottom:1px solid var(--line);background:var(--raise)}
+.brand{font-family:var(--disp);font-weight:900;font-size:22px;letter-spacing:.04em;text-transform:uppercase}.brand b{color:var(--acc)}
+.who{color:var(--mut);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who b{color:#fff}
+.ver{font-family:var(--mono);font-size:12px;color:var(--acc);letter-spacing:.08em}
+.stage{flex:1;min-height:0;position:relative;background:#111}
+iframe{width:100%;height:100%;border:0;background:#fff;display:block}
+.center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;background:radial-gradient(900px 500px at 50% 0,rgba(245,184,0,.12),transparent 60%),var(--bg)}
+.center h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(44px,8vw,92px);line-height:.9}
+.center p{color:var(--text2);max-width:520px;margin:14px auto 0}
+.spin{width:44px;height:44px;border:3px solid var(--line2);border-top-color:var(--acc);border-radius:50%;margin:0 auto 22px;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.act{flex:none;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--raise)}
+.act .btn{height:50px}
+.rev{position:fixed;inset:0;background:rgba(5,5,9,.78);backdrop-filter:blur(8px);display:grid;place-items:center;padding:16px;z-index:20}
+.box{width:min(600px,100%);background:var(--raise);border:1px solid var(--line2);border-radius:10px;padding:26px;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.box h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:34px;line-height:.95}
+.box p{color:var(--mut);font-size:14.5px;margin:8px 0 14px}
+.box textarea{width:100%;min-height:150px;background:var(--bg);border:1px solid var(--line2);border-radius:3px;padding:12px 14px;line-height:1.5;resize:vertical}
+.box textarea:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(245,184,0,.16)}
+.row{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.err{color:#ff7b7b;font-size:14px;margin-top:8px;min-height:18px}
+</style>
+</head>
+<body>
+<div class="bar"><span class="brand">HSW<b>365</b> Media</span><span class="who" id="who">Your Elite website demo</span><span class="ver" id="ver"></span></div>
+<div class="stage" id="stage"><div class="center"><div><div class="spin"></div><h1>Loading</h1></div></div></div>
+<div class="act" id="act" hidden>
+  <button class="btn btn-line" id="rv" type="button">Request changes</button>
+  <button class="btn btn-acc" id="ap" type="button">Approve this design</button>
+</div>
+<div class="rev" id="rev" hidden role="dialog" aria-modal="true" aria-labelledby="rt">
+  <div class="box"><h2 id="rt">What should we change?</h2>
+    <p>Be as specific as you like: wording, colors, sections, photos you'll send, anything. A new demo is built from your notes and sent to you.</p>
+    <textarea id="notes" placeholder="Example: make the headline shorter, use navy and gold, add a section for financing..."></textarea>
+    <div class="err" id="err" role="alert"></div>
+    <div class="row"><button class="btn btn-line" id="cx" type="button">Cancel</button><button class="btn btn-acc" id="send" type="button">Send my changes</button></div>
+  </div>
+</div>
+<script>
+(function(){
+var API="https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-elite";
+var q=new URLSearchParams(location.search),id=q.get("o"),key=q.get("k"),stage=document.getElementById("stage"),act=document.getElementById("act"),timer=null,ver=-1;
+function call(b){b.id=id;b.key=key;return fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(function(r){return r.json()})}
+function msg(h,p,spin){stage.innerHTML="";var c=document.createElement("div");c.className="center";c.innerHTML="<div>"+(spin?'<div class="spin"></div>':"")+"<h1></h1><p></p></div>";
+ c.querySelector("h1").textContent=h;c.querySelector("p").textContent=p;stage.appendChild(c);act.hidden=true}
+function poll(){clearTimeout(timer);timer=setTimeout(load,15000)}
+function load(){
+ if(!id||!key){msg("Link incomplete","Open the review link from your email.");return}
+ call({a:"view"}).then(function(j){
+  if(j.error){msg("Not found","This link is not valid. Email hsw365media@gmail.com.");return}
+  document.getElementById("who").innerHTML="Demo for <b></b>";document.querySelector("#who b").textContent=j.business;
+  document.getElementById("ver").textContent=j.version?"VERSION "+j.version:"";
+  if(j.status==="demo_ready"&&j.demo_html){
+   if(ver!==j.version){ver=j.version;stage.innerHTML="";var fr=document.createElement("iframe");fr.setAttribute("sandbox","allow-popups");fr.title="Your website demo";fr.srcdoc=j.demo_html;stage.appendChild(fr)}
+   act.hidden=false;return}
+  if(j.status==="approved"){msg("Approved","Thank you. Your design is approved and we're moving to launch. We'll email you next steps.");return}
+  if(j.status==="revision")msg("Changes received","We're rebuilding your demo from your notes. This page updates when it's ready.",true);
+  else if(j.status==="failed")msg("Almost there","Your demo needs a manual touch. We've been notified and will email you shortly.");
+  else msg("Building your demo","Your details are in. This page updates by itself when your demo is ready, and we'll email you too.",true);
+  if(j.status!=="failed")poll();
+ }).catch(function(){msg("Connection issue","Refresh to try again.")})}
+var rev=document.getElementById("rev"),err=document.getElementById("err");
+document.getElementById("rv").onclick=function(){rev.hidden=false;document.getElementById("notes").focus()};
+document.getElementById("cx").onclick=function(){rev.hidden=true};
+document.getElementById("send").onclick=function(){var n=document.getElementById("notes").value.trim();if(n.length<5){err.textContent="Tell us what to change.";return}
+ this.disabled=true;var b=this;call({a:"revise",notes:n}).then(function(j){b.disabled=false;if(!j.ok){err.textContent=j.error||"Try again.";return}rev.hidden=true;document.getElementById("notes").value="";err.textContent="";ver=-1;load()}).catch(function(){b.disabled=false;err.textContent="Connection issue. Try again."})};
+document.getElementById("ap").onclick=function(){if(!confirm("Approve this design and move to launch?"))return;this.disabled=true;var b=this;
+ call({a:"approve"}).then(function(j){b.disabled=false;if(j.ok){ver=-1;load()}else alert(j.error||"Try again.")}).catch(function(){b.disabled=false;alert("Connection issue. Try again.")})};
+load();
+})();
+</script>
+</body>
+</html>
