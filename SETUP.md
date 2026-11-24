@@ -35,6 +35,25 @@ Trailer ads use a deep cinematic narrator voice made with open-source Kokoro (`e
 
 To change these, edit `config/products.json`. The next run syncs them to the bot.
 
+## Central iRun AI gateway
+
+Studio, Creator Hub and Team send AI text requests to one server-side iRun gateway at
+`supabase/functions/irun-ai`. Provider credentials are not stored in browser localStorage.
+The gateway checks the iRun owner key, applies request-size limits, and returns clear provider
+errors instead of silently switching to a shared free endpoint.
+
+To deploy it:
+
+1. Add the Supabase personal access token as GitHub Actions secret `SUPABASE_ACCESS_TOKEN`.
+2. Add `ANTHROPIC_API_KEY` as a GitHub Actions secret. The deploy workflow copies it into the
+   Supabase project's Edge Function secrets.
+3. Open **Actions → Deploy iRun AI gateway → Run workflow** (or push a change to that function).
+
+The deploy job targets the existing Supabase project `lsxdlmrjrcivxwgfkpop` and deploys with
+JWT verification disabled because the gateway validates the iRun owner key itself. If the
+provider key is missing or out of quota, AI requests stop with an explicit configuration or
+quota error; iRun does not fall back to an unmetered third-party writer.
+
 ## 1. GitHub secrets
 Go to repo **Settings > Secrets and variables > Actions > New repository secret** and add:
 
