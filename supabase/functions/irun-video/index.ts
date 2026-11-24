@@ -15,6 +15,7 @@ const OWNERS = [
   "hoodstarent365@gmail.com",
   "book@hoodstar365.com",
   "elvintorressr@gmail.com",
+  "emilymahan8792@gmail.com",
 ];
 const DAY = 864e5;
 // Videos per 30 days that come with each plan. Owners have no limit.
