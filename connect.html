@@ -46,7 +46,7 @@ button{font:inherit;color:inherit}
 .top .in{max-width:1240px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand .mark{width:30px;height:30px;border-radius:7px;background:var(--red);display:grid;place-items:center;font:900 22px/1 'Barlow Condensed',sans-serif;color:#0a0a0f;box-shadow:0 6px 22px rgba(239,68,68,.45)}
-.brand b{font:800 22px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em}
+.brand b{font:800 22px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;white-space:nowrap}
 .brand b span{color:var(--cy)}
 .top nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
 .top nav::-webkit-scrollbar{display:none}
@@ -106,18 +106,18 @@ h1 .neon{display:block;background:linear-gradient(92deg,var(--cy) 0%,#7c8cff 45%
 .tile svg{width:23px;height:23px}
 .tile .mg{font:900 22px/1 'Barlow Condensed',sans-serif;color:var(--c)}
 .card h3{margin:0;font:700 17px/1.2 Inter,sans-serif;letter-spacing:-.005em}
-.card .cat{margin-top:3px;font-size:11px}
+.card .cat{margin-top:3px;font-size:11px;display:flex;align-items:center;gap:8px}
 .card p{margin:0;color:var(--mut);font-size:14px;line-height:1.5;flex:1}
-.card .foot{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.card .foot{display:flex;align-items:center;gap:8px;justify-content:space-between;width:100%}
 .state{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--mut);max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .state i{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--dim)}
 .state.ok{color:var(--gr)}.state.ok i{background:var(--gr);box-shadow:0 0 10px var(--gr)}
 .state.free{color:var(--cy)}.state.free i{background:var(--cy);box-shadow:0 0 10px var(--cy)}
 .state.warn{color:var(--yl)}.state.warn i{background:var(--yl)}
 .state.bad{color:#ff7a7a}.state.bad i{background:var(--red)}
-.go{font:700 12.5px/1 Inter,sans-serif;padding:9px 12px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--line2);white-space:nowrap}
+.go{margin-left:auto;font:700 12.5px/1 Inter,sans-serif;padding:9px 12px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--line2);white-space:nowrap}
 .card:hover .go{background:var(--text);color:#0a0a0f;border-color:var(--text)}
-.tag{position:absolute;top:14px;right:14px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:5px 7px;border-radius:6px;color:var(--cy);background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.25)}
+.tag{font:700 9.5px/1 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:3px 6px;border-radius:5px;color:var(--cy);background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.25)}
 
 /* forms */
 label.f{display:block;margin:14px 0 6px;font-size:12.5px;font-weight:600;color:var(--mut)}
@@ -221,7 +221,7 @@ textarea{min-height:96px;resize:vertical}
 .li .b b{font-size:13.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .li .acts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto}
 .li .acts .btn{padding:9px 8px;font-size:12.5px}
-.li .acts .btn.full{grid-column:1/-1}
+.li .acts .btn.full,.li .acts > .full ~ :last-child:nth-child(even){grid-column:1/-1}
 .drop{display:flex;align-items:center;justify-content:center;gap:10px;min-height:120px;border:1.5px dashed var(--line2);border-radius:16px;color:var(--mut);cursor:pointer;transition:.2s;background:rgba(255,255,255,.015)}
 .drop:hover,.drop.on{border-color:var(--vi);color:var(--text);background:rgba(168,85,247,.06)}
 
@@ -253,7 +253,7 @@ textarea{min-height:96px;resize:vertical}
       <a href="sales.html" class="hide-sm">Sales Agent</a>
       <a href="team.html" class="hide-sm">AI Team</a>
       <a href="dashboard.html">Command</a>
-      <a href="connect.html" class="on" aria-current="page">Connect</a>
+      <a href="connect.html" class="on hide-sm" aria-current="page">Connect</a>
     </nav>
   </div>
 </header>
@@ -474,8 +474,7 @@ function renderGrid() {
     const s = st(x.id);
     const cta = x.free || s.connected ? "Open" : s.pending ? "Finish" : "Connect";
     return `<button class="card" style="--c:${x.color}" data-id="${x.id}" aria-label="${esc(x.name)}: ${esc(txt)}">
-      ${x.replaces ? `<span class="tag">Free</span>` : ""}
-      <div class="row1">${tile(x)}<div><h3>${esc(x.name)}</h3><div class="cat mono">${CATNAME[x.cat]}</div></div></div>
+      <div class="row1">${tile(x)}<div><h3>${esc(x.name)}</h3><div class="cat mono">${CATNAME[x.cat]}${x.replaces || x.free ? `<span class="tag">Free</span>` : ""}</div></div></div>
       <p>${esc(x.blurb)}</p>
       <div class="foot"><span class="state ${cls}"><i></i>${esc(txt)}</span><span class="go">${cta}</span></div>
     </button>`;
@@ -622,7 +621,7 @@ const PANELS = {
   discord: senderPanel("discord"), telegram: senderPanel("telegram"), slack: senderPanel("slack"),
 
   instagram(el) {
-    const d = blk("Last 28 days", `<div class="kpis" id="ig_k"><div class="kpi"><div class="n">...</div><div class="l mono">Loading</div></div></div>`);
+    const d = blk("Account, last 28 days", `<div class="kpis" id="ig_k"><div class="kpi"><div class="n">...</div><div class="l mono">Loading</div></div></div>`);
     const p = blk("Recent posts, best first", `<div class="list" id="ig_p"></div>`);
     el.append(d, p);
     run("instagram", "overview").then((r) => {
