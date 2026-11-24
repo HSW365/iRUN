@@ -1,0 +1,175 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "website-elite",
+  "platform": "instagram",
+  "shots_dir": "content/shots/elite-ugc",
+  "accent": "#FF3B6B",
+  "title": "ELITE",
+  "presents": "REAL OWNER \u00b7 REAL TALK",
+  "look": "bright",
+  "title_style": "wipe",
+  "slam_style": "block",
+  "cut_style": "glitch",
+  "end_style": "center",
+  "bug": {
+    "text": "HSW365 ELITE",
+    "pos": "tl"
+  },
+  "score": {
+    "shift": 2,
+    "tempo": 1.12
+  },
+  "narrator": {
+    "blend": {
+      "am_onyx": 0.5,
+      "am_liam": 0.5
+    },
+    "tone": "warm",
+    "speed": 1.0,
+    "exag": 0.6
+  },
+  "shot_prompts": {
+    "phone": "candid vertical iPhone still of a small restaurant owner in an apron holding his phone up showing a bad old website to the camera, restaurant kitchen, daylight, handheld, raw UGC look, shot on iPhone",
+    "gasp": "candid vertical iPhone close-up of a woman boutique owner cringing at her laptop screen, bright shop, handheld, raw UGC look, shot on iPhone",
+    "friend": "candid vertical iPhone still of a friend leaning in pointing at a laptop saying you need a real website, bright cafe, handheld, raw UGC look",
+    "laptop": "candid vertical iPhone still over the shoulder of a laptop showing a beautiful modern business website, bright cafe table, handheld, raw UGC look",
+    "happy": "candid vertical iPhone still of a boutique owner celebrating with arms up behind her counter, bright shop, handheld, raw UGC look, shot on iPhone",
+    "hero": "candid vertical iPhone selfie-style still of a smiling restaurant owner at the front door with open sign, daylight, handheld, raw UGC look"
+  },
+  "open": {
+    "shot": "phone",
+    "impact": "YIKES",
+    "cy": 0.45
+  },
+  "scenes": [
+    {
+      "shot": "gasp",
+      "cy": 0.4,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.3
+    },
+    {
+      "shot": "friend",
+      "cy": 0.45,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.4
+    },
+    {
+      "card": {
+        "title": "Your website vs. the shop down the street",
+        "tag": "AWKWARD",
+        "rows": [
+          [
+            "Yours",
+            "2014 template"
+          ],
+          [
+            "Theirs",
+            "looks premium"
+          ],
+          [
+            "Customers",
+            "go to theirs"
+          ]
+        ]
+      },
+      "bg": "laptop",
+      "dur": 1.7
+    }
+  ],
+  "slams": [
+    {
+      "word": "UPGRADE",
+      "shot": "laptop",
+      "dur": 1.4
+    },
+    {
+      "word": "YOUR",
+      "shot": "happy",
+      "dur": 1.5
+    },
+    {
+      "word": "SITE",
+      "shot": "laptop",
+      "dur": 1.55
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "BETTER",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "happy",
+      "cy": 0.42,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "dur": 1.8
+    }
+  ],
+  "end_dur": 3.9,
+  "vo_captions": true,
+  "duck": 0.62,
+  "vo_lines": [
+    [
+      0.25,
+      "Be honest. Would you trust your own website?"
+    ],
+    [
+      5.0,
+      "Your customers already judged it."
+    ],
+    [
+      7.6,
+      "HSW365 Elite is a premium website, built for you."
+    ],
+    [
+      11.4,
+      "Your brand. Your services. Your next customer."
+    ],
+    [
+      16.35,
+      "Scan the code. Let's build it."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "ELITE",
+      "SITE"
+    ],
+    "tagline": "A website you're proud of.",
+    "cta": "SCAN TO START",
+    "lines": [
+      "HSW365 ELITE WEBSITE DESIGN",
+      "$4,999 \u00b7 50% DEPOSIT TO START"
+    ],
+    "fine": "Balance due at launch. hsw365.net",
+    "link": "https://hsw365.net/products/hsw365-website-design-elite"
+  },
+  "hashtags": [
+    "websitedesign",
+    "smallbusiness",
+    "contractor",
+    "webdesign",
+    "localbusiness",
+    "hsw365",
+    "restaurant",
+    "boutique"
+  ],
+  "caption": "Be honest: would you trust your own website? HSW365 Elite Website Design is a premium site built around your business. $4,999 project, 50% deposit to start, balance due at launch. Scan the QR or tap the link in bio."
+}

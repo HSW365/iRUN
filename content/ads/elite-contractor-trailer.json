@@ -1,0 +1,191 @@
+{
+  "kind": "trailer",
+  "account": "hoodstar365",
+  "product": "website-elite",
+  "platform": "instagram",
+  "shots_dir": "content/shots/elite-contractor",
+  "accent": "#F5B800",
+  "title": "ELITE",
+  "presents": "A HSW365 ELITE FILM",
+  "look": "dark",
+  "title_style": "smoke",
+  "slam_style": "neon",
+  "cut_style": "whip",
+  "end_style": "poster",
+  "bug": {
+    "text": "HSW365 ELITE",
+    "pos": "tl"
+  },
+  "score": {
+    "shift": 0,
+    "tempo": 1.0
+  },
+  "narrator": {
+    "blend": {
+      "bm_george": 0.65,
+      "bm_daniel": 0.35
+    },
+    "tone": "deep",
+    "speed": 0.92,
+    "exag": 0.5
+  },
+  "shot_prompts": {
+    "phone": "close-up of a homeowner's thumb scrolling a phone showing a dated cluttered contractor website, kitchen at night, cold phone light, tense, photoreal",
+    "owner": "tired middle-aged plumbing company owner in work jacket sitting in a parked work van at dusk looking at his phone, dashboard glow, realistic",
+    "van": "white work van parked on a suburban street at night, empty driveway, moody streetlight",
+    "build": "close-up of a designer's monitor showing a sleek premium dark gold business website being built, desk lamp, night studio",
+    "launch": "laptop on a desk showing a stunning professional contractor website with gold accents, shallow depth of field",
+    "pro": "confident contractor in clean branded polo shaking a homeowner's hand at a front door, golden hour, success",
+    "hero": "contractor owner smiling beside a branded truck at sunrise, golden light, success"
+  },
+  "open": {
+    "shot": "phone",
+    "impact": "NOT TRUSTED",
+    "cy": 0.5
+  },
+  "scenes": [
+    {
+      "shot": "owner",
+      "cy": 0.4,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.3
+    },
+    {
+      "card": {
+        "title": "Homeowner \u00b7 \"who do I call?\"",
+        "tag": "SKIPPED",
+        "rows": [
+          [
+            "Your website",
+            "looks outdated"
+          ],
+          [
+            "Competitor A",
+            "premium site \u00b7 called"
+          ],
+          [
+            "Competitor B",
+            "premium site \u00b7 called"
+          ]
+        ]
+      },
+      "bg": "van",
+      "dur": 1.7
+    },
+    {
+      "shot": "van",
+      "cy": 0.5,
+      "zoom": [
+        1.08,
+        1.22
+      ],
+      "dur": 1.5
+    }
+  ],
+  "slams": [
+    {
+      "word": "TRUST",
+      "shot": "build",
+      "cy": 0.5,
+      "dur": 1.4
+    },
+    {
+      "word": "BEFORE",
+      "shot": "van",
+      "dur": 1.5,
+      "panel": {
+        "label": "HSW365",
+        "title": "Your business",
+        "working": "Designing your site...",
+        "done": "Elite site ready",
+        "steps": [
+          "HOME",
+          "SERVICES",
+          "CALL NOW"
+        ]
+      }
+    },
+    {
+      "word": "CALL",
+      "shot": "launch",
+      "cy": 0.5,
+      "dur": 1.55
+    }
+  ],
+  "callback": {
+    "shot": "phone",
+    "impact": "CALLED",
+    "dur": 1.3
+  },
+  "payoff": [
+    {
+      "shot": "pro",
+      "cy": 0.42,
+      "warm": true,
+      "dur": 1.3
+    },
+    {
+      "shot": "hero",
+      "zoom": [
+        1.04,
+        1.12
+      ],
+      "cy": 0.38,
+      "warm": true,
+      "dur": 1.8
+    }
+  ],
+  "end_dur": 3.9,
+  "vo_captions": true,
+  "duck": 0.62,
+  "vo_lines": [
+    [
+      0.25,
+      "Customers check your website before they ever pick up the phone."
+    ],
+    [
+      5.0,
+      "Outdated looks untrustworthy."
+    ],
+    [
+      7.6,
+      "HSW365 Elite builds a premium website around your business."
+    ],
+    [
+      11.4,
+      "Clear services. A real brand. Built to get the call."
+    ],
+    [
+      16.35,
+      "Scan the code. Start your Elite build."
+    ]
+  ],
+  "end": {
+    "wordmark": [
+      "ELITE",
+      "SITE"
+    ],
+    "tagline": "Built to earn the call.",
+    "cta": "SCAN TO START",
+    "lines": [
+      "HSW365 ELITE WEBSITE DESIGN",
+      "$4,999 \u00b7 50% DEPOSIT TO START"
+    ],
+    "fine": "Balance due at launch. hsw365.net",
+    "link": "https://hsw365.net/products/hsw365-website-design-elite"
+  },
+  "hashtags": [
+    "websitedesign",
+    "smallbusiness",
+    "contractor",
+    "webdesign",
+    "localbusiness",
+    "hsw365",
+    "plumber",
+    "hvac"
+  ],
+  "caption": "Customers check your website before they ever pick up the phone. HSW365 Elite Website Design: a premium, professional site built around your business goals. $4,999 project, 50% deposit to start, balance due at launch. Scan the QR or tap the link in bio."
+}
