@@ -193,8 +193,7 @@ canvas#stage{display:none}
   <section id="v-settings" hidden>
     <div class="card">
       <h2>Settings</h2>
-      <p class="note">Saved only in this browser on this device. Works with no keys: scripts use the free built-in writer. Add your own Anthropic key for Claude-quality scripts. Keys go straight to Anthropic / ElevenLabs, nowhere else.</p>
-      <label>Anthropic API key (optional, upgrades scripts to Claude)</label><input id="sAnth" type="password" placeholder="sk-ant-..." autocomplete="off">
+      <p class="note">AI writing runs through iRun’s secure server-side gateway. The provider key is managed by HSW365 and is never stored in this browser. Add an ElevenLabs key only if you want its optional voiceover service.</p>
       <label>ElevenLabs API key (optional, adds voiceover)</label><input id="sEleven" type="password" autocomplete="off">
       <label>ElevenLabs voice ID (optional)</label><input id="sVoice" placeholder="pNInz6obpgDQGcFmaJgB">
       <label>Your handle</label><input id="sHandle" value="hsw365media">
@@ -238,12 +237,12 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
 
 /* ---------- settings ---------- */
 function loadSettings() {
-  $("sAnth").value = store.get("anth"); $("sEleven").value = store.get("eleven");
+  $("sEleven").value = store.get("eleven");
   $("sVoice").value = store.get("voice"); $("sHandle").value = store.get("handle", "hsw365media");
   $("sOwner").value = store.get("owner");
 }
 $("btnSave").onclick = () => {
-  store.set("anth", $("sAnth").value.trim()); store.set("eleven", $("sEleven").value.trim());
+  store.set("anth", ""); store.set("eleven", $("sEleven").value.trim());
   store.set("voice", $("sVoice").value.trim()); store.set("handle", ($("sHandle").value.trim() || "hsw365media").replace(/^@/, ""));
   store.set("owner", $("sOwner").value.trim());
   setStatus("sStatus", "Saved on this device.", "ok");
