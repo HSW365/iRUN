@@ -220,6 +220,7 @@ table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--li
 </div>
 <div class="modal" id="modal" hidden><div class="box" id="mBox"></div></div>
 <script src="creator-agents.js"></script>
+<script src="assets/irun-ai.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -297,28 +298,9 @@ const gigOf = id => allGigs().find(g => g.id === id) || {};
 /* saved flags for seed gigs live in D.saved */
 D.saved = D.saved || [];
 
-/* ---------- AI ---------- */
-const anthKey = () => ls.get("irun_anth");
-const MODELS = ["claude-sonnet-5-5", "claude-sonnet-5"];
+/* ---------- AI: all Creator Hub agents run through iRun's central gateway ---------- */
 async function ai(system, user) {
-  const key = anthKey();
-  if (key) {
-    for (const model of MODELS) {
-      const r = await fetch("https://api.anthropic.com/v1/messages", {method: "POST", headers: {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "anthropic-dangerous-direct-browser-access": "true"}, body: JSON.stringify({model, max_tokens: 3500, system, messages: [{role: "user", content: user}]})});
-      if (r.ok) return ((await r.json()).content || []).filter(b => b.type === "text").map(b => b.text).join("");
-      if (r.status === 401) break;
-    }
-  }
-  let last;
-  for (let i = 0; i < 2; i++) {
-    try {
-      const r = await fetch("https://text.pollinations.ai/openai", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({model: "openai", private: true, seed: Math.floor(Math.random() * 1e6), messages: [{role: "system", content: system}, {role: "user", content: user}]})});
-      if (!r.ok) throw new Error("Free writer busy (" + r.status + ")");
-      const t = (await r.json()).choices?.[0]?.message?.content || "";
-      if (t.trim()) return t;
-    } catch (e) { last = e; }
-  }
-  throw new Error((last?.message || "AI unavailable") + ". Try again in a moment.");
+  return window.IRUN_AI({system, messages: [{role: "user", content: user}], max: 3500});
 }
 function sys(a) {
   return `You are ${a.name}, the ${a.role} on the iRun Creator Squad. ${a.job}\nDeliver finished, usable work. No preamble. No emojis. Never invent brands, clients, results, rates presented as fact, or statistics.\n\n${creatorContext()}`;
