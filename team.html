@@ -277,7 +277,6 @@ const ls = {
   get(k, d = "") { try { return localStorage.getItem(k) ?? d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } }
 };
-const anthKey = () => ls.get("irun_anth");
 const ownerKey = () => ls.get("irun_owner");
 
 const TEAM = [
@@ -498,7 +497,7 @@ function renderTeam() {
   $("heroBiz").textContent = p.name; $("heroN").textContent = TEAM.length;
   $("kLib").textContent = p.library.length; $("kFacts").textContent = p.facts.length; $("kDocs").textContent = p.docs.length;
   $("kMsgs").textContent = Object.values(p.chats).reduce((a, c) => a + c.length, 0);
-  $("keyNote").innerHTML = anthKey() ? `Team is on. ${ownerKey() ? "Memory syncs across your devices." : "Memory is saved in this browser. Add your owner key in <a href=\"app.html\">Studio Settings</a> to sync devices."}` : `Team is on (free writer). Add your Anthropic key in <a href="app.html">Studio &gt; Settings</a> for Claude-quality work.`;
+  $("keyNote").textContent = `All iRun Team agents use the secure iRun AI gateway. ${ownerKey() ? "Memory syncs across your devices." : "Memory is saved in this browser; add your iRun owner key in Studio Settings to sync devices."}`;
   const card = e => { const n = (p.chats[e.id] || []).length;
     return `<button class="emp" style="--hue:${e.hue}" data-e="${e.id}">${n ? `<span class="cnt">${n} MSG</span>` : ""}<div class="hd">${avatar(e)}<div><div class="nm">${esc(e.name)}</div><div class="rl">${esc(e.role)}</div></div></div><p>${esc(e.blurb)}</p></button>`; };
   $("teamGrid").innerHTML = `<div class="grid" style="grid-column:1/-1">${TEAM.filter(e => !e.squad).map(card).join("")}</div>` +
