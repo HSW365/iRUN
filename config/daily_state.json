@@ -1,5 +1,5 @@
 {
-  "cursor": 14,
+  "cursor": 15,
   "used": {
     "calltwin": [
       "answers"
@@ -42,17 +42,20 @@
     ],
     "dispute365": [
       "errors"
+    ],
+    "speekzone": [
+      "no-algo"
     ]
   },
   "voices": [
-    "en-US-JennyNeural",
     "en-US-AriaNeural",
     "en-US-EricNeural",
     "en-IE-ConnorNeural",
     "en-GB-SoniaNeural",
     "en-US-JennyNeural",
     "en-US-AvaMultilingualNeural",
-    "en-US-AndrewMultilingualNeural"
+    "en-US-AndrewMultilingualNeural",
+    "en-US-GuyNeural"
   ],
   "log": [
     {
@@ -151,6 +154,13 @@
       "app": "dispute365",
       "cap": "errors",
       "voice": "en-US-AndrewMultilingualNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-24T04:04Z",
+      "app": "speekzone",
+      "cap": "no-algo",
+      "voice": "en-US-GuyNeural",
       "posted": true
     }
   ]

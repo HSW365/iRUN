@@ -1,11 +1,11 @@
 {
   "recent": [
-    "stack",
     "phone",
     "stat",
     "stack",
     "browser",
-    "split"
+    "split",
+    "stat"
   ],
   "by_app": {
     "calltwin": "phone",
@@ -21,6 +21,7 @@
     "nil": "phone",
     "friendy": "stat",
     "affiliate": "stack",
-    "stream": "browser"
+    "stream": "browser",
+    "speekzone": "stat"
   }
 }
