@@ -501,7 +501,7 @@ $("pBioAI").onclick = () => { $("pSave").click(); runAgent("bio", "Write my crea
 $("pRate2").onclick = () => { $("pSave").click(); runAgent("rate", "Build my rate card: per video, retainer, usage rights, whitelisting, exclusivity, rush. Show the formula and give ranges I can adjust.", "Rate card"); };
 function rAcct() {
   $("acPay").value = D.account.pay || ""; $("acPosts").value = D.goals.postsPerDay || 4; $("acGoal").value = D.goals.monthly || "";
-  $("keyNote").innerHTML = anthKey() ? "Claude key found. Agents run on Claude." : 'No Claude key saved, so agents use the free writer. Add your key in <a href="app.html">Studio &gt; Settings</a> for the best quality.';
+  $("keyNote").textContent = "All 15 Creator agents use the secure iRun AI gateway. Provider access is managed server-side by HSW365.";
   $("ledger").innerHTML = D.earnings.length ? `<table><tr><th>Date</th><th>Source</th><th>Amount</th><th></th></tr>${D.earnings.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "")).map(e => `<tr><td>${esc(e.date)}</td><td>${esc(e.brand)}${e.note ? ` <span class="note">${esc(e.note)}</span>` : ""}</td><td>${money(e.amount)}</td><td><button class="x" data-e="${e.id}">&times;</button></td></tr>`).join("")}</table>` : '<p class="note">No payouts logged.</p>';
   document.querySelectorAll("#ledger [data-e]").forEach(b => b.onclick = () => { D.earnings = D.earnings.filter(e => e.id !== b.dataset.e); save(); rAcct(); });
 }
