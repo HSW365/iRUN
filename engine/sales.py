@@ -354,7 +354,8 @@ def outreach():
     if room <= 0:
         return 0
     # Sales Agent leads the owner approved in sales.html go first, with their own personal draft.
-    batch = db.select("irun_sales_leads", f"status=eq.approved&select=*&order=approved_at.asc&limit={room}")
+    batch = [] if os.environ.get("SALES_OFFER") == "elite" else \
+        db.select("irun_sales_leads", f"status=eq.approved&select=*&order=approved_at.asc&limit={room}")
     if len(batch) < room:
         stock_leads(room - len(batch))
         batch += db.select("irun_sales_leads", f"status=eq.new&select=*&order=created_at.asc&limit={room - len(batch)}")
