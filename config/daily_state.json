@@ -1,5 +1,5 @@
 {
-  "cursor": 15,
+  "cursor": 0,
   "used": {
     "calltwin": [
       "answers"
@@ -45,17 +45,20 @@
     ],
     "speekzone": [
       "no-algo"
+    ],
+    "captureitlive": [
+      "fill"
     ]
   },
   "voices": [
-    "en-US-AriaNeural",
     "en-US-EricNeural",
     "en-IE-ConnorNeural",
     "en-GB-SoniaNeural",
     "en-US-JennyNeural",
     "en-US-AvaMultilingualNeural",
     "en-US-AndrewMultilingualNeural",
-    "en-US-GuyNeural"
+    "en-US-GuyNeural",
+    "en-GB-RyanNeural"
   ],
   "log": [
     {
@@ -161,6 +164,13 @@
       "app": "speekzone",
       "cap": "no-algo",
       "voice": "en-US-GuyNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-24T06:56Z",
+      "app": "captureitlive",
+      "cap": "fill",
+      "voice": "en-GB-RyanNeural",
       "posted": true
     }
   ]
