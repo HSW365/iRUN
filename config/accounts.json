@@ -366,6 +366,29 @@
             "stop paying $100 a month to mail letters you can send yourself",
             "find the errors, send the letters"
           ]
+        },
+        {
+          "id": "website-elite",
+          "name": "HSW365 ELITE WEBSITE DESIGN",
+          "keyword": "ELITE",
+          "link": "https://hsw365.net/products/hsw365-website-design-elite",
+          "audience": "established small businesses, service companies and entrepreneurs who need a premium professional website and stronger online presence",
+          "pitch": "HSW365 Elite Website Design is a $4,999 premium website build. A 50% deposit of $2,499.50 starts the project; the remaining balance is due at launch. Optional ongoing care is separate.",
+          "angles": [
+            "your website is your first impression",
+            "stop sending customers to an outdated online presence",
+            "a premium website built around your business goals",
+            "make it easier for customers to understand your services and take action",
+            "professional web design with a clear project scope and launch process"
+          ],
+          "cta": {
+            "spoken": "Ready to upgrade your business presence? Explore HSW365 Elite Website Design. The project is $4,999, with a 50% deposit to start and the balance due at launch.",
+            "screen": [
+              "HSW365 ELITE WEBSITE DESIGN",
+              "$4,999 · 50% DEPOSIT"
+            ],
+            "caption": "Explore HSW365 Elite Website Design. $4,999 project; $2,499.50 deposit to start, balance due at launch. Details and checkout: https://hsw365.net/products/hsw365-website-design-elite"
+          }
         }
       ]
     },
