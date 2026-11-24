@@ -210,44 +210,14 @@ canvas#stage{display:none}
 </div>
 <canvas id="stage" width="1080" height="1920"></canvas>
 
+<script src="assets/irun-ai.js"></script>
 <script>
 const W = 1080, H = 1920, FPS = 30;
 const C = {base:"#0a0a0f", cyan:"#22d3ee", violet:"#a855f7", red:"#ef4444", yellow:"#fbbf24", white:"#f2f2f7", muted:"#78788c"};
 const LEADS_API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-ig-webhook";
-const MODEL = "claude-sonnet-5";
-const MODELS = ["claude-sonnet-5-5", MODEL];
-/* AI text: uses your Anthropic key when set; otherwise (or if it fails) the free, keyless writer. */
-async function freeAI(system, user) {
-  let lastErr;
-  for (let i = 0; i < 2; i++) {
-    try {
-      const r = await fetch("https://text.pollinations.ai/openai", {method: "POST", headers: {"content-type": "application/json"},
-        body: JSON.stringify({model: "openai", private: true, seed: Math.floor(Math.random() * 1e6),
-          messages: [{role: "system", content: system}, {role: "user", content: user}]})});
-      if (!r.ok) throw new Error(`Free writer busy (${r.status})`);
-      const j = await r.json(), t = j.choices?.[0]?.message?.content || "";
-      if (t.trim()) return t;
-      throw new Error("Free writer came back empty");
-    } catch (e) { lastErr = e; }
-  }
-  throw new Error(lastErr.message + ". Try again in a moment.");
-}
+/* All Studio AI work runs through the central iRun gateway. */
 async function ai(system, user, max = 1500) {
-  const key = store.get("anth");
-  if (key) {
-    for (const model of MODELS) {
-      try {
-        const r = await fetch("https://api.anthropic.com/v1/messages", {method: "POST",
-          headers: {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "anthropic-dangerous-direct-browser-access": "true"},
-          body: JSON.stringify({model, max_tokens: max, system, messages: [{role: "user", content: user}]})});
-        const d = await r.json().catch(() => ({}));
-        if (r.ok) return (d.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-        if (r.status === 404 || /model/i.test(d?.error?.message || "")) continue;
-        break;
-      } catch (e) { break; }
-    }
-  }
-  return freeAI(system, user);
+  return window.IRUN_AI({system, messages: [{role: "user", content: user}], max});
 }
 const jsonOut = t => { const m = String(t).match(/\{[\s\S]*\}/); if (!m) throw new Error("The writer returned no script. Tap again."); return JSON.parse(m[0]); };
 const $ = id => document.getElementById(id);
