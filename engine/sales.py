@@ -255,7 +255,26 @@ TRADE_WORDS = {"plumber": "plumbing", "roofer": "roofing", "electrician": "elect
                "local business": "local"}
 
 
+ELITE_LINK = "https://hsw365.net/products/hsw365-website-design-elite"
+
+
+def elite_email(l):
+    who = html.escape((l.get("contact") or "").strip() or f"{l['business']} team")
+    where = f" in {html.escape(l['city'])}" if l.get("city") else ""
+    inner = (f"<p>Hi {who},</p>"
+             f"<p>I'm Elvin Torres Sr., founder of HSW365 Media. Customers judge {html.escape(l['business'])}{where} by its "
+             "website before they ever call, so I built <b>HSW365 Elite Website Design</b>: a premium, professional site "
+             "designed around your business goals, with clear services, a real brand look and a clear way for customers to "
+             "contact you.</p>"
+             "<p>It's a $4,999 project. A 50% deposit ($2,499.50) starts the build and the balance is due at launch.</p>"
+             f'<p>Details and checkout: <a href="{ELITE_LINK}">HSW365 Elite Website Design</a></p>'
+             f"<p>Reply <b>\"YES\"</b> and I'll send a written proposal for {html.escape(l['business'])}. No obligation.</p>")
+    return f"{l['business']}: a website that earns the call", wrap(inner)
+
+
 def first_email(l):
+    if os.environ.get("SALES_OFFER") == "elite":
+        return elite_email(l)
     who = html.escape((l.get("contact") or "").strip() or f"{l['business']} team")
     trade = TRADE_WORDS.get((l.get("trade") or "").lower(), l.get("trade") or "local")
     where = f" in {l['city']}" if l.get("city") else ""
@@ -279,6 +298,12 @@ def first_email(l):
 
 
 def followup_email(l):
+    if os.environ.get("SALES_OFFER") == "elite" and not l.get("followup_body"):
+        inner = (f"<p>Hi {html.escape((l.get('contact') or '').strip() or l['business'] + ' team')},</p>"
+                 "<p>Following up on my note about HSW365 Elite Website Design: a premium website built around your business, "
+                 f'$4,999 with 50% down to start. <a href="{ELITE_LINK}">Details and checkout</a>. '
+                 "Reply YES and I'll send a written proposal.</p>")
+        return "Re: " + (l.get("last_subject") or l["business"]), wrap(inner)
     if l.get("followup_body"):
         return "Re: " + (l.get("last_subject") or l.get("subject") or l["business"]), wrap(l["followup_body"])
     inner = (f"<p>Hi {html.escape((l.get('contact') or '').strip() or l['business'] + ' team')},</p>"

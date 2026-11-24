@@ -8,6 +8,9 @@ on:
       task:
         description: "auto, outreach, replies, followups, summary or all"
         default: "summary"
+      offer:
+        description: "elite for the Elite website offer, blank for the standard mix"
+        default: ""
 
 permissions:
   contents: read
@@ -39,6 +42,7 @@ jobs:
           OUTREACH_ADDRESS: ${{ vars.OUTREACH_ADDRESS }}
           SALES_DAILY_CAP: "150"
           SALES_MODE: ${{ vars.SALES_MODE }}
+          SALES_OFFER: ${{ github.event.inputs.offer }}
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "Sales Autopilot idle: SUPABASE_SERVICE_KEY secret missing"; exit 0; fi
           python engine/sales.py --task "${{ github.event.inputs.task || 'summary' }}"
