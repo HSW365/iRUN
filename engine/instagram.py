@@ -70,4 +70,12 @@ def publish(video_url, caption, account=accounts.MAIN, collaborators=(), first_c
         out["first_comment"] = cm.get("id") or cm.get("error", {}).get("message")
     if collab:
         out["collaborators"] = collab
+    try:  # iRun Connect: send the new post to the Discord / Telegram / Slack channels with auto-share on
+        import integrations
+        link = requests.get(f"{GRAPH}/{p['id']}", params={"fields": "permalink", "access_token": tok}, timeout=30).json().get("permalink")
+        shared = integrations.share_post(caption, video_url, "video", link, account=account)
+        if shared:
+            out["shared"] = shared
+    except Exception as e:
+        print(f"[connect] share skipped: {e}")
     return out

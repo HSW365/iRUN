@@ -54,6 +54,34 @@ JWT verification disabled because the gateway validates the iRun owner key itsel
 provider key is missing or out of quota, AI requests stop with an explicit configuration or
 quota error; iRun does not fall back to an unmetered third-party writer.
 
+## iRun Connect (integrations hub)
+
+`connect.html` is one page for every outside tool iRun works with. Open it from Studio, Sales Agent, AI Team or Creator Hub (Connect in the menu). It uses your owner key, and every service key is stored server side in `irun_integrations` (never in the browser).
+
+| Card | What it does in iRun | Cost |
+|---|---|---|
+| Instagram Insights | Followers, 28-day reach, best posts for @hoodstar365; posts Library items to the feed | Free (uses the existing Instagram login) |
+| Canva | Bring any design in as JPG/PNG/MP4; send an iRun flyer to Canva as a new design | Free Canva Connect API |
+| Figma | Export a frame as a post-ready JPG | Free token |
+| Shopify | Product photos to the Library, one-tap Shopify ad on the autopilot, 30-day sales (with an Admin token) | Free |
+| Stripe | Balance and 30-day payments; payment links with a QR code | Free (Stripe's normal fee per sale) |
+| Discord, Telegram, Slack | Send now, auto-share every new Instagram post, lead alerts after each autopilot run | Free webhooks / bot |
+| HubSpot | Instagram leads and Sales Agent replies synced to the free CRM, on demand or every run | Free CRM |
+| Calendly | Booking link, upcoming calls, optional booking line in Sales Agent emails | Free token |
+| Zoom | Create meeting links, see upcoming meetings | Free Server-to-Server app |
+| Local Leads | Businesses by type and city from OpenStreetMap; send to the Sales Agent as drafts, HubSpot, or CSV | Free, no account |
+| Spotify | Artist stats, top tracks and releases; cover art to the Library | Free developer app |
+| GitHub | Every repo with its live link; run Daily promo, Faceless, Showcase and Sales workflows (with a token) | Free |
+| Render | Service status and one-tap redeploys | Free API key |
+| Google Drive | Save any Library item or iRun video to an iRun folder | Free OAuth client |
+| Domain Check | .com/.net/.co availability over RDAP | Free, no account |
+
+Not included: ElevenLabs, Higgsfield and Lusha (not used for iRun), and tools that only work on a paid plan (Adobe, Supermetrics, Yelp, ZoomInfo, Similarweb, Ahrefs, Crunchbase, Apollo, MyChatBot, ActiveCampaign, Bird SMS/WhatsApp).
+
+Setup, once: apply `supabase/migrations/20261124_irun_connect.sql` (tables `irun_integrations`, `irun_library` and the public `irun-connect` bucket), then deploy the function: **Actions > Deploy iRun Connect > Run workflow** (needs the `SUPABASE_ACCESS_TOKEN` secret). Canva and Google Drive need `https://hsw365.github.io/iRUN/connect.html` as their redirect URL; each card shows its own steps.
+
+The engine side is `engine/integrations.py`: `instagram.publish` shares each new post from your own accounts to channels with Auto-share on, and every `run.py` run sends lead alerts and the HubSpot sync. A failure there is logged on that card and never stops a post.
+
 ## 1. GitHub secrets
 Go to repo **Settings > Secrets and variables > Actions > New repository secret** and add:
 

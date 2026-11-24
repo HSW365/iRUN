@@ -526,6 +526,8 @@ def main():
                 traceback.print_exc()
                 failed += 1
     print(f"done: {made} made, {skipped} skipped (no script), {failed} failed")
+    import integrations  # iRun Connect: lead alerts + HubSpot sync, only for services switched on in connect.html
+    integrations.sync()
     sys.exit(1 if failed else 0)
 
 

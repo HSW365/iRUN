@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Social Media Automation Integrations | iRun by HSW365</title>
+<meta name="description" content="Connect Canva, Shopify, Stripe, Discord, HubSpot and more to iRun. Bring designs in, find local leads, share every post and track your Instagram growth.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="canonical" href="https://hsw365.github.io/iRUN/connect.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="iRun by HSW365 Media">
+<meta property="og:title" content="iRun Connect: every tool you run, one engine">
+<meta property="og:description" content="Canva, Shopify, Stripe, Discord, HubSpot, Spotify and more, wired into iRun's content, ads, posting and outreach.">
+<meta property="og:url" content="https://hsw365.github.io/iRUN/connect.html">
+<meta property="og:image" content="https://hsw365.github.io/iRUN/assets/video/irun-sample-calltwin.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3Ei%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<style>
+:root{
+  --bg:#0a0a0f;--p1:#101018;--p2:#15151f;--p3:#1b1b28;--line:rgba(255,255,255,.075);--line2:rgba(255,255,255,.14);
+  --text:#f4f4f8;--mut:#9393a9;--dim:#62627a;--cy:#22d3ee;--vi:#a855f7;--red:#ef4444;--yl:#fbbf24;--gr:#34d399;
+  --r:18px;--ease:cubic-bezier(.2,.8,.2,1)
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{min-height:100vh;background:
+  radial-gradient(1100px 620px at 92% -12%,rgba(168,85,247,.20),transparent 62%),
+  radial-gradient(900px 520px at -12% 6%,rgba(34,211,238,.13),transparent 60%),
+  radial-gradient(700px 500px at 50% 120%,rgba(239,68,68,.08),transparent 60%),var(--bg);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.055;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+button{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.mono{font:700 11px/1.3 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 20px 120px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,15,.72);border-bottom:1px solid var(--line)}
+.top .in{max-width:1240px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .mark{width:30px;height:30px;border-radius:7px;background:var(--red);display:grid;place-items:center;font:900 22px/1 'Barlow Condensed',sans-serif;color:#0a0a0f;box-shadow:0 6px 22px rgba(239,68,68,.45)}
+.brand b{font:800 22px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em}
+.brand b span{color:var(--cy)}
+.top nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.top nav::-webkit-scrollbar{display:none}
+.top nav a{flex:0 0 auto;padding:8px 12px;border-radius:9px;color:var(--mut);text-decoration:none;font-weight:600;font-size:13.5px;transition:.2s}
+.top nav a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.top nav a.on{color:var(--text);background:rgba(168,85,247,.16);box-shadow:inset 0 0 0 1px rgba(168,85,247,.45)}
+@media(max-width:720px){.top nav a.hide-sm{display:none}}
+
+/* hero */
+.hero{padding:64px 0 34px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:40px;gap:26px}}
+.kicker{display:inline-flex;align-items:center;gap:10px;padding:7px 12px;border:1px solid var(--line2);border-radius:999px;background:rgba(255,255,255,.03)}
+.kicker i{width:7px;height:7px;border-radius:50%;background:var(--gr);box-shadow:0 0 12px var(--gr)}
+h1{margin:18px 0 0;font:900 clamp(48px,8.4vw,112px)/.86 'Barlow Condensed',sans-serif;letter-spacing:-.01em;text-transform:uppercase}
+h1 .neon{display:block;background:linear-gradient(92deg,var(--cy) 0%,#7c8cff 45%,var(--vi) 75%,#f472b6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(124,140,255,.35))}
+.lede{max-width:640px;margin:22px 0 0;font-size:17.5px;color:#c7c7d6}
+.lede b{color:var(--text);font-weight:600}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{position:relative;overflow:hidden;padding:18px 18px 16px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+.stat .n{font:800 46px/1 'Barlow Condensed',sans-serif;letter-spacing:.01em}
+.stat .n small{font-size:22px;color:var(--dim);margin-left:2px}
+.stat .l{margin-top:6px}
+.stat::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;filter:blur(30px);opacity:.35;background:var(--c,var(--cy))}
+
+/* gate */
+.gate{margin:10px 0 30px;padding:26px;border-radius:22px;border:1px solid rgba(239,68,68,.35);background:linear-gradient(135deg,rgba(239,68,68,.10),rgba(168,85,247,.06));display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.gate h2{margin:0 0 4px;font:800 28px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.gate p{margin:0;color:var(--mut)}
+.gate form{display:flex;gap:8px}
+@media(max-width:720px){.gate{grid-template-columns:1fr}.gate form{flex-direction:column}}
+
+/* controls */
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 18px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--mut);font-weight:600;font-size:13.5px;cursor:pointer;transition:.2s var(--ease)}
+.chip:hover{color:var(--text);border-color:var(--line2)}
+.chip.on{color:#0a0a0f;background:var(--text);border-color:var(--text)}
+.chip em{font-style:normal;opacity:.6;margin-left:6px;font-size:12px}
+.search{margin-left:auto;position:relative;min-width:240px}
+.search input{padding-left:38px}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--dim)}
+@media(max-width:720px){.search{margin-left:0;width:100%}}
+.sec{display:flex;align-items:baseline;gap:14px;margin:44px 0 16px}
+.sec h2{margin:0;font:800 34px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.sec .mono{margin-left:auto}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{--c:#fff;position:relative;display:flex;flex-direction:column;gap:14px;padding:20px;border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(180deg,var(--p2),var(--p1));cursor:pointer;text-align:left;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;overflow:hidden;isolation:isolate;min-height:208px}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;background:radial-gradient(420px 200px at 0% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%)}
+.card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 45%,transparent);box-shadow:0 24px 60px -24px color-mix(in srgb,var(--c) 55%,transparent)}
+.card:hover::before{opacity:1}
+.card:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+.card .row1{display:flex;align-items:center;gap:12px}
+.tile{flex:0 0 auto;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,#0d0d14);border:1px solid color-mix(in srgb,var(--c) 38%,transparent);box-shadow:0 10px 26px -10px color-mix(in srgb,var(--c) 70%,transparent)}
+.tile svg{width:23px;height:23px}
+.tile .mg{font:900 22px/1 'Barlow Condensed',sans-serif;color:var(--c)}
+.card h3{margin:0;font:700 17px/1.2 Inter,sans-serif;letter-spacing:-.005em}
+.card .cat{margin-top:3px;font-size:11px}
+.card p{margin:0;color:var(--mut);font-size:14px;line-height:1.5;flex:1}
+.card .foot{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.state{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--mut);max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.state i{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.state.ok{color:var(--gr)}.state.ok i{background:var(--gr);box-shadow:0 0 10px var(--gr)}
+.state.free{color:var(--cy)}.state.free i{background:var(--cy);box-shadow:0 0 10px var(--cy)}
+.state.warn{color:var(--yl)}.state.warn i{background:var(--yl)}
+.state.bad{color:#ff7a7a}.state.bad i{background:var(--red)}
+.go{font:700 12.5px/1 Inter,sans-serif;padding:9px 12px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--line2);white-space:nowrap}
+.card:hover .go{background:var(--text);color:#0a0a0f;border-color:var(--text)}
+.tag{position:absolute;top:14px;right:14px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:5px 7px;border-radius:6px;color:var(--cy);background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.25)}
+
+/* forms */
+label.f{display:block;margin:14px 0 6px;font-size:12.5px;font-weight:600;color:var(--mut)}
+label.f small{font-weight:500;color:var(--dim);margin-left:6px}
+input,select,textarea{width:100%;background:#0b0b12;border:1px solid var(--line2);color:var(--text);padding:12px 13px;border-radius:11px;font:15px Inter,sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--vi);box-shadow:0 0 0 3px rgba(168,85,247,.18)}
+textarea{min-height:96px;resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:11px;border:0;background:var(--text);color:#0a0a0f;font:700 14.5px/1 Inter,sans-serif;cursor:pointer;text-decoration:none;transition:transform .15s,opacity .2s,background .2s;white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.vi{background:linear-gradient(135deg,var(--vi),#7c3aed);color:#fff;box-shadow:0 10px 30px -10px rgba(168,85,247,.8)}
+.btn.cy{background:var(--cy);color:#04232b}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line2)}
+.btn.ghost:hover{background:rgba(255,255,255,.05)}
+.btn.red{background:transparent;color:#ff8a8a;border:1px solid rgba(239,68,68,.4)}
+.btn.sm{padding:9px 12px;font-size:13px;border-radius:9px}
+.btn .spin{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:2fr 1.4fr 1fr;gap:10px}
+@media(max-width:560px){.two,.three{grid-template-columns:1fr}}
+.tg{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-top:1px solid var(--line);cursor:pointer}
+.tg:first-child{border-top:0}
+.tg input{display:none}
+.tg .sw{flex:0 0 auto;width:42px;height:24px;border-radius:999px;background:#2a2a3a;position:relative;transition:.25s;margin-top:1px}
+.tg .sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.25s var(--ease)}
+.tg input:checked + .sw{background:var(--gr)}
+.tg input:checked + .sw::after{left:21px}
+.tg b{display:block;font-size:14.5px;font-weight:600}
+.tg span.d{display:block;color:var(--mut);font-size:13px;margin-top:2px}
+
+/* drawer */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(4,4,8,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(680px,100vw);background:linear-gradient(180deg,#13131c,#0d0d14);border-left:1px solid var(--line2);transform:translateX(102%);transition:transform .42s var(--ease);display:flex;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,.5)}
+.drawer.on{transform:none}
+.dh{--c:#fff;position:relative;padding:22px 24px 18px;border-bottom:1px solid var(--line);overflow:hidden}
+.dh::before{content:"";position:absolute;inset:0;background:radial-gradient(500px 180px at 0% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);pointer-events:none}
+.dh .row1{position:relative;display:flex;align-items:center;gap:14px}
+.dh .tile{width:54px;height:54px;border-radius:15px}
+.dh .tile svg{width:27px;height:27px}
+.dh h2{margin:0;font:800 30px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.dh .x{margin-left:auto;width:40px;height:40px;border-radius:11px;border:1px solid var(--line2);background:rgba(255,255,255,.03);display:grid;place-items:center;cursor:pointer}
+.dh .x:hover{background:rgba(255,255,255,.08)}
+.dh p{position:relative;margin:14px 0 0;color:#c4c4d3;font-size:14.5px}
+.db{flex:1;overflow-y:auto;padding:6px 24px 40px;overscroll-behavior:contain}
+.blk{margin-top:22px}
+.blk > .mono{display:block;margin-bottom:10px}
+.panel{padding:16px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 36px;color:#c9c9d8;font-size:14px;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:24px;height:24px;border-radius:7px;background:rgba(255,255,255,.06);border:1px solid var(--line2);display:grid;place-items:center;font:700 12px/1 'Space Mono',monospace;color:var(--text)}
+.steps a{color:var(--cy)}
+.steps code,.code{font:12.5px/1.4 'Space Mono',monospace;background:#0b0b12;border:1px solid var(--line2);padding:2px 6px;border-radius:6px;color:#e5e5ef;word-break:break-all}
+.copyrow{display:flex;gap:8px;align-items:center}
+.copyrow .code{flex:1;padding:10px 12px;display:block}
+.msg{margin-top:10px;font-size:13.5px;color:var(--mut);min-height:18px}
+.msg.err{color:#ff8a8a}.msg.ok{color:var(--gr)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.kpi{padding:14px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.kpi .n{font:800 30px/1 'Barlow Condensed',sans-serif}
+.kpi .l{margin-top:6px;font-size:11px}
+.list{display:flex;flex-direction:column;gap:8px}
+.it{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.it img,.it .ph{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#0b0b12;border:1px solid var(--line)}
+.it .t{min-width:0}
+.it .t b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .t span{display:block;font-size:12.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .a{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:560px){.it{grid-template-columns:auto 1fr}.it .a{grid-column:1/-1;justify-content:flex-start}}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.th{border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.02);overflow:hidden;display:flex;flex-direction:column}
+.th .im{aspect-ratio:4/5;background:#0b0b12 center/cover no-repeat;position:relative}
+.th .im span{position:absolute;left:8px;bottom:8px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.1em;padding:4px 6px;border-radius:5px;background:rgba(0,0,0,.65);color:#fff}
+.th .b{padding:10px;display:flex;flex-direction:column;gap:8px;flex:1}
+.th .b b{font-size:13px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.th .b small{color:var(--mut);font-size:12px}
+.th .b .btn{width:100%}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font:700 10.5px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:10px 8px;border-bottom:1px solid var(--line2);position:sticky;top:0;background:#111119}
+.tbl td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl a{color:var(--cy);text-decoration:none}
+.tw{max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:13px}
+.pill{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11.5px;font-weight:700;border:1px solid var(--line2);color:var(--mut)}
+.pill.ok{color:var(--gr);border-color:rgba(52,211,153,.35)}
+.pill.bad{color:#ff8a8a;border-color:rgba(239,68,68,.35)}
+.pill.cy{color:var(--cy);border-color:rgba(34,211,238,.35)}
+.empty{padding:26px;text-align:center;color:var(--mut);border:1px dashed var(--line2);border-radius:15px}
+.qr{display:inline-block;padding:10px;background:#fff;border-radius:12px}
+.warnbox{padding:12px 14px;border-radius:12px;border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.07);color:#f3d58a;font-size:13.5px}
+
+/* library */
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.li{border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,var(--p2),var(--p1));overflow:hidden;display:flex;flex-direction:column}
+.li .m{position:relative;aspect-ratio:4/5;background:#08080d}
+.li .m img,.li .m video{width:100%;height:100%;object-fit:cover;display:block}
+.li .m .src{position:absolute;left:10px;top:10px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:5px 7px;border-radius:6px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+.li .m .done{position:absolute;right:10px;top:10px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.1em;padding:5px 7px;border-radius:6px;background:rgba(52,211,153,.9);color:#04231a}
+.li .b{padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.li .b b{font-size:13.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.li .acts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto}
+.li .acts .btn{padding:9px 8px;font-size:12.5px}
+.li .acts .btn.full{grid-column:1/-1}
+.drop{display:flex;align-items:center;justify-content:center;gap:10px;min-height:120px;border:1.5px dashed var(--line2);border-radius:16px;color:var(--mut);cursor:pointer;transition:.2s;background:rgba(255,255,255,.015)}
+.drop:hover,.drop.on{border-color:var(--vi);color:var(--text);background:rgba(168,85,247,.06)}
+
+/* modal + toast */
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,4,8,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal.on{display:flex}
+.mbox{width:100%;max-width:560px;max-height:92vh;overflow:auto;padding:24px;border-radius:22px;border:1px solid var(--line2);background:linear-gradient(180deg,#171722,#0e0e15);box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.mbox h3{margin:0 0 4px;font:800 26px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.mbox .prev{display:flex;gap:12px;align-items:center;margin:14px 0 4px}
+.mbox .prev img,.mbox .prev video{width:72px;height:90px;border-radius:10px;object-fit:cover;background:#000}
+.toasts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:calc(100% - 32px);max-width:520px}
+.toast{pointer-events:auto;padding:13px 16px;border-radius:13px;background:#1c1c29;border:1px solid var(--line2);box-shadow:0 18px 50px rgba(0,0,0,.5);font-size:14px;font-weight:500;animation:tin .35s var(--ease);display:flex;gap:10px;align-items:center}
+.toast.ok{border-color:rgba(52,211,153,.45)}.toast.err{border-color:rgba(239,68,68,.5)}
+.toast i{width:8px;height:8px;border-radius:50%;background:var(--cy);flex:0 0 auto}
+.toast.ok i{background:var(--gr)}.toast.err i{background:var(--red)}
+@keyframes tin{from{opacity:0;transform:translateY(10px)}}
+.footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--dim);font-size:13px}
+.footer a{color:var(--mut);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="in">
+    <a class="brand" href="app.html" aria-label="iRun Studio"><span class="mark">i</span><b>iRUN <span>CONNECT</span></b></a>
+    <nav aria-label="iRun">
+      <a href="app.html">Studio</a>
+      <a href="adstudio.html" class="hide-sm">Ad Studio</a>
+      <a href="sales.html" class="hide-sm">Sales Agent</a>
+      <a href="team.html" class="hide-sm">AI Team</a>
+      <a href="dashboard.html">Command</a>
+      <a href="connect.html" class="on" aria-current="page">Connect</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="kicker"><i></i><span class="mono">HSW365 Media &middot; iRun Connect</span></span>
+      <h1>Your integrations.<span class="neon">One engine.</span></h1>
+      <p class="lede">Plug <b>Canva, Shopify, Stripe, Discord, HubSpot, Spotify</b> and eleven more into iRun. Designs come in, leads go out, and every post you make lands everywhere your people are. Free tools first, and your keys stay on iRun's server.</p>
+    </div>
+    <div class="stats" aria-live="polite">
+      <div class="stat" style="--c:var(--gr)"><div class="n" id="stConn">0<small>/17</small></div><div class="l mono">Connected</div></div>
+      <div class="stat" style="--c:var(--vi)"><div class="n" id="stLib">0</div><div class="l mono">In your library</div></div>
+      <div class="stat" style="--c:var(--cy)"><div class="n" id="stShare">0</div><div class="l mono">Auto-share channels</div></div>
+      <div class="stat" style="--c:var(--yl)"><div class="n">2</div><div class="l mono">Free, always on</div></div>
+    </div>
+  </section>
+
+  <section class="gate" id="gate" hidden>
+    <div>
+      <h2>Owner key required</h2>
+      <p>iRun Connect holds your service keys, so it only opens for you. Use the same owner key as the Sales Agent and Studio.</p>
+    </div>
+    <form id="gateForm" autocomplete="off">
+      <input id="gateKey" type="password" placeholder="Owner key" aria-label="Owner key" autocomplete="off">
+      <button class="btn vi" type="submit">Open Connect</button>
+    </form>
+  </section>
+
+  <div class="bar">
+    <div class="chips" id="chips" role="tablist" aria-label="Filter integrations"></div>
+    <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search tools" aria-label="Search tools"></label>
+  </div>
+  <section class="grid" id="grid" aria-label="Integrations"></section>
+
+  <div class="sec"><h2>Library</h2><span class="mono" id="libNote">Designs, covers and product photos you bring in</span></div>
+  <section id="libWrap">
+    <label class="drop" id="drop"><input type="file" id="upFile" accept="image/jpeg,image/png,image/webp,video/mp4" multiple hidden>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
+      <span>Drop a flyer or video here, or tap to upload. It's ready to post, share or send to Canva.</span></label>
+    <div class="lib" id="lib" style="margin-top:14px"></div>
+    <div id="recentWrap" hidden>
+      <div class="sec" style="margin-top:34px"><h2 style="font-size:26px">Latest from iRun</h2><span class="mono">Share or save what the autopilot made</span></div>
+      <div class="lib" id="recent"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>iRun by HSW365 Media LLC &middot; <a href="mailto:hsw365media@gmail.com">hsw365media@gmail.com</a></span>
+    <span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="https://hsw365.net">hsw365.net</a></span>
+  </footer>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+  <div class="dh" id="dHead"></div>
+  <div class="db" id="dBody"></div>
+</aside>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+(() => {
+"use strict";
+const API = "https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/irun-connect";
+const ICONS = {"calendly":{"d":"M19.655 14.262c.281 0 .557.023.828.064 0 .005-.005.01-.005.014-.105.267-.234.534-.381.786l-1.219 2.106c-1.112 1.936-3.177 3.127-5.411 3.127h-2.432c-2.23 0-4.294-1.191-5.412-3.127l-1.218-2.106a6.251 6.251 0 0 1 0-6.252l1.218-2.106C6.736 4.832 8.8 3.641 11.035 3.641h2.432c2.23 0 4.294 1.191 5.411 3.127l1.219 2.106c.147.252.271.519.381.786 0 .004.005.009.005.014-.267.041-.543.064-.828.064-1.816 0-2.501-.607-3.291-1.306-.764-.676-1.711-1.517-3.44-1.517h-1.029c-1.251 0-2.387.455-3.2 1.278-.796.805-1.233 1.904-1.233 3.099v1.411c0 1.196.437 2.295 1.233 3.099.813.823 1.949 1.278 3.2 1.278h1.034c1.729 0 2.676-.841 3.439-1.517.791-.703 1.471-1.306 3.287-1.301Zm.005-3.237c.399 0 .794-.036 1.179-.11-.002-.004-.002-.01-.002-.014-.073-.414-.193-.823-.349-1.218.731-.12 1.407-.396 1.986-.819 0-.004-.005-.013-.005-.018-.331-1.085-.832-2.101-1.489-3.03-.649-.915-1.435-1.719-2.331-2.395-1.867-1.398-4.088-2.138-6.428-2.138-1.448 0-2.855.28-4.175.841-1.273.543-2.423 1.315-3.407 2.299S2.878 6.552 2.341 7.83c-.557 1.324-.842 2.726-.842 4.175 0 1.448.281 2.855.842 4.174.542 1.274 1.314 2.423 2.298 3.407s2.129 1.761 3.407 2.299c1.324.556 2.727.841 4.175.841 2.34 0 4.561-.74 6.428-2.137a10.815 10.815 0 0 0 2.331-2.396c.652-.929 1.158-1.949 1.489-3.03 0-.004.005-.014.005-.018-.579-.423-1.255-.699-1.986-.819.161-.395.276-.804.349-1.218.005-.009.005-.014.005-.023.869.166 1.692.506 2.404 1.035.685.505.552 1.075.446 1.416C22.184 20.437 17.619 24 12.221 24c-6.625 0-12-5.375-12-12s5.37-12 12-12c5.398 0 9.963 3.563 11.471 8.464.106.341.239.915-.446 1.421-.717.529-1.535.873-2.404 1.034.128.716.128 1.45 0 2.166-.387-.074-.782-.11-1.182-.11-4.184 0-3.968 2.823-6.736 2.823h-1.029c-1.899 0-3.15-1.357-3.15-3.095v-1.411c0-1.738 1.251-3.094 3.15-3.094h1.034c2.768 0 2.552 2.823 6.731 2.827Z"},"discord":{"d":"M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"},"figma":{"d":"M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"},"github":{"d":"M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"},"googledrive":{"d":"M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"},"hubspot":{"d":"M18.164 7.93V5.084a2.198 2.198 0 001.267-1.978v-.067A2.2 2.2 0 0017.238.845h-.067a2.2 2.2 0 00-2.193 2.193v.067a2.196 2.196 0 001.252 1.973l.013.006v2.852a6.22 6.22 0 00-2.969 1.31l.012-.01-7.828-6.095A2.497 2.497 0 104.3 4.656l-.012.006 7.697 5.991a6.176 6.176 0 00-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-.013-.02-2.342 2.343a1.968 1.968 0 00-.58-.095h-.002a2.033 2.033 0 102.033 2.033 1.978 1.978 0 00-.1-.595l.005.014 2.317-2.317a6.247 6.247 0 104.782-11.134l-.036-.005zm-.964 9.378a3.206 3.206 0 113.215-3.207v.002a3.206 3.206 0 01-3.207 3.207z"},"instagram":{"d":"M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"},"openstreetmap":{"d":"M2.672 23.969c-.352-.089-.534-.234-1.471-1.168C.085 21.688.014 21.579.018 20.999c0-.645-.196-.414 3.368-3.986 3.6-3.608 3.415-3.451 4.064-3.449.302 0 .378.016.62.14l.277.14 1.744-1.744-.218-.343c-.425-.662-.825-1.629-1.006-2.429a7.657 7.657 0 0 1 1.479-6.44c2.49-3.12 6.959-3.812 10.26-1.588 1.812 1.218 2.99 3.099 3.328 5.314.07.467.07 1.579 0 2.074a7.554 7.554 0 0 1-2.205 4.402 6.712 6.712 0 0 1-1.943 1.401c-.959.483-1.775.71-2.881.803-1.573.131-3.32-.305-4.656-1.163l-.343-.218-1.744 1.744.14.28c.125.241.14.316.14.617.003.651.156.467-3.426 4.049-2.761 2.756-3.186 3.164-3.398 3.261-.271.125-.69.171-.945.106zM17.485 13.95a6.425 6.425 0 0 0 4.603-3.51c1.391-2.899.455-6.306-2.227-8.108-.638-.43-1.529-.794-2.367-.962-.581-.117-1.809-.104-2.414.025a6.593 6.593 0 0 0-2.452 1.064c-.444.315-1.177 1.048-1.487 1.487a6.384 6.384 0 0 0 .38 7.907 6.406 6.406 0 0 0 3.901 2.136c.509.078 1.542.058 2.065-.037zm-3.738 7.376a80.97 80.97 0 0 1-2.196-.651c-.025-.028 1.207-4.396 1.257-4.449.023-.026 4.242 1.152 4.414 1.236.062.026-.003.288-.525 2.102a398.513 398.513 0 0 0-.635 2.236c-.025.087-.069.156-.097.156-.028-.003-1.028-.287-2.219-.631zm2.912.524c0-.053 1.227-4.333 1.246-4.347.047-.034 4.324-1.23 4.341-1.211.019.019-1.199 4.337-1.23 4.36-.02.019-4.126 1.191-4.259 1.218-.054.011-.098 0-.098-.019zm-7.105-1.911c.846-.852 1.599-1.627 1.674-1.728.171-.218.405-.732.472-1.015.026-.118.053-.352.058-.522l.011-.307.182-.051c.103-.028.193-.044.202-.034.023.025-1.207 4.321-1.246 4.36-.02.016-.677.213-1.464.436l-1.425.405 1.537-1.542zm8.289-3.06a1.371 1.371 0 0 1-.059-.187l-.044-.156.156-.028c1.339-.227 2.776-.856 3.908-1.713.16-.125.252-.171.265-.134.054.165.272.95.265.959-.034.034-4.48 1.282-4.492 1.261zm-15.083-1.3c-.05-.039-1.179-3.866-1.264-4.29-.016-.084.146-.044 2.174.536 2.121.604 2.192.629 2.222.74.028.098.011.129-.125.223-.084.059-.769.724-1.523 1.479a63.877 63.877 0 0 1-1.39 1.367c-.016 0-.056-.025-.093-.054zm.821-4.378c-1.188-.343-2.164-.623-2.167-.626-.016-.012 1.261-4.433 1.285-4.46.022-.022 4.422 1.211 4.469 1.252.009.009-.269 1.017-.618 2.239-.576 2.02-.643 2.224-.723 2.22-.05-.003-1.059-.285-2.247-.626zm2.959.538c.012-.031.212-.723.444-1.534l.42-1.476.056.321c.093.556.265 1.188.464 1.741.106.296.187.539.181.545-.008.006-.332.101-.719.212-.389.109-.741.21-.786.224-.058.016-.075.006-.059-.034zM4.905 6.112c-1.187-.339-2.167-.635-2.18-.654-.04-.062-1.246-4.321-1.23-4.338.026-.025 4.31 1.204 4.351 1.246.047.051 1.28 4.379 1.246 4.376L4.91 6.113zm2.148-1.713l-.519-1.806-.078-.28 1.693-.483c.934-.265 1.724-.495 1.76-.508.034-.016-.083.14-.26.336A8.729 8.729 0 0 0 7.69 5.23a4.348 4.348 0 0 0-.132.561c0 .293-.115-.025-.505-1.39z"},"render":{"d":"M18.263.007c-3.121-.147-5.744 2.109-6.192 5.082-.018.138-.045.272-.067.405-.696 3.703-3.936 6.507-7.827 6.507-1.388 0-2.691-.356-3.825-.979a.2024.2024 0 0 0-.302.178V24H12v-8.999c0-1.656 1.338-3 2.987-3h2.988c3.382 0 6.103-2.817 5.97-6.244-.12-3.084-2.61-5.603-5.682-5.75"},"shopify":{"d":"M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"},"spotify":{"d":"M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"},"stripe":{"d":"M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"},"telegram":{"d":"M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"},"zoom":{"d":"M5.033 14.649H.743a.74.74 0 0 1-.686-.458.74.74 0 0 1 .16-.808L3.19 10.41H1.06A1.06 1.06 0 0 1 0 9.35h3.957c.301 0 .57.18.686.458a.74.74 0 0 1-.161.808L1.51 13.59h2.464c.585 0 1.06.475 1.06 1.06zM24 11.338c0-1.14-.927-2.066-2.066-2.066-.61 0-1.158.265-1.537.686a2.061 2.061 0 0 0-1.536-.686c-1.14 0-2.066.926-2.066 2.066v3.311a1.06 1.06 0 0 0 1.06-1.06v-2.251a1.004 1.004 0 0 1 2.013 0v2.251c0 .586.474 1.06 1.06 1.06v-3.311a1.004 1.004 0 0 1 2.012 0v2.251c0 .586.475 1.06 1.06 1.06zM16.265 12a2.728 2.728 0 1 1-5.457 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0zm-4.82 0a2.728 2.728 0 1 1-5.458 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0z"}}; /* Simple Icons, CC0 */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const ls = { get(k) { try { return localStorage.getItem(k) || ""; } catch { return ""; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} }, del(k) { try { localStorage.removeItem(k); } catch {} } };
+const num = (n) => n == null || n === "" ? "-" : Number(n) >= 1e6 ? (Number(n) / 1e6).toFixed(1).replace(/\.0$/, "") + "M" : Number(n) >= 1e4 ? (Number(n) / 1e3).toFixed(1).replace(/\.0$/, "") + "K" : Number(n).toLocaleString();
+const money = (n, c = "usd") => { try { return new Intl.NumberFormat("en-US", { style: "currency", currency: String(c).toUpperCase() }).format(n); } catch { return "$" + Number(n).toFixed(2); } };
+const when = (t) => { if (!t) return ""; const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }); };
+const ago = (t) => { if (!t) return ""; const s = (Date.now() - new Date(t)) / 1000; if (s < 90) return "just now"; if (s < 3600) return Math.round(s / 60) + " min ago"; if (s < 86400) return Math.round(s / 3600) + " h ago"; return Math.round(s / 86400) + " d ago"; };
+const OWNER = () => ls.get("irun_owner");
+const REDIRECT = "https://hsw365.github.io/iRUN/connect.html";
+
+const ICO = {
+  x: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg>'
+};
+
+// ------------------------------------------------------------------ catalog
+const CATS = [["all", "All"], ["publish", "Publish"], ["design", "Design"], ["commerce", "Commerce"], ["leads", "Leads & CRM"], ["insights", "Insights"], ["build", "Build"], ["files", "Files"]];
+const CATNAME = Object.fromEntries(CATS);
+const A = (t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
+const INTS = [
+  { id: "instagram", name: "Instagram Insights", cat: "insights", icon: "instagram", color: "#FF0069",
+    blurb: "Followers, 28-day reach and your best posts for @hoodstar365. Anything in your Library posts straight to the feed.", replaces: "Supermetrics" },
+  { id: "canva", name: "Canva", cat: "design", mono: "C", color: "#7D2AE8", oauth: true,
+    blurb: "Pull any Canva design into iRun as a JPG or MP4 and post it, or send an iRun flyer to Canva to edit.",
+    fields: [{ k: "client_id", label: "Client ID" }, { k: "client_secret", label: "Client secret", secret: true }],
+    steps: [`Open ${A("Canva Developers", "https://www.canva.com/developers/integrations/connect-api")} and create an integration (private is fine).`,
+      "Under Scopes, turn on: profile:read, design:meta:read, design:content:read, design:content:write, asset:read, asset:write.",
+      "Under Authentication, add the redirect URL below, then save.", "Copy the Client ID, generate a Client secret, paste both here and tap Sign in with Canva."] },
+  { id: "shopify", name: "Shopify", cat: "commerce", icon: "shopify", color: "#7AB55C",
+    blurb: "Your hsw365.net catalog inside iRun: product photos to post, one-tap Shopify ads on the autopilot, and sales numbers.",
+    fields: [{ k: "store", label: "Store domain", ph: "hsw365.net", plain: true }, { k: "admin", label: "myshopify.com address", ph: "your-store.myshopify.com", optional: "only for sales numbers", plain: true }, { k: "token", label: "Admin API access token", secret: true, optional: "only for sales numbers" }],
+    steps: ["Your store domain is all iRun needs to read products and make ads.",
+      `For sales numbers: Shopify admin, Settings, Apps and sales channels, ${A("Develop apps", "https://help.shopify.com/en/manual/apps/app-types/custom-apps")}, Create an app.`,
+      "Admin API scopes: read_orders and read_products. Install it, then reveal the Admin API access token once and paste it here."] },
+  { id: "discord", name: "Discord", cat: "publish", icon: "discord", color: "#5865F2",
+    blurb: "Every new iRun post drops into your HSW365 Discord, plus lead alerts the moment people ask about your apps.",
+    fields: [{ k: "webhook", label: "Webhook URL", ph: "https://discord.com/api/webhooks/...", secret: true }],
+    steps: ["In your server, open the channel's settings.", "Integrations, Webhooks, New Webhook. Name it iRun.", "Copy Webhook URL and paste it here."] },
+  { id: "leads", name: "Local Leads", cat: "leads", icon: "openstreetmap", color: "#7EBC6F", free: true,
+    blurb: "Find local businesses by type and city, with phones, emails and websites. Send them to your Sales Agent or HubSpot.", replaces: "Yelp, Apollo, ZoomInfo" },
+  { id: "stripe", name: "Stripe", cat: "commerce", icon: "stripe", color: "#635BFF",
+    blurb: "Revenue at a glance, and payment links with a scannable QR code for any offer, ready for captions and flyers.",
+    fields: [{ k: "key", label: "Restricted key", ph: "rk_live_...", secret: true }],
+    steps: [`Stripe dashboard, Developers, ${A("API keys", "https://dashboard.stripe.com/apikeys")}, Create restricted key.`,
+      "Allow read on Charges and Balance, and write on Products, Prices and Payment Links.", "Paste the rk_live_ key here."] },
+  { id: "telegram", name: "Telegram", cat: "publish", icon: "telegram", color: "#26A5E4",
+    blurb: "Auto-share new posts and videos to your Telegram channel, and get lead alerts on your phone.",
+    fields: [{ k: "token", label: "Bot token", ph: "123456:ABC...", secret: true }, { k: "chat", label: "Channel or chat", ph: "@yourchannel", plain: true }],
+    steps: [`In Telegram, message ${A("@BotFather", "https://t.me/BotFather")}, send /newbot and copy the token.`, "Add the bot to your channel as an admin.", "Enter the channel as @yourchannel, or a chat ID."] },
+  { id: "figma", name: "Figma", cat: "design", icon: "figma", color: "#F24E1E",
+    blurb: "Paste a Figma file link, pick a frame, and iRun exports it as a post-ready image.",
+    fields: [{ k: "token", label: "Personal access token", secret: true }],
+    steps: [`Figma, Settings, Security, ${A("Personal access tokens", "https://help.figma.com/hc/en-us/articles/8085703771159")}.`, "Generate a token with File content set to read-only.", "Paste it here."] },
+  { id: "hubspot", name: "HubSpot", cat: "leads", icon: "hubspot", color: "#FF7A59",
+    blurb: "Every Instagram lead and every Sales Agent reply lands in your free HubSpot CRM, automatically.",
+    fields: [{ k: "token", label: "Private app token", ph: "pat-na1-...", secret: true }],
+    steps: [`HubSpot (the free CRM works), Settings, Integrations, ${A("Private apps", "https://developers.hubspot.com/docs/api/private-apps")}, Create.`, "Scopes: crm.objects.contacts.read and crm.objects.contacts.write.", "Create the app and copy the access token here."] },
+  { id: "spotify", name: "Spotify", cat: "insights", icon: "spotify", color: "#1ED760",
+    blurb: "Your HOODSTAR365 catalog: followers, top tracks and releases, with cover art you can post in one tap.",
+    fields: [{ k: "client_id", label: "Client ID" }, { k: "client_secret", label: "Client secret", secret: true }, { k: "artist", label: "Artist name", ph: "HOODSTAR365", plain: true, optional: "optional" }],
+    steps: [`Open the ${A("Spotify Developer Dashboard", "https://developer.spotify.com/dashboard")} and create an app (Web API).`, `Use ${REDIRECT} as the redirect URI.`, "Open Settings and copy the Client ID and Client secret here."] },
+  { id: "slack", name: "Slack", cat: "publish", mono: "S", color: "#E01E5A",
+    blurb: "New posts and lead alerts in the Slack channel you pick.",
+    fields: [{ k: "webhook", label: "Incoming webhook URL", ph: "https://hooks.slack.com/services/...", secret: true }, { k: "label", label: "Channel name", ph: "#marketing", plain: true, optional: "for your reference" }],
+    steps: [`Go to ${A("api.slack.com/apps", "https://api.slack.com/apps")}, Create New App, From scratch.`, "Incoming Webhooks, turn it on, Add New Webhook to Workspace, pick the channel.", "Copy the webhook URL here."] },
+  { id: "calendly", name: "Calendly", cat: "leads", icon: "calendly", color: "#006BFF",
+    blurb: "Your booking link on tap, upcoming calls in view, and an option to add it to every Sales Agent email.",
+    fields: [{ k: "token", label: "Personal access token", secret: true }],
+    steps: [`Calendly, Integrations and apps, ${A("API and webhooks", "https://calendly.com/integrations/api_webhooks")}.`, "Generate a personal access token.", "Paste it here."] },
+  { id: "zoom", name: "Zoom", cat: "leads", icon: "zoom", color: "#0B5CFF",
+    blurb: "Spin up a Zoom link for a sales call or client onboarding in one tap.",
+    fields: [{ k: "account_id", label: "Account ID", plain: true }, { k: "client_id", label: "Client ID" }, { k: "client_secret", label: "Client secret", secret: true }],
+    steps: [`${A("Zoom App Marketplace", "https://marketplace.zoom.us/develop/create")}, Develop, Build App, Server-to-Server OAuth.`, "Scopes: meeting:write:meeting:admin, meeting:read:list_meetings:admin and user:read:user:admin. Activate the app.", "Copy the Account ID, Client ID and Client secret here."] },
+  { id: "github", name: "GitHub", cat: "build", icon: "github", color: "#E6EDF3",
+    blurb: "Every app in your GitHub with its live link, and buttons that run iRun's autopilot without opening GitHub.",
+    fields: [{ k: "owner", label: "GitHub account", ph: "HSW365", plain: true }, { k: "token", label: "Fine-grained token", secret: true, optional: "to run the autopilot" }],
+    steps: ["Public repos work with no token.", `To run iRun from here: ${A("GitHub fine-grained tokens", "https://github.com/settings/personal-access-tokens/new")}, repository HSW365/iRUN.`, "Permissions: Actions read and write, Contents read. Generate and paste it here."] },
+  { id: "render", name: "Render", cat: "build", icon: "render", color: "#E6EDF3",
+    blurb: "See Klipit, FLIPIT, CallTwin and your other Render apps, and redeploy any of them from here.",
+    fields: [{ k: "key", label: "API key", ph: "rnd_...", secret: true }],
+    steps: [`Render dashboard, Account settings, ${A("API keys", "https://dashboard.render.com/u/settings#api-keys")}.`, "Create an API key.", "Paste it here."] },
+  { id: "gdrive", name: "Google Drive", cat: "files", icon: "googledrive", color: "#4285F4", oauth: true,
+    blurb: "Back up any iRun video, flyer or design to an iRun folder in your Drive.",
+    fields: [{ k: "client_id", label: "Client ID" }, { k: "client_secret", label: "Client secret", secret: true }],
+    steps: [`In ${A("Google Cloud console", "https://console.cloud.google.com/apis/library/drive.googleapis.com")}, enable the Google Drive API.`,
+      "OAuth consent screen: External. Publish it, or add your Gmail as a test user (test sign-ins expire after 7 days).",
+      "Credentials, Create OAuth client ID, Web application. Add the redirect URL below.", "Copy the Client ID and secret here and tap Sign in with Google."] },
+  { id: "domains", name: "Domain Check", cat: "leads", svg: "globe", color: "#fbbf24", free: true,
+    blurb: "Check a business name across .com, .net and .co before you pitch a QUEENEE website." },
+];
+const BY = Object.fromEntries(INTS.map((x) => [x.id, x]));
+
+function tile(x, cls = "tile") {
+  let inner;
+  if (x.icon && ICONS[x.icon]) {
+    const fill = ["github", "render"].includes(x.icon) ? "#f4f4f8" : x.color;
+    inner = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="${fill}" d="${ICONS[x.icon].d}"/></svg>`;
+  } else if (x.svg) inner = `<span style="color:${x.color};display:grid">${ICO[x.svg]}</span>`;
+  else inner = `<span class="mg">${esc(x.mono || x.name[0])}</span>`;
+  return `<span class="${cls}" style="--c:${x.color}">${inner}</span>`;
+}
+
+// ------------------------------------------------------------------ API
+async function call(a, extra = {}) {
+  const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ owner: OWNER(), a, ...extra }) });
+  const d = await r.json().catch(() => ({}));
+  if (r.status === 401) { showGate(true); throw new Error(d.error || "Sign in with your owner key."); }
+  if (!r.ok) { const e = new Error(d.error || `Request failed (${r.status})`); e.status = r.status; throw e; }
+  return d;
+}
+const run = (id, op, args = {}) => call("run", { id, op, args });
+
+function toast(text, kind = "") {
+  const t = document.createElement("div");
+  t.className = "toast " + kind; t.innerHTML = `<i></i><span>${esc(text)}</span>`;
+  $("#toasts").appendChild(t);
+  setTimeout(() => { t.style.transition = "opacity .3s"; t.style.opacity = "0"; setTimeout(() => t.remove(), 320); }, kind === "err" ? 6000 : 3600);
+}
+async function busy(btn, fn) {
+  const html = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span>${btn.dataset.busy || "Working"}`;
+  try { return await fn(); } catch (e) { toast(e.message, "err"); throw e; } finally { btn.disabled = false; btn.innerHTML = html; }
+}
+async function copy(text, what = "Copied") {
+  try { await navigator.clipboard.writeText(text); toast(what, "ok"); } catch { prompt("Copy this:", text); }
+}
+
+// ------------------------------------------------------------------ state + grid
+const S = { cat: null, filter: "all", q: "", lib: [], recent: [] };
+const st = (id) => S.cat?.items?.find((i) => i.id === id) || { id };
+
+function stateOf(x) {
+  const s = st(x.id);
+  if (x.free) return ["free", "Free, always on"];
+  if (s.connected && s.last_error) return ["bad", "Needs attention"];
+  if (s.connected) return ["ok", s.label ? `Connected · ${s.label}` : "Connected"];
+  if (s.pending) return ["warn", "Finish sign-in"];
+  return ["", "Not connected"];
+}
+function renderChips() {
+  $("#chips").innerHTML = CATS.map(([k, n]) => {
+    const c = k === "all" ? INTS.length : INTS.filter((x) => x.cat === k).length;
+    return `<button class="chip${S.filter === k ? " on" : ""}" role="tab" aria-selected="${S.filter === k}" data-k="${k}">${n}<em>${c}</em></button>`;
+  }).join("");
+}
+function renderGrid() {
+  const q = S.q.trim().toLowerCase();
+  const list = INTS.filter((x) => (S.filter === "all" || x.cat === S.filter) && (!q || (x.name + " " + x.blurb + " " + (x.replaces || "")).toLowerCase().includes(q)));
+  $("#grid").innerHTML = list.map((x) => {
+    const [cls, txt] = stateOf(x);
+    const s = st(x.id);
+    const cta = x.free || s.connected ? "Open" : s.pending ? "Finish" : "Connect";
+    return `<button class="card" style="--c:${x.color}" data-id="${x.id}" aria-label="${esc(x.name)}: ${esc(txt)}">
+      ${x.replaces ? `<span class="tag">Free</span>` : ""}
+      <div class="row1">${tile(x)}<div><h3>${esc(x.name)}</h3><div class="cat mono">${CATNAME[x.cat]}</div></div></div>
+      <p>${esc(x.blurb)}</p>
+      <div class="foot"><span class="state ${cls}"><i></i>${esc(txt)}</span><span class="go">${cta}</span></div>
+    </button>`;
+  }).join("") || `<div class="empty" style="grid-column:1/-1">No tools match that search.</div>`;
+  const items = S.cat?.items || [];
+  const conn = items.filter((i) => i.connected).length;
+  $("#stConn").innerHTML = `${conn}<small>/${INTS.length}</small>`;
+  $("#stShare").textContent = items.filter((i) => ["discord", "telegram", "slack"].includes(i.id) && i.connected && i.auto_share).length;
+}
+async function refresh() {
+  if (!OWNER()) { showGate(true); renderGrid(); return; }
+  try {
+    S.cat = await call("catalog");
+    showGate(false);
+    $("#stLib").textContent = S.cat.library ?? 0;
+  } catch (e) { if (OWNER()) toast(e.message, "err"); }
+  renderGrid();
+  if (S.open) openDrawer(S.open, true);
+}
+function showGate(on) { $("#gate").hidden = !on; }
+
+// ------------------------------------------------------------------ drawer
+function closeDrawer() { $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); S.open = null; document.body.style.overflow = ""; }
+function openDrawer(id, keepScroll = false) {
+  const x = BY[id]; if (!x) return;
+  if (!OWNER()) { showGate(true); $("#gateKey").focus(); toast("Enter your owner key first.", "err"); return; }
+  S.open = id;
+  const s = st(id);
+  const [cls, txt] = stateOf(x);
+  $("#dHead").style.setProperty("--c", x.color);
+  $("#dHead").innerHTML = `<div class="row1">${tile(x)}<div><h2 id="dTitle">${esc(x.name)}</h2><span class="state ${cls}" style="max-width:none"><i></i>${esc(txt)}</span></div>
+    <button class="x" aria-label="Close">${ICO.x}</button></div><p>${esc(x.blurb)}${x.replaces ? ` <span class="pill cy">Free, replaces ${esc(x.replaces)}</span>` : ""}</p>`;
+  $(".x", $("#dHead")).onclick = closeDrawer;
+  const body = $("#dBody");
+  const top = body.scrollTop;
+  body.innerHTML = "";
+  if (s.connected && s.last_error) body.insertAdjacentHTML("beforeend", `<div class="blk warnbox">Last problem: ${esc(s.last_error)}</div>`);
+  const ready = x.free || s.connected;
+  if (ready && PANELS[id]) { const el = document.createElement("div"); body.appendChild(el); PANELS[id](el, s); }
+  if (!ready && id === "instagram") body.appendChild(igConnect());
+  else if (!x.free && id !== "instagram") body.appendChild(connectForm(x, s));
+  if (!keepScroll) body.scrollTop = 0; else body.scrollTop = top;
+  $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); document.body.style.overflow = "hidden";
+}
+function igConnect() {
+  const el = document.createElement("div");
+  el.className = "blk";
+  el.innerHTML = `<span class="mono">Connect</span><div class="panel"><p style="margin:0 0 12px;color:#c9c9d8">Sign in with Instagram so iRun can read your insights and post from the Library. This uses iRun's Instagram login for @hoodstar365.</p>
+    <a class="btn vi" href="instagram.html?account=hoodstar365&o=${encodeURIComponent(OWNER())}">Connect @hoodstar365</a></div>`;
+  return el;
+}
+function connectForm(x, s) {
+  const el = document.createElement("div");
+  el.className = "blk";
+  const connected = s.connected;
+  const hints = s.hints || {};
+  const fields = (x.fields || []).map((f) => {
+    const have = hints[f.k];
+    const ph = connected && have ? (f.plain ? have : `Saved (${have}). Leave blank to keep it.`) : (f.ph || "");
+    const val = connected && f.plain && have ? have : "";
+    return `<label class="f" for="f_${f.k}">${esc(f.label)}${f.optional ? `<small>${esc(f.optional)}</small>` : ""}</label>
+      <input id="f_${f.k}" data-k="${f.k}" type="${f.secret ? "password" : "text"}" autocomplete="off" spellcheck="false" placeholder="${esc(ph)}" value="${esc(val)}">`;
+  }).join("");
+  const redirect = x.oauth ? `<label class="f">Redirect URL<small>paste this in ${esc(x.name)}'s settings</small></label>
+    <div class="copyrow"><span class="code">${REDIRECT}</span><button type="button" class="btn ghost sm" data-copy="${REDIRECT}">Copy</button></div>` : "";
+  el.innerHTML = `<span class="mono">${connected ? "Keys" : "Connect in 2 minutes"}</span>
+    <div class="panel">
+      <ol class="steps">${(x.steps || []).map((t) => `<li>${t}</li>`).join("")}</ol>
+      <form autocomplete="off">${redirect}${fields}
+        <div class="btns">
+          <button class="btn vi" type="submit" data-busy="${x.oauth ? "Opening" : "Checking"}">${x.oauth ? `Sign in with ${esc(x.name)}` : connected ? "Save changes" : "Save and test"}</button>
+          ${connected ? `<button class="btn red" type="button" data-dc>Disconnect</button>` : ""}
+        </div>
+        <div class="msg"></div>
+      </form>
+    </div>`;
+  if (connected) { el.querySelector(".panel").hidden = true; const t = document.createElement("button"); t.className = "btn ghost sm"; t.textContent = "Update keys or disconnect"; t.onclick = () => { el.querySelector(".panel").hidden = false; t.remove(); }; el.insertBefore(t, el.querySelector(".panel")); }
+  $$("[data-copy]", el).forEach((b) => b.onclick = () => copy(b.dataset.copy, "Redirect URL copied"));
+  const form = $("form", el), msg = $(".msg", el);
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    const creds = {};
+    $$("input[data-k]", form).forEach((i) => { if (i.value.trim()) creds[i.dataset.k] = i.value.trim(); });
+    busy($("button[type=submit]", form), async () => {
+      msg.className = "msg"; msg.textContent = "";
+      try {
+        if (x.oauth) {
+          const r = await call("oauth_start", { id: x.id, creds });
+          ls.set("irun_connect_return", x.id);
+          location.href = r.url;
+          return;
+        }
+        const r = await call("save", { id: x.id, creds });
+        toast(`${x.name} connected${r.label ? `: ${r.label}` : ""}`, "ok");
+        await refresh();
+      } catch (err) { msg.className = "msg err"; msg.textContent = err.message; throw err; }
+    }).catch(() => {});
+  };
+  const dc = $("[data-dc]", el);
+  if (dc) dc.onclick = () => {
+    if (!confirm(`Disconnect ${x.name}? iRun deletes the saved keys.`)) return;
+    busy(dc, async () => { await call("disconnect", { id: x.id }); toast(`${x.name} disconnected`); await refresh(); }).catch(() => {});
+  };
+  return el;
+}
+function blk(title, html) {
+  const d = document.createElement("div"); d.className = "blk";
+  d.innerHTML = `${title ? `<span class="mono">${title}</span>` : ""}${html}`;
+  return d;
+}
+function toggles(el, id, list) {
+  const s = st(id);
+  const d = blk("Automations", `<div class="panel">${list.map((t) => `<label class="tg"><input type="checkbox" data-t="${t.k}" ${t.on(s) ? "checked" : ""}><span class="sw"></span><span><b>${t.title}</b><span class="d">${t.desc}</span></span></label>`).join("")}</div>`);
+  $$("input[data-t]", d).forEach((i) => i.onchange = async () => {
+    const t = list.find((x) => x.k === i.dataset.t);
+    try { await call("settings", { id, ...t.body(i.checked) }); toast(`${t.title}: ${i.checked ? "on" : "off"}`, "ok"); await refresh(); }
+    catch (e) { i.checked = !i.checked; toast(e.message, "err"); }
+  });
+  el.appendChild(d);
+}
+
+// ------------------------------------------------------------------ panels
+const shareToggles = (id) => [
+  { k: "auto_share", title: "Auto-share new posts", desc: "Every post iRun puts on Instagram @hoodstar365 also goes here, with the video and the post link.", on: (s) => s.auto_share, body: (v) => ({ auto_share: v }) },
+  { k: "lead_alerts", title: "Lead alerts", desc: "A message when someone comments or DMs a keyword, or a Sales Agent prospect writes back. Checked after each autopilot run.", on: (s) => s.lead_alerts, body: (v) => ({ lead_alerts: v }) },
+];
+function senderPanel(id) {
+  return (el) => {
+    const d = blk("Send now", `<div class="panel"><textarea id="sx_text" placeholder="Drop is live. Link in bio."></textarea>
+      <label class="f">Link<small>optional</small></label><input id="sx_link" placeholder="https://hsw365.net">
+      <div class="btns"><button class="btn vi" id="sx_go" data-busy="Sending">Send to ${esc(BY[id].name)}</button></div></div>`);
+    el.appendChild(d);
+    $("#sx_go", d).onclick = (e) => busy(e.currentTarget, async () => {
+      const r = await run(id, "send", { text: $("#sx_text", d).value, link: $("#sx_link", d).value.trim() || undefined });
+      const res = r[id] || Object.values(r)[0];
+      if (res?.error) throw new Error(res.error);
+      toast(`Sent to ${BY[id].name}`, "ok"); $("#sx_text", d).value = "";
+    }).catch(() => {});
+    toggles(el, id, shareToggles(id));
+  };
+}
+
+const PANELS = {
+  discord: senderPanel("discord"), telegram: senderPanel("telegram"), slack: senderPanel("slack"),
+
+  instagram(el) {
+    const d = blk("Last 28 days", `<div class="kpis" id="ig_k"><div class="kpi"><div class="n">...</div><div class="l mono">Loading</div></div></div>`);
+    const p = blk("Recent posts, best first", `<div class="list" id="ig_p"></div>`);
+    el.append(d, p);
+    run("instagram", "overview").then((r) => {
+      const a = r.account || {}, l = r.last28 || {};
+      const k = [["Followers", a.followers], ["Posts", a.posts], ["Reach", l.reach], ["Views", l.views], ["Profile visits", l.profile_views], ["Interactions", l.total_interactions], ["Accounts engaged", l.accounts_engaged], ["Link taps", l.website_clicks]].filter(([, v]) => v != null);
+      $("#ig_k", d).innerHTML = k.map(([n, v]) => `<div class="kpi"><div class="n">${num(v)}</div><div class="l mono">${n}</div></div>`).join("");
+      const posts = (r.posts || []).sort((x, y) => (y.views || y.reach || 0) - (x.views || x.reach || 0));
+      $("#ig_p", p).innerHTML = posts.map((x) => `<div class="it">${x.thumb ? `<img src="${esc(x.thumb)}" alt="" loading="lazy">` : `<span class="ph"></span>`}
+        <div class="t"><b>${esc(x.caption || "(no caption)")}</b><span>${num(x.views)} views · ${num(x.reach)} reach · ${num(x.likes)} likes · ${num(x.saved)} saves · ${num(x.shares)} shares · ${ago(x.at)}</span></div>
+        <div class="a"><a class="btn ghost sm" href="${esc(x.link)}" target="_blank" rel="noopener">Open</a></div></div>`).join("") || `<div class="empty">No posts yet.</div>`;
+    }).catch((e) => { $("#ig_k", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+  },
+
+  canva(el) {
+    const d = blk("Your designs", `<div class="panel"><div class="two"><input id="cv_q" placeholder="Search your designs"><button class="btn ghost" id="cv_s">Search</button></div></div>
+      <div class="thumbs" id="cv_g" style="margin-top:12px"></div><div class="btns"><button class="btn ghost sm" id="cv_more" hidden>Load more</button></div>`);
+    el.appendChild(d);
+    let cont = null;
+    const card = (x) => `<div class="th"><div class="im" style="background-image:url('${esc(x.thumb || "")}')">${x.pages > 1 ? `<span>${x.pages} pages</span>` : ""}</div>
+      <div class="b"><b>${esc(x.title)}</b><small>${ago(x.updated * 1000 || x.updated)}</small>
+      <select data-fmt="${x.id}" aria-label="Format"><option value="jpg">JPG image</option><option value="png">PNG image</option><option value="mp4">MP4 video</option></select>
+      <button class="btn vi sm" data-ex="${x.id}" data-title="${esc(x.title)}" data-busy="Exporting">Bring into iRun</button>
+      ${x.edit ? `<a class="btn ghost sm" href="${esc(x.edit)}" target="_blank" rel="noopener">Edit in Canva</a>` : ""}</div></div>`;
+    const load = async (more) => {
+      if (!more) { $("#cv_g", d).innerHTML = `<div class="empty" style="grid-column:1/-1">Loading designs...</div>`; cont = null; }
+      try {
+        const r = await run("canva", "designs", { query: $("#cv_q", d).value.trim() || undefined, continuation: more ? cont : undefined });
+        cont = r.continuation;
+        const html = r.designs.map(card).join("");
+        if (more) $("#cv_g", d).insertAdjacentHTML("beforeend", html); else $("#cv_g", d).innerHTML = html || `<div class="empty" style="grid-column:1/-1">No designs found.</div>`;
+        $("#cv_more", d).hidden = !cont;
+      } catch (e) { $("#cv_g", d).innerHTML = `<div class="warnbox" style="grid-column:1/-1">${esc(e.message)}</div>`; }
+    };
+    $("#cv_s", d).onclick = () => load(false);
+    $("#cv_q", d).onkeydown = (e) => { if (e.key === "Enter") load(false); };
+    $("#cv_more", d).onclick = () => load(true);
+    d.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-ex]"); if (!b) return;
+      const fmt = $(`[data-fmt="${b.dataset.ex}"]`, d).value;
+      busy(b, async () => {
+        let r = await run("canva", "export", { design: b.dataset.ex, title: b.dataset.title, format: fmt });
+        while (r.pending) { toast("Canva is still rendering. Hang tight."); r = await run("canva", "export_status", r); }
+        toast(`${r.items.length} file${r.items.length > 1 ? "s" : ""} added to your Library`, "ok");
+        await loadLib();
+      }).catch(() => {});
+    });
+    load(false);
+  },
+
+  figma(el) {
+    const d = blk("Export a frame", `<div class="panel"><div class="two"><input id="fg_f" placeholder="Paste a Figma file link"><button class="btn ghost" id="fg_go" data-busy="Reading">Show frames</button></div></div><div class="thumbs" id="fg_g" style="margin-top:12px"></div>`);
+    el.appendChild(d);
+    let file = "";
+    $("#fg_go", d).onclick = (e) => busy(e.currentTarget, async () => {
+      const r = await run("figma", "frames", { file: $("#fg_f", d).value.trim() });
+      file = r.file;
+      $("#fg_g", d).innerHTML = r.frames.map((f) => `<div class="th"><div class="im" style="background-image:url('${esc(f.thumb || "")}')"><span>${esc(f.page)}</span></div>
+        <div class="b"><b>${esc(f.name)}</b><button class="btn vi sm" data-node="${esc(f.id)}" data-name="${esc(f.name)}" data-busy="Exporting">Bring into iRun</button></div></div>`).join("") || `<div class="empty" style="grid-column:1/-1">No frames on the top level of that file.</div>`;
+    }).catch(() => {});
+    d.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-node]"); if (!b) return;
+      busy(b, async () => { await run("figma", "export", { file, node: b.dataset.node, name: b.dataset.name }); toast("Frame added to your Library", "ok"); await loadLib(); }).catch(() => {});
+    });
+  },
+
+  shopify(el, s) {
+    if (s.hints?.token) {
+      const k = blk("Sales, last 30 days", `<div class="kpis" id="sh_k"><div class="kpi"><div class="n">...</div><div class="l mono">Loading</div></div></div>`);
+      el.appendChild(k);
+      run("shopify", "sales", { days: 30 }).then((r) => { $("#sh_k", k).innerHTML = `<div class="kpi"><div class="n">${money(r.revenue, r.currency)}</div><div class="l mono">Revenue</div></div><div class="kpi"><div class="n">${num(r.orders)}</div><div class="l mono">Orders</div></div>`; })
+        .catch((e) => { $("#sh_k", k).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    }
+    const d = blk("Products", `<div class="panel"><input id="sh_q" placeholder="Filter products"></div><div class="list" id="sh_l" style="margin-top:10px"><div class="empty">Loading your catalog...</div></div>`);
+    el.appendChild(d);
+    let all = [];
+    const paint = () => {
+      const q = $("#sh_q", d).value.trim().toLowerCase();
+      $("#sh_l", d).innerHTML = all.filter((p) => !q || p.title.toLowerCase().includes(q)).slice(0, 80).map((p, i) => `<div class="it">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy">` : `<span class="ph"></span>`}
+        <div class="t"><b>${esc(p.title)}</b><span>${p.price ? money(p.price) : ""}${p.available ? "" : " · sold out"}</span></div>
+        <div class="a">${p.image ? `<button class="btn ghost sm" data-imp="${all.indexOf(p)}" data-busy="Adding">Add photo</button>` : ""}
+        <button class="btn vi sm" data-ad="${all.indexOf(p)}" data-busy="Starting">Make ad</button>
+        <button class="btn ghost sm" data-cp="${esc(p.url)}">Copy link</button></div></div>`).join("") || `<div class="empty">No products match.</div>`;
+    };
+    run("shopify", "products").then((r) => { all = r.products; paint(); }).catch((e) => { $("#sh_l", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    $("#sh_q", d).oninput = paint;
+    d.addEventListener("click", (e) => {
+      const imp = e.target.closest("[data-imp]"), ad = e.target.closest("[data-ad]"), cp = e.target.closest("[data-cp]");
+      if (cp) return copy(cp.dataset.cp, "Product link copied");
+      if (imp) { const p = all[imp.dataset.imp]; busy(imp, async () => { await run("shopify", "import", { image: p.image, title: p.title, handle: p.handle, url: p.url, price: p.price }); toast("Photo added to your Library", "ok"); await loadLib(); }).catch(() => {}); }
+      if (ad) { const p = all[ad.dataset.ad]; busy(ad, async () => { const r = await run("shopify", "make_ad", { url: p.url }); toast(r.note, "ok"); }).catch(() => {}); }
+    });
+  },
+
+  stripe(el) {
+    const k = blk("Money", `<div class="kpis" id="sp_k"><div class="kpi"><div class="n">...</div><div class="l mono">Loading</div></div></div>`);
+    const f = blk("Payment link with QR", `<div class="panel"><label class="f">What you're selling</label><input id="sp_n" placeholder="iRun Operator Starter">
+      <div class="two"><div><label class="f">Price (USD)</label><input id="sp_a" type="number" min="0.5" step="0.01" placeholder="15"></div>
+      <div><label class="f">Billing</label><select id="sp_i"><option value="">One time</option><option value="month">Monthly</option><option value="year">Yearly</option></select></div></div>
+      <div class="btns"><button class="btn vi" id="sp_go" data-busy="Creating">Create payment link</button></div><div id="sp_out"></div></div>`);
+    const l = blk("Links made in iRun", `<div class="list" id="sp_l"></div>`);
+    el.append(k, f, l);
+    const paintLinks = (links) => {
+      $("#sp_l", l).innerHTML = (links || []).map((x) => `<div class="it"><span class="ph" style="display:grid;place-items:center;font:800 18px 'Barlow Condensed'">$</span><div class="t"><b>${esc(x.name)}</b><span>${money(x.amount)}${x.interval ? ` / ${x.interval}` : ""} · ${ago(x.at)}</span></div>
+        <div class="a"><button class="btn ghost sm" data-cp="${esc(x.url)}">Copy</button><button class="btn ghost sm" data-qr="${esc(x.url)}" data-name="${esc(x.name)}">QR</button></div></div>`).join("") || `<div class="empty">Links you create here show up in this list.</div>`;
+    };
+    run("stripe", "revenue", { days: 30 }).then((r) => {
+      const ch = r.charges[0];
+      $("#sp_k", k).innerHTML = [
+        ...r.available.map((b) => `<div class="kpi"><div class="n">${money(b.amount, b.currency)}</div><div class="l mono">Available</div></div>`),
+        ...r.pending.map((b) => `<div class="kpi"><div class="n">${money(b.amount, b.currency)}</div><div class="l mono">Pending</div></div>`),
+        `<div class="kpi"><div class="n">${ch ? money(ch.gross, ch.currency) : money(0)}</div><div class="l mono">Paid, 30 days</div></div>`,
+        `<div class="kpi"><div class="n">${ch ? num(ch.count) : 0}</div><div class="l mono">Payments, 30 days</div></div>`].join("");
+    }).catch((e) => { $("#sp_k", k).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    run("stripe", "links").then((r) => paintLinks(r.links)).catch(() => paintLinks([]));
+    const qr = (url, name) => {
+      const box = document.createElement("div"); box.style.marginTop = "14px";
+      box.innerHTML = `<div class="copyrow"><span class="code">${esc(url)}</span><button class="btn ghost sm" data-cp="${esc(url)}">Copy</button></div><div style="display:flex;gap:14px;align-items:center;margin-top:12px"><span class="qr"></span><span class="mono">Scan to pay<br>${esc(name)}</span></div>`;
+      if (window.QRCode) new QRCode($(".qr", box), { text: url, width: 148, height: 148, colorDark: "#0a0a0f", colorLight: "#ffffff" });
+      return box;
+    };
+    $("#sp_go", f).onclick = (e) => busy(e.currentTarget, async () => {
+      const name = $("#sp_n", f).value.trim(), amount = $("#sp_a", f).value;
+      const interval = $("#sp_i", f).value;
+      if (!confirm(`Create a Stripe payment link for ${name || "this item"} at ${money(amount || 0)}${interval ? ` per ${interval}` : ""}? Anyone with the link can pay it.`)) return;
+      const r = await run("stripe", "payment_link", { name, amount, interval });
+      $("#sp_out", f).innerHTML = ""; $("#sp_out", f).appendChild(qr(r.url, name)); paintLinks(r.links); toast("Payment link ready", "ok");
+    }).catch(() => {});
+    el.addEventListener("click", (e) => {
+      const cp = e.target.closest("[data-cp]"), q = e.target.closest("[data-qr]");
+      if (cp) copy(cp.dataset.cp, "Link copied");
+      if (q) { $("#sp_out", f).innerHTML = ""; $("#sp_out", f).appendChild(qr(q.dataset.qr, q.dataset.name)); $("#sp_out", f).scrollIntoView({ behavior: "smooth", block: "center" }); }
+    });
+  },
+
+  hubspot(el, s) {
+    const d = blk("Your CRM", `<div class="kpis" id="hs_k"><div class="kpi"><div class="n">...</div><div class="l mono">Loading</div></div></div>
+      <div class="btns"><button class="btn vi" id="hs_go" data-busy="Syncing">Sync iRun leads now</button></div><div class="msg" id="hs_m"></div>`);
+    el.appendChild(d);
+    const load = () => run("hubspot", "count").then((r) => {
+      $("#hs_k", d).innerHTML = `<div class="kpi"><div class="n">${num(r.contacts)}</div><div class="l mono">Contacts</div></div><div class="kpi"><div class="n">${num(r.synced)}</div><div class="l mono">Sent from iRun</div></div><div class="kpi"><div class="n" style="font-size:20px;line-height:30px">${r.last_sync ? ago(r.last_sync) : "never"}</div><div class="l mono">Last sync</div></div>`;
+    }).catch((e) => { $("#hs_k", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    load();
+    $("#hs_go", d).onclick = (e) => busy(e.currentTarget, async () => {
+      const r = await run("hubspot", "sync");
+      $("#hs_m", d).className = "msg ok"; $("#hs_m", d).textContent = `${r.created} new and ${r.updated} updated contacts (${r.instagram} Instagram leads, ${r.sales} Sales Agent replies).`;
+      load();
+    }).catch(() => {});
+    toggles(el, "hubspot", [{ k: "auto_sync", title: "Sync leads every run", desc: "After each autopilot run, new Instagram leads and Sales Agent replies go to HubSpot.", on: (x) => !!x.meta?.auto_sync, body: (v) => ({ meta: { auto_sync: v } }) }]);
+  },
+
+  calendly(el) {
+    const d = blk("Booking", `<div class="panel" id="cl_p">Loading...</div>`);
+    const ev = blk("Upcoming calls", `<div class="list" id="cl_e"></div>`);
+    el.append(d, ev);
+    run("calendly", "events").then((r) => {
+      $("#cl_p", d).innerHTML = r.link ? `<div class="copyrow"><span class="code">${esc(r.link)}</span><button class="btn ghost sm" data-cp="${esc(r.link)}">Copy</button></div>` : "No booking link on this account.";
+      $("#cl_e", ev).innerHTML = r.events.map((x) => `<div class="it"><span class="ph" style="display:grid;place-items:center;font:800 16px 'Barlow Condensed'">${new Date(x.start).getDate()}</span><div class="t"><b>${esc(x.name)}</b><span>${when(x.start)}${x.where ? ` · ${esc(String(x.where).replace(/^https?:\/\//, "").slice(0, 40))}` : ""}</span></div><div class="a">${/^https:/.test(x.where || "") ? `<a class="btn ghost sm" href="${esc(x.where)}" target="_blank" rel="noopener">Join</a>` : ""}</div></div>`).join("") || `<div class="empty">No calls booked yet.</div>`;
+    }).catch((e) => { $("#cl_p", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    d.addEventListener("click", (e) => { const cp = e.target.closest("[data-cp]"); if (cp) copy(cp.dataset.cp, "Booking link copied"); });
+    toggles(el, "calendly", [{ k: "use_in_sales", title: "Add my booking link to Sales Agent emails", desc: "Prospects get a 'book a time' line above your signature, so they can grab a call instead of replying.", on: (x) => !!x.meta?.use_in_sales, body: (v) => ({ meta: { use_in_sales: v } }) }]);
+  },
+
+  zoom(el) {
+    const d = blk("New meeting", `<div class="panel"><label class="f">Topic</label><input id="zm_t" placeholder="HSW365 strategy call">
+      <div class="two"><div><label class="f">Start<small>blank = right now</small></label><input id="zm_s" type="datetime-local"></div><div><label class="f">Minutes</label><input id="zm_m" type="number" value="30" min="15" max="240"></div></div>
+      <div class="btns"><button class="btn vi" id="zm_go" data-busy="Creating">Create Zoom link</button></div><div id="zm_o"></div></div>`);
+    const up = blk("Upcoming", `<div class="list" id="zm_l"></div>`);
+    el.append(d, up);
+    const list = () => run("zoom", "meetings").then((r) => { $("#zm_l", up).innerHTML = r.meetings.map((m) => `<div class="it"><span class="ph"></span><div class="t"><b>${esc(m.topic)}</b><span>${m.start ? when(m.start) : "Instant"}</span></div><div class="a"><button class="btn ghost sm" data-cp="${esc(m.join)}">Copy link</button></div></div>`).join("") || `<div class="empty">Nothing scheduled.</div>`; })
+      .catch((e) => { $("#zm_l", up).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    list();
+    $("#zm_go", d).onclick = (e) => busy(e.currentTarget, async () => {
+      const s = $("#zm_s", d).value;
+      const r = await run("zoom", "meeting", { topic: $("#zm_t", d).value.trim(), start: s ? new Date(s).toISOString() : undefined, minutes: $("#zm_m", d).value });
+      $("#zm_o", d).innerHTML = `<div style="margin-top:14px" class="copyrow"><span class="code">${esc(r.join)}</span><button class="btn ghost sm" data-cp="${esc(r.join)}">Copy</button></div>${r.passcode ? `<div class="msg">Passcode ${esc(r.passcode)}</div>` : ""}`;
+      toast("Zoom link ready", "ok"); list();
+    }).catch(() => {});
+    el.addEventListener("click", (e) => { const cp = e.target.closest("[data-cp]"); if (cp) copy(cp.dataset.cp, "Zoom link copied"); });
+  },
+
+  leads(el) {
+    const kinds = ["plumber", "hvac", "electrician", "roofer", "contractor", "landscaper", "painter", "auto repair", "car wash", "restaurant", "cafe", "bakery", "food truck", "barber", "salon", "beauty", "nails", "spa", "gym", "dentist", "chiropractor", "lawyer", "real estate", "insurance", "accountant", "church", "boutique", "tattoo", "florist", "photographer", "daycare", "cleaning", "music studio", "hotel", "bar"];
+    const d = blk("Find businesses", `<div class="panel"><div class="three">
+      <div><label class="f">Business type</label><input id="ld_w" list="ld_k" placeholder="plumber"><datalist id="ld_k">${kinds.map((k) => `<option value="${k}">`).join("")}</datalist></div>
+      <div><label class="f">City or ZIP</label><input id="ld_c" placeholder="Vineland NJ"></div>
+      <div><label class="f">Miles</label><input id="ld_m" type="number" value="15" min="1" max="40"></div></div>
+      <div class="btns"><button class="btn vi" id="ld_go" data-busy="Searching">Find leads</button></div><div class="msg" id="ld_msg"></div></div>`);
+    const r = blk("", `<div id="ld_r"></div>`);
+    el.append(d, r);
+    let rows = [], what = "";
+    $("#ld_go", d).onclick = (e) => busy(e.currentTarget, async () => {
+      const out = await run("leads", "search", { what: $("#ld_w", d).value.trim(), where: $("#ld_c", d).value.trim(), miles: $("#ld_m", d).value });
+      rows = out.leads; what = out.what;
+      const em = rows.filter((x) => x.email).length, web = rows.filter((x) => x.website).length;
+      $("#ld_msg", d).className = "msg ok"; $("#ld_msg", d).textContent = `${out.count} found near ${out.center.label.split(",").slice(0, 2).join(",")}. ${em} with email, ${web} with a website.`;
+      $("#ld_r", r).innerHTML = rows.length ? `<div class="btns" style="margin:0 0 10px"><button class="btn vi sm" id="ld_s" data-busy="Adding">Send to Sales Agent</button>${st("hubspot").connected ? `<button class="btn ghost sm" id="ld_h" data-busy="Sending">Send to HubSpot</button>` : ""}<button class="btn ghost sm" id="ld_csv">Download CSV</button><label class="chip" style="margin-left:auto;cursor:pointer"><input type="checkbox" id="ld_all" checked hidden>Select all</label></div>
+        <div class="tw"><table class="tbl"><thead><tr><th></th><th>Business</th><th>Contact</th><th>Mi</th></tr></thead><tbody>${rows.map((x, i) => `<tr><td><input type="checkbox" data-i="${i}" checked style="width:auto"></td>
+        <td><b>${esc(x.name)}</b><br><span style="color:var(--mut)">${esc([x.address, x.city].filter(Boolean).join(", "))}</span></td>
+        <td>${x.email ? `<a href="mailto:${esc(x.email)}">${esc(x.email)}</a><br>` : ""}${x.phone ? `${esc(x.phone)}<br>` : ""}${x.website ? `<a href="${esc(x.website)}" target="_blank" rel="noopener">${esc(x.website.replace(/^https?:\/\/(www\.)?/, "").slice(0, 32))}</a>` : ""}${!x.email && !x.phone && !x.website ? `<span style="color:var(--dim)">no contact listed</span>` : ""}</td>
+        <td>${x.miles ?? ""}</td></tr>`).join("")}</tbody></table></div>` : `<div class="empty">No matches there. Try a nearby city or a wider radius.</div>`;
+    }).catch(() => {});
+    const picked = () => $$("input[data-i]", r).filter((i) => i.checked).map((i) => rows[i.dataset.i]);
+    r.addEventListener("click", (e) => {
+      if (e.target.id === "ld_all") { $$("input[data-i]", r).forEach((i) => i.checked = e.target.checked); }
+      if (e.target.closest("#ld_s")) busy(e.target.closest("#ld_s"), async () => {
+        const o = await run("leads", "to_sales", { rows: picked(), what });
+        toast(`${o.added} added to the Sales Agent as drafts${o.skipped ? `, ${o.skipped} already there` : ""}. Approve them in the Sales Agent to send.`, "ok");
+      }).catch(() => {});
+      if (e.target.closest("#ld_h")) busy(e.target.closest("#ld_h"), async () => { const o = await run("hubspot", "add", { rows: picked() }); toast(`HubSpot: ${o.created} new, ${o.updated} updated`, "ok"); }).catch(() => {});
+      if (e.target.closest("#ld_csv")) {
+        const cols = ["name", "email", "phone", "website", "address", "city", "state", "instagram", "facebook", "miles"];
+        const csv = [cols.join(","), ...picked().map((x) => cols.map((c) => `"${String(x[c] ?? "").replace(/"/g, '""')}"`).join(","))].join("\n");
+        const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = `irun-leads-${what.replace(/\W+/g, "-")}.csv`; a.click();
+      }
+    });
+  },
+
+  spotify(el, s) {
+    const d = blk("Artist", `<div class="panel"><div class="two"><input id="sf_q" value="${esc(s.meta?.artist || "HOODSTAR365")}" placeholder="Artist name"><button class="btn ghost" id="sf_go" data-busy="Searching">Find</button></div><div id="sf_a" style="margin-top:12px"></div></div>`);
+    const m = blk("", `<div id="sf_m"></div>`);
+    el.append(d, m);
+    const music = (a) => busy(document.createElement("button"), async () => {
+      $("#sf_m", m).innerHTML = `<div class="empty">Loading music...</div>`;
+      const r = await run("spotify", "music", { artist: a.id, save_artist: a.name });
+      const row = (x, sub) => `<div class="th"><div class="im" style="background-image:url('${esc(x.image || "")}');aspect-ratio:1"></div><div class="b"><b>${esc(x.name)}</b><small>${esc(sub)}</small>
+        ${x.image ? `<button class="btn vi sm" data-img="${esc(x.image)}" data-t="${esc(x.name)}" data-ref="${esc(x.id)}" data-link="${esc(x.link || "")}" data-busy="Adding">Add cover</button>` : ""}
+        <button class="btn ghost sm" data-cp="${esc(x.link || "")}">Copy link</button></div></div>`;
+      $("#sf_m", m).innerHTML = `<div class="blk"><span class="mono">Top tracks</span><div class="thumbs">${r.tracks.map((x) => row(x, `${x.album || ""}${x.popularity != null ? ` · popularity ${x.popularity}` : ""}`)).join("") || `<div class="empty" style="grid-column:1/-1">No top tracks.</div>`}</div></div>
+        <div class="blk"><span class="mono">Releases</span><div class="thumbs">${r.releases.map((x) => row(x, `${x.type} · ${x.released || ""}`)).join("") || `<div class="empty" style="grid-column:1/-1">No releases.</div>`}</div></div>`;
+    }).catch(() => {});
+    const find = () => busy($("#sf_go", d), async () => {
+      const r = await run("spotify", "artist", { q: $("#sf_q", d).value.trim() });
+      $("#sf_a", d).innerHTML = `<div class="list">${r.artists.map((a, i) => `<div class="it">${a.image ? `<img src="${esc(a.image)}" alt="${esc(a.name)}">` : `<span class="ph"></span>`}<div class="t"><b>${esc(a.name)}</b><span>${a.followers != null ? `${num(a.followers)} followers` : ""}${a.popularity != null ? ` · popularity ${a.popularity}` : ""}</span></div><div class="a"><button class="btn ghost sm" data-ar="${i}">Open</button></div></div>`).join("") || `<div class="empty">No artist found.</div>`}</div>`;
+      $$("[data-ar]", d).forEach((b) => b.onclick = () => music(r.artists[b.dataset.ar]));
+      if (r.artists[0] && r.artists[0].name.toLowerCase() === $("#sf_q", d).value.trim().toLowerCase()) music(r.artists[0]);
+    }).catch(() => {});
+    $("#sf_go", d).onclick = find;
+    m.addEventListener("click", (e) => {
+      const cp = e.target.closest("[data-cp]"), im = e.target.closest("[data-img]");
+      if (cp && cp.dataset.cp) copy(cp.dataset.cp, "Spotify link copied");
+      if (im) busy(im, async () => { await run("spotify", "import", { image: im.dataset.img, title: im.dataset.t, ref: im.dataset.ref, link: im.dataset.link }); toast("Cover added to your Library", "ok"); await loadLib(); }).catch(() => {});
+    });
+    find();
+  },
+
+  github(el, s) {
+    const hasToken = !!s.hints?.token;
+    if (hasToken) {
+      const ap = blk("Run the autopilot", `<div class="panel">
+        <label class="f">What to run</label><select id="gh_w">
+          <option value="daily.yml">Daily app promo ad (next app in rotation)</option>
+          <option value="irun.yml">Faceless video from an idea</option>
+          <option value="showcase.yml">Showcase ads for chosen apps</option>
+          <option value="sales.yml">Sales autopilot</option>
+        </select>
+        <div id="gh_in"></div>
+        <div class="btns"><button class="btn vi" id="gh_go" data-busy="Starting">Run it</button></div></div>`);
+      const runs = blk("Recent runs", `<div class="list" id="gh_r"></div>`);
+      el.append(ap, runs);
+      const forms = {
+        "daily.yml": `<div class="two"><div><label class="f">App<small>blank = next in line</small></label><input data-in="app" placeholder="calltwin"></div><div><label class="f">Mode</label><select data-in="mode"><option value="draft">Draft, render only</option><option value="live">Live, post to Instagram</option></select></div></div>`,
+        "irun.yml": `<label class="f">Idea</label><input data-in="idea" placeholder="Why discipline beats motivation"><div class="two"><div><label class="f">Look</label><select data-in="style">${["cinematic", "noir", "anime", "comic", "3d", "dark-fantasy", "cyberpunk", "photoreal", "minimal"].map((x) => `<option>${x}</option>`).join("")}</select></div><div><label class="f">Mode</label><select data-in="mode"><option value="draft">Draft, render only</option><option value="live">Live, post it</option></select></div></div><input type="hidden" data-in="kind" value="faceless"><input type="hidden" data-in="platform" value="instagram"><input type="hidden" data-in="account" value="hoodstar365">`,
+        "showcase.yml": `<label class="f">App ids<small>space separated, blank = the usual list</small></label><input data-in="apps" placeholder="calltwin queenee klipit">`,
+        "sales.yml": `<label class="f">Task</label><select data-in="task"><option value="auto">Auto</option><option value="replies">Answer replies</option><option value="followups">Send follow-ups</option><option value="summary">Summary</option></select>`,
+      };
+      const paintForm = () => { $("#gh_in", ap).innerHTML = forms[$("#gh_w", ap).value]; };
+      $("#gh_w", ap).onchange = paintForm; paintForm();
+      const loadRuns = () => run("github", "runs").then((r) => { $("#gh_r", runs).innerHTML = r.runs.map((x) => `<div class="it"><span class="ph" style="display:grid;place-items:center"><span class="pill ${x.result === "success" ? "ok" : x.result === "failure" ? "bad" : "cy"}" style="font-size:10px">${esc(x.result || x.status)}</span></span><div class="t"><b>${esc(x.name)}</b><span>${ago(x.at)} · ${esc(x.event)}</span></div><div class="a"><a class="btn ghost sm" href="${esc(x.link)}" target="_blank" rel="noopener">View</a></div></div>`).join(""); })
+        .catch((e) => { $("#gh_r", runs).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+      loadRuns();
+      $("#gh_go", ap).onclick = (e) => busy(e.currentTarget, async () => {
+        const inputs = {}; $$("[data-in]", ap).forEach((i) => { inputs[i.dataset.in] = i.value.trim(); });
+        if (inputs.mode === "live" && !confirm("Live mode posts to Instagram @hoodstar365 when it finishes. Run it?")) return;
+        await run("github", "dispatch", { workflow: $("#gh_w", ap).value, inputs });
+        toast("Started. It shows in Recent runs in a few seconds.", "ok"); setTimeout(loadRuns, 5000);
+      }).catch(() => {});
+    }
+    const d = blk("Your apps", `<div class="list" id="gh_l"><div class="empty">Loading repositories...</div></div>`);
+    el.appendChild(d);
+    run("github", "repos").then((r) => {
+      $("#gh_l", d).innerHTML = r.repos.map((x) => `<div class="it"><span class="ph" style="display:grid;place-items:center;font:800 18px 'Barlow Condensed';text-transform:uppercase">${esc(x.name.slice(0, 2))}</span>
+        <div class="t"><b>${esc(x.name)} ${x.in_irun ? `<span class="pill ok">Promoted by iRun</span>` : ""}${x.private ? ` <span class="pill">Private</span>` : ""}</b><span>${esc(x.description || "")}${x.description ? " · " : ""}updated ${ago(x.pushed)}</span></div>
+        <div class="a">${x.live ? `<a class="btn ghost sm" href="${esc(x.live)}" target="_blank" rel="noopener">Live</a>` : ""}<a class="btn ghost sm" href="${esc(x.link)}" target="_blank" rel="noopener">Code</a></div></div>`).join("") || `<div class="empty">No repositories.</div>`;
+    }).catch((e) => { $("#gh_l", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+  },
+
+  render(el) {
+    const d = blk("Services", `<div class="list" id="rd_l"><div class="empty">Loading services...</div></div>`);
+    el.appendChild(d);
+    const load = () => run("render", "services").then((r) => {
+      $("#rd_l", d).innerHTML = r.services.map((x) => `<div class="it"><span class="ph" style="display:grid;place-items:center"><span class="pill ${x.suspended === "suspended" ? "bad" : x.deploy?.status === "live" ? "ok" : "cy"}" style="font-size:10px">${esc(x.suspended === "suspended" ? "paused" : x.deploy?.status || "ready")}</span></span>
+        <div class="t"><b>${esc(x.name)}</b><span>${esc(x.type)}${x.deploy?.at ? ` · deployed ${ago(x.deploy.at)}` : ""}</span></div>
+        <div class="a">${x.url ? `<a class="btn ghost sm" href="${esc(x.url)}" target="_blank" rel="noopener">Open</a>` : ""}<button class="btn vi sm" data-dep="${esc(x.id)}" data-n="${esc(x.name)}" data-busy="Deploying">Deploy</button></div></div>`).join("") || `<div class="empty">No services on this account.</div>`;
+    }).catch((e) => { $("#rd_l", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+    load();
+    d.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-dep]"); if (!b) return;
+      if (!confirm(`Redeploy ${b.dataset.n} from its latest code?`)) return;
+      busy(b, async () => { const r = await run("render", "deploy", { service: b.dataset.dep }); toast(`${b.dataset.n}: deploy ${r.status || "started"}`, "ok"); setTimeout(load, 4000); }).catch(() => {});
+    });
+  },
+
+  gdrive(el) {
+    const d = blk("Saved by iRun", `<div class="list" id="gd_l"><div class="empty">Loading...</div></div><p class="msg">Use Save to Drive on anything in your Library below.</p>`);
+    el.appendChild(d);
+    run("gdrive", "files").then((r) => {
+      $("#gd_l", d).innerHTML = r.files.map((f) => `<div class="it">${f.thumbnailLink ? `<img src="${esc(f.thumbnailLink)}" alt="" referrerpolicy="no-referrer">` : `<span class="ph"></span>`}<div class="t"><b>${esc(f.name)}</b><span>${ago(f.createdTime)}</span></div><div class="a"><a class="btn ghost sm" href="${esc(f.webViewLink)}" target="_blank" rel="noopener">Open</a></div></div>`).join("") || `<div class="empty">Nothing saved yet. Your files go to an iRun folder in Drive.</div>`;
+    }).catch((e) => { $("#gd_l", d).innerHTML = `<div class="warnbox">${esc(e.message)}</div>`; });
+  },
+
+  domains(el) {
+    const d = blk("Check names", `<div class="panel"><label class="f">Business names or domains<small>comma separated</small></label><input id="dm_q" placeholder="arkplumbing, pinkshampu.com">
+      <div class="btns"><button class="btn vi" id="dm_go" data-busy="Checking">Check</button></div></div><div class="list" id="dm_r" style="margin-top:12px"></div>`);
+    el.appendChild(d);
+    const go = (e) => busy(e?.currentTarget || $("#dm_go", d), async () => {
+      const r = await run("domains", "check", { names: $("#dm_q", d).value });
+      $("#dm_r", d).innerHTML = r.results.map((x) => `<div class="it"><span class="ph" style="display:grid;place-items:center">${x.available ? `<span class="pill ok">Free</span>` : x.available === false ? `<span class="pill bad">Taken</span>` : `<span class="pill">?</span>`}</span>
+        <div class="t"><b>${esc(x.domain)}</b><span>${x.available ? "Available to register" : x.available === false ? (x.expires ? `Registered until ${new Date(x.expires).toLocaleDateString()}` : "Registered") : esc(x.note || "Couldn't check")}</span></div><div class="a"></div></div>`).join("");
+    }).catch(() => {});
+    $("#dm_go", d).onclick = go;
+    $("#dm_q", d).onkeydown = (e) => { if (e.key === "Enter") go(); };
+  },
+};
+
+// ------------------------------------------------------------------ library
+async function loadLib() {
+  if (!OWNER()) return;
+  try {
+    const r = await call("library", { limit: 60 });
+    S.lib = r.items; S.recent = r.recent || [];
+    $("#stLib").textContent = S.lib.length;
+  } catch { /* gate handles 401 */ }
+  paintLib();
+}
+const sharers = () => ["discord", "telegram", "slack"].filter((id) => st(id).connected);
+function libCard(x, recent = false) {
+  const kind = recent ? "video" : x.kind, url = recent ? x.video_url : x.url;
+  const title = recent ? (x.hook || (x.caption || "").split("\n")[0] || "iRun video") : x.title;
+  const posted = !recent && (x.posted || []).some((p) => p.to === "instagram");
+  const media = kind === "video" ? `<video src="${esc(url)}" muted playsinline preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>` : `<img src="${esc(url)}" alt="${esc(title)}" loading="lazy">`;
+  const key = recent ? `r${x.id}` : `l${x.id}`;
+  return `<article class="li"><div class="m">${media}<span class="src">${esc(recent ? `${x.platform} · ${x.status}` : x.source)}</span>${posted ? `<span class="done">POSTED</span>` : ""}</div>
+    <div class="b"><b>${esc(title)}</b><div class="acts">
+      ${recent ? "" : `<button class="btn vi full" data-act="ig" data-key="${key}">Post to Instagram</button>`}
+      ${sharers().length ? `<button class="btn ghost" data-act="share" data-key="${key}">Share</button>` : ""}
+      ${st("gdrive").connected ? `<button class="btn ghost" data-act="drive" data-key="${key}" data-busy="Saving">Drive</button>` : ""}
+      ${!recent && kind === "image" && st("canva").connected ? `<button class="btn ghost" data-act="canva" data-key="${key}" data-busy="Sending">Canva</button>` : ""}
+      <a class="btn ghost" href="${esc(url)}" download target="_blank" rel="noopener">Download</a>
+      ${recent ? "" : `<button class="btn ghost" data-act="del" data-key="${key}">Remove</button>`}
+    </div></div></article>`;
+}
+function paintLib() {
+  $("#lib").innerHTML = S.lib.map((x) => libCard(x)).join("") || (OWNER() ? `<div class="empty" style="grid-column:1/-1">Bring in a Canva design, a Figma frame, a Spotify cover or a product photo, or upload a file above.</div>` : "");
+  $("#recent").innerHTML = S.recent.map((x) => libCard(x, true)).join("");
+  $("#recentWrap").hidden = !S.recent.length || !(sharers().length || st("gdrive").connected);
+}
+const itemOf = (key) => key[0] === "r" ? { recent: true, ...S.recent.find((x) => `r${x.id}` === key) } : S.lib.find((x) => `l${x.id}` === key);
+const itemUrl = (it) => it.recent ? it.video_url : it.url;
+const itemKind = (it) => it.recent ? "video" : it.kind;
+const itemTitle = (it) => it.recent ? (it.hook || "iRun video") : it.title;
+
+function modal(html) { $("#mbox").innerHTML = html; $("#modal").classList.add("on"); return $("#mbox"); }
+function closeModal() { $("#modal").classList.remove("on"); }
+$("#modal").addEventListener("click", (e) => { if (e.target.id === "modal" || e.target.closest("[data-close]")) closeModal(); });
+
+async function toJpegUrl(it) {
+  const res = await fetch(itemUrl(it));
+  const blob = await res.blob();
+  const bmp = await createImageBitmap(blob);
+  const c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
+  const g = c.getContext("2d"); g.fillStyle = "#000"; g.fillRect(0, 0, c.width, c.height); g.drawImage(bmp, 0, 0);
+  const jpg = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.92));
+  const u = await call("upload_url", { name: itemTitle(it) + ".jpg", type: "image/jpeg" });
+  const fd = new FormData(); fd.append("cacheControl", "3600"); fd.append("", jpg);
+  const up = await fetch(u.upload, { method: "PUT", body: fd });
+  if (!up.ok) throw new Error("Couldn't convert the image for Instagram.");
+  return u.url;
+}
+function igModal(it) {
+  const url = itemUrl(it), kind = itemKind(it);
+  const box = modal(`<h3>Post to Instagram</h3><p class="mono">@hoodstar365 · ${kind === "video" ? "Reel" : "Feed post"}</p>
+    <div class="prev">${kind === "video" ? `<video src="${esc(url)}" muted></video>` : `<img src="${esc(url)}" alt="">`}<span style="color:var(--mut);font-size:13.5px">${esc(itemTitle(it))}</span></div>
+    <label class="f">Caption</label><textarea id="ig_cap" style="min-height:150px">${esc(it.meta?.link ? `${itemTitle(it)}\n\nStream it now: ${it.meta.link}` : it.meta?.product_url ? `${itemTitle(it)}\n\nShop now: ${it.meta.product_url}` : "")}</textarea>
+    ${sharers().length ? `<p class="msg">Channels with Auto-share on get it too.</p>` : ""}
+    <div class="btns"><button class="btn vi" id="ig_go" data-busy="Posting">Post now</button><button class="btn ghost" data-close>Cancel</button></div><div class="msg" id="ig_m"></div>`);
+  $("#ig_go", box).onclick = (e) => busy(e.currentTarget, async () => {
+    const caption = $("#ig_cap", box).value;
+    const m = $("#ig_m", box);
+    let target = url;
+    let r;
+    try { r = await call("ig_publish", { url: target, kind, caption, lib: it.id }); }
+    catch (err) {
+      if (err.status !== 415) throw err;
+      m.textContent = "Converting to JPEG for Instagram...";
+      target = await toJpegUrl(it);
+      r = await call("ig_publish", { url: target, kind, caption, lib: it.id });
+    }
+    while (r.pending) { m.textContent = "Instagram is still processing the video..."; r = await call("ig_finish", { container: r.container, url: target, kind, caption, lib: it.id }); }
+    m.className = "msg ok"; m.innerHTML = `Posted. ${r.permalink ? `<a href="${esc(r.permalink)}" target="_blank" rel="noopener" style="color:var(--cy)">Open the post</a>` : ""}`;
+    toast("Posted to Instagram", "ok"); await loadLib();
+  }).catch((err) => { $("#ig_m", box).className = "msg err"; $("#ig_m", box).textContent = err.message; });
+}
+function shareModal(it) {
+  const list = sharers();
+  const box = modal(`<h3>Share</h3><p class="mono">${esc(itemTitle(it))}</p>
+    <div class="chips" style="margin:14px 0 4px;flex-wrap:wrap">${list.map((id) => `<label class="chip on" style="cursor:pointer"><input type="checkbox" data-to="${id}" checked hidden>${esc(BY[id].name)}</label>`).join("")}</div>
+    <label class="f">Message</label><textarea id="sh_t">${esc(it.recent ? (it.caption || "") : itemTitle(it))}</textarea>
+    <label class="f">Link<small>optional</small></label><input id="sh_l" value="${esc(it.meta?.link || it.meta?.product_url || "")}">
+    <div class="btns"><button class="btn vi" id="sh_go" data-busy="Sending">Send</button><button class="btn ghost" data-close>Cancel</button></div>`);
+  $$("[data-to]", box).forEach((i) => i.parentElement.onclick = (e) => { e.preventDefault(); i.checked = !i.checked; i.parentElement.classList.toggle("on", i.checked); });
+  $("#sh_go", box).onclick = (e) => busy(e.currentTarget, async () => {
+    const to = $$("[data-to]", box).filter((i) => i.checked).map((i) => i.dataset.to);
+    if (!to.length) throw new Error("Pick at least one channel.");
+    const r = await call("share", { text: $("#sh_t", box).value || itemTitle(it), url: itemUrl(it), kind: itemKind(it), link: $("#sh_l", box).value.trim() || undefined, to });
+    const bad = Object.entries(r.shared).filter(([, v]) => v?.error);
+    if (bad.length) throw new Error(bad.map(([k, v]) => `${BY[k].name}: ${v.error}`).join(" "));
+    toast(`Shared to ${to.map((x) => BY[x].name).join(", ")}`, "ok"); closeModal();
+  }).catch(() => {});
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const it = itemOf(b.dataset.key); if (!it) return;
+  const act = b.dataset.act;
+  if (act === "ig") igModal(it);
+  if (act === "share") shareModal(it);
+  if (act === "drive") busy(b, async () => { const r = await run("gdrive", "save", { url: itemUrl(it), name: itemTitle(it), lib: it.recent ? undefined : it.id }); toast(`Saved to Drive: ${r.name}`, "ok"); }).catch(() => {});
+  if (act === "canva") busy(b, async () => { const r = await run("canva", "send_to_canva", { url: itemUrl(it), title: itemTitle(it), kind: itemKind(it) }); toast("Opened as a new Canva design", "ok"); if (r.edit) window.open(r.edit, "_blank", "noopener"); }).catch(() => {});
+  if (act === "del") { if (!confirm("Remove this from your Library? The original stays wherever it came from.")) return; busy(b, async () => { await call("library_del", { lib: it.id }); await loadLib(); }).catch(() => {}); }
+});
+
+async function upload(files) {
+  for (const f of files) {
+    if (!/^(image\/(jpeg|png|webp)|video\/mp4)$/.test(f.type)) { toast(`${f.name}: use JPG, PNG, WebP or MP4.`, "err"); continue; }
+    if (f.size > 100 * 1024 * 1024) { toast(`${f.name} is over 100 MB.`, "err"); continue; }
+    try {
+      toast(`Uploading ${f.name}...`);
+      const u = await call("upload_url", { name: f.name, type: f.type });
+      const fd = new FormData(); fd.append("cacheControl", "3600"); fd.append("", f);
+      const r = await fetch(u.upload, { method: "PUT", body: fd });
+      if (!r.ok) throw new Error("Upload failed. Try again.");
+      await call("library_add", { url: u.url, kind: f.type.startsWith("video") ? "video" : "image", title: f.name.replace(/\.[^.]+$/, ""), source: "upload" });
+      toast(`${f.name} added`, "ok");
+    } catch (e) { toast(e.message, "err"); }
+  }
+  loadLib();
+}
+
+// ------------------------------------------------------------------ boot
+$("#chips").addEventListener("click", (e) => { const c = e.target.closest(".chip"); if (!c) return; S.filter = c.dataset.k; renderChips(); renderGrid(); });
+$("#q").addEventListener("input", (e) => { S.q = e.target.value; renderGrid(); });
+$("#grid").addEventListener("click", (e) => { const c = e.target.closest(".card"); if (c) openDrawer(c.dataset.id); });
+$("#scrim").addEventListener("click", closeDrawer);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { if ($("#modal").classList.contains("on")) closeModal(); else closeDrawer(); } });
+$("#gateForm").addEventListener("submit", (e) => { e.preventDefault(); const k = $("#gateKey").value.trim(); if (!k) return; ls.set("irun_owner", k); $("#gateKey").value = ""; boot(); });
+$("#upFile").addEventListener("change", (e) => { if (!OWNER()) return showGate(true); upload([...e.target.files]); e.target.value = ""; });
+const drop = $("#drop");
+["dragenter", "dragover"].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add("on"); }));
+["dragleave", "drop"].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove("on"); }));
+drop.addEventListener("drop", (e) => { if (!OWNER()) return showGate(true); upload([...e.dataTransfer.files]); });
+
+async function boot() {
+  renderChips();
+  const p = new URLSearchParams(location.search);
+  if (p.get("code") && p.get("state") && OWNER()) {
+    history.replaceState(null, "", location.pathname);
+    try { const r = await call("oauth_finish", { code: p.get("code"), state: p.get("state") }); toast(`${BY[r.id]?.name || r.id} connected: ${r.label}`, "ok"); S.open = r.id; }
+    catch (e) { toast(e.message, "err"); S.open = ls.get("irun_connect_return") || null; }
+    ls.del("irun_connect_return");
+  } else if (p.get("error")) {
+    history.replaceState(null, "", location.pathname);
+    toast(`Sign-in was cancelled${p.get("error_description") ? `: ${p.get("error_description")}` : ""}.`, "err");
+  }
+  await refresh();
+  await loadLib();
+  const open = p.get("open"); if (open && BY[open]) openDrawer(open);
+}
+boot();
+})();
+</script>
+</body>
+</html>

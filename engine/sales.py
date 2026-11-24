@@ -227,9 +227,24 @@ def price_table():
             f'{rows}</table>')
 
 
+_BOOKING = None
+
+
+def booking_line():
+    """Calendly link from iRun Connect, only when "Add my booking link to Sales Agent emails" is on."""
+    global _BOOKING
+    if _BOOKING is None:
+        try:
+            import integrations
+            _BOOKING = integrations.booking_link()
+        except Exception:
+            _BOOKING = ""
+    return f'<p>Rather talk it through? <a href="{html.escape(_BOOKING)}">Book a time that works for you</a>.</p>' if _BOOKING else ""
+
+
 def wrap(inner):
     return ('<div style="font-family:Helvetica,Arial,sans-serif;max-width:600px;color:#111;font-size:15px;line-height:1.55">'
-            f'{inner}<p>Elvin Torres Sr.<br>Founder, HSW365 Media LLC &middot; Veteran-owned<br>'
+            f'{inner}{booking_line()}<p>Elvin Torres Sr.<br>Founder, HSW365 Media LLC &middot; Veteran-owned<br>'
             f'<a href="{LINKS["store"]}">hsw365.net</a></p>'
             f'<p style="font-size:12px;color:#888;border-top:1px solid #eee;padding-top:10px">HSW365 Media LLC, {html.escape(ADDRESS)}. '
             'Not interested? Reply "unsubscribe" and you won\'t hear from me again.</p></div>')
