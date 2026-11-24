@@ -1,17 +1,15 @@
-[narrator:kokoro] vo1.wav  Three a.m. Your stream just had its best moment.
-[narrator:kokoro] vo2.wav  And it's buried in hour three.
-[narrator:kokoro] vo3.wav  Stop scrubbing. Paste the link.
-[narrator:kokoro] vo4.wav  Klipit finds every highlight. Vertical. Ready to post.
-[narrator:kokoro] vo5.wav  Scan. Sign up. Clip the night.
-[hoodstar365/instagram] posted 17913647817310963
-[shots] livingroom: pollinations
-[shots] gasp: pollinations
-[shots] chaos: pollinations
-[shots] slump: pollinations
-[shots] timeline: pollinations
-[shots] friend: pollinations
-[shots] paste: pollinations
-[shots] stream: pollinations
+[0;93m2026-11-24 14:38:44.274619300 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[narrator:kokoro] vo1.wav  A silent phone. A website nobody trusts.
+[narrator:kokoro] vo2.wav  Zero calls this week.
+[narrator:kokoro] vo3.wav  HSW365 Elite builds a premium website for your business.
+[narrator:kokoro] vo4.wav  Make the phone ring.
+[narrator:kokoro] vo5.wav  Scan to start your Elite build.
+[hoodstar365/instagram] posted 18019298906753002
 [shots] phone: pollinations
-[shots] win: pollinations
-{"video": "/home/runner/work/iRUN/iRUN/engine/../out/klipit-miami-ad.mp4", "seconds": 19.9}
+[shots] owner: pollinations
+[shots] street: pollinations
+[shots] build: pollinations
+[shots] launch: pollinations
+[shots] ring: pollinations
+[shots] hero: pollinations
+{"video": "/home/runner/work/iRUN/iRUN/engine/../out/elite-noir-ad.mp4", "seconds": 20.5}
