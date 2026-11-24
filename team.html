@@ -262,6 +262,7 @@ textarea{min-height:84px;resize:vertical}
 
 <div class="modal" id="modal" hidden><div class="box" id="mBox"></div></div>
 
+<script src="assets/irun-ai.js"></script>
 <script src="creator-agents.js"></script>
 <script>
 /* ================= config ================= */
@@ -458,54 +459,11 @@ How you work:
 BRAIN
 ${brainText(p)}${e.squad ? "\n" + creatorContext() + "\n" : ""}`;
 }
-/* Free, keyless writer used when no Anthropic key is set or the key fails. */
-async function freeClaude({system, messages, onText, signal}) {
+/* All Team agents use the same server-side iRun AI gateway. */
+async function claude({system, messages, max = 4000, stream = false, onText, signal}) {
   const flat = c => typeof c === "string" ? c : (c || []).filter(b => b.type === "text").map(b => b.text).join("\n");
-  const msgs = [{role: "system", content: system || ""}, ...messages.map(m => ({role: m.role, content: flat(m.content)}))];
-  let lastErr;
-  for (let i = 0; i < 2; i++) {
-    try {
-      const r = await fetch("https://text.pollinations.ai/openai", {method: "POST", signal, headers: {"content-type": "application/json"},
-        body: JSON.stringify({model: "openai", private: true, seed: Math.floor(Math.random() * 1e6), messages: msgs})});
-      if (!r.ok) throw new Error(`Free writer busy (${r.status})`);
-      const t = (await r.json()).choices?.[0]?.message?.content || "";
-      if (!t.trim()) throw new Error("Free writer came back empty");
-      onText && onText(t); return t;
-    } catch (e) { if (e.name === "AbortError") throw e; lastErr = e; }
-  }
-  throw new Error(lastErr.message + ". Try again in a moment.");
-}
-async function claude({system, messages, max = 4000, stream = false, onText, signal, models = MODELS}) {
-  const key = anthKey();
-  if (!key) return freeClaude({system, messages, onText, signal});
-  let lastErr;
-  for (const model of models) {
-    const r = await fetch("https://api.anthropic.com/v1/messages", {method: "POST", signal,
-      headers: {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "anthropic-dangerous-direct-browser-access": "true"},
-      body: JSON.stringify({model, max_tokens: max, system, messages, stream})});
-    if (!r.ok) {
-      const j = await r.json().catch(() => ({}));
-      lastErr = new Error(r.status === 401 ? "Your Anthropic key was rejected. Check it in Studio > Settings." : (j.error?.message || `Claude error ${r.status}`));
-      if (r.status === 404 || /model/i.test(j.error?.message || "")) continue;
-      return freeClaude({system, messages, onText, signal});
-    }
-    if (!stream) { const j = await r.json(); return (j.content || []).filter(b => b.type === "text").map(b => b.text).join(""); }
-    const rd = r.body.getReader(), dec = new TextDecoder(); let buf = "", full = "";
-    while (true) {
-      const {done, value} = await rd.read(); if (done) break;
-      buf += dec.decode(value, {stream: true});
-      let i; while ((i = buf.indexOf("\n")) >= 0) {
-        const ln = buf.slice(0, i).trim(); buf = buf.slice(i + 1);
-        if (!ln.startsWith("data:")) continue;
-        try { const ev = JSON.parse(ln.slice(5));
-          if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") { full += ev.delta.text; onText && onText(full); }
-          if (ev.type === "error") throw new Error(ev.error?.message || "Stream error");
-        } catch (e) { if (e.message && !/JSON/.test(e.message)) throw e; }
-      }
-    }
-    return full;
-  }
-  throw lastErr || new Error("No model available.");
+  const clean = messages.map(m => ({role: m.role === "assistant" ? "assistant" : "user", content: flat(m.content)}));
+  return window.IRUN_AI({system, messages: clean, max, onText, signal});
 }
 
 /* ================= nav ================= */
