@@ -1,6 +1,8 @@
 {
-  "video": "assets/ads/promo/friendy_promo_final.mp4",
-  "caption": "3 AM and nobody to talk to? Friendy is always there. Talk anytime in any language, share photos, and meet real friends from all over the world. Scan the QR in the video to sign up.\n\n#friendship #mentalhealthawareness #makefriends #lonely #chatapp #newfriends #socialapp #hsw365media #turnnegativeintopositive",
+  "spec": "content/ads/secure365-launch.json",
+  "video": "",
+  "caption": "Small businesses deserve a stronger digital safety plan. Secure365 by HSW365 is in development. We're building toward one place to organize business devices and accounts, reduce unwanted contact, and help owners respond to suspicious activity. No security product can promise zero risk. Follow @hoodstar365 for launch updates. HSW365.NET\n\n#Secure365 #SmallBusiness #CybersecurityAwareness #BusinessOwners #HSW365",
   "account": "hoodstar365",
-  "platform": "instagram"
+  "platform": "instagram",
+  "post": true
 }
