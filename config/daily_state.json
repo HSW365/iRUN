@@ -1,5 +1,5 @@
 {
-  "cursor": 2,
+  "cursor": 3,
   "used": {
     "calltwin": [
       "answers",
@@ -10,7 +10,8 @@
       "formats"
     ],
     "queenee": [
-      "built"
+      "built",
+      "books"
     ],
     "shopteam": [
       "daily-ad"
@@ -53,14 +54,14 @@
     ]
   },
   "voices": [
-    "en-GB-SoniaNeural",
     "en-US-JennyNeural",
     "en-US-AvaMultilingualNeural",
     "en-US-AndrewMultilingualNeural",
     "en-US-GuyNeural",
     "en-GB-RyanNeural",
     "en-US-BrianMultilingualNeural",
-    "en-US-AriaNeural"
+    "en-US-AriaNeural",
+    "en-AU-WilliamMultilingualNeural"
   ],
   "log": [
     {
@@ -187,6 +188,13 @@
       "app": "klipit",
       "cap": "formats",
       "voice": "en-US-AriaNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-25T05:26Z",
+      "app": "queenee",
+      "cap": "books",
+      "voice": "en-AU-WilliamMultilingualNeural",
       "posted": true
     }
   ]
