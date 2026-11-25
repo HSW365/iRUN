@@ -1,12 +1,13 @@
 {
-  "cursor": 1,
+  "cursor": 2,
   "used": {
     "calltwin": [
       "answers",
       "captures"
     ],
     "klipit": [
-      "vod"
+      "vod",
+      "formats"
     ],
     "queenee": [
       "built"
@@ -52,14 +53,14 @@
     ]
   },
   "voices": [
-    "en-IE-ConnorNeural",
     "en-GB-SoniaNeural",
     "en-US-JennyNeural",
     "en-US-AvaMultilingualNeural",
     "en-US-AndrewMultilingualNeural",
     "en-US-GuyNeural",
     "en-GB-RyanNeural",
-    "en-US-BrianMultilingualNeural"
+    "en-US-BrianMultilingualNeural",
+    "en-US-AriaNeural"
   ],
   "log": [
     {
@@ -179,6 +180,13 @@
       "app": "calltwin",
       "cap": "captures",
       "voice": "en-US-BrianMultilingualNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-25T02:12Z",
+      "app": "klipit",
+      "cap": "formats",
+      "voice": "en-US-AriaNeural",
       "posted": true
     }
   ]
