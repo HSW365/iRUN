@@ -1,9 +1,12 @@
 name: iRun post now
 
-# Direct posting hook: commit config/postnow.json and iRun posts that finished video right away.
-# {"video": "assets/ads/x.mp4", "caption": "...", "account": "hoodstar365", "platform": "instagram"}
+# Build a supplied iRun ad spec, then publish the finished video to the selected connected account.
+# A change to config/postnow.json intentionally starts this one-shot publish workflow.
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "config/postnow.json"
 
 permissions:
   contents: write
@@ -25,7 +28,7 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           pip install -q -r requirements.txt
-      - name: Post
+      - name: Build and post with iRun
         env:
           SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -45,19 +48,19 @@ jobs:
           IRUN_SCORE: ${{ vars.IRUN_SCORE }}
           IRUN_MODE: ${{ vars.IRUN_MODE || 'live' }}
         run: |
-          # "spec" = build the ad with iRun's own engine first (images + free voice), then post it
+          set -o pipefail
           mkdir -p out
           SPEC=$(jq -r '.spec // ""' config/postnow.json)
           VIDEO=$(jq -r '.video // ""' config/postnow.json)
           if [ -n "$SPEC" ]; then
             VIDEO="out/$(basename "$SPEC" .json)-ad.mp4"
-            mkdir -p out && python engine/make_ad.py "$SPEC" "$VIDEO" 2>&1 | tee out/build.log; test ${PIPESTATUS[0]} -eq 0
+            python engine/make_ad.py "$SPEC" "$VIDEO" 2>&1 | tee out/build.log
           fi
           if [ "$(jq -r 'if .post == false then "false" else "true" end' config/postnow.json)" = "false" ]; then echo "build only"; exit 0; fi
           CAPTION=$(jq -r '.caption // ""' config/postnow.json)
           ACCOUNT=$(jq -r '.account // "hoodstar365"' config/postnow.json)
           PLATFORM=$(jq -r '.platform // "instagram"' config/postnow.json)
-          python engine/run.py --account "$ACCOUNT" --platform "$PLATFORM" --video "$VIDEO" --caption "$CAPTION" 2>&1 | tee -a out/build.log; test ${PIPESTATUS[0]} -eq 0
+          python engine/run.py --account "$ACCOUNT" --platform "$PLATFORM" --video "$VIDEO" --caption "$CAPTION" 2>&1 | tee -a out/build.log
       - name: Keep the built ad
         if: always()
         run: |
