@@ -239,7 +239,7 @@ def main():
         tags = " ".join("#" + t for t in spec.get("hashtags", []))
         sh(sys.executable, os.path.join(HERE, "run.py"), "--account", a.account or spec.get("account", "hoodstar365"),
            "--platform", "instagram", "--video", video, "--caption", (spec.get("caption", "") + "\n\n" + tags).strip(),
-           "--mode", os.environ.get("IRUN_MODE", "live"))
+           "--mode", os.environ.get("IRUN_MODE", "draft"))
 
 
 if __name__ == "__main__":
