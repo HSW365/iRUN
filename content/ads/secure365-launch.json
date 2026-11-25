@@ -1,0 +1,39 @@
+{
+  "title": "Secure365 — Protect the Business You Built",
+  "name": "SECURE365 BY HSW365",
+  "brand": "HSW365",
+  "style": "photoreal",
+  "voice": "en-US-GuyNeural",
+  "seed": 3651125,
+  "link": "https://hsw365.net",
+  "cta": [
+    "FOLLOW @HOODSTAR365",
+    "HSW365.NET"
+  ],
+  "scenes": [
+    {
+      "say": "You built your business from the ground up. Don't overlook what protects it online.",
+      "visual": "Premium photoreal commercial portrait of a confident Black and Puerto Rican small business owner opening a bright independent neighborhood storefront in the morning, colorful tasteful merchandise, warm daylight, real authentic small business atmosphere, uplifting vibrant palette, vertical composition"
+    },
+    {
+      "say": "One suspicious email. One exposed password. One careless click can create a serious problem.",
+      "visual": "Photoreal close-up of a small business owner at a bright modern counter looking at a laptop with a generic suspicious email warning, no readable brand names or personal data, phone beside laptop, natural daylight, polished editorial cybersecurity campaign photography"
+    },
+    {
+      "say": "That's why HSW365 is developing Secure365 for small businesses across America.",
+      "visual": "High-end commercial image of a diverse small business team standing together in a bright colorful workspace, laptop tablet and smartphone on a clean desk, confident focused expressions, uplifting turquoise coral and warm yellow accents, premium realistic photography"
+    },
+    {
+      "say": "The goal: one place to organize your business devices and digital security.",
+      "visual": "Photoreal overhead view of a laptop, smartphone and tablet neatly arranged on a bright modern office desk, generic abstract security dashboard on laptop with simple shield and device icons only, no tiny text, bright clean daylight, premium technology advertising"
+    },
+    {
+      "say": "We're working toward smarter ways to manage account risks and unwanted spam calls, texts and emails.",
+      "visual": "Photoreal small business owner reviewing a smartphone with generic muted spam call and message warning icons, laptop open nearby, calm confident expression, bright welcoming office, clean vivid colors, no logos or readable private information"
+    },
+    {
+      "say": "Secure365 is in development. Follow Hoodstar365 for launch updates. HSW365 dot net.",
+      "visual": "Hero portrait of a confident diverse small business owner in a vibrant bright storefront, standing beside a laptop and phone, optimistic expression looking toward camera, clean colorful negative space for brand end card, premium authentic commercial photography"
+    }
+  ]
+}
