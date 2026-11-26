@@ -1,5 +1,5 @@
 {
-  "cursor": 6,
+  "cursor": 7,
   "used": {
     "calltwin": [
       "answers",
@@ -26,7 +26,8 @@
       "risk"
     ],
     "studio": [
-      "record"
+      "record",
+      "tune"
     ],
     "estimate": [
       "photos"
@@ -57,14 +58,14 @@
     ]
   },
   "voices": [
-    "en-US-GuyNeural",
     "en-GB-RyanNeural",
     "en-US-BrianMultilingualNeural",
     "en-US-AriaNeural",
     "en-AU-WilliamMultilingualNeural",
     "en-US-GuyNeural",
     "en-US-ChristopherNeural",
-    "en-US-BrianMultilingualNeural"
+    "en-US-BrianMultilingualNeural",
+    "en-US-AriaNeural"
   ],
   "log": [
     {
@@ -219,6 +220,13 @@
       "app": "flipit",
       "cap": "risk",
       "voice": "en-US-BrianMultilingualNeural",
+      "posted": true
+    },
+    {
+      "at": "2026-11-26T22:44Z",
+      "app": "studio",
+      "cap": "tune",
+      "voice": "en-US-AriaNeural",
       "posted": true
     }
   ]
