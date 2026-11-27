@@ -1,0 +1,36 @@
+name: HSW365 Army (100 agents)
+
+# Every 2 hours: 12 scouts hunt contacts (all 77 rotate through daily), 15 watchmen check every site,
+# 8 command agents watch money, posting and outreach. Nothing is emailed or posted from here.
+on:
+  schedule:
+    - cron: "23 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: "scouts to run now (1-77)"
+        default: "12"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hsw365-army
+  cancel-in-progress: false
+
+jobs:
+  army:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 1}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q requests
+      - name: Deploy the army
+        env:
+          SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          ARMY_BATCH: ${{ github.event.inputs.batch || '12' }}
+        run: python engine/army.py

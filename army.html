@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07132b">
+<title>HSW365 Army | Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07132b;--card:#0e2047;--line:#22407c;--text:#f5f8ff;--mute:#93a9d6;--blue:#3d7bff;--aqua:#27e0c0;--coral:#ff5d5d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 520px at 100% -5%,#1c4bb8 0,transparent 60%),radial-gradient(700px 500px at -10% 30%,#0b6e72 0,transparent 55%),var(--bg);background-attachment:fixed;color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif;min-height:100vh}
+.w{max-width:1100px;margin:0 auto;padding:72px 16px 80px}
+h1{font:400 clamp(46px,11vw,104px)/.92 Anton,Impact,sans-serif;text-transform:uppercase;margin:0}
+h1 span{display:block;background:linear-gradient(90deg,var(--aqua),var(--blue),#c7d8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mute);margin:14px 0 26px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat,.box,.lead{background:rgba(14,32,71,.82);border:1px solid var(--line);border-radius:16px;padding:16px}
+.stat b{display:block;font:400 42px/1 Anton,Impact,sans-serif}.stat small{color:var(--mute)}
+h2{font:400 28px Anton,Impact,sans-serif;text-transform:uppercase;margin:34px 0 12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+button,select,.btn{font:800 13px Inter,sans-serif;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);padding:11px 15px;cursor:pointer;text-decoration:none}
+button.on,.btn.go{background:var(--blue);border-color:var(--blue)}
+.lead{margin-bottom:10px}.lead strong{font-size:16px}.lead div{color:var(--mute);font-size:13px;word-break:break-word}.lead .bar{margin:12px 0 0}
+.alert{border-left:4px solid var(--coral);margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.dot{aspect-ratio:1;border-radius:7px;border:0;padding:0;background:#24406f}.dot.ok{background:var(--aqua)}.dot.alert{background:var(--coral)}.dot.retry{background:var(--blue)}
+#who{margin-top:12px;min-height:76px}
+.gate{text-align:center;padding:40px 16px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="w">
+<h1>HSW365<span>Army of 100</span></h1>
+<p class="sub">Turn negative into positive. Your agents hunt bookings and buyers every 2 hours.</p>
+<div id="gate" class="box gate"><p>Owner only. Sign in with your PIN to open the command center.</p><button class="on" onclick="HSW_OWNER_OPEN()">OWNER LOGIN</button></div>
+<div id="app" hidden>
+<div class="stats" id="stats"></div>
+<div id="alerts"></div>
+<h2>Ready to send</h2>
+<div class="bar"><button id="tb" class="on">BOOKINGS</button><button id="tc">BUYERS</button><select id="st" aria-label="State"><option value="">All states</option></select><button id="copy">COPY ALL EMAILS</button></div>
+<div id="leads"></div>
+<h2>The 100</h2>
+<div class="grid" id="grid"></div>
+<div class="box" id="who">Tap a square to see what that agent last did.</div>
+</div>
+</main>
+<script src="owner-login.js"></script>
+<script>
+(function(){
+var API="https://lsxdlmrjrcivxwgfkpop.supabase.co/functions/v1/army-api",kind="booking",leads=[];
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return "&#"+c.charCodeAt(0)+";"})}
+function call(b){var t="";try{t=localStorage.getItem("hsw_owner")||""}catch(e){}b.token=t;
+return fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(function(r){if(!r.ok)throw new Error(r.error);return r})}
+var P={calltwin:["Never miss another customer call","CallTwin answers your calls, texts and website chat 24/7, collects the caller's name, number and job, and sends it straight to you."],
+queenee:["A website that brings you customers","I build modern websites from your own business info, on your own domain."],
+estimate:["Estimates and proposals from job photos","Our AI Estimates and Proposals turns job photos or video into a finished estimate with e-sign and deposit."],
+irun:["Your business posting every day, hands-free","iRun creates and posts promo content for your business automatically."],
+merch:["HOODSTARWORLD streetwear for your shop","I make HSW365 streetwear with a real story behind it and would love to talk about carrying it in your store."],
+books:["Local author: books and signing event","I am the author of Hoodlum Soldier, Ride Out, Better Days and God Who Am I?, and would love to talk about stocking them or doing a signing."],
+perform:["Live performance booking: HOODSTAR365","I am a recording artist and speaker and would love to perform at your venue."],
+media:["Interview and music submission: HOODSTAR365","I am a U.S. Army veteran, author, recording artist and host of the Respect Da Game podcast, available for interviews and airplay."],
+music:["Independent music from HOODSTAR365","I am an independent recording artist and would love to talk about carrying or featuring my music."],
+studio365:["Browser recording studio for your artists","HSW365studio lets artists record in the browser."],
+seniortech:["Friendly tech help for your seniors","I offer patient, plain-language tech help for seniors and anyone who is not tech savvy."]};
+function draft(l){var s,body;
+if(l.kind==="booking"){s="Speaker and performance booking: Turn Negative Into Positive";
+body="Hello "+l.name+" team,\n\nMy name is Elvin Torres Sr. (Hoodstar365). I am a U.S. Army veteran, published author, recording artist and motivational speaker. My program, The Journey Continues: Inspired to Inspire, brings together a keynote, live music and a book signing around one message: turn negative into positive.\n\nWould you be open to booking it for an upcoming event? If someone else handles programming, could you point me to them?"}
+else{var p=P[l.product]||P.queenee;s=p[0];body="Hello "+l.name+" team,\n\n"+p[1]+"\n\nWould you like to see how it could work for you?"}
+body+="\n\nElvin Torres Sr.\nHSW365 Media | book@hoodstar365.com | (856) 796-8081\nhttps://hsw365.net\n19 12th, Apt 2, Hammonton, NJ 08037\nReply \"stop\" and I will not email again.";
+return "mailto:"+encodeURIComponent(l.email).replace("%40","@")+"?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent(body)}
+function show(){$("leads").innerHTML=leads.length?leads.map(function(l,i){return '<article class="lead"><strong>'+esc(l.name)+'</strong><div>'+esc([l.segment,l.city,l.state].filter(Boolean).join(" · "))+'<br>'+esc(l.email)+(l.phone?" · "+esc(l.phone):"")+'</div><div class="bar"><a class="btn go" href="'+esc(draft(l))+'">OPEN DRAFT</a><button data-i="'+i+'" data-s="contacted">SENT</button><button data-i="'+i+'" data-s="skipped">SKIP</button></div></article>'}).join(""):'<div class="box">No contacts waiting here yet. The scouts run every 2 hours.</div>'}
+function load(){call({a:"leads",kind:kind,state:$("st").value}).then(function(r){leads=r.leads;show()}).catch(function(e){$("leads").textContent=e.message})}
+function overview(){return call({a:"overview"}).then(function(r){var c=r.counts,ran=r.agents.filter(function(a){return a.last_run_at}).length;
+$("stats").innerHTML=[[c.booking,"booking contacts ready"],[c.customer,"buyer contacts ready"],[c.contacted,"contacted"],[ran+"/100","agents reported in"]].map(function(x){return '<div class="stat"><b>'+x[0].toLocaleString()+'</b><small>'+x[1]+'</small></div>'}).join("");
+var al=r.agents.filter(function(a){return a.last_status==="alert"});$("alerts").innerHTML=al.length?"<h2>Needs you</h2>"+al.map(function(a){return '<div class="box alert"><strong>'+esc(a.name)+"</strong><br>"+esc(a.last_result)+"</div>"}).join(""):"";
+$("grid").innerHTML=r.agents.map(function(a){return '<button class="dot '+esc(a.last_status||"")+'" title="'+esc(a.name)+'" aria-label="'+esc(a.name)+'"></button>'}).join("");
+Array.prototype.forEach.call($("grid").children,function(el,i){el.onclick=function(){var a=r.agents[i];$("who").innerHTML="<strong>"+esc(a.name)+"</strong><br>"+esc(a.job)+"<br><small>"+esc(a.last_result||"Waiting for its first shift")+"</small>"}});
+var states=r.agents.filter(function(a){return a.id.indexOf("book-")===0}).map(function(a){return a.id.slice(5).toUpperCase()});
+if($("st").length===1)states.forEach(function(s){$("st").add(new Option(s,s))})})}
+function open(){$("gate").hidden=true;$("app").hidden=false;overview().then(load).catch(function(e){$("gate").hidden=false;$("app").hidden=true;$("gate").querySelector("p").textContent=e.message})}
+window.addEventListener("hsw-owner",function(e){if(e.detail.owner)open();else{$("app").hidden=true;$("gate").hidden=false}});
+function tab(k){kind=k;$("tb").className=k==="booking"?"on":"";$("tc").className=k==="customer"?"on":"";load()}
+$("tb").onclick=function(){tab("booking")};$("tc").onclick=function(){tab("customer")};$("st").onchange=load;
+$("leads").onclick=function(e){var b=e.target.closest("button[data-i]");if(!b)return;var l=leads[+b.dataset.i];b.disabled=true;call({a:"mark",emails:[l.email],status:b.dataset.s}).then(function(){load();overview()}).catch(function(x){b.disabled=false;alert(x.message)})};
+$("copy").onclick=function(){var t=leads.map(function(l){return l.email}).join(", "),b=this;navigator.clipboard.writeText(t).then(function(){b.textContent="COPIED "+leads.length},function(){prompt("Copy:",t)})};
+})();
+</script>
+</body>
+</html>

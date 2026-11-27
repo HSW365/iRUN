@@ -1,0 +1,1291 @@
+{
+ "states": [
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY"
+ ],
+ "agents": [
+  {
+   "id": "book-al",
+   "name": "Alabama Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "AL",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Alabama schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ak",
+   "name": "Alaska Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "AK",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Alaska schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-az",
+   "name": "Arizona Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "AZ",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Arizona schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ar",
+   "name": "Arkansas Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "AR",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Arkansas schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ca",
+   "name": "California Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "CA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find California schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-co",
+   "name": "Colorado Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "CO",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Colorado schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ct",
+   "name": "Connecticut Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "CT",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Connecticut schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-de",
+   "name": "Delaware Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "DE",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Delaware schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-fl",
+   "name": "Florida Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "FL",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Florida schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ga",
+   "name": "Georgia Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "GA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Georgia schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-hi",
+   "name": "Hawaii Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "HI",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Hawaii schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-id",
+   "name": "Idaho Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "ID",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Idaho schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-il",
+   "name": "Illinois Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "IL",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Illinois schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-in",
+   "name": "Indiana Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "IN",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Indiana schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ia",
+   "name": "Iowa Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "IA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Iowa schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ks",
+   "name": "Kansas Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "KS",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Kansas schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ky",
+   "name": "Kentucky Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "KY",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Kentucky schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-la",
+   "name": "Louisiana Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "LA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Louisiana schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-me",
+   "name": "Maine Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "ME",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Maine schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-md",
+   "name": "Maryland Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MD",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Maryland schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ma",
+   "name": "Massachusetts Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Massachusetts schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-mi",
+   "name": "Michigan Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MI",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Michigan schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-mn",
+   "name": "Minnesota Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MN",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Minnesota schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ms",
+   "name": "Mississippi Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MS",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Mississippi schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-mo",
+   "name": "Missouri Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MO",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Missouri schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-mt",
+   "name": "Montana Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "MT",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Montana schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ne",
+   "name": "Nebraska Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NE",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Nebraska schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-nv",
+   "name": "Nevada Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NV",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Nevada schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-nh",
+   "name": "New Hampshire Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NH",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find New Hampshire schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-nj",
+   "name": "New Jersey Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NJ",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find New Jersey schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-nm",
+   "name": "New Mexico Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NM",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find New Mexico schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ny",
+   "name": "New York Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NY",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find New York schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-nc",
+   "name": "North Carolina Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "NC",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find North Carolina schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-nd",
+   "name": "North Dakota Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "ND",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find North Dakota schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-oh",
+   "name": "Ohio Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "OH",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Ohio schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ok",
+   "name": "Oklahoma Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "OK",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Oklahoma schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-or",
+   "name": "Oregon Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "OR",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Oregon schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-pa",
+   "name": "Pennsylvania Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "PA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Pennsylvania schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ri",
+   "name": "Rhode Island Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "RI",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Rhode Island schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-sc",
+   "name": "South Carolina Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "SC",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find South Carolina schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-sd",
+   "name": "South Dakota Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "SD",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find South Dakota schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-tn",
+   "name": "Tennessee Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "TN",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Tennessee schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-tx",
+   "name": "Texas Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "TX",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Texas schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-ut",
+   "name": "Utah Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "UT",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Utah schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-vt",
+   "name": "Vermont Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "VT",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Vermont schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-va",
+   "name": "Virginia Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "VA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Virginia schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-wa",
+   "name": "Washington Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "WA",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Washington schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-wv",
+   "name": "West Virginia Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "WV",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find West Virginia schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-wi",
+   "name": "Wisconsin Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "WI",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Wisconsin schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "book-wy",
+   "name": "Wyoming Booking Scout",
+   "squad": "booking",
+   "type": "scout",
+   "state": "WY",
+   "kind": "booking",
+   "product": "speaking",
+   "job": "Find Wyoming schools, colleges, libraries, veteran groups, community centers and theaters that book speakers and performers",
+   "filters": [
+    "[\"amenity\"~\"^(school|college|university|library|community_centre|theatre|arts_centre|events_venue)$\"]",
+    "[\"club\"~\"^(veterans|youth)$\"]"
+   ]
+  },
+  {
+   "id": "sell-plumb",
+   "name": "Plumbing & HVAC Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 0,
+   "job": "Find plumbing & hvac contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"~\"^(plumber|hvac)$\"]"
+   ]
+  },
+  {
+   "id": "sell-electric",
+   "name": "Electrician Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 7,
+   "job": "Find electrician contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"=\"electrician\"]"
+   ]
+  },
+  {
+   "id": "sell-roof",
+   "name": "Roofing Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "estimate",
+   "start": 14,
+   "job": "Find roofing contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"=\"roofer\"]"
+   ]
+  },
+  {
+   "id": "sell-paint",
+   "name": "Painting Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "estimate",
+   "start": 21,
+   "job": "Find painting contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"=\"painter\"]"
+   ]
+  },
+  {
+   "id": "sell-build",
+   "name": "Builder & Carpentry Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "estimate",
+   "start": 28,
+   "job": "Find builder & carpentry contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"~\"^(builder|carpenter)$\"]"
+   ]
+  },
+  {
+   "id": "sell-lawn",
+   "name": "Landscaping Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 35,
+   "job": "Find landscaping contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"~\"^(gardener|landscaper)$\"]"
+   ]
+  },
+  {
+   "id": "sell-clean",
+   "name": "Cleaning & Handyman Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 42,
+   "job": "Find cleaning & handyman contacts nationwide, one state at a time",
+   "filters": [
+    "[\"craft\"~\"^(cleaning|handyman)$\"]"
+   ]
+  },
+  {
+   "id": "sell-auto",
+   "name": "Auto Repair Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 49,
+   "job": "Find auto repair contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"=\"car_repair\"]"
+   ]
+  },
+  {
+   "id": "sell-hair",
+   "name": "Hair Salon Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "queenee",
+   "start": 6,
+   "job": "Find hair salon contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"=\"hairdresser\"]"
+   ]
+  },
+  {
+   "id": "sell-beauty",
+   "name": "Beauty Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "queenee",
+   "start": 13,
+   "job": "Find beauty contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"=\"beauty\"]"
+   ]
+  },
+  {
+   "id": "sell-food",
+   "name": "Restaurant Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "queenee",
+   "start": 20,
+   "job": "Find restaurant contacts nationwide, one state at a time",
+   "filters": [
+    "[\"amenity\"=\"restaurant\"]"
+   ]
+  },
+  {
+   "id": "sell-sweets",
+   "name": "Bakery & Florist Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "irun",
+   "start": 27,
+   "job": "Find bakery & florist contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"~\"^(bakery|florist)$\"]"
+   ]
+  },
+  {
+   "id": "sell-dental",
+   "name": "Dental Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 34,
+   "job": "Find dental contacts nationwide, one state at a time",
+   "filters": [
+    "[\"amenity\"=\"dentist\"]"
+   ]
+  },
+  {
+   "id": "sell-law",
+   "name": "Law Office Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 41,
+   "job": "Find law office contacts nationwide, one state at a time",
+   "filters": [
+    "[\"office\"=\"lawyer\"]"
+   ]
+  },
+  {
+   "id": "sell-tax",
+   "name": "Tax & Accounting Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "queenee",
+   "start": 48,
+   "job": "Find tax & accounting contacts nationwide, one state at a time",
+   "filters": [
+    "[\"office\"~\"^(accountant|tax_advisor)$\"]"
+   ]
+  },
+  {
+   "id": "sell-realty",
+   "name": "Real Estate Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "irun",
+   "start": 5,
+   "job": "Find real estate contacts nationwide, one state at a time",
+   "filters": [
+    "[\"office\"=\"estate_agent\"]"
+   ]
+  },
+  {
+   "id": "sell-npo",
+   "name": "Nonprofit Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "queenee",
+   "start": 12,
+   "job": "Find nonprofit contacts nationwide, one state at a time",
+   "filters": [
+    "[\"office\"~\"^(ngo|charity|association)$\"]"
+   ]
+  },
+  {
+   "id": "sell-gym",
+   "name": "Gym Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "irun",
+   "start": 19,
+   "job": "Find gym contacts nationwide, one state at a time",
+   "filters": [
+    "[\"leisure\"=\"fitness_centre\"]"
+   ]
+  },
+  {
+   "id": "sell-wear",
+   "name": "Streetwear Boutique Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "merch",
+   "start": 26,
+   "job": "Find streetwear boutique contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"=\"clothes\"]"
+   ]
+  },
+  {
+   "id": "sell-books",
+   "name": "Bookstore Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "books",
+   "start": 33,
+   "job": "Find bookstore contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"=\"books\"]"
+   ]
+  },
+  {
+   "id": "sell-venue",
+   "name": "Live Music Venue Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "perform",
+   "start": 40,
+   "job": "Find live music venue contacts nationwide, one state at a time",
+   "filters": [
+    "[\"amenity\"~\"^(nightclub|music_venue)$\"]"
+   ]
+  },
+  {
+   "id": "sell-radio",
+   "name": "Radio & Media Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "media",
+   "start": 47,
+   "job": "Find radio & media contacts nationwide, one state at a time",
+   "filters": [
+    "[\"amenity\"=\"studio\"][\"studio\"=\"radio\"]"
+   ]
+  },
+  {
+   "id": "sell-records",
+   "name": "Music Store Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "music",
+   "start": 4,
+   "job": "Find music store contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"~\"^(music|musical_instrument)$\"]"
+   ]
+  },
+  {
+   "id": "sell-studio",
+   "name": "Recording Studio Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "studio365",
+   "start": 11,
+   "job": "Find recording studio contacts nationwide, one state at a time",
+   "filters": [
+    "[\"amenity\"=\"studio\"][\"studio\"=\"audio\"]"
+   ]
+  },
+  {
+   "id": "sell-senior",
+   "name": "Senior Center Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "seniortech",
+   "start": 18,
+   "job": "Find senior center contacts nationwide, one state at a time",
+   "filters": [
+    "[\"amenity\"=\"social_facility\"][\"social_facility:for\"=\"senior\"]"
+   ]
+  },
+  {
+   "id": "sell-pet",
+   "name": "Pet Care Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "calltwin",
+   "start": 25,
+   "job": "Find pet care contacts nationwide, one state at a time",
+   "filters": [
+    "[\"shop\"=\"pet_grooming\"]"
+   ]
+  },
+  {
+   "id": "sell-sport",
+   "name": "Sports Center Sales Scout",
+   "squad": "sales",
+   "type": "scout",
+   "kind": "customer",
+   "product": "irun",
+   "start": 32,
+   "job": "Find sports center contacts nationwide, one state at a time",
+   "filters": [
+    "[\"leisure\"=\"sports_centre\"]"
+   ]
+  },
+  {
+   "id": "watch-store",
+   "name": "hsw365.net store Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.net/",
+   "job": "Check that hsw365.net store is online"
+  },
+  {
+   "id": "watch-packages",
+   "name": "Packages page Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.net/pages/ai-front-office",
+   "job": "Check that Packages page is online"
+  },
+  {
+   "id": "watch-media",
+   "name": "hsw365media.com Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365media.com/",
+   "job": "Check that hsw365media.com is online"
+  },
+  {
+   "id": "watch-irun",
+   "name": "iRun Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/iRUN/",
+   "job": "Check that iRun is online"
+  },
+  {
+   "id": "watch-calltwin",
+   "name": "CallTwin Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/calltwin/",
+   "job": "Check that CallTwin is online"
+  },
+  {
+   "id": "watch-queenee",
+   "name": "QUEENEE Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/QUEENEE.github.io/",
+   "job": "Check that QUEENEE is online"
+  },
+  {
+   "id": "watch-klipit",
+   "name": "Klipit Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/KLIPIT/",
+   "job": "Check that Klipit is online"
+  },
+  {
+   "id": "watch-speekzone",
+   "name": "SpeekZone Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/SPEEKZONE/",
+   "job": "Check that SpeekZone is online"
+  },
+  {
+   "id": "watch-dispute",
+   "name": "DISPUTE365 Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/DISPUTE365/",
+   "job": "Check that DISPUTE365 is online"
+  },
+  {
+   "id": "watch-studio",
+   "name": "HSW365studio Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/STUDIO365/",
+   "job": "Check that HSW365studio is online"
+  },
+  {
+   "id": "watch-truth",
+   "name": "Truth Be Told Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/truth-be-told/",
+   "job": "Check that Truth Be Told is online"
+  },
+  {
+   "id": "watch-flipit",
+   "name": "FLIPIT Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/FLIPIT/",
+   "job": "Check that FLIPIT is online"
+  },
+  {
+   "id": "watch-capture",
+   "name": "CaptureItLive Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/captureitlive/",
+   "job": "Check that CaptureItLive is online"
+  },
+  {
+   "id": "watch-friendy",
+   "name": "Friendy Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://hsw365.github.io/FRIENDY/",
+   "job": "Check that Friendy is online"
+  },
+  {
+   "id": "watch-artist",
+   "name": "Artist Empire Watchman",
+   "squad": "watch",
+   "type": "watch",
+   "url": "https://artistempire.live/",
+   "job": "Check that Artist Empire is online"
+  },
+  {
+   "id": "ops-money",
+   "name": "Money Watcher",
+   "squad": "command",
+   "type": "ops",
+   "op": "money",
+   "job": "Flag customer payments waiting for approval"
+  },
+  {
+   "id": "ops-posts",
+   "name": "Posting Watcher",
+   "squad": "command",
+   "type": "ops",
+   "op": "posts",
+   "job": "Flag when Instagram posting stops"
+  },
+  {
+   "id": "ops-mail",
+   "name": "Outreach Watcher",
+   "squad": "command",
+   "type": "ops",
+   "op": "mail",
+   "job": "Flag when sales email stops sending"
+  },
+  {
+   "id": "ops-booking",
+   "name": "Booking Bot Watcher",
+   "squad": "command",
+   "type": "ops",
+   "op": "booking",
+   "job": "Flag failed booking and offer emails"
+  },
+  {
+   "id": "ops-clean",
+   "name": "List Cleaner",
+   "squad": "command",
+   "type": "ops",
+   "op": "clean",
+   "job": "Remove opted-out and bounced addresses"
+  },
+  {
+   "id": "ops-local",
+   "name": "Local Priority",
+   "squad": "command",
+   "type": "ops",
+   "op": "local",
+   "job": "Put NJ, PA, DE and NY bookings first"
+  },
+  {
+   "id": "ops-video",
+   "name": "Video Queue Watcher",
+   "squad": "command",
+   "type": "ops",
+   "op": "video",
+   "job": "Flag failed member videos"
+  },
+  {
+   "id": "ops-chief",
+   "name": "Chief of Staff",
+   "squad": "command",
+   "type": "ops",
+   "op": "chief",
+   "job": "Write the daily shared-memory briefing"
+  }
+ ]
+}
