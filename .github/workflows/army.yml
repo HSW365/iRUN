@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: hsw365-army
@@ -32,5 +33,6 @@ jobs:
         env:
           SUPABASE_URL: https://lsxdlmrjrcivxwgfkpop.supabase.co
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
           ARMY_BATCH: ${{ github.event.inputs.batch || '12' }}
         run: python engine/army.py

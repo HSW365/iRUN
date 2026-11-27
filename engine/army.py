@@ -110,11 +110,15 @@ def ops(a):
             return "alert", f"{len(p)} payment(s) worth ${total:,.2f} waiting for approval ({apps}). Check the money arrived first.", 0
         return "ok", "No payments waiting", 0
     if op == "posts":
-        p = db.select("irun_posts", "status=eq.posted&select=posted_at&order=posted_at.desc.nullslast&limit=1")
-        h = hours_since(p[0]["posted_at"]) if p and p[0]["posted_at"] else None
+        # the daily promo workflow fails when Instagram rejects a post, so its last success is the last post
+        r = requests.get("https://api.github.com/repos/HSW365/iRUN/actions/workflows/daily.yml/runs?status=success&per_page=1",
+                         headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"}, timeout=40)
+        r.raise_for_status()
+        runs = r.json()["workflow_runs"]
+        h = hours_since(runs[0]["created_at"]) if runs else None
         if h is None or h > 36:
-            return "alert", "No Instagram post recorded in " + ("a long time" if h is None else f"{h / 24:.0f} days"), 0
-        return "ok", f"Last recorded post {h:.0f}h ago", 0
+            return "alert", "The daily Instagram promo has not succeeded in over 36 hours", 0
+        return "ok", f"Daily Instagram promo succeeded {h:.0f}h ago", 0
     if op == "mail":
         p = db.select("irun_sales_log", "kind=eq.sent&select=created_at&order=created_at.desc&limit=1")
         h = hours_since(p[0]["created_at"]) if p else None
@@ -167,8 +171,13 @@ def main():
     state = {x["id"]: x for x in db.select("army_agents", "select=*")}
     blocked = {x["email"].lower() for x in rows("irun_suppress", "select=email&order=email")}
     blocked |= {x["email"].lower() for x in rows("irun_sales_leads", "select=email&order=email")}  # already worked by iRun sales
-    scouts = sorted((a for a in agents if a["type"] == "scout"),
-                    key=lambda a: (state[a["id"]]["last_run_at"] or "", a.get("state") not in LOCAL))[:BATCH]
+    def due(kind, n):
+        return sorted((a for a in agents if a["type"] == "scout" and a["kind"] == kind),
+                      key=lambda a: (state[a["id"]]["last_status"] != "retry", state[a["id"]]["last_run_at"] or "",
+                                     a.get("state") not in LOCAL))[:n]
+
+    pairs = zip(due("booking", BATCH - BATCH // 2), due("customer", BATCH // 2))
+    scouts = [a for pair in pairs for a in pair]
     order = scouts + [a for a in agents if a["type"] == "watch"] + \
         sorted((a for a in agents if a["type"] == "ops"), key=lambda a: a["op"] == "chief")
     start, done, failed = time.time(), 0, 0
