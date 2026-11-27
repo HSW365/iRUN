@@ -24,8 +24,8 @@ button,select,.btn{font:800 13px Inter,sans-serif;border-radius:10px;border:1px 
 button.on,.btn.go{background:var(--blue);border-color:var(--blue)}
 .lead{margin-bottom:10px}.lead strong{font-size:16px}.lead div{color:var(--mute);font-size:13px;word-break:break-word}.lead .bar{margin:12px 0 0}
 .alert{border-left:4px solid var(--coral);margin-bottom:8px}
-.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
-.dot{aspect-ratio:1;border-radius:7px;border:0;padding:0;background:#24406f}.dot.ok{background:var(--aqua)}.dot.alert{background:var(--coral)}.dot.retry{background:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px}
+.dot{height:30px;min-width:0;border-radius:7px;border:0;padding:0;background:#24406f}.dot.ok{background:var(--aqua)}.dot.alert{background:var(--coral)}.dot.retry{background:var(--blue)}
 #who{margin-top:12px;min-height:76px}
 .gate{text-align:center;padding:40px 16px}
 [hidden]{display:none!important}
