@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>HSW365 Ad Studio | Micro-drama ads for your brand</title>
+<title>HSW365 iRun Ad Studio | Micro-Drama Ads for Brands</title>
 <meta name="description" content="Short acted ads for your business, clothing line or music. Scripted, produced, QR-coded and posted to your Instagram by iRun. From $247.">
 <meta name="theme-color" content="#0a0a0f">
-<meta property="og:title" content="HSW365 Ad Studio">
+<meta property="og:title" content="HSW365 iRun Ad Studio">
 <meta property="og:description" content="Micro-drama ads for your business, clothing line or music. From $247.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%23ef4444%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2747%27%20font-family%3D%27Arial%20Narrow%2CArial%27%20font-weight%3D%27900%27%20font-size%3D%2744%27%20text-anchor%3D%27middle%27%20fill%3D%27%230a0a0f%27%3EA%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/hsw/hsw.css">
@@ -17,6 +17,7 @@ body{font-size:17px}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:16px}
 .mark{font-family:var(--disp);font-weight:900;font-size:24px;letter-spacing:.04em;text-transform:uppercase}
 .mark b{color:var(--acc)}
+.mark .irun{text-transform:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:16px;border:1px solid var(--line2);transition:transform .2s var(--ease),background .2s,border-color .2s;cursor:pointer;background:transparent}
 .btn:hover{transform:translateY(-1px);border-color:var(--text2)}
 .btn.p{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
@@ -94,16 +95,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .reel .clip .v{max-height:640px}
 }
 @media (max-width:520px){.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.nav .btn{display:none}}
+@media (min-width:521px){.nav .btn{margin-right:max(0px,calc(250px - (100vw - 100%) / 2))}}
+@media (max-width:520px){.mark{font-size:19px;line-height:1.05;white-space:nowrap}.mark b{display:block}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="canonical" href="https://hsw365.github.io/iRUN/adstudio.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HSW365 Ad Studio | Micro-drama ads for your brand">
+<meta name="twitter:title" content="HSW365 iRun Ad Studio | Micro-Drama Ads for Brands">
 <meta name="twitter:description" content="Short acted ads for your business, clothing line or music. Scripted, produced, QR-coded and posted to your Instagram by iRun. From $247.">
 </head>
 <body>
 <header class="nav"><div class="wrap">
-  <a class="mark" href="#top">HSW365 <b>Ad Studio</b></a>
+  <a class="mark" href="#top">HSW365 <span class="irun">iRun</span> <b>Ad Studio</b></a>
   <a class="btn p sm" href="#order">Book your ad</a>
 </div></header>
 
